@@ -1,0 +1,10 @@
+# 6.1.4 shared_mutex 与读写锁
+
+理解共享/独占锁语义、适用场景和公平性问题。
+
+---
+
+## 导航
+
+← 上一节：[6.1.3 condition_variable 与等待谓词](../03_condition_variable_与等待谓词/index.md)
+下一节：[6.1.5 future、promise、async 与 packaged_task](../05_future_promise_async_与_packaged_task/index.md) →

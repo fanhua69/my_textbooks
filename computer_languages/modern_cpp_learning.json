@@ -1,0 +1,1098 @@
+{
+  "title": "Modern C++ Learning",
+  "language": "zh-CN",
+  "description": "一套从语言基础到并发、性能和工程实践的现代 C++ 系统教材。以 C++11 为现代 C++ 起点，覆盖 C++14/17/20/23，并跟踪 C++26。",
+  "navigation": {
+    "mode": "depth_first_all_index_pages",
+    "description": "前一页/后一页按教材目录深度优先顺序排列，包含部分、二级节和三级节的 index.md。"
+  },
+  "parts": [
+    {
+      "title": "C++ 语言基础与演进脉络",
+      "slug": "01_cpp_fundamentals",
+      "intro": "建立现代 C++ 的整体认知：理解语言标准的演进、编译模型、程序结构、类型系统与基本语法，为后续深入学习打下共同基础。",
+      "sections": [
+        {
+          "title": "C++ 的历史、标准与设计哲学",
+          "slug": "01_c__的历史_标准与设计哲学",
+          "intro": "梳理 C++ 从早期版本到现代标准的演进，理解兼容性、零开销抽象与多范式设计。",
+          "subsections": [
+            {
+              "title": "C++ 的起源与发展：从 C with Classes 到现代 C++",
+              "slug": "01_c__的起源与发展_从_c_with_classes_到现代_c",
+              "intro": "了解 C++ 的设计背景、主要里程碑及其与 C 的关系。"
+            },
+            {
+              "title": "C++ 标准版本：C++98 到 C++26",
+              "slug": "02_c__标准版本_c_98_到_c_26",
+              "intro": "掌握各标准的重要特性、发布时间脉络及版本之间的差异。"
+            },
+            {
+              "title": "现代 C++ 的核心设计原则",
+              "slug": "03_现代_c__的核心设计原则",
+              "intro": "理解 zero-overhead abstraction、RAII、类型安全和泛型编程等理念。"
+            },
+            {
+              "title": "如何阅读标准、提案与编译器文档",
+              "slug": "04_如何阅读标准_提案与编译器文档",
+              "intro": "认识 ISO C++ 标准、WG21 papers、cppreference 与编译器文档的用途。"
+            }
+          ]
+        },
+        {
+          "title": "编译、链接与程序构建模型",
+          "slug": "02_编译_链接与程序构建模型",
+          "intro": "从源代码到可执行文件，理解预处理、编译、汇编、链接及构建系统。",
+          "subsections": [
+            {
+              "title": "预处理、编译、汇编与链接",
+              "slug": "01_预处理_编译_汇编与链接",
+              "intro": "理解 translation phases 以及各阶段的输入、输出和职责。"
+            },
+            {
+              "title": "声明、定义与 One Definition Rule",
+              "slug": "02_声明_定义与_one_definition_rule",
+              "intro": "区分 declaration、definition、ODR-use 与违反 ODR 的后果。"
+            },
+            {
+              "title": "头文件、源文件与模块化组织",
+              "slug": "03_头文件_源文件与模块化组织",
+              "intro": "掌握头文件组织、包含保护、前置声明和编译单元。"
+            },
+            {
+              "title": "静态库、动态库与 ABI",
+              "slug": "04_静态库_动态库与_abi",
+              "intro": "理解 library、symbol、ABI compatibility、name mangling 与链接方式。"
+            },
+            {
+              "title": "CMake 与现代 C++ 项目结构",
+              "slug": "05_cmake_与现代_c__项目结构",
+              "intro": "学习 target-based CMake、依赖管理、配置与构建目录组织。"
+            }
+          ]
+        },
+        {
+          "title": "基本语法、对象与类型",
+          "slug": "03_基本语法_对象与类型",
+          "intro": "掌握表达式、语句、对象生命周期和 C++ 类型系统的基本概念。",
+          "subsections": [
+            {
+              "title": "变量、对象、初始化与作用域",
+              "slug": "01_变量_对象_初始化与作用域",
+              "intro": "区分变量和对象，掌握初始化形式、存储期与作用域。"
+            },
+            {
+              "title": "基本类型、字面量与类型转换",
+              "slug": "02_基本类型_字面量与类型转换",
+              "intro": "学习整数、浮点、字符、布尔类型及隐式/显式转换。"
+            },
+            {
+              "title": "const、constexpr 与 consteval",
+              "slug": "03_const_constexpr_与_consteval",
+              "intro": "理解只读语义、常量表达式和编译期求值。"
+            },
+            {
+              "title": "auto、decltype 与类型推导",
+              "slug": "04_auto_decltype_与类型推导",
+              "intro": "掌握类型推导规则及其在模板和泛型代码中的作用。"
+            },
+            {
+              "title": "枚举、别名与用户定义类型",
+              "slug": "05_枚举_别名与用户定义类型",
+              "intro": "学习 enum class、using、struct、class 与类型建模。"
+            }
+          ]
+        },
+        {
+          "title": "表达式、运算符与求值规则",
+          "slug": "04_表达式_运算符与求值规则",
+          "intro": "理解表达式如何产生值、类型和副作用，以及求值顺序规则。",
+          "subsections": [
+            {
+              "title": "值类别：lvalue、xvalue 与 prvalue",
+              "slug": "01_值类别_lvalue_xvalue_与_prvalue",
+              "intro": "建立 glvalue、rvalue 等值类别的完整关系图。"
+            },
+            {
+              "title": "运算符、优先级与结合性",
+              "slug": "02_运算符_优先级与结合性",
+              "intro": "掌握常见运算符语义，避免将优先级误当作求值顺序。"
+            },
+            {
+              "title": "求值顺序、sequenced-before 与副作用",
+              "slug": "03_求值顺序_sequenced_before_与副作用",
+              "intro": "理解 sequencing 规则及其对未定义行为的影响。"
+            },
+            {
+              "title": "隐式转换、用户定义转换与 explicit",
+              "slug": "04_隐式转换_用户定义转换与_explicit",
+              "intro": "掌握转换序列、构造函数转换和 explicit 的设计意义。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "类、对象与资源管理",
+      "slug": "02_objects_and_resource_management",
+      "intro": "深入 C++ 的对象模型和资源管理机制，掌握类设计、构造析构、拷贝移动语义以及 RAII，这是理解现代 C++ 的核心。",
+      "sections": [
+        {
+          "title": "类与封装",
+          "slug": "01_类与封装",
+          "intro": "理解类如何表达不变量、控制访问并形成稳定接口。",
+          "subsections": [
+            {
+              "title": "class、struct 与访问控制",
+              "slug": "01_class_struct_与访问控制",
+              "intro": "掌握成员访问权限、默认访问级别和封装边界。"
+            },
+            {
+              "title": "构造函数、析构函数与成员初始化",
+              "slug": "02_构造函数_析构函数与成员初始化",
+              "intro": "理解对象建立和销毁过程、成员初始化顺序及初始化列表。"
+            },
+            {
+              "title": "this 指针、成员函数与 const 成员函数",
+              "slug": "03_this_指针_成员函数与_const_成员函数",
+              "intro": "掌握隐式对象参数、成员函数限定及 const-correctness。"
+            },
+            {
+              "title": "静态成员与类级别状态",
+              "slug": "04_静态成员与类级别状态",
+              "intro": "理解 static data member、static member function 及其适用边界。"
+            },
+            {
+              "title": "运算符重载与用户定义字面量",
+              "slug": "05_运算符重载与用户定义字面量",
+              "intro": "学习运算符重载规则、非成员重载和 literal operators。"
+            }
+          ]
+        },
+        {
+          "title": "对象生命周期与特殊成员函数",
+          "slug": "02_对象生命周期与特殊成员函数",
+          "intro": "系统掌握对象从创建到销毁的生命周期，以及编译器生成的特殊成员函数。",
+          "subsections": [
+            {
+              "title": "对象生命周期与存储期",
+              "slug": "01_对象生命周期与存储期",
+              "intro": "区分 automatic、static、thread-local 与 dynamic storage duration。"
+            },
+            {
+              "title": "拷贝构造、拷贝赋值与析构",
+              "slug": "02_拷贝构造_拷贝赋值与析构",
+              "intro": "理解 copy constructor、copy assignment 和析构函数的职责。"
+            },
+            {
+              "title": "移动构造与移动赋值",
+              "slug": "03_移动构造与移动赋值",
+              "intro": "理解 move semantics、资源转移和 moved-from state。"
+            },
+            {
+              "title": "Rule of Three、Five 与 Zero",
+              "slug": "04_rule_of_three_five_与_zero",
+              "intro": "掌握特殊成员函数管理策略及 Rule of Zero 的优先级。"
+            },
+            {
+              "title": "=default、=delete 与特殊成员函数生成规则",
+              "slug": "05_default_delete_与特殊成员函数生成规则",
+              "intro": "理解显式默认/删除及隐式声明、定义和删除条件。"
+            }
+          ]
+        },
+        {
+          "title": "RAII 与异常安全资源管理",
+          "slug": "03_raii_与异常安全资源管理",
+          "intro": "将资源生命周期绑定到对象生命周期，构建异常安全的资源管理代码。",
+          "subsections": [
+            {
+              "title": "RAII 的思想与适用范围",
+              "slug": "01_raii_的思想与适用范围",
+              "intro": "理解 Resource Acquisition Is Initialization 及其对异常安全的价值。"
+            },
+            {
+              "title": "智能指针：unique_ptr、shared_ptr、weak_ptr",
+              "slug": "02_智能指针_unique_ptr_shared_ptr_weak_ptr",
+              "intro": "掌握所有权模型、控制块、循环引用和自定义 deleter。"
+            },
+            {
+              "title": "资源句柄与自定义 RAII 类型",
+              "slug": "03_资源句柄与自定义_raii_类型",
+              "intro": "为文件、锁、socket、数据库句柄等资源设计管理类型。"
+            },
+            {
+              "title": "异常安全保证：基本、强与不抛出保证",
+              "slug": "04_异常安全保证_基本_强与不抛出保证",
+              "intro": "理解 exception-safety guarantees 和事务式操作。"
+            },
+            {
+              "title": "所有权、借用与生命周期设计",
+              "slug": "05_所有权_借用与生命周期设计",
+              "intro": "区分 owning/non-owning、observer 与 lifetime contract。"
+            }
+          ]
+        },
+        {
+          "title": "继承、多态与对象模型",
+          "slug": "04_继承_多态与对象模型",
+          "intro": "理解面向对象机制、虚函数分派、继承关系及其成本。",
+          "subsections": [
+            {
+              "title": "继承、基类与派生类",
+              "slug": "01_继承_基类与派生类",
+              "intro": "掌握 public/protected/private inheritance 与可替换性。"
+            },
+            {
+              "title": "虚函数、override 与 final",
+              "slug": "02_虚函数_override_与_final",
+              "intro": "理解动态绑定、虚函数表的常见实现及接口约束。"
+            },
+            {
+              "title": "虚析构函数与多态删除",
+              "slug": "03_虚析构函数与多态删除",
+              "intro": "理解通过基类指针删除派生对象时的要求。"
+            },
+            {
+              "title": "多重继承、虚继承与菱形问题",
+              "slug": "04_多重继承_虚继承与菱形问题",
+              "intro": "理解子对象布局、二义性和虚基类。"
+            },
+            {
+              "title": "对象切片与组合优于继承",
+              "slug": "05_对象切片与组合优于继承",
+              "intro": "识别 slicing，并比较 inheritance 与 composition。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "现代 C++ 核心语言特性",
+      "slug": "03_modern_language_features",
+      "intro": "聚焦 C++11 以来改变编程方式的语言特性，理解移动语义、lambda、类型推导、constexpr、结构化绑定、概念和协程。",
+      "sections": [
+        {
+          "title": "C++11/14：现代 C++ 的起点",
+          "slug": "01_c_11_14_现代_c__的起点",
+          "intro": "学习现代 C++ 编程范式的基础设施。",
+          "subsections": [
+            {
+              "title": "auto 与统一初始化",
+              "slug": "01_auto_与统一初始化",
+              "intro": "掌握类型推导、花括号初始化和 narrowing conversion。"
+            },
+            {
+              "title": "nullptr、enum class 与范围 for",
+              "slug": "02_nullptr_enum_class_与范围_for",
+              "intro": "理解类型安全改进和更简洁的遍历语法。"
+            },
+            {
+              "title": "右值引用与移动语义基础",
+              "slug": "03_右值引用与移动语义基础",
+              "intro": "理解 T&&、std::move 的作用以及移动并不等于移动数据。"
+            },
+            {
+              "title": "Lambda 表达式与闭包对象",
+              "slug": "04_lambda_表达式与闭包对象",
+              "intro": "掌握捕获列表、闭包类型、可变 lambda 和泛型 lambda。"
+            },
+            {
+              "title": "constexpr、变参模板与别名模板",
+              "slug": "05_constexpr_变参模板与别名模板",
+              "intro": "认识编译期计算和模板表达能力的提升。"
+            }
+          ]
+        },
+        {
+          "title": "C++17：表达能力与编译期增强",
+          "slug": "02_c_17_表达能力与编译期增强",
+          "intro": "掌握 C++17 带来的语言层面改进。",
+          "subsections": [
+            {
+              "title": "结构化绑定",
+              "slug": "01_结构化绑定",
+              "intro": "使用 structured bindings 解包数组、tuple 和聚合类型。"
+            },
+            {
+              "title": "if constexpr 与编译期分支",
+              "slug": "02_if_constexpr_与编译期分支",
+              "intro": "理解模板实例化中的条件编译。"
+            },
+            {
+              "title": "折叠表达式",
+              "slug": "03_折叠表达式",
+              "intro": "简化 variadic templates 中的参数包运算。"
+            },
+            {
+              "title": "inline variables 与 guaranteed copy elision",
+              "slug": "04_inline_variables_与_guaranteed_copy_elision",
+              "intro": "理解变量 ODR 规则变化及强制复制消除场景。"
+            },
+            {
+              "title": "std::optional、variant 与 any 的语言配合",
+              "slug": "05_std_optional_variant_与_any_的语言配合",
+              "intro": "从类型系统角度理解值语义的代数数据类型。"
+            }
+          ]
+        },
+        {
+          "title": "C++20：概念、范围与协程基础",
+          "slug": "03_c_20_概念_范围与协程基础",
+          "intro": "掌握 C++20 的重要语言特性及其设计动机。",
+          "subsections": [
+            {
+              "title": "Concepts 与 requires 表达式",
+              "slug": "01_concepts_与_requires_表达式",
+              "intro": "用约束表达模板接口要求并改善诊断信息。"
+            },
+            {
+              "title": "Ranges 与 range-based pipelines",
+              "slug": "02_ranges_与_range_based_pipelines",
+              "intro": "理解 range、view、lazy evaluation 与管道风格。"
+            },
+            {
+              "title": "协程：co_await、co_yield 与 co_return",
+              "slug": "03_协程_co_await_co_yield_与_co_return",
+              "intro": "理解 coroutine 的语言机制、promise type 和状态机转换。"
+            },
+            {
+              "title": "三路比较运算符 <=>",
+              "slug": "04_三路比较运算符",
+              "intro": "理解 comparison category 和默认比较。"
+            },
+            {
+              "title": "模块 Modules 与导入模型",
+              "slug": "05_模块_modules_与导入模型",
+              "intro": "认识 module interface、implementation partition 和 header unit。"
+            }
+          ]
+        },
+        {
+          "title": "C++23/26：持续演进",
+          "slug": "04_c_23_26_持续演进",
+          "intro": "了解较新标准中的语言特性，并建立跟踪标准演进的能力。",
+          "subsections": [
+            {
+              "title": "deducing this 与显式对象参数",
+              "slug": "01_deducing_this_与显式对象参数",
+              "intro": "理解显式对象参数如何影响成员函数和递归调用。"
+            },
+            {
+              "title": "if consteval 与 constexpr 扩展",
+              "slug": "02_if_consteval_与_constexpr_扩展",
+              "intro": "掌握编译期/运行期分支及常量求值能力变化。"
+            },
+            {
+              "title": "std::expected 与错误返回模型",
+              "slug": "03_std_expected_与错误返回模型",
+              "intro": "理解 expected<T,E> 的语义及其与异常的取舍。"
+            },
+            {
+              "title": "C++23 ranges、views 与库语言协同",
+              "slug": "04_c_23_ranges_views_与库语言协同",
+              "intro": "掌握新增 range 能力及其适用边界。"
+            },
+            {
+              "title": "C++26 重点提案与特性跟踪",
+              "slug": "05_c_26_重点提案与特性跟踪",
+              "intro": "学习通过 WG21 提案判断特性的成熟度和标准状态。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "模板与泛型编程",
+      "slug": "04_templates_and_generic_programming",
+      "intro": "从模板语法深入到泛型编程、编译期计算和模板元编程，理解 C++ 强大抽象能力背后的实例化与约束机制。",
+      "sections": [
+        {
+          "title": "函数模板与类模板",
+          "slug": "01_函数模板与类模板",
+          "intro": "掌握模板声明、实例化、推导和特化。",
+          "subsections": [
+            {
+              "title": "函数模板声明与实例化",
+              "slug": "01_函数模板声明与实例化",
+              "intro": "理解 template、模板实参和实例化时机。"
+            },
+            {
+              "title": "类模板、成员模板与别名模板",
+              "slug": "02_类模板_成员模板与别名模板",
+              "intro": "掌握类模板及其成员的定义和使用。"
+            },
+            {
+              "title": "模板参数：类型、非类型与模板模板参数",
+              "slug": "03_模板参数_类型_非类型与模板模板参数",
+              "intro": "理解不同模板参数类别及其约束。"
+            },
+            {
+              "title": "模板实参推导与显式指定",
+              "slug": "04_模板实参推导与显式指定",
+              "intro": "掌握 deduction、默认模板参数和显式模板实参。"
+            },
+            {
+              "title": "全特化与偏特化",
+              "slug": "05_全特化与偏特化",
+              "intro": "理解 specialization 的匹配规则和使用场景。"
+            }
+          ]
+        },
+        {
+          "title": "模板进阶机制",
+          "slug": "02_模板进阶机制",
+          "intro": "理解模板重载、依赖名称和实例化规则。",
+          "subsections": [
+            {
+              "title": "重载决议与 SFINAE",
+              "slug": "01_重载决议与_sfinae",
+              "intro": "理解 Substitution Failure Is Not An Error 及其传统应用。"
+            },
+            {
+              "title": "enable_if、void_t 与 detection idiom",
+              "slug": "02_enable_if_void_t_与_detection_idiom",
+              "intro": "认识 C++20 Concepts 之前常见的约束技术。"
+            },
+            {
+              "title": "依赖名称、typename 与 template 关键字",
+              "slug": "03_依赖名称_typename_与_template_关键字",
+              "intro": "理解 dependent name 的解析规则。"
+            },
+            {
+              "title": "ADL 与两阶段名称查找",
+              "slug": "04_adl_与两阶段名称查找",
+              "intro": "掌握 argument-dependent lookup 和 dependent lookup。"
+            },
+            {
+              "title": "完美转发与 std::forward",
+              "slug": "05_完美转发与_std_forward",
+              "intro": "理解 forwarding reference、引用折叠和转发语义。"
+            }
+          ]
+        },
+        {
+          "title": "编译期计算与模板元编程",
+          "slug": "03_编译期计算与模板元编程",
+          "intro": "学习如何在编译期表达算法、类型计算和约束。",
+          "subsections": [
+            {
+              "title": "模板元编程的基本模型",
+              "slug": "01_模板元编程的基本模型",
+              "intro": "理解 template instantiation 如何承担编译期计算。"
+            },
+            {
+              "title": "type_traits 与类型变换",
+              "slug": "02_type_traits_与类型变换",
+              "intro": "掌握 is_same、is_base_of、remove_reference 等工具。"
+            },
+            {
+              "title": "constexpr 与 consteval 计算",
+              "slug": "03_constexpr_与_consteval_计算",
+              "intro": "比较常量表达式、立即函数和模板元编程。"
+            },
+            {
+              "title": "Concepts 与约束组合",
+              "slug": "04_concepts_与约束组合",
+              "intro": "使用 requires、concept definition 和 subsumption。"
+            },
+            {
+              "title": "静态多态：CRTP 与 policy-based design",
+              "slug": "05_静态多态_crtp_与_policy_based_design",
+              "intro": "理解静态分派、零运行时开销抽象及其复杂性。"
+            }
+          ]
+        },
+        {
+          "title": "泛型库设计与实践",
+          "slug": "04_泛型库设计与实践",
+          "intro": "将泛型技术用于可复用、可组合且诊断友好的库设计。",
+          "subsections": [
+            {
+              "title": "泛型接口与类型要求",
+              "slug": "01_泛型接口与类型要求",
+              "intro": "从调用者视角设计清晰的 template contract。"
+            },
+            {
+              "title": "迭代器、范围与自定义 range",
+              "slug": "02_迭代器_范围与自定义_range",
+              "intro": "理解 iterator category/concept 和 range 接口。"
+            },
+            {
+              "title": "定制点：ADL、tag_invoke 与 customization point",
+              "slug": "03_定制点_adl_tag_invoke_与_customization_point",
+              "intro": "认识泛型库中的定制机制及其权衡。"
+            },
+            {
+              "title": "模板错误诊断与编译时间控制",
+              "slug": "04_模板错误诊断与编译时间控制",
+              "intro": "降低模板错误复杂度、实例化开销和头文件依赖。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "标准库与现代编程惯用法",
+      "slug": "05_standard_library_and_idioms",
+      "intro": "系统学习标准库容器、算法、字符串、时间、文件系统、格式化和并发工具，并掌握现代 C++ 的常见表达方式。",
+      "sections": [
+        {
+          "title": "容器与数据结构",
+          "slug": "01_容器与数据结构",
+          "intro": "理解标准容器的语义、复杂度和失效规则。",
+          "subsections": [
+            {
+              "title": "序列容器：array、vector、deque、list",
+              "slug": "01_序列容器_array_vector_deque_list",
+              "intro": "比较连续存储、迭代器稳定性和复杂度。"
+            },
+            {
+              "title": "关联容器：map、set 与 unordered 容器",
+              "slug": "02_关联容器_map_set_与_unordered_容器",
+              "intro": "理解有序树结构、哈希结构和键等价规则。"
+            },
+            {
+              "title": "容器适配器：stack、queue、priority_queue",
+              "slug": "03_容器适配器_stack_queue_priority_queue",
+              "intro": "掌握受限接口和底层容器关系。"
+            },
+            {
+              "title": "容器选择、复杂度与失效规则",
+              "slug": "04_容器选择_复杂度与失效规则",
+              "intro": "根据访问模式、插入删除和内存局部性选择容器。"
+            }
+          ]
+        },
+        {
+          "title": "迭代器、算法与 ranges",
+          "slug": "02_迭代器_算法与_ranges",
+          "intro": "掌握算法与数据结构解耦的标准库设计。",
+          "subsections": [
+            {
+              "title": "迭代器类别与迭代器概念",
+              "slug": "01_迭代器类别与迭代器概念",
+              "intro": "理解 input、forward、bidirectional、random access 和 contiguous。"
+            },
+            {
+              "title": "常用非修改与修改序列算法",
+              "slug": "02_常用非修改与修改序列算法",
+              "intro": "掌握 find、transform、remove、partition、sort 等。"
+            },
+            {
+              "title": "算法组合与 ranges pipeline",
+              "slug": "03_算法组合与_ranges_pipeline",
+              "intro": "使用 views、adaptors 和算法表达数据处理流程。"
+            },
+            {
+              "title": "算法复杂度与正确性前提",
+              "slug": "04_算法复杂度与正确性前提",
+              "intro": "理解算法的前置条件、排序要求和迭代器失效。"
+            }
+          ]
+        },
+        {
+          "title": "字符串、格式化与文本处理",
+          "slug": "03_字符串_格式化与文本处理",
+          "intro": "掌握现代 C++ 文本处理工具。",
+          "subsections": [
+            {
+              "title": "std::string 与 string_view",
+              "slug": "01_std_string_与_string_view",
+              "intro": "理解所有权、生命周期和悬空 view 风险。"
+            },
+            {
+              "title": "字符编码与 Unicode 基础",
+              "slug": "02_字符编码与_unicode_基础",
+              "intro": "区分字节、码点、编码单元及 UTF-8/16/32。"
+            },
+            {
+              "title": "std::format 与格式化输出",
+              "slug": "03_std_format_与格式化输出",
+              "intro": "掌握类型安全格式化及自定义 formatter。"
+            },
+            {
+              "title": "正则表达式与文本解析",
+              "slug": "04_正则表达式与文本解析",
+              "intro": "了解 regex 的能力、性能特征和替代方案。"
+            }
+          ]
+        },
+        {
+          "title": "工具库与实用设施",
+          "slug": "04_工具库与实用设施",
+          "intro": "掌握标准库中常用的通用工具。",
+          "subsections": [
+            {
+              "title": "tuple、pair 与结构化数据",
+              "slug": "01_tuple_pair_与结构化数据",
+              "intro": "理解异构值组合及 tuple-like 接口。"
+            },
+            {
+              "title": "optional、variant、any 与 expected",
+              "slug": "02_optional_variant_any_与_expected",
+              "intro": "比较可选值、和类型、动态类型与错误结果。"
+            },
+            {
+              "title": "chrono：时间点、时长与日历",
+              "slug": "03_chrono_时间点_时长与日历",
+              "intro": "掌握 duration、time_point、clock 和日历设施。"
+            },
+            {
+              "title": "filesystem：路径与文件操作",
+              "slug": "04_filesystem_路径与文件操作",
+              "intro": "使用 path、directory_iterator 和文件状态接口。"
+            },
+            {
+              "title": "span、bit、utility 与 source_location",
+              "slug": "05_span_bit_utility_与_source_location",
+              "intro": "掌握非拥有视图、位操作和辅助工具。"
+            }
+          ]
+        },
+        {
+          "title": "输入输出与格式化",
+          "slug": "05_输入输出与格式化",
+          "intro": "掌握流式 I/O、文件 I/O 和现代格式化接口。",
+          "subsections": [
+            {
+              "title": "iostream 与流状态",
+              "slug": "01_iostream_与流状态",
+              "intro": "理解 stream state、缓冲和格式标志。"
+            },
+            {
+              "title": "文件流与二进制 I/O",
+              "slug": "02_文件流与二进制_i_o",
+              "intro": "掌握 ifstream、ofstream、fstream 及二进制读写。"
+            },
+            {
+              "title": "流缓冲、同步与性能",
+              "slug": "03_流缓冲_同步与性能",
+              "intro": "理解缓冲区、flush、sync_with_stdio 和性能权衡。"
+            },
+            {
+              "title": "日志接口与输出设计",
+              "slug": "04_日志接口与输出设计",
+              "intro": "区分格式化、日志级别、结构化日志和输出后端。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "并发、内存模型与性能",
+      "slug": "06_concurrency_memory_performance",
+      "intro": "从 C++ 内存模型出发，系统学习线程、同步、原子操作、无锁编程和性能分析，建立正确且高效的并发程序设计能力。",
+      "sections": [
+        {
+          "title": "线程与同步原语",
+          "slug": "01_线程与同步原语",
+          "intro": "掌握 C++ 标准线程库及基本同步手段。",
+          "subsections": [
+            {
+              "title": "std::thread 与线程生命周期",
+              "slug": "01_std_thread_与线程生命周期",
+              "intro": "理解线程创建、join、detach 和异常处理。"
+            },
+            {
+              "title": "mutex、lock_guard 与 unique_lock",
+              "slug": "02_mutex_lock_guard_与_unique_lock",
+              "intro": "掌握互斥锁、RAII 锁管理和锁所有权。"
+            },
+            {
+              "title": "condition_variable 与等待谓词",
+              "slug": "03_condition_variable_与等待谓词",
+              "intro": "理解 wait、notify、虚假唤醒和 lost wakeup。"
+            },
+            {
+              "title": "shared_mutex 与读写锁",
+              "slug": "04_shared_mutex_与读写锁",
+              "intro": "理解共享/独占锁语义、适用场景和公平性问题。"
+            },
+            {
+              "title": "future、promise、async 与 packaged_task",
+              "slug": "05_future_promise_async_与_packaged_task",
+              "intro": "掌握任务结果传递和异步执行模型。"
+            }
+          ]
+        },
+        {
+          "title": "C++ 内存模型",
+          "slug": "02_c__内存模型",
+          "intro": "理解并发访问规则、数据竞争和 happens-before 关系。",
+          "subsections": [
+            {
+              "title": "数据竞争 Data Race 与未定义行为",
+              "slug": "01_数据竞争_data_race_与未定义行为",
+              "intro": "掌握冲突访问、同步关系和 data race 的标准定义。"
+            },
+            {
+              "title": "原子操作与 std::atomic",
+              "slug": "02_原子操作与_std_atomic",
+              "intro": "理解原子对象、原子操作和不可分割性。"
+            },
+            {
+              "title": "memory_order：relaxed 到 seq_cst",
+              "slug": "03_memory_order_relaxed_到_seq_cst",
+              "intro": "掌握 memory ordering 的语义及适用场景。"
+            },
+            {
+              "title": "happens-before 与 synchronizes-with",
+              "slug": "04_happens_before_与_synchronizes_with",
+              "intro": "建立线程间可见性和顺序关系的推理模型。"
+            },
+            {
+              "title": "编译器重排、CPU 重排与 as-if rule",
+              "slug": "05_编译器重排_cpu_重排与_as_if_rule",
+              "intro": "区分抽象机规则、编译器优化和硬件执行顺序。"
+            }
+          ]
+        },
+        {
+          "title": "原子与无锁编程",
+          "slug": "03_原子与无锁编程",
+          "intro": "理解原子读改写、CAS、锁自由属性及其工程风险。",
+          "subsections": [
+            {
+              "title": "load、store、exchange 与 fetch 操作",
+              "slug": "01_load_store_exchange_与_fetch_操作",
+              "intro": "掌握常见 atomic member functions。"
+            },
+            {
+              "title": "compare_exchange 与 CAS 循环",
+              "slug": "02_compare_exchange_与_cas_循环",
+              "intro": "理解 expected 参数、弱/强 CAS 和重试循环。"
+            },
+            {
+              "title": "lock-free、wait-free 与 obstruction-free",
+              "slug": "03_lock_free_wait_free_与_obstruction_free",
+              "intro": "区分进度保证，不把 lock-free 等同于更快。"
+            },
+            {
+              "title": "ABA 问题与内存回收",
+              "slug": "04_aba_问题与内存回收",
+              "intro": "理解 ABA、hazard pointer、epoch-based reclamation。"
+            },
+            {
+              "title": "原子智能指针与无锁数据结构",
+              "slug": "05_原子智能指针与无锁数据结构",
+              "intro": "了解 atomic shared_ptr 和并发结构的生命周期设计。"
+            }
+          ]
+        },
+        {
+          "title": "性能工程与硬件基础",
+          "slug": "04_性能工程与硬件基础",
+          "intro": "建立从测量到优化的性能工程方法。",
+          "subsections": [
+            {
+              "title": "缓存层次、cache line 与局部性",
+              "slug": "01_缓存层次_cache_line_与局部性",
+              "intro": "理解 cache hierarchy、spatial/temporal locality。"
+            },
+            {
+              "title": "false sharing 与数据布局",
+              "slug": "02_false_sharing_与数据布局",
+              "intro": "识别伪共享并理解 padding 和对齐策略。"
+            },
+            {
+              "title": "分配器、内存池与对象布局",
+              "slug": "03_分配器_内存池与对象布局",
+              "intro": "理解 allocator、pool、fragmentation 和 allocation cost。"
+            },
+            {
+              "title": "基准测试、profiling 与 flame graph",
+              "slug": "04_基准测试_profiling_与_flame_graph",
+              "intro": "掌握可重复测量、统计波动和热点分析。"
+            },
+            {
+              "title": "延迟、吞吐量与 tail latency",
+              "slug": "05_延迟_吞吐量与_tail_latency",
+              "intro": "区分 latency/throughput，理解 p95/p99 和排队效应。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "工程实践、质量与工具链",
+      "slug": "07_engineering_testing_tooling",
+      "intro": "把语言知识转化为可维护的软件工程能力，涵盖设计原则、测试、调试、静态分析、构建、依赖管理和持续集成。",
+      "sections": [
+        {
+          "title": "软件设计与架构",
+          "slug": "01_软件设计与架构",
+          "intro": "使用现代 C++ 构建低耦合、可测试、可演进的系统。",
+          "subsections": [
+            {
+              "title": "抽象、封装与接口设计",
+              "slug": "01_抽象_封装与接口设计",
+              "intro": "理解抽象边界、信息隐藏和稳定接口。"
+            },
+            {
+              "title": "SOLID 与依赖倒置原则",
+              "slug": "02_solid_与依赖倒置原则",
+              "intro": "掌握 SRP、OCP、LSP、ISP、DIP 及其适用边界。"
+            },
+            {
+              "title": "RAII、值语义与组合式设计",
+              "slug": "03_raii_值语义与组合式设计",
+              "intro": "以资源管理和组合替代脆弱的继承层次。"
+            },
+            {
+              "title": "错误处理：异常、错误码与 expected",
+              "slug": "04_错误处理_异常_错误码与_expected",
+              "intro": "根据系统边界、性能和语义选择错误模型。"
+            },
+            {
+              "title": "API 设计、ABI 稳定性与版本策略",
+              "slug": "05_api_设计_abi_稳定性与版本策略",
+              "intro": "理解 source compatibility、binary compatibility 和演进策略。"
+            }
+          ]
+        },
+        {
+          "title": "测试与质量保障",
+          "slug": "02_测试与质量保障",
+          "intro": "建立从单元测试到持续回归的质量体系。",
+          "subsections": [
+            {
+              "title": "单元测试、集成测试与端到端测试",
+              "slug": "01_单元测试_集成测试与端到端测试",
+              "intro": "理解测试层次、边界和反馈速度。"
+            },
+            {
+              "title": "GoogleTest、Catch2 与测试组织",
+              "slug": "02_googletest_catch2_与测试组织",
+              "intro": "掌握测试框架、fixture、参数化测试和断言。"
+            },
+            {
+              "title": "Mock、Stub、Fake 与 Test Double",
+              "slug": "03_mock_stub_fake_与_test_double",
+              "intro": "区分测试替身及其使用场景。"
+            },
+            {
+              "title": "测试覆盖率与测试质量",
+              "slug": "04_测试覆盖率与测试质量",
+              "intro": "理解 statement/branch coverage 的局限和断言质量。"
+            },
+            {
+              "title": "回归测试、属性测试与变异测试",
+              "slug": "05_回归测试_属性测试与变异测试",
+              "intro": "建立回归防护，并用 property/mutation testing 检验测试能力。"
+            },
+            {
+              "title": "并发测试与 flaky tests",
+              "slug": "06_并发测试与_flaky_tests",
+              "intro": "理解非确定性、竞态检测和稳定复现策略。"
+            }
+          ]
+        },
+        {
+          "title": "调试、诊断与静态分析",
+          "slug": "03_调试_诊断与静态分析",
+          "intro": "掌握定位运行时错误和预防缺陷的工具。",
+          "subsections": [
+            {
+              "title": "GDB、LLDB 与断点调试",
+              "slug": "01_gdb_lldb_与断点调试",
+              "intro": "掌握断点、调用栈、变量检查和条件断点。"
+            },
+            {
+              "title": "AddressSanitizer、UBSan 与 TSan",
+              "slug": "02_addresssanitizer_ubsan_与_tsan",
+              "intro": "理解内存错误、未定义行为和数据竞争检测。"
+            },
+            {
+              "title": "Valgrind 与内存诊断",
+              "slug": "03_valgrind_与内存诊断",
+              "intro": "了解动态分析工具的适用范围和限制。"
+            },
+            {
+              "title": "clang-tidy、静态分析与代码规范",
+              "slug": "04_clang_tidy_静态分析与代码规范",
+              "intro": "建立自动化代码检查和规则治理。"
+            },
+            {
+              "title": "Core dump、崩溃分析与符号信息",
+              "slug": "05_core_dump_崩溃分析与符号信息",
+              "intro": "理解崩溃转储、debug symbols 和 backtrace。"
+            }
+          ]
+        },
+        {
+          "title": "构建、依赖与持续集成",
+          "slug": "04_构建_依赖与持续集成",
+          "intro": "掌握可重复构建、依赖管理和自动化交付。",
+          "subsections": [
+            {
+              "title": "CMake：target、生成器与现代用法",
+              "slug": "01_cmake_target_生成器与现代用法",
+              "intro": "掌握 target_sources、target_link_libraries 和 usage requirements。"
+            },
+            {
+              "title": "编译器选项、警告与构建配置",
+              "slug": "02_编译器选项_警告与构建配置",
+              "intro": "理解 Debug/Release、优化级别、LTO 和警告策略。"
+            },
+            {
+              "title": "包管理：Conan、vcpkg 与系统包",
+              "slug": "03_包管理_conan_vcpkg_与系统包",
+              "intro": "比较依赖获取、版本锁定和可复现构建。"
+            },
+            {
+              "title": "CI/CD：GitHub Actions 与流水线",
+              "slug": "04_ci_cd_github_actions_与流水线",
+              "intro": "构建自动测试、构建矩阵、制品和发布流程。"
+            },
+            {
+              "title": "代码审查、Git 工作流与版本发布",
+              "slug": "05_代码审查_git_工作流与版本发布",
+              "intro": "掌握 review、branch strategy、semantic versioning。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "高级主题与实战项目",
+      "slug": "08_advanced_topics_projects",
+      "intro": "将前面各部分融会贯通，进一步探索底层系统、网络、跨平台、性能敏感开发，并通过完整项目形成工程闭环。",
+      "sections": [
+        {
+          "title": "底层系统与平台接口",
+          "slug": "01_底层系统与平台接口",
+          "intro": "理解 C++ 与操作系统、硬件及 C ABI 的交界面。",
+          "subsections": [
+            {
+              "title": "进程、线程、虚拟内存与系统调用",
+              "slug": "01_进程_线程_虚拟内存与系统调用",
+              "intro": "理解用户态/内核态、地址空间和系统资源。"
+            },
+            {
+              "title": "动态链接、符号可见性与插件架构",
+              "slug": "02_动态链接_符号可见性与插件架构",
+              "intro": "掌握 shared library、visibility 和 plugin loading。"
+            },
+            {
+              "title": "C ABI、extern C 与跨语言接口",
+              "slug": "03_c_abi_extern_c_与跨语言接口",
+              "intro": "理解名称修饰、调用约定和 C/C++ 边界。"
+            },
+            {
+              "title": "对齐、对象表示与字节序",
+              "slug": "04_对齐_对象表示与字节序",
+              "intro": "掌握 alignment、object representation、endianness。"
+            },
+            {
+              "title": "平台抽象：POSIX、Windows 与 macOS",
+              "slug": "05_平台抽象_posix_windows_与_macos",
+              "intro": "比较平台 API 并设计可移植边界。"
+            }
+          ]
+        },
+        {
+          "title": "网络与分布式系统基础",
+          "slug": "02_网络与分布式系统基础",
+          "intro": "用现代 C++ 构建网络服务和分布式组件。",
+          "subsections": [
+            {
+              "title": "Socket、TCP 与 UDP",
+              "slug": "01_socket_tcp_与_udp",
+              "intro": "理解连接、字节流、数据报和网络错误处理。"
+            },
+            {
+              "title": "同步 I/O 与异步 I/O",
+              "slug": "02_同步_i_o_与异步_i_o",
+              "intro": "比较 blocking、non-blocking、事件驱动和异步模型。"
+            },
+            {
+              "title": "TLS、证书与安全通信",
+              "slug": "03_tls_证书与安全通信",
+              "intro": "理解加密传输、证书验证和密钥管理边界。"
+            },
+            {
+              "title": "HTTP、WebSocket 与 RPC",
+              "slug": "04_http_websocket_与_rpc",
+              "intro": "掌握常见应用层协议及接口设计。"
+            },
+            {
+              "title": "序列化、协议演进与兼容性",
+              "slug": "05_序列化_协议演进与兼容性",
+              "intro": "理解 schema、wire format 和向前/向后兼容。"
+            }
+          ]
+        },
+        {
+          "title": "高级语言与库设计主题",
+          "slug": "03_高级语言与库设计主题",
+          "intro": "探索大型 C++ 库和复杂系统常见的高级技术。",
+          "subsections": [
+            {
+              "title": "自定义 allocator 与内存资源 PMR",
+              "slug": "01_自定义_allocator_与内存资源_pmr",
+              "intro": "掌握 polymorphic_allocator 和 memory_resource。"
+            },
+            {
+              "title": "类型擦除与 std::function",
+              "slug": "02_类型擦除与_std_function",
+              "intro": "理解 type erasure、small buffer optimization 的常见实现思路。"
+            },
+            {
+              "title": "PImpl、ABI 防火墙与编译隔离",
+              "slug": "03_pimpl_abi_防火墙与编译隔离",
+              "intro": "理解实现隐藏、编译依赖和 ABI 稳定性。"
+            },
+            {
+              "title": "插件、回调与事件驱动设计",
+              "slug": "04_插件_回调与事件驱动设计",
+              "intro": "掌握回调生命周期、事件分发和取消语义。"
+            },
+            {
+              "title": "协程异步框架与执行器模型",
+              "slug": "05_协程异步框架与执行器模型",
+              "intro": "理解 coroutine 与 scheduler/executor 的组合方式。"
+            }
+          ]
+        },
+        {
+          "title": "实战项目与综合训练",
+          "slug": "04_实战项目与综合训练",
+          "intro": "通过逐步增加复杂度的项目，把语言、库、并发和工程实践结合起来。",
+          "subsections": [
+            {
+              "title": "项目一：现代 C++ 命令行工具",
+              "slug": "01_项目一_现代_c__命令行工具",
+              "intro": "练习参数解析、文件系统、错误处理、测试和 CMake。"
+            },
+            {
+              "title": "项目二：线程安全任务队列",
+              "slug": "02_项目二_线程安全任务队列",
+              "intro": "练习 mutex、condition_variable、关闭语义和压力测试。"
+            },
+            {
+              "title": "项目三：日志库或配置库",
+              "slug": "03_项目三_日志库或配置库",
+              "intro": "练习 API 设计、RAII、格式化、线程安全和性能测量。"
+            },
+            {
+              "title": "项目四：异步网络服务",
+              "slug": "04_项目四_异步网络服务",
+              "intro": "练习 socket、协议解析、并发模型和资源生命周期。"
+            },
+            {
+              "title": "项目五：性能敏感组件",
+              "slug": "05_项目五_性能敏感组件",
+              "intro": "练习基准测试、缓存局部性、分配器和延迟分析。"
+            },
+            {
+              "title": "代码审查、文档与发布",
+              "slug": "06_代码审查_文档与发布",
+              "intro": "完成 README、设计文档、CI、版本发布和维护计划。"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

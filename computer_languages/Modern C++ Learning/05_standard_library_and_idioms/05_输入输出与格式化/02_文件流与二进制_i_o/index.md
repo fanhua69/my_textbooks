@@ -1,0 +1,10 @@
+# 5.5.2 文件流与二进制 I/O
+
+掌握 ifstream、ofstream、fstream 及二进制读写。
+
+---
+
+## 导航
+
+← 上一节：[5.5.1 iostream 与流状态](../01_iostream_与流状态/index.md)
+下一节：[5.5.3 流缓冲、同步与性能](../03_流缓冲_同步与性能/index.md) →
