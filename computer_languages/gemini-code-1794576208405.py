@@ -180,8 +180,12 @@ def main() -> int:
                               "dir": topic["dir"], "index": topic["index"],
                               "children": [], "level": 1})
 
+    # Root level index.md (Home page)
+    root_index_path = root / "index.md"
+    all_indices = [root_index_path] + [p["index"] for p in pages]
+
     # Refuse accidental overwrite unless --force. Existing non-index files are preserved.
-    existing = [p["index"] for p in pages if p["index"].exists()]
+    existing = [p for p in all_indices if p.exists()]
     if existing and not args.force:
         print(
             f"发现 {len(existing)} 个已存在的 index.md。为避免覆盖，请备份后加 --force。",
@@ -189,9 +193,34 @@ def main() -> int:
         )
         return 2
 
+    # 1. Generate root index.md
+    root.mkdir(parents=True, exist_ok=True)
+    root_intro = data.get("intro", f"欢迎阅读《{data['title']}》教程。")
+    root_children = [(part["title"], part["index"]) for part in part_records]
+    root_previous = None
+    root_following = (pages[0]["title"], pages[0]["index"]) if pages else None
+
+    root_content = render_index(
+        title=data["title"],
+        intro=root_intro,
+        children=root_children,
+        previous=root_previous,
+        following=root_following,
+        current_dir=root,
+        level=1,
+    )
+    root_index_path.write_text(root_content, encoding="utf-8")
+
+    # 2. Generate sub-pages index.md
     for i, page in enumerate(pages):
-        previous = (pages[i - 1]["title"], pages[i - 1]["index"]) if i > 0 else None
+        # 这里的 previous 对应前一页，如果 i == 0，则上一页是根目录的 index.md
+        if i == 0:
+            previous = (data["title"], root_index_path)
+        else:
+            previous = (pages[i - 1]["title"], pages[i - 1]["index"])
+
         following = (pages[i + 1]["title"], pages[i + 1]["index"]) if i + 1 < len(pages) else None
+
         page["dir"].mkdir(parents=True, exist_ok=True)
         content = render_index(
             page["title"], page["intro"], page["children"],
@@ -200,8 +229,8 @@ def main() -> int:
         page["index"].write_text(content, encoding="utf-8")
 
     print(f"完成：{root}")
-    print(f"创建/更新 {len(pages)} 个 index.md 文件")
-    print("导航顺序：按 JSON 大纲深度优先排列（部分 → 二级节 → 三级节）")
+    print(f"创建/更新 {len(pages) + 1} 个 index.md 文件（包含主目录）")
+    print("导航顺序：根目录 → 深度优先排列（部分 → 二级节 → 三级节）")
     return 0
 
 
