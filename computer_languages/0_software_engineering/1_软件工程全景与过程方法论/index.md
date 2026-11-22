@@ -8,11 +8,12 @@
 - [1.2 软件过程与方法论：经典与现代过程模型](1.2_软件过程与方法论_经典与现代过程模型/index.md)
 - [1.3 敏捷、精益与现代交付模型](1.3_敏捷_精益与现代交付模型/index.md)
 - [1.4 软件项目管理与研发效能度量](1.4_软件项目管理与研发效能度量/index.md)
+- [1.5 软件建模与 UML](1.5_软件建模与_UML/index.md)
 
 ---
 
 ## 导航
 
-← 上一节：[0_software_engineering](../index.md)
-↑ 返回上级：[0_software_engineering](../index.md)
+← 上一节：[software_engineering_third](../index.md)
+↑ 返回上级：[software_engineering_third](../index.md)
 下一节：[2 需求工程与规范驱动开发 (SDD)](../2_需求工程与规范驱动开发_SDD/index.md) →

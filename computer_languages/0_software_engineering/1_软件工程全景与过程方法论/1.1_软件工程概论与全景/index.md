@@ -12,6 +12,6 @@
 
 ## 导航
 
-← 上一节：[0_software_engineering](../../index.md)
+← 上一节：[software_engineering_third](../../index.md)
 ↑ 返回上级：[1 软件工程全景与过程方法论](../index.md)
 下一节：[1.2 软件过程与方法论：经典与现代过程模型](../1.2_软件过程与方法论_经典与现代过程模型/index.md) →

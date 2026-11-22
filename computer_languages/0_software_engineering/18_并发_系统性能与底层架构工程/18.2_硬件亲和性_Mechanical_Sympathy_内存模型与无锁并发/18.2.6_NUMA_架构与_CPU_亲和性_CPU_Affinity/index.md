@@ -1,0 +1,11 @@
+# 18.2.6 NUMA 架构与 CPU 亲和性 (CPU Affinity)
+
+理解远/近内存访问延迟差异，通过线程绑核与内存首触放置降低跨节点访问与调度抖动。
+
+---
+
+## 导航
+
+← 上一节：[18.2.5 ABA 问题、风险指针 (Hazard Pointer) 与 RCU 内存回收](../18.2.5_ABA_问题_风险指针_Hazard_Pointer_与_RCU_内存回收/index.md)
+↑ 返回上级：[18.2 硬件亲和性 (Mechanical Sympathy)、内存模型与无锁并发](../index.md)
+下一节：[18.2.7 内存分配器与分配策略：tcmalloc、jemalloc 与 Arena](../18.2.7_内存分配器与分配策略_tcmalloc_jemalloc_与_Arena/index.md) →

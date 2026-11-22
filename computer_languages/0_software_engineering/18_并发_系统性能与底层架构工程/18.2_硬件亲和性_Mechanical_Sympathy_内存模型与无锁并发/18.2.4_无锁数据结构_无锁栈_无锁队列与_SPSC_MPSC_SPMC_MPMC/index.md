@@ -1,0 +1,11 @@
+# 18.2.4 无锁数据结构：无锁栈、无锁队列与 SPSC / MPSC / SPMC / MPMC
+
+按生产者/消费者数量选择环形缓冲与链式无锁队列，理解各自的内存序与可扩展性边界。
+
+---
+
+## 导航
+
+← 上一节：[18.2.3 零拷贝 (Zero-Copy) 与对象池化内存治理](../18.2.3_零拷贝与对象池化内存治理_Zero-Copy/index.md)
+↑ 返回上级：[18.2 硬件亲和性 (Mechanical Sympathy)、内存模型与无锁并发](../index.md)
+下一节：[18.2.5 ABA 问题、风险指针 (Hazard Pointer) 与 RCU 内存回收](../18.2.5_ABA_问题_风险指针_Hazard_Pointer_与_RCU_内存回收/index.md) →

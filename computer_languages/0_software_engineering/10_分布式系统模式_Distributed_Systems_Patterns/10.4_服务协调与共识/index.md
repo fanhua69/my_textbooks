@@ -1,0 +1,15 @@
+# 10.4 服务协调与共识
+
+集群中的一致决策、领导权与成员管理。服务发现见微服务治理一节。
+
+## 本节目录
+
+- [10.4.1 分布式共识与协调原语](10.4.1_分布式共识与协调原语/index.md)
+
+---
+
+## 导航
+
+← 上一节：[10.3 分布式弹性与容错](../10.3_分布式弹性与容错/index.md)
+↑ 返回上级：[10 分布式系统模式 (Distributed Systems Patterns)](../index.md)
+下一节：[11 部署与运行层模式 (Deployment & Runtime Patterns)](../../11_部署与运行层模式_Deployment_Runtime_Patterns/index.md) →

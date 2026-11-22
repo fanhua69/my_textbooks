@@ -1,0 +1,11 @@
+# 14.2.5.2 回归测试 (Regression Testing) 与冒烟测试 (Smoke Testing)
+
+以自动化回归套件保护既有功能，并以快速冒烟测试作为构建与部署后的第一道健康门槛。
+
+---
+
+## 导航
+
+← 上一节：[14.2.5.1 系统测试 (System Testing) 与验收测试 (Acceptance Testing)](../14.2.5.1_系统测试_System_Testing_与验收测试_Acceptance_Testing/index.md)
+↑ 返回上级：[14.2.5 系统测试、验收测试与回归/冒烟测试](../index.md)
+下一节：[14.3 专项测试技术与现代测试方法](../../../14.3_专项测试技术与现代测试方法/index.md) →

@@ -1,0 +1,11 @@
+# 17.2.1.3 函数调用 (Function Calling / MCP) 与工具安全沙箱
+
+定义 JSON Schema 与模型上下文协议 (MCP) 工具规格，解析结构化参数，构建具备鉴权与越权拦截的执行沙箱。
+
+---
+
+## 导航
+
+← 上一节：[17.2.1.2 Agent 智能体编排与工作流模式 (ReAct & Multi-Agent)](../17.2.1.2_智能体编排与工作流模式_ReAct_Multi-Agent/index.md)
+↑ 返回上级：[17.2.1 LLM 软件系统架构模式](../index.md)
+下一节：[17.2.2 LLM 系统评估与质量基准 (LLM Evals)](../../17.2.2_系统评估与质量基准_LLM_Evals/index.md) →

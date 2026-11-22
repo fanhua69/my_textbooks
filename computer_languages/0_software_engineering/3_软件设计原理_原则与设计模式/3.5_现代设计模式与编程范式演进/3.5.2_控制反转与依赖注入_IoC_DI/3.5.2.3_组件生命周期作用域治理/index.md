@@ -1,0 +1,11 @@
+# 3.5.2.3 组件生命周期作用域治理
+
+掌握单例 (Singleton)、瞬态 (Transient)、作用域 (Scoped / Per-Request) 的内存管理与对象销毁安全。
+
+---
+
+## 导航
+
+← 上一节：[3.5.2.2 构造器注入、方法注入与字段注入优劣分析](../3.5.2.2_构造器注入_方法注入与字段注入优劣分析/index.md)
+↑ 返回上级：[3.5.2 控制反转与依赖注入 (IoC/DI)](../index.md)
+下一节：[3.5.2.4 服务定位器 (Service Locator)、组合根 (Composition Root) 与依赖图](../3.5.2.4_服务定位器_Service_Locator_组合根_Composition_Root_与依赖图/index.md) →

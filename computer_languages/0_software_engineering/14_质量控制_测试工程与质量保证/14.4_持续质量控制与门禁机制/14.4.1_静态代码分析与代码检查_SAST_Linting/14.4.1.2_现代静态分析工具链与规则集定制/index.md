@@ -1,0 +1,11 @@
+# 14.4.1.2 现代静态分析工具链与规则集定制
+
+配置 SonarQube、Semgrep、ESLint 与 Clang-Tidy，定制特定业务安全规则并开展误报（False Positives）治理。
+
+---
+
+## 导航
+
+← 上一节：[14.4.1.1 静态分析原理：抽象语法树 (AST) 与控制流分析](../14.4.1.1_静态分析原理_抽象语法树与控制流分析_AST/index.md)
+↑ 返回上级：[14.4.1 静态代码分析与代码检查 (SAST/Linting)](../index.md)
+下一节：[14.4.2 动态代码分析与运行时检测 (DAST/Sanitizers)](../../14.4.2_动态代码分析与运行时检测_DAST_Sanitizers/index.md) →

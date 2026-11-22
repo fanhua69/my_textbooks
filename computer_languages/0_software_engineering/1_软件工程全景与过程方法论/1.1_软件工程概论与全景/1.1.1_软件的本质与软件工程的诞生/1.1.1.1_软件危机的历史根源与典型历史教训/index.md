@@ -6,6 +6,6 @@
 
 ## 导航
 
-← 上一节：[0_software_engineering](../../../../index.md)
+← 上一节：[software_engineering_third](../../../../index.md)
 ↑ 返回上级：[1.1.1 软件的本质与软件工程的诞生](../index.md)
 下一节：[1.1.1.2 本质复杂度与偶然复杂度（布鲁克斯《没有银弹》）](../1.1.1.2_本质复杂度与偶然复杂度/index.md) →

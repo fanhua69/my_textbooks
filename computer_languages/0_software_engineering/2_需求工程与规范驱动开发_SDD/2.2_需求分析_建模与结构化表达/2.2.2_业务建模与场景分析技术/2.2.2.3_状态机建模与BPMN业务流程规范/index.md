@@ -8,4 +8,4 @@
 
 ← 上一节：[2.2.2.2 领域故事讲述 (Domain Storytelling)](../2.2.2.2_领域故事讲述_Domain_Storytelling/index.md)
 ↑ 返回上级：[2.2.2 业务建模与场景分析技术](../index.md)
-下一节：[2.3 规范驱动开发 (SDD, Spec-Driven Development)](../../../2.3_规范驱动开发_SDD_Spec-Driven_Development/index.md) →
+下一节：[2.2.3 需求规格说明与需求分析方法](../../2.2.3_需求规格说明与需求分析方法/index.md) →

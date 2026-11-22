@@ -1,0 +1,11 @@
+# 13.2.2.1 接缝模型 (Seam Model) 与解开依赖
+
+寻找预处理接缝、链接接缝与对象接缝，在不修改原有代码的前提下注入测试桩。同时涵盖 Feathers 的依赖破除技法 (Break Dependency)：提取接口、参数化构造函数与子类化重写。
+
+---
+
+## 导航
+
+← 上一节：[13.2.1 向模式重构 (Refactoring to Patterns)](../../13.2.1_向模式重构_Refactoring_to_Patterns/index.md)
+↑ 返回上级：[13.2.2 遗留系统改造策略与安全网接手](../index.md)
+下一节：[13.2.2.2 特征测试（Characterization Tests）构建保护网](../13.2.2.2_特征测试构建保护网_Characterization_Tests/index.md) →

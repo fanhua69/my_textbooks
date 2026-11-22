@@ -1,0 +1,11 @@
+# 11.2.1.3 容器化部署 (Containerized Deployment) 模式：单进程容器与 Pod 组合
+
+以不可变镜像打包服务，用 Pod 组合紧密协作的容器，实现环境一致与快速弹性。
+
+---
+
+## 导航
+
+← 上一节：[11.2.1.2 每主机单服务 (Service per Host) 与每主机多服务 (Multiple Services per Host)](../11.2.1.2_每主机单服务_Service_per_Host_与每主机多服务_Multiple_Services_per_H/index.md)
+↑ 返回上级：[11.2.1 部署形态](../index.md)
+下一节：[11.2.2 边车模式族](../../11.2.2_边车模式族/index.md) →

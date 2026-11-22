@@ -1,0 +1,11 @@
+# 16.2.1.2 现代 CMake：以目标 (Target) 为中心的构建配置
+
+使用 target_link_libraries、可见性 (PUBLIC/PRIVATE/INTERFACE) 与 Presets 组织可复用、可安装的 C++ 项目。
+
+---
+
+## 导航
+
+← 上一节：[16.2.1.1 构建系统原理：Make、Ninja 与增量构建的依赖图](../16.2.1.1_构建系统原理_Make_Ninja_与增量构建的依赖图/index.md)
+↑ 返回上级：[16.2.1 构建系统与 CMake](../index.md)
+下一节：[16.2.2 依赖与包管理](../../16.2.2_依赖与包管理/index.md) →

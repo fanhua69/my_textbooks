@@ -1,0 +1,11 @@
+# 10.3.1.4 回退 (Fallback) 与降级兜底策略
+
+在依赖失败时返回缓存、默认值或简化功能，把失败对用户的影响限制在可接受范围；健康检查见运行期模式。
+
+---
+
+## 导航
+
+← 上一节：[10.3.1.3 舱壁隔离模式 (Bulkhead Isolation)](../10.3.1.3_舱壁隔离模式_Bulkhead_Isolation/index.md)
+↑ 返回上级：[10.3.1 弹性设计核心模式](../index.md)
+下一节：[10.3.1.5 限流 (Rate Limiting)、节流 (Throttling)、负载脱落 (Load Shedding) 与背压保护](../10.3.1.5_限流_Rate_Limiting_节流_Throttling_负载脱落_Load_Shedding_与背压保护/index.md) →

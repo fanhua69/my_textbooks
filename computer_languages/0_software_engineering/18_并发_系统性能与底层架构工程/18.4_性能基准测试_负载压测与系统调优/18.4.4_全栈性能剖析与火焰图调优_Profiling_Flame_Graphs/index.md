@@ -1,0 +1,11 @@
+# 18.4.4 全栈性能剖析 (Profiling) 与火焰图 (Flame Graphs) 调优
+
+利用 perf / eBPF / Async-Profiler 生成 On-CPU、Off-CPU 与内存分配火焰图，精确诊断热点路径与锁竞争。
+
+---
+
+## 导航
+
+← 上一节：[18.4.3 压力测试与长时间浸泡稳定性测试 (Soak Testing)](../18.4.3_压力测试与长时间浸泡稳定性测试_Soak_Testing/index.md)
+↑ 返回上级：[18.4 性能基准测试、负载压测与系统调优](../index.md)
+下一节：[18.4.5 内存剖析 (Memory Profiling)：堆分析、泄漏定位与分配热点](../18.4.5_内存剖析_Memory_Profiling_堆分析_泄漏定位与分配热点/index.md) →

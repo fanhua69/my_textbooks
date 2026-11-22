@@ -1,0 +1,11 @@
+# 5.3.2.2 工厂 (Factory)：领域对象的创建与重建
+
+封装复杂聚合的创建不变式，并区分新建与从持久化重建；资源库 (Repository) 的集合式抽象见数据访问层。
+
+---
+
+## 导航
+
+← 上一节：[5.3.2.1 领域服务 (Domain Service) 与应用服务 (Application Service) 的职责划分](../5.3.2.1_领域服务_Domain_Service_与应用服务_Application_Service_的职责划分/index.md)
+↑ 返回上级：[5.3.2 领域服务与对象生命周期](../index.md)
+下一节：[5.4 领域驱动设计 (DDD) 战略设计](../../../5.4_领域驱动设计_DDD_战略设计/index.md) →
