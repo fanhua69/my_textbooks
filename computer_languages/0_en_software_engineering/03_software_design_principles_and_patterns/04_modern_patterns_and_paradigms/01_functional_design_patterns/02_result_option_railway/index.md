@@ -1,0 +1,11 @@
+# 3.4.1.2 Result / Option 类型与铁路导向编程
+
+运用代数数据类型优雅表达错误，通过 Railway Oriented Programming 实现链式分支错误处理。
+
+---
+
+## 导航
+
+← 上一节：[3.4.1.1 不可变数据结构与纯函数设计](../01_immutability_and_pure_functions/index.md)
+↑ 返回上级：[3.4.1 现代语言中的函数式设计模式](../index.md)
+下一节：[3.4.1.3 高阶函数、柯里化与模式匹配替代传统模式](../03_higher_order_functions_currying/index.md) →

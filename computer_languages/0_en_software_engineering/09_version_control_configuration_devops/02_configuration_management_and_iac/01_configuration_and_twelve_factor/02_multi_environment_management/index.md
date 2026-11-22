@@ -1,0 +1,11 @@
+# 9.2.1.2 开发/测试/预发/生产多环境配置分离策略
+
+制定严格的配置与代码物理分离规则，确保同一份不可变构建制品（Artifact）能在所有环境中无缝流转。
+
+---
+
+## 导航
+
+← 上一节：[9.2.1.1 The Twelve-Factor App 第三条配置规范](../01_twelve_factor_config_rule/index.md)
+↑ 返回上级：[9.2.1 环境一致性与 12-Factor 配置法则](../index.md)
+下一节：[9.2.1.3 统一分布式配置中心设计与安全加密](../03_distributed_config_centers/index.md) →

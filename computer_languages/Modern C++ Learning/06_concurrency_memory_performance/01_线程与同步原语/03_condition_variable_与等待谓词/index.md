@@ -7,4 +7,6 @@
 ## 导航
 
 ← 上一节：[6.1.2 mutex、lock_guard 与 unique_lock](../02_mutex_lock_guard_与_unique_lock/index.md)
+↑ 返回上级：[6.1 线程与同步原语](../index.md)
 下一节：[6.1.4 shared_mutex 与读写锁](../04_shared_mutex_与读写锁/index.md) →
+

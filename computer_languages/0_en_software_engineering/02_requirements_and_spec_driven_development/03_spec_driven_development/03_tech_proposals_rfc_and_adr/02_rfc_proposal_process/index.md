@@ -1,0 +1,11 @@
+# 2.3.3.2 技术设计提案 (RFC) 制度设计与同行评审
+
+建立从 RFC 起草、公开评审期（RFC Period）、委员会决策到里程碑落地的标准化工程协作。
+
+---
+
+## 导航
+
+← 上一节：[2.3.3.1 架构决策记录 (ADR) 模板与演进治理](../01_architecture_decision_records/index.md)
+↑ 返回上级：[2.3.3 架构决策与技术提案规范体系](../index.md)
+下一节：[2.3.4 行为驱动开发与形式化规格验证](../../04_bdd_and_formal_specifications/index.md) →

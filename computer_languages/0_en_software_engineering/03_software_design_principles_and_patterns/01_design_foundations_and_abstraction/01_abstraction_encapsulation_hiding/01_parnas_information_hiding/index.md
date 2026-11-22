@@ -1,0 +1,11 @@
+# 3.1.1.1 Parnas 信息隐藏原则与模块边界设计
+
+探讨将最容易发生变化的设计决策（如数据结构、算法、硬件接口）隐藏在模块内部的核心方法。
+
+---
+
+## 导航
+
+← 上一节：[2 需求工程与规范驱动开发 (SDD)](../../../../02_requirements_and_spec_driven_development/index.md)
+↑ 返回上级：[3.1.1 抽象、封装与信息隐藏](../index.md)
+下一节：[3.1.1.2 抽象泄漏定律（Law of Leaky Abstractions）及其应对](../02_leaky_abstractions_law/index.md) →

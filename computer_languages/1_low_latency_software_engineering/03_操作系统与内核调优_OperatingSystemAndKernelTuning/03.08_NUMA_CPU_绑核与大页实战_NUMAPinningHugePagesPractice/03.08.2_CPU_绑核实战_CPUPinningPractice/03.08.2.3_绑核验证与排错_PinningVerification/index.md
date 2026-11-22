@@ -1,0 +1,16 @@
+# 3.8.2.3 绑核验证与排错
+
+确认线程真的没有被迁移。
+
+## 本节目录
+
+- [3.8.2.3.1 ps、mpstat 与 perf sched 验证](03.08.2.3.1_ps_mpstat_与_perf_sched_验证_PsMpstatPerfSched/index.md)
+- [3.8.2.3.2 容器与 cgroup 对绑核的覆盖](03.08.2.3.2_容器与_cgroup_对绑核的覆盖_CgroupOverridesPinning/index.md)
+
+---
+
+## 导航
+
+← 上一节：[3.8.2.2 隔离核心的联合配置](../03.08.2.2_隔离核心的联合配置_IsolationJointConfig/index.md)
+↑ 返回上级：[3.8.2 CPU 绑核实战](../index.md)
+下一节：[3.8.2.4 macOS 与 Apple 平台的替代手段](../03.08.2.4_macOS_与_Apple_平台的替代手段_MacOSPinningAlternatives/index.md) →

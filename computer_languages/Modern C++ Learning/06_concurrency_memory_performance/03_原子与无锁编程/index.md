@@ -15,4 +15,6 @@
 ## 导航
 
 ← 上一节：[6.2.5 编译器重排、CPU 重排与 as-if rule](../02_c__内存模型/05_编译器重排_cpu_重排与_as_if_rule/index.md)
+↑ 返回上级：[6. 并发、内存模型与性能](../index.md)
 下一节：[6.3.1 load、store、exchange 与 fetch 操作](01_load_store_exchange_与_fetch_操作/index.md) →
+

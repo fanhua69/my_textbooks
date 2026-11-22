@@ -14,4 +14,6 @@
 ## 导航
 
 ← 上一节：[2.4.5 对象切片与组合优于继承](../02_objects_and_resource_management/04_继承_多态与对象模型/05_对象切片与组合优于继承/index.md)
+↑ 返回上级：[Modern C++ Learning](../index.md)
 下一节：[3.1 C++11/14：现代 C++ 的起点](01_c_11_14_现代_c__的起点/index.md) →
+

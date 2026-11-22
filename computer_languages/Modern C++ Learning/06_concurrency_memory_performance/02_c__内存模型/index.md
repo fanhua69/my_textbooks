@@ -15,4 +15,6 @@
 ## 导航
 
 ← 上一节：[6.1.5 future、promise、async 与 packaged_task](../01_线程与同步原语/05_future_promise_async_与_packaged_task/index.md)
+↑ 返回上级：[6. 并发、内存模型与性能](../index.md)
 下一节：[6.2.1 数据竞争 Data Race 与未定义行为](01_数据竞争_data_race_与未定义行为/index.md) →
+

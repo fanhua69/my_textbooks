@@ -14,4 +14,6 @@
 ## 导航
 
 ← 上一节：[6.4.5 延迟、吞吐量与 tail latency](../06_concurrency_memory_performance/04_性能工程与硬件基础/05_延迟_吞吐量与_tail_latency/index.md)
+↑ 返回上级：[Modern C++ Learning](../index.md)
 下一节：[7.1 软件设计与架构](01_软件设计与架构/index.md) →
+

@@ -1,0 +1,11 @@
+# 2.3.2.3 Protocol Buffers / gRPC 二进制契约与兼容演进
+
+利用 Protobuf 定义强类型 RPC 接口，掌握字段编号规则与向前/向后兼容演进纪律。
+
+---
+
+## 导航
+
+← 上一节：[2.3.2.2 AsyncAPI 规范：事件驱动消息契约定义](../02_asyncapi_event_specs/index.md)
+↑ 返回上级：[2.3.2 契约优先与 API 驱动设计实践](../index.md)
+下一节：[2.3.3 架构决策与技术提案规范体系](../../03_tech_proposals_rfc_and_adr/index.md) →

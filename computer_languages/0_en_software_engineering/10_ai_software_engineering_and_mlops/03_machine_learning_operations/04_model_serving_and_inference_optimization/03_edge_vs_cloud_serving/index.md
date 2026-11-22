@@ -1,0 +1,11 @@
+# 10.3.4.3 边缘端部署 vs 云端服务集群的资源博弈
+
+评估端侧计算（移动设备/IoT）的低延迟隐私优势与云端中心化集群弹性算力之间的工程权衡。
+
+---
+
+## 导航
+
+← 上一节：[10.3.4.2 推理加速与量化剪枝工程 (ONNX / TensorRT)](../02_inference_optimization_quantization/index.md)
+↑ 返回上级：[10.3.4 模型服务化部署与推理优化](../index.md)
+下一节：[10.3.5 模型持续监控与持续训练 (CT)](../../05_continuous_monitoring_and_retraining/index.md) →

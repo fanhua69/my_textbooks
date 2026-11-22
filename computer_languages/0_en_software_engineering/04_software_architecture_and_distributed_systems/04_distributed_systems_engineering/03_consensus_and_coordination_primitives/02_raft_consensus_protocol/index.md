@@ -1,0 +1,11 @@
+# 4.4.3.2 Raft 共识协议全流程运作机制
+
+详细解析 Leader 选举随机超时、日志复制追加、安全提交原则（Log Matching）以及成员变更与日志压缩。
+
+---
+
+## 导航
+
+← 上一节：[4.4.3.1 Paxos 经典共识算法深度剖析](../01_paxos_algorithm/index.md)
+↑ 返回上级：[4.4.3 分布式共识与协调原语](../index.md)
+下一节：[4.4.3.3 分布式锁实现与租约安全防范](../03_distributed_locks_and_leases/index.md) →

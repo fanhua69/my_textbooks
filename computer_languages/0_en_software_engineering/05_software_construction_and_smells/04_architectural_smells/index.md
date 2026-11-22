@@ -1,0 +1,17 @@
+# 5.4 架构异味与系统侵蚀
+
+从宏观拓扑结构与分布式服务视角，识别破坏系统可演化性与扩展性的架构级致命坏味道。
+
+## 本节目录
+
+- [5.4.1 宏观架构退化与系统侵蚀](01_macro_architectural_decay/index.md)
+- [5.4.2 服务与系统边界架构异味](02_service_and_boundary_smells/index.md)
+- [5.4.3 通信与数据架构异味](03_communication_and_data_smells/index.md)
+
+---
+
+## 导航
+
+← 上一节：[5.3 设计异味与组件退化](../03_design_smells/index.md)
+↑ 返回上级：[5 软件构造、代码质量与异味识别](../index.md)
+下一节：[6 软件重构、技术债与软件演化](../../06_refactoring_technical_debt_evolution/index.md) →

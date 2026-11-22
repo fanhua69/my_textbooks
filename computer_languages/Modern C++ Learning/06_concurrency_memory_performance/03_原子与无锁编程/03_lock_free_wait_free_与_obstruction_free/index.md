@@ -7,4 +7,6 @@
 ## 导航
 
 ← 上一节：[6.3.2 compare_exchange 与 CAS 循环](../02_compare_exchange_与_cas_循环/index.md)
+↑ 返回上级：[6.3 原子与无锁编程](../index.md)
 下一节：[6.3.4 ABA 问题与内存回收](../04_aba_问题与内存回收/index.md) →
+

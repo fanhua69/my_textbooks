@@ -7,4 +7,6 @@
 ## 导航
 
 ← 上一节：[6.2.4 happens-before 与 synchronizes-with](../04_happens_before_与_synchronizes_with/index.md)
+↑ 返回上级：[6.2 C++ 内存模型](../index.md)
 下一节：[6.3 原子与无锁编程](../../03_原子与无锁编程/index.md) →
+

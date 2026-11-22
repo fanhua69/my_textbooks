@@ -7,4 +7,6 @@
 ## 导航
 
 ← 上一节：[2.4 继承、多态与对象模型](../index.md)
+↑ 返回上级：[2.4 继承、多态与对象模型](../index.md)
 下一节：[2.4.2 虚函数、override 与 final](../02_虚函数_override_与_final/index.md) →
+

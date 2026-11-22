@@ -7,4 +7,6 @@
 ## 导航
 
 ← 上一节：[2.1.1 class、struct 与访问控制](../01_class_struct_与访问控制/index.md)
+↑ 返回上级：[2.1 类与封装](../index.md)
 下一节：[2.1.3 this 指针、成员函数与 const 成员函数](../03_this_指针_成员函数与_const_成员函数/index.md) →
+

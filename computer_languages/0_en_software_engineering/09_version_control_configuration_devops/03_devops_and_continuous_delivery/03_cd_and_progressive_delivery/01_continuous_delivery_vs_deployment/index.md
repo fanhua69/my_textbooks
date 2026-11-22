@@ -1,0 +1,11 @@
+# 9.3.3.1 持续交付 (CD) vs 持续部署 (CD) 门禁辨析
+
+区分自动化构建至随时可部署状态（人工审核放行）与全流程无人干预自动化部署上线的关键控制点。
+
+---
+
+## 导航
+
+← 上一节：[9.3.2 持续集成 (CI) 流水线工程](../../02_ci_pipeline_engineering/index.md)
+↑ 返回上级：[9.3.3 持续交付与渐进式发布策略](../index.md)
+下一节：[9.3.3.2 蓝绿部署 (Blue-Green Deployment) 实战](../02_blue_green_deployment/index.md) →

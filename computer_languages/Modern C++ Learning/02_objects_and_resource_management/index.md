@@ -14,4 +14,6 @@
 ## 导航
 
 ← 上一节：[1.4.4 隐式转换、用户定义转换与 explicit](../01_cpp_fundamentals/04_表达式_运算符与求值规则/04_隐式转换_用户定义转换与_explicit/index.md)
+↑ 返回上级：[Modern C++ Learning](../index.md)
 下一节：[2.1 类与封装](01_类与封装/index.md) →
+

@@ -1,0 +1,11 @@
+# 4.3.1.2 康威定律 (Conway's Law) 与逆康威组织调整
+
+“组织设计的架构必然映射其沟通结构”：通过逆康威调整（Inverse Conway Maneuver）重构敏捷小团队驱动微服务治理。
+
+---
+
+## 导航
+
+← 上一节：[4.3.1.1 微服务拆分策略：业务能力 vs 限界上下文](../01_decomposition_strategies/index.md)
+↑ 返回上级：[4.3.1 微服务拆分原则与康威定律](../index.md)
+下一节：[4.3.1.3 单体向微服务解耦演进路线](../03_monolith_to_microservices/index.md) →

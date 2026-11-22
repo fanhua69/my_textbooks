@@ -7,4 +7,6 @@
 ## 导航
 
 ← 上一节：[2.3.2 智能指针：unique_ptr、shared_ptr、weak_ptr](../02_智能指针_unique_ptr_shared_ptr_weak_ptr/index.md)
+↑ 返回上级：[2.3 RAII 与异常安全资源管理](../index.md)
 下一节：[2.3.4 异常安全保证：基本、强与不抛出保证](../04_异常安全保证_基本_强与不抛出保证/index.md) →
+

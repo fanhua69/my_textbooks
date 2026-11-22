@@ -1,0 +1,11 @@
+# 10.1.1.1 从 Copilot 编程结对助手到 Agentic 自主智能体
+
+梳理从单行代码补全（Tab Completion）、对话式辅助编程，跃迁到具备环境感知、工具调用与自主规划闭环的 Agent 阶段。
+
+---
+
+## 导航
+
+← 上一节：[9 版本控制与配置管理及 DevOps 工程](../../../../09_version_control_configuration_devops/index.md)
+↑ 返回上级：[10.1.1 AI 时代软件工程范式变迁](../index.md)
+下一节：[10.1.1.2 人机协作双驾驶员（Centaur）模式演进](../02_human_ai_collaboration_patterns/index.md) →
