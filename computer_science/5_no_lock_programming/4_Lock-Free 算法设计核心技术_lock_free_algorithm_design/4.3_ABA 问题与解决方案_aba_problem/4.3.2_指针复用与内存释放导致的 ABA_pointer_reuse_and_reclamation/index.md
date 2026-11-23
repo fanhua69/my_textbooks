@@ -1,0 +1,11 @@
+# 4.3.2 指针复用与内存释放导致的 ABA  pointer reuse and reclamation
+
+理解 allocator 地址复用、悬空指针和 ABA 的联系。
+
+---
+
+## 导航
+
+← 上一节：[4.3.1 ABA 问题的产生过程  aba problem walkthrough](../4.3.1_ABA%20问题的产生过程_aba_problem_walkthrough/index.md)
+↑ 返回上级：[4.3 ABA 问题与解决方案  aba problem](../index.md)
+下一节：[4.3.3 Tagged Pointer 与版本计数  tagged pointer and version counter](../4.3.3_Tagged%20Pointer%20与版本计数_tagged_pointer_and_version_counter/index.md) →

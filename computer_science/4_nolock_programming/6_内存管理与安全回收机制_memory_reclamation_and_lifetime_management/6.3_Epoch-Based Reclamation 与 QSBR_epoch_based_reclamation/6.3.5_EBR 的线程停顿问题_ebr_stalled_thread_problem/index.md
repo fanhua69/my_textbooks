@@ -1,0 +1,11 @@
+# 6.3.5 6.3.5_EBR 的线程停顿问题_ebr_stalled_thread_problem
+
+分析线程长期停顿导致回收延迟和内存膨胀。
+
+---
+
+## 导航
+
+← 上一节：[6.3.4 6.3.4_Quiescent State-Based Reclamation_qsbr](../6.3.4_Quiescent State-Based Reclamation_qsbr/index.md)
+↑ 返回上级：[6.3 6.3_Epoch-Based Reclamation 与 QSBR_epoch_based_reclamation](../index.md)
+下一节：[6.3.6 6.3.6_EBR 的性能与适用场景_ebr_performance_and_use_cases](../6.3.6_EBR 的性能与适用场景_ebr_performance_and_use_cases/index.md) →

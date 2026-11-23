@@ -1,0 +1,1417 @@
+{
+  "title": "No-Lock Programming：C++ 无锁编程",
+  "language": "zh-CN",
+  "description": "一套面向现代 C++ 并发与高性能系统开发的无锁编程系统教材。从并发拓扑（SPSC、SPMC、MPSC、MPMC）和进度保证出发，深入 CPU 原子操作、C++ 内存模型、CAS、线性化、ABA、经典无锁数据结构与安全内存回收，并覆盖性能工程、正确性验证及低延迟系统实战。以 C++11 为基础，覆盖 C++14/17/20/23 并跟踪 C++26；同时比较 x86-64 与 ARM64 平台行为。",
+  "navigation": {
+    "mode": "depth_first_all_index_pages",
+    "description": "前一页/后一页按教材目录深度优先顺序排列，包含部分、二级节和三级节的 index.md。"
+  },
+  "parts": [
+    {
+      "title": "1_无锁编程基础与并发模型_lock_free_fundamentals_and_concurrency_models",
+      "slug": "1_无锁编程基础与并发模型_lock_free_fundamentals_and_concurrency_models",
+      "intro": "建立并发编程、同步机制与无锁算法的整体认知。先理解线程交互模式和进度保证，再明确无锁编程解决什么问题、付出什么代价。",
+      "sections": [
+        {
+          "title": "1.1_并发基础与同步原语_concurrency_fundamentals",
+          "slug": "1.1_并发基础与同步原语_concurrency_fundamentals",
+          "intro": "理解线程、共享状态、数据竞争、同步关系及传统锁的工作方式，为无锁算法建立共同语言。",
+          "subsections": [
+            {
+              "title": "1.1.1_进程、线程与共享内存模型_process_thread_and_shared_memory",
+              "slug": "1.1.1_进程、线程与共享内存模型_process_thread_and_shared_memory",
+              "intro": "理解线程执行上下文、共享地址空间、线程局部存储及线程间通信。"
+            },
+            {
+              "title": "1.1.2_数据竞争、竞态条件与线程安全_data_race_race_condition_and_thread_safety",
+              "slug": "1.1.2_数据竞争、竞态条件与线程安全_data_race_race_condition_and_thread_safety",
+              "intro": "区分 data race、race condition、线程安全和可重入性；理解 C++ 数据竞争导致未定义行为。"
+            },
+            {
+              "title": "1.1.3_互斥锁、读写锁与自旋锁_mutex_rwlock_and_spinlock",
+              "slug": "1.1.3_互斥锁、读写锁与自旋锁_mutex_rwlock_and_spinlock",
+              "intro": "比较 mutex、shared_mutex、spinlock 的语义、成本、适用场景与公平性。"
+            },
+            {
+              "title": "1.1.4_条件变量、信号量与屏障_condition_variable_semaphore_and_barrier",
+              "slug": "1.1.4_条件变量、信号量与屏障_condition_variable_semaphore_and_barrier",
+              "intro": "掌握阻塞式协调原语，以及它们与原子操作的关系。"
+            },
+            {
+              "title": "1.1.5_锁竞争、上下文切换与优先级反转_lock_contention_context_switch_and_priority_inversion",
+              "slug": "1.1.5_锁竞争、上下文切换与优先级反转_lock_contention_context_switch_and_priority_inversion",
+              "intro": "分析锁竞争、调度、内核介入、优先级反转及尾延迟。"
+            }
+          ]
+        },
+        {
+          "title": "1.2_并发拓扑与生产者消费者模型_concurrency_topologies",
+          "slug": "1.2_并发拓扑与生产者消费者模型_concurrency_topologies",
+          "intro": "以生产者和消费者的数量关系为主线，系统介绍 SPSC、SPMC、MPSC、MPMC 等常见并发拓扑。这些拓扑是选择队列、环形缓冲区和任务调度结构的基础。",
+          "subsections": [
+            {
+              "title": "1.2.1_生产者与消费者模型概览_producer_consumer_model_overview",
+              "slug": "1.2.1_生产者与消费者模型概览_producer_consumer_model_overview",
+              "intro": "定义 producer、consumer、消息传递、队列边界及并发访问角色。"
+            },
+            {
+              "title": "1.2.2_SPSC：Single Producer Single Consumer_spsc_single_producer_single_consumer",
+              "slug": "1.2.2_SPSC：Single Producer Single Consumer_spsc_single_producer_single_consumer",
+              "intro": "单生产者单消费者模型；分析单写端、单读端、head/tail 索引、环形缓冲区及其低开销优势。"
+            },
+            {
+              "title": "1.2.3_SPMC：Single Producer Multiple Consumers_spmc_single_producer_multiple_consumers",
+              "slug": "1.2.3_SPMC：Single Producer Multiple Consumers_spmc_single_producer_multiple_consumers",
+              "intro": "单生产者多消费者模型；分析多消费者竞争、任务分发、消费端索引协调与典型应用。"
+            },
+            {
+              "title": "1.2.4_MPSC：Multiple Producers Single Consumer_mpsc_multiple_producers_single_consumer",
+              "slug": "1.2.4_MPSC：Multiple Producers Single Consumer_mpsc_multiple_producers_single_consumer",
+              "intro": "多生产者单消费者模型；分析生产端并发入队、单消费者出队、CAS 竞争及日志汇聚场景。"
+            },
+            {
+              "title": "1.2.5_MPMC：Multiple Producers Multiple Consumers_mpmc_multiple_producers_multiple_consumers",
+              "slug": "1.2.5_MPMC：Multiple Producers Multiple Consumers_mpmc_multiple_producers_multiple_consumers",
+              "intro": "多生产者多消费者模型；分析双端并发竞争、队列状态协调、吞吐量与复杂度。"
+            },
+            {
+              "title": "1.2.6_模型对比：SPSC、SPMC、MPSC 与 MPMC_compare_spsc_spmc_mpsc_mpmc",
+              "slug": "1.2.6_模型对比：SPSC、SPMC、MPSC 与 MPMC_compare_spsc_spmc_mpsc_mpmc",
+              "intro": "从原子变量数量、竞争热点、内存序、实现复杂度、吞吐量、延迟和适用场景比较四种拓扑。"
+            },
+            {
+              "title": "1.2.7_扩展拓扑：N-to-1、1-to-N 与 N-to-M_extended_producer_consumer_topologies",
+              "slug": "1.2.7_扩展拓扑：N-to-1、1-to-N 与 N-to-M_extended_producer_consumer_topologies",
+              "intro": "讨论多队列汇聚、广播、扇出、分片队列及拓扑组合。"
+            },
+            {
+              "title": "1.2.8_有界与无界队列_bounded_and_unbounded_queues",
+              "slug": "1.2.8_有界与无界队列_bounded_and_unbounded_queues",
+              "intro": "比较 bounded queue 与 unbounded queue 的容量、内存分配、背压和失败语义。"
+            }
+          ]
+        },
+        {
+          "title": "1.3_Lock-Free、Wait-Free 与进度保证_progress_guarantees",
+          "slug": "1.3_Lock-Free、Wait-Free 与进度保证_progress_guarantees",
+          "intro": "严格定义非阻塞算法的进度属性，避免把无锁、无等待和无互斥锁混为一谈。",
+          "subsections": [
+            {
+              "title": "1.3.1_Blocking 与 Non-blocking 算法_blocking_and_non_blocking_algorithms",
+              "slug": "1.3.1_Blocking 与 Non-blocking 算法_blocking_and_non_blocking_algorithms",
+              "intro": "从线程暂停、调度依赖和系统整体进度角度理解阻塞与非阻塞。"
+            },
+            {
+              "title": "1.3.2_Obstruction-Free：无障碍_obstruction_free",
+              "slug": "1.3.2_Obstruction-Free：无障碍_obstruction_free",
+              "intro": "定义线程独占执行一段时间后能够完成操作的保证及其局限。"
+            },
+            {
+              "title": "1.3.3_Lock-Free：无锁_lock_free",
+              "slug": "1.3.3_Lock-Free：无锁_lock_free",
+              "intro": "定义系统整体持续取得进展的性质；区分系统级进展与单线程进展。"
+            },
+            {
+              "title": "1.3.4_Wait-Free：无等待_wait_free",
+              "slug": "1.3.4_Wait-Free：无等待_wait_free",
+              "intro": "定义每个操作在有限步数内完成的保证，讨论有界步数与实时系统意义。"
+            },
+            {
+              "title": "1.3.5_公平性、饥饿与活锁_fairness_starvation_and_livelock",
+              "slug": "1.3.5_公平性、饥饿与活锁_fairness_starvation_and_livelock",
+              "intro": "理解 lock-free 不等于公平，也不保证每个线程都能及时完成。"
+            },
+            {
+              "title": "1.3.6_Lock-Free 不等于使用 atomic_lock_free_is_not_just_atomic",
+              "slug": "1.3.6_Lock-Free 不等于使用 atomic_lock_free_is_not_just_atomic",
+              "intro": "分析 atomic、CAS 与算法整体进度保证之间的区别。"
+            }
+          ]
+        },
+        {
+          "title": "1.4_无锁编程的适用边界_when_to_use_lock_free",
+          "slug": "1.4_无锁编程的适用边界_when_to_use_lock_free",
+          "intro": "建立工程判断能力：理解无锁算法的收益、复杂度和维护成本，知道何时使用锁反而更好。",
+          "subsections": [
+            {
+              "title": "1.4.1_无锁编程的收益与成本_benefits_and_costs",
+              "slug": "1.4.1_无锁编程的收益与成本_benefits_and_costs",
+              "intro": "分析低延迟、减少阻塞、可组合性与复杂实现、重试开销、内存回收成本。"
+            },
+            {
+              "title": "1.4.2_吞吐量、平均延迟与尾延迟_throughput_latency_and_tail_latency",
+              "slug": "1.4.2_吞吐量、平均延迟与尾延迟_throughput_latency_and_tail_latency",
+              "intro": "区分 throughput、平均 latency、p99/p999 latency，并理解它们可能相互冲突。"
+            },
+            {
+              "title": "1.4.3_锁、无锁与混合式设计的选择_lock_vs_lock_free_vs_hybrid",
+              "slug": "1.4.3_锁、无锁与混合式设计的选择_lock_vs_lock_free_vs_hybrid",
+              "intro": "根据临界区长度、竞争程度、线程数和实时要求选择同步方案。"
+            },
+            {
+              "title": "1.4.4_无锁算法的典型应用领域_typical_application_domains",
+              "slug": "1.4.4_无锁算法的典型应用领域_typical_application_domains",
+              "intro": "介绍网络收发、交易系统、日志、内存分配器、任务调度和实时数据通道。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "2_CPU 原子操作、缓存一致性与硬件基础_hardware_atomic_operations_and_cache_coherence",
+      "slug": "2_CPU 原子操作、缓存一致性与硬件基础_hardware_atomic_operations_and_cache_coherence",
+      "intro": "从硬件层理解原子读改写、缓存一致性、内存屏障和伪共享，解释 C++ 原子操作最终如何映射到 CPU 指令。",
+      "sections": [
+        {
+          "title": "2.1_原子操作的硬件基础_hardware_atomic_primitives",
+          "slug": "2.1_原子操作的硬件基础_hardware_atomic_primitives",
+          "intro": "理解处理器提供的原子指令及其约束。",
+          "subsections": [
+            {
+              "title": "2.1.1_原子性、可见性与有序性_atomicity_visibility_and_ordering",
+              "slug": "2.1.1_原子性、可见性与有序性_atomicity_visibility_and_ordering",
+              "intro": "区分 atomicity、visibility、ordering 三个概念。"
+            },
+            {
+              "title": "2.1.2_Read-Modify-Write 操作_read_modify_write",
+              "slug": "2.1.2_Read-Modify-Write 操作_read_modify_write",
+              "intro": "理解 fetch_add、exchange、compare-exchange 等读改写操作。"
+            },
+            {
+              "title": "2.1.3_Compare-And-Swap 与 Compare-And-Exchange_cas_and_compare_exchange",
+              "slug": "2.1.3_Compare-And-Swap 与 Compare-And-Exchange_cas_and_compare_exchange",
+              "intro": "理解 CAS 的比较、条件写入、旧值返回及失败语义。"
+            },
+            {
+              "title": "2.1.4_Test-And-Set、Fetch-And-Add 与交换指令_test_and_set_fetch_add_and_exchange",
+              "slug": "2.1.4_Test-And-Set、Fetch-And-Add 与交换指令_test_and_set_fetch_add_and_exchange",
+              "intro": "了解常见原子指令族及其算法用途。"
+            },
+            {
+              "title": "2.1.5_x86-64 与 ARM64 原子指令概览_x86_64_and_arm64_atomic_instructions",
+              "slug": "2.1.5_x86-64 与 ARM64 原子指令概览_x86_64_and_arm64_atomic_instructions",
+              "intro": "对比 LOCK 前缀、CMPXCHG、LL/SC、LSE 等机制；注意架构与实现差异。"
+            },
+            {
+              "title": "2.1.6_原子操作是否真的 Lock-Free_hardware_lock_free_support",
+              "slug": "2.1.6_原子操作是否真的 Lock-Free_hardware_lock_free_support",
+              "intro": "理解硬件支持、编译器实现和库回退路径；使用 is_lock_free 与 is_always_lock_free。"
+            }
+          ]
+        },
+        {
+          "title": "2.2_缓存一致性与多核通信_cache_coherence_and_intercore_communication",
+          "slug": "2.2_缓存一致性与多核通信_cache_coherence_and_intercore_communication",
+          "intro": "理解多个 CPU 核心如何观察共享缓存行，以及原子变量为何会成为性能热点。",
+          "subsections": [
+            {
+              "title": "2.2.1_Cache Line 与缓存层次_cache_line_and_hierarchy",
+              "slug": "2.2.1_Cache Line 与缓存层次_cache_line_and_hierarchy",
+              "intro": "理解 L1/L2/L3、缓存行、命中与未命中。"
+            },
+            {
+              "title": "2.2.2_MESI 与缓存一致性协议_mesi_and_cache_coherence",
+              "slug": "2.2.2_MESI 与缓存一致性协议_mesi_and_cache_coherence",
+              "intro": "理解 Modified、Exclusive、Shared、Invalid 状态及缓存行所有权迁移。"
+            },
+            {
+              "title": "2.2.3_Cache Line Ping-Pong_cache_line_ping_pong",
+              "slug": "2.2.3_Cache Line Ping-Pong_cache_line_ping_pong",
+              "intro": "分析多个核心反复写同一缓存行造成的通信开销。"
+            },
+            {
+              "title": "2.2.4_False Sharing：伪共享_false_sharing",
+              "slug": "2.2.4_False Sharing：伪共享_false_sharing",
+              "intro": "理解不同变量位于同一缓存行时产生的性能干扰。"
+            },
+            {
+              "title": "2.2.5_std::hardware_destructive_interference_size_hardware_destructive_interference_size",
+              "slug": "2.2.5_std::hardware_destructive_interference_size_hardware_destructive_interference_size",
+              "intro": "理解 C++17 干扰尺寸常量及其使用限制。"
+            },
+            {
+              "title": "2.2.6_NUMA 与跨插槽访问_numa_and_cross_socket_access",
+              "slug": "2.2.6_NUMA 与跨插槽访问_numa_and_cross_socket_access",
+              "intro": "理解 NUMA 节点、本地/远程内存和跨节点原子通信成本。"
+            }
+          ]
+        },
+        {
+          "title": "2.3_内存屏障与处理器内存模型_hardware_memory_ordering",
+          "slug": "2.3_内存屏障与处理器内存模型_hardware_memory_ordering",
+          "intro": "理解编译器和 CPU 为什么会重排内存操作，以及屏障如何约束可观察顺序。",
+          "subsections": [
+            {
+              "title": "2.3.1_编译器重排与 CPU 重排_compiler_and_cpu_reordering",
+              "slug": "2.3.1_编译器重排与 CPU 重排_compiler_and_cpu_reordering",
+              "intro": "区分编译器优化重排与处理器执行/观察顺序。"
+            },
+            {
+              "title": "2.3.2_Store Buffer 与 Load Buffer_store_buffer_and_load_buffer",
+              "slug": "2.3.2_Store Buffer 与 Load Buffer_store_buffer_and_load_buffer",
+              "intro": "理解存储缓冲区、加载缓冲区及其对可见顺序的影响。"
+            },
+            {
+              "title": "2.3.3_Memory Fence 与 Barrier_memory_fence_and_barrier",
+              "slug": "2.3.3_Memory Fence 与 Barrier_memory_fence_and_barrier",
+              "intro": "介绍硬件屏障的作用、成本和架构差异。"
+            },
+            {
+              "title": "2.3.4_x86-TSO 与 ARM 弱内存模型_x86_tso_and_arm_weak_memory_model",
+              "slug": "2.3.4_x86-TSO 与 ARM 弱内存模型_x86_tso_and_arm_weak_memory_model",
+              "intro": "比较常见架构内存模型，解释同一代码在不同平台上的表现差异。"
+            },
+            {
+              "title": "2.3.5_原子操作的硬件代价_cost_of_atomic_operations",
+              "slug": "2.3.5_原子操作的硬件代价_cost_of_atomic_operations",
+              "intro": "分析原子读、写、RMW、屏障和缓存行迁移的相对成本。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "3_C++ 原子库与内存模型_cpp_atomics_and_memory_model",
+      "slug": "3_C++ 原子库与内存模型_cpp_atomics_and_memory_model",
+      "intro": "系统掌握 C++11 引入的内存模型与原子库，并追踪 C++14/17/20/23/26 的相关演进。重点理解 memory_order、happens-before 和正确发布数据的方式。",
+      "sections": [
+        {
+          "title": "3.1_C++ 并发内存模型_cpp_concurrency_memory_model",
+          "slug": "3.1_C++ 并发内存模型_cpp_concurrency_memory_model",
+          "intro": "以标准抽象描述线程间操作顺序、可见性与数据竞争。",
+          "subsections": [
+            {
+              "title": "3.1.1_C++11 内存模型的设计目标_cpp11_memory_model_goals",
+              "slug": "3.1.1_C++11 内存模型的设计目标_cpp11_memory_model_goals",
+              "intro": "理解标准化内存模型为何是可移植并发编程的基础。"
+            },
+            {
+              "title": "3.1.2_Sequenced-Before 与 Dependency-Ordered-Before_sequenced_before_and_dependency_ordered_before",
+              "slug": "3.1.2_Sequenced-Before 与 Dependency-Ordered-Before_sequenced_before_and_dependency_ordered_before",
+              "intro": "掌握线程内求值顺序及依赖关系术语。"
+            },
+            {
+              "title": "3.1.3_Synchronizes-With 与 Happens-Before_synchronizes_with_and_happens_before",
+              "slug": "3.1.3_Synchronizes-With 与 Happens-Before_synchronizes_with_and_happens_before",
+              "intro": "理解跨线程同步关系如何建立可见性。"
+            },
+            {
+              "title": "3.1.4_Modification Order 与 Write-Read Coherence_modification_order_and_coherence",
+              "slug": "3.1.4_Modification Order 与 Write-Read Coherence_modification_order_and_coherence",
+              "intro": "理解单个原子对象的修改顺序及一致性约束。"
+            },
+            {
+              "title": "3.1.5_Undefined Behavior 与 Data Race_undefined_behavior_and_data_race",
+              "slug": "3.1.5_Undefined Behavior 与 Data Race_undefined_behavior_and_data_race",
+              "intro": "理解数据竞争的标准定义及其与硬件原子性的区别。"
+            }
+          ]
+        },
+        {
+          "title": "3.2_std::atomic 全面介绍_std_atomic",
+          "slug": "3.2_std::atomic 全面介绍_std_atomic",
+          "intro": "掌握 C++ 原子类型、操作、约束与工程用法。",
+          "subsections": [
+            {
+              "title": "3.2.1_std::atomic<T> 的基本语义_atomic_template_basics",
+              "slug": "3.2.1_std::atomic<T> 的基本语义_atomic_template_basics",
+              "intro": "理解原子对象、不可复制性、默认构造及适用类型约束。"
+            },
+            {
+              "title": "3.2.2_load、store 与 exchange_load_store_exchange",
+              "slug": "3.2.2_load、store 与 exchange_load_store_exchange",
+              "intro": "掌握原子读、原子写和原子交换。"
+            },
+            {
+              "title": "3.2.3_fetch_add、fetch_sub 与复合操作_fetch_operations",
+              "slug": "3.2.3_fetch_add、fetch_sub 与复合操作_fetch_operations",
+              "intro": "掌握整数/指针原子读改写操作及返回值语义。"
+            },
+            {
+              "title": "3.2.4_compare_exchange_weak 与 compare_exchange_strong_compare_exchange_weak_and_strong",
+              "slug": "3.2.4_compare_exchange_weak 与 compare_exchange_strong_compare_exchange_weak_and_strong",
+              "intro": "理解 expected 参数、成功/失败内存序、伪失败及循环使用模式。"
+            },
+            {
+              "title": "3.2.5_std::atomic_flag_atomic_flag",
+              "slug": "3.2.5_std::atomic_flag_atomic_flag",
+              "intro": "理解最小保证的原子标志及其在自旋等待中的用途。"
+            },
+            {
+              "title": "3.2.6_std::atomic<T*> 与指针原子操作_atomic_pointer",
+              "slug": "3.2.6_std::atomic<T*> 与指针原子操作_atomic_pointer",
+              "intro": "理解原子指针、地址发布和指针更新。"
+            },
+            {
+              "title": "3.2.7_std::atomic_ref_atomic_ref",
+              "slug": "3.2.7_std::atomic_ref_atomic_ref",
+              "intro": "介绍 C++20 atomic_ref、对既有对象进行原子访问的条件与限制。"
+            },
+            {
+              "title": "3.2.8_is_lock_free 与 is_always_lock_free_lock_free_queries",
+              "slug": "3.2.8_is_lock_free 与 is_always_lock_free_lock_free_queries",
+              "intro": "判断具体原子类型和目标平台是否提供无锁实现。"
+            }
+          ]
+        },
+        {
+          "title": "3.3_Memory Order 六种内存序_memory_order",
+          "slug": "3.3_Memory Order 六种内存序_memory_order",
+          "intro": "深入理解 relaxed、consume、acquire、release、acq_rel、seq_cst 的语义和适用场景。",
+          "subsections": [
+            {
+              "title": "3.3.1_memory_order_relaxed_memory_order_relaxed",
+              "slug": "3.3.1_memory_order_relaxed_memory_order_relaxed",
+              "intro": "只保证原子性和单对象修改顺序，不建立跨对象同步关系。"
+            },
+            {
+              "title": "3.3.2_memory_order_consume_memory_order_consume",
+              "slug": "3.3.2_memory_order_consume_memory_order_consume",
+              "intro": "介绍依赖序语义、历史实现困难及实际使用时的注意事项。"
+            },
+            {
+              "title": "3.3.3_memory_order_acquire_memory_order_acquire",
+              "slug": "3.3.3_memory_order_acquire_memory_order_acquire",
+              "intro": "理解 acquire load 如何与 release 操作配对并建立同步关系。"
+            },
+            {
+              "title": "3.3.4_memory_order_release_memory_order_release",
+              "slug": "3.3.4_memory_order_release_memory_order_release",
+              "intro": "理解 release store 如何发布此前的普通内存写入。"
+            },
+            {
+              "title": "3.3.5_memory_order_acq_rel_memory_order_acq_rel",
+              "slug": "3.3.5_memory_order_acq_rel_memory_order_acq_rel",
+              "intro": "理解读改写操作同时具有 acquire 和 release 语义的场景。"
+            },
+            {
+              "title": "3.3.6_memory_order_seq_cst_memory_order_seq_cst",
+              "slug": "3.3.6_memory_order_seq_cst_memory_order_seq_cst",
+              "intro": "理解 sequential consistency 的全局顺序保证及其成本。"
+            },
+            {
+              "title": "3.3.7_六种内存序对照与选择方法_memory_order_comparison",
+              "slug": "3.3.7_六种内存序对照与选择方法_memory_order_comparison",
+              "intro": "通过发布/订阅、计数器、队列和 CAS 循环比较各内存序。"
+            }
+          ]
+        },
+        {
+          "title": "3.4_Fence、发布订阅与同步模式_fences_and_synchronization_patterns",
+          "slug": "3.4_Fence、发布订阅与同步模式_fences_and_synchronization_patterns",
+          "intro": "将内存序规则应用到常见线程通信模式。",
+          "subsections": [
+            {
+              "title": "3.4.1_atomic_thread_fence 与 atomic_signal_fence_atomic_fences",
+              "slug": "3.4.1_atomic_thread_fence 与 atomic_signal_fence_atomic_fences",
+              "intro": "理解线程间屏障与编译器信号屏障的区别。"
+            },
+            {
+              "title": "3.4.2_Release-Acquire 发布订阅模式_release_acquire_publish_subscribe",
+              "slug": "3.4.2_Release-Acquire 发布订阅模式_release_acquire_publish_subscribe",
+              "intro": "通过 flag 发布普通数据，分析正确与错误写法。"
+            },
+            {
+              "title": "3.4.3_Message Passing 模式_message_passing",
+              "slug": "3.4.3_Message Passing 模式_message_passing",
+              "intro": "理解消息传递中的数据发布、读取和同步。"
+            },
+            {
+              "title": "3.4.4_Double-Checked Initialization_double_checked_initialization",
+              "slug": "3.4.4_Double-Checked Initialization_double_checked_initialization",
+              "intro": "分析双重检查初始化的正确实现条件及常见错误。"
+            },
+            {
+              "title": "3.4.5_原子变量与普通变量混合访问_mixing_atomic_and_non_atomic_access",
+              "slug": "3.4.5_原子变量与普通变量混合访问_mixing_atomic_and_non_atomic_access",
+              "intro": "分析同一对象混合访问、数据竞争及同步边界。"
+            }
+          ]
+        },
+        {
+          "title": "3.5_C++ 标准演进与并发设施_cpp_standard_evolution",
+          "slug": "3.5_C++ 标准演进与并发设施_cpp_standard_evolution",
+          "intro": "按标准版本梳理与原子和并发相关的语言、库设施。",
+          "subsections": [
+            {
+              "title": "3.5.1_C++11：线程库与原子内存模型_cpp11_concurrency",
+              "slug": "3.5.1_C++11：线程库与原子内存模型_cpp11_concurrency",
+              "intro": "介绍 thread、mutex、condition_variable、atomic 与 memory model。"
+            },
+            {
+              "title": "3.5.2_C++14/17：并发库补充_cpp14_cpp17_concurrency",
+              "slug": "3.5.2_C++14/17：并发库补充_cpp14_cpp17_concurrency",
+              "intro": "梳理共享互斥、干扰尺寸等相关设施。"
+            },
+            {
+              "title": "3.5.3_C++20：atomic wait/notify 与新原子设施_cpp20_atomic_wait_notify",
+              "slug": "3.5.3_C++20：atomic wait/notify 与新原子设施_cpp20_atomic_wait_notify",
+              "intro": "介绍 wait、notify_one、notify_all、atomic_ref、atomic_flag 测试操作等。"
+            },
+            {
+              "title": "3.5.4_C++23：并发设施进展_cpp23_concurrency",
+              "slug": "3.5.4_C++23：并发设施进展_cpp23_concurrency",
+              "intro": "梳理 C++23 与原子、并发相关的标准库变化。"
+            },
+            {
+              "title": "3.5.5_C++26：最新并发方向_cpp26_concurrency",
+              "slug": "3.5.5_C++26：最新并发方向_cpp26_concurrency",
+              "intro": "跟踪标准化进展；明确已发布标准、提案和实现支持之间的区别。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "4_Lock-Free 算法设计核心技术_lock_free_algorithm_design",
+      "slug": "4_Lock-Free 算法设计核心技术_lock_free_algorithm_design",
+      "intro": "从原子操作走向完整算法，掌握 CAS 循环、线性化、ABA、状态机和算法正确性证明方法。",
+      "sections": [
+        {
+          "title": "4.1_CAS 循环与状态更新_cas_loops_and_state_updates",
+          "slug": "4.1_CAS 循环与状态更新_cas_loops_and_state_updates",
+          "intro": "掌握以 compare-exchange 构建并发状态转换的基本方法。",
+          "subsections": [
+            {
+              "title": "4.1.1_CAS Retry Loop 基本模式_cas_retry_loop",
+              "slug": "4.1.1_CAS Retry Loop 基本模式_cas_retry_loop",
+              "intro": "理解读取预期值、计算新值、CAS 失败后重试的标准结构。"
+            },
+            {
+              "title": "4.1.2_Weak CAS 与 Strong CAS 的选择_weak_vs_strong_cas",
+              "slug": "4.1.2_Weak CAS 与 Strong CAS 的选择_weak_vs_strong_cas",
+              "intro": "分析平台伪失败、循环内外使用及性能考量。"
+            },
+            {
+              "title": "4.1.3_竞争失败与 Backoff 策略_contention_and_backoff",
+              "slug": "4.1.3_竞争失败与 Backoff 策略_contention_and_backoff",
+              "intro": "介绍 pause、指数退避、随机退避及其公平性影响。"
+            },
+            {
+              "title": "4.1.4_状态机与原子状态转换_atomic_state_machine",
+              "slug": "4.1.4_状态机与原子状态转换_atomic_state_machine",
+              "intro": "用有限状态机表达并发对象的合法状态变化。"
+            },
+            {
+              "title": "4.1.5_多字段状态与打包原子状态_packed_atomic_state",
+              "slug": "4.1.5_多字段状态与打包原子状态_packed_atomic_state",
+              "intro": "介绍版本号、标志位、指针打包及对齐/位宽约束。"
+            }
+          ]
+        },
+        {
+          "title": "4.2_线性化与算法正确性_linearizability_and_correctness",
+          "slug": "4.2_线性化与算法正确性_linearizability_and_correctness",
+          "intro": "用形式化并发语义描述操作是否正确。",
+          "subsections": [
+            {
+              "title": "4.2.1_Linearizability：线性化_linearizability",
+              "slug": "4.2.1_Linearizability：线性化_linearizability",
+              "intro": "理解每个并发操作仿佛在某个瞬间原子生效的要求。"
+            },
+            {
+              "title": "4.2.2_Linearization Point：线性化点_linearization_point",
+              "slug": "4.2.2_Linearization Point：线性化点_linearization_point",
+              "intro": "定位 enqueue、dequeue、push、pop 操作真正生效的原子步骤。"
+            },
+            {
+              "title": "4.2.3_Sequential Consistency 与 Linearizability 的区别_sequential_consistency_vs_linearizability",
+              "slug": "4.2.3_Sequential Consistency 与 Linearizability 的区别_sequential_consistency_vs_linearizability",
+              "intro": "区分内存模型的顺序保证与对象操作的实时语义。"
+            },
+            {
+              "title": "4.2.4_Safety 与 Liveness_safety_and_liveness",
+              "slug": "4.2.4_Safety 与 Liveness_safety_and_liveness",
+              "intro": "区分不会发生错误与系统最终能够取得进展。"
+            },
+            {
+              "title": "4.2.5_不变量与状态转换证明_invariants_and_state_transition_proofs",
+              "slug": "4.2.5_不变量与状态转换证明_invariants_and_state_transition_proofs",
+              "intro": "建立队列、栈和节点生命周期的不变量。"
+            },
+            {
+              "title": "4.2.6_并发历史与操作重排验证_concurrent_histories",
+              "slug": "4.2.6_并发历史与操作重排验证_concurrent_histories",
+              "intro": "通过 invocation/response 历史检查并发操作是否合法。"
+            }
+          ]
+        },
+        {
+          "title": "4.3_ABA 问题与解决方案_aba_problem",
+          "slug": "4.3_ABA 问题与解决方案_aba_problem",
+          "intro": "深入理解 CAS 只比较位模式所造成的状态误判及其缓解方案。",
+          "subsections": [
+            {
+              "title": "4.3.1_ABA 问题的产生过程_aba_problem_walkthrough",
+              "slug": "4.3.1_ABA 问题的产生过程_aba_problem_walkthrough",
+              "intro": "用线程交错时间线展示 A→B→A 后 CAS 错误成功的原因。"
+            },
+            {
+              "title": "4.3.2_指针复用与内存释放导致的 ABA_pointer_reuse_and_reclamation",
+              "slug": "4.3.2_指针复用与内存释放导致的 ABA_pointer_reuse_and_reclamation",
+              "intro": "理解 allocator 地址复用、悬空指针和 ABA 的联系。"
+            },
+            {
+              "title": "4.3.3_Tagged Pointer 与版本计数_tagged_pointer_and_version_counter",
+              "slug": "4.3.3_Tagged Pointer 与版本计数_tagged_pointer_and_version_counter",
+              "intro": "使用指针加版本号检测中间状态变化及其位宽限制。"
+            },
+            {
+              "title": "4.3.4_Double-Width CAS_double_width_cas",
+              "slug": "4.3.4_Double-Width CAS_double_width_cas",
+              "intro": "介绍双字 CAS 的硬件支持、平台限制与可移植性问题。"
+            },
+            {
+              "title": "4.3.5_ABA 的其他处理策略_other_aba_mitigation",
+              "slug": "4.3.5_ABA 的其他处理策略_other_aba_mitigation",
+              "intro": "讨论延迟复用、节点标记、引用计数等方法及其边界。"
+            }
+          ]
+        },
+        {
+          "title": "4.4_无锁算法的常见设计模式_common_lock_free_design_patterns",
+          "slug": "4.4_无锁算法的常见设计模式_common_lock_free_design_patterns",
+          "intro": "归纳可复用的并发算法结构。",
+          "subsections": [
+            {
+              "title": "4.4.1_不可变数据与 Copy-On-Write_immutable_data_and_copy_on_write",
+              "slug": "4.4.1_不可变数据与 Copy-On-Write_immutable_data_and_copy_on_write",
+              "intro": "通过不可变对象减少共享写竞争。"
+            },
+            {
+              "title": "4.4.2_发布后不再修改_publish_then_immutability",
+              "slug": "4.4.2_发布后不再修改_publish_then_immutability",
+              "intro": "使用 release/acquire 发布完整构造的对象。"
+            },
+            {
+              "title": "4.4.3_分段与分片状态_sharding_and_partitioned_state",
+              "slug": "4.4.3_分段与分片状态_sharding_and_partitioned_state",
+              "intro": "降低单一原子热点，按线程、CPU 或键空间拆分状态。"
+            },
+            {
+              "title": "4.4.4_双缓冲与多版本数据_double_buffering_and_multi_version_data",
+              "slug": "4.4.4_双缓冲与多版本数据_double_buffering_and_multi_version_data",
+              "intro": "介绍 double buffering、版本切换和读写隔离。"
+            },
+            {
+              "title": "4.4.5_帮助完成机制 Help-Other_help_other_mechanism",
+              "slug": "4.4.5_帮助完成机制 Help-Other_help_other_mechanism",
+              "intro": "理解线程帮助其他线程完成未完成操作的算法思想。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "5_经典无锁数据结构与并发拓扑实现_lock_free_data_structures_and_topologies",
+      "slug": "5_经典无锁数据结构与并发拓扑实现_lock_free_data_structures_and_topologies",
+      "intro": "围绕常见数据结构和生产者消费者拓扑展开实现与比较。每种结构都分析有界/无界版本、线性化点、内存序、内存回收和性能特征。",
+      "sections": [
+        {
+          "title": "5.1_Ring Buffer 与循环队列_ring_buffer_and_circular_queue",
+          "slug": "5.1_Ring Buffer 与循环队列_ring_buffer_and_circular_queue",
+          "intro": "从数组环形缓冲区入手，理解无锁队列中索引、容量和缓存局部性。",
+          "subsections": [
+            {
+              "title": "5.1.1_Ring Buffer 基本原理_ring_buffer_basics",
+              "slug": "5.1.1_Ring Buffer 基本原理_ring_buffer_basics",
+              "intro": "理解 head、tail、容量、取模与环形存储布局。"
+            },
+            {
+              "title": "5.1.2_预留一个槽位的设计_one_slot_reservation",
+              "slug": "5.1.2_预留一个槽位的设计_one_slot_reservation",
+              "intro": "解释通过保留一个空槽区分 full 与 empty 的方法及容量代价。"
+            },
+            {
+              "title": "5.1.3_计数器区分 Full 与 Empty_sequence_counter_full_empty",
+              "slug": "5.1.3_计数器区分 Full 与 Empty_sequence_counter_full_empty",
+              "intro": "使用单调计数或序列号区分满、空及索引回绕。"
+            },
+            {
+              "title": "5.1.4_有界 SPSC Ring Buffer_bounded_spsc_ring_buffer",
+              "slug": "5.1.4_有界 SPSC Ring Buffer_bounded_spsc_ring_buffer",
+              "intro": "实现单生产者单消费者的固定容量环形队列。"
+            },
+            {
+              "title": "5.1.5_Cache Line Padding 与索引隔离_cache_line_padding",
+              "slug": "5.1.5_Cache Line Padding 与索引隔离_cache_line_padding",
+              "intro": "隔离生产者和消费者频繁更新的索引，减少伪共享。"
+            },
+            {
+              "title": "5.1.6_环形缓冲区的容量与溢出策略_capacity_and_overflow_policy",
+              "slug": "5.1.6_环形缓冲区的容量与溢出策略_capacity_and_overflow_policy",
+              "intro": "比较拒绝、覆盖、阻塞等待、丢弃和背压策略。"
+            }
+          ]
+        },
+        {
+          "title": "5.2_SPSC 无锁队列_spsc_lock_free_queue",
+          "slug": "5.2_SPSC 无锁队列_spsc_lock_free_queue",
+          "intro": "深入实现最简单、常用于低延迟通道的单生产者单消费者队列。",
+          "subsections": [
+            {
+              "title": "5.2.1_SPSC 的并发约束与所有权_spsc_constraints_and_ownership",
+              "slug": "5.2.1_SPSC 的并发约束与所有权_spsc_constraints_and_ownership",
+              "intro": "说明为什么一个线程独占写索引、另一个线程独占读索引。"
+            },
+            {
+              "title": "5.2.2_SPSC 的 Release-Acquire 配对_spsc_release_acquire",
+              "slug": "5.2.2_SPSC 的 Release-Acquire 配对_spsc_release_acquire",
+              "intro": "分析生产者发布 tail 与消费者 acquire 读取 tail 的同步关系。"
+            },
+            {
+              "title": "5.2.3_SPSC 入队与出队实现_spsc_enqueue_dequeue",
+              "slug": "5.2.3_SPSC 入队与出队实现_spsc_enqueue_dequeue",
+              "intro": "逐步实现 push/pop、空满判断和索引更新。"
+            },
+            {
+              "title": "5.2.4_SPSC 有界与无界实现比较_spsc_bounded_vs_unbounded",
+              "slug": "5.2.4_SPSC 有界与无界实现比较_spsc_bounded_vs_unbounded",
+              "intro": "比较固定数组与动态节点实现的内存和延迟特征。"
+            },
+            {
+              "title": "5.2.5_SPSC 批量读写与零拷贝_spsc_batch_and_zero_copy",
+              "slug": "5.2.5_SPSC 批量读写与零拷贝_spsc_batch_and_zero_copy",
+              "intro": "介绍批量提交、批量消费、reserve/commit 接口。"
+            },
+            {
+              "title": "5.2.6_SPSC 性能优化与适用场景_spsc_optimization_and_use_cases",
+              "slug": "5.2.6_SPSC 性能优化与适用场景_spsc_optimization_and_use_cases",
+              "intro": "分析网络收发、音视频、采集流水线和线程间单向通道。"
+            }
+          ]
+        },
+        {
+          "title": "5.3_MPSC 无锁队列_mpsc_lock_free_queue",
+          "slug": "5.3_MPSC 无锁队列_mpsc_lock_free_queue",
+          "intro": "研究多个生产者并发提交、单消费者串行处理的结构。",
+          "subsections": [
+            {
+              "title": "5.3.1_MPSC 的并发约束与典型场景_mpsc_constraints_and_use_cases",
+              "slug": "5.3.1_MPSC 的并发约束与典型场景_mpsc_constraints_and_use_cases",
+              "intro": "介绍多线程日志汇聚、事件提交和任务投递。"
+            },
+            {
+              "title": "5.3.2_基于 CAS 的 MPSC 入队_mpsc_cas_enqueue",
+              "slug": "5.3.2_基于 CAS 的 MPSC 入队_mpsc_cas_enqueue",
+              "intro": "分析多个生产者争夺尾指针、节点链接和发布顺序。"
+            },
+            {
+              "title": "5.3.3_单消费者出队路径_mpsc_single_consumer_dequeue",
+              "slug": "5.3.3_单消费者出队路径_mpsc_single_consumer_dequeue",
+              "intro": "研究单消费者如何安全读取已发布节点。"
+            },
+            {
+              "title": "5.3.4_Intrusive MPSC Queue_intrusive_mpsc_queue",
+              "slug": "5.3.4_Intrusive MPSC Queue_intrusive_mpsc_queue",
+              "intro": "介绍侵入式节点、生命周期责任及低分配开销。"
+            },
+            {
+              "title": "5.3.5_MPSC 的空队列与链表断链窗口_mpsc_empty_and_linking_window",
+              "slug": "5.3.5_MPSC 的空队列与链表断链窗口_mpsc_empty_and_linking_window",
+              "intro": "分析生产者交换尾指针但尚未链接前驱节点时的中间状态。"
+            },
+            {
+              "title": "5.3.6_MPSC 有界队列与序列号方案_bounded_mpsc_sequence_queue",
+              "slug": "5.3.6_MPSC 有界队列与序列号方案_bounded_mpsc_sequence_queue",
+              "intro": "介绍基于槽位序列号的有界多生产者单消费者队列思路。"
+            }
+          ]
+        },
+        {
+          "title": "5.4_MPMC 无锁队列_mpmc_lock_free_queue",
+          "slug": "5.4_MPMC 无锁队列_mpmc_lock_free_queue",
+          "intro": "研究多生产者、多消费者同时入队和出队时的协调机制。",
+          "subsections": [
+            {
+              "title": "5.4.1_MPMC 的竞争结构与设计难点_mpmc_contention_and_challenges",
+              "slug": "5.4.1_MPMC 的竞争结构与设计难点_mpmc_contention_and_challenges",
+              "intro": "分析 head/tail 竞争、槽位所有权、空满判断和节点回收。"
+            },
+            {
+              "title": "5.4.2_Michael-Scott Lock-Free Queue_michael_scott_queue",
+              "slug": "5.4.2_Michael-Scott Lock-Free Queue_michael_scott_queue",
+              "intro": "深入经典链表式无锁队列的 enqueue/dequeue、CAS 和帮助机制。"
+            },
+            {
+              "title": "5.4.3_Bounded MPMC Array Queue_bounded_mpmc_array_queue",
+              "slug": "5.4.3_Bounded MPMC Array Queue_bounded_mpmc_array_queue",
+              "intro": "研究固定容量数组队列、序列号和槽位状态转换。"
+            },
+            {
+              "title": "5.4.4_Per-Slot Sequence Number_per_slot_sequence_number",
+              "slug": "5.4.4_Per-Slot Sequence Number_per_slot_sequence_number",
+              "intro": "理解每个槽位的序列号如何区分可写、可读和不同轮次。"
+            },
+            {
+              "title": "5.4.5_MPMC 的线性化点与正确性_mpmc_linearization_and_correctness",
+              "slug": "5.4.5_MPMC 的线性化点与正确性_mpmc_linearization_and_correctness",
+              "intro": "定位入队/出队线性化点并建立并发不变量。"
+            },
+            {
+              "title": "5.4.6_MPMC 的扩展性与热点分析_mpmc_scalability_and_contention",
+              "slug": "5.4.6_MPMC 的扩展性与热点分析_mpmc_scalability_and_contention",
+              "intro": "分析 CAS 重试、缓存行争用、NUMA 和线程数扩展。"
+            }
+          ]
+        },
+        {
+          "title": "5.5_SPMC 与广播/扇出结构_spmc_and_broadcast_queues",
+          "slug": "5.5_SPMC 与广播/扇出结构_spmc_and_broadcast_queues",
+          "intro": "研究一个生产者向多个消费者分发数据或广播事件的结构。",
+          "subsections": [
+            {
+              "title": "5.5.1_SPMC 的任务分发语义_spmc_work_distribution",
+              "slug": "5.5.1_SPMC 的任务分发语义_spmc_work_distribution",
+              "intro": "区分竞争消费（每条消息只被一个消费者取得）与广播消费（每个消费者都收到）。"
+            },
+            {
+              "title": "5.5.2_SPMC 队列的消费者竞争_spmc_consumer_contention",
+              "slug": "5.5.2_SPMC 队列的消费者竞争_spmc_consumer_contention",
+              "intro": "分析多个消费者对读位置或节点的竞争。"
+            },
+            {
+              "title": "5.5.3_Broadcast Queue 与 Fan-Out_broadcast_queue_and_fanout",
+              "slug": "5.5.3_Broadcast Queue 与 Fan-Out_broadcast_queue_and_fanout",
+              "intro": "介绍每消费者游标、慢消费者和数据保留策略。"
+            },
+            {
+              "title": "5.5.4_多订阅者 Ring Buffer_multi_subscriber_ring_buffer",
+              "slug": "5.5.4_多订阅者 Ring Buffer_multi_subscriber_ring_buffer",
+              "intro": "设计每个消费者独立序列位置的共享环形日志。"
+            },
+            {
+              "title": "5.5.5_慢消费者、覆盖与背压_slow_consumer_and_backpressure",
+              "slug": "5.5.5_慢消费者、覆盖与背压_slow_consumer_and_backpressure",
+              "intro": "讨论阻塞、丢弃、覆盖、限流和消费者追赶策略。"
+            }
+          ]
+        },
+        {
+          "title": "5.6_其他常见无锁数据结构_other_lock_free_data_structures",
+          "slug": "5.6_其他常见无锁数据结构_other_lock_free_data_structures",
+          "intro": "扩展到栈、链表、哈希表和内存分配器等结构。",
+          "subsections": [
+            {
+              "title": "5.6.1_Treiber Stack：无锁栈_treiber_stack",
+              "slug": "5.6.1_Treiber Stack：无锁栈_treiber_stack",
+              "intro": "使用 CAS 更新栈顶，分析 ABA 与节点回收。"
+            },
+            {
+              "title": "5.6.2_Lock-Free Linked List_lock_free_linked_list",
+              "slug": "5.6.2_Lock-Free Linked List_lock_free_linked_list",
+              "intro": "介绍逻辑删除、标记指针和物理摘链。"
+            },
+            {
+              "title": "5.6.3_Lock-Free Hash Table_lock_free_hash_table",
+              "slug": "5.6.3_Lock-Free Hash Table_lock_free_hash_table",
+              "intro": "分析并发查找、插入、删除、扩容和桶迁移。"
+            },
+            {
+              "title": "5.6.4_Lock-Free Skip List_lock_free_skip_list",
+              "slug": "5.6.4_Lock-Free Skip List_lock_free_skip_list",
+              "intro": "理解多层索引、CAS 插入和并发删除。"
+            },
+            {
+              "title": "5.6.5_Lock-Free Free List 与对象池_lock_free_free_list_and_object_pool",
+              "slug": "5.6.5_Lock-Free Free List 与对象池_lock_free_free_list_and_object_pool",
+              "intro": "分析空闲节点链表、对象复用和 ABA 风险。"
+            },
+            {
+              "title": "5.6.6_并发计数器、位图与统计结构_counters_bitmaps_and_statistics",
+              "slug": "5.6.6_并发计数器、位图与统计结构_counters_bitmaps_and_statistics",
+              "intro": "介绍计数器、原子位图、分片计数和近似统计。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "6_内存管理与安全回收机制_memory_reclamation_and_lifetime_management",
+      "slug": "6_内存管理与安全回收机制_memory_reclamation_and_lifetime_management",
+      "intro": "无锁数据结构最难的部分往往不是 CAS，而是节点何时可以安全释放。本部分系统比较 Hazard Pointers、Epoch-Based Reclamation、RCU 等技术。",
+      "sections": [
+        {
+          "title": "6.1_无锁数据结构的内存生命周期问题_memory_lifetime_problems",
+          "slug": "6.1_无锁数据结构的内存生命周期问题_memory_lifetime_problems",
+          "intro": "理解并发读取、删除、释放和地址复用之间的冲突。",
+          "subsections": [
+            {
+              "title": "6.1.1_悬空指针与 Use-After-Free_dangling_pointer_and_uaf",
+              "slug": "6.1.1_悬空指针与 Use-After-Free_dangling_pointer_and_uaf",
+              "intro": "分析线程仍持有节点指针而另一个线程已释放对象的危险。"
+            },
+            {
+              "title": "6.1.2_逻辑删除与物理回收_logical_deletion_and_physical_reclamation",
+              "slug": "6.1.2_逻辑删除与物理回收_logical_deletion_and_physical_reclamation",
+              "intro": "区分节点从数据结构中不可见与内存真正可释放。"
+            },
+            {
+              "title": "6.1.3_为什么不能直接 delete 节点_why_direct_delete_is_unsafe",
+              "slug": "6.1.3_为什么不能直接 delete 节点_why_direct_delete_is_unsafe",
+              "intro": "用线程交错案例展示直接释放造成的崩溃和未定义行为。"
+            },
+            {
+              "title": "6.1.4_内存回收与 ABA 的关系_reclamation_and_aba",
+              "slug": "6.1.4_内存回收与 ABA 的关系_reclamation_and_aba",
+              "intro": "理解安全回收如何降低地址复用导致的 ABA 风险。"
+            },
+            {
+              "title": "6.1.5_节点生命周期与所有权协议_node_lifetime_and_ownership_protocol",
+              "slug": "6.1.5_节点生命周期与所有权协议_node_lifetime_and_ownership_protocol",
+              "intro": "定义发布、访问、摘链、延迟回收和最终销毁阶段。"
+            }
+          ]
+        },
+        {
+          "title": "6.2_Hazard Pointers_hazard_pointers",
+          "slug": "6.2_Hazard Pointers_hazard_pointers",
+          "intro": "掌握通过线程声明正在访问的节点，阻止其他线程过早回收的机制。",
+          "subsections": [
+            {
+              "title": "6.2.1_Hazard Pointer 基本思想_hazard_pointer_basics",
+              "slug": "6.2.1_Hazard Pointer 基本思想_hazard_pointer_basics",
+              "intro": "理解 hazard record、保护指针和 retired list。"
+            },
+            {
+              "title": "6.2.2_发布 Hazard Pointer 的正确顺序_hazard_pointer_publication_order",
+              "slug": "6.2.2_发布 Hazard Pointer 的正确顺序_hazard_pointer_publication_order",
+              "intro": "分析 load、store、验证指针及内存序配合。"
+            },
+            {
+              "title": "6.2.3_扫描 Hazard Records 与延迟释放_scan_hazard_records",
+              "slug": "6.2.3_扫描 Hazard Records 与延迟释放_scan_hazard_records",
+              "intro": "介绍 retired 节点扫描、批量回收和复杂度。"
+            },
+            {
+              "title": "6.2.4_Hazard Pointer Stack 实现_hazard_pointer_stack",
+              "slug": "6.2.4_Hazard Pointer Stack 实现_hazard_pointer_stack",
+              "intro": "为 Treiber Stack 加入安全节点保护。"
+            },
+            {
+              "title": "6.2.5_Hazard Pointer Queue 实现_hazard_pointer_queue",
+              "slug": "6.2.5_Hazard Pointer Queue 实现_hazard_pointer_queue",
+              "intro": "分析队列中 head、tail 和 next 指针的保护需求。"
+            },
+            {
+              "title": "6.2.6_Hazard Pointer 的性能与局限_hazard_pointer_costs_and_limits",
+              "slug": "6.2.6_Hazard Pointer 的性能与局限_hazard_pointer_costs_and_limits",
+              "intro": "分析记录数量、扫描成本、线程注册和 API 设计。"
+            }
+          ]
+        },
+        {
+          "title": "6.3_Epoch-Based Reclamation 与 QSBR_epoch_based_reclamation",
+          "slug": "6.3_Epoch-Based Reclamation 与 QSBR_epoch_based_reclamation",
+          "intro": "掌握基于 epoch 或静止状态判断旧节点是否可回收的机制。",
+          "subsections": [
+            {
+              "title": "6.3.1_Epoch-Based Reclamation 基本原理_ebr_basics",
+              "slug": "6.3.1_Epoch-Based Reclamation 基本原理_ebr_basics",
+              "intro": "理解全局 epoch、线程本地 epoch 和 retired 节点。"
+            },
+            {
+              "title": "6.3.2_进入与退出临界区_enter_exit_critical_section",
+              "slug": "6.3.2_进入与退出临界区_enter_exit_critical_section",
+              "intro": "分析线程宣布活跃、退出保护区及可见性要求。"
+            },
+            {
+              "title": "6.3.3_Epoch 推进与安全回收条件_epoch_advancement_and_reclamation",
+              "slug": "6.3.3_Epoch 推进与安全回收条件_epoch_advancement_and_reclamation",
+              "intro": "理解所有相关线程越过旧 epoch 后才能释放对象。"
+            },
+            {
+              "title": "6.3.4_Quiescent State-Based Reclamation_qsbr",
+              "slug": "6.3.4_Quiescent State-Based Reclamation_qsbr",
+              "intro": "理解静止状态、读侧报告和延迟回收。"
+            },
+            {
+              "title": "6.3.5_EBR 的线程停顿问题_ebr_stalled_thread_problem",
+              "slug": "6.3.5_EBR 的线程停顿问题_ebr_stalled_thread_problem",
+              "intro": "分析线程长期停顿导致回收延迟和内存膨胀。"
+            },
+            {
+              "title": "6.3.6_EBR 的性能与适用场景_ebr_performance_and_use_cases",
+              "slug": "6.3.6_EBR 的性能与适用场景_ebr_performance_and_use_cases",
+              "intro": "比较读侧开销、回收批次和线程参与要求。"
+            }
+          ]
+        },
+        {
+          "title": "6.4_Read-Copy-Update（RCU）_read_copy_update",
+          "slug": "6.4_Read-Copy-Update（RCU）_read_copy_update",
+          "intro": "理解读侧极低开销的更新与回收机制，以及它与普通 C++ 原子操作的关系。",
+          "subsections": [
+            {
+              "title": "6.4.1_RCU 的设计思想_rcu_design_principles",
+              "slug": "6.4.1_RCU 的设计思想_rcu_design_principles",
+              "intro": "理解 read-copy-update、读侧临界区和宽限期。"
+            },
+            {
+              "title": "6.4.2_RCU Read-Side 与 Update-Side_rcu_read_side_and_update_side",
+              "slug": "6.4.2_RCU Read-Side 与 Update-Side_rcu_read_side_and_update_side",
+              "intro": "区分读侧访问协议与更新者复制、替换和回收流程。"
+            },
+            {
+              "title": "6.4.3_Grace Period 与 Quiescent State_grace_period_and_quiescent_state",
+              "slug": "6.4.3_Grace Period 与 Quiescent State_grace_period_and_quiescent_state",
+              "intro": "理解宽限期如何确保旧读者退出。"
+            },
+            {
+              "title": "6.4.4_RCU 与 C++ 内存模型_rcu_and_cpp_memory_model",
+              "slug": "6.4.4_RCU 与 C++ 内存模型_rcu_and_cpp_memory_model",
+              "intro": "讨论指针发布、读侧保护及平台/库实现边界。"
+            },
+            {
+              "title": "6.4.5_RCU、EBR 与 Hazard Pointers 比较_rcu_ebr_hazard_pointer_comparison",
+              "slug": "6.4.5_RCU、EBR 与 Hazard Pointers 比较_rcu_ebr_hazard_pointer_comparison",
+              "intro": "从读侧成本、写侧成本、线程停顿和内存占用比较。"
+            },
+            {
+              "title": "6.4.6_RCU 的适用领域与工程限制_rcu_use_cases_and_limits",
+              "slug": "6.4.6_RCU 的适用领域与工程限制_rcu_use_cases_and_limits",
+              "intro": "介绍读多写少的数据结构、内核和用户态实现。"
+            }
+          ]
+        },
+        {
+          "title": "6.5_其他内存回收技术_other_reclamation_techniques",
+          "slug": "6.5_其他内存回收技术_other_reclamation_techniques",
+          "intro": "了解引用计数、类型化所有权和混合回收策略。",
+          "subsections": [
+            {
+              "title": "6.5.1_引用计数与原子引用计数_atomic_reference_counting",
+              "slug": "6.5.1_引用计数与原子引用计数_atomic_reference_counting",
+              "intro": "分析引用计数的安全性、热点和循环引用问题。"
+            },
+            {
+              "title": "6.5.2_Deferred Reclamation 与 Retire List_deferred_reclamation_and_retire_list",
+              "slug": "6.5.2_Deferred Reclamation 与 Retire List_deferred_reclamation_and_retire_list",
+              "intro": "理解延迟回收队列及批量销毁。"
+            },
+            {
+              "title": "6.5.3_Stamp-it 与时间戳回收思路_stamp_it_and_timestamp_reclamation",
+              "slug": "6.5.3_Stamp-it 与时间戳回收思路_stamp_it_and_timestamp_reclamation",
+              "intro": "了解基于时间戳或活动区间的回收方案。"
+            },
+            {
+              "title": "6.5.4_内存池、对象池与节点复用_memory_pool_and_node_reuse",
+              "slug": "6.5.4_内存池、对象池与节点复用_memory_pool_and_node_reuse",
+              "intro": "分析预分配、复用、碎片和并发分配安全。"
+            },
+            {
+              "title": "6.5.5_回收机制选型_reclamation_strategy_selection",
+              "slug": "6.5.5_回收机制选型_reclamation_strategy_selection",
+              "intro": "根据读写比例、线程模型、延迟和内存上限选择回收机制。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "7_无锁编程性能工程与系统优化_lock_free_performance_engineering",
+      "slug": "7_无锁编程性能工程与系统优化_lock_free_performance_engineering",
+      "intro": "将算法正确性转化为可测量的系统性能。重点关注缓存一致性、原子竞争、内存布局、NUMA、线程亲和性和尾延迟。",
+      "sections": [
+        {
+          "title": "7.1_性能指标与基准测试_metrics_and_benchmarking",
+          "slug": "7.1_性能指标与基准测试_metrics_and_benchmarking",
+          "intro": "建立可重复的性能测试方法，避免只比较单次运行或平均值。",
+          "subsections": [
+            {
+              "title": "7.1.1_Throughput、Latency 与 Operations per Second_throughput_latency_and_ops",
+              "slug": "7.1.1_Throughput、Latency 与 Operations per Second_throughput_latency_and_ops",
+              "intro": "明确吞吐量、单次延迟、单位时间操作数的定义。"
+            },
+            {
+              "title": "7.1.2_平均值、中位数、P95、P99 与 P999_latency_percentiles",
+              "slug": "7.1.2_平均值、中位数、P95、P99 与 P999_latency_percentiles",
+              "intro": "理解延迟分布和尾延迟。"
+            },
+            {
+              "title": "7.1.3_微基准测试设计_microbenchmark_design",
+              "slug": "7.1.3_微基准测试设计_microbenchmark_design",
+              "intro": "控制预热、线程数、数据规模、编译选项和测量噪声。"
+            },
+            {
+              "title": "7.1.4_Google Benchmark 与自定义压测_google_benchmark_and_load_test",
+              "slug": "7.1.4_Google Benchmark 与自定义压测_google_benchmark_and_load_test",
+              "intro": "设计单线程、多线程和不同竞争度的基准。"
+            },
+            {
+              "title": "7.1.5_统计显著性与可重复性_statistical_significance_and_reproducibility",
+              "slug": "7.1.5_统计显著性与可重复性_statistical_significance_and_reproducibility",
+              "intro": "理解多轮测量、置信区间和实验记录。"
+            }
+          ]
+        },
+        {
+          "title": "7.2_缓存与内存布局优化_cache_and_memory_layout_optimization",
+          "slug": "7.2_缓存与内存布局优化_cache_and_memory_layout_optimization",
+          "intro": "从数据布局降低缓存未命中和跨核通信成本。",
+          "subsections": [
+            {
+              "title": "7.2.1_Cache Locality 与 Data-Oriented Design_cache_locality_and_data_oriented_design",
+              "slug": "7.2.1_Cache Locality 与 Data-Oriented Design_cache_locality_and_data_oriented_design",
+              "intro": "按访问模式组织数据，减少指针追踪。"
+            },
+            {
+              "title": "7.2.2_Padding、Alignment 与 False Sharing_padding_alignment_and_false_sharing",
+              "slug": "7.2.2_Padding、Alignment 与 False Sharing_padding_alignment_and_false_sharing",
+              "intro": "使用 alignas 和布局隔离高频写变量。"
+            },
+            {
+              "title": "7.2.3_批处理与 Amortization_batching_and_amortization",
+              "slug": "7.2.3_批处理与 Amortization_batching_and_amortization",
+              "intro": "通过批量入队/出队摊薄原子操作成本。"
+            },
+            {
+              "title": "7.2.4_预分配与无动态分配路径_preallocation_and_allocation_free_path",
+              "slug": "7.2.4_预分配与无动态分配路径_preallocation_and_allocation_free_path",
+              "intro": "避免关键路径 malloc/free 和不可预测的分配延迟。"
+            },
+            {
+              "title": "7.2.5_Prefetch 与分支预测_prefetch_and_branch_prediction",
+              "slug": "7.2.5_Prefetch 与分支预测_prefetch_and_branch_prediction",
+              "intro": "理解预取、分支可预测性及优化的测量边界。"
+            }
+          ]
+        },
+        {
+          "title": "7.3_线程调度与 NUMA 优化_thread_scheduling_and_numa",
+          "slug": "7.3_线程调度与 NUMA 优化_thread_scheduling_and_numa",
+          "intro": "理解操作系统调度和硬件拓扑对无锁算法的影响。",
+          "subsections": [
+            {
+              "title": "7.3.1_CPU Affinity 与线程绑核_cpu_affinity",
+              "slug": "7.3.1_CPU Affinity 与线程绑核_cpu_affinity",
+              "intro": "介绍线程亲和性、迁移成本及测试控制。"
+            },
+            {
+              "title": "7.3.2_NUMA-aware 数据结构_numa_aware_data_structures",
+              "slug": "7.3.2_NUMA-aware 数据结构_numa_aware_data_structures",
+              "intro": "理解内存节点本地化、首次触碰和跨节点访问。"
+            },
+            {
+              "title": "7.3.3_SMT/Hyper-Threading 的影响_smt_and_hyper_threading",
+              "slug": "7.3.3_SMT/Hyper-Threading 的影响_smt_and_hyper_threading",
+              "intro": "分析逻辑核共享执行资源对延迟和吞吐量的影响。"
+            },
+            {
+              "title": "7.3.4_优先级、抢占与实时调度_priority_preemption_and_realtime_scheduling",
+              "slug": "7.3.4_优先级、抢占与实时调度_priority_preemption_and_realtime_scheduling",
+              "intro": "分析线程被抢占对 lock-free 进度和尾延迟的影响。"
+            },
+            {
+              "title": "7.3.5_忙等、pause 与自适应等待_spin_pause_and_adaptive_waiting",
+              "slug": "7.3.5_忙等、pause 与自适应等待_spin_pause_and_adaptive_waiting",
+              "intro": "比较纯忙等、处理器 pause、yield、睡眠和自适应策略。"
+            }
+          ]
+        },
+        {
+          "title": "7.4_低延迟系统中的无锁设计_lock_free_for_low_latency_systems",
+          "slug": "7.4_低延迟系统中的无锁设计_lock_free_for_low_latency_systems",
+          "intro": "将无锁结构应用到低延迟交易、网络和事件处理系统。",
+          "subsections": [
+            {
+              "title": "7.4.1_低延迟数据通道设计_low_latency_data_pipeline",
+              "slug": "7.4.1_低延迟数据通道设计_low_latency_data_pipeline",
+              "intro": "设计线程间单向数据通道，明确生产者消费者拓扑。"
+            },
+            {
+              "title": "7.4.2_Market Data 与行情分发_market_data_distribution",
+              "slug": "7.4.2_Market Data 与行情分发_market_data_distribution",
+              "intro": "分析行情采集、解码、扇出和订阅者隔离。"
+            },
+            {
+              "title": "7.4.3_Order Gateway 与事件队列_order_gateway_and_event_queue",
+              "slug": "7.4.3_Order Gateway 与事件队列_order_gateway_and_event_queue",
+              "intro": "分析订单入口、命令队列和状态更新路径。"
+            },
+            {
+              "title": "7.4.4_日志与遥测数据通道_logging_and_telemetry_pipeline",
+              "slug": "7.4.4_日志与遥测数据通道_logging_and_telemetry_pipeline",
+              "intro": "比较 SPSC/MPSC 日志汇聚和异步落盘架构。"
+            },
+            {
+              "title": "7.4.5_背压、限流与过载保护_backpressure_rate_limiting_and_overload",
+              "slug": "7.4.5_背压、限流与过载保护_backpressure_rate_limiting_and_overload",
+              "intro": "设计容量上限、丢弃策略、流量控制和过载恢复。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "8_正确性验证、调试与工程实践_verification_debugging_and_engineering",
+      "slug": "8_正确性验证、调试与工程实践_verification_debugging_and_engineering",
+      "intro": "无锁算法极易出现低概率并发错误。本部分建立从单元测试、压力测试、模型检查到生产观测的验证体系。",
+      "sections": [
+        {
+          "title": "8.1_并发测试与故障复现_concurrency_testing",
+          "slug": "8.1_并发测试与故障复现_concurrency_testing",
+          "intro": "掌握多线程测试、边界条件和可重复故障复现。",
+          "subsections": [
+            {
+              "title": "8.1.1_确定性测试与随机压力测试_deterministic_and_stress_testing",
+              "slug": "8.1.1_确定性测试与随机压力测试_deterministic_and_stress_testing",
+              "intro": "组合固定交错测试与随机高并发压力测试。"
+            },
+            {
+              "title": "8.1.2_线程数、竞争度与容量边界_thread_count_contention_and_capacity",
+              "slug": "8.1.2_线程数、竞争度与容量边界_thread_count_contention_and_capacity",
+              "intro": "覆盖单核、多核、超额订阅、队列满/空和极小容量。"
+            },
+            {
+              "title": "8.1.3_调度扰动与故障注入_scheduler_perturbation_and_fault_injection",
+              "slug": "8.1.3_调度扰动与故障注入_scheduler_perturbation_and_fault_injection",
+              "intro": "通过 yield、延迟、暂停和随机扰动放大竞态窗口。"
+            },
+            {
+              "title": "8.1.4_线性化历史记录与校验_history_recording_and_checking",
+              "slug": "8.1.4_线性化历史记录与校验_history_recording_and_checking",
+              "intro": "记录并发操作历史并检查是否符合顺序规范。"
+            },
+            {
+              "title": "8.1.5_长时间运行与内存增长测试_long_running_and_memory_growth_tests",
+              "slug": "8.1.5_长时间运行与内存增长测试_long_running_and_memory_growth_tests",
+              "intro": "检测节点泄漏、回收停滞和资源耗尽。"
+            }
+          ]
+        },
+        {
+          "title": "8.2_Sanitizer 与动态分析工具_sanitizers_and_dynamic_analysis",
+          "slug": "8.2_Sanitizer 与动态分析工具_sanitizers_and_dynamic_analysis",
+          "intro": "使用工具发现数据竞争、越界访问、悬空指针和未定义行为。",
+          "subsections": [
+            {
+              "title": "8.2.1_ThreadSanitizer（TSan）_thread_sanitizer",
+              "slug": "8.2.1_ThreadSanitizer（TSan）_thread_sanitizer",
+              "intro": "检测数据竞争；理解其能力边界以及对无锁代码的影响。"
+            },
+            {
+              "title": "8.2.2_AddressSanitizer（ASan）_address_sanitizer",
+              "slug": "8.2.2_AddressSanitizer（ASan）_address_sanitizer",
+              "intro": "检测 use-after-free、越界访问和内存错误。"
+            },
+            {
+              "title": "8.2.3_UndefinedBehaviorSanitizer（UBSan）_undefined_behavior_sanitizer",
+              "slug": "8.2.3_UndefinedBehaviorSanitizer（UBSan）_undefined_behavior_sanitizer",
+              "intro": "检测部分未定义行为和类型/算术问题。"
+            },
+            {
+              "title": "8.2.4_Sanitizer 组合与性能影响_sanitizer_combinations_and_overhead",
+              "slug": "8.2.4_Sanitizer 组合与性能影响_sanitizer_combinations_and_overhead",
+              "intro": "理解工具组合限制、运行开销和误报/漏报边界。"
+            },
+            {
+              "title": "8.2.5_调试器与核心转储分析_debugger_and_core_dump",
+              "slug": "8.2.5_调试器与核心转储分析_debugger_and_core_dump",
+              "intro": "使用 LLDB/GDB 分析线程栈、原子状态和崩溃现场。"
+            }
+          ]
+        },
+        {
+          "title": "8.3_模型检查与形式化验证_model_checking_and_formal_verification",
+          "slug": "8.3_模型检查与形式化验证_model_checking_and_formal_verification",
+          "intro": "用系统化方法探索线程交错并验证并发算法。",
+          "subsections": [
+            {
+              "title": "8.3.1_状态空间与线程交错爆炸_state_space_and_interleaving_explosion",
+              "slug": "8.3.1_状态空间与线程交错爆炸_state_space_and_interleaving_explosion",
+              "intro": "理解并发状态组合数量为何快速增长。"
+            },
+            {
+              "title": "8.3.2_Litmus Tests 与内存模型测试_litmus_tests",
+              "slug": "8.3.2_Litmus Tests 与内存模型测试_litmus_tests",
+              "intro": "使用小型测试验证特定内存序行为。"
+            },
+            {
+              "title": "8.3.3_CDSChecker 与 Relacy Race Detector_cdschecker_and_relacy",
+              "slug": "8.3.3_CDSChecker 与 Relacy Race Detector_cdschecker_and_relacy",
+              "intro": "了解专门用于并发算法探索和验证的工具及其使用边界。"
+            },
+            {
+              "title": "8.3.4_模型检查与随机压力测试的区别_model_checking_vs_stress_testing",
+              "slug": "8.3.4_模型检查与随机压力测试的区别_model_checking_vs_stress_testing",
+              "intro": "比较穷举/受限状态探索与实际运行测试。"
+            },
+            {
+              "title": "8.3.5_算法证明文档与代码审查_proof_documentation_and_code_review",
+              "slug": "8.3.5_算法证明文档与代码审查_proof_documentation_and_code_review",
+              "intro": "为线性化点、内存序、生命周期和进度保证建立审查清单。"
+            }
+          ]
+        },
+        {
+          "title": "8.4_跨平台、编译器与生产部署_portability_compilers_and_production",
+          "slug": "8.4_跨平台、编译器与生产部署_portability_compilers_and_production",
+          "intro": "确保算法在不同架构、编译器和构建环境中保持正确。",
+          "subsections": [
+            {
+              "title": "8.4.1_GCC、Clang 与 MSVC 原子实现差异_compiler_atomic_implementation_differences",
+              "slug": "8.4.1_GCC、Clang 与 MSVC 原子实现差异_compiler_atomic_implementation_differences",
+              "intro": "比较实现支持、诊断、内建函数和目标平台差异。"
+            },
+            {
+              "title": "8.4.2_x86-64 与 ARM64 交叉验证_x86_arm64_cross_validation",
+              "slug": "8.4.2_x86-64 与 ARM64 交叉验证_x86_arm64_cross_validation",
+              "intro": "在强/弱内存模型架构上验证算法。"
+            },
+            {
+              "title": "8.4.3_CMake、CTest 与 CI 并发测试_cmake_ctest_and_ci",
+              "slug": "8.4.3_CMake、CTest 与 CI 并发测试_cmake_ctest_and_ci",
+              "intro": "组织测试目标、Sanitizer 构建和持续集成。"
+            },
+            {
+              "title": "8.4.4_ABI、平台能力与运行时降级_abi_platform_capabilities_and_fallback",
+              "slug": "8.4.4_ABI、平台能力与运行时降级_abi_platform_capabilities_and_fallback",
+              "intro": "设计能力检测、可移植接口和锁式回退策略。"
+            },
+            {
+              "title": "8.4.5_生产监控与故障诊断_production_observability_and_diagnostics",
+              "slug": "8.4.5_生产监控与故障诊断_production_observability_and_diagnostics",
+              "intro": "监控队列深度、重试次数、丢弃量、延迟分位数和内存回收积压。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "9_综合项目与高级专题_projects_and_advanced_topics",
+      "slug": "9_综合项目与高级专题_projects_and_advanced_topics",
+      "intro": "通过从简单到复杂的项目，完成无锁编程从理论、实现、验证到性能优化的工程闭环。",
+      "sections": [
+        {
+          "title": "9.1_基础项目：SPSC 与 MPSC 队列_foundational_projects",
+          "slug": "9.1_基础项目：SPSC 与 MPSC 队列_foundational_projects",
+          "intro": "从简单拓扑建立可运行、可测试、可测量的代码库。",
+          "subsections": [
+            {
+              "title": "9.1.1_项目一：固定容量 SPSC Ring Buffer_project_spsc_ring_buffer",
+              "slug": "9.1.1_项目一：固定容量 SPSC Ring Buffer_project_spsc_ring_buffer",
+              "intro": "实现模板化 SPSC 队列，支持 push/pop、批量操作、容量策略和单元测试。"
+            },
+            {
+              "title": "9.1.2_项目二：低延迟 SPSC 数据通道_project_low_latency_spsc_channel",
+              "slug": "9.1.2_项目二：低延迟 SPSC 数据通道_project_low_latency_spsc_channel",
+              "intro": "增加缓存行隔离、统计指标、基准测试和生产者消费者演示。"
+            },
+            {
+              "title": "9.1.3_项目三：MPSC 日志汇聚队列_project_mpsc_logging_queue",
+              "slug": "9.1.3_项目三：MPSC 日志汇聚队列_project_mpsc_logging_queue",
+              "intro": "实现多线程日志提交、单线程消费、关闭语义和过载处理。"
+            },
+            {
+              "title": "9.1.4_项目四：SPMC 任务分发器_project_spmc_dispatcher",
+              "slug": "9.1.4_项目四：SPMC 任务分发器_project_spmc_dispatcher",
+              "intro": "实现单生产者任务发布和多消费者竞争消费。"
+            }
+          ]
+        },
+        {
+          "title": "9.2_进阶项目：MPMC 与内存回收_advanced_queue_and_reclamation_projects",
+          "slug": "9.2_进阶项目：MPMC 与内存回收_advanced_queue_and_reclamation_projects",
+          "intro": "实现复杂拓扑并解决节点生命周期和并发正确性问题。",
+          "subsections": [
+            {
+              "title": "9.2.1_项目五：Bounded MPMC Ring Queue_project_bounded_mpmc_ring_queue",
+              "slug": "9.2.1_项目五：Bounded MPMC Ring Queue_project_bounded_mpmc_ring_queue",
+              "intro": "实现序列号槽位方案，验证满/空边界和多线程并发行为。"
+            },
+            {
+              "title": "9.2.2_项目六：Michael-Scott Queue_project_michael_scott_queue",
+              "slug": "9.2.2_项目六：Michael-Scott Queue_project_michael_scott_queue",
+              "intro": "实现经典链表式 MPMC 队列，标注线性化点并验证正确性。"
+            },
+            {
+              "title": "9.2.3_项目七：Hazard Pointer 库_project_hazard_pointer_library",
+              "slug": "9.2.3_项目七：Hazard Pointer 库_project_hazard_pointer_library",
+              "intro": "实现线程注册、保护指针、retire list、扫描和回收。"
+            },
+            {
+              "title": "9.2.4_项目八：Epoch-Based Reclamation 库_project_ebr_library",
+              "slug": "9.2.4_项目八：Epoch-Based Reclamation 库_project_ebr_library",
+              "intro": "实现 epoch 管理、临界区登记、宽限期和延迟回收。"
+            },
+            {
+              "title": "9.2.5_项目九：无锁栈与 ABA 对策_project_lock_free_stack_and_aba",
+              "slug": "9.2.5_项目九：无锁栈与 ABA 对策_project_lock_free_stack_and_aba",
+              "intro": "实现 Treiber Stack，并比较 tagged pointer 与安全回收策略。"
+            }
+          ]
+        },
+        {
+          "title": "9.3_系统项目：低延迟事件处理框架_low_latency_event_processing_framework",
+          "slug": "9.3_系统项目：低延迟事件处理框架_low_latency_event_processing_framework",
+          "intro": "将多个并发组件组合成接近真实系统的事件处理架构。",
+          "subsections": [
+            {
+              "title": "9.3.1_项目十：多拓扑消息总线_project_multi_topology_message_bus",
+              "slug": "9.3.1_项目十：多拓扑消息总线_project_multi_topology_message_bus",
+              "intro": "组合 SPSC、MPSC、MPMC 通道，提供统一接口和拓扑配置。"
+            },
+            {
+              "title": "9.3.2_项目十一：行情数据分发模拟器_project_market_data_distributor",
+              "slug": "9.3.2_项目十一：行情数据分发模拟器_project_market_data_distributor",
+              "intro": "实现行情生产、解码、订阅者扇出、慢消费者隔离和延迟统计。"
+            },
+            {
+              "title": "9.3.3_项目十二：无锁任务调度器_project_lock_free_task_scheduler",
+              "slug": "9.3.3_项目十二：无锁任务调度器_project_lock_free_task_scheduler",
+              "intro": "实现任务队列、工作线程、任务窃取的基础版本及关闭协议。"
+            },
+            {
+              "title": "9.3.4_项目十三：无锁对象池与内存分配器_project_lock_free_object_pool",
+              "slug": "9.3.4_项目十三：无锁对象池与内存分配器_project_lock_free_object_pool",
+              "intro": "实现预分配节点池、并发申请/归还和内存安全回收。"
+            },
+            {
+              "title": "9.3.5_项目十四：端到端性能对比实验_project_end_to_end_performance_study",
+              "slug": "9.3.5_项目十四：端到端性能对比实验_project_end_to_end_performance_study",
+              "intro": "比较 mutex queue、SPSC、MPSC、MPMC 在不同负载下的吞吐量和尾延迟。"
+            }
+          ]
+        },
+        {
+          "title": "9.4_高级专题与研究方向_advanced_research_topics",
+          "slug": "9.4_高级专题与研究方向_advanced_research_topics",
+          "intro": "继续探索更复杂的算法、标准提案和高性能并发系统。",
+          "subsections": [
+            {
+              "title": "9.4.1_Work-Stealing Deque_work_stealing_deque",
+              "slug": "9.4.1_Work-Stealing Deque_work_stealing_deque",
+              "intro": "介绍任务窃取双端队列、owner/thief 角色、经典算法及适用边界。"
+            },
+            {
+              "title": "9.4.2_Flat Combining_flat_combining",
+              "slug": "9.4.2_Flat Combining_flat_combining",
+              "intro": "理解通过集中批量执行减少原子竞争的替代设计。"
+            },
+            {
+              "title": "9.4.3_Transactional Memory_transactional_memory",
+              "slug": "9.4.3_Transactional Memory_transactional_memory",
+              "intro": "介绍硬件/软件事务内存及其与 lock-free 的区别。"
+            },
+            {
+              "title": "9.4.4_Wait-Free Queue 与有界步数算法_wait_free_queue",
+              "slug": "9.4.4_Wait-Free Queue 与有界步数算法_wait_free_queue",
+              "intro": "研究 wait-free 队列及其复杂度和工程代价。"
+            },
+            {
+              "title": "9.4.5_无锁算法的最新研究与标准进展_research_and_standardization",
+              "slug": "9.4.5_无锁算法的最新研究与标准进展_research_and_standardization",
+              "intro": "跟踪学术论文、WG21 提案、主流库和处理器新指令。"
+            },
+            {
+              "title": "9.4.6_经典论文与开源实现阅读_papers_and_open_source_implementations",
+              "slug": "9.4.6_经典论文与开源实现阅读_papers_and_open_source_implementations",
+              "intro": "阅读 Michael-Scott Queue、Hazard Pointers、RCU、concurrent queue 等代表性资料。"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

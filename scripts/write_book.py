@@ -45,6 +45,18 @@ def node_slug(node: dict[str, Any], fallback: str) -> str:
     return safe_component(str(slug)) if slug else fallback
 
 
+def pretty_title(raw: str) -> str:
+    """'1.1.3_互斥锁、读写锁与自旋锁_mutex_rwlock_and_spinlock'
+    -> '互斥锁、读写锁与自旋锁  mutex rwlock and spinlock'"""
+    t = raw.strip()
+    t = re.sub(r"^\d+(?:\.\d+)*[_\s]+", "", t)  # 去掉 JSON 标题自带的编号前缀
+    m = re.match(r"^(.*?)_([\x00-\x7f]+)$", t)  # 第一个 "_" 之后若全是 ASCII，视为英文部分
+    if m:
+        cn, en = m.groups()
+        return f"{cn}  {en.replace('_', ' ')}"
+    return t.replace("_", " ")
+
+
 def get_raw_children(node: dict[str, Any]) -> list[dict[str, Any]]:
     """Retrieve child nodes using common outline keys."""
     for key in ("parts", "sections", "subsections", "children", "topics"):
@@ -171,7 +183,7 @@ def build_outline_tree(
     """Recursively build OutlineNode objects for arbitrary depth."""
     for idx, child in enumerate(raw_children):
         child_num = f"{num_prefix}.{idx + 1}" if num_prefix else f"{idx + 1}"
-        child_title = f"{child_num} {child['title']}"
+        child_title = f"{child_num} {pretty_title(child['title'])}"
         child_slug = node_slug(child, f"{idx + 1:02d}_section")
         child_dir = current_dir / child_slug
         child_index = child_dir / "index.md"
@@ -209,8 +221,9 @@ def collect_all_nodes(node: OutlineNode) -> list[OutlineNode]:
 
 
 def relative_link(source_dir: Path, target_index: Path, label: str) -> str:
-    rel = Path(os.path.relpath(target_index, source_dir))
-    return f"[{label}]({rel.as_posix()})"
+    rel = Path(os.path.relpath(target_index, source_dir)).as_posix()
+    rel = rel.replace(" ", "%20").replace("(", "%28").replace(")", "%29")
+    return f"[{label}]({rel})"
 
 
 def render_nav_lines(
@@ -263,6 +276,25 @@ def update_nav_in_markdown(text: str, nav_lines: list[str]) -> str:
         return re.sub(pattern, new_nav_block + "\n", text)
     else:
         return text.rstrip() + "\n\n---\n\n" + new_nav_block
+
+
+def update_heading(text: str, title: str, level: int) -> str:
+    new_head = f'{"#" * level} {title}'
+    if re.match(r"#+ ", text):
+        return re.sub(r"\A#+ .*", lambda m: new_head, text, count=1)
+    return new_head + "\n\n" + text
+
+
+def update_toc(text: str, children: list[tuple[str, Path]], current_dir: Path) -> str:
+    if not children:
+        return text
+    block = "## 本节目录\n\n" + "\n".join(
+        f"- {relative_link(current_dir, p, t)}" for t, p in children
+    ) + "\n\n"
+    pattern = r"## 本节目录[ \t]*\n+(?:- [^\n]*\n*)+"
+    if re.search(pattern, text):
+        return re.sub(pattern, lambda m: block, text, count=1)
+    return text
 
 
 def main() -> int:
@@ -348,6 +380,8 @@ def main() -> int:
             existing_text = node.index_path.read_text(encoding="utf-8")
             nav_lines = render_nav_lines(prev_target, parent_target, next_target, node.dir_path)
             updated_text = update_nav_in_markdown(existing_text, nav_lines)
+            updated_text = update_heading(updated_text, node.title, node.level)
+            updated_text = update_toc(updated_text, children_targets, node.dir_path)
             node.index_path.write_text(updated_text, encoding="utf-8")
         else:
             content = render_index(
