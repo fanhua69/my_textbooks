@@ -18,3 +18,12 @@
 - **降低锁粒度与避免嵌套加锁**：按独立数据分片加锁（如分段锁），严格规定全局加锁顺序，减少跨锁等待。
 
 ---
+
+
+---
+
+## 导航
+
+- **上一层**：[1.1.5 锁竞争、上下文切换与优先级反转  lock contention context switch and priority inversion](../index.md)
+- **前一节**：[1.1.4 条件变量、信号量与屏障 condition variable semaphore and barrier](../../1.1.4_条件变量、信号量与屏障_condition_variable_semaphore_and_barrier/index.md)
+- **后一节**：[1.1.5.2 上下文切换：用户态、内核态与硬件代价](../1.1.5.2_上下文切换：用户态、内核态与硬件代价/index.md)

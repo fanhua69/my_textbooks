@@ -1,0 +1,263 @@
+# 1.2.1.5 可运行 C++ 示例：基础生产者-消费者队列边界建模
+
+> **简介**：下面给出一个自包含的 C++17 示例，展示 `Producer`、`Consumer` 与有界队列边界（支持 `try_push` / `try_pop` 以及 `stop` 优雅收尾），可用 `g++ -O2 -std=c++17 -pthread` 编译运行：
+
+---
+
+下面给出一个自包含的 C++17 示例，展示 `Producer`、`Consumer` 与有界队列边界（支持 `try_push` / `try_pop` 以及 `stop` 优雅收尾），可用 `g++ -O2 -std=c++17 -pthread` 编译运行：
+
+```cpp
+#include <cstddef>
+#include <iostream>
+#include <mutex>
+#include <optional>
+#include <queue>
+#include <thread>
+#include <vector>
+
+namespace {
+
+template <typename T>
+class BoundedChannel {
+public:
+    explicit BoundedChannel(std::size_t capacity)
+        : capacity_(capacity == 0 ? 1 : capacity) {}
+
+    bool try_push(T item) {
+        std::lock_guard<std::mutex> lk(mtx_);
+        if (closed_ || queue_.size() >= capacity_) {
+            return false;
+        }
+        queue_.push(std::move(item));
+        return true;
+    }
+
+    std::optional<T> try_pop() {
+        std::lock_guard<std::mutex> lk(mtx_);
+        if (queue_.empty()) {
+            return std::nullopt;
+        }
+        T item = std::move(queue_.front());
+        queue_.pop();
+        return item;
+    }
+
+    void close() {
+        std::lock_guard<std::mutex> lk(mtx_);
+        closed_ = true;
+    }
+
+    bool is_closed_and_empty() const {
+        std::lock_guard<std::mutex> lk(mtx_);
+        return closed_ && queue_.empty();
+    }
+
+private:
+    const std::size_t capacity_;
+    mutable std::mutex mtx_;
+    std::queue<T> queue_;
+    bool closed_ = false;
+};
+
+struct TaskItem {
+    int id;
+    int payload;
+};
+
+} // namespace
+
+int main() {
+    BoundedChannel<TaskItem> channel(8);
+    std::size_t dropped = 0;
+
+    std::thread producer([&]() {
+        for (int i = 1; i <= 20; ++i) {
+            TaskItem item{i, i * 100};
+            while (!channel.try_push(item)) {
+                ++dropped;
+                std::this_thread::yield();
+            }
+        }
+        channel.close();
+    });
+
+    std::size_t consumed = 0;
+    std::thread consumer([&]() {
+        while (true) {
+            auto item = channel.try_pop();
+            if (item.has_value()) {
+                ++consumed;
+                if (item->id <= 5 || item->id == 20) {
+                    std::cout << "Consumed task id=" << item->id
+                              << ", payload=" << item->payload << "\n";
+                }
+            } else if (channel.is_closed_and_empty()) {
+                break;
+            } else {
+                std::this_thread::yield();
+            }
+        }
+    });
+
+    producer.join();
+    consumer.join();
+
+    std::cout << "Total consumed: " << consumed
+              << ", yield retries while full: " << dropped << "\n";
+    return 0;
+}
+
+// 无锁方式：
+
+#include <atomic>
+#include <cstddef>
+#include <iostream>
+#include <optional>
+#include <thread>
+#include <vector>
+
+namespace {
+
+// 容量向上取整到 2 的幂，便于位掩码取模（适用于单生产者 + 单消费者边界建模）
+std::size_t round_up_pow2(std::size_t n) {
+    if (n <= 2) {
+        return 2;
+    }
+    std::size_t p = 1;
+    while (p < n) {
+        p <<= 1;
+    }
+    return p;
+}
+
+template <typename T>
+class LockFreeSpscChannel {
+public:
+    explicit LockFreeSpscChannel(std::size_t min_capacity)
+        : capacity_(round_up_pow2(min_capacity)),
+          mask_(capacity_ - 1),
+          buffer_(capacity_) {}
+
+    bool try_push(const T& item) {
+        if (closed_.load(std::memory_order_acquire)) {
+            return false;
+        }
+        const std::size_t tail = tail_.load(std::memory_order_relaxed);
+        const std::size_t next_tail = (tail + 1) & mask_;
+        // acquire 同步消费者对 head_ 的推进，确保槽位已被消费完毕再覆盖
+        if (next_tail == head_.load(std::memory_order_acquire)) {
+            return false; // 队列已满
+        }
+        buffer_[tail] = item;
+        // release 确保元素写入对消费者可见后再更新 tail_
+        tail_.store(next_tail, std::memory_order_release);
+        return true;
+    }
+
+    bool try_push(T&& item) {
+        if (closed_.load(std::memory_order_acquire)) {
+            return false;
+        }
+        const std::size_t tail = tail_.load(std::memory_order_relaxed);
+        const std::size_t next_tail = (tail + 1) & mask_;
+        if (next_tail == head_.load(std::memory_order_acquire)) {
+            return false;
+        }
+        buffer_[tail] = std::move(item);
+        tail_.store(next_tail, std::memory_order_release);
+        return true;
+    }
+
+    std::optional<T> try_pop() {
+        const std::size_t head = head_.load(std::memory_order_relaxed);
+        // acquire 同步生产者对 tail_ 的发布，确保先看到 buffer_[head] 的写入
+        if (head == tail_.load(std::memory_order_acquire)) {
+            return std::nullopt; // 队列为空
+        }
+        T item = std::move(buffer_[head]);
+        const std::size_t next_head = (head + 1) & mask_;
+        // release 通知生产者该槽位已释放，可安全复用
+        head_.store(next_head, std::memory_order_release);
+        return item;
+    }
+
+    void close() {
+        closed_.store(true, std::memory_order_release);
+    }
+
+    bool is_closed_and_empty() const {
+        if (!closed_.load(std::memory_order_acquire)) {
+            return false;
+        }
+        return head_.load(std::memory_order_acquire) ==
+               tail_.load(std::memory_order_acquire);
+    }
+
+private:
+    const std::size_t capacity_;
+    const std::size_t mask_;
+    std::vector<T> buffer_;
+
+    alignas(64) std::atomic<std::size_t> head_{0};
+    alignas(64) std::atomic<std::size_t> tail_{0};
+    alignas(64) std::atomic<bool> closed_{false};
+};
+
+struct TaskItem {
+    int id;
+    int payload;
+};
+
+} // namespace
+
+int main() {
+    // 有效可用槽位为 capacity - 1，传入 16 实际分配 16 槽位（最多存 15 个元素）
+    LockFreeSpscChannel<TaskItem> channel(16);
+    std::size_t full_retries = 0;
+
+    std::thread producer([&]() {
+        for (int i = 1; i <= 20; ++i) {
+            TaskItem item{i, i * 100};
+            while (!channel.try_push(item)) {
+                ++full_retries;
+                std::this_thread::yield();
+            }
+        }
+        channel.close();
+    });
+
+    std::size_t consumed = 0;
+    std::thread consumer([&]() {
+        while (true) {
+            auto item = channel.try_pop();
+            if (item.has_value()) {
+                ++consumed;
+                if (item->id <= 5 || item->id == 20) {
+                    std::cout << "Consumed task id=" << item->id
+                              << ", payload=" << item->payload << "\n";
+                }
+            } else if (channel.is_closed_and_empty()) {
+                break;
+            } else {
+                std::this_thread::yield();
+            }
+        }
+    });
+
+    producer.join();
+    consumer.join();
+
+    std::cout << "Total consumed: " << consumed
+              << ", full retries: " << full_retries << "\n";
+    return 0;
+}
+```
+
+
+---
+
+## 导航
+
+- **上一层**：[1.2.1 生产者与消费者模型概览  producer consumer model overview](../index.md)
+- **前一节**：[1.2.1.4 队列边界的典型语义对比](../1.2.1.4_队列边界的典型语义对比/index.md)
+- **后一节**：[1.2.2 SPSC：Single Producer Single Consumer  spsc single producer single consumer](../../1.2.2_SPSC%EF%BC%9ASingle%20Producer%20Single%20Consumer_spsc_single_producer_single_consumer/index.md)

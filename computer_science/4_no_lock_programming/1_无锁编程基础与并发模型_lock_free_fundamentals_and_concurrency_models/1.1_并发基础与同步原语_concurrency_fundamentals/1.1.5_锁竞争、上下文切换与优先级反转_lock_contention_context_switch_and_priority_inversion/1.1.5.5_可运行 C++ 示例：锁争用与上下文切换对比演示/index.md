@@ -98,3 +98,12 @@ int main() {
     return 0;
 }
 ```
+
+
+---
+
+## 导航
+
+- **上一层**：[1.1.5 锁竞争、上下文切换与优先级反转  lock contention context switch and priority inversion](../index.md)
+- **前一节**：[1.1.5.4 诊断指标与工程观测思路](../1.1.5.4_诊断指标与工程观测思路/index.md)
+- **后一节**：[1.2 并发拓扑与生产者消费者模型  concurrency topologies](../../../1.2_并发拓扑与生产者消费者模型_concurrency_topologies/index.md)

@@ -1,0 +1,385 @@
+{
+  "title": "Cross-Platform Inter-Process Communication (IPC) Engineering",
+  "language": "zh-CN",
+  "description": "一套系统讲解跨平台进程间通信（IPC）的工程教材，深入覆盖理论基础与安全边界，并全面剖析 Linux、macOS（XNU/Darwin）与 Windows 三大主流操作系统的原生及通用 IPC 机制、性能优化与跨平台架构抽象。",
+  "navigation": {
+    "mode": "depth_first_all_index_pages",
+    "description": "前一页/后一页按教材目录深度优先顺序排列，包含部分、二级节和三级节的 index.md。"
+  },
+  "parts": [
+    {
+      "title": "IPC 基础理论与核心抽象",
+      "slug": "01_ipc_fundamentals_and_abstractions",
+      "intro": "建立进程间通信的系统级认知：理解虚拟内存隔离、内核态/用户态边界、通信模型分类、跨进程同步原语以及安全权限体系。",
+      "sections": [
+        {
+          "title": "进程隔离与跨进程通信本质",
+          "slug": "01_进程隔离与跨进程通信本质",
+          "intro": "从虚拟地址空间、页表映射与内核中介视角理解为何需要 IPC 以及数据如何在隔离进程间流转。",
+          "subsections": [
+            {
+              "title": "虚拟内存隔离与地址空间边界",
+              "slug": "01_虚拟内存隔离与地址空间边界",
+              "intro": "剖析进程独立虚拟地址空间、页表隔离机制以及为何普通指针无法直接跨进程传递。"
+            },
+            {
+              "title": "数据拷贝路径与零拷贝（Zero-Copy）原理",
+              "slug": "02_数据拷贝路径与零拷贝_zero_copy_原理",
+              "intro": "对比双次内核拷贝（发送方->内核->接收方）与共享物理页映射（mmap/VirtualAlloc）的开销差异。"
+            },
+            {
+              "title": "IPC 的五大通信模型：消息传递、字节流、共享内存、RPC 与事件信号",
+              "slug": "03_ipc_的五大通信模型_消息传递_字节流_共享内存_rpc_与事件信号",
+              "intro": "梳理不同通信范式的边界语义、吞吐延迟特征与典型应用场景。"
+            }
+          ]
+        },
+        {
+          "title": "跨进程同步原语与无锁内存模型",
+          "slug": "02_跨进程同步原语与无锁内存模型",
+          "intro": "解决共享内存与异步通知中的竞态问题，掌握跨进程锁、事件等待与共享内存中的原子操作。",
+          "subsections": [
+            {
+              "title": "共享内存中的 std::atomic 与内存序（Memory Order）",
+              "slug": "01_共享内存中的_std_atomic_与内存序_memory_order",
+              "intro": "理解 lock-free 原子对象在跨进程映射内存中的合法性要求、缓存一致性与 acquire-release 语义。"
+            },
+            {
+              "title": "跨进程无锁环形缓冲区（SPSC / MPSC / MPMC Ring Buffer）",
+              "slug": "02_跨进程无锁环形缓冲区_spsc_mpsc_mpmc_ring_buffer",
+              "intro": "设计基于共享内存的零拷贝无锁队列，处理伪共享（False Sharing）与缓存行对齐。"
+            },
+            {
+              "title": "跨进程阻塞等待与唤醒机制（futex / ulock / WaitOnAddress）",
+              "slug": "03_跨进程阻塞等待与唤醒机制_futex_ulock_waitonaddress",
+              "intro": "对比三大系统底层用户态快速路径 + 内核态挂起唤醒原语的设计共性与差异。"
+            }
+          ]
+        },
+        {
+          "title": "生命周期、身份认证与安全边界",
+          "slug": "03_生命周期_身份认证与安全边界",
+          "intro": "构建健壮、抗崩溃且符合最小权限原则的工业级 IPC 通道。",
+          "subsections": [
+            {
+              "title": "命名空间、服务发现与连接握手协议",
+              "slug": "01_命名空间_服务发现与连接握手协议",
+              "intro": "对比文件系统路径、全局内核对象名、Mach 服务名与动态端口协商策略。"
+            },
+            {
+              "title": "对端身份认证与权限校验（PID / UID / Audit Token / SID）",
+              "slug": "02_对端身份认证与权限校验_pid_uid_audit_token_sid",
+              "intro": "防止 PID 复用欺骗，掌握各平台防篡改的进程凭证与代码签名校验方法。"
+            },
+            {
+              "title": "句柄/描述符传递与异常崩溃恢复（Crash Recovery）",
+              "slug": "03_句柄_描述符传递与异常崩溃恢复_crash_recovery",
+              "intro": "理解跨进程传递内核对象权柄的原理，以及对端崩溃时的孤儿锁清理与状态重建。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Linux 平台 IPC 机制深度剖析",
+      "slug": "02_linux_ipc_mechanisms",
+      "intro": "深入 Linux 内核与 POSIX/System V 体系，掌握高并发服务器与低延迟系统中的 Linux 核心 IPC 技术。",
+      "sections": [
+        {
+          "title": "管道（Pipe / FIFO）与信号机制",
+          "slug": "01_管道_pipe_fifo_与信号机制",
+          "intro": "理解 UNIX 最经典的字节流管道、命名管道与异步进程通知。",
+          "subsections": [
+            {
+              "title": "匿名管道（pipe / pipe2）与命名管道（mkfifo）",
+              "slug": "01_匿名管道_pipe_pipe2_与命名管道_mkfifo",
+              "intro": "掌握内核环形缓冲区页大小（PIPE_BUF）原子写保证、非阻塞模式与进程组协作。"
+            },
+            {
+              "title": "信号（Signal）与实时信号（sigqueue）",
+              "slug": "02_信号_signal_与实时信号_sigqueue",
+              "intro": "理解异步信号安全（Async-Signal-Safe）约束、信号掩码及 sigval 载荷传递局限。"
+            }
+          ]
+        },
+        {
+          "title": "UNIX Domain Sockets（AF_UNIX）",
+          "slug": "02_unix_domain_sockets_af_unix",
+          "intro": "全面掌握 Linux 本地服务通信主力机制：流式、数据报、顺序包及控制消息。",
+          "subsections": [
+            {
+              "title": "SOCK_STREAM、SOCK_DGRAM 与 SOCK_SEQPACKET 语义对比",
+              "slug": "01_sock_stream_sock_dgram_与_sock_seqpacket_语义对比",
+              "intro": "分析消息边界保留、可靠性、背压控制及抽象命名空间（Abstract Namespace）特性。"
+            },
+            {
+              "title": "辅助数据（cmsg）：SCM_RIGHTS 与 SCM_CREDENTIALS",
+              "slug": "02_辅助数据_cmsg_scm_rights_与_scm_credentials",
+              "intro": "实现跨进程传递文件描述符（fd）以及基于内核验证的 ucred 身份认证。"
+            },
+            {
+              "title": "结合 epoll 的高并发本地事件循环",
+              "slug": "03_结合_epoll_的高并发本地事件循环",
+              "intro": "构建单线程或多线程 Reactor 模型处理海量本地 Socket 连接。"
+            }
+          ]
+        },
+        {
+          "title": "共享内存与内存文件描述符",
+          "slug": "03_共享内存与内存文件描述符",
+          "intro": "掌握 Linux 下零拷贝数据交换的演进与现代实践。",
+          "subsections": [
+            {
+              "title": "POSIX 共享内存（shm_open + mmap）与 System V shm 对比",
+              "slug": "01_posix_共享内存_shm_open_mmap_与_system_v_shm_对比",
+              "intro": "比较 /dev/shm 虚拟文件系统映射、内核参数限制（shmmax）与生命周期清理。"
+            },
+            {
+              "title": "匿名内存文件 memfd_create 与文件封印（File Sealing）",
+              "slug": "02_匿名内存文件_memfd_create_与文件封印_file_sealing",
+              "intro": "使用 memfd 避免命名冲突，并通过 F_SEAL_SHRINK / F_SEAL_WRITE 防止对端恶意截断引发 SIGBUS。"
+            },
+            {
+              "title": "大页内存（HugeTLB / THP）与 NUMA 亲和性优化",
+              "slug": "03_大页内存_hugetlb_thp_与_numa_亲和性优化",
+              "intro": "降低高频交易与高性能计算场景下共享内存的 TLB Miss 与跨 NUMA 节点访问延迟。"
+            }
+          ]
+        },
+        {
+          "title": "现代内核事件通知与消息总线",
+          "slug": "04_现代内核事件通知与消息总线",
+          "intro": "了解 Linux 轻量级事件驱动原语、futex 与桌面/系统总线。",
+          "subsections": [
+            {
+              "title": "eventfd 与 POSIX 消息队列（mq_open）",
+              "slug": "01_eventfd_与_posix_消息队列_mq_open",
+              "intro": "使用 eventfd 配合 epoll 实现极轻量内核计数器唤醒，对比优先级消息队列。"
+            },
+            {
+              "title": "Linux futex 原理与跨进程同步封装",
+              "slug": "02_linux_futex_原理与跨进程同步封装",
+              "intro": "理解 FUTEX_WAIT / FUTEX_WAKE 底层系统调用及 Robust Mutex 崩溃恢复机制。"
+            },
+            {
+              "title": "D-Bus 系统总线架构与应用场景",
+              "slug": "03_d_bus_系统总线架构与应用场景",
+              "intro": "理解 Linux 桌面与系统服务（systemd）中基于 Daemon 路由的面向对象消息总线。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "macOS（XNU / Darwin）平台 IPC 机制深度剖析",
+      "slug": "03_macos_ipc_mechanisms",
+      "intro": "深入理解 XNU 混合内核（Mach + BSD）下的 macOS 特有 IPC 体系，重点掌握 XPC、Mach Port、Sandbox 限制与系统级架构。",
+      "sections": [
+        {
+          "title": "XNU 混合内核与 Mach Ports 底层原语",
+          "slug": "01_xnu_混合内核与_mach_ports_底层原语",
+          "intro": "探究苹果操作系统 IPC 的微内核基石：Mach 消息传递与端口权限模型。",
+          "subsections": [
+            {
+              "title": "Mach Port、Send/Receive Rights 与端口命名空间",
+              "slug": "01_mach_port_send_receive_rights_与端口命名空间",
+              "intro": "理解内核管理的单向消息队列、端口引用计数以及权限转移机制。"
+            },
+            {
+              "title": "mach_msg() 消息结构与 Out-of-Line（OOL）内存描述符",
+              "slug": "02_mach_msg_消息结构与_out_of_line_ool_内存描述符",
+              "intro": "剖析内联数据与写时复制（COW）跨进程虚拟内存页传输原理。"
+            },
+            {
+              "title": "Bootstrap Server 与 launchd 服务注册机制",
+              "slug": "03_bootstrap_server_与_launchd_服务注册机制",
+              "intro": "理解 macOS 启动守护进程（LaunchDaemon / LaunchAgent）如何通过 MachService 暴露端点。"
+            }
+          ]
+        },
+        {
+          "title": "XPC 框架：macOS 现代 IPC 核心",
+          "slug": "02_xpc_框架_macos_现代_ipc_核心",
+          "intro": "全面掌握苹果官方推荐的 XPC C API 与 NSXPCConnection 架构。",
+          "subsections": [
+            {
+              "title": "底层 C API（libxpc / xpc_connection_t）与序列化类型系统",
+              "slug": "01_底层_c_api_libxpc_xpc_connection_t_与序列化类型系统",
+              "intro": "掌握 xpc_dictionary、xpc_shmem、事件处理器与 C/C++ 无 Objective-C 运行时依赖集成。"
+            },
+            {
+              "title": "NSXPCConnection、NSXPCInterface 与远程对象代理",
+              "slug": "02_nsxpcconnection_nsxpcinterface_与远程对象代理",
+              "intro": "设计强类型 Protocol 契约、NSSecureCoding 白名单校验与异步 Reply Block。"
+            },
+            {
+              "title": "按需启动（On-Demand）、连接中断（Interruption）与作废（Invalidation）",
+              "slug": "03_按需启动_on_demand_连接中断_interruption_与作废_invalidation",
+              "intro": "处理特权 Helper 进程动态拉起、崩溃恢复与防止循环引用的生命周期管理。"
+            },
+            {
+              "title": "Audit Token 校验与代码签名（Code Signing Requirement）安全加固",
+              "slug": "04_audit_token_校验与代码签名_code_signing_requirement_安全加固",
+              "intro": "使用 xpc_connection_get_audit_token 与 SecCodeCopyGuestWithAttributes 防范未授权客户端。"
+            }
+          ]
+        },
+        {
+          "title": "macOS 下的 POSIX / BSD IPC 与沙盒（App Sandbox）边界",
+          "slug": "03_macos_下的_posix_bsd_ipc_与沙盒_app_sandbox_边界",
+          "intro": "对比 macOS 与 Linux 在 POSIX IPC 上的细微差异及 App Sandbox 安全约束。",
+          "subsections": [
+            {
+              "title": "macOS 共享内存（shm_open / mach_vm_remap）与 xpc_shmem",
+              "slug": "01_macos_共享内存_shm_open_mach_vm_remap_与_xpc_shmem",
+              "intro": "解决沙盒环境下 POSIX 共享内存命名受限问题，结合 XPC 传递共享内存区域实现高速数据面。"
+            },
+            {
+              "title": "UNIX Domain Socket、kqueue 与 macOS POSIX 信号量限制",
+              "slug": "02_unix_domain_socket_kqueue_与_macos_posix_信号量限制",
+              "intro": "注意 macOS 不支持进程间无名 sem_init、默认 SysV shm 上限较小等平台陷阱。"
+            },
+            {
+              "title": "App Group 容器、NSDistributedNotificationCenter 与 System Extension 通信",
+              "slug": "03_app_group_容器_nsdistributednotificationcenter_与_system_extension_通信",
+              "intro": "掌握沙盒应用间共享容器、轻量广播及 EndpointSecurity / NetworkExtension 的 IPC 规范。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Windows 平台 IPC 机制深度剖析",
+      "slug": "04_windows_ipc_mechanisms",
+      "intro": "深入 Windows NT 内核对象模型，掌握命名管道、共享内存（File Mapping）、Windows 同步原语、ALPC 与 COM/RPC。",
+      "sections": [
+        {
+          "title": "Windows 内核对象模型、句柄与安全描述符",
+          "slug": "01_windows_内核对象模型_句柄与安全描述符",
+          "intro": "建立 Windows IPC 的底层统一视角：一切皆内核对象与句柄引用。",
+          "subsections": [
+            {
+              "title": "内核对象命名空间（Global\\、Local\\ 与 Session 隔离）",
+              "slug": "01_内核对象命名空间_global_local_与_session_隔离",
+              "intro": "理解 Windows Service（Session 0）与桌面用户会话（Session 1+）之间的跨会话 IPC 隔离与穿透。"
+            },
+            {
+              "title": "句柄继承、DuplicateHandle 与访问控制列表（ACL / DACL）",
+              "slug": "02_句柄继承_duplicatehandle_与访问控制列表_acl_dacl",
+              "intro": "实现跨进程句柄复制以及基于 SECURITY_ATTRIBUTES 的细粒度权限控制。"
+            }
+          ]
+        },
+        {
+          "title": "命名管道（Named Pipes）与匿名管道",
+          "slug": "02_命名管道_named_pipes_与匿名管道",
+          "intro": "掌握 Windows 本地及局域网服务间最常用的双向消息/字节流管道。",
+          "subsections": [
+            {
+              "title": "CreateNamedPipe、消息模式（PIPE_TYPE_MESSAGE）与事务读取",
+              "slug": "01_createnamedpipe_消息模式_pipe_type_message_与事务读取",
+              "intro": "利用原生消息边界、多实例并发连接及客户端模拟（ImpersonateNamedPipeClient）构建服务。"
+            },
+            {
+              "title": "基于 Overlapped I/O 与 IOCP（完成端口）的异步管道服务器",
+              "slug": "02_基于_overlapped_i_o_与_iocp_完成端口_的异步管道服务器",
+              "intro": "结合 I/O Completion Ports 实现高吞吐、低线程开销的异步管道通信。"
+            }
+          ]
+        },
+        {
+          "title": "共享内存（File Mapping）与同步原语",
+          "slug": "03_共享内存_file_mapping_与同步原语",
+          "intro": "构建 Windows 平台下的零拷贝共享内存与低延迟唤醒通道。",
+          "subsections": [
+            {
+              "title": "CreateFileMapping（INVALID_HANDLE_VALUE）与 MapViewOfFile",
+              "slug": "01_createfilemapping_invalid_handle_value_与_mapviewoffile",
+              "intro": "基于页文件（Pagefile-backed）创建命名或匿名共享内存视图，支持大页（SEC_LARGE_PAGES）。"
+            },
+            {
+              "title": "Named Event、Mutex、Semaphore 与 WaitOnAddress 同步组合",
+              "slug": "02_named_event_mutex_semaphore_与_waitonaddress_同步组合",
+              "intro": "处理 WAIT_ABANDONED 崩溃检测，以及 Windows 8+ 用户态原语 WaitOnAddress 的低开销唤醒。"
+            }
+          ]
+        },
+        {
+          "title": "Windows Socket（AF_UNIX）、ALPC 与 RPC / COM",
+          "slug": "04_windows_socket_af_unix_alpc_与_rpc_com",
+          "intro": "了解现代 Windows 跨平台本地套接字与系统底层高级本地过程调用。",
+          "subsections": [
+            {
+              "title": "Windows 10+ 原生 AF_UNIX Socket 支持与局限",
+              "slug": "01_windows_10_原生_af_unix_socket_支持与局限",
+              "intro": "使用 Winsock AF_UNIX 统一跨平台代码，规避不支持 SCM_RIGHTS 传递句柄等平台差异。"
+            },
+            {
+              "title": "ALPC（Advanced Local Procedure Call）、MS-RPC 与 Out-of-Proc COM",
+              "slug": "02_alpc_advanced_local_procedure_call_ms_rpc_与_out_of_proc_com",
+              "intro": "理解 Windows 系统服务背后高速内核通道 ALPC 的架构定位及上层 RPC/COM 接口。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "三大平台横评、跨平台抽象设计与实战",
+      "slug": "05_cross_platform_comparison_and_architecture",
+      "intro": "打通 Linux、macOS 与 Windows 的工程壁垒，提炼统一 C++ 抽象层设计方法论，并通过可落地的性能基准与混合架构完成实战闭环。",
+      "sections": [
+        {
+          "title": "Linux、macOS 与 Windows IPC 机制全景对比",
+          "slug": "01_linux_macos_与_windows_ipc_机制全景对比",
+          "intro": "从通信模型、延迟吞吐、句柄传递、身份认证与生命周期管理维度建立全景映射表。",
+          "subsections": [
+            {
+              "title": "对等机制映射表与特性矩阵",
+              "slug": "01_对等机制映射表与特性矩阵",
+              "intro": "对照三平台在共享内存、本地流/消息通道、事件通知与特权 RPC 上的对应实现。"
+            },
+            {
+              "title": "常见跨平台陷阱与平台专属行为差异",
+              "slug": "02_常见跨平台陷阱与平台专属行为差异",
+              "intro": "总结命名规则、权限模型、崩溃资源回收（内核自动清理 vs 文件系统残留）与沙盒限制。"
+            }
+          ]
+        },
+        {
+          "title": "跨平台 C++ IPC 抽象层与混合架构设计",
+          "slug": "02_跨平台_c__ipc_抽象层与混合架构设计",
+          "intro": "设计薄而清晰、不牺牲零拷贝性能的现代 C++ 跨平台 IPC 抽象接口。",
+          "subsections": [
+            {
+              "title": "“控制面 + 数据面”分离架构模式",
+              "slug": "01_控制面_数据面_分离架构模式",
+              "intro": "控制面（XPC / AF_UNIX / Named Pipe）负责握手与认证，数据面（Shm + 无锁队列）负责零拷贝流转。"
+            },
+            {
+              "title": "统一 C++20 抽象接口设计（Channel / SharedRegion / Notifier）",
+              "slug": "02_统一_c_20_抽象接口设计_channel_sharedregion_notifier",
+              "intro": "运用 RAII、C ABI 边界与策略模式封装平台后端，避免虚函数进入热路径。"
+            }
+          ]
+        },
+        {
+          "title": "综合实战与性能基准测试",
+          "slug": "03_综合实战与性能基准测试",
+          "intro": "通过端到端工程项目验证延迟分布（P50 / P99 / P99.9）与吞吐上限。",
+          "subsections": [
+            {
+              "title": "实战项目：跨三平台低延迟共享内存无锁消息总线",
+              "slug": "01_实战项目_跨三平台低延迟共享内存无锁消息总线",
+              "intro": "实现支持 Linux（memfd + futex）、macOS（xpc_shmem/shm + ulock）与 Windows（FileMapping + WaitOnAddress）的统一总线。"
+            },
+            {
+              "title": "IPC 延迟与吞吐基准测试（Round-Trip Latency & Tail Latency）",
+              "slug": "02_ipc_延迟与吞吐基准测试_round_trip_latency_tail_latency",
+              "intro": "设计 Ping-Pong 往返延迟测试框架，实测对比本地 Socket、命名管道、XPC 与无锁共享内存的纳秒级表现。"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

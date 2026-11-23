@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Check and fill textbook section navigation links.
+"""Check and fill textbook section navigation links and child directory TOCs.
 
 Each directory that contains an index.md is one section. Sibling sections are
 ordered by the numeric prefix of the directory name (07 < 07.1 < 07.2 < 07.10).
@@ -13,21 +13,27 @@ For every section except the textbook root:
 - 后一节 / 下一节: the next sibling. If this section is last, walk up and
   link to the next sibling of the nearest ancestor that has one.
 
+For every section that has direct child sections (subdirectories with index.md):
+
+- ## 目录: bullet list linking to each direct child's index.md in sorted order.
+
 The root index.md has no parent and no previous section. Its next section is
 the first top-level chapter.
 
-Existing lines that use either label set are checked. Missing roles are
-appended. Wrong targets are rewritten. Pass --check to report only.
+Existing lines that use either label set are checked. Missing roles and child
+TOC entries are inserted/updated. Wrong targets are rewritten. Pass --check to
+report only.
 """
 
 from __future__ import annotations
 
 import argparse
+import os
 import re
 import sys
 from dataclasses import dataclass, field
 from pathlib import Path
-from urllib.parse import unquote
+from urllib.parse import quote, unquote
 
 ROLE_LABELS = {
     "prev": ("前一节", "上一节"),
@@ -48,6 +54,9 @@ NAV_LINE = re.compile(
 MD_LINK = re.compile(r"\[([^\]]*)\]\(([^)]+)\)")
 NONE_MARKER = re.compile(r"无(?:（[^）]*）|\([^)]*\))?")
 H1 = re.compile(r"^#\s+(.+?)\s*$", re.MULTILINE)
+H2_HEADING = re.compile(r"^##\s+(.+?)\s*$")
+TOC_HEADING_NAMES = {"目录", "本节目录", "本章目录", "子目录", "子章节"}
+NAV_HEADING_NAMES = {"导航"}
 
 
 @dataclass
@@ -101,12 +110,8 @@ def title_of(path: Path, fallback: str) -> str:
 
 
 def relative_link(source: Section, target: Section) -> str:
-    rel = Path(
-        __import__("os").path.relpath(target.index_path, source.directory)
-    ).as_posix()
+    rel = Path(os.path.relpath(target.index_path, source.directory)).as_posix()
     if any(char in rel for char in " ()"):
-        from urllib.parse import quote
-
         return quote(rel, safe="/-._~")
     return rel
 
@@ -156,9 +161,9 @@ class NavHit:
     href: str | None
 
 
-def parse_nav(text: str) -> list[NavHit]:
+def parse_nav(lines: list[str]) -> list[NavHit]:
     hits: list[NavHit] = []
-    for index, line in enumerate(text.splitlines()):
+    for index, line in enumerate(lines):
         match = NAV_LINE.match(line)
         if not match:
             continue
@@ -198,7 +203,9 @@ def render_body(body: str, target_md: str) -> str:
     return target_md + suffix
 
 
-def target_markdown(source: Section, target: Section | None, titles: dict[Path, str]) -> str:
+def target_markdown(
+    source: Section, target: Section | None, titles: dict[Path, str]
+) -> str:
     if target is None:
         return "无"
     return f"[{titles[target.directory]}]({relative_link(source, target)})"
@@ -208,6 +215,129 @@ def iter_sections(section: Section):
     yield section
     for child in section.children:
         yield from iter_sections(child)
+
+
+def find_h2_section_range(
+    lines: list[str], heading_names: set[str]
+) -> tuple[int, int] | None:
+    """Return [start, end) line indices for a matching H2 section."""
+    start: int | None = None
+    for idx, line in enumerate(lines):
+        match = H2_HEADING.match(line)
+        if match:
+            title = match.group(1).strip()
+            if start is None and title in heading_names:
+                start = idx
+            elif start is not None:
+                return (start, idx)
+    if start is not None:
+        return (start, len(lines))
+    return None
+
+
+def find_nav_insert_index(lines: list[str]) -> int:
+    """Find the start index of the trailing navigation block (--- + ## 导航 or first nav line)."""
+    nav_h2 = find_h2_section_range(lines, NAV_HEADING_NAMES)
+    if nav_h2 is not None:
+        idx = nav_h2[0]
+        # Walk backwards over preceding blank lines and horizontal rule ---
+        probe = idx - 1
+        while probe >= 0 and lines[probe].strip() == "":
+            probe -= 1
+        if probe >= 0 and lines[probe].strip() == "---":
+            return probe
+        return idx
+
+    nav_hits = parse_nav(lines)
+    if nav_hits:
+        idx = nav_hits[0].line_index
+        probe = idx - 1
+        while probe >= 0 and lines[probe].strip() == "":
+            probe -= 1
+        if probe >= 0 and lines[probe].strip() == "---":
+            return probe
+        return idx
+
+    return len(lines)
+
+
+def build_children_toc_lines(
+    section: Section, titles: dict[Path, str]
+) -> list[str]:
+    items = [
+        f"- {target_markdown(section, child, titles)}"
+        for child in section.children
+    ]
+    return ["## 目录", "", *items]
+
+
+def check_and_update_children_toc(
+    section: Section,
+    lines: list[str],
+    titles: dict[Path, str],
+    details: list[str],
+) -> tuple[list[str], bool]:
+    """Ensure section's index.md links to all direct child index.md files."""
+    if not section.children:
+        return lines, False
+
+    expected_toc = build_children_toc_lines(section, titles)
+    toc_range = find_h2_section_range(lines, TOC_HEADING_NAMES)
+
+    if toc_range is not None:
+        start, end = toc_range
+        # Trim trailing blank lines inside the existing TOC section for clean comparison
+        content_end = end
+        while content_end > start and lines[content_end - 1].strip() == "":
+            content_end -= 1
+        existing_block = lines[start:content_end]
+        if existing_block == expected_toc:
+            return lines, False
+
+        details.append(f"更新子目录列表（共 {len(section.children)} 个子节）")
+        replacement = [*expected_toc, ""]
+        updated = lines[:start] + replacement + lines[end:]
+        return updated, True
+
+    # No explicit ## 目录 heading: check if all child index.md links already exist in body
+    existing_hrefs: list[str] = []
+    for line in lines:
+        if NAV_LINE.match(line):
+            continue
+        for match in MD_LINK.finditer(line):
+            href = unquote(match.group(2).strip()).split("#", 1)[0].split("?", 1)[0]
+            if href:
+                existing_hrefs.append(href)
+
+    missing_children = [
+        child
+        for child in section.children
+        if not any(resolves_to(section, href, child) for href in existing_hrefs)
+    ]
+    if not missing_children:
+        return lines, False
+
+    if len(missing_children) == len(section.children):
+        details.append(f"缺少子目录列表（共 {len(section.children)} 个子节）")
+    else:
+        missing_names = ", ".join(child.name for child in missing_children)
+        details.append(f"缺少部分子目录链接：{missing_names}")
+
+    insert_at = find_nav_insert_index(lines)
+    prefix_lines = lines[:insert_at]
+    suffix_lines = lines[insert_at:]
+
+    while prefix_lines and prefix_lines[-1].strip() == "":
+        prefix_lines.pop()
+
+    inserted: list[str] = []
+    if prefix_lines:
+        inserted.extend(["", "---", ""])
+    inserted.extend(expected_toc)
+    if suffix_lines:
+        inserted.append("")
+
+    return prefix_lines + inserted + suffix_lines, True
 
 
 @dataclass
@@ -223,10 +353,19 @@ def check_section(
 ) -> FileResult:
     original = section.index_path.read_text(encoding="utf-8")
     lines = original.splitlines()
-    hits = parse_nav(original)
-    expected = expected_targets(section, root)
     details: list[str] = []
     changed = False
+
+    # 1. Check / insert direct child directory links (## 目录)
+    lines, toc_changed = check_and_update_children_toc(
+        section, lines, titles, details
+    )
+    if toc_changed:
+        changed = True
+
+    # 2. Check / update three-way navigation links (上一层 / 前一节 / 后一节)
+    hits = parse_nav(lines)
+    expected = expected_targets(section, root)
     seen: dict[str, list[NavHit]] = {"prev": [], "next": [], "parent": []}
     for hit in hits:
         seen[hit.role].append(hit)
@@ -264,9 +403,7 @@ def check_section(
     ]
     if missing_roles:
         block = ["", "---", "", "## 导航", ""]
-        if "## 导航" in original and not changed:
-            block = [""]
-        elif "## 导航" in original:
+        if "## 导航" in "\n".join(lines):
             block = [""]
         for role in ("parent", "prev", "next"):
             if role not in missing_roles:
@@ -286,10 +423,6 @@ def check_section(
     if original.endswith("\n"):
         new_text += "\n"
     status = "missing" if any(item.startswith("缺少") for item in details) else "wrong"
-    if any(item.startswith("缺少") for item in details) and any(
-        not item.startswith("缺少") for item in details
-    ):
-        status = "missing"
     return FileResult(section, status, details, new_text if changed else None)
 
 
@@ -300,7 +433,9 @@ def display_path(section: Section, root: Path) -> str:
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="核对并补齐教材 index.md 的三向导航链接")
+    parser = argparse.ArgumentParser(
+        description="核对并补齐教材 index.md 的子目录列表与三向导航链接"
+    )
     parser.add_argument(
         "root",
         nargs="?",
@@ -334,7 +469,7 @@ def main() -> int:
 
     print(
         f"\n共 {len(results)} 个 index.md：正确 {counts['ok']}，"
-        f"链接错误 {counts['wrong']}，缺少链接 {counts['missing']}"
+        f"需要更新 {counts['wrong']}，缺少链接 {counts['missing']}"
     )
     if args.check:
         print("未修改文件（--check）")
