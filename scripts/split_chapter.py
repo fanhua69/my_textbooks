@@ -1,9 +1,17 @@
 #!/usr/bin/env python3
 import argparse
-import os
 import re
 import sys
+from dataclasses import dataclass
 from pathlib import Path
+
+
+@dataclass
+class SectionSpan:
+    raw_title: str
+    start_line: int  # 0-based inclusive in lines
+    end_line: int    # 0-based exclusive in lines
+    body: str
 
 
 def find_chapter_dir(root: Path, chapter_id: str) -> Path:
@@ -28,8 +36,8 @@ def find_chapter_dir(root: Path, chapter_id: str) -> Path:
 
     return matches[0]
 
+
 def clean_title(name: str) -> str:
-    # 去掉开头的 "1. "、"2. " 这类序号前缀，并规范化空白
     cleaned = re.sub(r"^\d+\.\s+", "", name.strip())
     cleaned = re.sub(r"\s+", " ", cleaned).strip()
     return cleaned
@@ -37,48 +45,72 @@ def clean_title(name: str) -> str:
 
 def sanitize_dirname(name: str) -> str:
     base = clean_title(name)
-    # 清理文件系统非法字符（/ \ : * ? " < > |）
     cleaned = re.sub(r'[\\/:*?"<>|]', " ", base)
     cleaned = re.sub(r"\s+", " ", cleaned).strip()
     return cleaned
 
 
-def split_sections(content: str) -> list[tuple[str, str]]:
+def trim_utf8_bytes(text: str, max_bytes: int = 180) -> str:
+    raw = text.encode("utf-8")
+    if len(raw) <= max_bytes:
+        return text
+    return raw[:max_bytes].decode("utf-8", errors="ignore").rstrip()
+
+
+def split_sections_with_spans(content: str) -> list[SectionSpan]:
     lines = content.splitlines(keepends=True)
-    sections: list[tuple[str, str]] = []
+    raw_spans: list[SectionSpan] = []
     current_raw_title: str | None = None
-    current_lines: list[str] = []
+    current_start: int | None = None
+    in_code = False
 
-    for line in lines:
-        # 匹配行首可能有缩进的 "## "，排除 "###"
-        m = re.match(r"^\s*##\s+(?!#)(.+?)\s*\r?\n?\$", line)
-        if m:
-            if current_raw_title is not None:
-                sections.append((current_raw_title, "".join(current_lines).strip()))
-            current_raw_title = m.group(1).strip()
-            current_lines = [line]
-        else:
-            if current_raw_title is not None:
-                current_lines.append(line)
+    for idx, line in enumerate(lines):
+        stripped_line = line.rstrip("\r\n")
+        if stripped_line.lstrip().startswith("```"):
+            in_code = not in_code
+            continue
 
-    if current_raw_title is not None:
-        sections.append((current_raw_title, "".join(current_lines).strip()))
+        if not in_code:
+            m = re.match(r"^\s*##\s+(?!#)(.+)$", stripped_line)
+            if m:
+                if current_raw_title is not None and current_start is not None:
+                    body_text = "".join(lines[current_start:idx]).strip()
+                    raw_spans.append(
+                        SectionSpan(
+                            raw_title=current_raw_title,
+                            start_line=current_start,
+                            end_line=idx,
+                            body=body_text,
+                        )
+                    )
+                current_raw_title = m.group(1).strip()
+                current_start = idx
 
-    # 过滤掉“导航”片段
-    return [(t, b) for (t, b) in sections if t.strip() != "导航"]
+    if current_raw_title is not None and current_start is not None:
+        body_text = "".join(lines[current_start : len(lines)]).strip()
+        raw_spans.append(
+            SectionSpan(
+                raw_title=current_raw_title,
+                start_line=current_start,
+                end_line=len(lines),
+                body=body_text,
+            )
+        )
+
+    return [s for s in raw_spans if s.raw_title.strip() != "导航"]
 
 
-def normalize_sec_body(sec_body: str, cleaned_title: str) -> str:
+def normalize_sec_body(sec_body: str) -> str:
     body_lines = sec_body.splitlines()
     if not body_lines:
-        return sec_body
+        return ""
     if re.match(r"^\s*##\s+(?!#)", body_lines[0]):
-        body_lines[0] = f"## {cleaned_title}"
+        body_lines = body_lines[1:]
     return "\n".join(body_lines).strip()
 
 
-def extract_summary(sec_title: str, sec_body: str) -> str:
-    body_lines = sec_body.splitlines()[1:]
+def extract_summary(sec_title: str, clean_body: str) -> str:
+    body_lines = clean_body.splitlines()
     in_code = False
     para_buf: list[str] = []
 
@@ -108,13 +140,40 @@ def extract_summary(sec_title: str, sec_body: str) -> str:
     return summary
 
 
+def build_links_block(entries: list[tuple[str, str, str]]) -> str:
+    lines = ["## 小节索引", ""]
+    for sub_id, display_title, sub_dir_name in entries:
+        encoded_dir = sub_dir_name.replace(" ", "%20")
+        lines.append(f"- [{sub_id} {display_title}](./{encoded_dir}/index.md)")
+    lines.append("")
+    return "\n".join(lines)
+
+
+def update_parent_index(
+    content: str,
+    spans: list[SectionSpan],
+    link_entries: list[tuple[str, str, str]],
+) -> str:
+    lines = content.splitlines(keepends=True)
+    first_start = spans[0].start_line
+    last_end = spans[-1].end_line
+
+    prefix_text = "".join(lines[:first_start]).rstrip()
+    suffix_text = "".join(lines[last_end:]).strip()
+    links_block = build_links_block(link_entries).strip()
+
+    parts = [p for p in (prefix_text, links_block, suffix_text) if p]
+    return "\n\n".join(parts) + "\n"
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(
-        description="按 '##' 二级标题拆分指定章节下的 index.md 为子目录与子 index.md"
+        description="按 '##' 二级标题拆分指定章节下的 index.md 为子目录与子 index.md，并回写父 index.md 链接"
     )
     parser.add_argument("chapter_id", help="章节号，例如 1.1.1 或 2.1.4")
     parser.add_argument("--dry-run", action="store_true", help="仅预览将创建的目录与文件，不实际写入")
     parser.add_argument("--force", action="store_true", help="若目标 index.md 已存在则覆盖")
+    parser.add_argument("--keep-source", action="store_true", help="保留父 index.md 中已被拆分的 '##' 片段")
     parser.add_argument("--root", default=".", help="递归查找章节目录的根路径（默认: 当前目录）")
 
     args = parser.parse_args()
@@ -132,23 +191,26 @@ def main() -> int:
         return 1
 
     content = index_file.read_text(encoding="utf-8")
-    sections = split_sections(content)
+    spans = split_sections_with_spans(content)
 
-    if not sections:
+    if not spans:
         print(f"提示: '{index_file}' 中未找到任何可拆分的 '##' 二级标题片段。", file=sys.stderr)
         return 1
 
     print(f"源目录: {target_dir}")
-    print(f"共检测到 {len(sections)} 个有效 '##' 片段:\n")
+    print(f"共检测到 {len(spans)} 个有效 '##' 片段:\n")
 
-    for idx, (raw_title, raw_body) in enumerate(sections, start=1):
+    link_entries: list[tuple[str, str, str]] = []
+
+    for idx, span in enumerate(spans, start=1):
         sub_id = f"{args.chapter_id}.{idx}"
-        display_title = clean_title(raw_title)
-        safe_title = sanitize_dirname(raw_title)
-        sub_dir_name = f"{sub_id}_{safe_title}"
+        display_title = clean_title(span.raw_title)
+        safe_title = sanitize_dirname(span.raw_title)
+        raw_dir_name = f"{sub_id}_{safe_title}"
+        sub_dir_name = trim_utf8_bytes(raw_dir_name, max_bytes=180)
         sub_dir_path = target_dir / sub_dir_name
         sub_index_path = sub_dir_path / "index.md"
-        clean_body = normalize_sec_body(raw_body, display_title)
+        clean_body = normalize_sec_body(span.body)
         summary = extract_summary(display_title, clean_body)
 
         sub_markdown = (
@@ -158,7 +220,9 @@ def main() -> int:
             f"{clean_body}\n"
         )
 
+        link_entries.append((sub_id, display_title, sub_dir_name))
         print(f"  [{idx}] {sub_dir_name}/index.md")
+
         if args.dry_run:
             continue
 
@@ -169,10 +233,19 @@ def main() -> int:
 
         sub_index_path.write_text(sub_markdown, encoding="utf-8")
 
+    updated_parent = update_parent_index(content, spans, link_entries)
+
     if args.dry_run:
-        print("\n(--dry-run 模式：未写入任何文件)")
+        print("\n(--dry-run 模式：未写入任何文件，预览父 index.md 如下)")
+        print("---")
+        print(updated_parent)
     else:
-        print("\n拆分完成。")
+        if not args.keep_source:
+            index_file.write_text(updated_parent, encoding="utf-8")
+            print(f"\n已更新父目录索引并移除被拆分片段: {index_file}")
+        else:
+            print("\n(--keep-source 模式：未修改父 index.md)")
+        print("拆分完成。")
 
     return 0
 
