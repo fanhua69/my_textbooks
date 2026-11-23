@@ -47,5 +47,5 @@ launchctl list
 ## 导航
 
 - **上一层**：[5_my_ipc](../index.md)
-- **前一节**：[5_my_ipc](../index.md)
-- **后一节**：[基础隔离与安全加固项](../2_systemd/index.md)
+- **前一节**：[IPC Intro](../2_ipc_intro/index.md)
+- **后一节**：[基础隔离与安全加固项](../4_systemd/index.md)

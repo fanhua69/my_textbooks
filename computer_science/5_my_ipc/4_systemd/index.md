@@ -90,11 +90,9 @@ System 实例与 User 实例区分：系统级服务由 root 管理的 systemd �
 
 ## 目录
 
-- [systemd 命令详解：Linux 服务与系统管理](2.1_systemd_intro/index.md)
-
----
+- [systemd 命令详解：Linux 服务与系统管理](4.1_systemd_intro/index.md)
 
 ## 导航
 
 - **上一层**：[5_my_ipc](../index.md)
-- **前一节**：[查看系统域下某个守护进程的详细状态](../1_launchd/index.md)
+- **前一节**：[查看系统域下某个守护进程的详细状态](../3_launchd/index.md)
