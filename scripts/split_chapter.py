@@ -9,8 +9,8 @@ from pathlib import Path
 @dataclass
 class SectionSpan:
     raw_title: str
-    start_line: int  # 0-based inclusive in lines
-    end_line: int    # 0-based exclusive in lines
+    start_line: int
+    end_line: int
     body: str
 
 
@@ -97,7 +97,8 @@ def split_sections_with_spans(content: str) -> list[SectionSpan]:
             )
         )
 
-    return [s for s in raw_spans if s.raw_title.strip() != "导航"]
+    excluded = {"导航", "小节索引"}
+    return [s for s in raw_spans if s.raw_title.strip() not in excluded]
 
 
 def normalize_sec_body(sec_body: str) -> str:
@@ -107,6 +108,31 @@ def normalize_sec_body(sec_body: str) -> str:
     if re.match(r"^\s*##\s+(?!#)", body_lines[0]):
         body_lines = body_lines[1:]
     return "\n".join(body_lines).strip()
+
+
+def shift_sub_headings(text: str) -> str:
+    """将子小节正文（代码块外）中 ### 及更深层级标题的 '#' 减一（### -> ##, #### -> ###, ##### -> ####）。"""
+    out_lines: list[str] = []
+    in_code = False
+
+    for line in text.splitlines():
+        stripped = line.lstrip()
+        if stripped.startswith("```"):
+            in_code = not in_code
+            out_lines.append(line)
+            continue
+
+        if not in_code:
+            m = re.match(r"^(\s*)(#{3,})(\s+.*)$", line)
+            if m:
+                indent, hashes, rest = m.group(1), m.group(2), m.group(3)
+                new_hashes = "#" * (len(hashes) - 1)
+                out_lines.append(f"{indent}{new_hashes}{rest}")
+                continue
+
+        out_lines.append(line)
+
+    return "\n".join(out_lines).strip()
 
 
 def extract_summary(sec_title: str, clean_body: str) -> str:
@@ -141,12 +167,11 @@ def extract_summary(sec_title: str, clean_body: str) -> str:
 
 
 def build_links_block(entries: list[tuple[str, str, str]]) -> str:
-    lines = ["## 小节索引", ""]
+    out_lines = ["## 小节索引", ""]
     for sub_id, display_title, sub_dir_name in entries:
         encoded_dir = sub_dir_name.replace(" ", "%20")
-        lines.append(f"- [{sub_id} {display_title}](./{encoded_dir}/index.md)")
-    lines.append("")
-    return "\n".join(lines)
+        out_lines.append(f"- [{sub_id} {display_title}](./{encoded_dir}/index.md)")
+    return "\n".join(out_lines)
 
 
 def update_parent_index(
@@ -160,7 +185,7 @@ def update_parent_index(
 
     prefix_text = "".join(lines[:first_start]).rstrip()
     suffix_text = "".join(lines[last_end:]).strip()
-    links_block = build_links_block(link_entries).strip()
+    links_block = build_links_block(link_entries)
 
     parts = [p for p in (prefix_text, links_block, suffix_text) if p]
     return "\n\n".join(parts) + "\n"
@@ -210,7 +235,8 @@ def main() -> int:
         sub_dir_name = trim_utf8_bytes(raw_dir_name, max_bytes=180)
         sub_dir_path = target_dir / sub_dir_name
         sub_index_path = sub_dir_path / "index.md"
-        clean_body = normalize_sec_body(span.body)
+        raw_body = normalize_sec_body(span.body)
+        clean_body = shift_sub_headings(raw_body)
         summary = extract_summary(display_title, clean_body)
 
         sub_markdown = (

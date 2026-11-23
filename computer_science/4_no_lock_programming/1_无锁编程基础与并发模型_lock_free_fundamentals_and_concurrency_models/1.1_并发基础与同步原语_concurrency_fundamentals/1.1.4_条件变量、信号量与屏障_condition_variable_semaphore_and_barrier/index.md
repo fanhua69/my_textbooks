@@ -1,8 +1,14 @@
-# 1.1.4 条件变量、信号量与屏障  condition variable semaphore and barrier
+# 1.1.4 条件变量、信号量与屏障 condition variable semaphore and barrier
 
-掌握阻塞式协调原语，以及它们与原子操作的关系。
+掌握阻塞式协调原语（条件变量 `std::condition_variable`、计数信号量 `std::counting_semaphore` / `std::binary_semaphore` 与线程屏障 `std::barrier` / `std::latch`）的工作语义、虚假唤醒与丢失唤醒防治、系统差异，以及它们与原子操作（`std::atomic` / C++20 `atomic::wait`/`notify`）的协作与取舍关系。
 
----
+## 小节索引
+
+- [1.1.4.1 条件变量（Condition Variable）：谓词等待与唤醒机制](./1.1.4.1_条件变量（Condition%20Variable）：谓词等待与唤醒机制/index.md)
+- [1.1.4.2 信号量（Semaphore）：许可计数与资源并发控制](./1.1.4.2_信号量（Semaphore）：许可计数与资源并发控制/index.md)
+- [1.1.4.3 屏障（Latch 与 Barrier）：阶段同步与多线程会合](./1.1.4.3_屏障（Latch%20与%20Barrier）：阶段同步与多线程会合/index.md)
+- [1.1.4.4 与原子操作的协作关系：阻塞原语 vs. `std::atomic::wait`](./1.1.4.4_与原子操作的协作关系：阻塞原语%20vs.%20`std%20atomic%20wait`/index.md)
+- [1.1.4.5 可运行 C++ 示例：`std::condition_variable` 与 `std::latch` 协作](./1.1.4.5_可运行%20C++%20示例：`std%20condition_variable`%20与%20`std%20latch`%20协作/index.md)
 
 ## 导航
 
