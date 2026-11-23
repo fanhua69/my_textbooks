@@ -1,0 +1,11 @@
+# 4.4.2.4 状态管理模式对比：集中式 Store、原子状态与有限状态机驱动 UI
+
+依据状态规模、耦合度与团队约束选型，并用状态机消除非法界面状态组合。
+
+---
+
+## 导航
+
+← 上一节：[4.4.2.3 MVU (Model-View-Update)：Elm 架构](../04.4.2.3_MVU_Model-View-Update_Elm_架构/index.md)
+↑ 返回上级：[4.4.2 单向数据流与状态管理模式](../index.md)
+下一节：[5 业务逻辑层与领域模型模式 (Business Logic Layer Patterns)](../../../../05_业务逻辑层与领域模型模式_Business_Logic_Layer_Patterns/index.md) →

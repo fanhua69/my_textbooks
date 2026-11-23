@@ -1,0 +1,17 @@
+# 5.5.1 规则的表达与组合
+
+以对象或数据表达业务规则。
+
+## 本节目录
+
+- [5.5.1.1 规约模式 (Specification Pattern)：可组合的业务判定](05.5.1.1_规约模式_Specification_Pattern_可组合的业务判定/index.md)
+- [5.5.1.2 规则引擎 (Rules Engine) 与决策表 (Decision Table)](05.5.1.2_规则引擎_Rules_Engine_与决策表_Decision_Table/index.md)
+- [5.5.1.3 策略对象 (Policy) 模式：可替换的业务策略](05.5.1.3_策略对象_Policy_模式_可替换的业务策略/index.md)
+
+---
+
+## 导航
+
+← 上一节：[5.4 领域驱动设计 (DDD) 战略设计](../../05.4_领域驱动设计_DDD_战略设计/index.md)
+↑ 返回上级：[5.5 业务规则模式](../index.md)
+下一节：[5.5.2 规则的执行与校验](../05.5.2_规则的执行与校验/index.md) →
