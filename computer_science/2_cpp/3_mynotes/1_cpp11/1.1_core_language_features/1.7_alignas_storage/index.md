@@ -321,4 +321,4 @@ destroy_at|如何结束对象生命周期？
 
 - **上一层**：[1_cpp11](../index.md)
 - **前一节**：[1.6 `std::atomic`：`compare_exchange_weak` 与 `compare_exchange_strong`](../1.6_atomic_compare_and_swap/index.md)
-- **后一节**：[2 _cpp17](../../2_cpp17/index.md)
+- **后一节**：无
