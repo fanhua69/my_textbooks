@@ -5,7 +5,6 @@
 ---
 
 
-# C++17 `auto` 与直接列表初始化（Direct-List-Initialization）新规则
 
 - 这篇文章讲的是 **C++17 对 `auto` 结合大括号列表初始化（brace-init-list / list-initialization）的类型推导规则修正**（对应标准提案 **N3922**，*New rules for auto deduction from braced-init-list*）。
 
@@ -94,4 +93,4 @@ int main() {
 
 - **上一层**：[父级](../index.md)
 - **前一节**：[2.1.8 new and delete improvements](../2.1.8_new_and_delete_improvements/index.md)
-- **后一节**：[TODO_NEXT]
+- **后一节**：[2.2 standard template library](../../2.2_standard_template_library/index.md)
