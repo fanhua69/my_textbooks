@@ -36,37 +36,7 @@ def resolve_parent_num_and_section_num(
     if current_match is None:
         return None, first_available_section_num(current_dir)
 
-    numbered_chain = [current_dir]
-    while DIR_NAME_RE.match(numbered_chain[-1].parent.name):
-        numbered_chain.append(numbered_chain[-1].parent)
-    numbered_chain.reverse()
-
-    parent_parts: list[int] = []
-    for path in numbered_chain:
-        match = DIR_NAME_RE.match(path.name)
-        assert match is not None
-        parts = number_parts(match.group(1))
-        if not parent_parts or (
-            len(parts) > len(parent_parts) and parts[: len(parent_parts)] == parent_parts
-        ):
-            parent_parts = parts
-        else:
-            parent_parts.extend(parts)
-
-    child_parts = [
-        parts for parts, _, _ in list_numbered_dirs(current_dir) if len(parts) > 1
-    ]
-    current_dir_parts = number_parts(current_match.group(1))
-
-    def has_numbered_children(parts: list[int]) -> bool:
-        return any(
-            len(child) == len(parts) + 1 and child[:-1] == parts
-            for child in child_parts
-        )
-
-    if has_numbered_children(current_dir_parts):
-        parent_parts = current_dir_parts
-
+    parent_parts = number_parts(current_match.group(1))
     parent_num = ".".join(str(part) for part in parent_parts)
     used_numbers = {
         parts[-1]

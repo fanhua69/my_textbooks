@@ -21,9 +21,21 @@
 - [1.13 uniform initialization or list initialization](1.13_uniform_initialization_or_list_initialization/index.md)
 - [1.14 delegating constructors](1.14_delegating_constructors/index.md)
 - [1.15 default and delete functions](1.15_default_and_delete_functions/index.md)
+- [1.16 strongly typed enums](1.16_strongly_typed_enums/index.md)
+- [1.17 decltype](1.17_decltype/index.md)
+- [1.18 override specifier](1.18_override_specifier/index.md)
+- [1.19 static assert](1.19_static_assert/index.md)
+- [1.20 long long int](1.20_long_long_int/index.md)
+- [1.21 user defined literals](1.21_user_defined_literals/index.md)
+- [1.22 trailing return type](1.22_trailing_return_type/index.md)
+- [1.23 no except specifier](1.23_no_except_specifier/index.md)
+- [1.24 alignof and alignas and aligned storage](1.24_alignof_and_alignas_and_aligned_storage/index.md)
+- [1.25 external friend declarations](1.25_external_friend_declarations/index.md)
+- [1.26 generalized POD(plain old data) types](1.26_generalized_POD%28plain_old_data%29_types/index.md)
+- [1.27 unicode string literals](1.27_unicode_string_literals/index.md)
 
 ## 导航
 
-- **上一层**：[1 cpp11](../index.md)
-- **前一节**：[1 cpp11](../index.md)
-- **后一节**：[2 standard library additions and improvements](../2_standard_library_additions_and_improvements/index.md)
+- **上一层**：无
+- **前一节**：无
+- **后一节**：[1.01 nullptr_t and nullptr](1.01_nullptr_t_and_nullptr/index.md)
