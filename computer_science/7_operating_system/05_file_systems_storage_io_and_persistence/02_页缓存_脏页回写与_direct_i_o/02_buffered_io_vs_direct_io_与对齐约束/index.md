@@ -1,0 +1,11 @@
+# 5.2.2 Buffered I/O vs Direct I/O（O DIRECT / FILE FLAG NO BUFFERING）与对齐约束
+
+理解绕过页缓存避免双重缓存与额外拷贝的原理，以及块大小/内存地址对齐限制。
+
+---
+
+## 导航
+
+← 上一节：[5.2.1 Page Cache 读命中、预读（Read-ahead）与脏页（Dirty Page）后台回写抖动](../01_page_cache_预读与脏页回写延迟毛刺/index.md)
+↑ 返回上级：[5.2 页缓存（Page Cache）、脏页回写与 Direct I/O](../index.md)
+下一节：[5.3 主流文件系统特性与持久化语义（fsync / F FULLFSYNC / Flush）](../../03_主流文件系统特性与持久化语义/index.md) →

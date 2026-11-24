@@ -1,0 +1,262 @@
+{
+  "title": "C++17 全景式深度课程大纲（语言增强、编译期计算、值语义、并行算法、文件系统与标准库全量特性）",
+  "language": "zh-CN",
+  "standard": "ISO/IEC 14882:2017 (C++17)",
+  "description": "面向现代 C++ 开发者与系统工程师的 C++17 深度大纲。完整覆盖 C++17 从 C++14 演进的全部核心语言特性、对象模型与内存分配改进、模板与编译期增强、词汇类型与标准库新增组件、并行 STL、文件系统库以及弃用/移除项与工程最佳实践。",
+  "navigation": {
+    "mode": "depth_first_all_index_pages",
+    "description": "前一页/后一页按教材目录深度优先顺序排列，包含部分、二级节和三级节的 index.md。"
+  },
+  "parts": [
+    {
+      "title": "C++17 演进定位、核心语法、结构化绑定与属性机制",
+      "slug": "01_cpp17_overview_syntax_bindings_and_attributes",
+      "intro": "理解 C++17 承上启下的工程定位、标准演进与清理项，掌握结构化绑定、if/switch 初始化语句、内联变量、嵌套命名空间、求值顺序与标准属性。",
+      "sections": [
+        {
+          "title": "C++17 标准定位、向后兼容与清理/移除特性",
+          "slug": "01_cpp17_标准定位_向后兼容与清理移除特性",
+          "intro": "梳理 C++17 的务实设计路线、弃用/移除项与预处理器增强。",
+          "subsections": [
+            {
+              "title": "从 C++11/14 到 C++17：工程实用性与现代词汇类型落地",
+              "slug": "01_从_cpp11_14_到_cpp17_工程实用性与现代词汇类型",
+              "intro": "理解 C++17 如何整合 TS 成果、简化日常样板代码并强化编译期与值语义表达。"
+            },
+            {
+              "title": "C++17 移除与弃用特性（动态异常规格移除、register/auto_ptr 移除、三字符组移除等）",
+              "slug": "02_cpp17_移除与弃用特性",
+              "intro": "掌握 throw(T) 动态异常说明移除（仅保留 throw() 作 noexcept(true) 别名）、register 关键字移除、std::auto_ptr 与 std::random_shuffle 移除、三字符组（Trigraphs）移除及 operator++(bool) 移除。"
+            },
+            {
+              "title": "__has_include 预处理器条件与嵌套命名空间（namespace A::B::C）",
+              "slug": "03_has_include_与嵌套命名空间",
+              "intro": "掌握 __has_include(\"header\") / __has_include(<header>) 可移植头文件探测，以及简化多层嵌套命名空间的 namespace A::B::C 语法。"
+            }
+          ]
+        },
+        {
+          "title": "结构化绑定（Structured Bindings）与 if / switch 初始化语句",
+          "slug": "02_结构化绑定与_if_switch_初始化语句",
+          "intro": "掌握解构元组/结构体/数组与条件作用域变量声明，消除冗余临时变量与作用域污染。",
+          "subsections": [
+            {
+              "title": "结构化绑定：解包 std::pair、std::tuple、数组、聚合结构体与自定义 tuple-like 类型",
+              "slug": "01_结构化绑定解包规则与_cv_ref_修饰",
+              "intro": "掌握 auto [x, y] = ...、const auto& [k, v] = ...、auto&& [...] = ...、结构化绑定与 range-based for 配合，以及 std::tuple_size / std::tuple_element / get 协议自定义。"
+            },
+            {
+              "title": "if 与 switch 语句中的初始化语句（if (init; cond) / switch (init; cond)）",
+              "slug": "02_if_与_switch_初始化语句",
+              "intro": "掌握在 if 与 switch 条件前声明并初始化局部变量（如 map::try_emplace / find 结果绑定），缩小变量生命周期作用域。"
+            }
+          ]
+        },
+        {
+          "title": "inline 变量、求值顺序保证、UTF-8 字符字面量与标准属性",
+          "slug": "03_inline_变量_求值顺序_utf8_字符与标准属性",
+          "intro": "掌握头文件内联变量消除 ODR 冲突、更明确的表达式求值顺序、u8 字符字面量及 C++17 核心标准属性。",
+          "subsections": [
+            {
+              "title": "Inline Variables（内联变量）与类静态数据成员 inline 初始化",
+              "slug": "01_inline_variables_与头文件常量_静态成员",
+              "intro": "掌握 inline 变量如何在多个翻译单元间合并为同一实体，解决头文件定义变量及类内非 const/非整型静态成员初始化问题。"
+            },
+            {
+              "title": "C++17 表达式求值顺序强化（后缀/赋值/移位/成员访问求值规则）",
+              "slug": "02_cpp17_表达式求值顺序强化",
+              "intro": "掌握后缀表达式从左到右、赋值运算符（= 及复合赋值）右操作数先于左操作数求值、移位运算符左到右及 obj.fn(args) 规则，减少未定序副作用。"
+            },
+            {
+              "title": "UTF-8 字符字面量（u8'a'）与十六进制浮点字面量",
+              "slug": "03_utf8_字符字面量与十六进制浮点字面量",
+              "intro": "掌握 char u8c = u8'a' 的 UTF-8 编码语义与取值范围，以及十六进制浮点字面量（0x1.fp3）在精确二进制浮点表示中的作用。"
+            },
+            {
+              "title": "[[nodiscard]]、[[maybe_unused]]、[[fallthrough]] 与属性命名空间/枚举器属性",
+              "slug": "04_nodiscard_maybe_unused_fallthrough_与属性增强",
+              "intro": "掌握 [[nodiscard]] 防止忽略关键返回值、[[maybe_unused]] 抑制未使用变量/参数/类型告警、[[fallthrough]] 显式标注 switch 穿透，以及 using ns: 与枚举器/命名空间属性扩展。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "编译期计算、模板增强、Lambda 扩展与对象/内存模型改进",
+      "slug": "02_compile_time_templates_lambdas_and_object_memory_model",
+      "intro": "深入 C++17 核心语言机制升级：if constexpr、constexpr lambda、折叠表达式、类模板实参推导（CTAD）、auto 非类型模板参数、强制复制消除与过对齐动态内存分配。",
+      "sections": [
+        {
+          "title": "if constexpr 编译期分支与 constexpr 扩展",
+          "slug": "01_if_constexpr_与_constexpr_扩展",
+          "intro": "掌握模板实例化阶段丢弃未选中分支的编译期条件语句，以及 C++17 放宽后的 constexpr 函数与 constexpr lambda 能力。",
+          "subsections": [
+            {
+              "title": "if constexpr 语义、未选中分支丢弃与替代 SFINAE / Tag Dispatch",
+              "slug": "01_if_constexpr_语义与替代_sfinae",
+              "intro": "理解 if constexpr 布尔常量条件、未命中分支不进行实例化（仍需语法合法）、结合 type_traits 简化泛型代码及注意事项。"
+            },
+            {
+              "title": "C++17 constexpr 扩展（局部变量、if/循环、constexpr lambda）与 static_assert 无消息形式",
+              "slug": "02_cpp17_constexpr_扩展与_static_assert",
+              "intro": "掌握 constexpr 函数中使用局部变量、if/switch、for/while 循环与 constexpr lambda，以及 static_assert(cond) 省略提示字符串的用法。"
+            }
+          ]
+        },
+        {
+          "title": "折叠表达式（Fold Expressions）、CTAD 与模板参数增强",
+          "slug": "02_折叠表达式_ctad_与模板参数增强",
+          "intro": "掌握一元/二元折叠表达式简化变参包运算、类模板实参推导（CTAD）与推导指引、auto 非类型模板参数及包展开 using 声明。",
+          "subsections": [
+            {
+              "title": "一元左右折叠与二元左右折叠表达式（(... op pack) / (pack op ...) / (init op ... op pack)）",
+              "slug": "01_一元与二元折叠表达式",
+              "intro": "掌握折叠表达式对算术、逻辑、位运算、逗号与指针成员运算符的展开规则，以及空参数包在 &&、|| 与逗号运算符下的特殊默认值。"
+            },
+            {
+              "title": "类模板实参推导（CTAD）、推导指引（Deduction Guides）与 auto 列表初始化推导",
+              "slug": "02_ctad_推导指引与_auto_花括号推导",
+              "intro": "掌握无需显式写模板实参构造类模板（如 std::pair / std::lock_guard / 自定义容器）、编写自定义 deduction guide，以及 auto x{v}（单元素推导为 T）与 auto x{a,b} 规则变化。"
+            },
+            {
+              "title": "auto 非类型模板参数（template <auto N>）、包展开 using 声明与模板模板参数匹配放宽",
+              "slug": "03_auto_非类型模板参数与模板规则放宽",
+              "intro": "掌握非类型模板参数自动推导类型、using Base<Ts>...::member 成员包展开及模板模板参数匹配规则放宽。"
+            }
+          ]
+        },
+        {
+          "title": "Lambda 增强、强制复制消除与内存/对象生命周期改进",
+          "slug": "03_lambda_增强_强制复制消除与内存分配改进",
+          "intro": "掌握按值捕获 *this、标准保证的复制消除（Guaranteed Copy Elision）、new T[n]{} 值初始化与对齐感知动态内存分配。",
+          "subsections": [
+            {
+              "title": "Lambda 按值捕获 *this（[*this]）与 constexpr Lambda",
+              "slug": "01_lambda_捕获_this_与_constexpr_lambda",
+              "intro": "掌握 [*this] 在异步任务与多线程回调中拷贝当前对象防止悬空引用，以及 constexpr 闭包对象的编译期调用。"
+            },
+            {
+              "title": "强制复制消除（Guaranteed Copy Elision）与 prvalue 纯右值语义重塑",
+              "slug": "02_强制复制消除与_prvalue_语义",
+              "intro": "理解 C++17 将 prvalue 定义为“未物化对象初始化器”，在返回纯右值与按值传参/初始化场景下无需可拷贝/可移动构造函数即可直接构造目标对象。"
+            },
+            {
+              "title": "new T[n]{} 默认值初始化、过对齐动态内存分配（std::align_val_t）与 std::hardware_destructive_interference_size",
+              "slug": "03_new_值初始化_对齐分配与缓存行常量",
+              "intro": "掌握 new T[n]{} 对数组元素执行值初始化、operator new/delete 重载对齐参数（std::align_val_t）及硬件缓存行干扰尺寸查询常量。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "C++17 现代词汇类型、字符串视图、工具库与容器/算法增强",
+      "slug": "03_cpp17_vocabulary_types_string_view_and_stl_enhancements",
+      "intro": "系统掌握 C++17 引入的关键词汇类型（optional / variant / any / byte）、非拥有字符串视图 string_view、调用/元组工具及关联容器/并行算法增强。",
+      "sections": [
+        {
+          "title": "std::optional、std::variant、std::any 与 std::byte",
+          "slug": "01_optional_variant_any_与_byte",
+          "intro": "掌握值语义代数数据类型、类型安全联合、任意类型擦除容器与原始字节类型。",
+          "subsections": [
+            {
+              "title": "std::optional、std::nullopt 与 std::make_optional",
+              "slug": "01_std_optional_与空值安全表达",
+              "intro": "掌握有值/无值语义、value_or 回退、emplace/reset 与相比原始指针/魔数返回值的清晰度与零堆分配优势。"
+            },
+            {
+              "title": "std::variant、std::visit、std::monostate 与 std::get_if / holds_alternative",
+              "slug": "02_std_variant_与_std_visit_访问器",
+              "intro": "掌握类型安全联合体、多态访问器 std::visit（含重载 lambda 惯用法）、首元素默认构造与异常/valueless_by_exception 语义。"
+            },
+            {
+              "title": "std::any、std::any_cast 与 std::byte 原始字节操作",
+              "slug": "03_std_any_与_std_byte_字节语义",
+              "intro": "掌握类型擦除值容器 std::any 的小缓冲优化与类型安全转换，以及 std::byte 与按位运算替代 unsigned char 表达原始字节。"
+            }
+          ]
+        },
+        {
+          "title": "std::string_view、字符串搜索器与 std::invoke / std::apply / as_const",
+          "slug": "02_string_view_搜索器与函数调用工具",
+          "intro": "掌握零拷贝字符串视图生命周期约束、 Boyer-Moore 搜索器及统一可调用对象调用与元组解包工具。",
+          "subsections": [
+            {
+              "title": "std::string_view 切片/前缀后缀/子串与悬空指针生命周期陷阱",
+              "slug": "01_std_string_view_与生命周期边界",
+              "intro": "掌握非拥有字符序列视图、substr/remove_prefix/remove_suffix、无结尾 '\\0' 保证及避免绑定临时字符串导致的悬空引用。"
+            },
+            {
+              "title": "std::invoke、std::apply、std::make_from_tuple、std::as_const 与 Boyer-Moore 搜索器",
+              "slug": "02_invoke_apply_as_const_与搜索器",
+              "intro": "掌握统一调用函数/成员函数/成员指针的 std::invoke、将 tuple 展开传参的 std::apply、构造对象的 std::make_from_tuple、加 const 的 std::as_const 及 booyer_moore_searcher / booyer_moore_horspool_searcher。"
+            }
+          ]
+        },
+        {
+          "title": "关联容器增强（try_emplace / insert_or_assign / 节点提取）与并行 STL",
+          "slug": "03_容器增强与并行_stl_算法",
+          "intro": "掌握避免冗余构造的映射插入接口、无拷贝节点迁移/合并、std::scoped_lock 与并行执行策略算法。",
+          "subsections": [
+            {
+              "title": "try_emplace、insert_or_assign、节点句柄（extract / insert / merge）与 std::scoped_lock",
+              "slug": "01_容器增强与_std_scoped_lock",
+              "intro": "掌握键已存在时不构造值的 try_emplace、存在则赋值/不存在则插入的 insert_or_assign、map/set 节点提取与合并，以及 CTAD 加持的死锁安全多锁封装 std::scoped_lock。"
+            },
+            {
+              "title": "并行 STL（std::execution::seq / par / par_unseq）与 reduce / transform_reduce / scan",
+              "slug": "02_并行_stl_执行策略与规约扫描算法",
+              "intro": "掌握并行算法执行策略、结合律/交换律正确性要求、死锁/数据竞争规避，以及 std::reduce、std::transform_reduce、std::inclusive_scan 与 std::exclusive_scan。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "std::filesystem 文件系统库、数值/数学扩展与工程落地",
+      "slug": "04_cpp17_filesystem_math_and_engineering_practice",
+      "intro": "全面掌握标准文件系统库 std::filesystem（路径、目录遍历、文件状态与操作）、数学/数值扩展（clamp、gcd/lcm、特殊数学函数）及 C++17 工程迁移与实践。",
+      "sections": [
+        {
+          "title": "std::filesystem 路径、目录迭代与文件系统操作",
+          "slug": "01_std_filesystem_路径_目录遍历与文件操作",
+          "intro": "掌握跨平台路径建模、目录条目缓存迭代、文件类型/权限查询与异常/error_code 双模式操作。",
+          "subsections": [
+            {
+              "title": "std::filesystem::path 拼接/分解、原生与通用格式及多字符编码转换",
+              "slug": "01_filesystem_path_操作与跨平台路径语义",
+              "intro": "掌握路径拼接（/ 与 append）、文件名/扩展名/父路径/根路径提取、正反斜杠规范化及宽/窄字符路径转换。"
+            },
+            {
+              "title": "directory_iterator、recursive_directory_iterator 与 directory_entry 缓存",
+              "slug": "02_目录迭代器与_directory_entry_缓存",
+              "intro": "掌握单层与递归目录遍历、跳过目录/跟随符号链接选项及 directory_entry 缓存状态减少重复系统调用。"
+            },
+            {
+              "title": "文件状态/权限查询、创建/复制/重命名/删除、空间查询与 error_code 重载",
+              "slug": "03_文件系统操作接口与错误码处理",
+              "intro": "掌握 file_status/perms、create_directories、copy_file、rename、remove/remove_all、space 及不抛异常的 std::error_code 重载用法。"
+            }
+          ]
+        },
+        {
+          "title": "数值/数学增强与 C++17 工程实践闭环",
+          "slug": "02_数值数学增强与_cpp17_工程实践",
+          "intro": "掌握 clamp/gcd/lcm 与特殊数学函数，并将 C++17 特性应用于现代接口设计、编译提速与存量代码升级。",
+          "subsections": [
+            {
+              "title": "std::clamp、std::gcd、std::lcm 与 C++17 数学特殊函数",
+              "slug": "01_clamp_gcd_lcm_与数学特殊函数",
+              "intro": "掌握数值钳位 std::clamp、最大公约数/最小公倍数 std::gcd / std::lcm 以及贝塞尔、勒让德、黎曼 zeta、椭圆积分等特殊数学函数。"
+            },
+            {
+              "title": "C++17 工程实战：接口重构、编译期优化与存量代码升级",
+              "slug": "02_cpp17_工程实战与迁移策略",
+              "intro": "结合 structured bindings、if constexpr、optional/variant/string_view 与 filesystem 重构真实模块并验证构建与运行时表现。"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

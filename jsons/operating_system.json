@@ -1,0 +1,1230 @@
+{
+  "title": "Operating Systems Engineering: Low-Latency & Systems Architecture (Linux, macOS & Windows)",
+  "language": "zh-CN",
+  "description": "面向低延迟系统工程师与架构师的深度操作系统教材（三级节细化）。全面覆盖历史演进、现状与未来，深入拆解 Linux、macOS（XNU）与 Windows 的内核架构、启动与 Daemon/Service 托管、文件系统与 I/O 栈、IPC 与零拷贝/共享内存、TLB/Cache Line/CPU/NUMA/CPU Binding/DMA 与硬件缓存体系、任务调度与 P99/P99.9 尾延迟治理、安全与 IPC 边界（含 TCC/PPPC、Security Framework、Authorization Services 与特权/非特权 XPC 设计），以及高频命令行与内核/硬件性能剖析工具链。",
+  "navigation": {
+    "mode": "depth_first_all_index_pages",
+    "description": "前一页/后一页按教材目录深度优先顺序排列，包含部分、二级节和三级节的 index.md。"
+  },
+  "parts": [
+    {
+      "title": "操作系统演进、现状与低延迟系统未来",
+      "slug": "01_os_history_present_and_low_latency_future",
+      "intro": "从分时调度与地址空间隔离的起源出发，梳理 Linux、macOS 与 Windows 的演进脉络、当代架构定位，以及异构 SoC、内存安全与确定性低延迟在未来的演变趋势。",
+      "sections": [
+        {
+          "title": "操作系统历史演进与内核设计分叉",
+          "slug": "01_操作系统历史演进与内核设计分叉",
+          "intro": "理解批处理、分时系统、UNIX/POSIX 与微内核/宏内核/混合内核分叉背后的硬件与工程动机。",
+          "subsections": [
+            {
+              "title": "从批处理、分时系统到 UNIX 与 POSIX 契约",
+              "slug": "01_从批处理_分时系统到_unix_与_posix_契约",
+              "intro": "分析多道程序与分时调度如何催生地址空间隔离、时钟中断抢占、文件描述符与标准化系统接口。",
+              "subsections": [
+                {
+                  "title": "批处理、多道程序与分时调度的硬件基础",
+                  "slug": "01_批处理_多道程序与分时调度的硬件基础",
+                  "intro": "理解特权环（Ring）、基址/限长寄存器与可编程定时器如何支撑多任务隔离与抢占。"
+                },
+                {
+                  "title": "UNIX 哲学、文件描述符抽象与 POSIX 标准演进",
+                  "slug": "02_unix_哲学_文件描述符抽象与_posix_标准演进",
+                  "intro": "梳理一切皆文件、进程/管道原语及 POSIX 接口对跨 UNIX/类 UNIX 系统工程的影响。"
+                }
+              ]
+            },
+            {
+              "title": "Linux、BSD/Mach（XNU）与 Windows NT 的诞生与架构分叉",
+              "slug": "02_linux_bsd_mach_xnu_与_windows_nt_的诞生与架构分叉",
+              "intro": "对比三大内核家族在可抢占性、驱动模型、I/O 架构与向后兼容性上的历史取舍与演进轨迹。",
+              "subsections": [
+                {
+                  "title": "Linux 宏内核演进与抢占模型变迁",
+                  "slug": "01_linux_宏内核演进与抢占模型变迁",
+                  "intro": "从早期不可抢占内核到 CONFIG_PREEMPT 与 PREEMPT_RT 实时补丁合入主线的演进逻辑。"
+                },
+                {
+                  "title": "Mach 微内核、BSD 子系统与 XNU 混合内核融合",
+                  "slug": "02_mach_微内核_bsd_子系统与_xnu_混合内核融合",
+                  "intro": "解析 NeXTSTEP / macOS 如何将 Mach IPC/VM/调度与 FreeBSD VFS/网络/POSIX 融合为 XNU。"
+                },
+                {
+                  "title": "Windows NT 内核设计与向后兼容子系统",
+                  "slug": "03_windows_nt_内核设计与向后兼容子系统",
+                  "intro": "理解 NT 执行体/微内核分层、对象管理器、I/O 请求包（IRP）与 Win32 子系统设计。"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "当代三大操作系统现状与低延迟工程师视角",
+          "slug": "02_当代三大操作系统现状与低延迟工程师视角",
+          "intro": "审视 Linux、macOS 与 Windows 在低延迟计算、终端状态控制与企业基础设施中的实际定位与边界。",
+          "subsections": [
+            {
+              "title": "Linux：高频/低延迟计算、内核旁路与云原生现状",
+              "slug": "01_linux_高频_低延迟计算_内核旁路与云原生现状",
+              "intro": "剖析 PREEMPT_RT、io_uring、DPDK/RDMA、eBPF 与 cgroup v2 在微秒级延迟敏感系统中的优势与瓶颈。",
+              "subsections": [
+                {
+                  "title": "内核旁路（DPDK / RDMA / AF_XDP）与异步批处理（io_uring）",
+                  "slug": "01_内核旁路与异步批处理_io_uring",
+                  "intro": "对比绕过内核协议栈与减少系统调用陷入在降低吞吐抖动与尾延迟上的作用。"
+                },
+                {
+                  "title": "容器化、cgroup v2 与多租户噪声邻居问题",
+                  "slug": "02_容器化_cgroup_v2_与多租户噪声邻居问题",
+                  "intro": "识别 CPU 配额限流、内存回收与宿主机/虚拟机调度争用对低延迟服务的干扰。"
+                }
+              ]
+            },
+            {
+              "title": "macOS：XNU 混合内核、Apple Silicon 统一内存与终端管控现状",
+              "slug": "02_macos_xnu_混合内核_apple_silicon_与终端管控现状",
+              "intro": "解析 ARM64 架构、统一内存（UMA）、System Extension 与 Endpoint Security / MDM 终端管理生态。",
+              "subsections": [
+                {
+                  "title": "Apple Silicon 与 XNU 生态现状",
+                  "slug": "01_apple_silicon_与_xnu_生态现状",
+                  "intro": "理解性能核/能效核（P-core/E-core）异构布局、统一内存访问与内核扩展逐步退场后的系统架构。"
+                },
+                {
+                  "title": "macOS 终端状态控制与安全框架现状",
+                  "slug": "02_macos_终端状态控制与安全框架现状",
+                  "intro": "梳理 LaunchDaemon、System Extension、XPC、TCC/PPPC 与 MDM 在现代企业终端管理中的定位。"
+                }
+              ]
+            },
+            {
+              "title": "Windows：NT 内核、IOCP/ETW 与企业终端/混合负载现状",
+              "slug": "03_windows_nt_内核_iocp_etw_与企业终端_混合负载现状",
+              "intro": "理解 NT 对象管理器、I/O 完成端口、ETW 追踪、Session 0 隔离与企业服务/安全架构。",
+              "subsections": [
+                {
+                  "title": "Windows 高并发 I/O 与系统可观测性现状",
+                  "slug": "01_windows_高并发_i_o_与系统可观测性现状",
+                  "intro": "分析 IOCP 线程池调度、ETW 内核/用户态事件流与 Windows 服务端/终端性能特征。"
+                },
+                {
+                  "title": "Windows 会话隔离、服务托管与安全边界现状",
+                  "slug": "02_windows_会话隔离_服务托管与安全边界现状",
+                  "intro": "理解 Session 0 与用户会话隔离、服务控制管理器及权限令牌在终端管理中的约束。"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "操作系统的未来趋势：异构 SoC、内存安全与确定性",
+          "slug": "03_操作系统的未来趋势_异构_soc_内存安全与确定性",
+          "intro": "探讨异构加速演进、内存安全强制化与确定性低延迟对未来 OS 内核与系统软件的深层影响。",
+          "subsections": [
+            {
+              "title": "异构 SoC、统一内存与近数据计算",
+              "slug": "01_异构_soc_统一内存与近数据计算",
+              "intro": "分析 CPU、GPU、NPU、ISP/DMA 与专用加速引擎共享内存时的缓存一致性、页表共享与调度协同。",
+              "subsections": [
+                {
+                  "title": "异构加速引擎的缓存一致性与页表共享",
+                  "slug": "01_异构加速引擎的缓存一致性与页表共享",
+                  "intro": "探讨 IOMMU/SMMU、统一虚拟地址空间与硬件一致性互联在减少数据搬运中的作用。"
+                },
+                {
+                  "title": "异构任务队列、延迟预算与加速器协同调度",
+                  "slug": "02_异构任务队列_延迟预算与加速器协同调度",
+                  "intro": "分析多计算单元协同下的提交开销、完成通知机制与端到端延迟边界。"
+                }
+              ]
+            },
+            {
+              "title": "内存安全语言、硬件能力隔离与零信任终端",
+              "slug": "02_内存安全语言_硬件能力隔离与零信任终端",
+              "intro": "探讨 Rust 进内核、指针认证/内存标记与严格进程/IPC 边界对降低漏洞与运行期风险的意义。",
+              "subsections": [
+                {
+                  "title": "Rust 进内核与硬件级内存安全扩展（PAC / MTE）",
+                  "slug": "01_rust_进内核与硬件级内存安全扩展_pac_mte",
+                  "intro": "理解编译期借用检查与硬件指针签名/内存标签如何从根源缓解越界与释放后使用（UAF）。"
+                },
+                {
+                  "title": "零信任终端、最小特权拆分与确定性运行时",
+                  "slug": "02_零信任终端_最小特权拆分与确定性运行时",
+                  "intro": "展望系统组件细粒度隔离、强身份认证与低抖动执行环境的长期演进方向。"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "内核架构、启动链路、进程与 Daemon/Service 托管",
+      "slug": "02_kernel_boot_processes_and_daemons",
+      "intro": "深入内核特权级与陷入开销、系统启动阶段与服务管理器（systemd / launchd / SCM）机理、进程/线程/进程组/会话生命周期，以及守护进程在高可用与低延迟下的工程约束。",
+      "sections": [
+        {
+          "title": "内核架构、陷入开销与系统调用路径",
+          "slug": "01_内核架构_陷入开销与系统调用路径",
+          "intro": "从指令级与微架构角度拆解用户态切入内核态的代价、安全缓解与旁路路径。",
+          "subsections": [
+            {
+              "title": "宏内核（Linux）、混合内核（XNU / Windows NT）与微内核对比",
+              "slug": "01_宏内核_linux_混合内核_xnu_windows_nt_与微内核对比",
+              "intro": "对比内核态函数调用与跨地址空间 IPC 往返延迟、子系统耦合度、驱动隔离性与故障域大小。",
+              "subsections": [
+                {
+                  "title": "跨地址空间 IPC 往返代价与子系统耦合度",
+                  "slug": "01_跨地址空间_ipc_往返代价与子系统耦合度",
+                  "intro": "分析微内核消息传递与宏内核直接调用在延迟、模块化及安全性之间的权衡。"
+                },
+                {
+                  "title": "驱动崩溃域隔离：内核态驱动 vs 用户态扩展",
+                  "slug": "02_驱动崩溃域隔离_内核态驱动_vs_用户态扩展",
+                  "intro": "对比内核态崩溃风险与用户态驱动/系统扩展（如 DriverKit / System Extension）的隔离收益与代价。"
+                }
+              ]
+            },
+            {
+              "title": "中断、异常、陷入与上下文保存/恢复开销",
+              "slug": "02_中断_异常_陷入与上下文保存_恢复开销",
+              "intro": "剖析寄存器保存/恢复、内核栈切换、页表隔离（KPTI）与预测执行缓解带来的纳秒级抖动。",
+              "subsections": [
+                {
+                  "title": "syscall / svc / int 陷入路径与寄存器/栈切换",
+                  "slug": "01_syscall_svc_int_陷入路径与寄存器_栈切换",
+                  "intro": "追踪用户态到内核态的特权级跃迁、内核栈切换及返回路径上的微架构开销。"
+                },
+                {
+                  "title": "KPTI 页表切换与 Spectre/Meltdown 缓解对延迟的影响",
+                  "slug": "02_kpti_页表切换与_spectre_meltdown_缓解对延迟的影响",
+                  "intro": "理解内核页表隔离、分支预测刷新与 TLB 刷新在高频系统调用场景下的性能影响。"
+                }
+              ]
+            },
+            {
+              "title": "系统调用批处理、io_uring 与内核态/用户态边界跨越优化",
+              "slug": "03_系统调用批处理_io_uring_与边界跨越优化",
+              "intro": "理解减少陷入次数的工程方法：共享环形缓冲、内核轮询线程与用户态快速路径。",
+              "subsections": [
+                {
+                  "title": "vDSO 快速路径与系统调用批量化设计",
+                  "slug": "01_vdso_快速路径与系统调用批量化设计",
+                  "intro": "剖析无需陷入内核即可读取时间/状态信息的 vDSO 机制与批量提交减少陷入次数的原理。"
+                },
+                {
+                  "title": "io_uring 共享环队列与 SQPOLL 轮询模式",
+                  "slug": "02_io_uring_共享环队列与_sqpoll_轮询模式",
+                  "intro": "理解提交/完成队列无锁交互、注册缓冲区/文件描述符与内核轮询线程对延迟的优化。"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "系统启动流程（Boot）与早期初始化",
+          "slug": "02_系统启动流程_boot_与早期初始化",
+          "intro": "贯通固件、Bootloader、内核初始化与用户态一号进程拉起，识别启动阶段配置与安全校验点。",
+          "subsections": [
+            {
+              "title": "固件引导（UEFI / iBoot）、Bootloader 与内核早期初始化",
+              "slug": "01_固件引导_uefi_iboot_bootloader_与早期初始化",
+              "intro": "梳理安全启动信任链、内存早期引导分配器、设备树/ACPI 拓扑发现与根文件系统挂载。",
+              "subsections": [
+                {
+                  "title": "安全启动信任链（Secure Boot / Verified Boot）",
+                  "slug": "01_安全启动信任链_secure_boot_verified_boot",
+                  "intro": "理解从硬件根信任到固件、Bootloader 与内核镜像逐级签名校验的完整链条。"
+                },
+                {
+                  "title": "ACPI / 设备树解析、早期内存分配与根挂载",
+                  "slug": "02_acpi_设备树解析_早期内存分配与根挂载",
+                  "intro": "了解内核启动初期如何发现 CPU/NUMA/设备拓扑、初始化页表与挂载初始根文件系统。"
+                }
+              ]
+            },
+            {
+              "title": "Linux 启动链：固件 -> Bootloader -> initramfs -> systemd（PID 1）",
+              "slug": "02_linux_启动链_initramfs_与_systemd_初始化",
+              "intro": "掌握早期用户态钩子、root 切换、Unit 依赖解析、Socket/D-Bus 激活与并行服务拉起。",
+              "subsections": [
+                {
+                  "title": "initramfs 阶段、udev 设备冷插拔与 switch_root",
+                  "slug": "01_initramfs_阶段_udev_设备冷插拔与_switch_root",
+                  "intro": "梳理初始内存盘加载存储/文件系统驱动、创建设备节点与切换至真实根文件系统的过程。"
+                },
+                {
+                  "title": "systemd PID 1 初始化、Target 依赖与并行启动",
+                  "slug": "02_systemd_pid_1_初始化_target_依赖与并行启动",
+                  "intro": "掌握 sysinit.target / basic.target / multi-user.target 演进与依赖有向无环图调度。"
+                }
+              ]
+            },
+            {
+              "title": "macOS 启动链：Secure ROM / iBoot -> XNU -> launchd（PID 1）",
+              "slug": "03_macos_启动链_xnu_与_launchd_初始化",
+              "intro": "剖析苹果芯片签名验证链、APFS 根卷/快照挂载与 launchd 作为 PID 1 的服务初始化。",
+              "subsections": [
+                {
+                  "title": "Boot ROM、iBoot 阶段与密封 APFS 根卷/系统快照",
+                  "slug": "01_boot_rom_iboot_阶段与密封_apfs_根卷_系统快照",
+                  "intro": "理解 SSV（Signed System Volume）完整性保护、内核缓存加载与启动安全策略。"
+                },
+                {
+                  "title": "XNU 内核启动与 launchd 域初始化",
+                  "slug": "02_xnu_内核启动与_launchd_域初始化",
+                  "intro": "梳理 BSD/Mach 初始化完成后拉起 launchd（PID 1）及系统域、用户会话域建立的流程。"
+                }
+              ]
+            },
+            {
+              "title": "Windows 启动链：Bootmgr / winload -> ntoskrnl -> smss / csrss / wininit / services.exe",
+              "slug": "04_windows_启动链_ntoskrnl_与会话初始化",
+              "intro": "理解 BCD 引导配置、内核与 HAL 加载、会话管理器初始化以及 Session 0 与用户会话分离。",
+              "subsections": [
+                {
+                  "title": "UEFI / Bootmgr / winload 与 BCD、内核/驱动加载",
+                  "slug": "01_uefi_bootmgr_winload_与_bcd_内核_驱动加载",
+                  "intro": "掌握引导配置数据、系统注册表 hive 加载与引导启动驱动（Boot-start driver）初始化。"
+                },
+                {
+                  "title": "smss、csrss、wininit 与 Session 0 / Session 1 建立",
+                  "slug": "02_smss_csrss_wininit_与_session_0_session_1_建立",
+                  "intro": "理解会话管理器如何创建 Session 0 承载服务与 Session 1+ 承载交互式登录会话。"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "进程、线程生命周期与 Daemon / Service 托管",
+          "slug": "03_进程_线程生命周期与_daemon_service_托管",
+          "intro": "深入进程/线程控制块、地址空间克隆与后台守护进程管理机制，防范僵尸进程、孤儿进程与启动/重启抖动。",
+          "subsections": [
+            {
+              "title": "PCB/TCB、fork/vfork/posix_spawn/CreateProcess、线程组与僵尸/孤儿回收",
+              "slug": "01_pcb_tcb_进程创建原语_线程组与僵尸孤儿回收",
+              "intro": "对比 fork 页表复制开销与 posix_spawn 轻量创建、进程组/会话控制终端以及 waitpid/信号回收语义。",
+              "subsections": [
+                {
+                  "title": "fork/COW、vfork、posix_spawn 与 CreateProcess 开销对比",
+                  "slug": "01_fork_cow_vfork_posix_spawn_与_createprocess_开销对比",
+                  "intro": "剖析大内存进程 fork 页表复制与 TLB 刷新代价，以及 posix_spawn/CreateProcess 的工程优势。"
+                },
+                {
+                  "title": "进程组、会话、控制终端与僵尸/孤儿进程回收",
+                  "slug": "02_进程组_会话_控制终端与僵尸_孤儿进程回收",
+                  "intro": "掌握 SIGCHLD 处理、waitpid 非阻塞回收、subreaper 与 PID 1 托管孤儿进程的机制。"
+                }
+              ]
+            },
+            {
+              "title": "Linux systemd Unit（.service/.socket/.slice）、cgroup v2 追踪与资源限额",
+              "slug": "02_linux_systemd_unit_cgroup_v2_与资源限额",
+              "intro": "掌握启动类型、Socket 激活、cgroup 进程树精确追踪及 CPU/内存/PIDs 限额对延迟的影响。",
+              "subsections": [
+                {
+                  "title": ".service 启动类型、sd_notify 就绪通知与 Socket Activation",
+                  "slug": "01_service_启动类型_sd_notify_就绪通知与_socket_activation",
+                  "intro": "避免将未就绪服务视为已启动，使用 Socket 激活实现零丢连按需拉起与平滑重启。"
+                },
+                {
+                  "title": "cgroup v2 进程组追踪、cpu.max 限流与内存/PIDs 保护",
+                  "slug": "02_cgroup_v2_进程组追踪_cpu_max_限流与内存_pids_保护",
+                  "intro": "理解 cgroup 精确收割子进程的原理，以及 CPU 周期性限流引发延迟尖峰的排查与规避。"
+                }
+              ]
+            },
+            {
+              "title": "macOS LaunchDaemon、LaunchAgent、领域（Domain）与按需激活（On-Demand）",
+              "slug": "03_macos_launchdaemon_launchagent_领域与按需激活",
+              "intro": "深入系统域/GUI 域/用户域、MachServices/Sockets/Paths 触发器、plist 权限与精简环境变量陷阱。",
+              "subsections": [
+                {
+                  "title": "LaunchDaemon（系统域）与 LaunchAgent（用户/GUI 域）边界",
+                  "slug": "01_launchdaemon_系统域_与_launchagent_用户_gui_域_边界",
+                  "intro": "区分无登录后台特权服务与用户会话级代理，正确处理多用户切换与会话上下文访问。"
+                },
+                {
+                  "title": "On-Demand 触发器、KeepAlive、plist 权限与环境变量陷阱",
+                  "slug": "02_on_demand_触发器_keepalive_plist_权限与环境变量陷阱",
+                  "intro": "掌握 MachServices/Sockets 按需拉起、root:wheel 0644 权限要求与非交互环境变量显式配置。"
+                }
+              ]
+            },
+            {
+              "title": "Windows Service、SCM 状态机、Session 0 隔离与服务恢复策略",
+              "slug": "04_windows_service_scm_状态机_session0_隔离与服务恢复策略",
+              "intro": "掌握服务控制处理器、启动超时/依赖顺序、Session 0 隔离限制及失败重启策略。",
+              "subsections": [
+                {
+                  "title": "SCM 服务生命周期状态机与 ServiceMain / HandlerEx",
+                  "slug": "01_scm_服务生命周期状态机与_servicemain_handlerex",
+                  "intro": "实现启动进度上报、暂停/继续、关机/停止通知响应与服务间依赖排序。"
+                },
+                {
+                  "title": "Session 0 隔离限制与服务崩溃自动恢复配置",
+                  "slug": "02_session_0_隔离限制与服务崩溃自动恢复配置",
+                  "intro": "理解 Session 0 无法直接交互桌面 UI 的架构约束，配置失败延迟重启与恢复操作。"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "虚拟内存、TLB、Cache Line、CPU、NUMA、DMA 与硬件内存体系",
+      "slug": "03_virtual_memory_tlb_cache_line_cpu_numa_and_dma",
+      "intro": "从低延迟系统工程师视角系统拆解地址翻译与 TLB、多级 CPU Cache 与 Cache Line 伪共享、CPU 架构与拓扑、NUMA/UMA 内存层次、DMA / Direct Access Memory（直接内存访问与零拷贝）及各平台内存回收与分配策略。",
+      "sections": [
+        {
+          "title": "虚拟地址空间、页表、TLB 与缺页异常（Page Fault）",
+          "slug": "01_虚拟地址空间_页表_tlb_与缺页异常",
+          "intro": "消除热路径中的隐式缺页与 TLB 刷新抖动，掌握地址翻译缓存与内存映射/锁定原语。",
+          "subsections": [
+            {
+              "title": "多级页表遍历（Page Walk）、TLB 命中/失效、PCID/ASID 与 TLB Shootdown 代价",
+              "slug": "01_多级页表_tlb_pcid_asid_与_tlb_shootdown_代价",
+              "intro": "剖析多级页表遍历开销、TLB 大小与关联度限制、PCID/ASID 隔离以及跨核 TLB Shootdown 抖动。",
+              "subsections": [
+                {
+                  "title": "4级/5级页表遍历、L1/L2 TLB 与 ASID / PCID 机制",
+                  "slug": "01_4级_5级页表遍历与_tlb_asid_pcid_机制",
+                  "intro": "理解地址空间标识符如何减少上下文切换时的全量 TLB 刷写，以及页表 walk 对访存延迟的放大。"
+                },
+                {
+                  "title": "TLB Shootdown 跨核核间中断（IPI）与低延迟规避",
+                  "slug": "02_tlb_shootdown_跨核核间中断_ipi_与低延迟规避",
+                  "intro": "分析多线程频繁 mmap/munmap/mprotect 引发的核间中断抖动，通过预分配与池化规避。"
+                }
+              ]
+            },
+            {
+              "title": "Minor/Major Page Fault、写时复制（COW）与热路径防缺页",
+              "slug": "02_page_fault_cow_与热路径防缺页策略",
+              "intro": "理解按需调页与 COW 在低延迟路径中的延迟毛刺成因，掌握内存预 fault、锁定物理页与禁用透明大页毛刺的方法。",
+              "subsections": [
+                {
+                  "title": "缺页类型分类、写时复制（COW）与透明大页（THP）抖动",
+                  "slug": "01_缺页类型分类_写时复制_cow_与透明大页_thp_抖动",
+                  "intro": "剖析磁盘 I/O 导致的 Major Fault、零页/COW 导致的 Minor Fault 以及 THP 合并/分裂带来的延迟尖峰。"
+                },
+                {
+                  "title": "mlock / mlockall / MAP_POPULATE 与 VirtualLock 实践",
+                  "slug": "02_mlock_mlockall_map_populate_与_virtuallock_实践",
+                  "intro": "在启动阶段完成物理页 fault 与锁定，防止运行期热路径触发缺页或被换出。"
+                }
+              ]
+            },
+            {
+              "title": "mmap / munmap / madvise 与 Windows VirtualAlloc / VirtualProtect 对比",
+              "slug": "03_mmap_madvise_与_virtualalloc_语义对比",
+              "intro": "对比匿名映射、文件映射、保护属性修改与内存建议标志在三平台下的实现与副作用。",
+              "subsections": [
+                {
+                  "title": "POSIX mmap / munmap / madvise（MADV_DONTNEED / MADV_HUGEPAGE）",
+                  "slug": "01_posix_mmap_munmap_madvise_语义与副作用",
+                  "intro": "掌握不同 madvise 建议在 Linux 与 macOS 上的实际语义差异与内存回收效果。"
+                },
+                {
+                  "title": "Windows VirtualAlloc / VirtualFree / VirtualProtect 内存管理",
+                  "slug": "02_windows_virtualalloc_virtualfree_virtualprotect_管理",
+                  "intro": "区分 MEM_RESERVE 与 MEM_COMMIT 阶段，理解页面保护修改对工作集与锁的影响。"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "CPU 架构、Cache Line 层次与缓存一致性协议",
+          "slug": "02_cpu_架构_cache_line_层次与缓存一致性协议",
+          "intro": "将数据结构、线程布局与并发原语对齐到 CPU 核拓扑与 Cache Line，消除伪共享、缓存行乒乓与流水线/访存抖动。",
+          "subsections": [
+            {
+              "title": "CPU 核拓扑、超线程（SMT）、大小核异构与硬件预取器",
+              "slug": "01_cpu_核拓扑_smt_大小核异构与硬件预取器",
+              "intro": "理解物理核/逻辑核资源共享、P-core/E-core 异构调度差异以及硬件预取器对访存模式的敏感性。",
+              "subsections": [
+                {
+                  "title": "物理核、SMT 超线程共享资源与 P-core / E-core 异构特性",
+                  "slug": "01_物理核_smt_共享资源与大小核异构特性",
+                  "intro": "剖析超线程共享 L1/执行单元带来的争用与延迟干扰，以及异构核心性能与能效特征。"
+                },
+                {
+                  "title": "顺序/步长访存、指针追逐与硬件预取器（Hardware Prefetcher）",
+                  "slug": "02_顺序_步长访存与硬件预取器行为",
+                  "intro": "对比连续数组与链表/树指针追逐的预取命中率，掌握数据结构布局对访存延迟的影响。"
+                }
+              ]
+            },
+            {
+              "title": "L1i/L1d/L2/L3 Cache Line 原理、MESI/MOESI 一致性协议与伪共享（False Sharing）",
+              "slug": "02_cache_line_mesi_moesi_一致性与伪共享",
+              "intro": "深入 Cache Line 大小、组相联映射、缓存一致性状态机与伪共享根因及隔离手段。",
+              "subsections": [
+                {
+                  "title": "Cache Line 粒度、组相联映射、MESI/MOESI 状态机与缓冲队列",
+                  "slug": "01_cache_line_粒度_组相联与_mesi_moesi_状态机",
+                  "intro": "理解缓存行失效广播、Store Buffer 与 Invalidate Queue 对多核可见性与延迟的影响。"
+                },
+                {
+                  "title": "伪共享（False Sharing）成因、定位与 Cache Line 对齐隔离",
+                  "slug": "02_伪共享_false_sharing_定位与对齐隔离",
+                  "intro": "识别跨核高频写入不同变量却落在同一 Cache Line 的性能退化，使用 alignas 隔离热变量。"
+                }
+              ]
+            },
+            {
+              "title": "指令缓存（I-Cache）、分支预测器与热点路径代码布局优化",
+              "slug": "03_指令缓存_分支预测与热点路径代码布局",
+              "intro": "减少热循环分支误预测与 I-Cache Miss，保持关键延迟路径紧凑、可预测、无堆分配。",
+              "subsections": [
+                {
+                  "title": "分支预测误判惩罚与冷热路径分离",
+                  "slug": "01_分支预测误判惩罚与冷热路径分离",
+                  "intro": "将错误处理与低频分支移出热循环，提升分支预测准确率与流水线吞吐。"
+                },
+                {
+                  "title": "指令缓存足迹控制、代码膨胀与热路径零分配/零异常",
+                  "slug": "02_指令缓存足迹控制与热路径零分配设计",
+                  "intro": "避免过度模板膨胀与超大函数内联撑爆 I-Cache，保持热路径确定性与低抖动。"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "NUMA 架构、Direct Access Memory（DMA / 零拷贝）与物理内存子系统",
+          "slug": "03_numa_direct_access_memory_dma_与物理内存子系统",
+          "intro": "掌握多 Socket NUMA 拓扑、Direct Access Memory（DMA / IOMMU / GPUDirect / 共享内存零拷贝）以及内核/用户态内存分配与回收机制。",
+          "subsections": [
+            {
+              "title": "NUMA 节点拓扑、跨节点访存延迟、内存策略与 macOS UMA 对比",
+              "slug": "01_numa_拓扑_内存策略与_uma_对比",
+              "intro": "剖析非统一内存访问节点间互连延迟、本地/交错分配策略与 Apple Silicon 统一内存的差异。",
+              "subsections": [
+                {
+                  "title": "NUMA 节点、本地 vs 远程内存访问延迟与 numactl / mbind / set_mempolicy",
+                  "slug": "01_numa_节点_远程访存延迟与内存策略接口",
+                  "intro": "避免跨 NUMA 节点频繁读写导致的延迟上升，掌握线程与内存本地化配置方法。"
+                },
+                {
+                  "title": "Linux NUMA、macOS 统一内存（UMA）与 Windows 内存节点/工作集对比",
+                  "slug": "02_三平台_numa_uma_与内存节点特性对比",
+                  "intro": "对比多路服务器 NUMA、苹果统一内存架构与 Windows 内存节点及工作集调优机制。"
+                }
+              ]
+            },
+            {
+              "title": "Direct Access Memory：DMA、IOMMU/SMMU、缓存一致性与零拷贝通路",
+              "slug": "02_direct_access_memory_dma_iommu_与零拷贝通路",
+              "intro": "深入硬件直接内存访问（DMA）与总线/内存映射机制，消除 CPU 参与数据搬运的开销。",
+              "subsections": [
+                {
+                  "title": "DMA 控制器、Scatter-Gather、总线地址与 IOMMU / SMMU 地址转换",
+                  "slug": "01_dma_原理_scatter_gather_与_iommu_smmu",
+                  "intro": "理解外设直接读写物理内存的机制、IOMMU 隔离与地址重映射及 DMA 缓冲一致性同步。"
+                },
+                {
+                  "title": "零拷贝 I/O、用户态映射与跨组件直接内存访问模式",
+                  "slug": "02_零拷贝_i_o_用户态映射与直接内存访问模式",
+                  "intro": "对比传统多次拷贝路径与固定缓冲区 DMA / 共享内存零拷贝在吞吐与延迟上的收益与约束。"
+                }
+              ]
+            },
+            {
+              "title": "内核/用户态内存分配器、大页（HugeTLB）与回收/淘汰机制",
+              "slug": "03_内存分配器_大页与回收淘汰机制",
+              "intro": "掌握伙伴系统、Slab/SLUB、用户态分配器、大页 TLB 覆盖率提升以及内存回收/OOM/Jetsam 策略。",
+              "subsections": [
+                {
+                  "title": "伙伴系统、Slab/SLUB、大页（HugeTLB / 2MB / 1GB）与用户态分配器",
+                  "slug": "01_分配器层次_大页配置与预分配策略",
+                  "intro": "通过大页减少页表层级与 TLB Miss，对比分配器锁竞争与低延迟对象池/Arena 预分配。"
+                },
+                {
+                  "title": "后台回收、Swap、内存压缩与 OOM Killer / Jetsam 淘汰",
+                  "slug": "02_内存回收_swap_压缩与_oom_jetsam_机制",
+                  "intro": "理解内存压力下的后台回收、压缩开销与进程淘汰优先级，防止关键服务被误杀或卡顿。"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "进程间通信（IPC）、共享内存与高速数据通道",
+      "slug": "04_ipc_shared_memory_and_data_channels",
+      "intro": "系统讲解 Linux、macOS 与 Windows 三大平台的 IPC 机制、跨进程同步原语、零拷贝共享内存与无锁环形缓冲区，以及“控制面 + 数据面”分离的低延迟架构设计。",
+      "sections": [
+        {
+          "title": "IPC 基础模型与跨进程无锁同步原语",
+          "slug": "01_ipc_基础模型与跨进程无锁同步原语",
+          "intro": "从地址空间隔离与缓存一致性出发，掌握共享内存原子同步、无锁环形队列与用户态等待唤醒原语。",
+          "subsections": [
+            {
+              "title": "IPC 通信范式对比：消息传递、字节流、共享内存、RPC 与事件通知",
+              "slug": "01_ipc_通信范式对比与适用边界",
+              "intro": "分析不同 IPC 机制的拷贝次数、序列化成本、消息边界保证与延迟特性。"
+            },
+            {
+              "title": "共享内存中的 std::atomic、内存序与无锁环形缓冲区（SPSC / MPMC）",
+              "slug": "02_共享内存原子同步与无锁环形缓冲区",
+              "intro": "在跨进程共享映射内存上构建无锁队列，处理 acquire-release 内存序、环索引回绕与 Cache Line 隔离。"
+            },
+            {
+              "title": "跨进程阻塞等待与唤醒原语：futex / ulock / WaitOnAddress",
+              "slug": "03_跨进程阻塞等待与唤醒原语对比",
+              "intro": "剖析用户态快速路径检查 + 内核态挂起/唤醒原语在低延迟与低 CPU 占用之间的折中。"
+            }
+          ]
+        },
+        {
+          "title": "Linux、macOS 与 Windows 核心 IPC 机制详解",
+          "slug": "02_linux_macos_与_windows_核心_ipc_机制详解",
+          "intro": "逐一拆解三大操作系统的主力 IPC 通道、描述符/句柄传递能力及平台特有行为。",
+          "subsections": [
+            {
+              "title": "Linux IPC：UNIX Domain Socket（SCM_RIGHTS）、memfd + File Sealing、eventfd 与管道",
+              "slug": "01_linux_ipc_af_unix_memfd_eventfd_与管道",
+              "intro": "掌握流/数据报/顺序包本地套接字、匿名内存文件封印防篡改、eventfd 轻量事件通知与 epoll 集成。"
+            },
+            {
+              "title": "macOS IPC：Mach Port / mach_msg、XPC（libxpc / NSXPCConnection）、xpc_shmem 与 POSIX IPC",
+              "slug": "02_macos_ipc_mach_port_xpc_与_posix_差异",
+              "intro": "深入 Mach 端口权限与 OOL 内存、XPC 按需拉起与序列化机制、xpc_shmem 共享内存及 macOS POSIX 限制。"
+            },
+            {
+              "title": "Windows IPC：Named Pipes（Overlapped / IOCP）、File Mapping、WaitOnAddress、AF_UNIX 与 ALPC/RPC",
+              "slug": "03_windows_ipc_named_pipes_file_mapping_alpc_与_rpc",
+              "intro": "掌握消息模式命名管道与 IOCP 异步 I/O、页文件映射共享内存、Windows 10+ AF_UNIX 及 ALPC/RPC 定位。"
+            }
+          ]
+        },
+        {
+          "title": "低延迟 IPC 架构：控制面 + 数据面分离与崩溃恢复",
+          "slug": "03_低延迟_ipc_架构_控制面_数据面与崩溃恢复",
+          "intro": "将安全/生命周期管理与高频零拷贝数据流解耦，构建高可用、抗崩溃的跨进程数据通路。",
+          "subsections": [
+            {
+              "title": "控制面（XPC / AF_UNIX / Named Pipe）握手与数据面（共享内存）建链",
+              "slug": "01_控制面握手与共享内存数据面建链",
+              "intro": "通过控制面完成身份校验、版本协商与共享内存/fd 分发，数据面通过无锁环队列实现微秒/亚微秒级传输。"
+            },
+            {
+              "title": "对端异常退出、僵尸状态检测、重连与共享内存不变量恢复",
+              "slug": "02_对端崩溃检测_重连与共享内存状态恢复",
+              "intro": "设计心跳/连接作废感知、序列号与校验和防护，确保单一进程崩溃不会导致共享通道死锁或脏读。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "文件系统、存储 I/O 栈与持久化性能",
+      "slug": "05_file_systems_storage_io_and_persistence",
+      "intro": "从 VFS 与块设备层剖析文件系统结构、页缓存与脏页回写、同步/异步/直接 I/O（Direct I/O）与 NVMe/持久化路径，理解存储 I/O 对系统延迟与稳定性的影响。",
+      "sections": [
+        {
+          "title": "虚拟文件系统（VFS）、元数据与块设备 I/O 栈",
+          "slug": "01_vfs_元数据与块设备_i_o_栈",
+          "intro": "理解文件抽象、目录/inode 缓存（dentry/inode cache）、块层调度与存储协议栈。",
+          "subsections": [
+            {
+              "title": "文件描述符、打开文件表、Inode / Dentry 缓存与路径解析开销",
+              "slug": "01_fd_inode_dentry_缓存与路径解析开销",
+              "intro": "分析频繁 open/stat/lookup 的内核路径开销，以及目录项/索引节点缓存命中率对性能的影响。"
+            },
+            {
+              "title": "通用块层、I/O 调度器、NVMe 多队列（blk-mq）与 DMA 传输",
+              "slug": "02_块层_blk_mq_nvme_与_dma_传输路径",
+              "intro": "理解请求合并/分发、硬件队列与 CPU 核映射以及存储控制器通过 DMA 完成数据搬运的流程。"
+            }
+          ]
+        },
+        {
+          "title": "页缓存（Page Cache）、脏页回写与 Direct I/O",
+          "slug": "02_页缓存_脏页回写与_direct_i_o",
+          "intro": "掌握读缓存、后台刷盘抖动治理以及绕过页缓存的 Direct I/O 适用场景与对齐要求。",
+          "subsections": [
+            {
+              "title": "Page Cache 读命中、预读（Read-ahead）与脏页（Dirty Page）后台回写抖动",
+              "slug": "01_page_cache_预读与脏页回写延迟毛刺",
+              "intro": "剖析突发大量刷盘或 dirty ratio 触发写限流/回写导致的应用延迟尖峰及调优思路。"
+            },
+            {
+              "title": "Buffered I/O vs Direct I/O（O_DIRECT / FILE_FLAG_NO_BUFFERING）与对齐约束",
+              "slug": "02_buffered_io_vs_direct_io_与对齐约束",
+              "intro": "理解绕过页缓存避免双重缓存与额外拷贝的原理，以及块大小/内存地址对齐限制。"
+            }
+          ]
+        },
+        {
+          "title": "主流文件系统特性与持久化语义（fsync / F_FULLFSYNC / Flush）",
+          "slug": "03_主流文件系统特性与持久化语义",
+          "intro": "对比 ext4/XFS、APFS、NTFS/ReFS 的结构与日志/写时复制特性，掌握跨平台落盘持久化语义差异。",
+          "subsections": [
+            {
+              "title": "Linux 文件系统（ext4 / XFS）与 fsync / fdatasync 持久化语义",
+              "slug": "01_linux_文件系统与_fsync_fdatasync_语义",
+              "intro": "理解日志模式、元数据/数据刷盘开销以及有序写路径对持久化延迟的影响。"
+            },
+            {
+              "title": "macOS APFS（克隆/快照/空间共享）与 F_FULLFSYNC 落盘保证",
+              "slug": "02_macos_apfs_特性与_f_fullfsync_落盘保证",
+              "intro": "掌握 APFS 写时复制克隆/快照机制，以及 macOS 上 fsync 与 F_FULLFSYNC 在驱动/设备缓存刷盘上的差异。"
+            },
+            {
+              "title": "Windows NTFS / ReFS 与 FlushFileBuffers / WriteFile 异步刷盘",
+              "slug": "03_windows_ntfs_refs_与持久化刷盘机制",
+              "intro": "理解 NTFS 日志/元文件、文件写入缓存与显式刷盘操作对吞吐和延迟的影响。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "任务调度、CPU Binding 与尾延迟（P99 / P99.9）治理",
+      "slug": "06_task_scheduling_cpu_binding_and_tail_latency",
+      "intro": "深入多核调度器算法、CPU Binding（绑核与核隔离）、上下文切换与中断/软中断干扰、同步/无锁原语与优先级反转，构建面向 P99/P99.9/P99.99 尾延迟的系统级调度工程体系。",
+      "sections": [
+        {
+          "title": "多核任务调度器核心机制与切换开销",
+          "slug": "01_多核任务调度器核心机制与切换开销",
+          "intro": "理解线程如何被选中运行、为何发生抢占或迁移，以及调度事件对延迟分布的影响。",
+          "subsections": [
+            {
+              "title": "抢占式调度、时间片、调度算法与实时调度类",
+              "slug": "01_抢占式调度_时间片_调度算法与实时调度类",
+              "intro": "对比吞吐优先、交互响应与硬/软实时确定性在调度队列设计与抢占点上的差异。",
+              "subsections": [
+                {
+                  "title": "公平调度与时间片/虚拟运行时间/虚拟截止时间机制",
+                  "slug": "01_公平调度与时间片_虚拟运行时间_虚拟截止时间机制",
+                  "intro": "理解调度器如何平衡多任务 CPU 份额与唤醒延迟、抢占粒度。"
+                },
+                {
+                  "title": "实时调度类（SCHED_FIFO / SCHED_RR / SCHED_DEADLINE）与实时节流",
+                  "slug": "02_实时调度类与实时节流机制",
+                  "intro": "掌握高优先级实时线程抢占普通任务的机制，以及防止实时线程饿死内核的节流保护。"
+                }
+              ]
+            },
+            {
+              "title": "多核负载均衡、唤醒抢占与上下文切换抖动",
+              "slug": "02_多核负载均衡_唤醒抢占与上下文切换抖动",
+              "intro": "剖析线程跨核迁移丢失缓存、同核唤醒抢占延迟以及自愿/非自愿切换的测量与抑制。",
+              "subsections": [
+                {
+                  "title": "Runqueue 负载均衡、跨核迁移与 L1/L2 Cache 热度丢失",
+                  "slug": "01_runqueue_负载均衡_跨核迁移与缓存热度丢失",
+                  "intro": "理解调度器迁移线程的触发条件及跨核迁移后重建缓存热度带来的延迟回升。"
+                },
+                {
+                  "title": "唤醒抢占、上下文切换成本与调度延迟归因",
+                  "slug": "02_唤醒抢占_上下文切换成本与调度延迟归因",
+                  "intro": "分析减少无关线程抢占与降低自愿/非自愿上下文切换频次的工程方法。"
+                }
+              ]
+            },
+            {
+              "title": "硬件中断、软中断/工作队列、定时器与时钟节拍降抖动",
+              "slug": "03_中断_定时器与_tickless_nohz_full_降抖动",
+              "intro": "理解中断线程化、IRQ 绑核隔离与减少周期性时钟中断对专用低延迟核心的打扰。",
+              "subsections": [
+                {
+                  "title": "硬件 IRQ 亲和性、中断线程化与软中断/工作队列干扰",
+                  "slug": "01_硬件_irq_亲和性_中断线程化与软中断干扰",
+                  "intro": "将网卡/存储中断与高延迟应用核心隔离，防止突发中断抢占关键执行线程。"
+                },
+                {
+                  "title": "周期性时钟中断、Tickless 与 nohz_full / isolcpus 隔离",
+                  "slug": "02_周期性时钟中断_tickless_与_nohz_full_isolcpus_隔离",
+                  "intro": "理解减少或消除无谓时钟中断与隔离专用计算核在极低尾延迟系统中的作用。"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "CPU Binding（绑核）、核隔离与三大平台调度器对比",
+          "slug": "02_cpu_binding_核隔离与三大平台调度器对比",
+          "intro": "掌握 CPU Affinity 绑核设计、隔离核规划与 Linux、macOS、Windows 调度器控制接口及典型毛刺。",
+          "subsections": [
+            {
+              "title": "CPU Binding 策略：物理核映射、避开超线程争用与 NUMA 协同绑核",
+              "slug": "01_cpu_binding_策略_物理核映射与_numa_协同",
+              "intro": "掌握线程与特定 CPU 核心绑定（pthread_setaffinity_np / sched_setaffinity / SetThreadAffinityMask）及避免跨 NUMA 绑核。",
+              "subsections": [
+                {
+                  "title": "线程绑核接口、物理核/SMT 拓扑识别与专职线程划分",
+                  "slug": "01_线程绑核接口与物理核_smt_拓扑识别",
+                  "intro": "为 I/O 收发、撮合/计算与控制面分配独立核心，减少互相抢占与缓存污染。"
+                },
+                {
+                  "title": "隔离核（isolcpus / nohz_full / cpuset）与系统后台线程隔离",
+                  "slug": "02_隔离核配置与系统后台线程隔离",
+                  "intro": "将内核工作线程、监控探针与无关业务移出专用低延迟核心集合。"
+                }
+              ]
+            },
+            {
+              "title": "Linux 调度器（EEVDF / CFS / RT / Deadline）与 cgroup cpu.max 限流",
+              "slug": "02_linux_调度器_eevdf_rt_deadline_与_cgroup_限流",
+              "intro": "重点剖析 cgroup cpu.max 周期性限流引发的突发性几十毫秒延迟毛刺及规避方案。",
+              "subsections": [
+                {
+                  "title": "EEVDF / CFS 调度行为与 SCHED_FIFO / SCHED_DEADLINE 配置",
+                  "slug": "01_eevdf_cfs_调度行为与实时调度配置",
+                  "intro": "掌握 Linux 调度策略设置、权限要求（CAP_SYS_NICE）与实时线程运行风险。"
+                },
+                {
+                  "title": "cgroup v2 cpu.max 限流尖峰与低延迟部署规范",
+                  "slug": "02_cgroup_v2_cpu_max_限流尖峰与低延迟部署规范",
+                  "intro": "解析配额耗尽被 throttling 导致的等待毛刺，以及如何通过合理配额或独立资源组规避。"
+                }
+              ]
+            },
+            {
+              "title": "macOS GCD / QoS 与 Windows 线程优先级 / 组调度 / EcoQoS",
+              "slug": "03_macos_gcd_qos_与_windows_调度器特性",
+              "intro": "对比 macOS 服务质量分级与 GCD 工作队列，以及 Windows 动态优先级提升、处理器组与 EcoQoS。",
+              "subsections": [
+                {
+                  "title": "macOS QoS 级别、优先级反转缓解与 GCD 队列调度",
+                  "slug": "01_macos_qos_优先级反转缓解与_gcd_调度",
+                  "intro": "理解苹果调度器如何结合 QoS 等级与优先级提升保障交互响应与队列吞吐。"
+                },
+                {
+                  "title": "Windows 线程优先级、动态提升、处理器组与 EcoQoS",
+                  "slug": "02_windows_优先级_动态提升_组调度与_ecocos",
+                  "intro": "理解多处理器组调度、动态优先级提升规则及 EcoQoS 降频对延迟的影响。"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "并发同步、优先级反转与尾延迟（P99 / P99.9 / P99.99）治理",
+          "slug": "03_并发同步_优先级反转与尾延迟治理",
+          "intro": "从架构层消除锁争用与调度不确定性，建立可量化的尾延迟治理方法论。",
+          "subsections": [
+            {
+              "title": "锁原语、自旋与阻塞取舍及优先级继承",
+              "slug": "01_锁原语_自旋与阻塞取舍及优先级继承",
+              "intro": "分析经典优先级反转场景、PI Mutex 内核支持、自旋锁在虚拟化/超线程环境下的反模式与替代方案。",
+              "subsections": [
+                {
+                  "title": "优先级反转成因、Priority Inheritance 与 Priority Ceiling",
+                  "slug": "01_优先级反转成因_priority_inheritance_与_priority_ceiling",
+                  "intro": "拆解高/中/低优先级任务争用共享锁导致的延迟放大，以及优先级继承/天花板协议。"
+                },
+                {
+                  "title": "互斥锁、读写锁与自旋锁在虚拟化/超线程下的风险",
+                  "slug": "02_锁原语与自旋锁在虚拟化_超线程下的风险",
+                  "intro": "识别锁持有者被抢占或 vCPU 被调度出去时自旋等待造成的空转浪费与延迟抖动。"
+                }
+              ]
+            },
+            {
+              "title": "热路径纪律与 P50 / P99 / P99.9 / P99.99 尾延迟治理闭环",
+              "slug": "02_热路径纪律与尾延迟治理闭环",
+              "intro": "制定热路径零分配/零锁/少系统调用规范，使用高分辨率直方图度量并根因消除长尾毛刺。",
+              "subsections": [
+                {
+                  "title": "热路径纪律：禁堆分配、禁锁、禁阻塞 I/O 与线程专职化",
+                  "slug": "01_热路径纪律_禁分配_禁锁与线程专职化",
+                  "intro": "将异步日志、统计采集与控制面 RPC 剥离出关键延迟路径。"
+                },
+                {
+                  "title": "尾延迟分布度量、长尾归因与系统级消抖实践",
+                  "slug": "02_尾延迟分布度量_长尾归因与消抖实践",
+                  "intro": "结合时间戳直方图与内核/硬件追踪工具，定位偶发毛刺并验证调优收益。"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "操作系统安全模型、苹果安全机制与 IPC 通信边界",
+      "slug": "07_os_security_apple_security_and_ipc_boundaries",
+      "intro": "系统讲解权限与访问控制模型、代码签名与沙盒、IPC 攻击面防护，深入剖析苹果生态下的 TCC / PPPC、Security Framework、Authorization Services 与特权/非特权多进程 XPC 通信边界设计，并对比 Linux 与 Windows 安全机制。",
+      "sections": [
+        {
+          "title": "操作系统安全基础与 IPC 信任边界",
+          "slug": "01_操作系统安全基础与_ipc_信任边界",
+          "intro": "在多进程协作与低延迟共享内存/本地通信中建立严密的身份认证、权限校验与故障隔离边界。",
+          "subsections": [
+            {
+              "title": "DAC、MAC、Capabilities、沙盒与最小特权原则",
+              "slug": "01_dac_mac_capabilities_沙盒与最小特权原则",
+              "intro": "理解自主访问控制、强制访问控制、细粒度特权拆分与沙盒限制对系统软件架构的约束。",
+              "subsections": [
+                {
+                  "title": "DAC、MAC 与细粒度 Capabilities / 最小特权设计",
+                  "slug": "01_dac_mac_与细粒度_capabilities_最小特权设计",
+                  "intro": "拆分高权限操作与普通业务逻辑，避免全量 root/SYSTEM 权限贯穿整个进程。"
+                },
+                {
+                  "title": "进程沙盒化与系统调用/资源访问受限模型",
+                  "slug": "02_进程沙盒化与系统调用_资源访问受限模型",
+                  "intro": "理解沙盒如何限制文件系统、网络、Mach/IPC 或系统调用，并设计合规的越界请求通道。"
+                }
+              ]
+            },
+            {
+              "title": "IPC 威胁与防御：混淆代理人、身份伪造与共享内存安全",
+              "slug": "02_ipc_威胁与防御_混淆代理人_身份伪造与共享内存安全",
+              "intro": "掌握安全获取对端凭证、安全传递 fd/句柄、校验共享内存索引/大小边界以及防范并发篡改的方法。",
+              "subsections": [
+                {
+                  "title": "混淆代理人（Confused Deputy）、PID 复用与身份伪造防御",
+                  "slug": "01_混淆代理人_pid_复用与身份伪造防御",
+                  "intro": "避免高权限服务端盲目替低权限客户端执行特权动作，采用内核签发凭证而非仅靠 PID。"
+                },
+                {
+                  "title": "句柄/文件描述符传递与共享内存越界/竞态防护",
+                  "slug": "02_句柄_fd_传递与共享内存越界_竞态防护",
+                  "intro": "校验共享内存布局、索引上下界与并发写入不变量，防止恶意或异常对端破坏内存状态。"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "苹果平台安全机制：TCC / PPPC、Security Framework 与 Authorization Services",
+          "slug": "02_苹果平台安全机制_tcc_pppc_security_framework_与_authorization_services",
+          "intro": "深入 macOS 终端状态与控制工程核心安全机制，理解权限判定链、签名信任与特权授权协作。",
+          "subsections": [
+            {
+              "title": "TCC（透明、同意与控制）机制、权限服务与企业/MDM PPPC 策略",
+              "slug": "01_tcc_与_mdm_pppc_策略机制",
+              "intro": "剖析受保护资源类型、进程归属/响应者判定、用户同意弹窗及 MDM/企业 PPPC 策略生效与排障。",
+              "subsections": [
+                {
+                  "title": "TCC 保护资源、进程责任归属与用户授权弹窗流程",
+                  "slug": "01_tcc_保护资源_进程责任归属与用户授权弹窗流程",
+                  "intro": "理解 Full Disk Access、Accessibility、AppleEvents、Camera/Microphone 等权限的判定与授权逻辑。"
+                },
+                {
+                  "title": "MDM / 企业 PPPC（Privacy Preferences Policy Control）配置与排障",
+                  "slug": "02_mdm_企业_pppc_配置与排障",
+                  "intro": "掌握通过 MDM 下发 PPPC 策略时的 Bundle ID / Designated Requirement 匹配与常见不生效原因。"
+                }
+              ]
+            },
+            {
+              "title": "Security Framework：Keychain、证书/信任评估与代码签名校验",
+              "slug": "02_security_framework_keychain_证书信任与代码签名校验",
+              "intro": "掌握钥匙串访问控制与数据保护、证书链信任评估，以及通过静态/动态代码签名与 Requirement 校验调用方。",
+              "subsections": [
+                {
+                  "title": "Keychain 访问控制、Data Protection 与 SecTrust 证书校验",
+                  "slug": "01_keychain_访问控制_data_protection_与_sectrust_校验",
+                  "intro": "理解凭据存储访问组/ACL、加密保护等级与 X.509 证书链验证及吊销/信任策略。"
+                },
+                {
+                  "title": "Code Signing、Entitlements 与 SecRequirement 调用方验证",
+                  "slug": "02_code_signing_entitlements_与_secrequirement_验证",
+                  "intro": "利用代码签名要求表达式验证对端签名身份与 Team ID / Bundle ID，防止未签名或篡改客户端接入。"
+                }
+              ]
+            },
+            {
+              "title": "Authorization Services：授权权利（Rights）、授权数据库、特权执行与授权插件",
+              "slug": "03_authorization_services_特权授权与授权插件",
+              "intro": "深入 AuthorizationCreate / AuthorizationCopyRights 工作流、系统授权策略与登录/提权授权插件边界。",
+              "subsections": [
+                {
+                  "title": "AuthorizationCreate / AuthorizationCopyRights 与授权数据库规则",
+                  "slug": "01_authorization_api_与授权数据库规则",
+                  "intro": "理解授权权利（Rights）请求、外部授权机制、交互提示与授权令牌在进程间传递的注意事项。"
+                },
+                {
+                  "title": "特权守护进程协作与 Authorization Plug-in 边界约束",
+                  "slug": "02_特权守护进程协作与_authorization_plug_in_边界约束",
+                  "intro": "掌握安全获取特权执行的架构模式及授权插件在执行环境与稳定性上的严格限制。"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "macOS 特权与非特权多进程 XPC 通信边界设计",
+          "slug": "03_macos_特权与非特权多进程_xpc_通信边界设计",
+          "intro": "围绕特权守护进程/扩展与非特权 App/Agent/CLI 的多进程架构，设计可审计、抗攻击、低开销的 XPC 边界。",
+          "subsections": [
+            {
+              "title": "特权分离架构：非特权客户端与特权服务端划分",
+              "slug": "01_特权分离架构_客户端与特权服务端划分",
+              "intro": "明确特权边界与责任划分，避免非特权进程直接触碰高危系统状态，并处理多用户会话与守护进程生命周期。",
+              "subsections": [
+                {
+                  "title": "非特权 App / LaunchAgent / CLI 与特权 root LaunchDaemon / System Extension 分工",
+                  "slug": "01_客户端与特权服务端职责划分",
+                  "intro": "将界面交互、用户态状态采集与系统级策略下发/特权执行拆分为独立进程并明确信任契约。"
+                },
+                {
+                  "title": "多用户会话与守护进程按需拉起/崩溃重连设计",
+                  "slug": "02_多用户会话与按需拉起_崩溃重连设计",
+                  "intro": "处理连接中断与作废事件、多会话并发请求以及守护进程重启后的状态同步。"
+                }
+              ]
+            },
+            {
+              "title": "XPC 服务端调用方校验（Audit Token / Signing Requirement）与严格参数校验",
+              "slug": "02_xpc_服务端身份校验与严格参数校验",
+              "intro": "利用内核签发的 Audit Token 结合代码签名校验连接合法性，实施协议白名单、安全编解码与输入边界检查。",
+              "subsections": [
+                {
+                  "title": "基于 Audit Token 与 SecCode/Signing Requirement 的对端认证",
+                  "slug": "01_基于_audit_token_与_signing_requirement_的对端认证",
+                  "intro": "在连接建立及敏感接口调用处校验 Audit Token 对应的代码签名属性，拒绝非法调用方。"
+                },
+                {
+                  "title": "XPC 协议契约最小化、NSSecureCoding 白名单与参数合法性校验",
+                  "slug": "02_xpc_协议契约最小化与输入参数校验",
+                  "intro": "缩小特权暴露面、校验路径/整数/枚举/长度边界，防止恶作剧或受损客户端触发越权操作。"
+                }
+              ]
+            },
+            {
+              "title": "XPC 控制面与高速数据面解耦及崩溃隔离",
+              "slug": "03_xpc_控制面与高速数据面解耦及崩溃隔离",
+              "intro": "用 XPC 承载认证、策略控制与共享内存/句柄分发，用共享内存 + 原子队列承接高频数据，确保单进程崩溃不拖垮全局。",
+              "subsections": [
+                {
+                  "title": "控制面（XPC）握手与数据面（共享内存 / fd）建链流程",
+                  "slug": "01_控制面_xpc_握手与数据面_共享内存_建链流程",
+                  "intro": "通过 XPC 完成身份鉴权、通道协商与共享内存区域创建/映射，随后数据面绕过序列化直接读写。"
+                },
+                {
+                  "title": "单进程崩溃隔离、共享内存状态校验与优雅降级",
+                  "slug": "02_单进程崩溃隔离_共享内存状态校验与优雅降级",
+                  "intro": "当客户端或服务端异常退出时，安全清理或重置共享通道，保障系统整体可用性。"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Linux 与 Windows 安全与 IPC 权限边界对比",
+          "slug": "04_linux_与_windows_安全与_ipc_权限边界对比",
+          "intro": "对比 Linux 与 Windows 在凭证校验、访问控制与本地 IPC 权限隔离上的实现细节。",
+          "subsections": [
+            {
+              "title": "Linux 安全模型：凭证校验、命名空间与 MAC 策略",
+              "slug": "01_linux_安全模型_凭证校验与_mac_策略",
+              "intro": "掌握内核验证的本地 Socket 凭证获取、命名空间映射边界与强制访问控制策略对 IPC 的限制。",
+              "subsections": [
+                {
+                  "title": "SO_PEERCRED / SCM_CREDENTIALS 凭证与 User Namespace 映射",
+                  "slug": "01_so_peercred_scm_credentials_与_user_namespace",
+                  "intro": "理解内核填充的对端 UID/GID/PID 语义及容器/命名空间隔离下的身份映射边界。"
+                },
+                {
+                  "title": "SELinux / AppArmor / seccomp 对本地 IPC 与文件描述符的约束",
+                  "slug": "02_selinux_apparmor_seccomp_对_ipc_的约束",
+                  "intro": "排查强制访问控制策略或系统调用过滤导致的本地 Socket 连接/绑定与权限拒绝问题。"
+                }
+              ]
+            },
+            {
+              "title": "Windows 安全模型：SID、Access Token、完整性级别、ACL 与 Impersonation",
+              "slug": "02_windows_安全模型_token_完整性级别_acl_与_impersonation",
+              "intro": "理解安全描述符、完整性级别写入限制、命名管道安全设置与客户端模拟风险控制。",
+              "subsections": [
+                {
+                  "title": "SID、Access Token、Mandatory Integrity Control（MIC）与 DACL",
+                  "slug": "01_sid_access_token_mic_与_dacl_权限控制",
+                  "intro": "掌握低/中/高/System 完整性级别对跨级别写入的阻止，以及通过 SDDL 配置管道/共享内存 ACL。"
+                },
+                {
+                  "title": "命名管道客户端模拟（ImpersonateNamedPipeClient）与安全陷阱",
+                  "slug": "02_命名管道客户端模拟与安全陷阱",
+                  "intro": "理解在以客户端身份执行操作时如何避免模拟泄露与重放/伪造风险，完成后及时还原上下文。"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "常用命令行工具、内核性能剖析与低延迟实战",
+      "slug": "08_cli_tools_profiling_and_low_latency_practice",
+      "intro": "系统掌握 Linux、macOS 与 Windows 常用运维与底层诊断命令、性能剖析工具链（perf / ftrace / cyclictest / Valgrind / VTune / gperf / dtrace / Instruments / ETW），并通过低延迟工程实验闭环验证。",
+      "sections": [
+        {
+          "title": "Linux 常用命令与内核/性能剖析工具链",
+          "slug": "01_linux_常用命令与内核_性能剖析工具链",
+          "intro": "熟练使用 Linux 命令行与内核观测工具定位调度抖动、缓存未命中、锁争用与系统调用瓶颈。",
+          "subsections": [
+            {
+              "title": "系统与资源日常命令：ps、top/htop、systemctl、journalctl、numactl、taskset、chrt、vmstat、iostat、ss、lsof",
+              "slug": "01_linux_日常运维与调度_内存_网络命令",
+              "intro": "快速检查服务状态、NUMA 节点分布、CPU 亲和性、实时优先级、虚拟内存/I/O 指标与本地套接字/句柄占用。",
+              "subsections": [
+                {
+                  "title": "进程、服务与日志排查：ps、top/htop、systemctl、journalctl、lsof、ss",
+                  "slug": "01_linux_进程_服务_日志与套接字排查命令",
+                  "intro": "定位异常进程、服务启动失败、文件描述符/本地 Socket 占用与系统/单元日志。"
+                },
+                {
+                  "title": "调度、亲和性、NUMA 与内存/I/O 观测：taskset、chrt、numactl、vmstat、iostat",
+                  "slug": "02_linux_调度_亲和性_numa_与内存_i_o_观测命令",
+                  "intro": "验证线程绑核、调度策略、跨节点内存分布及上下文切换/缺页/I/O 等待趋势。"
+                }
+              ]
+            },
+            {
+              "title": "内核追踪与性能剖析：perf、ftrace、strace、cyclictest、Valgrind、VTune 与 gperf",
+              "slug": "02_linux_perf_ftrace_cyclictest_valgrind_vtune_gperf",
+              "intro": "使用 perf 采样热点与 cache/TLB miss、ftrace 追踪调度/唤醒/中断、cyclictest 测调度抖动、Valgrind/VTune/gperf 分析内存与热点。",
+              "subsections": [
+                {
+                  "title": "perf 硬件性能计数器、ftrace 内核追踪与 cyclictest 延迟基准",
+                  "slug": "01_perf_ftrace_与_cyclictest_实战",
+                  "intro": "通过 perf stat/record 分析缓存/分支/TLB 指标，用 ftrace 抓取调度延迟，用 cyclictest 评估系统抖动。"
+                },
+                {
+                  "title": "strace 系统调用追踪与 Valgrind / VTune / gperf 深度剖析",
+                  "slug": "02_strace_与_valgrind_vtune_gperf_剖析",
+                  "intro": "排查高频系统调用与阻塞点，结合 Valgrind 内存/并发检查与 VTune/gperf 定位 CPU 热点。"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "macOS 常用命令与系统/性能诊断工具链",
+          "slug": "02_macos_常用命令与系统_性能诊断工具链",
+          "intro": "掌握 macOS 终端命令、安全与权限检查工具以及苹果性能剖析手段。",
+          "subsections": [
+            {
+              "title": "服务、进程、内存与日志命令：launchctl、ps、top、vm_stat、memory_pressure、log、sysctl",
+              "slug": "01_macos_launchctl_内存压力_统一日志与内核参数",
+              "intro": "排查 LaunchDaemon/LaunchAgent 域状态、内存压缩与压力等级、Unified Logging 过滤及 XNU 内核参数。",
+              "subsections": [
+                {
+                  "title": "launchctl 域管理、进程状态与 Unified Logging（log 命令）",
+                  "slug": "01_launchctl_域管理_进程状态与_log_命令",
+                  "intro": "使用 launchctl print/bootstrap/kickstart 排查服务状态，按谓词高效检索 macOS 统一日志。"
+                },
+                {
+                  "title": "vm_stat、memory_pressure、sysctl 与系统内存/内核参数检查",
+                  "slug": "02_vm_stat_memory_pressure_与_sysctl_检查",
+                  "intro": "观察活跃/非活跃/压缩/换出内存页统计、系统内存压力状态与关键 sysctl 内核参数。"
+                }
+              ]
+            },
+            {
+              "title": "代码签名、TCC/权限与剖析工具：codesign、spctl、security、tccutil、lsof、dtrace / sample / spindump / Instruments",
+              "slug": "02_macos_codesign_tcc_dtrace_sample_instruments",
+              "intro": "校验签名与权限需求、排查文件/端口占用，结合 Instruments 与 dtrace/sample/spindump 定位延迟与阻塞。",
+              "subsections": [
+                {
+                  "title": "codesign、spctl、security、tccutil 与 lsof 签名/权限/句柄排查",
+                  "slug": "01_codesign_spctl_security_tccutil_与_lsof_用法",
+                  "intro": "验证二进制/App/扩展签名与 Requirement、重置/测试 TCC 权限及检查进程打开文件与端口。"
+                },
+                {
+                  "title": "Instruments（Time Profiler / System Trace / Allocations）与 sample / spindump / dtrace",
+                  "slug": "02_instruments_与_sample_spindump_dtrace_剖析",
+                  "intro": "利用 Instruments 追踪线程调度、锁等待、内存分配与调用栈，结合 sample/spindump/dtrace 诊断卡顿。"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Windows 常用命令与系统/性能诊断工具链",
+          "slug": "03_windows_常用命令与系统_性能诊断工具链",
+          "intro": "掌握 Windows 命令行、服务/句柄排查与 ETW 高精度性能分析工具。",
+          "subsections": [
+            {
+              "title": "服务、进程与系统信息命令：sc、Get-Service、Get-Process、tasklist、systeminfo",
+              "slug": "01_windows_sc_powershell_进程与服务排查",
+              "intro": "管理 Windows 服务状态与配置、检查进程/线程/系统信息及常见故障排查。",
+              "subsections": [
+                {
+                  "title": "sc 与 PowerShell Get-Service / Get-Process 服务与进程管理",
+                  "slug": "01_sc_与_powershell_服务_进程管理命令",
+                  "intro": "查询服务配置/运行状态、启停服务与通过 PowerShell 筛选进程线程及资源占用。"
+                },
+                {
+                  "title": "tasklist、systeminfo 与系统环境/会话信息快速核查",
+                  "slug": "02_tasklist_systeminfo_与系统信息核查",
+                  "intro": "查看进程列表、模块/服务关联、系统版本与硬件配置信息。"
+                }
+              ]
+            },
+            {
+              "title": "句柄、进程与 ETW 剖析：handle、Process Explorer / Monitor、logman / xperf / WPA",
+              "slug": "02_windows_handle_procexp_procmon_与_etw_wpa",
+              "intro": "定位内核对象句柄泄漏、文件/注册表/命名管道/IPC 轨迹，利用 ETW 与 WPA 分析调度与延迟。",
+              "subsections": [
+                {
+                  "title": "handle、Process Explorer 与 Process Monitor 句柄与 IPC 追踪",
+                  "slug": "01_handle_process_explorer_与_process_monitor_用法",
+                  "intro": "排查未关闭的命名管道/事件/文件映射句柄，追踪进程行为、访问被拒与跨进程交互。"
+                },
+                {
+                  "title": "ETW 追踪（logman / xperf）与 Windows Performance Analyzer（WPA）分析",
+                  "slug": "02_etw_追踪与_wpa_延迟调度分析",
+                  "intro": "采集内核与用户态 ETW 事件，在 WPA 中分析上下文切换延迟、磁盘/网络 I/O 阻塞与 CPU 占用。"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "低延迟与跨平台系统工程综合实战",
+          "slug": "04_低延迟与跨平台系统工程综合实战",
+          "intro": "将调度、内存/缓存、安全边界与命令行剖析工具整合进可复现的工程实验与调优闭环。",
+          "subsections": [
+            {
+              "title": "实战一：多平台守护进程/服务与受控 IPC 通道构建",
+              "slug": "01_实战一_守护进程与受控_ipc_通道构建",
+              "intro": "实现跨平台服务生命周期管理、对端身份认证与控制面/数据面分离，并验证崩溃恢复。",
+              "subsections": [
+                {
+                  "title": "服务托管（systemd / launchd / Service）与身份校验边界实现",
+                  "slug": "01_服务托管与对端身份校验边界实现",
+                  "intro": "完成守护进程启停管理、调用方凭证/签名校验与非法请求拦截验证。"
+                },
+                {
+                  "title": "控制面 + 共享内存数据面与进程崩溃恢复测试",
+                  "slug": "02_控制面_共享内存数据面与崩溃恢复测试",
+                  "intro": "搭建低开销数据通道并模拟客户端/服务端异常退出，验证状态恢复与无死锁/无泄漏。"
+                }
+              ]
+            },
+            {
+              "title": "实战二：伪共享消除、绑核/防缺页调优与 P50/P99/P99.9 尾延迟基准压测",
+              "slug": "02_实战二_缓存对齐_绑核与尾延迟压测调优",
+              "intro": "通过压测与剖析工具定位缓存行乒乓、缺页与调度抖动根因，量化优化前后延迟分布变化。",
+              "subsections": [
+                {
+                  "title": "基线延迟压测与伪共享、缺页、调度毛刺定位",
+                  "slug": "01_基线延迟压测与多维瓶颈定位",
+                  "intro": "建立端到端延迟采样与直方图统计，结合系统剖析工具锁定主要延迟抖动来源。"
+                },
+                {
+                  "title": "对齐隔离、内存锁定/预分配与亲和性调优后的对比验证",
+                  "slug": "02_优化实施与_p50_p99_p99_9_收益对比",
+                  "intro": "应用针对性系统与数据结构优化，对比优化前后 P50/P99/P99.9/P99.99 延迟与吞吐表现。"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

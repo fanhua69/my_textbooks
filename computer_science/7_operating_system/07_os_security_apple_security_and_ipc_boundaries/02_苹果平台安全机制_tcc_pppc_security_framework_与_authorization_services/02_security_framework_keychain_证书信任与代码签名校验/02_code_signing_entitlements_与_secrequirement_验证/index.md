@@ -1,0 +1,11 @@
+# 7.2.2.2 Code Signing、Entitlements 与 SecRequirement 调用方验证
+
+利用代码签名要求表达式验证对端签名身份与 Team ID / Bundle ID，防止未签名或篡改客户端接入。
+
+---
+
+## 导航
+
+← 上一节：[7.2.2.1 Keychain 访问控制、Data Protection 与 SecTrust 证书校验](../01_keychain_访问控制_data_protection_与_sectrust_校验/index.md)
+↑ 返回上级：[7.2.2 Security Framework：Keychain、证书/信任评估与代码签名校验](../index.md)
+下一节：[7.2.3 Authorization Services：授权权利（Rights）、授权数据库、特权执行与授权插件](../../03_authorization_services_特权授权与授权插件/index.md) →

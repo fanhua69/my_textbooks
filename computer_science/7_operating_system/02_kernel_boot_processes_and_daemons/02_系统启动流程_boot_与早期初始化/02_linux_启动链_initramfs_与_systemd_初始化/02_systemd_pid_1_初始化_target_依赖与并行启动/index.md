@@ -1,0 +1,11 @@
+# 2.2.2.2 systemd PID 1 初始化、Target 依赖与并行启动
+
+掌握 sysinit.target / basic.target / multi-user.target 演进与依赖有向无环图调度。
+
+---
+
+## 导航
+
+← 上一节：[2.2.2.1 initramfs 阶段、udev 设备冷插拔与 switch  root](../01_initramfs_阶段_udev_设备冷插拔与_switch_root/index.md)
+↑ 返回上级：[2.2.2 Linux 启动链：固件 -> Bootloader -> initramfs -> systemd（PID 1）](../index.md)
+下一节：[2.2.3 macOS 启动链：Secure ROM / iBoot -> XNU -> launchd（PID 1）](../../03_macos_启动链_xnu_与_launchd_初始化/index.md) →

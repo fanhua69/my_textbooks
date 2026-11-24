@@ -1,0 +1,11 @@
+# 2.1.1 if constexpr 语义、未选中分支丢弃与替代 SFINAE / Tag Dispatch
+
+理解 if constexpr 布尔常量条件、未命中分支不进行实例化（仍需语法合法）、结合 type_traits 简化泛型代码及注意事项。
+
+---
+
+## 导航
+
+← 上一节：[1 C++17 演进定位、核心语法、结构化绑定与属性机制](../../../01_cpp17_overview_syntax_bindings_and_attributes/index.md)
+↑ 返回上级：[2.1 if constexpr 编译期分支与 constexpr 扩展](../index.md)
+下一节：[2.1.2 C++17 constexpr 扩展（局部变量、if/循环、constexpr lambda）与 static assert 无消息形式](../02_cpp17_constexpr_扩展与_static_assert/index.md) →

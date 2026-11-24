@@ -1,0 +1,480 @@
+{
+  "title": "C++11 全景式深度课程大纲（语言核心、对象与内存模型、泛型与标准库全量特性）",
+  "language": "zh-CN",
+  "standard": "ISO/IEC 14882:2011 (C++11)",
+  "description": "面向现代 C++ 开发者与系统工程师的 C++11 深度大纲。完整覆盖 C++11 从 C++98/03 跃迁的全部语言特性、类与对象模型、内存与并发模型、模板与泛型机制、标准库及 TR1 纳入组件，以及废弃/移除特性与工程最佳实践。",
+  "navigation": {
+    "mode": "depth_first_all_index_pages",
+    "description": "前一页/后一页按教材目录深度优先顺序排列，包含部分、二级节和三级节的 index.md。"
+  },
+  "parts": [
+    {
+      "title": "C++11 演进背景、核心语法与类型推导",
+      "slug": "01_cpp11_overview_syntax_and_type_deduction",
+      "intro": "理解 C++11 作为现代 C++ 起点（原 C++0x）的历史意义、标准演进与基础语法革新，掌握类型推导、字面量、初始化与属性机制。",
+      "sections": [
+        {
+          "title": "C++11 标准背景、兼容性与演进定位",
+          "slug": "01_cpp11_标准背景_兼容性与演进定位",
+          "intro": "梳理 C++11 的设计目标、向后兼容原则、弃用/移除项以及与 C99/TR1 的关系。",
+          "subsections": [
+            {
+              "title": "从 C++98/03 到 C++11：现代 C++ 的诞生",
+              "slug": "01_从_cpp98_03_到_cpp11_现代_cpp_的诞生",
+              "intro": "了解 C++11 的发布背景、核心设计哲学（零开销抽象、默认安全与现代生产力）与标准演进脉络。"
+            },
+            {
+              "title": "C++11 废弃与移除特性（auto_ptr、register、export、动态异常规格等）",
+              "slug": "02_cpp11_废弃与移除特性",
+              "intro": "掌握 std::auto_ptr 弃用、register 关键字语义变更与弃用、模板 export 移除及动态异常说明 throw(...) 弃用。"
+            },
+            {
+              "title": "C99 预处理器特性与 long long int 融入",
+              "slug": "03_c99_预处理器特性与_long_long_int_融入",
+              "intro": "掌握 long long int 与 unsigned long long int 整数类型、_Pragma 运算符及 C99 预处理器对齐细节。"
+            }
+          ]
+        },
+        {
+          "title": "auto、decltype、尾置返回类型与类型推导",
+          "slug": "02_auto_decltype_尾置返回类型与类型推导",
+          "intro": "掌握 C++11 核心类型推导工具的语法、规则与边界陷阱。",
+          "subsections": [
+            {
+              "title": "auto 类型推导规则与修饰符组合",
+              "slug": "01_auto_类型推导规则与修饰符组合",
+              "intro": "掌握 auto 与 const、&、&&、指针、多声明变量同类型约束及 auto 列表初始化推导行为。"
+            },
+            {
+              "title": "decltype 表达式类型推导（实体 vs 表达式值类别）",
+              "slug": "02_decltype_表达式类型推导",
+              "intro": "区分未加括号标识符与表达式对 decltype 的影响（lvalue 推导为 T&、xvalue 为 T&&、prvalue 为 T）。"
+            },
+            {
+              "title": "尾置返回类型（Trailing Return Type / 箭头语法）",
+              "slug": "03_尾置返回类型_箭头语法",
+              "intro": "掌握 auto func(params) -> RetType 语法在依赖参数类型推导与复杂函数指针声明中的用法。"
+            }
+          ]
+        },
+        {
+          "title": "统一初始化、std::initializer_list、nullptr 与强类型枚举",
+          "slug": "03_统一初始化_initializer_list_nullptr_与_enum_class",
+          "intro": "掌握花括号初始化、空指针常量、强类型枚举及范围 for 循环带来的类型与表达安全。",
+          "subsections": [
+            {
+              "title": "统一初始化（Brace Initialization {}）与窄化转换（Narrowing Conversion）",
+              "slug": "01_统一初始化与窄化转换限制",
+              "intro": "理解花括号初始化的统一性、禁止浮点/宽整向窄整/符号转换等窄化检查，以及“最令人 vexing 的解析”规避。"
+            },
+            {
+              "title": "std::initializer_list 与列表初始化重载决议",
+              "slug": "02_std_initializer_list_与列表初始化重载决议",
+              "intro": "掌握 std::initializer_list<T> 的轻量视图语义及其在构造函数重载中的优先级与陷阱。"
+            },
+            {
+              "title": "nullptr 与 std::nullptr_t 类型安全空指针",
+              "slug": "03_nullptr_与_std_nullptr_t",
+              "intro": "理解 nullptr 解决 NULL 宏与 0 在函数重载、模板推导和布尔上下文中的歧义问题。"
+            },
+            {
+              "title": "强类型枚举（enum class / enum struct）与显式底层类型",
+              "slug": "04_强类型枚举_enum_class_与显式底层类型",
+              "intro": "掌握作用域隔离、禁止隐式转整、指定底层整数类型（如 : uint8_t）以及非作用域枚举前向声明能力。"
+            },
+            {
+              "title": "基于范围的 for 循环（Range-Based for Loop）与迭代协议",
+              "slug": "05_基于范围的_for_循环与迭代协议",
+              "intro": "理解 for (decl : range_expr) 对原生数组、标准容器及自定义 begin/end 范围的支持与生命周期陷阱。"
+            }
+          ]
+        },
+        {
+          "title": "Unicode 字面量、原始字符串、用户自定义字面量与属性语法",
+          "slug": "04_字面量扩展_用户自定义字面量与标准属性",
+          "intro": "掌握字符串/字符字面量扩展、UDL 自定义字面量及 C++11 引入的通用属性标记框架。",
+          "subsections": [
+            {
+              "title": "Unicode 字符串字面量（u8 / u / U / L）与原始字符串字面量（R\"(...)\"）",
+              "slug": "01_unicode_字面量与原始字符串字面量",
+              "intro": "掌握 UTF-8/UTF-16/UTF-32/宽字符字面量、字符类型（char16_t / char32_t）以及免转义原始字符串定界符。"
+            },
+            {
+              "title": "用户自定义字面量（User-Defined Literals / operator \"\"）",
+              "slug": "02_用户自定义字面量",
+              "intro": "掌握字面量运算符的整型/浮点/字符串/字符参数形式，构建物理单位与强类型字面量。"
+            },
+            {
+              "title": "标准属性语法 [[attr]]（[[noreturn]]、[[carries_dependency]]）",
+              "slug": "03_标准属性语法_noreturn_与_carries_dependency",
+              "intro": "理解 [[...]] 统一属性语法、[[noreturn]] 函数不返回契约及 [[carries_dependency]] 内存依赖提示。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "移动语义、右值引用、Lambda 与编译期计算",
+      "slug": "02_move_semantics_lambdas_and_constexpr",
+      "intro": "深入 C++11 最具变革性的语言机制：右值引用与移动语义、完美转发、Lambda 表达式与闭包对象，以及 constexpr 编译期常量与函数。",
+      "sections": [
+        {
+          "title": "右值引用、移动语义与完美转发",
+          "slug": "01_右值引用_移动语义与完美转发",
+          "intro": "掌握值类别基础、T&& 右值引用、移动构造/移动赋值、引用折叠与 std::move / std::forward / std::move_if_noexcept。",
+          "subsections": [
+            {
+              "title": "左值与右值引用（T&&）及右值对象初始化规则",
+              "slug": "01_右值引用_t_与右值对象初始化",
+              "intro": "理解右值引用绑定临时对象/右值的规则、具名右值引用作为左值的语义及右值初始化类对象的直接性。"
+            },
+            {
+              "title": "移动构造函数、移动赋值运算符与已移后状态（Moved-From State）",
+              "slug": "02_移动构造_移动赋值与已移后状态",
+              "intro": "掌握资源窃取与源对象安全置空/有效可析构可赋值不变量，避免自移动与悬空指针。"
+            },
+            {
+              "title": "std::move、std::move_if_noexcept 与 noexcept 对移动优化的影响",
+              "slug": "03_std_move_std_move_if_noexcept_与_noexcept",
+              "intro": "理解 std::move 的无条件强转本质、noexcept 说明符与 noexcept 运算符，以及 std::vector 重分配时依赖 noexcept 决定移动或拷贝。"
+            },
+            {
+              "title": "转发引用（Forwarding Reference）、引用折叠与 std::forward 完美转发",
+              "slug": "04_转发引用_引用折叠与_std_forward",
+              "intro": "掌握模板推导中的 T&& 引用折叠规则（左值/右值引用组合折叠）及 std::forward 保留值类别的精确转发机制。"
+            }
+          ]
+        },
+        {
+          "title": "Lambda 表达式与闭包对象",
+          "slug": "02_lambda_表达式与闭包对象",
+          "intro": "掌握匿名函数与闭包类生成原理、捕获方式、可变性、异常规格及与函数指针/标准库算法的配合。",
+          "subsections": [
+            {
+              "title": "Lambda 语法组成、闭包类型与局部/无名类型作为模板实参",
+              "slug": "01_lambda_语法_闭包类型与局部类型模板实参",
+              "intro": "理解编译器为每个 lambda 生成唯一闭包类、捕获成员变量布局及 C++11 允许局部/无名类型作模板实参的配合。"
+            },
+            {
+              "title": "值捕获、引用捕获、默认捕获（[=] / [&]）与生命周期陷阱",
+              "slug": "02_lambda_捕获机制与悬空引用陷阱",
+              "intro": "对比按值拷贝与按引用捕获的语义，识别异步回调或逃逸闭包中引用局部变量导致的未定义行为。"
+            },
+            {
+              "title": "mutable Lambda、noexcept Lambda 与向函数指针转换",
+              "slug": "03_mutable_noexcept_与函数指针转换",
+              "intro": "掌握 mutable 解除 operator() const 限制、在 lambda 尾部写 noexcept 以及无捕获 lambda 隐式转换为普通函数指针的规则。"
+            }
+          ]
+        },
+        {
+          "title": "constexpr 编译期常量表达式与静态断言",
+          "slug": "03_constexpr_与_static_assert",
+          "intro": "掌握 C++11 constexpr 常量与函数约束、编译期静态断言及与模板元编程的协同。",
+          "subsections": [
+            {
+              "title": "constexpr 变量与 C++11 constexpr 函数规则",
+              "slug": "01_constexpr_变量与_cpp11_函数规则",
+              "intro": "理解 constexpr 对象的编译期求值保证及 C++11 constexpr 函数单 return 表达式与字面量类型约束。"
+            },
+            {
+              "title": "static_assert 编译期断言",
+              "slug": "02_static_assert_编译期断言",
+              "intro": "掌握 static_assert(bool_constexpr, \"message\") 在类型尺寸、对齐、常量条件与模板契约检查中的应用。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "类、对象生命周期、对齐与继承控制",
+      "slug": "03_classes_object_lifecycle_alignment_and_inheritance",
+      "intro": "深入 C++11 类设计控制与对象模型：非静态成员类内初始化、委托与继承构造、特殊成员函数生成规则、广义 POD、内存对齐与继承/友元控制。",
+      "sections": [
+        {
+          "title": "类定义、成员初始化、委托构造与继承构造",
+          "slug": "01_类定义_成员初始化_委托构造与继承构造",
+          "intro": "掌握更简洁、安全且不易遗漏初始化的类构造与封装写法。",
+          "subsections": [
+            {
+              "title": "非静态数据成员类内初始化（In-Class Member Initializers）",
+              "slug": "01_非静态数据成员类内初始化",
+              "intro": "掌握成员声明处默认值（= expr 或 {}）与构造函数初始化列表覆盖优先级，减少多构造函数重复代码。"
+            },
+            {
+              "title": "委托构造函数（Delegating Constructors）",
+              "slug": "02_委托构造函数",
+              "intro": "掌握构造函数通过初始化列表调用同类另一构造函数（注意不能同时初始化其他非静态成员及循环委托禁止）。"
+            },
+            {
+              "title": "继承构造函数（using Base::Base）",
+              "slug": "03_继承构造函数_using_base_base",
+              "intro": "掌握在派生类中通过 using Base::Base 继承基类构造函数，并理解新引入成员默认初始化与隐藏规则。"
+            },
+            {
+              "title": "扩展 friend 声明（Extended Friend Declarations）",
+              "slug": "04_扩展_friend_声明",
+              "intro": "掌握将模板类型参数、typedef/using 类型别名及内置类型声明为友元，且无需前置 class 关键字的 C++11 规则。"
+            }
+          ]
+        },
+        {
+          "title": "特殊成员函数、=default/=delete、广义 POD 与内存对齐",
+          "slug": "02_特殊成员函数_default_delete_pod_与对齐",
+          "intro": "掌握编译器隐式生成规则、显式控制特殊成员函数、广义 POD 分类以及 alignof / alignas 底层对齐控制。",
+          "subsections": [
+            {
+              "title": "=default 与 =delete 显式默认与禁用函数",
+              "slug": "01_default_与_delete_显式控制函数",
+              "intro": "使用 =default 请求编译器生成默认实现，使用 =delete 禁用拷贝/移动构造、特定重载或隐式转换。"
+            },
+            {
+              "title": "移动特殊成员函数的隐式生成与抑制规则",
+              "slug": "02_移动特殊成员函数的隐式生成与抑制",
+              "intro": "掌握用户声明拷贝/移动/析构函数对拷贝与移动构造/赋值隐式生成的连锁影响及工程实践建议。"
+            },
+            {
+              "title": "广义 POD（Generalized POD）、平凡类型与标准布局类型",
+              "slug": "03_广义_pod_平凡类型与标准布局类型",
+              "intro": "理解 C++11 对 POD 概念的拆解与泛化（Trivial、Standard-layout、Literal type）及其在跨语言与底层内存中的意义。"
+            },
+            {
+              "title": "alignof 运算符与 alignas 对齐说明符",
+              "slug": "04_alignof_与_alignas_内存对齐控制",
+              "intro": "掌握查询类型/表达式对齐字节数的 alignof 与指定变量/类型/成员对齐要求的 alignas（含缓存行与硬件对齐场景）。"
+            }
+          ]
+        },
+        {
+          "title": "继承控制、内联命名空间与右角括号语法",
+          "slug": "03_override_final_inline_namespace_与右角括号",
+          "intro": "掌握虚函数重写校验、防继承/防重写锁定、版本化内联命名空间及嵌套模板右角括号简化。",
+          "subsections": [
+            {
+              "title": "override 与 final 说明符",
+              "slug": "01_override_与_final_说明符",
+              "intro": "使用 override 让编译器校验虚函数签名匹配防止意外隐藏/新建虚函数，使用 final 禁止虚函数重写或类被继承。"
+            },
+            {
+              "title": "内联命名空间（Inline Namespace）与库版本管理",
+              "slug": "02_内联命名空间与库版本管理",
+              "intro": "掌握 inline namespace 的名称提升与特化规则，用于管理 ABI 版本演进与默认实现切换。"
+            },
+            {
+              "title": "嵌套模板右角括号（>>）语法解析",
+              "slug": "03_嵌套模板右角括号_语法解析",
+              "intro": "了解 C++11 消除 vector<list<int>> 中 >> 必须加空格限制的词法/语法改进及遗留边界情况。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "模板增强、泛型基础设施与类型萃取",
+      "slug": "04_templates_and_type_traits",
+      "intro": "掌握 C++11 变参模板、别名模板、外部模板、局部/无名类型作模板实参、type_traits 元编程库及 std::ratio 编译期有理数。",
+      "sections": [
+        {
+          "title": "变参模板（Variadic Templates）、别名模板与外部模板",
+          "slug": "01_变参模板_别名模板与外部模板",
+          "intro": "掌握任意数量模板参数包、sizeof...、参数包展开模式、using 别名模板与 extern template 实例化控制。",
+          "subsections": [
+            {
+              "title": "模板参数包、函数参数包与 sizeof... 运算符",
+              "slug": "01_参数包与_sizeof_运算符",
+              "intro": "理解 typename... / class... 类型包、Args... 函数包及获取参数个数的 sizeof...(args) / sizeof...(Args)。"
+            },
+            {
+              "title": "参数包展开模式与递归展开惯用法",
+              "slug": "02_参数包展开模式与递归展开",
+              "intro": "掌握在函数实参、基类列表、初始化列表、模板实参及逗号表达式中展开参数包的规则与递归终止写法。"
+            },
+            {
+              "title": "别名模板（Alias Templates / using）与局部/无名类型作模板实参",
+              "slug": "03_别名模板与局部_无名类型作模板实参",
+              "intro": "对比 using 别名模板与 typedef/结构体封装的差异，并掌握局部类与无名类型作为模板实参的能力。"
+            },
+            {
+              "title": "显式实例化声明（Extern Template）控制编译开销",
+              "slug": "04_显式实例化声明_extern_template",
+              "intro": "掌握 extern template class/func 抑制重复实例化，配合显式实例化定义缩短大型项目编译与链接时间。"
+            }
+          ]
+        },
+        {
+          "title": "<type_traits> 类型萃取与 <ratio> 编译期有理数",
+          "slug": "02_type_traits_与_ratio",
+          "intro": "掌握编译期类型查询/变换工具与编译期分数算术设施。",
+          "subsections": [
+            {
+              "title": "主/复合类型分类与类型属性查询（is_integral、is_trivially_copyable、is_base_of 等）",
+              "slug": "01_类型分类与类型属性萃取",
+              "intro": "掌握编译期布尔常量萃取与 std::integral_constant，用于模板约束与静态分发。"
+            },
+            {
+              "title": "类型修饰符变换（remove_reference、add_const、decay、conditional、enable_if）",
+              "slug": "02_类型变换_conditional_与_enable_if",
+              "intro": "掌握常见类型变换元函数、std::conditional 编译期选型及基于 std::enable_if 的 SFINAE 约束。"
+            },
+            {
+              "title": "<ratio> 编译期有理数算术与 SI 单位前缀",
+              "slug": "03_ratio_编译期有理数算术",
+              "intro": "理解 std::ratio<Num, Den> 自动约分、ratio_add/subtract/multiply/divide、ratio_equal/less 及 milli/micro/nano 等预定义别名。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "C++11 内存模型、并发与原子支持库",
+      "slug": "05_memory_model_and_concurrency_library",
+      "intro": "系统掌握 C++11 正式确立的抽象机内存模型与标准并发库：thread_local、std::thread、mutex/lock 设施、condition_variable、future/promise/async 与 std::atomic。",
+      "sections": [
+        {
+          "title": "C++11 内存模型、数据竞争与 std::thread_local",
+          "slug": "01_内存模型_数据竞争与_thread_local",
+          "intro": "理解线程间内存可见性、数据竞争未定义行为与线程局部存储生命周期。",
+          "subsections": [
+            {
+              "title": "内存位置、数据竞争（Data Race）、sequenced-before 与 happens-before",
+              "slug": "01_内存位置_数据竞争与_happens_before",
+              "intro": "掌握冲突访问、同步关系与 happens-before 推理模型，理解为何数据竞争构成未定义行为。"
+            },
+            {
+              "title": "std::thread_local 线程局部存储与构造/析构时机",
+              "slug": "02_std_thread_local_存储期与生命周期",
+              "intro": "掌握 thread_local 变量在块作用域、命名空间作用域与类静态成员中的初始化与线程退出时销毁规则。"
+            }
+          ]
+        },
+        {
+          "title": "<thread>、<mutex>、<condition_variable> 与 <future>",
+          "slug": "02_线程_互斥量_条件变量与异步期约",
+          "intro": "掌握标准库线程管理、死锁安全加锁原语、条件等待及异步任务结果传递。",
+          "subsections": [
+            {
+              "title": "std::thread 线程创建、join / detach 与 std::this_thread 工具",
+              "slug": "01_std_thread_与_this_thread",
+              "intro": "掌握可调用对象传参拷贝/移动规则、未 join/detach 析构终止（std::terminate）及 yield / sleep_for / sleep_until。"
+            },
+            {
+              "title": "std::mutex、recursive_mutex、timed_mutex、lock_guard、unique_lock、std::lock 与 std::call_once",
+              "slug": "02_互斥量_lock_guard_unique_lock_与_call_once",
+              "intro": "掌握各类互斥量与锁包装器、adopt_lock/defer_lock/try_to_lock 策略、std::lock 防多锁死锁及 once_flag / std::call_once 线程安全单次初始化。"
+            },
+            {
+              "title": "std::condition_variable 与 std::condition_variable_any",
+              "slug": "03_condition_variable_与等待谓词",
+              "intro": "掌握结合互斥量与谓词循环的 wait/wait_for/wait_until、notify_one/notify_all、虚假唤醒与丢失唤醒防范。"
+            },
+            {
+              "title": "std::promise、std::future、std::shared_future、std::packaged_task 与 std::async",
+              "slug": "04_promise_future_packaged_task_与_async",
+              "intro": "掌握共享状态传递返回值/异常、包装可调用对象为异步任务及 std::async 启动策略（launch::async / launch::deferred）。"
+            }
+          ]
+        },
+        {
+          "title": "<atomic> 原子操作、内存序（memory_order）与栅栏",
+          "slug": "03_atomic_原子操作_内存序与栅栏",
+          "intro": "掌握无锁原子类型、原子读改写原语、六种 memory_order 语义、信号处理器原子安全与内存栅栏。",
+          "subsections": [
+            {
+              "title": "std::atomic<T>、特化接口、is_lock_free 与信号处理器安全",
+              "slug": "01_std_atomic_类型_锁自由查询与信号安全",
+              "intro": "掌握 load、store、exchange、compare_exchange_weak / compare_exchange_strong、fetch_add/sub/and/or/xor 及 is_lock_free()。"
+            },
+            {
+              "title": "memory_order（relaxed、consume、acquire、release、acq_rel、seq_cst）与原子栅栏",
+              "slug": "02_memory_order_语义与原子栅栏",
+              "intro": "理解 acquire-release 同步、relaxed 计数器/标志、seq_cst 全局顺序、std::atomic_thread_fence / std::atomic_signal_fence 与释放序列规则。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "C++11 标准库容器、智能指针、字符串、时间、正则与错误处理",
+      "slug": "06_cpp11_standard_library_components",
+      "intro": "系统掌握 C++11 新增与增强的标准库组件：智能指针、新容器、tuple/tie/function/bind、chrono、regex、算法/迭代器增强、system_error 与 exception_ptr。",
+      "sections": [
+        {
+          "title": "现代智能指针（<memory>）：unique_ptr、shared_ptr 与 weak_ptr",
+          "slug": "01_智能指针_unique_ptr_shared_ptr_与_weak_ptr",
+          "intro": "掌握独占所有权、共享引用计数控制块、弱引用破循环及自定义删除器。",
+          "subsections": [
+            {
+              "title": "std::unique_ptr 独占所有权、数组特化与自定义删除器",
+              "slug": "01_std_unique_ptr_与自定义删除器",
+              "intro": "理解不可拷贝可移动语义、unique_ptr<T[]> 专用接口、空基类优化（EBO）与资源句柄封装。"
+            },
+            {
+              "title": "std::shared_ptr、std::make_shared、std::weak_ptr 与 enable_shared_from_this",
+              "slug": "02_std_shared_ptr_weak_ptr_与_shared_from_this",
+              "intro": "掌握强/弱引用计数控制块、make_shared 单次分配与大对象生命周期延迟释放权衡、循环引用排查及安全获取自身 shared_ptr。"
+            }
+          ]
+        },
+        {
+          "title": "新容器、元组与可调用对象包装",
+          "slug": "02_新容器_tuple_与_function_bind",
+          "intro": "掌握定长数组、单向链表、无序哈希容器、embrace 就地构造、元组解包与可调用对象适配。",
+          "subsections": [
+            {
+              "title": "std::array 与 std::forward_list",
+              "slug": "01_std_array_与_std_forward_list",
+              "intro": "掌握栈/聚合内连续定长数组 std::array<T, N> 与内存紧凑单向链表 std::forward_list<T>（before_begin / splice_after）。"
+            },
+            {
+              "title": "无序关联容器：std::unordered_map、unordered_set、unordered_multimap 与 unordered_multiset",
+              "slug": "02_无序哈希容器_map_set_multimap_multiset",
+              "intro": "掌握哈希函数、键等价谓词、桶（bucket）接口、负载因子（load_factor / max_load_factor）与 rehash/reserve 性能调优。"
+            },
+            {
+              "title": "容器移动增强与 emplace / emplace_hint / emplace_front / emplace_back",
+              "slug": "03_容器就地构造_emplace_与移动语义增强",
+              "intro": "理解在容器内部直接构造元素避免临时对象拷贝/移动的原理，以及元素移动进出容器的语义。"
+            },
+            {
+              "title": "std::tuple、std::make_tuple、std::tie、std::ignore 与 std::forward_as_tuple",
+              "slug": "04_std_tuple_std_tie_与_std_ignore",
+              "intro": "掌握异构元组构造与 std::get、std::tie 绑定左值解包与字典序比较、std::ignore 占位忽略及转发元组。"
+            },
+            {
+              "title": "std::function、std::bind、std::placeholders 与 std::ref / std::cref",
+              "slug": "05_std_function_std_bind_与引用包装",
+              "intro": "掌握类型擦除函数包装器 std::function、参数绑定与重排 std::bind、占位符 _1/_2... 及 std::ref/std::cref 包装引用传入线程或绑定器。"
+            }
+          ]
+        },
+        {
+          "title": "<chrono> 时间库、<regex> 正则表达式、算法/迭代器与错误处理",
+          "slug": "03_chrono_regex_算法迭代器与错误处理",
+          "intro": "掌握类型安全时间系统、标准正则表达式、迭代器/算法扩充以及跨平台系统错误与异常指针传递。",
+          "subsections": [
+            {
+              "title": "<chrono>：duration、time_point 与 system_clock / steady_clock / high_resolution_clock",
+              "slug": "01_chrono_duration_time_point_与时钟",
+              "intro": "掌握基于 std::ratio 的时间段 duration、duration_cast、时间点 time_point 以及系统时钟、单调时钟与高精度时钟选型。"
+            },
+            {
+              "title": "<regex>：ECMAScript 语法、regex_match / regex_search / regex_replace 与迭代器",
+              "slug": "02_regex_匹配_搜索_替换与正则迭代器",
+              "intro": "掌握 std::regex / std::wregex、smatch / cmatch 捕获分组、regex_iterator / regex_token_iterator 与性能注意事项。"
+            },
+            {
+              "title": "迭代器与算法增强（begin/end、next/prev、move_iterator、all_of/any_of/none_of、copy_if、iota、minmax、is_sorted）",
+              "slug": "03_迭代器与算法增强",
+              "intro": "掌握非成员 std::begin/std::end、迭代器步进 std::next/std::prev、移动迭代器适配器及 C++11 新增标准算法。"
+            },
+            {
+              "title": "<system_error>、std::error_code / error_condition 与 <exception> std::exception_ptr",
+              "slug": "04_system_error_与_exception_ptr",
+              "intro": "掌握错误码类别（error_category）、std::error_code 与 std::error_condition 分层错误抽象、std::system_error 异常，以及跨线程捕获与重抛异常的 std::current_exception / std::rethrow_exception（std::exception_ptr）。"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
