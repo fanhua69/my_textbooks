@@ -24,6 +24,12 @@
 - [2.16 std::mutex](2.16_std::mutex/index.md)
 - [2.17 std::atomic](2.17_std::atomic/index.md)
 - [2.18 std::condition_variable](2.18_std::condition_variable/index.md)
+- [2.19 std::future and std::promise](2.19_std::future_and_std::promise/index.md)
+- [2.20 iterator improvements](2.20_iterator_improvements/index.md)
+- [2.21 new algorithms](2.21_new_algorithms/index.md)
+- [2.22 std::ratio](2.22_std::ratio/index.md)
+- [2.23 std::system_error](2.23_std::system_error/index.md)
+- [2.24 std::exception_ptr](2.24_std::exception_ptr/index.md)
 
 ## 导航
 

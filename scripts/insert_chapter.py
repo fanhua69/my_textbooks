@@ -118,7 +118,12 @@ def resolve_level_widths(
 
     for depth in range(1, len(target_parts) + 1):
         prefix = target_parts[:depth]
-        siblings = list_numbered_dirs(current)
+        parent_prefix = prefix[:-1]
+        siblings = [
+            item
+            for item in list_numbered_dirs(current)
+            if len(item[0]) == depth and item[0][:-1] == parent_prefix
+        ]
         existing_count = len(siblings)
 
         if depth < len(target_parts):
@@ -129,7 +134,7 @@ def resolve_level_widths(
             else:
                 level_total = max(existing_count + 1, prefix[-1])
 
-        widths.append(calc_width(level_total))
+        widths.append(calc_width(max(level_total, prefix[-1])))
 
         if depth < len(target_parts):
             next_dir = find_dir_by_parts(current, prefix)
@@ -160,12 +165,20 @@ def rename_subtree(
                 collect(child)
         m = DIR_NAME_RE.match(current.name)
         if m:
-            cur_parts = number_parts(m.group(1))
+            raw_number = m.group(1)
+            raw_components = raw_number.split(".")
+            cur_parts = number_parts(raw_number)
             if is_same_or_descendant_parts(old_prefix_parts, cur_parts):
                 updated_parts = replace_prefix_parts(
                     cur_parts, old_prefix_parts, new_prefix_parts
                 )
-                new_num_str = format_parts(updated_parts, widths)
+                formatted_prefix = format_parts(
+                    updated_parts[: len(new_prefix_parts)], widths
+                )
+                suffix_components = raw_components[len(old_prefix_parts) :]
+                new_num_str = ".".join(
+                    [formatted_prefix, *suffix_components]
+                )
                 new_name = f"{new_num_str}_{m.group(2)}"
                 to_rename.append((current, new_name))
 
