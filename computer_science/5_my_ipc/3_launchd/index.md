@@ -36,13 +36,10 @@
 现代 macOS 推荐使用 `bootstrap` / `bootout` / `print` / `kickstart` 等子命令管理服务：
 
 ```bash
-# 查看系统域下某个守护进程的详细状态
 launchctl print system/<com.example.daemon.label>
 
-# 查看当前用户图形会话域下的代理状态
 launchctl print gui/\$(id -u)/<com.example.agent.label>
 
-# 列出当前域下已加载的服务
 launchctl list
 
 
@@ -51,5 +48,5 @@ launchctl list
 ## 导航
 
 - **上一层**：[5_my_ipc](../index.md)
-- **前一节**：[IPC Intro](../2_ipc_intro/index.md)
-- **后一节**：[基础隔离与安全加固项](../4_systemd/index.md)
+- **前一节**：[2 IPC Intro](../2_ipc_intro/index.md)
+- **后一节**：[4 systemd](../4_systemd/index.md)

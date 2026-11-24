@@ -13,6 +13,6 @@
 
 ## 导航
 
-← 上一节：[4 Lock-Free 算法设计核心技术  lock free algorithm design](../4_Lock-Free%20算法设计核心技术_lock_free_algorithm_design/index.md)
+← 上一节：[4 Lock-Free 算法设计核心技术  lock free algorithm design](../4_Lock-Free%20%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF_lock_free_algorithm_design/index.md)
 ↑ 返回上级：[No-Lock Programming：C++ 无锁编程](../index.md)
 下一节：[6 内存管理与安全回收机制  memory reclamation and lifetime management](../6_内存管理与安全回收机制_memory_reclamation_and_lifetime_management/index.md) →

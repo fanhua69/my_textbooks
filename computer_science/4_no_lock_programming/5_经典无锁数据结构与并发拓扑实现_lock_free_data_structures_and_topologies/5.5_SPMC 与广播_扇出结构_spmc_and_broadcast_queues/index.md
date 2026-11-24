@@ -12,6 +12,6 @@
 
 ## 导航
 
-← 上一节：[5.4 MPMC 无锁队列  mpmc lock free queue](../5.4_MPMC%20无锁队列_mpmc_lock_free_queue/index.md)
+← 上一节：[5.4 MPMC 无锁队列  mpmc lock free queue](../5.4_MPMC%20%E6%97%A0%E9%94%81%E9%98%9F%E5%88%97_mpmc_lock_free_queue/index.md)
 ↑ 返回上级：[5 经典无锁数据结构与并发拓扑实现  lock free data structures and topologies](../index.md)
 下一节：[5.6 其他常见无锁数据结构  other lock free data structures](../5.6_其他常见无锁数据结构_other_lock_free_data_structures/index.md) →

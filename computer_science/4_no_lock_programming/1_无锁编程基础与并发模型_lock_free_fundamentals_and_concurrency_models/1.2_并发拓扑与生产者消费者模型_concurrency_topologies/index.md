@@ -17,4 +17,4 @@
 
 ← 上一节：[1.1 并发基础与同步原语  concurrency fundamentals](../1.1_并发基础与同步原语_concurrency_fundamentals/index.md)
 ↑ 返回上级：[1 无锁编程基础与并发模型  lock free fundamentals and concurrency models](../index.md)
-下一节：[1.3 Lock-Free、Wait-Free 与进度保证  progress guarantees](../1.3_Lock-Free、Wait-Free%20与进度保证_progress_guarantees/index.md) →
+下一节：[1.3 Lock-Free、Wait-Free 与进度保证  progress guarantees](../1.3_Lock-Free%E3%80%81Wait-Free%20%E4%B8%8E%E8%BF%9B%E5%BA%A6%E4%BF%9D%E8%AF%81_progress_guarantees/index.md) →

@@ -6,6 +6,6 @@
 
 ## 导航
 
-← 上一节：[1.2.3 SPMC：Single Producer Multiple Consumers  spmc single producer multiple consumers](../1.2.3_SPMC：Single%20Producer%20Multiple%20Consumers_spmc_single_producer_multiple_consumers/index.md)
+← 上一节：[1.2.3 SPMC：Single Producer Multiple Consumers  spmc single producer multiple consumers](../1.2.3_SPMC%EF%BC%9ASingle%20Producer%20Multiple%20Consumers_spmc_single_producer_multiple_consumers/index.md)
 ↑ 返回上级：[1.2 并发拓扑与生产者消费者模型  concurrency topologies](../index.md)
-下一节：[1.2.5 MPMC：Multiple Producers Multiple Consumers  mpmc multiple producers multiple consumers](../1.2.5_MPMC：Multiple%20Producers%20Multiple%20Consumers_mpmc_multiple_producers_multiple_consumers/index.md) →
+下一节：[1.2.5 MPMC：Multiple Producers Multiple Consumers  mpmc multiple producers multiple consumers](../1.2.5_MPMC%EF%BC%9AMultiple%20Producers%20Multiple%20Consumers_mpmc_multiple_producers_multiple_consumers/index.md) →

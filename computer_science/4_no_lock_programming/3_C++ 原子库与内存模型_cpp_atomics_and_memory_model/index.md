@@ -12,6 +12,6 @@
 
 ## 导航
 
-← 上一节：[2 CPU 原子操作、缓存一致性与硬件基础  hardware atomic operations and cache coherence](../2_CPU%20原子操作、缓存一致性与硬件基础_hardware_atomic_operations_and_cache_coherence/index.md)
+← 上一节：[2 CPU 原子操作、缓存一致性与硬件基础  hardware atomic operations and cache coherence](../2_CPU%20%E5%8E%9F%E5%AD%90%E6%93%8D%E4%BD%9C%E3%80%81%E7%BC%93%E5%AD%98%E4%B8%80%E8%87%B4%E6%80%A7%E4%B8%8E%E7%A1%AC%E4%BB%B6%E5%9F%BA%E7%A1%80_hardware_atomic_operations_and_cache_coherence/index.md)
 ↑ 返回上级：[No-Lock Programming：C++ 无锁编程](../index.md)
-下一节：[4 Lock-Free 算法设计核心技术  lock free algorithm design](../4_Lock-Free%20算法设计核心技术_lock_free_algorithm_design/index.md) →
+下一节：[4 Lock-Free 算法设计核心技术  lock free algorithm design](../4_Lock-Free%20%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF_lock_free_algorithm_design/index.md) →

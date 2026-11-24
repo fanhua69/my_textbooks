@@ -12,6 +12,6 @@
 
 ## 导航
 
-← 上一节：[3 C++ 原子库与内存模型  cpp atomics and memory model](../../3_C++%20原子库与内存模型_cpp_atomics_and_memory_model/index.md)
+← 上一节：[3 C++ 原子库与内存模型  cpp atomics and memory model](../../3_C%2B%2B%20%E5%8E%9F%E5%AD%90%E5%BA%93%E4%B8%8E%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B_cpp_atomics_and_memory_model/index.md)
 ↑ 返回上级：[4 Lock-Free 算法设计核心技术  lock free algorithm design](../index.md)
 下一节：[4.2 线性化与算法正确性  linearizability and correctness](../4.2_线性化与算法正确性_linearizability_and_correctness/index.md) →

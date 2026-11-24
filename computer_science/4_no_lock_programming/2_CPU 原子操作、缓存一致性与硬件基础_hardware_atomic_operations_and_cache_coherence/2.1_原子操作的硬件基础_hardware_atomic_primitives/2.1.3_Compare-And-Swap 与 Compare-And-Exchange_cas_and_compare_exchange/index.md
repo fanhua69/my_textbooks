@@ -6,6 +6,6 @@
 
 ## 导航
 
-← 上一节：[2.1.2 Read-Modify-Write 操作  read modify write](../2.1.2_Read-Modify-Write%20操作_read_modify_write/index.md)
+← 上一节：[2.1.2 Read-Modify-Write 操作  read modify write](../2.1.2_Read-Modify-Write%20%E6%93%8D%E4%BD%9C_read_modify_write/index.md)
 ↑ 返回上级：[2.1 原子操作的硬件基础  hardware atomic primitives](../index.md)
-下一节：[2.1.4 Test-And-Set、Fetch-And-Add 与交换指令  test and set fetch add and exchange](../2.1.4_Test-And-Set、Fetch-And-Add%20与交换指令_test_and_set_fetch_add_and_exchange/index.md) →
+下一节：[2.1.4 Test-And-Set、Fetch-And-Add 与交换指令  test and set fetch add and exchange](../2.1.4_Test-And-Set%E3%80%81Fetch-And-Add%20%E4%B8%8E%E4%BA%A4%E6%8D%A2%E6%8C%87%E4%BB%A4_test_and_set_fetch_add_and_exchange/index.md) →

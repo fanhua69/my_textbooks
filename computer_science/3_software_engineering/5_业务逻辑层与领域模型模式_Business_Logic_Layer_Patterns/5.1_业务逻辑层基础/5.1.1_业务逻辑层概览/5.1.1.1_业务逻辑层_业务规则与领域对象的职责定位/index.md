@@ -1,0 +1,11 @@
+# 5.1.1.1 业务逻辑层、业务规则与领域对象的职责定位
+
+**介绍**: 界定业务逻辑层对业务规则、领域对象与业务流程的承载责任，以及与表现层、数据访问层的依赖方向。
+
+---
+
+## 导航
+
+← 上一节：[4 表现层与用户界面模式 (Presentation Layer Patterns)](../../../../4_表现层与用户界面模式_Presentation_Layer_Patterns/index.md)
+↑ 返回上级：[5.1.1 业务逻辑层概览](../index.md)
+下一节：[5.1.1.2 应用逻辑 (Application Logic) 与领域逻辑 (Domain Logic) 的边界划分](../5.1.1.2_应用逻辑_Application_Logic_与领域逻辑_Domain_Logic_的边界划分/index.md) →

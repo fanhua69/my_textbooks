@@ -15,6 +15,6 @@
 
 ## 导航
 
-← 上一节：[3.1 C++ 并发内存模型  cpp concurrency memory model](../3.1_C++%20并发内存模型_cpp_concurrency_memory_model/index.md)
+← 上一节：[3.1 C++ 并发内存模型  cpp concurrency memory model](../3.1_C%2B%2B%20%E5%B9%B6%E5%8F%91%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B_cpp_concurrency_memory_model/index.md)
 ↑ 返回上级：[3 C++ 原子库与内存模型  cpp atomics and memory model](../index.md)
-下一节：[3.3 Memory Order 六种内存序  memory order](../3.3_Memory%20Order%20六种内存序_memory_order/index.md) →
+下一节：[3.3 Memory Order 六种内存序  memory order](../3.3_Memory%20Order%20%E5%85%AD%E7%A7%8D%E5%86%85%E5%AD%98%E5%BA%8F_memory_order/index.md) →

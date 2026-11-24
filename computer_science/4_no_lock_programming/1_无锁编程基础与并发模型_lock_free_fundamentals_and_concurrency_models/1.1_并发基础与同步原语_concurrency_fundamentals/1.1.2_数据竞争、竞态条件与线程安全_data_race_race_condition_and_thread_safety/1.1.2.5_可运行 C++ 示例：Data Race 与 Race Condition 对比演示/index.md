@@ -121,4 +121,4 @@ int main() {
 
 - **上一层**：[1.1.2 数据竞争、竞态条件与线程安全 data race race condition and thread safety](../index.md)
 - **前一节**：[1.1.2.4 历史演进、系统差异与工程对比](../1.1.2.4_历史演进、系统差异与工程对比/index.md)
-- **后一节**：[1.1.3 互斥锁、读写锁与自旋锁  mutex rwlock and spinlock](../../1.1.3_互斥锁、读写锁与自旋锁_mutex_rwlock_and_spinlock/index.md)
+- **后一节**：[1.1.3 互斥锁、读写锁与自旋锁 mutex rwlock and spinlock](../../1.1.3_互斥锁、读写锁与自旋锁_mutex_rwlock_and_spinlock/index.md)

@@ -14,6 +14,6 @@
 
 ## 导航
 
-← 上一节：[3.2 std::atomic 全面介绍  std atomic](../3.2_std__atomic%20全面介绍_std_atomic/index.md)
+← 上一节：[3.2 std::atomic 全面介绍  std atomic](../3.2_std__atomic%20%E5%85%A8%E9%9D%A2%E4%BB%8B%E7%BB%8D_std_atomic/index.md)
 ↑ 返回上级：[3 C++ 原子库与内存模型  cpp atomics and memory model](../index.md)
 下一节：[3.4 Fence、发布订阅与同步模式  fences and synchronization patterns](../3.4_Fence、发布订阅与同步模式_fences_and_synchronization_patterns/index.md) →

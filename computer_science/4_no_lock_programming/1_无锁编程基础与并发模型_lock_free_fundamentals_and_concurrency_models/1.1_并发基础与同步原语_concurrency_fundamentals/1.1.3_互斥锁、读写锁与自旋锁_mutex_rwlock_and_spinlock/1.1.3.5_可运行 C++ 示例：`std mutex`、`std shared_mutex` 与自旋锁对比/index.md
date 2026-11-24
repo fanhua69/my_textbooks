@@ -127,4 +127,4 @@ int main() {
 
 - **上一层**：[1.1.3 互斥锁、读写锁与自旋锁 mutex rwlock and spinlock](../index.md)
 - **前一节**：[1.1.3.4 公平性、饥饿与锁/无锁演进对比](../1.1.3.4_%E5%85%AC%E5%B9%B3%E6%80%A7%E3%80%81%E9%A5%A5%E9%A5%BF%E4%B8%8E%E9%94%81%20%E6%97%A0%E9%94%81%E6%BC%94%E8%BF%9B%E5%AF%B9%E6%AF%94/index.md)
-- **后一节**：[1.1.4 条件变量、信号量与屏障  condition variable semaphore and barrier](../../1.1.4_条件变量、信号量与屏障_condition_variable_semaphore_and_barrier/index.md)
+- **后一节**：[1.1.4 条件变量、信号量与屏障 condition variable semaphore and barrier](../../1.1.4_条件变量、信号量与屏障_condition_variable_semaphore_and_barrier/index.md)

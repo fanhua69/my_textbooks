@@ -13,8 +13,8 @@
 
 ## 导航
 
-- **后一节**：[6 Cross-Platform Inter-Process Communication (IPC) Engineering](../6_ipc/index.md)
+- **后一节**：[1 intro](1_new/index.md)
 
 
-- **上一层**：[computer_science](../index.md)
-- **前一节**：[4 No-Lock Programming：C++ 无锁编程](../4_no_lock_programming/index.md)
+- **上一层**：无
+- **前一节**：无

@@ -102,8 +102,8 @@ macOS 继承了 **BSD / Mach 混合内核（XNU）** 的体系结构，其 IPC �
 ## 导航
 
 - **上一层**：[5_my_ipc](../index.md))
-- **前一节**：[intro](../1_new/index.md)
-- **后一节**：[查看系统域下某个守护进程的详细状态](../3_launchd/index.md)
+- **前一节**：[1 intro](../1_new/index.md)
+- **后一节**：[3 launchd](../3_launchd/index.md)
 
 <!-- 
   链接占位说明：

@@ -1,0 +1,11 @@
+# 5.2.1 Page Cache 读命中、预读（Read-ahead）与脏页（Dirty Page）后台回写抖动
+
+**介绍**: 剖析突发大量刷盘或 dirty ratio 触发写限流/回写导致的应用延迟尖峰及调优思路。
+
+---
+
+## 导航
+
+← 上一节：[5.1 虚拟文件系统（VFS）、元数据与块设备 I/O 栈](../../5.1_vfs_元数据与块设备_i_o_栈/index.md)
+↑ 返回上级：[5.2 页缓存（Page Cache）、脏页回写与 Direct I/O](../index.md)
+下一节：[5.2.2 Buffered I/O vs Direct I/O（O DIRECT / FILE FLAG NO BUFFERING）与对齐约束](../5.2.2_buffered_io_vs_direct_io_与对齐约束/index.md) →

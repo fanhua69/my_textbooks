@@ -6,6 +6,6 @@
 
 ## 导航
 
-← 上一节：[6.2.5 Hazard Pointer Queue 实现  hazard pointer queue](../6.2.5_Hazard%20Pointer%20Queue%20实现_hazard_pointer_queue/index.md)
+← 上一节：[6.2.5 Hazard Pointer Queue 实现  hazard pointer queue](../6.2.5_Hazard%20Pointer%20Queue%20%E5%AE%9E%E7%8E%B0_hazard_pointer_queue/index.md)
 ↑ 返回上级：[6.2 Hazard Pointers  hazard pointers](../index.md)
-下一节：[6.3 Epoch-Based Reclamation 与 QSBR  epoch based reclamation](../../6.3_Epoch-Based%20Reclamation%20与%20QSBR_epoch_based_reclamation/index.md) →
+下一节：[6.3 Epoch-Based Reclamation 与 QSBR  epoch based reclamation](../../6.3_Epoch-Based%20Reclamation%20%E4%B8%8E%20QSBR_epoch_based_reclamation/index.md) →

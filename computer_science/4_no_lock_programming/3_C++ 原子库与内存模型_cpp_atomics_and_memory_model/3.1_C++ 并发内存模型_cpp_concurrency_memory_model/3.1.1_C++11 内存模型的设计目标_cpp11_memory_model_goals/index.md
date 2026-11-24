@@ -6,6 +6,6 @@
 
 ## 导航
 
-← 上一节：[2 CPU 原子操作、缓存一致性与硬件基础  hardware atomic operations and cache coherence](../../../2_CPU%20原子操作、缓存一致性与硬件基础_hardware_atomic_operations_and_cache_coherence/index.md)
+← 上一节：[2 CPU 原子操作、缓存一致性与硬件基础  hardware atomic operations and cache coherence](../../../2_CPU%20%E5%8E%9F%E5%AD%90%E6%93%8D%E4%BD%9C%E3%80%81%E7%BC%93%E5%AD%98%E4%B8%80%E8%87%B4%E6%80%A7%E4%B8%8E%E7%A1%AC%E4%BB%B6%E5%9F%BA%E7%A1%80_hardware_atomic_operations_and_cache_coherence/index.md)
 ↑ 返回上级：[3.1 C++ 并发内存模型  cpp concurrency memory model](../index.md)
-下一节：[3.1.2 Sequenced-Before 与 Dependency-Ordered-Before  sequenced before and dependency ordered before](../3.1.2_Sequenced-Before%20与%20Dependency-Ordered-Before_sequenced_before_and_dependency_ordered_before/index.md) →
+下一节：[3.1.2 Sequenced-Before 与 Dependency-Ordered-Before  sequenced before and dependency ordered before](../3.1.2_Sequenced-Before%20%E4%B8%8E%20Dependency-Ordered-Before_sequenced_before_and_dependency_ordered_before/index.md) →

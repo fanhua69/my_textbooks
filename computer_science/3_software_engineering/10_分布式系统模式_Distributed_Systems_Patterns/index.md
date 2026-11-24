@@ -11,6 +11,6 @@
 
 ## 导航
 
-← 上一节：[9 软件架构：风格、分层与云原生](../09_软件架构_风格_分层与云原生/index.md)
+← 上一节：[9 软件架构：风格、分层与云原生](../9_软件架构_风格_分层与云原生/index.md)
 ↑ 返回上级：[software_engineering_third](../index.md)
 下一节：[11 部署与运行层模式 (Deployment & Runtime Patterns)](../11_部署与运行层模式_Deployment_Runtime_Patterns/index.md) →

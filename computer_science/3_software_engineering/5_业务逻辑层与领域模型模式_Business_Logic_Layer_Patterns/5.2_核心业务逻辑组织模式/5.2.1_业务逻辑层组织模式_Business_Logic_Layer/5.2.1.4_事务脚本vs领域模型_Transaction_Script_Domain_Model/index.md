@@ -1,0 +1,11 @@
+# 5.2.1.4 事务脚本 (Transaction Script) vs 领域模型 (Domain Model)
+
+**介绍**: 对比面向过程按用例组织简单逻辑的事务脚本，与面向对象封装复杂规则与状态的充血领域模型（防范贫血模型陷阱）。
+
+---
+
+## 导航
+
+← 上一节：[5.2.1.3 表模块 (Table Module)](../5.2.1.3_表模块_Table_Module/index.md)
+↑ 返回上级：[5.2.1 业务逻辑层组织模式 (Business Logic Layer)](../index.md)
+下一节：[5.2.1.5 服务层 (Service Layer)](../5.2.1.5_服务层_Service_Layer/index.md) →

@@ -8,4 +8,4 @@
 
 ← 上一节：[3.2.7 std::atomic  ref atomic ref](../3.2.7_std__atomic_ref_atomic_ref/index.md)
 ↑ 返回上级：[3.2 std::atomic 全面介绍  std atomic](../index.md)
-下一节：[3.3 Memory Order 六种内存序  memory order](../../3.3_Memory%20Order%20六种内存序_memory_order/index.md) →
+下一节：[3.3 Memory Order 六种内存序  memory order](../../3.3_Memory%20Order%20%E5%85%AD%E7%A7%8D%E5%86%85%E5%AD%98%E5%BA%8F_memory_order/index.md) →

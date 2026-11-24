@@ -6,6 +6,6 @@
 
 ## 导航
 
-← 上一节：[7.3 线程调度与 NUMA 优化  thread scheduling and numa](../../7.3_线程调度与%20NUMA%20优化_thread_scheduling_and_numa/index.md)
+← 上一节：[7.3 线程调度与 NUMA 优化  thread scheduling and numa](../../7.3_%E7%BA%BF%E7%A8%8B%E8%B0%83%E5%BA%A6%E4%B8%8E%20NUMA%20%E4%BC%98%E5%8C%96_thread_scheduling_and_numa/index.md)
 ↑ 返回上级：[7.4 低延迟系统中的无锁设计  lock free for low latency systems](../index.md)
-下一节：[7.4.2 Market Data 与行情分发  market data distribution](../7.4.2_Market%20Data%20与行情分发_market_data_distribution/index.md) →
+下一节：[7.4.2 Market Data 与行情分发  market data distribution](../7.4.2_Market%20Data%20%E4%B8%8E%E8%A1%8C%E6%83%85%E5%88%86%E5%8F%91_market_data_distribution/index.md) →

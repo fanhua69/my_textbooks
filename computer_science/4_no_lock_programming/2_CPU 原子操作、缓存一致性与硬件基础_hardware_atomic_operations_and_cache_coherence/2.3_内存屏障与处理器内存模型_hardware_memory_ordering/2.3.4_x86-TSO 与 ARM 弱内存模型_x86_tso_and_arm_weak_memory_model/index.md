@@ -6,6 +6,6 @@
 
 ## 导航
 
-← 上一节：[2.3.3 Memory Fence 与 Barrier  memory fence and barrier](../2.3.3_Memory%20Fence%20与%20Barrier_memory_fence_and_barrier/index.md)
+← 上一节：[2.3.3 Memory Fence 与 Barrier  memory fence and barrier](../2.3.3_Memory%20Fence%20%E4%B8%8E%20Barrier_memory_fence_and_barrier/index.md)
 ↑ 返回上级：[2.3 内存屏障与处理器内存模型  hardware memory ordering](../index.md)
 下一节：[2.3.5 原子操作的硬件代价  cost of atomic operations](../2.3.5_原子操作的硬件代价_cost_of_atomic_operations/index.md) →

@@ -11,6 +11,6 @@
 
 ## 导航
 
-← 上一节：[3 C++ 原子库与内存模型  cpp atomics and memory model](../3_C++%20原子库与内存模型_cpp_atomics_and_memory_model/index.md)
+← 上一节：[3 C++ 原子库与内存模型  cpp atomics and memory model](../3_C%2B%2B%20%E5%8E%9F%E5%AD%90%E5%BA%93%E4%B8%8E%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B_cpp_atomics_and_memory_model/index.md)
 ↑ 返回上级：[No-Lock Programming：C++ 无锁编程](../index.md)
 下一节：[5 经典无锁数据结构与并发拓扑实现  lock free data structures and topologies](../5_经典无锁数据结构与并发拓扑实现_lock_free_data_structures_and_topologies/index.md) →

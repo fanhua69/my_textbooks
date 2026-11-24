@@ -1,4 +1,5 @@
 # 4.1 systemd 命令详解：Linux 服务与系统管理
+
 **介绍**: **systemd Commands: Linux Service and System Management**
 
 ## 1. systemd 是什么？
@@ -125,19 +126,14 @@ systemctl status nginx
 ### 3.2 启动、停止和重启
 
 ```bash
-# 启动
 sudo systemctl start nginx
 
-# 停止
 sudo systemctl stop nginx
 
-# 重启
 sudo systemctl restart nginx
 
-# 尝试重新加载配置，不重启主进程
 sudo systemctl reload nginx
 
-# 如果支持 reload，否则重启
 sudo systemctl reload-or-restart nginx
 ```
 
@@ -146,16 +142,12 @@ sudo systemctl reload-or-restart nginx
 ### 3.3 开机启动管理
 
 ```bash
-# 设置开机自动启动
 sudo systemctl enable nginx
 
-# 取消开机自动启动
 sudo systemctl disable nginx
 
-# 设置开机启动，并立即启动
 sudo systemctl enable --now nginx
 
-# 取消开机启动，并立即停止
 sudo systemctl disable --now nginx
 ```
 
@@ -341,13 +333,10 @@ journalctl -u nginx -b
 ### 5.3 按时间查询
 
 ```bash
-# 今天的日志
 journalctl --since today
 
-# 最近一小时
 journalctl --since "1 hour ago"
 
-# 指定时间范围
 journalctl --since "2026-11-23 10:00:00" \
            --until "2026-11-23 11:00:00"
 ```
@@ -540,16 +529,12 @@ WantedBy=multi-user.target
 修改 Unit 文件后：
 
 ```bash
-# 重新加载 Unit 配置
 sudo systemctl daemon-reload
 
-# 设置开机启动
 sudo systemctl enable my_service
 
-# 启动
 sudo systemctl start my_service
 
-# 查看状态
 systemctl status my_service
 ```
 
@@ -848,7 +833,7 @@ systemd 不只是一个启动程序的工具，它是 Linux 用户空间的服�
 ## 导航
 
 - **上一层**：[基础隔离与安全加固项](../index.md)
-- **前一节**：[查看系统域下某个守护进程的详细状态](../../3_launchd/index.md)
+- **前一节**：[3 launchd](../../3_launchd/index.md)
 
 
-- **后一节**：[6 Cross-Platform Inter-Process Communication (IPC) Engineering](../../../6_ipc/index.md)
+- **后一节**：无

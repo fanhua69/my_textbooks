@@ -6,6 +6,6 @@
 
 ## 导航
 
-← 上一节：[3.4.1 atomic_thread_fence 与 atomic  signal fence atomic fences](../3.4.1_atomic_thread_fence%20与%20atomic_signal_fence_atomic_fences/index.md)
+← 上一节：[3.4.1 atomic_thread_fence 与 atomic  signal fence atomic fences](../3.4.1_atomic_thread_fence%20%E4%B8%8E%20atomic_signal_fence_atomic_fences/index.md)
 ↑ 返回上级：[3.4 Fence、发布订阅与同步模式  fences and synchronization patterns](../index.md)
-下一节：[3.4.3 Message Passing 模式  message passing](../3.4.3_Message%20Passing%20模式_message_passing/index.md) →
+下一节：[3.4.3 Message Passing 模式  message passing](../3.4.3_Message%20Passing%20%E6%A8%A1%E5%BC%8F_message_passing/index.md) →

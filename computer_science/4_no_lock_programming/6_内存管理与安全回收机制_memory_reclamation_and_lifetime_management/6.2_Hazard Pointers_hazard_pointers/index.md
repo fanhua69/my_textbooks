@@ -15,4 +15,4 @@
 
 ← 上一节：[6.1 无锁数据结构的内存生命周期问题  memory lifetime problems](../6.1_无锁数据结构的内存生命周期问题_memory_lifetime_problems/index.md)
 ↑ 返回上级：[6 内存管理与安全回收机制  memory reclamation and lifetime management](../index.md)
-下一节：[6.3 Epoch-Based Reclamation 与 QSBR  epoch based reclamation](../6.3_Epoch-Based%20Reclamation%20与%20QSBR_epoch_based_reclamation/index.md) →
+下一节：[6.3 Epoch-Based Reclamation 与 QSBR  epoch based reclamation](../6.3_Epoch-Based%20Reclamation%20%E4%B8%8E%20QSBR_epoch_based_reclamation/index.md) →

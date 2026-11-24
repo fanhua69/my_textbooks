@@ -14,4 +14,4 @@
 
 ← 上一节：[7 无锁编程性能工程与系统优化  lock free performance engineering](../../7_无锁编程性能工程与系统优化_lock_free_performance_engineering/index.md)
 ↑ 返回上级：[8 正确性验证、调试与工程实践  verification debugging and engineering](../index.md)
-下一节：[8.2 Sanitizer 与动态分析工具  sanitizers and dynamic analysis](../8.2_Sanitizer%20与动态分析工具_sanitizers_and_dynamic_analysis/index.md) →
+下一节：[8.2 Sanitizer 与动态分析工具  sanitizers and dynamic analysis](../8.2_Sanitizer%20%E4%B8%8E%E5%8A%A8%E6%80%81%E5%88%86%E6%9E%90%E5%B7%A5%E5%85%B7_sanitizers_and_dynamic_analysis/index.md) →

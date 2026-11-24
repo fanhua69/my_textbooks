@@ -1,0 +1,11 @@
+# 7.4.2.1 过滤 (Filtering)、排序 (Sorting) 与分页的 API 契约设计
+
+**介绍**: 设计统一的查询参数约定与分页响应结构；分页算法本身见数据访问层的分页模式。
+
+---
+
+## 导航
+
+← 上一节：[7.4.1 API 风格](../../7.4.1_API_风格/index.md)
+↑ 返回上级：[7.3.2 通用 API 设计规范](../index.md)
+下一节：[7.4.2.2 错误响应模型 (Error Response Model)：RFC 7807 Problem Details](../7.4.2.2_错误响应模型_Error_Response_Model_RFC_7807_Problem_Details/index.md) →

@@ -13,6 +13,6 @@
 
 ## 导航
 
-← 上一节：[5.3 MPSC 无锁队列  mpsc lock free queue](../5.3_MPSC%20无锁队列_mpsc_lock_free_queue/index.md)
+← 上一节：[5.3 MPSC 无锁队列  mpsc lock free queue](../5.3_MPSC%20%E6%97%A0%E9%94%81%E9%98%9F%E5%88%97_mpsc_lock_free_queue/index.md)
 ↑ 返回上级：[5 经典无锁数据结构与并发拓扑实现  lock free data structures and topologies](../index.md)
-下一节：[5.5 SPMC 与广播/扇出结构  spmc and broadcast queues](../5.5_SPMC%20与广播_扇出结构_spmc_and_broadcast_queues/index.md) →
+下一节：[5.5 SPMC 与广播/扇出结构  spmc and broadcast queues](../5.5_SPMC%20%E4%B8%8E%E5%B9%BF%E6%92%AD_%E6%89%87%E5%87%BA%E7%BB%93%E6%9E%84_spmc_and_broadcast_queues/index.md) →

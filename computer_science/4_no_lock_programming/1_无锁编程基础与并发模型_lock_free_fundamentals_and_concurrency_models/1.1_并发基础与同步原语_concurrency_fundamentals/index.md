@@ -12,6 +12,6 @@
 
 ## 导航
 
-← 上一节：[3 software_engineering_third](../../../3_software_engineering/index.md)
+← 上一节：[4 No-Lock Programming：C++ 无锁编程](../../index.md)
 ↑ 返回上级：[1 无锁编程基础与并发模型  lock free fundamentals and concurrency models](../index.md)
 下一节：[1.2 并发拓扑与生产者消费者模型  concurrency topologies](../1.2_并发拓扑与生产者消费者模型_concurrency_topologies/index.md) →

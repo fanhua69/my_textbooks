@@ -13,6 +13,6 @@
 
 ## 导航
 
-← 上一节：[4 Lock-Free 算法设计核心技术  lock free algorithm design](../../4_Lock-Free%20算法设计核心技术_lock_free_algorithm_design/index.md)
+← 上一节：[4 Lock-Free 算法设计核心技术  lock free algorithm design](../../4_Lock-Free%20%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF_lock_free_algorithm_design/index.md)
 ↑ 返回上级：[5 经典无锁数据结构与并发拓扑实现  lock free data structures and topologies](../index.md)
-下一节：[5.2 SPSC 无锁队列  spsc lock free queue](../5.2_SPSC%20无锁队列_spsc_lock_free_queue/index.md) →
+下一节：[5.2 SPSC 无锁队列  spsc lock free queue](../5.2_SPSC%20%E6%97%A0%E9%94%81%E9%98%9F%E5%88%97_spsc_lock_free_queue/index.md) →

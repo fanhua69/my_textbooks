@@ -71,4 +71,4 @@ int main() {
 
 - **上一层**：[1.1.1 进程、线程与共享内存模型 process thread and shared memory](../index.md)
 - **前一节**：[1.1.1.5 历史演进、系统差异与工程对比](../1.1.1.5_历史演进、系统差异与工程对比/index.md)
-- **后一节**：[1.1.2 数据竞争、竞态条件与线程安全  data race race condition and thread safety](../../1.1.2_数据竞争、竞态条件与线程安全_data_race_race_condition_and_thread_safety/index.md)
+- **后一节**：[1.1.2 数据竞争、竞态条件与线程安全 data race race condition and thread safety](../../1.1.2_数据竞争、竞态条件与线程安全_data_race_race_condition_and_thread_safety/index.md)

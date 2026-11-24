@@ -6,6 +6,6 @@
 
 ## 导航
 
-← 上一节：[3.2.2 load、store 与 exchange  load store exchange](../3.2.2_load、store%20与%20exchange_load_store_exchange/index.md)
+← 上一节：[3.2.2 load、store 与 exchange  load store exchange](../3.2.2_load%E3%80%81store%20%E4%B8%8E%20exchange_load_store_exchange/index.md)
 ↑ 返回上级：[3.2 std::atomic 全面介绍  std atomic](../index.md)
-下一节：[3.2.4 compare_exchange_weak 与 compare  exchange strong compare exchange weak and strong](../3.2.4_compare_exchange_weak%20与%20compare_exchange_strong_compare_exchange_weak_and_strong/index.md) →
+下一节：[3.2.4 compare_exchange_weak 与 compare  exchange strong compare exchange weak and strong](../3.2.4_compare_exchange_weak%20%E4%B8%8E%20compare_exchange_strong_compare_exchange_weak_and_strong/index.md) →

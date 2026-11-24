@@ -8,4 +8,4 @@
 
 ← 上一节：[7.1 性能指标与基准测试  metrics and benchmarking](../../7.1_性能指标与基准测试_metrics_and_benchmarking/index.md)
 ↑ 返回上级：[7.2 缓存与内存布局优化  cache and memory layout optimization](../index.md)
-下一节：[7.2.2 Padding、Alignment 与 False Sharing  padding alignment and false sharing](../7.2.2_Padding、Alignment%20与%20False%20Sharing_padding_alignment_and_false_sharing/index.md) →
+下一节：[7.2.2 Padding、Alignment 与 False Sharing  padding alignment and false sharing](../7.2.2_Padding%E3%80%81Alignment%20%E4%B8%8E%20False%20Sharing_padding_alignment_and_false_sharing/index.md) →

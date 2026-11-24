@@ -6,6 +6,6 @@
 
 ## 导航
 
-← 上一节：[9.1.1 项目一：固定容量 SPSC Ring Buffer  project spsc ring buffer](../9.1.1_项目一：固定容量%20SPSC%20Ring%20Buffer_project_spsc_ring_buffer/index.md)
+← 上一节：[9.1.1 项目一：固定容量 SPSC Ring Buffer  project spsc ring buffer](../9.1.1_%E9%A1%B9%E7%9B%AE%E4%B8%80%EF%BC%9A%E5%9B%BA%E5%AE%9A%E5%AE%B9%E9%87%8F%20SPSC%20Ring%20Buffer_project_spsc_ring_buffer/index.md)
 ↑ 返回上级：[9.1 基础项目：SPSC 与 MPSC 队列  foundational projects](../index.md)
-下一节：[9.1.3 项目三：MPSC 日志汇聚队列  project mpsc logging queue](../9.1.3_项目三：MPSC%20日志汇聚队列_project_mpsc_logging_queue/index.md) →
+下一节：[9.1.3 项目三：MPSC 日志汇聚队列  project mpsc logging queue](../9.1.3_%E9%A1%B9%E7%9B%AE%E4%B8%89%EF%BC%9AMPSC%20%E6%97%A5%E5%BF%97%E6%B1%87%E8%81%9A%E9%98%9F%E5%88%97_project_mpsc_logging_queue/index.md) →

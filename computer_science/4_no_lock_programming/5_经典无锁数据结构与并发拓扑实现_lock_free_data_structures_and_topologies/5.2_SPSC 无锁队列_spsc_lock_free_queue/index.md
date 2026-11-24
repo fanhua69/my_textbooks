@@ -13,6 +13,6 @@
 
 ## 导航
 
-← 上一节：[5.1 Ring Buffer 与循环队列  ring buffer and circular queue](../5.1_Ring%20Buffer%20与循环队列_ring_buffer_and_circular_queue/index.md)
+← 上一节：[5.1 Ring Buffer 与循环队列  ring buffer and circular queue](../5.1_Ring%20Buffer%20%E4%B8%8E%E5%BE%AA%E7%8E%AF%E9%98%9F%E5%88%97_ring_buffer_and_circular_queue/index.md)
 ↑ 返回上级：[5 经典无锁数据结构与并发拓扑实现  lock free data structures and topologies](../index.md)
-下一节：[5.3 MPSC 无锁队列  mpsc lock free queue](../5.3_MPSC%20无锁队列_mpsc_lock_free_queue/index.md) →
+下一节：[5.3 MPSC 无锁队列  mpsc lock free queue](../5.3_MPSC%20%E6%97%A0%E9%94%81%E9%98%9F%E5%88%97_mpsc_lock_free_queue/index.md) →

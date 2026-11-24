@@ -8,4 +8,4 @@
 
 ← 上一节：[7.2 缓存与内存布局优化  cache and memory layout optimization](../../7.2_缓存与内存布局优化_cache_and_memory_layout_optimization/index.md)
 ↑ 返回上级：[7.3 线程调度与 NUMA 优化  thread scheduling and numa](../index.md)
-下一节：[7.3.2 NUMA-aware 数据结构  numa aware data structures](../7.3.2_NUMA-aware%20数据结构_numa_aware_data_structures/index.md) →
+下一节：[7.3.2 NUMA-aware 数据结构  numa aware data structures](../7.3.2_NUMA-aware%20%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84_numa_aware_data_structures/index.md) →

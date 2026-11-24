@@ -12,4 +12,4 @@
 
 ← 上一节：[1 无锁编程基础与并发模型  lock free fundamentals and concurrency models](../1_无锁编程基础与并发模型_lock_free_fundamentals_and_concurrency_models/index.md)
 ↑ 返回上级：[No-Lock Programming：C++ 无锁编程](../index.md)
-下一节：[3 C++ 原子库与内存模型  cpp atomics and memory model](../3_C++%20原子库与内存模型_cpp_atomics_and_memory_model/index.md) →
+下一节：[3 C++ 原子库与内存模型  cpp atomics and memory model](../3_C%2B%2B%20%E5%8E%9F%E5%AD%90%E5%BA%93%E4%B8%8E%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B_cpp_atomics_and_memory_model/index.md) →

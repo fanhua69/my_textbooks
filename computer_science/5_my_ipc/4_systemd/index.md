@@ -57,7 +57,6 @@ ExecStart=/usr/local/bin/example-worker --config /etc/example-worker/config.toml
 Restart=on-failure
 RestartSec=3s
 
-# 基础隔离与安全加固项
 NoNewPrivileges=true
 PrivateTmp=true
 ProtectSystem=strict
@@ -69,15 +68,12 @@ WantedBy=multi-user.target
 
 ## 4. 日常运维与排查常用命令（systemctl / journalctl）
 ```Bash
-# 查看某个服务的运行状态、主进程 PID 与最近日志
 systemctl status example-worker.service
 
-# 重新加载 Unit 文件修改、启动/重启/停止与设置开机自启
 systemctl daemon-reload
 systemctl restart example-worker.service
 systemctl enable example-worker.service
 
-# 查看指定服务的实时与历史结构化日志
 journalctl -u example-worker.service -f
 journalctl -u example-worker.service --since "1 hour ago"
 ```
@@ -99,7 +95,7 @@ System 实例与 User 实例区分：系统级服务由 root 管理的 systemd �
 ## 导航
 
 - **上一层**：[5_my_ipc](../index.md)
-- **前一节**：[查看系统域下某个守护进程的详细状态](../3_launchd/index.md)
+- **前一节**：[3 launchd](../3_launchd/index.md)
 
 
-- **后一节**：[6 Cross-Platform Inter-Process Communication (IPC) Engineering](../../6_ipc/index.md)
+- **后一节**：无

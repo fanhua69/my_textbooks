@@ -1,0 +1,11 @@
+# 1.1.3.2 std::initializer list 与构造函数重载决议
+
+**介绍**: 理解 initializer_list 构造函数的优先级，以及与普通构造函数混用时的常见陷阱。
+
+---
+
+## 导航
+
+← 上一节：[1.1.3.1 列表初始化与窄化转换](../1.1.3.1_列表初始化与窄化转换/index.md)
+↑ 返回上级：[1.3 统一初始化、initializer list、nullptr 与 enum class](../index.md)
+下一节：[1.1.3.3 nullptr 与 std::nullptr  t](../1.1.3.3_nullptr_与_std_nullptr_t/index.md) →

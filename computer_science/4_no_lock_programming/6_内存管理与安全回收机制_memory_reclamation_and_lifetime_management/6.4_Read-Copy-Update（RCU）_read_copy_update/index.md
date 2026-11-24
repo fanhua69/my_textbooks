@@ -13,6 +13,6 @@
 
 ## 导航
 
-← 上一节：[6.3 Epoch-Based Reclamation 与 QSBR  epoch based reclamation](../6.3_Epoch-Based%20Reclamation%20与%20QSBR_epoch_based_reclamation/index.md)
+← 上一节：[6.3 Epoch-Based Reclamation 与 QSBR  epoch based reclamation](../6.3_Epoch-Based%20Reclamation%20%E4%B8%8E%20QSBR_epoch_based_reclamation/index.md)
 ↑ 返回上级：[6 内存管理与安全回收机制  memory reclamation and lifetime management](../index.md)
 下一节：[6.5 其他内存回收技术  other reclamation techniques](../6.5_其他内存回收技术_other_reclamation_techniques/index.md) →

@@ -8,4 +8,4 @@
 
 ← 上一节：[3.4.4 Double-Checked Initialization  double checked initialization](../3.4.4_Double-Checked%20Initialization_double_checked_initialization/index.md)
 ↑ 返回上级：[3.4 Fence、发布订阅与同步模式  fences and synchronization patterns](../index.md)
-下一节：[3.5 C++ 标准演进与并发设施  cpp standard evolution](../../3.5_C++%20标准演进与并发设施_cpp_standard_evolution/index.md) →
+下一节：[3.5 C++ 标准演进与并发设施  cpp standard evolution](../../3.5_C%2B%2B%20%E6%A0%87%E5%87%86%E6%BC%94%E8%BF%9B%E4%B8%8E%E5%B9%B6%E5%8F%91%E8%AE%BE%E6%96%BD_cpp_standard_evolution/index.md) →

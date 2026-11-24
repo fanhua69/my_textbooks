@@ -15,4 +15,4 @@
 
 ← 上一节：[9.3 系统项目：低延迟事件处理框架  low latency event processing framework](../9.3_系统项目：低延迟事件处理框架_low_latency_event_processing_framework/index.md)
 ↑ 返回上级：[9 综合项目与高级专题  projects and advanced topics](../index.md)
-下一节：[5 my_ipc](../../../5_my_ipc/index.md)
+下一节：无

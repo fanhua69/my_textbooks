@@ -8,4 +8,4 @@
 
 ← 上一节：[8.3 模型检查与形式化验证  model checking and formal verification](../../8.3_模型检查与形式化验证_model_checking_and_formal_verification/index.md)
 ↑ 返回上级：[8.4 跨平台、编译器与生产部署  portability compilers and production](../index.md)
-下一节：[8.4.2 x86-64 与 ARM64 交叉验证  x86 arm64 cross validation](../8.4.2_x86-64%20与%20ARM64%20交叉验证_x86_arm64_cross_validation/index.md) →
+下一节：[8.4.2 x86-64 与 ARM64 交叉验证  x86 arm64 cross validation](../8.4.2_x86-64%20%E4%B8%8E%20ARM64%20%E4%BA%A4%E5%8F%89%E9%AA%8C%E8%AF%81_x86_arm64_cross_validation/index.md) →

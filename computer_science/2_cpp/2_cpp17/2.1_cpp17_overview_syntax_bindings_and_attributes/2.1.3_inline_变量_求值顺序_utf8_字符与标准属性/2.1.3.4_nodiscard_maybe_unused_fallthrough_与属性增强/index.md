@@ -1,0 +1,11 @@
+# 2.1.3.4 [[nodiscard]]、[[maybe unused]]、[[fallthrough]] 与属性命名空间/枚举器属性
+
+**介绍**: 掌握 [[nodiscard]] 防止忽略关键返回值、[[maybe_unused]] 抑制未使用变量/参数/类型告警、[[fallthrough]] 显式标注 switch 穿透，以及 using ns: 与枚举器/命名空间属性扩展。
+
+---
+
+## 导航
+
+← 上一节：[2.1.3.3 UTF-8 字符字面量（u8'a'）与十六进制浮点字面量](../2.1.3.3_utf8_字符字面量与十六进制浮点字面量/index.md)
+↑ 返回上级：[1.3 inline 变量、求值顺序保证、UTF-8 字符字面量与标准属性](../index.md)
+下一节：[2.2 编译期计算、模板增强、Lambda 扩展与对象/内存模型改进](../../../2.2_compile_time_templates_lambdas_and_object_memory_model/index.md) →

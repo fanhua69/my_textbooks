@@ -6,6 +6,6 @@
 
 ## 导航
 
-← 上一节：[5.1 Ring Buffer 与循环队列  ring buffer and circular queue](../../5.1_Ring%20Buffer%20与循环队列_ring_buffer_and_circular_queue/index.md)
+← 上一节：[5.1 Ring Buffer 与循环队列  ring buffer and circular queue](../../5.1_Ring%20Buffer%20%E4%B8%8E%E5%BE%AA%E7%8E%AF%E9%98%9F%E5%88%97_ring_buffer_and_circular_queue/index.md)
 ↑ 返回上级：[5.2 SPSC 无锁队列  spsc lock free queue](../index.md)
-下一节：[5.2.2 SPSC 的 Release-Acquire 配对  spsc release acquire](../5.2.2_SPSC%20的%20Release-Acquire%20配对_spsc_release_acquire/index.md) →
+下一节：[5.2.2 SPSC 的 Release-Acquire 配对  spsc release acquire](../5.2.2_SPSC%20%E7%9A%84%20Release-Acquire%20%E9%85%8D%E5%AF%B9_spsc_release_acquire/index.md) →

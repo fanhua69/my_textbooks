@@ -6,6 +6,6 @@
 
 ## 导航
 
-← 上一节：[6.4.1 RCU 的设计思想  rcu design principles](../6.4.1_RCU%20的设计思想_rcu_design_principles/index.md)
+← 上一节：[6.4.1 RCU 的设计思想  rcu design principles](../6.4.1_RCU%20%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%80%9D%E6%83%B3_rcu_design_principles/index.md)
 ↑ 返回上级：[6.4 Read-Copy-Update（RCU）  read copy update](../index.md)
-下一节：[6.4.3 Grace Period 与 Quiescent State  grace period and quiescent state](../6.4.3_Grace%20Period%20与%20Quiescent%20State_grace_period_and_quiescent_state/index.md) →
+下一节：[6.4.3 Grace Period 与 Quiescent State  grace period and quiescent state](../6.4.3_Grace%20Period%20%E4%B8%8E%20Quiescent%20State_grace_period_and_quiescent_state/index.md) →

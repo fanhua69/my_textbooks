@@ -12,6 +12,6 @@
 
 ## 导航
 
-← 上一节：[9.1 基础项目：SPSC 与 MPSC 队列  foundational projects](../9.1_基础项目：SPSC%20与%20MPSC%20队列_foundational_projects/index.md)
+← 上一节：[9.1 基础项目：SPSC 与 MPSC 队列  foundational projects](../9.1_%E5%9F%BA%E7%A1%80%E9%A1%B9%E7%9B%AE%EF%BC%9ASPSC%20%E4%B8%8E%20MPSC%20%E9%98%9F%E5%88%97_foundational_projects/index.md)
 ↑ 返回上级：[9 综合项目与高级专题  projects and advanced topics](../index.md)
 下一节：[9.3 系统项目：低延迟事件处理框架  low latency event processing framework](../9.3_系统项目：低延迟事件处理框架_low_latency_event_processing_framework/index.md) →

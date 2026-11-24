@@ -14,4 +14,4 @@
 
 ← 上一节：[3.4 Fence、发布订阅与同步模式  fences and synchronization patterns](../3.4_Fence、发布订阅与同步模式_fences_and_synchronization_patterns/index.md)
 ↑ 返回上级：[3 C++ 原子库与内存模型  cpp atomics and memory model](../index.md)
-下一节：[4 Lock-Free 算法设计核心技术  lock free algorithm design](../../4_Lock-Free%20算法设计核心技术_lock_free_algorithm_design/index.md) →
+下一节：[4 Lock-Free 算法设计核心技术  lock free algorithm design](../../4_Lock-Free%20%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF_lock_free_algorithm_design/index.md) →

@@ -12,6 +12,6 @@
 
 ## 导航
 
-← 上一节：[2 CPU 原子操作、缓存一致性与硬件基础  hardware atomic operations and cache coherence](../../2_CPU%20原子操作、缓存一致性与硬件基础_hardware_atomic_operations_and_cache_coherence/index.md)
+← 上一节：[2 CPU 原子操作、缓存一致性与硬件基础  hardware atomic operations and cache coherence](../../2_CPU%20%E5%8E%9F%E5%AD%90%E6%93%8D%E4%BD%9C%E3%80%81%E7%BC%93%E5%AD%98%E4%B8%80%E8%87%B4%E6%80%A7%E4%B8%8E%E7%A1%AC%E4%BB%B6%E5%9F%BA%E7%A1%80_hardware_atomic_operations_and_cache_coherence/index.md)
 ↑ 返回上级：[3 C++ 原子库与内存模型  cpp atomics and memory model](../index.md)
-下一节：[3.2 std::atomic 全面介绍  std atomic](../3.2_std__atomic%20全面介绍_std_atomic/index.md) →
+下一节：[3.2 std::atomic 全面介绍  std atomic](../3.2_std__atomic%20%E5%85%A8%E9%9D%A2%E4%BB%8B%E7%BB%8D_std_atomic/index.md) →

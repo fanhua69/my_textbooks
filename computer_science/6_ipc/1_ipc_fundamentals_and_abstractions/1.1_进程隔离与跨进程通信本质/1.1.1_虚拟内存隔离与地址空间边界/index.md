@@ -1,0 +1,11 @@
+# 1.1.1 虚拟内存隔离与地址空间边界
+
+**介绍**: 剖析进程独立虚拟地址空间、页表隔离机制以及为何普通指针无法直接跨进程传递。
+
+---
+
+## 导航
+
+← 上一节：[6 Cross-Platform Inter-Process Communication (IPC) Engineering](../../../index.md)
+↑ 返回上级：[1.1 进程隔离与跨进程通信本质](../index.md)
+下一节：[1.1.2 数据拷贝路径与零拷贝（Zero-Copy）原理](../1.1.2_数据拷贝路径与零拷贝_zero_copy_原理/index.md) →

@@ -6,6 +6,6 @@
 
 ## 导航
 
-← 上一节：[9.1 基础项目：SPSC 与 MPSC 队列  foundational projects](../../9.1_基础项目：SPSC%20与%20MPSC%20队列_foundational_projects/index.md)
+← 上一节：[9.1 基础项目：SPSC 与 MPSC 队列  foundational projects](../../9.1_%E5%9F%BA%E7%A1%80%E9%A1%B9%E7%9B%AE%EF%BC%9ASPSC%20%E4%B8%8E%20MPSC%20%E9%98%9F%E5%88%97_foundational_projects/index.md)
 ↑ 返回上级：[9.2 进阶项目：MPMC 与内存回收  advanced queue and reclamation projects](../index.md)
-下一节：[9.2.2 项目六：Michael-Scott Queue  project michael scott queue](../9.2.2_项目六：Michael-Scott%20Queue_project_michael_scott_queue/index.md) →
+下一节：[9.2.2 项目六：Michael-Scott Queue  project michael scott queue](../9.2.2_%E9%A1%B9%E7%9B%AE%E5%85%AD%EF%BC%9AMichael-Scott%20Queue_project_michael_scott_queue/index.md) →

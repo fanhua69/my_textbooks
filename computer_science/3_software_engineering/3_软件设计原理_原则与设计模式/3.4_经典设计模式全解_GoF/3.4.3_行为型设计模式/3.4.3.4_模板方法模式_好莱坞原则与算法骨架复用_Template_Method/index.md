@@ -1,0 +1,11 @@
+# 3.4.3.4 模板方法模式 (Template Method)：好莱坞原则与算法骨架复用
+
+**介绍**: 在基类中固定算法执行骨架，开放钩子与特定步骤给子类重写，践行'Don't call us, we'll call you'。
+
+---
+
+## 导航
+
+← 上一节：[3.4.3.3 责任链模式 (Chain of Responsibility)：请求链式解耦与中间件管道](../3.4.3.3_责任链模式_请求链式解耦与中间件管道_Chain_of_Responsibility/index.md)
+↑ 返回上级：[3.4.3 行为型设计模式 (11种)](../index.md)
+下一节：[3.4.3.5 命令模式 (Command) 与备忘录模式 (Memento)：撤销重做与快照](../3.4.3.5_命令模式与备忘录模式_撤销重做与快照_Command_Memento/index.md) →

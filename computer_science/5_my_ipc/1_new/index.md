@@ -11,8 +11,8 @@ intro
 ## 导航
 
 - **上一层**：[5_my_ipc](../index.md))
-- **前一节**：[4 No-Lock Programming：C++ 无锁编程](../../4_no_lock_programming/index.md)
-- **后一节**：[IPC Intro](../2_ipc_intro/index.md)
+- **前一节**：[5 my_ipc](../index.md)
+- **后一节**：[2 IPC Intro](../2_ipc_intro/index.md)
 
 <!-- 
   链接占位说明：

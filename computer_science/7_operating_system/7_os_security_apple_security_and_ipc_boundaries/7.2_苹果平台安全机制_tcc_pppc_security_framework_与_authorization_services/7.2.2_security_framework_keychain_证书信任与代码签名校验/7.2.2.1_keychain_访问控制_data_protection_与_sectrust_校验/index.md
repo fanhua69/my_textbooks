@@ -1,0 +1,11 @@
+# 7.2.2.1 Keychain 访问控制、Data Protection 与 SecTrust 证书校验
+
+**介绍**: 理解凭据存储访问组/ACL、加密保护等级与 X.509 证书链验证及吊销/信任策略。
+
+---
+
+## 导航
+
+← 上一节：[7.2.1 TCC（透明、同意与控制）机制、权限服务与企业/MDM PPPC 策略](../../7.2.1_tcc_与_mdm_pppc_策略机制/index.md)
+↑ 返回上级：[7.2.2 Security Framework：Keychain、证书/信任评估与代码签名校验](../index.md)
+下一节：[7.2.2.2 Code Signing、Entitlements 与 SecRequirement 调用方验证](../7.2.2.2_code_signing_entitlements_与_secrequirement_验证/index.md) →

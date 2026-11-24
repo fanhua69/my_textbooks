@@ -13,6 +13,6 @@
 
 ## 导航
 
-← 上一节：[4.1 CAS 循环与状态更新  cas loops and state updates](../4.1_CAS%20循环与状态更新_cas_loops_and_state_updates/index.md)
+← 上一节：[4.1 CAS 循环与状态更新  cas loops and state updates](../4.1_CAS%20%E5%BE%AA%E7%8E%AF%E4%B8%8E%E7%8A%B6%E6%80%81%E6%9B%B4%E6%96%B0_cas_loops_and_state_updates/index.md)
 ↑ 返回上级：[4 Lock-Free 算法设计核心技术  lock free algorithm design](../index.md)
-下一节：[4.3 ABA 问题与解决方案  aba problem](../4.3_ABA%20问题与解决方案_aba_problem/index.md) →
+下一节：[4.3 ABA 问题与解决方案  aba problem](../4.3_ABA%20%E9%97%AE%E9%A2%98%E4%B8%8E%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88_aba_problem/index.md) →

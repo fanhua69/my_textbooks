@@ -34,5 +34,5 @@
 ## 导航
 
 - **上一层**：[1.1.1 进程、线程与共享内存模型 process thread and shared memory](../index.md)
-- **前一节**：[3 software_engineering_third](../../../../../3_software_engineering/index.md)
+- **前一节**：[4 No-Lock Programming：C++ 无锁编程](../../../../index.md)
 - **后一节**：[1.1.1.2 共享内存模型与无锁编程的起点](../1.1.1.2_共享内存模型与无锁编程的起点/index.md)
