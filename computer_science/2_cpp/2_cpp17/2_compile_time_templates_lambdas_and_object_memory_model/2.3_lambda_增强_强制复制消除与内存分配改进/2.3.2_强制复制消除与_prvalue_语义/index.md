@@ -1,0 +1,11 @@
+# 2.3.2 强制复制消除（Guaranteed Copy Elision）与 prvalue 纯右值语义重塑
+
+**介绍**: 理解 C++17 将 prvalue 定义为“未物化对象初始化器”，在返回纯右值与按值传参/初始化场景下无需可拷贝/可移动构造函数即可直接构造目标对象。
+
+---
+
+## 导航
+
+← 上一节：[2.3.1 Lambda 按值捕获 *this（[*this]）与 constexpr Lambda](../2.3.1_lambda_捕获_this_与_constexpr_lambda/index.md)
+↑ 返回上级：[2.3 Lambda 增强、强制复制消除与内存/对象生命周期改进](../index.md)
+下一节：[2.3.3 new T[n]{} 默认值初始化、过对齐动态内存分配（std::align_val_t）与 std::hardware  destructive interference size](../2.3.3_new_值初始化_对齐分配与缓存行常量/index.md) →

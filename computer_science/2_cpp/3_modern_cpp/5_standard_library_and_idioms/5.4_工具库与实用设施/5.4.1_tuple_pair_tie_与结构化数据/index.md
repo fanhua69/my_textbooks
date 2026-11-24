@@ -1,0 +1,11 @@
+# 5.4.1 tuple、pair、std::tie 与结构化数据
+
+**介绍**: 理解异构值组合、std::tie/std::ignore 解包及 tuple-like 接口[cite: 4, 5, 11]。
+
+---
+
+## 导航
+
+← 上一节：[5.3 字符串、格式化与文本处理](../../5.3_字符串_格式化与文本处理/index.md)
+↑ 返回上级：[5.4 工具库与实用设施](../index.md)
+下一节：[5.4.2 optional、variant、any 与 expected](../5.4.2_optional_variant_any_与_expected/index.md) →

@@ -1,0 +1,11 @@
+# 6.1.4 enable  shared from this
+
+**介绍**: 安全地从成员函数获取指向自身的 shared_ptr，避免重复创建控制块。
+
+---
+
+## 导航
+
+← 上一节：[6.1.3 weak ptr 与循环引用](../6.1.3_weak_ptr_与循环引用/index.md)
+↑ 返回上级：[6.1 智能指针：unique_ptr、shared_ptr 与 weak  ptr](../index.md)
+下一节：[6.1.5 智能指针的线程安全与原子操作](../6.1.5_智能指针的线程安全与原子操作/index.md) →

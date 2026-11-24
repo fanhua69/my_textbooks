@@ -3,10 +3,10 @@
 check_folder_names.py - Recursively normalize numbered directory names.
 
 Examples:
-    1.1_Alpha
-    1.2_Beta
-        1.2.1_First
-        1.2.2_Second
+    1.01_Alpha
+    1.02_Beta
+        1.02.1_First
+        1.02.2_Second
 
 Usage:
     python3 check_folder_names.py --dry-run
@@ -61,11 +61,12 @@ def collect_renames(root: Path) -> list[tuple[Path, Path]]:
             and not path.name.startswith(".")
         ]
         ordered = sort_siblings(directories)
+        number_width = len(str(len(ordered)))
 
         for index, directory in enumerate(ordered, start=1):
             _, suffix = parse_directory(directory)
             if parent_number:
-                target_number = f"{parent_number}.{index}"
+                target_number = f"{parent_number}.{index:0{number_width}d}"
             else:
                 target_number = str(index)
 

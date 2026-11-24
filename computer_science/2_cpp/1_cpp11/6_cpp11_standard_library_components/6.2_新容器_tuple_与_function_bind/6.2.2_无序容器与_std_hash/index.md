@@ -1,0 +1,11 @@
+# 6.2.2 无序容器与 std::hash
+
+**介绍**: 掌握 unordered_set、unordered_map 等无序容器，理解桶接口、负载因子与自定义哈希。
+
+---
+
+## 导航
+
+← 上一节：[6.2.1 array 与 forward  list](../6.2.1_array_与_forward_list/index.md)
+↑ 返回上级：[6.2 新容器、tuple 与 function/bind](../index.md)
+下一节：[6.2.3 pair 与 tuple](../6.2.3_pair_与_tuple/index.md) →

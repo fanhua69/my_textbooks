@@ -1,0 +1,11 @@
+# 5.2.2 常用非修改与修改序列算法（含 C++11 新算法与 C++17 并行 STL）
+
+**介绍**: 掌握 find、transform、remove、partition、sort、all_of/any_of/none_of、copy_if、iota，以及 C++17 并行策略（std::execution::seq/par/par_unseq）与 reduce / transform_reduce / inclusive_scan[cite: 4, 11, 13]。
+
+---
+
+## 导航
+
+← 上一节：[5.2.1 迭代器类别、迭代器概念与 C++11 迭代器增强](../5.2.1_迭代器类别_迭代器概念与_c_11_迭代器增强/index.md)
+↑ 返回上级：[5.2 迭代器、算法与 ranges](../index.md)
+下一节：[5.2.3 算法组合与 ranges pipeline](../5.2.3_算法组合与_ranges_pipeline/index.md) →
