@@ -1,0 +1,18 @@
+# 1.5 范围 for 循环与迭代协议
+
+掌握范围 for 的展开规则及其与 begin/end 的协作，写出简洁且高效的遍历代码。
+
+## 本节目录
+
+- [1.5.1 范围 for 的语法与等价展开](01_范围_for_的语法与等价展开/index.md)
+- [1.5.2 与 auto、引用和 const 的搭配](02_与_auto_引用和_const_的搭配/index.md)
+- [1.5.3 自定义类型支持范围 for](03_自定义类型支持范围_for/index.md)
+- [1.5.4 范围 for 的常见陷阱](04_范围_for_的常见陷阱/index.md)
+
+---
+
+## 导航
+
+← 上一节：[1.4 字面量扩展、用户自定义字面量与标准属性](../04_字面量扩展_用户自定义字面量与标准属性/index.md)
+↑ 返回上级：[1 C++11 概览、语法与类型推导](../index.md)
+下一节：[2 移动语义、Lambda 与 constexpr](../../02_move_semantics_lambdas_and_constexpr/index.md) →

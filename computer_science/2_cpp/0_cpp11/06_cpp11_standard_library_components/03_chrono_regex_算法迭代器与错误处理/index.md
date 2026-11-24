@@ -1,18 +1,21 @@
-# 6.3 <chrono> 时间库、<regex> 正则表达式、算法/迭代器与错误处理
+# 6.3 chrono、regex、算法迭代器与错误处理
 
-掌握类型安全时间系统、标准正则表达式、迭代器/算法扩充以及跨平台系统错误与异常指针传递。
+掌握时间库、正则库、容器与算法的 C++11 增强，以及统一的错误处理设施。
 
 ## 本节目录
 
-- [6.3.1 <chrono>：duration、time_point 与 system  clock / steady clock / high resolution clock](01_chrono_duration_time_point_与时钟/index.md)
-- [6.3.2 <regex>：ECMAScript 语法、regex match / regex search / regex replace 与迭代器](02_regex_匹配_搜索_替换与正则迭代器/index.md)
-- [6.3.3 迭代器与算法增强（begin/end、next/prev、move iterator、all of/any of/none of、copy if、iota、minmax、is sorted）](03_迭代器与算法增强/index.md)
-- [6.3.4 <system_error>、std::error_code / error_condition 与 <exception> std::exception  ptr](04_system_error_与_exception_ptr/index.md)
+- [6.3.1 chrono 时间库](01_chrono_时间库/index.md)
+- [6.3.2 regex 正则表达式库](02_regex_正则表达式库/index.md)
+- [6.3.3 容器接口的 C++11 变化](03_容器接口的_cpp11_变化/index.md)
+- [6.3.4 迭代器与 begin/end 自由函数](04_迭代器与_begin_end_自由函数/index.md)
+- [6.3.5 新增与增强的算法](05_新增与增强的算法/index.md)
+- [6.3.6 system error 与错误码体系](06_system_error_与错误码体系/index.md)
+- [6.3.7 exception ptr 与嵌套异常](07_exception_ptr_与嵌套异常/index.md)
 
 ---
 
 ## 导航
 
-← 上一节：[6.2 新容器、元组与可调用对象包装](../02_新容器_tuple_与_function_bind/index.md)
-↑ 返回上级：[6 C++11 标准库容器、智能指针、字符串、时间、正则与错误处理](../index.md)
-下一节：无（这是教材的最后一页）
+← 上一节：[6.2 新容器、tuple 与 function/bind](../02_新容器_tuple_与_function_bind/index.md)
+↑ 返回上级：[6 C++11 标准库组件](../index.md)
+下一节：[6.4 random 随机数库](../04_random_随机数库/index.md) →

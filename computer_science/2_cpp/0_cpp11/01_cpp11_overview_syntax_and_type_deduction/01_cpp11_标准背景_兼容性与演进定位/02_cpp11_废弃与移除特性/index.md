@@ -1,6 +1,6 @@
-# 1.1.2 C++11 废弃与移除特性（auto ptr、register、export、动态异常规格等）
+# 1.1.2 C++11 废弃与移除特性
 
-掌握 std::auto_ptr 弃用、register 关键字语义变更与弃用、模板 export 移除及动态异常说明 throw(...) 弃用。
+了解 auto 旧含义、export 模板、动态异常规范、auto_ptr、bind1st/bind2nd 等被移除或废弃的特性及其替代方案。
 
 ---
 

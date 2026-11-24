@@ -1,17 +1,20 @@
 # 2.2 Lambda 表达式与闭包对象
 
-掌握匿名函数与闭包类生成原理、捕获方式、可变性、异常规格及与函数指针/标准库算法的配合。
+掌握 lambda 的语法、捕获规则与闭包类型，并安全地将其与标准库结合使用。
 
 ## 本节目录
 
-- [2.2.1 Lambda 语法组成、闭包类型与局部/无名类型作为模板实参](01_lambda_语法_闭包类型与局部类型模板实参/index.md)
-- [2.2.2 值捕获、引用捕获、默认捕获（[=] / [&]）与生命周期陷阱](02_lambda_捕获机制与悬空引用陷阱/index.md)
-- [2.2.3 mutable Lambda、noexcept Lambda 与向函数指针转换](03_mutable_noexcept_与函数指针转换/index.md)
+- [2.2.1 Lambda 语法与基本用法](01_lambda_语法与基本用法/index.md)
+- [2.2.2 捕获列表：按值、按引用与 this 捕获](02_捕获列表_按值_按引用与_this_捕获/index.md)
+- [2.2.3 闭包类型与 mutable](03_闭包类型与_mutable/index.md)
+- [2.2.4 返回类型规则与 C++11 的限制](04_返回类型规则与_cpp11_的限制/index.md)
+- [2.2.5 Lambda 与 std::function、函数指针](05_lambda_与_std_function_函数指针/index.md)
+- [2.2.6 捕获的生命周期陷阱](06_捕获的生命周期陷阱/index.md)
 
 ---
 
 ## 导航
 
 ← 上一节：[2.1 右值引用、移动语义与完美转发](../01_右值引用_移动语义与完美转发/index.md)
-↑ 返回上级：[2 移动语义、右值引用、Lambda 与编译期计算](../index.md)
-下一节：[2.3 constexpr 编译期常量表达式与静态断言](../03_constexpr_与_static_assert/index.md) →
+↑ 返回上级：[2 移动语义、Lambda 与 constexpr](../index.md)
+下一节：[2.3 constexpr 与 static  assert](../03_constexpr_与_static_assert/index.md) →

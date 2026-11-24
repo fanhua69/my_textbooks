@@ -1,0 +1,11 @@
+# 1.3.4 enum class 与强类型枚举
+
+掌握作用域枚举、底层类型指定、不透明枚举声明与旧式枚举的区别。
+
+---
+
+## 导航
+
+← 上一节：[1.3.3 nullptr 与 std::nullptr  t](../03_nullptr_与_std_nullptr_t/index.md)
+↑ 返回上级：[1.3 统一初始化、initializer list、nullptr 与 enum class](../index.md)
+下一节：[1.4 字面量扩展、用户自定义字面量与标准属性](../../04_字面量扩展_用户自定义字面量与标准属性/index.md) →

@@ -1,0 +1,11 @@
+# 2.3.2 constexpr 函数及其 C++11 限制
+
+了解函数体只能包含单条 return 语句的限制，用递归与条件表达式代替循环，理解编译期与运行期的双重调用。
+
+---
+
+## 导航
+
+← 上一节：[2.3.1 常量表达式与 constexpr 变量](../01_常量表达式与_constexpr_变量/index.md)
+↑ 返回上级：[2.3 constexpr 与 static  assert](../index.md)
+下一节：[2.3.3 constexpr 构造函数与字面类型](../03_constexpr_构造函数与字面类型/index.md) →

@@ -1,0 +1,11 @@
+# 4.3.3 标签分发与编译期选择
+
+通过 true_type/false_type 标签分发实现编译期算法选择。
+
+---
+
+## 导航
+
+← 上一节：[4.3.2 enable if 与重载约束](../02_enable_if_与重载约束/index.md)
+↑ 返回上级：[4.3 SFINAE 与模板元编程基础](../index.md)
+下一节：[4.3.4 declval 与成员检测惯用法](../04_declval_与成员检测惯用法/index.md) →

@@ -1,16 +1,19 @@
-# 5.1 C++11 内存模型、数据竞争与 std::thread  local
+# 5.1 内存模型、数据竞争与 thread  local
 
-理解线程间内存可见性、数据竞争未定义行为与线程局部存储生命周期。
+理解 C++11 抽象机的内存模型，区分数据竞争与竞态条件，掌握线程局部存储。
 
 ## 本节目录
 
-- [5.1.1 内存位置、数据竞争（Data Race）、sequenced-before 与 happens-before](01_内存位置_数据竞争与_happens_before/index.md)
-- [5.1.2 std::thread local 线程局部存储与构造/析构时机](02_std_thread_local_存储期与生命周期/index.md)
+- [5.1.1 C++11 抽象机与内存位置](01_cpp11_抽象机与内存位置/index.md)
+- [5.1.2 数据竞争与竞态条件](02_数据竞争与竞态条件/index.md)
+- [5.1.3 位域与相邻内存位置](03_位域与相邻内存位置/index.md)
+- [5.1.4 thread local 存储期](04_thread_local_存储期/index.md)
+- [5.1.5 静态局部变量的线程安全初始化](05_静态局部变量的线程安全初始化/index.md)
 
 ---
 
 ## 导航
 
-← 上一节：[4 模板增强、泛型基础设施与类型萃取](../../04_templates_and_type_traits/index.md)
-↑ 返回上级：[5 C++11 内存模型、并发与原子支持库](../index.md)
-下一节：[5.2 <thread>、<mutex>、<condition variable> 与 <future>](../02_线程_互斥量_条件变量与异步期约/index.md) →
+← 上一节：[4 模板与类型萃取](../../04_templates_and_type_traits/index.md)
+↑ 返回上级：[5 内存模型与并发库](../index.md)
+下一节：[5.2 线程、互斥量、条件变量与异步期约](../02_线程_互斥量_条件变量与异步期约/index.md) →

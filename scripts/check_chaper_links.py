@@ -1,28 +1,14 @@
 #!/usr/bin/env python3
 """Check and fill textbook section navigation links and child directory TOCs.
 
-Each directory that contains an index.md is one section. Sibling sections are
-ordered by the numeric prefix of the directory name (07 < 07.1 < 07.2 < 07.10).
+Each non-hidden subdirectory under the textbook root is treated as a section.
+If the root or any section directory lacks index.md, a new one is created
+(unless --check is passed) with title and intro set to the directory name
+with spaces removed, followed by child TOC (when applicable) and
+prev/next/parent navigation links.
 
-For every section except the textbook root:
-
-- 上一层 / 返回上级: the parent directory's index.md
-- 前一节 / 上一节: the previous sibling. If this section is first, walk up
-  until an ancestor has a previous sibling and link to that sibling's
-  index.md. If the walk reaches the textbook root, link to the root index.md.
-- 后一节 / 下一节: the next sibling. If this section is last, walk up and
-  link to the next sibling of the nearest ancestor that has one.
-
-For every section that has direct child sections (subdirectories with index.md):
-
-- ## 目录: bullet list linking to each direct child's index.md in sorted order.
-
-The root index.md has no parent and no previous section. Its next section is
-the first top-level chapter.
-
-Existing lines that use either label set are checked. Missing roles and child
-TOC entries are inserted/updated. Wrong targets are rewritten. Pass --check to
-report only.
+Sibling sections are ordered by the numeric prefix of the directory name
+(07 < 07.1 < 07.2 < 07.10).
 """
 
 from __future__ import annotations
@@ -65,10 +51,15 @@ class Section:
     name: str
     parent: Section | None = None
     children: list[Section] = field(default_factory=list)
+    existed_before: bool = True
 
     @property
     def index_path(self) -> Path:
         return self.directory / "index.md"
+
+    @property
+    def clean_name(self) -> str:
+        return "".join(self.name.split())
 
 
 def sort_key(name: str) -> tuple:
@@ -80,33 +71,47 @@ def sort_key(name: str) -> tuple:
 
 
 def discover(root: Path) -> Section:
-    root_section = Section(directory=root, name=root.name)
+    root_section = Section(
+        directory=root,
+        name=root.name,
+        existed_before=(root / "index.md").is_file(),
+    )
 
     def walk(section: Section) -> None:
         children: list[Section] = []
         for child in section.directory.iterdir():
             if not child.is_dir() or child.name.startswith("."):
                 continue
-            if not (child / "index.md").is_file():
-                continue
-            children.append(Section(directory=child, name=child.name, parent=section))
+            has_index = (child / "index.md").is_file()
+            children.append(
+                Section(
+                    directory=child,
+                    name=child.name,
+                    parent=section,
+                    existed_before=has_index,
+                )
+            )
         children.sort(key=lambda item: sort_key(item.name))
         section.children = children
         for child in children:
             walk(child)
 
-    if not root_section.index_path.is_file():
-        raise SystemExit(f"root has no index.md: {root}")
     walk(root_section)
     return root_section
 
 
-def title_of(path: Path, fallback: str) -> str:
-    text = path.read_text(encoding="utf-8")
-    match = H1.search(text)
-    if match:
-        return match.group(1).strip()
-    return fallback
+def title_of(section: Section) -> str:
+    if section.index_path.is_file():
+        text = section.index_path.read_text(encoding="utf-8")
+        match = H1.search(text)
+        if match:
+            return match.group(1).strip()
+    return section.clean_name
+
+
+def render_new_index_base(section: Section) -> str:
+    label = section.clean_name
+    return f"# {label}\n\n{label}\n"
 
 
 def relative_link(source: Section, target: Section) -> str:
@@ -220,7 +225,6 @@ def iter_sections(section: Section):
 def find_h2_section_range(
     lines: list[str], heading_names: set[str]
 ) -> tuple[int, int] | None:
-    """Return [start, end) line indices for a matching H2 section."""
     start: int | None = None
     for idx, line in enumerate(lines):
         match = H2_HEADING.match(line)
@@ -236,11 +240,9 @@ def find_h2_section_range(
 
 
 def find_nav_insert_index(lines: list[str]) -> int:
-    """Find the start index of the trailing navigation block (--- + ## 导航 or first nav line)."""
     nav_h2 = find_h2_section_range(lines, NAV_HEADING_NAMES)
     if nav_h2 is not None:
         idx = nav_h2[0]
-        # Walk backwards over preceding blank lines and horizontal rule ---
         probe = idx - 1
         while probe >= 0 and lines[probe].strip() == "":
             probe -= 1
@@ -277,7 +279,6 @@ def check_and_update_children_toc(
     titles: dict[Path, str],
     details: list[str],
 ) -> tuple[list[str], bool]:
-    """Ensure section's index.md links to all direct child index.md files."""
     if not section.children:
         return lines, False
 
@@ -286,7 +287,6 @@ def check_and_update_children_toc(
 
     if toc_range is not None:
         start, end = toc_range
-        # Trim trailing blank lines inside the existing TOC section for clean comparison
         content_end = end
         while content_end > start and lines[content_end - 1].strip() == "":
             content_end -= 1
@@ -299,7 +299,6 @@ def check_and_update_children_toc(
         updated = lines[:start] + replacement + lines[end:]
         return updated, True
 
-    # No explicit ## 目录 heading: check if all child index.md links already exist in body
     existing_hrefs: list[str] = []
     for line in lines:
         if NAV_LINE.match(line):
@@ -346,24 +345,31 @@ class FileResult:
     status: str
     details: list[str]
     new_text: str | None = None
+    created: bool = False
 
 
 def check_section(
     section: Section, root: Section, titles: dict[Path, str]
 ) -> FileResult:
-    original = section.index_path.read_text(encoding="utf-8")
+    created = not section.existed_before and not section.index_path.is_file()
+    if created:
+        original = render_new_index_base(section)
+    else:
+        original = section.index_path.read_text(encoding="utf-8")
+
     lines = original.splitlines()
     details: list[str] = []
-    changed = False
+    changed = created
 
-    # 1. Check / insert direct child directory links (## 目录)
+    if created:
+        details.append(f"新建 index.md（题目与介绍：{section.clean_name}）")
+
     lines, toc_changed = check_and_update_children_toc(
         section, lines, titles, details
     )
     if toc_changed:
         changed = True
 
-    # 2. Check / update three-way navigation links (上一层 / 前一节 / 后一节)
     hits = parse_nav(lines)
     expected = expected_targets(section, root)
     seen: dict[str, list[NavHit]] = {"prev": [], "next": [], "parent": []}
@@ -418,12 +424,19 @@ def check_section(
         changed = True
 
     if not details:
-        return FileResult(section, "ok", [])
+        return FileResult(section, "ok", [], created=created)
+
     new_text = "\n".join(lines)
     if original.endswith("\n"):
         new_text += "\n"
-    status = "missing" if any(item.startswith("缺少") for item in details) else "wrong"
-    return FileResult(section, status, details, new_text if changed else None)
+    status = "missing" if any(item.startswith("缺少") or item.startswith("新建") for item in details) else "wrong"
+    return FileResult(
+        section,
+        status,
+        details,
+        new_text if changed else None,
+        created=created,
+    )
 
 
 def display_path(section: Section, root: Path) -> str:
@@ -434,7 +447,7 @@ def display_path(section: Section, root: Path) -> str:
 
 def main() -> int:
     parser = argparse.ArgumentParser(
-        description="核对并补齐教材 index.md 的子目录列表与三向导航链接"
+        description="核对并补齐教材 index.md、子目录列表与三向导航链接"
     )
     parser.add_argument(
         "root",
@@ -451,14 +464,17 @@ def main() -> int:
     root_path = Path(args.root).resolve()
     root = discover(root_path)
     titles = {
-        section.directory: title_of(section.index_path, section.name)
+        section.directory: title_of(section)
         for section in iter_sections(root)
     }
 
     results = [check_section(section, root, titles) for section in iter_sections(root)]
     counts = {"ok": 0, "wrong": 0, "missing": 0}
+    created_count = 0
     for result in results:
         counts[result.status] = counts.get(result.status, 0) + 1
+        if result.created:
+            created_count += 1
         if result.status == "ok":
             continue
         print(f"{display_path(result.section, root_path)}")
@@ -468,13 +484,13 @@ def main() -> int:
             result.section.index_path.write_text(result.new_text, encoding="utf-8")
 
     print(
-        f"\n共 {len(results)} 个 index.md：正确 {counts['ok']}，"
-        f"需要更新 {counts['wrong']}，缺少链接 {counts['missing']}"
+        f"\n共 {len(results)} 个 index.md（新建 {created_count} 个）："
+        f"正确 {counts['ok']}，需要更新 {counts['wrong']}，缺少链接/文件 {counts['missing']}"
     )
     if args.check:
         print("未修改文件（--check）")
     else:
-        print("已写回错误或缺失的文件")
+        print("已写回新建、错误或缺失的文件")
     return 1 if counts["wrong"] or counts["missing"] else 0
 
 

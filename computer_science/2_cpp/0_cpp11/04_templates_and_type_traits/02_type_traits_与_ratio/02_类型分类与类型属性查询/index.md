@@ -1,0 +1,11 @@
+# 4.2.2 类型分类与类型属性查询
+
+掌握主类型分类、复合类型分类，以及 is_trivially_* 等属性查询。
+
+---
+
+## 导航
+
+← 上一节：[4.2.1 type_traits 概览与 integral  constant](../01_type_traits_概览与_integral_constant/index.md)
+↑ 返回上级：[4.2 type traits 与 ratio](../index.md)
+下一节：[4.2.3 类型关系查询](../03_类型关系查询/index.md) →
