@@ -1,6 +1,6 @@
-# 6.2.3 memory_order：relaxed 到 seq  cst
+# 03 memory_order：relaxed 到 seq  cst
 
-掌握 memory ordering 的语义及适用场景[cite: 4]。
+**介绍**: 掌握 memory ordering 的语义及适用场景[cite: 4]。
 
 ---
 

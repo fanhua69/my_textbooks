@@ -1,6 +1,6 @@
 # 9.2.2 项目六：Michael-Scott Queue  project michael scott queue
 
-实现经典链表式 MPMC 队列，标注线性化点并验证正确性。
+**介绍**: 实现经典链表式 MPMC 队列，标注线性化点并验证正确性。
 
 ---
 

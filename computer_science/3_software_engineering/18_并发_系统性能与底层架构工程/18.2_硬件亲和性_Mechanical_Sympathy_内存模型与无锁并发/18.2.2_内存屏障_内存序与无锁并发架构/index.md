@@ -1,6 +1,6 @@
 # 18.2.2 内存屏障、内存序与无锁并发架构
 
-掌握 Acquire/Release 内存序、CAS 原子原语、无锁环形缓冲区（Ring Buffer）与 LMAX Disruptor 单写者架构原则。涵盖原子操作 (Atomic)、比较并交换 (Compare-And-Swap) 与 Acquire/Release 内存序在 C++ 中的使用。
+**介绍**: 掌握 Acquire/Release 内存序、CAS 原子原语、无锁环形缓冲区（Ring Buffer）与 LMAX Disruptor 单写者架构原则。涵盖原子操作 (Atomic)、比较并交换 (Compare-And-Swap) 与 Acquire/Release 内存序在 C++ 中的使用。
 
 ---
 

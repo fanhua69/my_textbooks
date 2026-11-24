@@ -1,6 +1,6 @@
 # 6.4.1 RCU 的设计思想  rcu design principles
 
-理解 read-copy-update、读侧临界区和宽限期。
+**介绍**: 理解 read-copy-update、读侧临界区和宽限期。
 
 ---
 

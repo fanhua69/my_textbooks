@@ -1,6 +1,6 @@
 # 3.1.5 Undefined Behavior 与 Data Race  undefined behavior and data race
 
-理解数据竞争的标准定义及其与硬件原子性的区别。
+**介绍**: 理解数据竞争的标准定义及其与硬件原子性的区别。
 
 ---
 

@@ -1,6 +1,6 @@
-# 3.2.2.3 多态性 (Polymorphism) 与受保护变化 (Protected Variations)
+# 03.2.2.3 多态性 (Polymorphism) 与受保护变化 (Protected Variations)
 
-识别系统中的不稳定变化点，在其周围建立稳定接口抽象封装实现变化。
+**介绍**: 识别系统中的不稳定变化点，在其周围建立稳定接口抽象封装实现变化。
 
 ---
 

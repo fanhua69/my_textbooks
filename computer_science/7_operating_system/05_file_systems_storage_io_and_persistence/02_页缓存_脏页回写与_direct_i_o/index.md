@@ -1,13 +1,11 @@
-# 5.2 页缓存（Page Cache）、脏页回写与 Direct I/O
+# 02 页缓存（Page Cache）、脏页回写与 Direct I/O
 
-掌握读缓存、后台刷盘抖动治理以及绕过页缓存的 Direct I/O 适用场景与对齐要求。
+**介绍**: 掌握读缓存、后台刷盘抖动治理以及绕过页缓存的 Direct I/O 适用场景与对齐要求。
 
-## 本节目录
+## 目录
 
-- [5.2.1 Page Cache 读命中、预读（Read-ahead）与脏页（Dirty Page）后台回写抖动](01_page_cache_预读与脏页回写延迟毛刺/index.md)
-- [5.2.2 Buffered I/O vs Direct I/O（O DIRECT / FILE FLAG NO BUFFERING）与对齐约束](02_buffered_io_vs_direct_io_与对齐约束/index.md)
-
----
+- [01 Page Cache 读命中、预读（Read-ahead）与脏页（Dirty Page）后台回写抖动](01_page_cache_预读与脏页回写延迟毛刺/index.md)
+- [02 Buffered I/O vs Direct I/O（O DIRECT / FILE FLAG NO BUFFERING）与对齐约束](02_buffered_io_vs_direct_io_与对齐约束/index.md)
 
 ## 导航
 

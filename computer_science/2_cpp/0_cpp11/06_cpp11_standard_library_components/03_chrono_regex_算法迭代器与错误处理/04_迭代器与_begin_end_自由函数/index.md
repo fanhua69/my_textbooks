@@ -1,6 +1,6 @@
-# 6.3.4 迭代器与 begin/end 自由函数
+# 04 迭代器与 begin/end 自由函数
 
-使用 std::begin/std::end、next、prev 与 move_iterator 编写更通用的迭代代码。
+**介绍**: 使用 std::begin/std::end、next、prev 与 move_iterator 编写更通用的迭代代码。
 
 ---
 

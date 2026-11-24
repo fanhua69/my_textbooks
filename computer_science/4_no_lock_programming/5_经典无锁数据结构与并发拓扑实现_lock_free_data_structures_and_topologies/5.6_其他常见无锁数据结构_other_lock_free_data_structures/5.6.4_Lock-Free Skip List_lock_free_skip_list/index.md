@@ -1,6 +1,6 @@
 # 5.6.4 Lock-Free Skip List  lock free skip list
 
-理解多层索引、CAS 插入和并发删除。
+**介绍**: 理解多层索引、CAS 插入和并发删除。
 
 ---
 

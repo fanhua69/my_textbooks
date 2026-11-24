@@ -1,6 +1,6 @@
-# 3.3.4 三路比较运算符 <=> 与右值限定成员函数
+# 04 三路比较运算符 <=> 与右值限定成员函数
 
-理解 strong/weak/partial_ordering 与 defaulted <=> 比较生成，并掌握成员函数引用限定（& / const & / &&）与右值限定成员函数设计[cite: 4, 10]。
+**介绍**: 理解 strong/weak/partial_ordering 与 defaulted <=> 比较生成，并掌握成员函数引用限定（& / const & / &&）与右值限定成员函数设计[cite: 4, 10]。
 
 ---
 

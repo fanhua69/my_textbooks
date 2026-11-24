@@ -1,13 +1,11 @@
-# 2.2.1 固件引导（UEFI / iBoot）、Bootloader 与内核早期初始化
+# 01 固件引导（UEFI / iBoot）、Bootloader 与内核早期初始化
 
-梳理安全启动信任链、内存早期引导分配器、设备树/ACPI 拓扑发现与根文件系统挂载。
+**介绍**: 梳理安全启动信任链、内存早期引导分配器、设备树/ACPI 拓扑发现与根文件系统挂载。
 
-## 本节目录
+## 目录
 
-- [2.2.1.1 安全启动信任链（Secure Boot / Verified Boot）](01_安全启动信任链_secure_boot_verified_boot/index.md)
-- [2.2.1.2 ACPI / 设备树解析、早期内存分配与根挂载](02_acpi_设备树解析_早期内存分配与根挂载/index.md)
-
----
+- [01 安全启动信任链（Secure Boot / Verified Boot）](01_安全启动信任链_secure_boot_verified_boot/index.md)
+- [02 ACPI / 设备树解析、早期内存分配与根挂载](02_acpi_设备树解析_早期内存分配与根挂载/index.md)
 
 ## 导航
 

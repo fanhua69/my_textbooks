@@ -1,6 +1,6 @@
 # 4.3.2 指针复用与内存释放导致的 ABA  pointer reuse and reclamation
 
-理解 allocator 地址复用、悬空指针和 ABA 的联系。
+**介绍**: 理解 allocator 地址复用、悬空指针和 ABA 的联系。
 
 ---
 

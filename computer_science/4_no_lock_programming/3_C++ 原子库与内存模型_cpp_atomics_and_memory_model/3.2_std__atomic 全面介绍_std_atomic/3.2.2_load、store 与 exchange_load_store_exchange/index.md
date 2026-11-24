@@ -1,6 +1,6 @@
 # 3.2.2 load、store 与 exchange  load store exchange
 
-掌握原子读、原子写和原子交换。
+**介绍**: 掌握原子读、原子写和原子交换。
 
 ---
 

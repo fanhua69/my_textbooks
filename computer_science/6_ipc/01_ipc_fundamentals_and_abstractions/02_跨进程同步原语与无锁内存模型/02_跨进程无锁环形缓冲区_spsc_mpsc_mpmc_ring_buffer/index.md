@@ -1,6 +1,6 @@
-# 1.2.2 跨进程无锁环形缓冲区（SPSC / MPSC / MPMC Ring Buffer）
+# 02 跨进程无锁环形缓冲区（SPSC / MPSC / MPMC Ring Buffer）
 
-设计基于共享内存的零拷贝无锁队列，处理伪共享（False Sharing）与缓存行对齐。
+**介绍**: 设计基于共享内存的零拷贝无锁队列，处理伪共享（False Sharing）与缓存行对齐。
 
 ---
 

@@ -1,6 +1,6 @@
 # 3.3.1 memory  order relaxed memory order relaxed
 
-只保证原子性和单对象修改顺序，不建立跨对象同步关系。
+**介绍**: 只保证原子性和单对象修改顺序，不建立跨对象同步关系。
 
 ---
 

@@ -1,6 +1,6 @@
 # 5.5.4 多订阅者 Ring Buffer  multi subscriber ring buffer
 
-设计每个消费者独立序列位置的共享环形日志。
+**介绍**: 设计每个消费者独立序列位置的共享环形日志。
 
 ---
 

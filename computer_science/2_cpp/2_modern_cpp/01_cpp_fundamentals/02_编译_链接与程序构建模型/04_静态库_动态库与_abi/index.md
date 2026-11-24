@@ -1,6 +1,6 @@
-# 1.2.4 静态库、动态库与 ABI
+# 04 静态库、动态库与 ABI
 
-理解 library、symbol、ABI compatibility、name mangling 与链接方式[cite: 4]。
+**介绍**: 理解 library、symbol、ABI compatibility、name mangling 与链接方式[cite: 4]。
 
 ---
 

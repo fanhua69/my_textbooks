@@ -1,6 +1,6 @@
-# 4.4.2.3 MVU (Model-View-Update)：Elm 架构
+# 04.4.2.3 MVU (Model-View-Update)：Elm 架构
 
-以 Model、View、Update 三个纯函数式部件构成闭环，由运行时统一调度消息与副作用，是 SwiftUI、Elm 等声明式框架的共同思想。
+**介绍**: 以 Model、View、Update 三个纯函数式部件构成闭环，由运行时统一调度消息与副作用，是 SwiftUI、Elm 等声明式框架的共同思想。
 
 ---
 

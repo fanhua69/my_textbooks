@@ -1,6 +1,6 @@
 # 17.1.5.2 IDE 上下文管理与项目级规则库构建 (.cursorrules)
 
-定制项目级系统提示词规则库（.cursorrules / prompt-templates），建立代码库语义向量索引，精准注入上下文。
+**介绍**: 定制项目级系统提示词规则库（.cursorrules / prompt-templates），建立代码库语义向量索引，精准注入上下文。
 
 ---
 

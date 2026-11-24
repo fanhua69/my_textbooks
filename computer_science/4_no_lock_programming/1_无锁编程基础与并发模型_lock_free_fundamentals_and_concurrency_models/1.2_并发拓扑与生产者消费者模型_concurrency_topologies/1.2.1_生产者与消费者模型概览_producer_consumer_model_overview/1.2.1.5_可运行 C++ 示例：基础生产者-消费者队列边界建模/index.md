@@ -1,6 +1,6 @@
 # 1.2.1.5 可运行 C++ 示例：基础生产者-消费者队列边界建模
 
-> **简介**：下面给出一个自包含的 C++17 示例，展示 `Producer`、`Consumer` 与有界队列边界（支持 `try_push` / `try_pop` 以及 `stop` 优雅收尾），可用 `g++ -O2 -std=c++17 -pthread` 编译运行：
+**介绍**: > **简介**：下面给出一个自包含的 C++17 示例，展示 `Producer`、`Consumer` 与有界队列边界（支持 `try_push` / `try_pop` 以及 `stop` 优雅收尾），可用 `g++ -O2 -std=c++17 -pthread` 编译运行：
 
 ---
 

@@ -1,6 +1,6 @@
 # 12.2.1.3 过长参数列 (Long Parameter List)
 
-方法参数超过 3-4 个，极易传错顺序与丢失类型检查；采用参数对象（Parameter Object）与 Builder 模式封装。
+**介绍**: 方法参数超过 3-4 个，极易传错顺序与丢失类型检查；采用参数对象（Parameter Object）与 Builder 模式封装。
 
 ---
 

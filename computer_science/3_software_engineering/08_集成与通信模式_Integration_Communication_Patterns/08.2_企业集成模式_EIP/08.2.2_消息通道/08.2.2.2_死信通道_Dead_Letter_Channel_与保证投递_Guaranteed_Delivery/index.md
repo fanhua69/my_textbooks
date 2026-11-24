@@ -1,6 +1,6 @@
-# 8.2.2.2 死信通道 (Dead Letter Channel) 与保证投递 (Guaranteed Delivery)
+# 08.2.2.2 死信通道 (Dead Letter Channel) 与保证投递 (Guaranteed Delivery)
 
-以持久化、确认与重试保证消息不丢失，并把不可处理的消息隔离到死信通道供人工或自动处理。
+**介绍**: 以持久化、确认与重试保证消息不丢失，并把不可处理的消息隔离到死信通道供人工或自动处理。
 
 ---
 

@@ -1,6 +1,6 @@
-# 6.3.1 load、store、exchange 与 fetch 操作
+# 01 load、store、exchange 与 fetch 操作
 
-掌握常见 atomic member functions[cite: 4]。
+**介绍**: 掌握常见 atomic member functions[cite: 4]。
 
 ---
 

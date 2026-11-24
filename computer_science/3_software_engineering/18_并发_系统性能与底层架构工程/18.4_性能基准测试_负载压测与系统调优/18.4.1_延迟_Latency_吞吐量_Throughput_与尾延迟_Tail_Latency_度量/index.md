@@ -1,6 +1,6 @@
 # 18.4.1 延迟 (Latency)、吞吐量 (Throughput) 与尾延迟 (Tail Latency) 度量
 
-正确使用分位数而非平均值描述延迟，理解排队论、协调遗漏 (Coordinated Omission) 与尾延迟放大效应。
+**介绍**: 正确使用分位数而非平均值描述延迟，理解排队论、协调遗漏 (Coordinated Omission) 与尾延迟放大效应。
 
 ---
 

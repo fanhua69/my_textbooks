@@ -1,6 +1,6 @@
-# 4.2.2 enable if、void t 与 detection idiom
+# 02 enable if、void t 与 detection idiom
 
-认识 C++20 Concepts 之前常见的约束技术[cite: 4]。
+**介绍**: 认识 C++20 Concepts 之前常见的约束技术[cite: 4]。
 
 ---
 

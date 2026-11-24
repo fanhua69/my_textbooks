@@ -1,6 +1,6 @@
-# 2.2.3 闭包类型与 mutable
+# 03 闭包类型与 mutable
 
-理解 lambda 生成的匿名闭包类型、operator() 默认 const 的原因及 mutable 的作用。
+**介绍**: 理解 lambda 生成的匿名闭包类型、operator() 默认 const 的原因及 mutable 的作用。
 
 ---
 

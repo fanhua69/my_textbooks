@@ -1,6 +1,6 @@
-# 2.3.2.3 Protocol Buffers / gRPC 二进制契约与兼容演进
+# 02.3.2.3 Protocol Buffers / gRPC 二进制契约与兼容演进
 
-利用 Protobuf 定义强类型 RPC 接口，掌握字段编号规则与向前/向后兼容演进纪律。
+**介绍**: 利用 Protobuf 定义强类型 RPC 接口，掌握字段编号规则与向前/向后兼容演进纪律。
 
 ---
 

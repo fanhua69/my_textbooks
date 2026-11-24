@@ -1,14 +1,12 @@
-# 5.4.1 战略设计：限界上下文与上下文映射
+# 05.4.1 战略设计：限界上下文与上下文映射
 
-用限界上下文切分复杂业务，并显式管理上下文之间的集成关系。
+**介绍**: 用限界上下文切分复杂业务，并显式管理上下文之间的集成关系。
 
-## 本节目录
+## 目录
 
-- [5.4.1.1 DDD 战略设计：通用语言与限界上下文](05.4.1.1_战略设计_通用语言与限界上下文_DDD/index.md)
-- [5.4.1.2 上下文映射 (Context Mapping)：共享内核 (Shared Kernel)、客户-供应商与遵奉者](05.4.1.2_上下文映射_Context_Mapping_共享内核_Shared_Kernel_客户-供应商与遵奉者/index.md)
-- [5.4.1.3 防腐层 (Anti-Corruption Layer)：隔离遗留模型与外部上下文](05.4.1.3_防腐层_Anti-Corruption_Layer_隔离遗留模型与外部上下文/index.md)
-
----
+- [05.4.1.1 DDD 战略设计：通用语言与限界上下文](05.4.1.1_战略设计_通用语言与限界上下文_DDD/index.md)
+- [05.4.1.2 上下文映射 (Context Mapping)：共享内核 (Shared Kernel)、客户-供应商与遵奉者](05.4.1.2_上下文映射_Context_Mapping_共享内核_Shared_Kernel_客户-供应商与遵奉者/index.md)
+- [05.4.1.3 防腐层 (Anti-Corruption Layer)：隔离遗留模型与外部上下文](05.4.1.3_防腐层_Anti-Corruption_Layer_隔离遗留模型与外部上下文/index.md)
 
 ## 导航
 

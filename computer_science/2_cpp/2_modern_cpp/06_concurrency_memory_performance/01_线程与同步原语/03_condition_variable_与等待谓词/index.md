@@ -1,6 +1,6 @@
-# 6.1.3 condition variable 与等待谓词
+# 03 condition variable 与等待谓词
 
-理解 wait、notify、虚假唤醒和 lost wakeup[cite: 4, 11]。
+**介绍**: 理解 wait、notify、虚假唤醒和 lost wakeup[cite: 4, 11]。
 
 ---
 

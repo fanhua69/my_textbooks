@@ -1,6 +1,6 @@
 # 7.1.5 统计显著性与可重复性  statistical significance and reproducibility
 
-理解多轮测量、置信区间和实验记录。
+**介绍**: 理解多轮测量、置信区间和实验记录。
 
 ---
 

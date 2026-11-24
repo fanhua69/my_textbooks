@@ -1,6 +1,6 @@
 # 3.3.3 memory  order acquire memory order acquire
 
-理解 acquire load 如何与 release 操作配对并建立同步关系。
+**介绍**: 理解 acquire load 如何与 release 操作配对并建立同步关系。
 
 ---
 

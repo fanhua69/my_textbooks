@@ -1,6 +1,6 @@
-# 3.5.2.3 组件生命周期作用域治理
+# 03.5.2.3 组件生命周期作用域治理
 
-掌握单例 (Singleton)、瞬态 (Transient)、作用域 (Scoped / Per-Request) 的内存管理与对象销毁安全。
+**介绍**: 掌握单例 (Singleton)、瞬态 (Transient)、作用域 (Scoped / Per-Request) 的内存管理与对象销毁安全。
 
 ---
 

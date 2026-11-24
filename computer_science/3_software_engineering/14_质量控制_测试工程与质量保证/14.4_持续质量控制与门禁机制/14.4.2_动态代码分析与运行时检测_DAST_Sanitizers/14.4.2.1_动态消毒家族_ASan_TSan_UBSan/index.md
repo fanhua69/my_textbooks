@@ -1,6 +1,6 @@
 # 14.4.2.1 Sanitizers 动态消毒家族 (ASan / TSan / UBSan)
 
-启用 AddressSanitizer 捕获内存越界访问、ThreadSanitizer 捕获数据竞争、UBSan 捕获未定义行为。
+**介绍**: 启用 AddressSanitizer 捕获内存越界访问、ThreadSanitizer 捕获数据竞争、UBSan 捕获未定义行为。
 
 ---
 

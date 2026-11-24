@@ -1,6 +1,6 @@
-# 5.2.2 this thread 与线程标识
+# 02 this thread 与线程标识
 
-使用 get_id、sleep_for、sleep_until 与 yield 管理当前线程。
+**介绍**: 使用 get_id、sleep_for、sleep_until 与 yield 管理当前线程。
 
 ---
 

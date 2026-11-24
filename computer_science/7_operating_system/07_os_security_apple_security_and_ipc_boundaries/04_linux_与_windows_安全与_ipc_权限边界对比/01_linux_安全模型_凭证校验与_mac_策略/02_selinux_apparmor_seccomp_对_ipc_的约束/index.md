@@ -1,6 +1,6 @@
-# 7.4.1.2 SELinux / AppArmor / seccomp 对本地 IPC 与文件描述符的约束
+# 02 SELinux / AppArmor / seccomp 对本地 IPC 与文件描述符的约束
 
-排查强制访问控制策略或系统调用过滤导致的本地 Socket 连接/绑定与权限拒绝问题。
+**介绍**: 排查强制访问控制策略或系统调用过滤导致的本地 Socket 连接/绑定与权限拒绝问题。
 
 ---
 

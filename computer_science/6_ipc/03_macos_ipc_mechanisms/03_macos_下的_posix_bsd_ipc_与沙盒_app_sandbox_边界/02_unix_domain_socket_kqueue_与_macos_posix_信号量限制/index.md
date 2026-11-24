@@ -1,6 +1,6 @@
-# 3.3.2 UNIX Domain Socket、kqueue 与 macOS POSIX 信号量限制
+# 02 UNIX Domain Socket、kqueue 与 macOS POSIX 信号量限制
 
-注意 macOS 不支持进程间无名 sem_init、默认 SysV shm 上限较小等平台陷阱。
+**介绍**: 注意 macOS 不支持进程间无名 sem_init、默认 SysV shm 上限较小等平台陷阱。
 
 ---
 

@@ -1,6 +1,6 @@
 # 20.1.1.2 企业应用分层模式分类：表现、业务逻辑、数据访问、服务接口与集成
 
-登记 MVC/MVP/MVVM、Transaction Script/Domain Model、DAO/Repository/Data Mapper、Remote Facade/DTO、Message Broker/Router 等分层模式。
+**介绍**: 登记 MVC/MVP/MVVM、Transaction Script/Domain Model、DAO/Repository/Data Mapper、Remote Facade/DTO、Message Broker/Router 等分层模式。
 
 ---
 

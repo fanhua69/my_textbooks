@@ -1,6 +1,6 @@
-# 1.1.3   has include 预处理器条件与嵌套命名空间（namespace A::B::C）
+# 03 has include 预处理器条件与嵌套命名空间（namespace A::B::C）
 
-掌握 __has_include("header") / __has_include(<header>) 可移植头文件探测，以及简化多层嵌套命名空间的 namespace A::B::C 语法。
+**介绍**: 掌握 __has_include("header") / __has_include(<header>) 可移植头文件探测，以及简化多层嵌套命名空间的 namespace A::B::C 语法。
 
 ---
 

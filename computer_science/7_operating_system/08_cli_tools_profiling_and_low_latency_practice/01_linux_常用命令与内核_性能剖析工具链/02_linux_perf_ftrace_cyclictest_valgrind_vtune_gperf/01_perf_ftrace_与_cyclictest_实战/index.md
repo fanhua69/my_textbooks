@@ -1,6 +1,6 @@
-# 8.1.2.1 perf 硬件性能计数器、ftrace 内核追踪与 cyclictest 延迟基准
+# 01 perf 硬件性能计数器、ftrace 内核追踪与 cyclictest 延迟基准
 
-通过 perf stat/record 分析缓存/分支/TLB 指标，用 ftrace 抓取调度延迟，用 cyclictest 评估系统抖动。
+**介绍**: 通过 perf stat/record 分析缓存/分支/TLB 指标，用 ftrace 抓取调度延迟，用 cyclictest 评估系统抖动。
 
 ---
 

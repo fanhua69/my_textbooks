@@ -1,6 +1,6 @@
-# 6.2.1 array 与 forward  list
+# 01 array 与 forward  list
 
-了解定长数组容器 array 与单向链表 forward_list 的设计取舍与使用场景。
+**介绍**: 了解定长数组容器 array 与单向链表 forward_list 的设计取舍与使用场景。
 
 ---
 

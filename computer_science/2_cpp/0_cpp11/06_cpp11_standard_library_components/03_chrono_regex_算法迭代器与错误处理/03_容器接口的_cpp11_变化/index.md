@@ -1,6 +1,6 @@
-# 6.3.3 容器接口的 C++11 变化
+# 03 容器接口的 C++11 变化
 
-掌握 emplace 系列、容器成员 cbegin/cend、shrink_to_fit、data 与 map::at 等新增接口。
+**介绍**: 掌握 emplace 系列、容器成员 cbegin/cend、shrink_to_fit、data 与 map::at 等新增接口。
 
 ---
 

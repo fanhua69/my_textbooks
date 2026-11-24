@@ -1,6 +1,6 @@
-# 4.2.2 macOS IPC：Mach Port / mach msg、XPC（libxpc / NSXPCConnection）、xpc shmem 与 POSIX IPC
+# 02 macOS IPC：Mach Port / mach msg、XPC（libxpc / NSXPCConnection）、xpc shmem 与 POSIX IPC
 
-深入 Mach 端口权限与 OOL 内存、XPC 按需拉起与序列化机制、xpc_shmem 共享内存及 macOS POSIX 限制。
+**介绍**: 深入 Mach 端口权限与 OOL 内存、XPC 按需拉起与序列化机制、xpc_shmem 共享内存及 macOS POSIX 限制。
 
 ---
 

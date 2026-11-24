@@ -1,12 +1,10 @@
-# 7.1.2 接口演进与兼容
+# 07.1.2 接口演进与兼容
 
-接口一旦发布即成承诺。
+**介绍**: 接口一旦发布即成承诺。
 
-## 本节目录
+## 目录
 
-- [7.1.2.1 接口版本管理 (API Versioning) 与向后兼容 (Backward Compatibility)](07.1.2.1_接口版本管理_API_Versioning_与向后兼容_Backward_Compatibility/index.md)
-
----
+- [07.1.2.1 接口版本管理 (API Versioning) 与向后兼容 (Backward Compatibility)](07.1.2.1_接口版本管理_API_Versioning_与向后兼容_Backward_Compatibility/index.md)
 
 ## 导航
 

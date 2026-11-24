@@ -1,6 +1,6 @@
-# 9.3.3.1 服务网格 (Service Mesh)：Sidecar 数据面与控制面
+# 09.3.3.1 服务网格 (Service Mesh)：Sidecar 数据面与控制面
 
-剖析以 Envoy 为代表的 Sidecar 数据面与 Istio 控制面，将 mTLS 加密、熔断限流与调用链追踪沉淀为基础设施。
+**介绍**: 剖析以 Envoy 为代表的 Sidecar 数据面与 Istio 控制面，将 mTLS 加密、熔断限流与调用链追踪沉淀为基础设施。
 
 ---
 

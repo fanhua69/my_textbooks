@@ -1,6 +1,6 @@
-# 6.3.4 ABA 问题与内存回收
+# 04 ABA 问题与内存回收
 
-理解 ABA、hazard pointer、epoch-based reclamation[cite: 4]。
+**介绍**: 理解 ABA、hazard pointer、epoch-based reclamation[cite: 4]。
 
 ---
 

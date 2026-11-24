@@ -1,6 +1,6 @@
 # 4.4.1 不可变数据与 Copy-On-Write  immutable data and copy on write
 
-通过不可变对象减少共享写竞争。
+**介绍**: 通过不可变对象减少共享写竞争。
 
 ---
 

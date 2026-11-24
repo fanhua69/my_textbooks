@@ -1,6 +1,6 @@
-# 6.3.2.2 外键映射 (Foreign Key Mapping) 与关联表映射 (Association Table Mapping)
+# 06.3.2.2 外键映射 (Foreign Key Mapping) 与关联表映射 (Association Table Mapping)
 
-用外键表达一对多，用关联表表达多对多，并处理双向关联、级联与集合映射。
+**介绍**: 用外键表达一对多，用关联表表达多对多，并处理双向关联、级联与集合映射。
 
 ---
 

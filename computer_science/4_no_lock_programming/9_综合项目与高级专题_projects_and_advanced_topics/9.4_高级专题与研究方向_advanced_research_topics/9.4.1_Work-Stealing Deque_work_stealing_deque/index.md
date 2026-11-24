@@ -1,6 +1,6 @@
 # 9.4.1 Work-Stealing Deque  work stealing deque
 
-介绍任务窃取双端队列、owner/thief 角色、经典算法及适用边界。
+**介绍**: 介绍任务窃取双端队列、owner/thief 角色、经典算法及适用边界。
 
 ---
 

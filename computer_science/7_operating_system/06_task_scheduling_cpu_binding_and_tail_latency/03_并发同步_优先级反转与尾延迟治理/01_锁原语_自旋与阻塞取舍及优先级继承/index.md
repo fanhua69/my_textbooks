@@ -1,13 +1,11 @@
-# 6.3.1 锁原语、自旋与阻塞取舍及优先级继承
+# 01 锁原语、自旋与阻塞取舍及优先级继承
 
-分析经典优先级反转场景、PI Mutex 内核支持、自旋锁在虚拟化/超线程环境下的反模式与替代方案。
+**介绍**: 分析经典优先级反转场景、PI Mutex 内核支持、自旋锁在虚拟化/超线程环境下的反模式与替代方案。
 
-## 本节目录
+## 目录
 
-- [6.3.1.1 优先级反转成因、Priority Inheritance 与 Priority Ceiling](01_优先级反转成因_priority_inheritance_与_priority_ceiling/index.md)
-- [6.3.1.2 互斥锁、读写锁与自旋锁在虚拟化/超线程下的风险](02_锁原语与自旋锁在虚拟化_超线程下的风险/index.md)
-
----
+- [01 优先级反转成因、Priority Inheritance 与 Priority Ceiling](01_优先级反转成因_priority_inheritance_与_priority_ceiling/index.md)
+- [02 互斥锁、读写锁与自旋锁在虚拟化/超线程下的风险](02_锁原语与自旋锁在虚拟化_超线程下的风险/index.md)
 
 ## 导航
 

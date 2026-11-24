@@ -1,6 +1,6 @@
-# 2.3.2.1 OpenAPI / Swagger 规范设计与治理
+# 02.3.2.1 OpenAPI / Swagger 规范设计与治理
 
-编写 RESTful API OpenAPI 3.x 契约，自动生成服务端 Stub、客户端 SDK、交互式文档与 Prism Mock。
+**介绍**: 编写 RESTful API OpenAPI 3.x 契约，自动生成服务端 Stub、客户端 SDK、交互式文档与 Prism Mock。
 
 ---
 

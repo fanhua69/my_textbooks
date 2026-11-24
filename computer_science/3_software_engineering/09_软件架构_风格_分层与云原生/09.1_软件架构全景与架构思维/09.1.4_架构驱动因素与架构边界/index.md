@@ -1,13 +1,11 @@
-# 9.1.4 架构驱动因素与架构边界
+# 09.1.4 架构驱动因素与架构边界
 
-识别塑造架构的关键输入，并以边界控制依赖。架构决策记录 (ADR) 见规范驱动开发一章。
+**介绍**: 识别塑造架构的关键输入，并以边界控制依赖。架构决策记录 (ADR) 见规范驱动开发一章。
 
-## 本节目录
+## 目录
 
-- [9.1.4.1 架构驱动因素 (Architectural Drivers)：目标、约束与关键质量属性场景](09.1.4.1_架构驱动因素_Architectural_Drivers_目标_约束与关键质量属性场景/index.md)
-- [9.1.4.2 架构边界 (Architectural Boundaries) 与边界设计](09.1.4.2_架构边界_Architectural_Boundaries_与边界设计/index.md)
-
----
+- [09.1.4.1 架构驱动因素 (Architectural Drivers)：目标、约束与关键质量属性场景](09.1.4.1_架构驱动因素_Architectural_Drivers_目标_约束与关键质量属性场景/index.md)
+- [09.1.4.2 架构边界 (Architectural Boundaries) 与边界设计](09.1.4.2_架构边界_Architectural_Boundaries_与边界设计/index.md)
 
 ## 导航
 

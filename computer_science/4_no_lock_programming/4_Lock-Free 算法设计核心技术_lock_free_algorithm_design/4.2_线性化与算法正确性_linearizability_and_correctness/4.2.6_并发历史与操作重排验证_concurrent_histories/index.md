@@ -1,6 +1,6 @@
 # 4.2.6 并发历史与操作重排验证  concurrent histories
 
-通过 invocation/response 历史检查并发操作是否合法。
+**介绍**: 通过 invocation/response 历史检查并发操作是否合法。
 
 ---
 

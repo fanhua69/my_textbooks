@@ -1,14 +1,12 @@
-# 4.2 Linux、macOS 与 Windows 核心 IPC 机制详解
+# 02 Linux、macOS 与 Windows 核心 IPC 机制详解
 
-逐一拆解三大操作系统的主力 IPC 通道、描述符/句柄传递能力及平台特有行为。
+**介绍**: 逐一拆解三大操作系统的主力 IPC 通道、描述符/句柄传递能力及平台特有行为。
 
-## 本节目录
+## 目录
 
-- [4.2.1 Linux IPC：UNIX Domain Socket（SCM RIGHTS）、memfd + File Sealing、eventfd 与管道](01_linux_ipc_af_unix_memfd_eventfd_与管道/index.md)
-- [4.2.2 macOS IPC：Mach Port / mach msg、XPC（libxpc / NSXPCConnection）、xpc shmem 与 POSIX IPC](02_macos_ipc_mach_port_xpc_与_posix_差异/index.md)
-- [4.2.3 Windows IPC：Named Pipes（Overlapped / IOCP）、File Mapping、WaitOnAddress、AF UNIX 与 ALPC/RPC](03_windows_ipc_named_pipes_file_mapping_alpc_与_rpc/index.md)
-
----
+- [01 Linux IPC：UNIX Domain Socket（SCM RIGHTS）、memfd + File Sealing、eventfd 与管道](01_linux_ipc_af_unix_memfd_eventfd_与管道/index.md)
+- [02 macOS IPC：Mach Port / mach msg、XPC（libxpc / NSXPCConnection）、xpc shmem 与 POSIX IPC](02_macos_ipc_mach_port_xpc_与_posix_差异/index.md)
+- [03 Windows IPC：Named Pipes（Overlapped / IOCP）、File Mapping、WaitOnAddress、AF UNIX 与 ALPC/RPC](03_windows_ipc_named_pipes_file_mapping_alpc_与_rpc/index.md)
 
 ## 导航
 

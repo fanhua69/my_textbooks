@@ -1,6 +1,6 @@
-# 2.3.2 智能指针：unique_ptr、shared_ptr、weak  ptr
+# 02 智能指针：unique_ptr、shared_ptr、weak  ptr
 
-掌握所有权模型、控制块、循环引用和自定义 deleter[cite: 4, 11]。
+**介绍**: 掌握所有权模型、控制块、循环引用和自定义 deleter[cite: 4, 11]。
 
 ---
 

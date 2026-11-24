@@ -1,6 +1,6 @@
 # 16.3.2.2 Terraform / Pulumi 状态管理与漂移检测
 
-掌握 tfstate 远程存储与并发锁机制，运行 drift detection 定期发现并自愈人工界面误操作引入的状态偏差。
+**介绍**: 掌握 tfstate 远程存储与并发锁机制，运行 drift detection 定期发现并自愈人工界面误操作引入的状态偏差。
 
 ---
 

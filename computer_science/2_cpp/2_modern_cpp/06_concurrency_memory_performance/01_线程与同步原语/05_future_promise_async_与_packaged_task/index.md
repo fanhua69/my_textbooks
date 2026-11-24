@@ -1,6 +1,6 @@
-# 6.1.5 future、promise、async 与 packaged  task
+# 05 future、promise、async 与 packaged  task
 
-掌握任务结果传递和异步执行模型[cite: 4, 11]。
+**介绍**: 掌握任务结果传递和异步执行模型[cite: 4, 11]。
 
 ---
 

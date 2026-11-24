@@ -1,6 +1,6 @@
 # 7.2.1 Cache Locality 与 Data-Oriented Design  cache locality and data oriented design
 
-按访问模式组织数据，减少指针追踪。
+**介绍**: 按访问模式组织数据，减少指针追踪。
 
 ---
 

@@ -1,6 +1,6 @@
 # 20.1.2.2 模式对比与选型速查 (Pattern Comparison)
 
-提供相近模式的对比矩阵（如 Active Record vs Data Mapper、Saga 编排 vs 协同）与选型判据。
+**介绍**: 提供相近模式的对比矩阵（如 Active Record vs Data Mapper、Saga 编排 vs 协同）与选型判据。
 
 ---
 

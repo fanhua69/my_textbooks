@@ -1,6 +1,6 @@
-# 4.1.2 句柄继承、DuplicateHandle 与访问控制列表（ACL / DACL）
+# 02 句柄继承、DuplicateHandle 与访问控制列表（ACL / DACL）
 
-实现跨进程句柄复制以及基于 SECURITY_ATTRIBUTES 的细粒度权限控制。
+**介绍**: 实现跨进程句柄复制以及基于 SECURITY_ATTRIBUTES 的细粒度权限控制。
 
 ---
 

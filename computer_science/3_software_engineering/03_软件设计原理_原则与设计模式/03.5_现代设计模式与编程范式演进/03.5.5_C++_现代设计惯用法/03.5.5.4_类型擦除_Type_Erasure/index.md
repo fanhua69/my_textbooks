@@ -1,6 +1,6 @@
-# 3.5.5.4 类型擦除 (Type Erasure)
+# 03.5.5.4 类型擦除 (Type Erasure)
 
-以值语义包装任意满足接口的类型（如 std::function、std::any），统一抽象与具体类型的边界。
+**介绍**: 以值语义包装任意满足接口的类型（如 std::function、std::any），统一抽象与具体类型的边界。
 
 ---
 

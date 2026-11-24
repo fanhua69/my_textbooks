@@ -1,6 +1,6 @@
-# 3.1.4 Lambda 表达式、闭包对象与 std::function / std::bind
+# 04 Lambda 表达式、闭包对象与 std::function / std::bind
 
-掌握捕获列表、mutable lambda、闭包类型、泛型 lambda（C++14）以及 std::function、std::bind 与 std::placeholders 可调用包装机制[cite: 4, 5, 6, 7, 8, 9, 11, 12]。
+**介绍**: 掌握捕获列表、mutable lambda、闭包类型、泛型 lambda（C++14）以及 std::function、std::bind 与 std::placeholders 可调用包装机制[cite: 4, 5, 6, 7, 8, 9, 11, 12]。
 
 ---
 

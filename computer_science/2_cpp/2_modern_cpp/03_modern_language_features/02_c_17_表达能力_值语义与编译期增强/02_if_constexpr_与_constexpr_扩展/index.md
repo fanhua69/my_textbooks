@@ -1,6 +1,6 @@
-# 3.2.2 if constexpr 与 constexpr 扩展（循环、分支与 lambda）
+# 02 if constexpr 与 constexpr 扩展（循环、分支与 lambda）
 
-掌握模板实例化阶段丢弃未选中分支的 if constexpr，以及 C++17 constexpr 函数对局部变量、循环（for/while）、if 分支和 constexpr lambda 的支持[cite: 4, 6, 13, 14]。
+**介绍**: 掌握模板实例化阶段丢弃未选中分支的 if constexpr，以及 C++17 constexpr 函数对局部变量、循环（for/while）、if 分支和 constexpr lambda 的支持[cite: 4, 6, 13, 14]。
 
 ---
 

@@ -1,6 +1,6 @@
-# 4.2.4 ADL 与两阶段名称查找
+# 04 ADL 与两阶段名称查找
 
-掌握 argument-dependent lookup 和 dependent lookup[cite: 4]。
+**介绍**: 掌握 argument-dependent lookup 和 dependent lookup[cite: 4]。
 
 ---
 

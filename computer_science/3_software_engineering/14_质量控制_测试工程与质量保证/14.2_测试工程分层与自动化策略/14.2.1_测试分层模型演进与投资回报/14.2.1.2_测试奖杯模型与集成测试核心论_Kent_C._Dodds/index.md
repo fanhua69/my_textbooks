@@ -1,6 +1,6 @@
 # 14.2.1.2 Kent C. Dodds 测试奖杯模型与集成测试核心论
 
-分析在现代前端与全栈开发中，强化跨组件集成测试（Write tests, not too many, mostly integration）的高性价比优势。
+**介绍**: 分析在现代前端与全栈开发中，强化跨组件集成测试（Write tests, not too many, mostly integration）的高性价比优势。
 
 ---
 

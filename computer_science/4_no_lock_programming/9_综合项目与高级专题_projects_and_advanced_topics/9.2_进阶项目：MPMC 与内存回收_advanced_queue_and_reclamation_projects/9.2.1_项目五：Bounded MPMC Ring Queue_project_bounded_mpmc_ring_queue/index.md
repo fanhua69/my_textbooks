@@ -1,6 +1,6 @@
 # 9.2.1 项目五：Bounded MPMC Ring Queue  project bounded mpmc ring queue
 
-实现序列号槽位方案，验证满/空边界和多线程并发行为。
+**介绍**: 实现序列号槽位方案，验证满/空边界和多线程并发行为。
 
 ---
 

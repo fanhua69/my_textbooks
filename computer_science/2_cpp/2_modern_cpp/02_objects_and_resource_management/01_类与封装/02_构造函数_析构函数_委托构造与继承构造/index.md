@@ -1,6 +1,6 @@
-# 2.1.2 构造函数、析构函数、委托构造与继承构造
+# 02 构造函数、析构函数、委托构造与继承构造
 
-理解对象建立和销毁过程、成员初始化顺序、委托构造函数（Delegating Constructors）与 using Base::Base 继承构造函数[cite: 4, 5, 12]。
+**介绍**: 理解对象建立和销毁过程、成员初始化顺序、委托构造函数（Delegating Constructors）与 using Base::Base 继承构造函数[cite: 4, 5, 12]。
 
 ---
 

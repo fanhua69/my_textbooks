@@ -1,6 +1,6 @@
-# 2.1.1 if constexpr 语义、未选中分支丢弃与替代 SFINAE / Tag Dispatch
+# 01 if constexpr 语义、未选中分支丢弃与替代 SFINAE / Tag Dispatch
 
-理解 if constexpr 布尔常量条件、未命中分支不进行实例化（仍需语法合法）、结合 type_traits 简化泛型代码及注意事项。
+**介绍**: 理解 if constexpr 布尔常量条件、未命中分支不进行实例化（仍需语法合法）、结合 type_traits 简化泛型代码及注意事项。
 
 ---
 

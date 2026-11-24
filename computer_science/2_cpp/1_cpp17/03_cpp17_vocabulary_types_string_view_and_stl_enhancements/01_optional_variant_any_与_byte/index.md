@@ -1,14 +1,12 @@
-# 3.1 std::optional、std::variant、std::any 与 std::byte
+# 01 std::optional、std::variant、std::any 与 std::byte
 
-掌握值语义代数数据类型、类型安全联合、任意类型擦除容器与原始字节类型。
+**介绍**: 掌握值语义代数数据类型、类型安全联合、任意类型擦除容器与原始字节类型。
 
-## 本节目录
+## 目录
 
-- [3.1.1 std::optional、std::nullopt 与 std::make  optional](01_std_optional_与空值安全表达/index.md)
-- [3.1.2 std::variant、std::visit、std::monostate 与 std::get  if / holds alternative](02_std_variant_与_std_visit_访问器/index.md)
-- [3.1.3 std::any、std::any cast 与 std::byte 原始字节操作](03_std_any_与_std_byte_字节语义/index.md)
-
----
+- [01 std::optional、std::nullopt 与 std::make  optional](01_std_optional_与空值安全表达/index.md)
+- [02 std::variant、std::visit、std::monostate 与 std::get  if / holds alternative](02_std_variant_与_std_visit_访问器/index.md)
+- [03 std::any、std::any cast 与 std::byte 原始字节操作](03_std_any_与_std_byte_字节语义/index.md)
 
 ## 导航
 

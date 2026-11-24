@@ -1,13 +1,11 @@
-# 4.1 Windows 内核对象模型、句柄与安全描述符
+# 01 Windows 内核对象模型、句柄与安全描述符
 
-建立 Windows IPC 的底层统一视角：一切皆内核对象与句柄引用。
+**介绍**: 建立 Windows IPC 的底层统一视角：一切皆内核对象与句柄引用。
 
-## 本节目录
+## 目录
 
-- [4.1.1 内核对象命名空间（Global\、Local\ 与 Session 隔离）](01_内核对象命名空间_global_local_与_session_隔离/index.md)
-- [4.1.2 句柄继承、DuplicateHandle 与访问控制列表（ACL / DACL）](02_句柄继承_duplicatehandle_与访问控制列表_acl_dacl/index.md)
-
----
+- [01 内核对象命名空间（Global\、Local\ 与 Session 隔离）](01_内核对象命名空间_global_local_与_session_隔离/index.md)
+- [02 句柄继承、DuplicateHandle 与访问控制列表（ACL / DACL）](02_句柄继承_duplicatehandle_与访问控制列表_acl_dacl/index.md)
 
 ## 导航
 

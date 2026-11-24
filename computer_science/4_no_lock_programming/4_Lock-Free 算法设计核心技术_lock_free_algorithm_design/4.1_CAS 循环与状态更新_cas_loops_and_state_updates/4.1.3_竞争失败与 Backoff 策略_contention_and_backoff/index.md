@@ -1,6 +1,6 @@
 # 4.1.3 竞争失败与 Backoff 策略  contention and backoff
 
-介绍 pause、指数退避、随机退避及其公平性影响。
+**介绍**: 介绍 pause、指数退避、随机退避及其公平性影响。
 
 ---
 

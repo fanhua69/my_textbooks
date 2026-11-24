@@ -1,6 +1,6 @@
 # 15.1.2.1 STRIDE 威胁建模模型全解
 
-系统分析六大威胁：身份仿冒 (Spoofing)、篡改 (Tampering)、抵赖 (Repudiation)、信息泄露 (Information Disclosure)、拒绝服务 (DoS) 与权限提升 (Elevation of Privilege)。
+**介绍**: 系统分析六大威胁：身份仿冒 (Spoofing)、篡改 (Tampering)、抵赖 (Repudiation)、信息泄露 (Information Disclosure)、拒绝服务 (DoS) 与权限提升 (Elevation of Privilege)。
 
 ---
 

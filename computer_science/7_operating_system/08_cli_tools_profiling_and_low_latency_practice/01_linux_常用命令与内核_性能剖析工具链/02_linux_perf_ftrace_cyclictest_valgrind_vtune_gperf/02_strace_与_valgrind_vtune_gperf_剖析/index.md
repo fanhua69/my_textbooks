@@ -1,6 +1,6 @@
-# 8.1.2.2 strace 系统调用追踪与 Valgrind / VTune / gperf 深度剖析
+# 02 strace 系统调用追踪与 Valgrind / VTune / gperf 深度剖析
 
-排查高频系统调用与阻塞点，结合 Valgrind 内存/并发检查与 VTune/gperf 定位 CPU 热点。
+**介绍**: 排查高频系统调用与阻塞点，结合 Valgrind 内存/并发检查与 VTune/gperf 定位 CPU 热点。
 
 ---
 

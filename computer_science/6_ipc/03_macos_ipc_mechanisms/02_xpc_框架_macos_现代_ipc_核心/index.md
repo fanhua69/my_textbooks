@@ -1,15 +1,13 @@
-# 3.2 XPC 框架：macOS 现代 IPC 核心
+# 02 XPC 框架：macOS 现代 IPC 核心
 
-全面掌握苹果官方推荐的 XPC C API 与 NSXPCConnection 架构。
+**介绍**: 全面掌握苹果官方推荐的 XPC C API 与 NSXPCConnection 架构。
 
-## 本节目录
+## 目录
 
-- [3.2.1 底层 C API（libxpc / xpc connection t）与序列化类型系统](01_底层_c_api_libxpc_xpc_connection_t_与序列化类型系统/index.md)
-- [3.2.2 NSXPCConnection、NSXPCInterface 与远程对象代理](02_nsxpcconnection_nsxpcinterface_与远程对象代理/index.md)
-- [3.2.3 按需启动（On-Demand）、连接中断（Interruption）与作废（Invalidation）](03_按需启动_on_demand_连接中断_interruption_与作废_invalidation/index.md)
-- [3.2.4 Audit Token 校验与代码签名（Code Signing Requirement）安全加固](04_audit_token_校验与代码签名_code_signing_requirement_安全加固/index.md)
-
----
+- [01 底层 C API（libxpc / xpc connection t）与序列化类型系统](01_底层_c_api_libxpc_xpc_connection_t_与序列化类型系统/index.md)
+- [02 NSXPCConnection、NSXPCInterface 与远程对象代理](02_nsxpcconnection_nsxpcinterface_与远程对象代理/index.md)
+- [03 按需启动（On-Demand）、连接中断（Interruption）与作废（Invalidation）](03_按需启动_on_demand_连接中断_interruption_与作废_invalidation/index.md)
+- [04 Audit Token 校验与代码签名（Code Signing Requirement）安全加固](04_audit_token_校验与代码签名_code_signing_requirement_安全加固/index.md)
 
 ## 导航
 

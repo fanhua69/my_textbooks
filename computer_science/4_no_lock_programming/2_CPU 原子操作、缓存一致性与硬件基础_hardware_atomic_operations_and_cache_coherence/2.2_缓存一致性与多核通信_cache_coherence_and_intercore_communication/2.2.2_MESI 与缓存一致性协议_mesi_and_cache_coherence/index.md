@@ -1,6 +1,6 @@
 # 2.2.2 MESI 与缓存一致性协议  mesi and cache coherence
 
-理解 Modified、Exclusive、Shared、Invalid 状态及缓存行所有权迁移。
+**介绍**: 理解 Modified、Exclusive、Shared、Invalid 状态及缓存行所有权迁移。
 
 ---
 

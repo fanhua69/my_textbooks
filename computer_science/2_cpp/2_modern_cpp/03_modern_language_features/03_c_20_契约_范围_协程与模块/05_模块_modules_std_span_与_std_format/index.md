@@ -1,6 +1,6 @@
-# 3.3.5 模块 Modules、std::span 与 std::format
+# 05 模块 Modules、std::span 与 std::format
 
-掌握模块接口单元、实现分区与构建系统集成，同时了解 span 与 format 的工程价值[cite: 4]。
+**介绍**: 掌握模块接口单元、实现分区与构建系统集成，同时了解 span 与 format 的工程价值[cite: 4]。
 
 ---
 

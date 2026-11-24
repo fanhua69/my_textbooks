@@ -1,6 +1,6 @@
 # 10.3.1.1 超时机制与带抖动的指数退避重试
 
-严格设置各级 RPC 调用超时，重试必须叠加 Exponential Backoff 与 Jitter 随机抖动以避免造成后端重试风暴。
+**介绍**: 严格设置各级 RPC 调用超时，重试必须叠加 Exponential Backoff 与 Jitter 随机抖动以避免造成后端重试风暴。
 
 ---
 

@@ -1,6 +1,6 @@
-# 8.2.2.2 Instruments（Time Profiler / System Trace / Allocations）与 sample / spindump / dtrace
+# 02 Instruments（Time Profiler / System Trace / Allocations）与 sample / spindump / dtrace
 
-利用 Instruments 追踪线程调度、锁等待、内存分配与调用栈，结合 sample/spindump/dtrace 诊断卡顿。
+**介绍**: 利用 Instruments 追踪线程调度、锁等待、内存分配与调用栈，结合 sample/spindump/dtrace 诊断卡顿。
 
 ---
 

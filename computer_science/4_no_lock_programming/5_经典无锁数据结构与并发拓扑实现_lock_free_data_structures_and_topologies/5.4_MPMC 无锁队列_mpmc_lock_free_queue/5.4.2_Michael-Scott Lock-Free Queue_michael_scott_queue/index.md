@@ -1,6 +1,6 @@
 # 5.4.2 Michael-Scott Lock-Free Queue  michael scott queue
 
-深入经典链表式无锁队列的 enqueue/dequeue、CAS 和帮助机制。
+**介绍**: 深入经典链表式无锁队列的 enqueue/dequeue、CAS 和帮助机制。
 
 ---
 

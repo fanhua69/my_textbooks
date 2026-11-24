@@ -1,6 +1,6 @@
-# 3.3.1 try_emplace、insert_or_assign、节点句柄（extract / insert / merge）与 std::scoped  lock
+# 01 try_emplace、insert_or_assign、节点句柄（extract / insert / merge）与 std::scoped  lock
 
-掌握键已存在时不构造值的 try_emplace、存在则赋值/不存在则插入的 insert_or_assign、map/set 节点提取与合并，以及 CTAD 加持的死锁安全多锁封装 std::scoped_lock。
+**介绍**: 掌握键已存在时不构造值的 try_emplace、存在则赋值/不存在则插入的 insert_or_assign、map/set 节点提取与合并，以及 CTAD 加持的死锁安全多锁封装 std::scoped_lock。
 
 ---
 

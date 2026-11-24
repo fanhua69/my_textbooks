@@ -1,6 +1,6 @@
 # 4.2.2 Linearization Point：线性化点  linearization point
 
-定位 enqueue、dequeue、push、pop 操作真正生效的原子步骤。
+**介绍**: 定位 enqueue、dequeue、push、pop 操作真正生效的原子步骤。
 
 ---
 

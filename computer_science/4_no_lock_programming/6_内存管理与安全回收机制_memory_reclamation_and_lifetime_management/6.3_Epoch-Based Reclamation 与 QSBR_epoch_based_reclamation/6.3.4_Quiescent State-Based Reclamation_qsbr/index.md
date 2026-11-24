@@ -1,6 +1,6 @@
 # 6.3.4 Quiescent State-Based Reclamation  qsbr
 
-理解静止状态、读侧报告和延迟回收。
+**介绍**: 理解静止状态、读侧报告和延迟回收。
 
 ---
 

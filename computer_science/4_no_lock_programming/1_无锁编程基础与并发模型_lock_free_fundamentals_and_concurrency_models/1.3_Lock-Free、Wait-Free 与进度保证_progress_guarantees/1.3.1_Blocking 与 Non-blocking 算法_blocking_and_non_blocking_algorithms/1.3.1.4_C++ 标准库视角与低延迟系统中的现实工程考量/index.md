@@ -1,6 +1,6 @@
 # 1.3.1.4 C++ 标准库视角与低延迟系统中的现实工程考量
 
-> **简介**：C++11 引入了 `<atomic>`，C++20 提供了 `std::atomic<T>::is_always_lock_free`（编译期常量），运行时也可通过 `obj.is_lock_free()` 检查特定原子对象是否由无锁硬件指令实现。
+**介绍**: > **简介**：C++11 引入了 `<atomic>`，C++20 提供了 `std::atomic<T>::is_always_lock_free`（编译期常量），运行时也可通过 `obj.is_lock_free()` 检查特定原子对象是否由无锁硬件指令实现。
 
 ---
 

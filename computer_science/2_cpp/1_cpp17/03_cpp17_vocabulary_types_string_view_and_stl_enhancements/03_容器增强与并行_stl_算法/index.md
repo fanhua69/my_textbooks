@@ -1,13 +1,11 @@
-# 3.3 关联容器增强（try emplace / insert or assign / 节点提取）与并行 STL
+# 03 关联容器增强（try emplace / insert or assign / 节点提取）与并行 STL
 
-掌握避免冗余构造的映射插入接口、无拷贝节点迁移/合并、std::scoped_lock 与并行执行策略算法。
+**介绍**: 掌握避免冗余构造的映射插入接口、无拷贝节点迁移/合并、std::scoped_lock 与并行执行策略算法。
 
-## 本节目录
+## 目录
 
-- [3.3.1 try_emplace、insert_or_assign、节点句柄（extract / insert / merge）与 std::scoped  lock](01_容器增强与_std_scoped_lock/index.md)
-- [3.3.2 并行 STL（std::execution::seq / par / par_unseq）与 reduce / transform  reduce / scan](02_并行_stl_执行策略与规约扫描算法/index.md)
-
----
+- [01 try_emplace、insert_or_assign、节点句柄（extract / insert / merge）与 std::scoped  lock](01_容器增强与_std_scoped_lock/index.md)
+- [02 并行 STL（std::execution::seq / par / par_unseq）与 reduce / transform  reduce / scan](02_并行_stl_执行策略与规约扫描算法/index.md)
 
 ## 导航
 

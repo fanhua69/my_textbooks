@@ -1,6 +1,6 @@
 # 5.3.4 Intrusive MPSC Queue  intrusive mpsc queue
 
-介绍侵入式节点、生命周期责任及低分配开销。
+**介绍**: 介绍侵入式节点、生命周期责任及低分配开销。
 
 ---
 

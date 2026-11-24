@@ -1,6 +1,6 @@
 # 3.4.2 Release-Acquire 发布订阅模式  release acquire publish subscribe
 
-通过 flag 发布普通数据，分析正确与错误写法。
+**介绍**: 通过 flag 发布普通数据，分析正确与错误写法。
 
 ---
 

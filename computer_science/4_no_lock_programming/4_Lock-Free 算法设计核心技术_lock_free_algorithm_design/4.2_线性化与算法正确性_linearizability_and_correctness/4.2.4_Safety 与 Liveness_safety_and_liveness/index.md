@@ -1,6 +1,6 @@
 # 4.2.4 Safety 与 Liveness  safety and liveness
 
-区分不会发生错误与系统最终能够取得进展。
+**介绍**: 区分不会发生错误与系统最终能够取得进展。
 
 ---
 

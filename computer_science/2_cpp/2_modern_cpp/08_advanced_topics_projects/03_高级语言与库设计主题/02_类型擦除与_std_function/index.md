@@ -1,6 +1,6 @@
-# 8.3.2 类型擦除与 std::function
+# 02 类型擦除与 std::function
 
-理解 type erasure、small buffer optimization 的常见实现思路[cite: 4, 7, 11]。
+**介绍**: 理解 type erasure、small buffer optimization 的常见实现思路[cite: 4, 7, 11]。
 
 ---
 

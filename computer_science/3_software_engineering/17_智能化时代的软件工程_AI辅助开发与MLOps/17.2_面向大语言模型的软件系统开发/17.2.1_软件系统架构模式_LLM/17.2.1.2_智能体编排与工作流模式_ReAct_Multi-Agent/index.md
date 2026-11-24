@@ -1,6 +1,6 @@
 # 17.2.1.2 Agent 智能体编排与工作流模式 (ReAct & Multi-Agent)
 
-掌握 Reason + Act 循环机制、状态机编排图（LangGraph）以及基于角色专业分工的多智能体协作通信协议。
+**介绍**: 掌握 Reason + Act 循环机制、状态机编排图（LangGraph）以及基于角色专业分工的多智能体协作通信协议。
 
 ---
 

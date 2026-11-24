@@ -1,6 +1,6 @@
 # 15.1.4.2 软件成分分析 (SCA) 与防投毒策略
 
-检测依赖已知 CVE 漏洞，防范抢注包名（Typosquatting）、依赖混淆（Dependency Confusion）与恶意投毒代码。
+**介绍**: 检测依赖已知 CVE 漏洞，防范抢注包名（Typosquatting）、依赖混淆（Dependency Confusion）与恶意投毒代码。
 
 ---
 

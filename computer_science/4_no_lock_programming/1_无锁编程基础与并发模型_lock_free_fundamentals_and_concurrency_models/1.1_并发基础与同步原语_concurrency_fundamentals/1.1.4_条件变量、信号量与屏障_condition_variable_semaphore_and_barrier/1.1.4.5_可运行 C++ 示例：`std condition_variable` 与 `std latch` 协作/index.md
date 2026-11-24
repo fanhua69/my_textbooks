@@ -1,6 +1,6 @@
 # 1.1.4.5 可运行 C++ 示例：`std::condition_variable` 与 `std::latch` 协作
 
-> **简介**：下面提供一段可编译运行的 C++20 示例，展示使用 `std::latch` 等待所有工作线程就绪，以及使用 `std::mutex` + `std::condition_variable` 实现带谓词防虚假唤醒的线程安全任务队列。
+**介绍**: > **简介**：下面提供一段可编译运行的 C++20 示例，展示使用 `std::latch` 等待所有工作线程就绪，以及使用 `std::mutex` + `std::condition_variable` 实现带谓词防虚假唤醒的线程安全任务队列。
 
 ---
 

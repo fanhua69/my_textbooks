@@ -1,6 +1,6 @@
-# 7.4.1 CMake：target、生成器与现代用法
+# 01 CMake：target、生成器与现代用法
 
-掌握 target_sources、target_link_libraries 和 usage requirements[cite: 4]。
+**介绍**: 掌握 target_sources、target_link_libraries 和 usage requirements[cite: 4]。
 
 ---
 

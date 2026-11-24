@@ -1,13 +1,11 @@
-# 8.3.1 服务、进程与系统信息命令：sc、Get-Service、Get-Process、tasklist、systeminfo
+# 01 服务、进程与系统信息命令：sc、Get-Service、Get-Process、tasklist、systeminfo
 
-管理 Windows 服务状态与配置、检查进程/线程/系统信息及常见故障排查。
+**介绍**: 管理 Windows 服务状态与配置、检查进程/线程/系统信息及常见故障排查。
 
-## 本节目录
+## 目录
 
-- [8.3.1.1 sc 与 PowerShell Get-Service / Get-Process 服务与进程管理](01_sc_与_powershell_服务_进程管理命令/index.md)
-- [8.3.1.2 tasklist、systeminfo 与系统环境/会话信息快速核查](02_tasklist_systeminfo_与系统信息核查/index.md)
-
----
+- [01 sc 与 PowerShell Get-Service / Get-Process 服务与进程管理](01_sc_与_powershell_服务_进程管理命令/index.md)
+- [02 tasklist、systeminfo 与系统环境/会话信息快速核查](02_tasklist_systeminfo_与系统信息核查/index.md)
 
 ## 导航
 

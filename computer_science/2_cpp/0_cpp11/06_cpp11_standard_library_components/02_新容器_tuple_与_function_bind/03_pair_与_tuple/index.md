@@ -1,6 +1,6 @@
-# 6.2.3 pair 与 tuple
+# 03 pair 与 tuple
 
-掌握 tuple、make_tuple、tie、tuple_cat 与 forward_as_tuple，以及 pair 的分段构造。
+**介绍**: 掌握 tuple、make_tuple、tie、tuple_cat 与 forward_as_tuple，以及 pair 的分段构造。
 
 ---
 

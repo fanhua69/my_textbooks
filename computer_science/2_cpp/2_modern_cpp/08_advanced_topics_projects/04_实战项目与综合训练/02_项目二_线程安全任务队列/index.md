@@ -1,6 +1,6 @@
-# 8.4.2 项目二：线程安全任务队列
+# 02 项目二：线程安全任务队列
 
-练习 mutex、condition_variable、关闭语义和压力测试[cite: 4]。
+**介绍**: 练习 mutex、condition_variable、关闭语义和压力测试[cite: 4]。
 
 ---
 

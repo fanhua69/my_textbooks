@@ -1,6 +1,6 @@
-# 1.3.2 std::initializer list 与构造函数重载决议
+# 02 std::initializer list 与构造函数重载决议
 
-理解 initializer_list 构造函数的优先级，以及与普通构造函数混用时的常见陷阱。
+**介绍**: 理解 initializer_list 构造函数的优先级，以及与普通构造函数混用时的常见陷阱。
 
 ---
 

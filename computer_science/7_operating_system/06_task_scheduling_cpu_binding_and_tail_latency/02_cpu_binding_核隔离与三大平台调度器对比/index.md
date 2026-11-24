@@ -1,14 +1,12 @@
-# 6.2 CPU Binding（绑核）、核隔离与三大平台调度器对比
+# 02 CPU Binding（绑核）、核隔离与三大平台调度器对比
 
-掌握 CPU Affinity 绑核设计、隔离核规划与 Linux、macOS、Windows 调度器控制接口及典型毛刺。
+**介绍**: 掌握 CPU Affinity 绑核设计、隔离核规划与 Linux、macOS、Windows 调度器控制接口及典型毛刺。
 
-## 本节目录
+## 目录
 
-- [6.2.1 CPU Binding 策略：物理核映射、避开超线程争用与 NUMA 协同绑核](01_cpu_binding_策略_物理核映射与_numa_协同/index.md)
-- [6.2.2 Linux 调度器（EEVDF / CFS / RT / Deadline）与 cgroup cpu.max 限流](02_linux_调度器_eevdf_rt_deadline_与_cgroup_限流/index.md)
-- [6.2.3 macOS GCD / QoS 与 Windows 线程优先级 / 组调度 / EcoQoS](03_macos_gcd_qos_与_windows_调度器特性/index.md)
-
----
+- [01 CPU Binding 策略：物理核映射、避开超线程争用与 NUMA 协同绑核](01_cpu_binding_策略_物理核映射与_numa_协同/index.md)
+- [02 Linux 调度器（EEVDF / CFS / RT / Deadline）与 cgroup cpu.max 限流](02_linux_调度器_eevdf_rt_deadline_与_cgroup_限流/index.md)
+- [03 macOS GCD / QoS 与 Windows 线程优先级 / 组调度 / EcoQoS](03_macos_gcd_qos_与_windows_调度器特性/index.md)
 
 ## 导航
 

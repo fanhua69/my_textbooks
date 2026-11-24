@@ -1,6 +1,6 @@
 # 7.3.4 优先级、抢占与实时调度  priority preemption and realtime scheduling
 
-分析线程被抢占对 lock-free 进度和尾延迟的影响。
+**介绍**: 分析线程被抢占对 lock-free 进度和尾延迟的影响。
 
 ---
 

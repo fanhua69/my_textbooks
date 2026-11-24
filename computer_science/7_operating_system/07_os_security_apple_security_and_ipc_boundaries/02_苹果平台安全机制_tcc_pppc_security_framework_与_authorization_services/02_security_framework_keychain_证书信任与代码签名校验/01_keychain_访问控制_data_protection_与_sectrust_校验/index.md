@@ -1,6 +1,6 @@
-# 7.2.2.1 Keychain 访问控制、Data Protection 与 SecTrust 证书校验
+# 01 Keychain 访问控制、Data Protection 与 SecTrust 证书校验
 
-理解凭据存储访问组/ACL、加密保护等级与 X.509 证书链验证及吊销/信任策略。
+**介绍**: 理解凭据存储访问组/ACL、加密保护等级与 X.509 证书链验证及吊销/信任策略。
 
 ---
 

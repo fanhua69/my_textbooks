@@ -1,13 +1,11 @@
-# 8.2.2 代码签名、TCC/权限与剖析工具：codesign、spctl、security、tccutil、lsof、dtrace / sample / spindump / Instruments
+# 02 代码签名、TCC/权限与剖析工具：codesign、spctl、security、tccutil、lsof、dtrace / sample / spindump / Instruments
 
-校验签名与权限需求、排查文件/端口占用，结合 Instruments 与 dtrace/sample/spindump 定位延迟与阻塞。
+**介绍**: 校验签名与权限需求、排查文件/端口占用，结合 Instruments 与 dtrace/sample/spindump 定位延迟与阻塞。
 
-## 本节目录
+## 目录
 
-- [8.2.2.1 codesign、spctl、security、tccutil 与 lsof 签名/权限/句柄排查](01_codesign_spctl_security_tccutil_与_lsof_用法/index.md)
-- [8.2.2.2 Instruments（Time Profiler / System Trace / Allocations）与 sample / spindump / dtrace](02_instruments_与_sample_spindump_dtrace_剖析/index.md)
-
----
+- [01 codesign、spctl、security、tccutil 与 lsof 签名/权限/句柄排查](01_codesign_spctl_security_tccutil_与_lsof_用法/index.md)
+- [02 Instruments（Time Profiler / System Trace / Allocations）与 sample / spindump / dtrace](02_instruments_与_sample_spindump_dtrace_剖析/index.md)
 
 ## 导航
 

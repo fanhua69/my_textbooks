@@ -1,6 +1,6 @@
-# 4.3.2 Named Event、Mutex、Semaphore 与 WaitOnAddress 同步组合
+# 02 Named Event、Mutex、Semaphore 与 WaitOnAddress 同步组合
 
-处理 WAIT_ABANDONED 崩溃检测，以及 Windows 8+ 用户态原语 WaitOnAddress 的低开销唤醒。
+**介绍**: 处理 WAIT_ABANDONED 崩溃检测，以及 Windows 8+ 用户态原语 WaitOnAddress 的低开销唤醒。
 
 ---
 

@@ -1,13 +1,11 @@
 # 12.2.3 变革预防类代码异味 (Change Preventers)
 
-识别使系统对后续业务变更产生阻力、违反单一职责与正交性的异味。
+**介绍**: 识别使系统对后续业务变更产生阻力、违反单一职责与正交性的异味。
 
-## 本节目录
+## 目录
 
 - [12.2.3.1 发散式变化 (Divergent Change)](12.2.3.1_发散式变化_Divergent_Change/index.md)
 - [12.2.3.2 霰弹式修改 (Shotgun Surgery)](12.2.3.2_霰弹式修改_Shotgun_Surgery/index.md)
-
----
 
 ## 导航
 

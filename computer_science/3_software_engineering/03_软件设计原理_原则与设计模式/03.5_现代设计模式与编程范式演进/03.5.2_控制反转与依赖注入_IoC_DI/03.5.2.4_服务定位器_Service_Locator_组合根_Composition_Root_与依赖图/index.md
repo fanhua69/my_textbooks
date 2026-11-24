@@ -1,6 +1,6 @@
-# 3.5.2.4 服务定位器 (Service Locator)、组合根 (Composition Root) 与依赖图
+# 03.5.2.4 服务定位器 (Service Locator)、组合根 (Composition Root) 与依赖图
 
-对比服务定位器与依赖注入的隐式依赖问题，在程序入口的组合根统一装配依赖图 (Dependency Graph)，避免容器渗透业务代码。
+**介绍**: 对比服务定位器与依赖注入的隐式依赖问题，在程序入口的组合根统一装配依赖图 (Dependency Graph)，避免容器渗透业务代码。
 
 ---
 

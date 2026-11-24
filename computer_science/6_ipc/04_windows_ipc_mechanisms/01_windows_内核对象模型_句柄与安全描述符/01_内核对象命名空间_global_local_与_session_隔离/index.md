@@ -1,6 +1,6 @@
-# 4.1.1 内核对象命名空间（Global\、Local\ 与 Session 隔离）
+# 01 内核对象命名空间（Global\、Local\ 与 Session 隔离）
 
-理解 Windows Service（Session 0）与桌面用户会话（Session 1+）之间的跨会话 IPC 隔离与穿透。
+**介绍**: 理解 Windows Service（Session 0）与桌面用户会话（Session 1+）之间的跨会话 IPC 隔离与穿透。
 
 ---
 

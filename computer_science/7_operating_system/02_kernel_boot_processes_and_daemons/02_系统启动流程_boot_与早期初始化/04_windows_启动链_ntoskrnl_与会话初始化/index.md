@@ -1,13 +1,11 @@
-# 2.2.4 Windows 启动链：Bootmgr / winload -> ntoskrnl -> smss / csrss / wininit / services.exe
+# 04 Windows 启动链：Bootmgr / winload -> ntoskrnl -> smss / csrss / wininit / services.exe
 
-理解 BCD 引导配置、内核与 HAL 加载、会话管理器初始化以及 Session 0 与用户会话分离。
+**介绍**: 理解 BCD 引导配置、内核与 HAL 加载、会话管理器初始化以及 Session 0 与用户会话分离。
 
-## 本节目录
+## 目录
 
-- [2.2.4.1 UEFI / Bootmgr / winload 与 BCD、内核/驱动加载](01_uefi_bootmgr_winload_与_bcd_内核_驱动加载/index.md)
-- [2.2.4.2 smss、csrss、wininit 与 Session 0 / Session 1 建立](02_smss_csrss_wininit_与_session_0_session_1_建立/index.md)
-
----
+- [01 UEFI / Bootmgr / winload 与 BCD、内核/驱动加载](01_uefi_bootmgr_winload_与_bcd_内核_驱动加载/index.md)
+- [02 smss、csrss、wininit 与 Session 0 / Session 1 建立](02_smss_csrss_wininit_与_session_0_session_1_建立/index.md)
 
 ## 导航
 

@@ -1,6 +1,6 @@
-# 5.1.3 容器适配器：stack、queue、priority  queue
+# 03 容器适配器：stack、queue、priority  queue
 
-掌握受限接口和底层容器关系[cite: 4]。
+**介绍**: 掌握受限接口和底层容器关系[cite: 4]。
 
 ---
 

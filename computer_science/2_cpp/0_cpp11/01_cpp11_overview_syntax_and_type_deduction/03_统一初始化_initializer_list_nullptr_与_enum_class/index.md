@@ -1,15 +1,13 @@
-# 1.3 统一初始化、initializer list、nullptr 与 enum class
+# 03 统一初始化、initializer list、nullptr 与 enum class
 
-理解统一初始化语法、initializer_list、nullptr 与强类型枚举带来的类型安全改进。
+**介绍**: 理解统一初始化语法、initializer_list、nullptr 与强类型枚举带来的类型安全改进。
 
-## 本节目录
+## 目录
 
-- [1.3.1 列表初始化与窄化转换](01_列表初始化与窄化转换/index.md)
-- [1.3.2 std::initializer list 与构造函数重载决议](02_std_initializer_list_与构造函数重载决议/index.md)
-- [1.3.3 nullptr 与 std::nullptr  t](03_nullptr_与_std_nullptr_t/index.md)
-- [1.3.4 enum class 与强类型枚举](04_enum_class_与强类型枚举/index.md)
-
----
+- [01 列表初始化与窄化转换](01_列表初始化与窄化转换/index.md)
+- [02 std::initializer list 与构造函数重载决议](02_std_initializer_list_与构造函数重载决议/index.md)
+- [03 nullptr 与 std::nullptr  t](03_nullptr_与_std_nullptr_t/index.md)
+- [04 enum class 与强类型枚举](04_enum_class_与强类型枚举/index.md)
 
 ## 导航
 

@@ -1,6 +1,6 @@
 # 7.4.3 Order Gateway 与事件队列  order gateway and event queue
 
-分析订单入口、命令队列和状态更新路径。
+**介绍**: 分析订单入口、命令队列和状态更新路径。
 
 ---
 

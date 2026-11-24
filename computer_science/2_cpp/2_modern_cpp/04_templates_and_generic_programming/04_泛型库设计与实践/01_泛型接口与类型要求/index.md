@@ -1,6 +1,6 @@
-# 4.4.1 泛型接口与类型要求
+# 01 泛型接口与类型要求
 
-从调用者视角设计清晰的 template contract[cite: 4]。
+**介绍**: 从调用者视角设计清晰的 template contract[cite: 4]。
 
 ---
 

@@ -1,6 +1,6 @@
 # 16.1.2.1 经典 GitFlow 及其重型包袱反思
 
-分析 master/develop/feature/release/hotfix 复杂多长期分支模型，揭示合并地狱与违背持续集成的痛点。
+**介绍**: 分析 master/develop/feature/release/hotfix 复杂多长期分支模型，揭示合并地狱与违背持续集成的痛点。
 
 ---
 

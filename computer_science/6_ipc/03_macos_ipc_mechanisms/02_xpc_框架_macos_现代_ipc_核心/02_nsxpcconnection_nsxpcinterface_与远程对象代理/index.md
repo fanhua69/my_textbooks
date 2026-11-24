@@ -1,6 +1,6 @@
-# 3.2.2 NSXPCConnection、NSXPCInterface 与远程对象代理
+# 02 NSXPCConnection、NSXPCInterface 与远程对象代理
 
-设计强类型 Protocol 契约、NSSecureCoding 白名单校验与异步 Reply Block。
+**介绍**: 设计强类型 Protocol 契约、NSSecureCoding 白名单校验与异步 Reply Block。
 
 ---
 

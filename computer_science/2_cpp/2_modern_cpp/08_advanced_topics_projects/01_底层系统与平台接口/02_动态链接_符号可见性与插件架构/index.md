@@ -1,6 +1,6 @@
-# 8.1.2 动态链接、符号可见性与插件架构
+# 02 动态链接、符号可见性与插件架构
 
-掌握 shared library、visibility 和 plugin loading[cite: 4]。
+**介绍**: 掌握 shared library、visibility 和 plugin loading[cite: 4]。
 
 ---
 

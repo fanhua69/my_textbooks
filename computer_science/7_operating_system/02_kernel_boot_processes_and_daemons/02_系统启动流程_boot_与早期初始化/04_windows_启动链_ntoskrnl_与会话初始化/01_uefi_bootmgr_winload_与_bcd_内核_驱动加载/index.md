@@ -1,6 +1,6 @@
-# 2.2.4.1 UEFI / Bootmgr / winload 与 BCD、内核/驱动加载
+# 01 UEFI / Bootmgr / winload 与 BCD、内核/驱动加载
 
-掌握引导配置数据、系统注册表 hive 加载与引导启动驱动（Boot-start driver）初始化。
+**介绍**: 掌握引导配置数据、系统注册表 hive 加载与引导启动驱动（Boot-start driver）初始化。
 
 ---
 

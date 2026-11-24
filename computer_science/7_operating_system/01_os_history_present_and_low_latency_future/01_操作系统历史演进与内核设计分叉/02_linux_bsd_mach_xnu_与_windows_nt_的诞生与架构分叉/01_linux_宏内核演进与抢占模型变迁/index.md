@@ -1,6 +1,6 @@
-# 1.1.2.1 Linux 宏内核演进与抢占模型变迁
+# 01 Linux 宏内核演进与抢占模型变迁
 
-从早期不可抢占内核到 CONFIG_PREEMPT 与 PREEMPT_RT 实时补丁合入主线的演进逻辑。
+**介绍**: 从早期不可抢占内核到 CONFIG_PREEMPT 与 PREEMPT_RT 实时补丁合入主线的演进逻辑。
 
 ---
 

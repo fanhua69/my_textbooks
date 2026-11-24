@@ -1,6 +1,6 @@
-# 5.1.2 关联容器：map/set、unordered 系列、flat 容器与 try emplace 增强
+# 02 关联容器：map/set、unordered 系列、flat 容器与 try emplace 增强
 
-理解有序树结构、哈希结构（unordered_map/set/multimap/multiset）、C++17 try_emplace / insert_or_assign / 节点句柄提取与键等价规则[cite: 4, 11, 13]。
+**介绍**: 理解有序树结构、哈希结构（unordered_map/set/multimap/multiset）、C++17 try_emplace / insert_or_assign / 节点句柄提取与键等价规则[cite: 4, 11, 13]。
 
 ---
 

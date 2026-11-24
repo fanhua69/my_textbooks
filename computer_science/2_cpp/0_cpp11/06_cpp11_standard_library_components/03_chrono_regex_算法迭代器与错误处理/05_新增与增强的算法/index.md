@@ -1,6 +1,6 @@
-# 6.3.5 新增与增强的算法
+# 05 新增与增强的算法
 
-掌握 all_of/any_of/none_of、copy_if、copy_n、iota、minmax、is_sorted、partition_point 与 move 算法等。
+**介绍**: 掌握 all_of/any_of/none_of、copy_if、copy_n、iota、minmax、is_sorted、partition_point 与 move 算法等。
 
 ---
 

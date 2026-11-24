@@ -1,6 +1,6 @@
 # 2.2.5 std::hardware  destructive interference size hardware destructive interference size
 
-理解 C++17 干扰尺寸常量及其使用限制。
+**介绍**: 理解 C++17 干扰尺寸常量及其使用限制。
 
 ---
 

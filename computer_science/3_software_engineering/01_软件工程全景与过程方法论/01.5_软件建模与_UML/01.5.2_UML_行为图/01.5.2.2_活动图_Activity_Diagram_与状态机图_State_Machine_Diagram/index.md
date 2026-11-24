@@ -1,6 +1,6 @@
-# 1.5.2.2 活动图 (Activity Diagram) 与状态机图 (State Machine Diagram)
+# 01.5.2.2 活动图 (Activity Diagram) 与状态机图 (State Machine Diagram)
 
-活动图描述业务/算法流程与并行分支；状态机图描述对象生命周期与事件驱动迁移。状态机在需求建模中的应用见 BPMN 一节。
+**介绍**: 活动图描述业务/算法流程与并行分支；状态机图描述对象生命周期与事件驱动迁移。状态机在需求建模中的应用见 BPMN 一节。
 
 ---
 

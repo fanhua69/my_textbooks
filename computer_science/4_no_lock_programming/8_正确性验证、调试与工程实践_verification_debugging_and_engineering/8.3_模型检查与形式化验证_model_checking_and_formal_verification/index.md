@@ -1,16 +1,14 @@
 # 8.3 模型检查与形式化验证  model checking and formal verification
 
-用系统化方法探索线程交错并验证并发算法。
+**介绍**: 用系统化方法探索线程交错并验证并发算法。
 
-## 本节目录
+## 目录
 
 - [8.3.1 状态空间与线程交错爆炸  state space and interleaving explosion](8.3.1_状态空间与线程交错爆炸_state_space_and_interleaving_explosion/index.md)
-- [8.3.2 Litmus Tests 与内存模型测试  litmus tests](8.3.2_Litmus%20Tests%20与内存模型测试_litmus_tests/index.md)
-- [8.3.3 CDSChecker 与 Relacy Race Detector  cdschecker and relacy](8.3.3_CDSChecker%20与%20Relacy%20Race%20Detector_cdschecker_and_relacy/index.md)
+- [8.3.2 Litmus Tests 与内存模型测试  litmus tests](8.3.2_Litmus%20Tests%20%E4%B8%8E%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E6%B5%8B%E8%AF%95_litmus_tests/index.md)
+- [8.3.3 CDSChecker 与 Relacy Race Detector  cdschecker and relacy](8.3.3_CDSChecker%20%E4%B8%8E%20Relacy%20Race%20Detector_cdschecker_and_relacy/index.md)
 - [8.3.4 模型检查与随机压力测试的区别  model checking vs stress testing](8.3.4_模型检查与随机压力测试的区别_model_checking_vs_stress_testing/index.md)
 - [8.3.5 算法证明文档与代码审查  proof documentation and code review](8.3.5_算法证明文档与代码审查_proof_documentation_and_code_review/index.md)
-
----
 
 ## 导航
 

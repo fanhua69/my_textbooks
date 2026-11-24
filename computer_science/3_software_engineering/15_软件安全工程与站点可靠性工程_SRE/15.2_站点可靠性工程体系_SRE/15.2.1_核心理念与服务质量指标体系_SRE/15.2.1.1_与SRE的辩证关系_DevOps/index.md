@@ -1,6 +1,6 @@
 # 15.2.1.1 DevOps 与 SRE 的辩证关系
 
-“Class SRE implements interface DevOps”：将 DevOps 的文化哲学落地为具体的工程实践与量化指标。
+**介绍**: “Class SRE implements interface DevOps”：将 DevOps 的文化哲学落地为具体的工程实践与量化指标。
 
 ---
 

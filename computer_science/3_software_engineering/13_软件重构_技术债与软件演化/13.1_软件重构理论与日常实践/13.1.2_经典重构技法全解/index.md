@@ -1,14 +1,12 @@
 # 13.1.2 经典重构技法全解
 
-熟练掌握代码重构中最核心、最常用的基础手法。
+**介绍**: 熟练掌握代码重构中最核心、最常用的基础手法。
 
-## 本节目录
+## 目录
 
 - [13.1.2.1 提炼函数 (Extract Method) 与内联函数 (Inline Method)](13.1.2.1_提炼函数与内联函数_Extract_Method_Inline_Method/index.md)
 - [13.1.2.2 提炼变量与引入参数对象 (Introduce Parameter Object)](13.1.2.2_提炼变量与引入参数对象_Introduce_Parameter_Object/index.md)
 - [13.1.2.3 以多态取代条件表达式 (Replace Conditional with Polymorphism)](13.1.2.3_以多态取代条件表达式_Replace_Conditional_with_Polymorphis/index.md)
-
----
 
 ## 导航
 

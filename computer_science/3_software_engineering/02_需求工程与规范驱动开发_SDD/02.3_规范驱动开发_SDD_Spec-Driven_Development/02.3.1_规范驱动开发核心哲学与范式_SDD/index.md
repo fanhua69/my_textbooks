@@ -1,14 +1,12 @@
-# 2.3.1 规范驱动开发 (SDD) 核心哲学与范式
+# 02.3.1 规范驱动开发 (SDD) 核心哲学与范式
 
-剖析从 Code-First 到 Spec-First 的研发范式变革，将规范视为系统的核心资产。
+**介绍**: 剖析从 Code-First 到 Spec-First 的研发范式变革，将规范视为系统的核心资产。
 
-## 本节目录
+## 目录
 
-- [2.3.1.1 从 Code-First 到 Spec-First 的思维转变](02.3.1.1_从Code-First到Spec-First的思维转变/index.md)
-- [2.3.1.2 以规范为单一事实源 (Single Source of Truth, SOT)](02.3.1.2_以规范为单一事实源_Single_Source_of_Truth_SOT/index.md)
-- [2.3.1.3 活文档（Living Documentation）生命周期治理](02.3.1.3_活文档生命周期治理_Living_Documentation/index.md)
-
----
+- [02.3.1.1 从 Code-First 到 Spec-First 的思维转变](02.3.1.1_从Code-First到Spec-First的思维转变/index.md)
+- [02.3.1.2 以规范为单一事实源 (Single Source of Truth, SOT)](02.3.1.2_以规范为单一事实源_Single_Source_of_Truth_SOT/index.md)
+- [02.3.1.3 活文档（Living Documentation）生命周期治理](02.3.1.3_活文档生命周期治理_Living_Documentation/index.md)
 
 ## 导航
 

@@ -1,6 +1,6 @@
 # 9.2.3 项目七：Hazard Pointer 库  project hazard pointer library
 
-实现线程注册、保护指针、retire list、扫描和回收。
+**介绍**: 实现线程注册、保护指针、retire list、扫描和回收。
 
 ---
 

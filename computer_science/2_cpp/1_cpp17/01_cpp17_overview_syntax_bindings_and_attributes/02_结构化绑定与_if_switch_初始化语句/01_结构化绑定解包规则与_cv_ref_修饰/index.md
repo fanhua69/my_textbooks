@@ -1,6 +1,6 @@
-# 1.2.1 结构化绑定：解包 std::pair、std::tuple、数组、聚合结构体与自定义 tuple-like 类型
+# 01 结构化绑定：解包 std::pair、std::tuple、数组、聚合结构体与自定义 tuple-like 类型
 
-掌握 auto [x, y] = ...、const auto& [k, v] = ...、auto&& [...] = ...、结构化绑定与 range-based for 配合，以及 std::tuple_size / std::tuple_element / get 协议自定义。
+**介绍**: 掌握 auto [x, y] = ...、const auto& [k, v] = ...、auto&& [...] = ...、结构化绑定与 range-based for 配合，以及 std::tuple_size / std::tuple_element / get 协议自定义。
 
 ---
 

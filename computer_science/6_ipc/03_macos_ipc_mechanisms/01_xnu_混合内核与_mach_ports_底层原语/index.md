@@ -1,14 +1,12 @@
-# 3.1 XNU 混合内核与 Mach Ports 底层原语
+# 01 XNU 混合内核与 Mach Ports 底层原语
 
-探究苹果操作系统 IPC 的微内核基石：Mach 消息传递与端口权限模型。
+**介绍**: 探究苹果操作系统 IPC 的微内核基石：Mach 消息传递与端口权限模型。
 
-## 本节目录
+## 目录
 
-- [3.1.1 Mach Port、Send/Receive Rights 与端口命名空间](01_mach_port_send_receive_rights_与端口命名空间/index.md)
-- [3.1.2 mach msg() 消息结构与 Out-of-Line（OOL）内存描述符](02_mach_msg_消息结构与_out_of_line_ool_内存描述符/index.md)
-- [3.1.3 Bootstrap Server 与 launchd 服务注册机制](03_bootstrap_server_与_launchd_服务注册机制/index.md)
-
----
+- [01 Mach Port、Send/Receive Rights 与端口命名空间](01_mach_port_send_receive_rights_与端口命名空间/index.md)
+- [02 mach msg() 消息结构与 Out-of-Line（OOL）内存描述符](02_mach_msg_消息结构与_out_of_line_ool_内存描述符/index.md)
+- [03 Bootstrap Server 与 launchd 服务注册机制](03_bootstrap_server_与_launchd_服务注册机制/index.md)
 
 ## 导航
 

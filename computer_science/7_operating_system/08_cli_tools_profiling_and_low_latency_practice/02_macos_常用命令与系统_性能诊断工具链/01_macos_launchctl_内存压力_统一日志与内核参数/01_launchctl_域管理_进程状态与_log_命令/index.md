@@ -1,6 +1,6 @@
-# 8.2.1.1 launchctl 域管理、进程状态与 Unified Logging（log 命令）
+# 01 launchctl 域管理、进程状态与 Unified Logging（log 命令）
 
-使用 launchctl print/bootstrap/kickstart 排查服务状态，按谓词高效检索 macOS 统一日志。
+**介绍**: 使用 launchctl print/bootstrap/kickstart 排查服务状态，按谓词高效检索 macOS 统一日志。
 
 ---
 

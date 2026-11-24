@@ -1,6 +1,6 @@
-# 5.3.1 std::atomic 与 atomic  flag
+# 01 std::atomic 与 atomic  flag
 
-掌握原子类型的接口、是否无锁的查询（is_lock_free）以及 atomic_flag 的自旋锁用法。
+**介绍**: 掌握原子类型的接口、是否无锁的查询（is_lock_free）以及 atomic_flag 的自旋锁用法。
 
 ---
 

@@ -1,6 +1,6 @@
-# 3.1.2.4 传入耦合、传出耦合、不稳定性指标 (Instability) 与依赖环检测
+# 03.1.2.4 传入耦合、传出耦合、不稳定性指标 (Instability) 与依赖环检测
 
-用 Ca、Ce 与 I = Ce/(Ca+Ce) 量化组件稳定性，识别依赖环 (Dependency Cycles)，并与包耦合原则 ADP/SDP 结合指导重构。
+**介绍**: 用 Ca、Ce 与 I = Ce/(Ca+Ce) 量化组件稳定性，识别依赖环 (Dependency Cycles)，并与包耦合原则 ADP/SDP 结合指导重构。
 
 ---
 

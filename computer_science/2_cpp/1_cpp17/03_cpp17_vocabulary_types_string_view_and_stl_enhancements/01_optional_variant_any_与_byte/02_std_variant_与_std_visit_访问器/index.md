@@ -1,6 +1,6 @@
-# 3.1.2 std::variant、std::visit、std::monostate 与 std::get  if / holds alternative
+# 02 std::variant、std::visit、std::monostate 与 std::get  if / holds alternative
 
-掌握类型安全联合体、多态访问器 std::visit（含重载 lambda 惯用法）、首元素默认构造与异常/valueless_by_exception 语义。
+**介绍**: 掌握类型安全联合体、多态访问器 std::visit（含重载 lambda 惯用法）、首元素默认构造与异常/valueless_by_exception 语义。
 
 ---
 

@@ -1,6 +1,6 @@
-# 5.3.3 std::format 与格式化输出
+# 03 std::format 与格式化输出
 
-掌握类型安全格式化及自定义 formatter[cite: 4]。
+**介绍**: 掌握类型安全格式化及自定义 formatter[cite: 4]。
 
 ---
 

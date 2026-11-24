@@ -1,13 +1,11 @@
-# 7.2.1 TCC（透明、同意与控制）机制、权限服务与企业/MDM PPPC 策略
+# 01 TCC（透明、同意与控制）机制、权限服务与企业/MDM PPPC 策略
 
-剖析受保护资源类型、进程归属/响应者判定、用户同意弹窗及 MDM/企业 PPPC 策略生效与排障。
+**介绍**: 剖析受保护资源类型、进程归属/响应者判定、用户同意弹窗及 MDM/企业 PPPC 策略生效与排障。
 
-## 本节目录
+## 目录
 
-- [7.2.1.1 TCC 保护资源、进程责任归属与用户授权弹窗流程](01_tcc_保护资源_进程责任归属与用户授权弹窗流程/index.md)
-- [7.2.1.2 MDM / 企业 PPPC（Privacy Preferences Policy Control）配置与排障](02_mdm_企业_pppc_配置与排障/index.md)
-
----
+- [01 TCC 保护资源、进程责任归属与用户授权弹窗流程](01_tcc_保护资源_进程责任归属与用户授权弹窗流程/index.md)
+- [02 MDM / 企业 PPPC（Privacy Preferences Policy Control）配置与排障](02_mdm_企业_pppc_配置与排障/index.md)
 
 ## 导航
 

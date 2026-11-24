@@ -1,6 +1,6 @@
-# 5.2.1 迭代器类别、迭代器概念与 C++11 迭代器增强
+# 01 迭代器类别、迭代器概念与 C++11 迭代器增强
 
-理解 input/forward/bidirectional/random access/contiguous，以及 std::begin/end、std::next/prev 与 move_iterator[cite: 4, 11]。
+**介绍**: 理解 input/forward/bidirectional/random access/contiguous，以及 std::begin/end、std::next/prev 与 move_iterator[cite: 4, 11]。
 
 ---
 

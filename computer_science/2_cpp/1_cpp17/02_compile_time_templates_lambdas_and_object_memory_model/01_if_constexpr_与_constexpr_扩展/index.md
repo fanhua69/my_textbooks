@@ -1,13 +1,11 @@
-# 2.1 if constexpr 编译期分支与 constexpr 扩展
+# 01 if constexpr 编译期分支与 constexpr 扩展
 
-掌握模板实例化阶段丢弃未选中分支的编译期条件语句，以及 C++17 放宽后的 constexpr 函数与 constexpr lambda 能力。
+**介绍**: 掌握模板实例化阶段丢弃未选中分支的编译期条件语句，以及 C++17 放宽后的 constexpr 函数与 constexpr lambda 能力。
 
-## 本节目录
+## 目录
 
-- [2.1.1 if constexpr 语义、未选中分支丢弃与替代 SFINAE / Tag Dispatch](01_if_constexpr_语义与替代_sfinae/index.md)
-- [2.1.2 C++17 constexpr 扩展（局部变量、if/循环、constexpr lambda）与 static assert 无消息形式](02_cpp17_constexpr_扩展与_static_assert/index.md)
-
----
+- [01 if constexpr 语义、未选中分支丢弃与替代 SFINAE / Tag Dispatch](01_if_constexpr_语义与替代_sfinae/index.md)
+- [02 C++17 constexpr 扩展（局部变量、if/循环、constexpr lambda）与 static assert 无消息形式](02_cpp17_constexpr_扩展与_static_assert/index.md)
 
 ## 导航
 

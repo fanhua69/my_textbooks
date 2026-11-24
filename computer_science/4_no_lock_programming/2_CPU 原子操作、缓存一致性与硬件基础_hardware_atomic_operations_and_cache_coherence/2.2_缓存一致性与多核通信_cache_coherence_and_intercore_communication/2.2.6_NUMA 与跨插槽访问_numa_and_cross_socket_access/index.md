@@ -1,6 +1,6 @@
 # 2.2.6 NUMA 与跨插槽访问  numa and cross socket access
 
-理解 NUMA 节点、本地/远程内存和跨节点原子通信成本。
+**介绍**: 理解 NUMA 节点、本地/远程内存和跨节点原子通信成本。
 
 ---
 

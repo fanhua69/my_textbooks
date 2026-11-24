@@ -1,6 +1,6 @@
 # 5.4.5 MPMC 的线性化点与正确性  mpmc linearization and correctness
 
-定位入队/出队线性化点并建立并发不变量。
+**介绍**: 定位入队/出队线性化点并建立并发不变量。
 
 ---
 

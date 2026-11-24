@@ -1,6 +1,6 @@
-# 1.3.3 const、constexpr 与 consteval
+# 03 const、constexpr 与 consteval
 
-理解只读语义、常量表达式（含 C++17 constexpr 支持循环/if/lambda）和编译期求值[cite: 4, 13, 14]。
+**介绍**: 理解只读语义、常量表达式（含 C++17 constexpr 支持循环/if/lambda）和编译期求值[cite: 4, 13, 14]。
 
 ---
 

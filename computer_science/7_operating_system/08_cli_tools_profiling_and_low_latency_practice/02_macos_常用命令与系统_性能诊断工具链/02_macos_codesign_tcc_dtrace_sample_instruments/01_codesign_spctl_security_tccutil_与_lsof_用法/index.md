@@ -1,6 +1,6 @@
-# 8.2.2.1 codesign、spctl、security、tccutil 与 lsof 签名/权限/句柄排查
+# 01 codesign、spctl、security、tccutil 与 lsof 签名/权限/句柄排查
 
-验证二进制/App/扩展签名与 Requirement、重置/测试 TCC 权限及检查进程打开文件与端口。
+**介绍**: 验证二进制/App/扩展签名与 Requirement、重置/测试 TCC 权限及检查进程打开文件与端口。
 
 ---
 

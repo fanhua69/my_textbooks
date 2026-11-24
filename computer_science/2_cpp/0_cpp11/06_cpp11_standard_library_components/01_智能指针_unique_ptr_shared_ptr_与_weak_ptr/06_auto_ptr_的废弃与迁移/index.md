@@ -1,6 +1,6 @@
-# 6.1.6 auto ptr 的废弃与迁移
+# 06 auto ptr 的废弃与迁移
 
-理解 auto_ptr 的拷贝语义缺陷，并迁移到 unique_ptr。
+**介绍**: 理解 auto_ptr 的拷贝语义缺陷，并迁移到 unique_ptr。
 
 ---
 

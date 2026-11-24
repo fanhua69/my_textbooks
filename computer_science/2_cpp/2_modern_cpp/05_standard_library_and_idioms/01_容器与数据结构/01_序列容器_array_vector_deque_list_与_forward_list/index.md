@@ -1,6 +1,6 @@
-# 5.1.1 序列容器：array、vector、deque、list 与 forward  list
+# 01 序列容器：array、vector、deque、list 与 forward  list
 
-比较连续存储、单向/双向链表、迭代器稳定性和复杂度[cite: 4, 11]。
+**介绍**: 比较连续存储、单向/双向链表、迭代器稳定性和复杂度[cite: 4, 11]。
 
 ---
 

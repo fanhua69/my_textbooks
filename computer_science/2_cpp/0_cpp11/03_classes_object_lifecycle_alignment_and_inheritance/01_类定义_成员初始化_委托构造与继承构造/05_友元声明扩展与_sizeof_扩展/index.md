@@ -1,6 +1,6 @@
-# 3.1.5 友元声明扩展与 sizeof 扩展
+# 05 友元声明扩展与 sizeof 扩展
 
-掌握 friend 对模板形参与简单类型名的支持，以及 sizeof(Class::member) 无需对象实例的用法。
+**介绍**: 掌握 friend 对模板形参与简单类型名的支持，以及 sizeof(Class::member) 无需对象实例的用法。
 
 ---
 

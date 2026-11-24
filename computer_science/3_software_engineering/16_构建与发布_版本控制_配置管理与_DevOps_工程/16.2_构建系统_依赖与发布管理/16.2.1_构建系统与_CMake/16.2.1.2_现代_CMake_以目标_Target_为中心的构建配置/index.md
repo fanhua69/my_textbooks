@@ -1,6 +1,6 @@
 # 16.2.1.2 现代 CMake：以目标 (Target) 为中心的构建配置
 
-使用 target_link_libraries、可见性 (PUBLIC/PRIVATE/INTERFACE) 与 Presets 组织可复用、可安装的 C++ 项目。
+**介绍**: 使用 target_link_libraries、可见性 (PUBLIC/PRIVATE/INTERFACE) 与 Presets 组织可复用、可安装的 C++ 项目。
 
 ---
 

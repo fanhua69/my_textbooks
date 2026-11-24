@@ -1,6 +1,6 @@
-# 3.3.2.1 DMA 控制器、Scatter-Gather、总线地址与 IOMMU / SMMU 地址转换
+# 01 DMA 控制器、Scatter-Gather、总线地址与 IOMMU / SMMU 地址转换
 
-理解外设直接读写物理内存的机制、IOMMU 隔离与地址重映射及 DMA 缓冲一致性同步。
+**介绍**: 理解外设直接读写物理内存的机制、IOMMU 隔离与地址重映射及 DMA 缓冲一致性同步。
 
 ---
 

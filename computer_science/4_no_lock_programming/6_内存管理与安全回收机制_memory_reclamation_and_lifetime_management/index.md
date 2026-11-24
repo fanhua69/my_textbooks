@@ -1,16 +1,14 @@
 # 6 内存管理与安全回收机制  memory reclamation and lifetime management
 
-无锁数据结构最难的部分往往不是 CAS，而是节点何时可以安全释放。本部分系统比较 Hazard Pointers、Epoch-Based Reclamation、RCU 等技术。
+**介绍**: 无锁数据结构最难的部分往往不是 CAS，而是节点何时可以安全释放。本部分系统比较 Hazard Pointers、Epoch-Based Reclamation、RCU 等技术。
 
-## 本节目录
+## 目录
 
 - [6.1 无锁数据结构的内存生命周期问题  memory lifetime problems](6.1_无锁数据结构的内存生命周期问题_memory_lifetime_problems/index.md)
 - [6.2 Hazard Pointers  hazard pointers](6.2_Hazard%20Pointers_hazard_pointers/index.md)
-- [6.3 Epoch-Based Reclamation 与 QSBR  epoch based reclamation](6.3_Epoch-Based%20Reclamation%20与%20QSBR_epoch_based_reclamation/index.md)
+- [6.3 Epoch-Based Reclamation 与 QSBR  epoch based reclamation](6.3_Epoch-Based%20Reclamation%20%E4%B8%8E%20QSBR_epoch_based_reclamation/index.md)
 - [6.4 Read-Copy-Update（RCU）  read copy update](6.4_Read-Copy-Update（RCU）_read_copy_update/index.md)
 - [6.5 其他内存回收技术  other reclamation techniques](6.5_其他内存回收技术_other_reclamation_techniques/index.md)
-
----
 
 ## 导航
 

@@ -1,6 +1,6 @@
-# 7.1.2.1 接口版本管理 (API Versioning) 与向后兼容 (Backward Compatibility)
+# 07.1.2.1 接口版本管理 (API Versioning) 与向后兼容 (Backward Compatibility)
 
-对比 URI、Header 与内容协商版本策略，制定兼容性规则、弃用流程与消费者迁移路径。
+**介绍**: 对比 URI、Header 与内容协商版本策略，制定兼容性规则、弃用流程与消费者迁移路径。
 
 ---
 

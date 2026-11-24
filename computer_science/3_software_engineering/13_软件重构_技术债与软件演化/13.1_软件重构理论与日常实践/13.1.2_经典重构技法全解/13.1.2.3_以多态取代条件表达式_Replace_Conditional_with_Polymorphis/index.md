@@ -1,6 +1,6 @@
 # 13.1.2.3 以多态取代条件表达式 (Replace Conditional with Polymorphism)
 
-将分散在各处的复杂 switch/if-else 分支转换为清晰的多态类层级，践行开闭原则。
+**介绍**: 将分散在各处的复杂 switch/if-else 分支转换为清晰的多态类层级，践行开闭原则。
 
 ---
 

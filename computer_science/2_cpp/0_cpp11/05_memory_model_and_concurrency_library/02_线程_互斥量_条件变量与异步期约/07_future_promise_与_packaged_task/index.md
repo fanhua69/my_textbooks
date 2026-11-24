@@ -1,6 +1,6 @@
-# 5.2.7 future、promise 与 packaged  task
+# 07 future、promise 与 packaged  task
 
-理解共享状态模型，掌握 future、shared_future、promise 与 packaged_task 的协作方式。
+**介绍**: 理解共享状态模型，掌握 future、shared_future、promise 与 packaged_task 的协作方式。
 
 ---
 

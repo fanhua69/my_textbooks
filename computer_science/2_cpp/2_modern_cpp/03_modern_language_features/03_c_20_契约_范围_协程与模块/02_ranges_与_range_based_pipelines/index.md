@@ -1,6 +1,6 @@
-# 3.3.2 Ranges 与 range-based pipelines
+# 02 Ranges 与 range-based pipelines
 
-理解 range、view 适配器、惰性求值、投影（projections）与管道组合[cite: 4]。
+**介绍**: 理解 range、view 适配器、惰性求值、投影（projections）与管道组合[cite: 4]。
 
 ---
 

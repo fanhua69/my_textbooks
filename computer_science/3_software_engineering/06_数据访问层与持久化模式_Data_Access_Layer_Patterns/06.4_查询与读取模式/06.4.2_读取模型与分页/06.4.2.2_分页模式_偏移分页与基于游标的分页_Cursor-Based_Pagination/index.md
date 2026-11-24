@@ -1,6 +1,6 @@
-# 6.4.2.2 分页模式：偏移分页与基于游标的分页 (Cursor-Based Pagination)
+# 06.4.2.2 分页模式：偏移分页与基于游标的分页 (Cursor-Based Pagination)
 
-分析 OFFSET 深翻页的性能退化，掌握键集 (Keyset) / 游标分页的实现与排序稳定性要求。
+**介绍**: 分析 OFFSET 深翻页的性能退化，掌握键集 (Keyset) / 游标分页的实现与排序稳定性要求。
 
 ---
 

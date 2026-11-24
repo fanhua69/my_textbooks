@@ -1,6 +1,6 @@
-# 7.2.2.2 后端为前端服务 (BFF, Backend for Frontend)
+# 07.3.2.2 后端为前端服务 (BFF, Backend for Frontend)
 
-为 Web、移动等不同客户端提供各自专属的聚合接口，避免通用接口被多端需求撑大；对比 BFF、API 网关与 GraphQL 的组合方式与团队归属。
+**介绍**: 为 Web、移动等不同客户端提供各自专属的聚合接口，避免通用接口被多端需求撑大；对比 BFF、API 网关与 GraphQL 的组合方式与团队归属。
 
 ---
 

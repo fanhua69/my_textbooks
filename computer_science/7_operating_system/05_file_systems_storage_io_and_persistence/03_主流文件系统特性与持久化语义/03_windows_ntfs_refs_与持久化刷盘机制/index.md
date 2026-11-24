@@ -1,6 +1,6 @@
-# 5.3.3 Windows NTFS / ReFS 与 FlushFileBuffers / WriteFile 异步刷盘
+# 03 Windows NTFS / ReFS 与 FlushFileBuffers / WriteFile 异步刷盘
 
-理解 NTFS 日志/元文件、文件写入缓存与显式刷盘操作对吞吐和延迟的影响。
+**介绍**: 理解 NTFS 日志/元文件、文件写入缓存与显式刷盘操作对吞吐和延迟的影响。
 
 ---
 

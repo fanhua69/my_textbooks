@@ -1,6 +1,6 @@
-# 3.1.2 统一初始化、std::initializer list、nullptr、强类型枚举与范围 for
+# 02 统一初始化、std::initializer list、nullptr、强类型枚举与范围 for
 
-掌握花括号初始化与 narrowing 限制、std::initializer_list 列表初始化、nullptr/nullptr_t、指定底层类型的 enum class、long long int、Unicode 字面量（u8/u/U/L）与范围 for 循环[cite: 4, 5, 6, 11, 12]。
+**介绍**: 掌握花括号初始化与 narrowing 限制、std::initializer_list 列表初始化、nullptr/nullptr_t、指定底层类型的 enum class、long long int、Unicode 字面量（u8/u/U/L）与范围 for 循环[cite: 4, 5, 6, 11, 12]。
 
 ---
 

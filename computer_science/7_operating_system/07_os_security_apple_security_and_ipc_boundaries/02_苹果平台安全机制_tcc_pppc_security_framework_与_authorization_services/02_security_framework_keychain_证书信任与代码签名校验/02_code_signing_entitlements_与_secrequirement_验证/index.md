@@ -1,6 +1,6 @@
-# 7.2.2.2 Code Signing、Entitlements 与 SecRequirement 调用方验证
+# 02 Code Signing、Entitlements 与 SecRequirement 调用方验证
 
-利用代码签名要求表达式验证对端签名身份与 Team ID / Bundle ID，防止未签名或篡改客户端接入。
+**介绍**: 利用代码签名要求表达式验证对端签名身份与 Team ID / Bundle ID，防止未签名或篡改客户端接入。
 
 ---
 

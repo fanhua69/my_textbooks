@@ -1,6 +1,6 @@
-# 7.4.1.1 SO PEERCRED / SCM CREDENTIALS 凭证与 User Namespace 映射
+# 01 SO PEERCRED / SCM CREDENTIALS 凭证与 User Namespace 映射
 
-理解内核填充的对端 UID/GID/PID 语义及容器/命名空间隔离下的身份映射边界。
+**介绍**: 理解内核填充的对端 UID/GID/PID 语义及容器/命名空间隔离下的身份映射边界。
 
 ---
 

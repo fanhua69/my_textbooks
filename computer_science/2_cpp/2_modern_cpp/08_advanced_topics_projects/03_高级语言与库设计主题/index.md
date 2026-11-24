@@ -1,16 +1,14 @@
-# 8.3 高级语言与库设计主题
+# 03 高级语言与库设计主题
 
-探索大型 C++ 库和复杂系统常见的高级技术[cite: 4]。
+**介绍**: 探索大型 C++ 库和复杂系统常见的高级技术[cite: 4]。
 
-## 本节目录
+## 目录
 
-- [8.3.1 自定义 allocator 与内存资源 PMR](01_自定义_allocator_与内存资源_pmr/index.md)
-- [8.3.2 类型擦除与 std::function](02_类型擦除与_std_function/index.md)
-- [8.3.3 PImpl、ABI 防火墙与编译隔离](03_pimpl_abi_防火墙与编译隔离/index.md)
-- [8.3.4 插件、回调与事件驱动设计](04_插件_回调与事件驱动设计/index.md)
-- [8.3.5 协程异步框架与执行器模型](05_协程异步框架与执行器模型/index.md)
-
----
+- [01 自定义 allocator 与内存资源 PMR](01_自定义_allocator_与内存资源_pmr/index.md)
+- [02 类型擦除与 std::function](02_类型擦除与_std_function/index.md)
+- [03 PImpl、ABI 防火墙与编译隔离](03_pimpl_abi_防火墙与编译隔离/index.md)
+- [04 插件、回调与事件驱动设计](04_插件_回调与事件驱动设计/index.md)
+- [05 协程异步框架与执行器模型](05_协程异步框架与执行器模型/index.md)
 
 ## 导航
 

@@ -1,6 +1,6 @@
 # 20.1.1.3 系统级模式分类：分布式、部署运行与并发
 
-登记 Saga、Circuit Breaker、Sidecar、Blue-Green 部署与 Producer-Consumer、SPSC 队列等系统级模式。
+**介绍**: 登记 Saga、Circuit Breaker、Sidecar、Blue-Green 部署与 Producer-Consumer、SPSC 队列等系统级模式。
 
 ---
 

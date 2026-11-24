@@ -1,6 +1,6 @@
-# 4.2.1.1 MVC (Model-View-Controller)
+# 04.2.1.1 MVC (Model-View-Controller)
 
-从 Smalltalk 起源讲起：模型维护状态与规则，视图负责展示，控制器处理输入，剖析 Web 与桌面两种 MVC 的差异与观察者通知机制。
+**介绍**: 从 Smalltalk 起源讲起：模型维护状态与规则，视图负责展示，控制器处理输入，剖析 Web 与桌面两种 MVC 的差异与观察者通知机制。
 
 ---
 

@@ -1,6 +1,6 @@
-# 1.1.2 C++17 移除与弃用特性（动态异常规格移除、register/auto ptr 移除、三字符组移除等）
+# 02 C++17 移除与弃用特性（动态异常规格移除、register/auto ptr 移除、三字符组移除等）
 
-掌握 throw(T) 动态异常说明移除（仅保留 throw() 作 noexcept(true) 别名）、register 关键字移除、std::auto_ptr 与 std::random_shuffle 移除、三字符组（Trigraphs）移除及 operator++(bool) 移除。
+**介绍**: 掌握 throw(T) 动态异常说明移除（仅保留 throw() 作 noexcept(true) 别名）、register 关键字移除、std::auto_ptr 与 std::random_shuffle 移除、三字符组（Trigraphs）移除及 operator++(bool) 移除。
 
 ---
 

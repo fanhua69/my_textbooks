@@ -1,6 +1,6 @@
-# 6.2.4 happens-before 与 synchronizes-with
+# 04 happens-before 与 synchronizes-with
 
-建立线程间可见性和顺序关系的推理模型[cite: 4]。
+**介绍**: 建立线程间可见性和顺序关系的推理模型[cite: 4]。
 
 ---
 

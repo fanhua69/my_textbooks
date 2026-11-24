@@ -1,6 +1,6 @@
-# 7.2.4 测试覆盖率与测试质量
+# 04 测试覆盖率与测试质量
 
-理解 statement/branch coverage 的局限和断言质量[cite: 4]。
+**介绍**: 理解 statement/branch coverage 的局限和断言质量[cite: 4]。
 
 ---
 

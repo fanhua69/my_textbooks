@@ -1,13 +1,11 @@
-# 8.3.2 句柄、进程与 ETW 剖析：handle、Process Explorer / Monitor、logman / xperf / WPA
+# 02 句柄、进程与 ETW 剖析：handle、Process Explorer / Monitor、logman / xperf / WPA
 
-定位内核对象句柄泄漏、文件/注册表/命名管道/IPC 轨迹，利用 ETW 与 WPA 分析调度与延迟。
+**介绍**: 定位内核对象句柄泄漏、文件/注册表/命名管道/IPC 轨迹，利用 ETW 与 WPA 分析调度与延迟。
 
-## 本节目录
+## 目录
 
-- [8.3.2.1 handle、Process Explorer 与 Process Monitor 句柄与 IPC 追踪](01_handle_process_explorer_与_process_monitor_用法/index.md)
-- [8.3.2.2 ETW 追踪（logman / xperf）与 Windows Performance Analyzer（WPA）分析](02_etw_追踪与_wpa_延迟调度分析/index.md)
-
----
+- [01 handle、Process Explorer 与 Process Monitor 句柄与 IPC 追踪](01_handle_process_explorer_与_process_monitor_用法/index.md)
+- [02 ETW 追踪（logman / xperf）与 Windows Performance Analyzer（WPA）分析](02_etw_追踪与_wpa_延迟调度分析/index.md)
 
 ## 导航
 

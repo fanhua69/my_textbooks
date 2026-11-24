@@ -1,6 +1,6 @@
 # 1.4.2 吞吐量、平均延迟与尾延迟  throughput latency and tail latency
 
-区分 throughput、平均 latency、p99/p999 latency，并理解它们可能相互冲突。
+**介绍**: 区分 throughput、平均 latency、p99/p999 latency，并理解它们可能相互冲突。
 
 ---
 

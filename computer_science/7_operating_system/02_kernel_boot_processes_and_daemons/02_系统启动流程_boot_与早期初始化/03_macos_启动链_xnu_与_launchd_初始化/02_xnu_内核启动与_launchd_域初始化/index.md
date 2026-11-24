@@ -1,6 +1,6 @@
-# 2.2.3.2 XNU 内核启动与 launchd 域初始化
+# 02 XNU 内核启动与 launchd 域初始化
 
-梳理 BSD/Mach 初始化完成后拉起 launchd（PID 1）及系统域、用户会话域建立的流程。
+**介绍**: 梳理 BSD/Mach 初始化完成后拉起 launchd（PID 1）及系统域、用户会话域建立的流程。
 
 ---
 

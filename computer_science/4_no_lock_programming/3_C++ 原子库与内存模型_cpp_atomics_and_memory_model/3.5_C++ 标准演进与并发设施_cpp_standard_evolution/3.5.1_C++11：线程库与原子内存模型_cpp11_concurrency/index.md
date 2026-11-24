@@ -1,6 +1,6 @@
 # 3.5.1 C++11：线程库与原子内存模型  cpp11 concurrency
 
-介绍 thread、mutex、condition_variable、atomic 与 memory model。
+**介绍**: 介绍 thread、mutex、condition_variable、atomic 与 memory model。
 
 ---
 

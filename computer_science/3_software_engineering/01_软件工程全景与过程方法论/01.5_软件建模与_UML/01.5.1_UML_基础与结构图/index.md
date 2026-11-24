@@ -1,14 +1,12 @@
-# 1.5.1 UML 基础与结构图
+# 01.5.1 UML 基础与结构图
 
-掌握 UML 的建模思想、图类型体系，以及描述静态结构的核心图。
+**介绍**: 掌握 UML 的建模思想、图类型体系，以及描述静态结构的核心图。
 
-## 本节目录
+## 目录
 
-- [1.5.1.1 UML 基础：建模目的、图类型体系与建模的适度原则](01.5.1.1_UML_基础_建模目的_图类型体系与建模的适度原则/index.md)
-- [1.5.1.2 类图 (Class Diagram)：类、关联、聚合、组合、泛化与依赖](01.5.1.2_类图_Class_Diagram_类_关联_聚合_组合_泛化与依赖/index.md)
-- [1.5.1.3 组件图 (Component Diagram) 与部署图 (Deployment Diagram)](01.5.1.3_组件图_Component_Diagram_与部署图_Deployment_Diagram/index.md)
-
----
+- [01.5.1.1 UML 基础：建模目的、图类型体系与建模的适度原则](01.5.1.1_UML_基础_建模目的_图类型体系与建模的适度原则/index.md)
+- [01.5.1.2 类图 (Class Diagram)：类、关联、聚合、组合、泛化与依赖](01.5.1.2_类图_Class_Diagram_类_关联_聚合_组合_泛化与依赖/index.md)
+- [01.5.1.3 组件图 (Component Diagram) 与部署图 (Deployment Diagram)](01.5.1.3_组件图_Component_Diagram_与部署图_Deployment_Diagram/index.md)
 
 ## 导航
 

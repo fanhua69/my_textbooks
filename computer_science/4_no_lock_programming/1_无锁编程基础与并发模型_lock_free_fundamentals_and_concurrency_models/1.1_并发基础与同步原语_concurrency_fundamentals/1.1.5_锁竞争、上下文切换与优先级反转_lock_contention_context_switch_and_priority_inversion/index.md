@@ -1,6 +1,6 @@
 # 1.1.5 锁竞争、上下文切换与优先级反转  lock contention context switch and priority inversion
 
-分析锁竞争、调度、内核介入、优先级反转及尾延迟。
+**介绍**: 分析锁竞争、调度、内核介入、优先级反转及尾延迟。
 
 ---
 

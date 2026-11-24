@@ -1,6 +1,6 @@
-# 2.1.1 class、struct、访问控制与扩展 friend 声明
+# 01 class、struct、访问控制与扩展 friend 声明
 
-掌握成员访问权限、默认访问级别、C++11 扩展 friend 声明（friend T / 模板友元）与封装边界[cite: 4, 12]。
+**介绍**: 掌握成员访问权限、默认访问级别、C++11 扩展 friend 声明（friend T / 模板友元）与封装边界[cite: 4, 12]。
 
 ---
 

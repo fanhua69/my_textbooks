@@ -1,6 +1,6 @@
-# 3.5.1.2 Result / Option 类型与铁路导向编程
+# 03.5.1.2 Result / Option 类型与铁路导向编程
 
-运用代数数据类型优雅表达错误，通过 Railway Oriented Programming 实现链式分支错误处理。
+**介绍**: 运用代数数据类型优雅表达错误，通过 Railway Oriented Programming 实现链式分支错误处理。
 
 ---
 

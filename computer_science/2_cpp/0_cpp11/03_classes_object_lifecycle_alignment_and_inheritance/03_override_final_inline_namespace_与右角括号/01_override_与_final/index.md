@@ -1,6 +1,6 @@
-# 3.3.1 override 与 final
+# 01 override 与 final
 
-使用 override 让编译器检查虚函数覆盖，用 final 禁止进一步覆盖或继承。
+**介绍**: 使用 override 让编译器检查虚函数覆盖，用 final 禁止进一步覆盖或继承。
 
 ---
 

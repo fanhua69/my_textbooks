@@ -1,6 +1,6 @@
-# 2.3.1 POSIX 共享内存（shm open + mmap）与 System V shm 对比
+# 01 POSIX 共享内存（shm open + mmap）与 System V shm 对比
 
-比较 /dev/shm 虚拟文件系统映射、内核参数限制（shmmax）与生命周期清理。
+**介绍**: 比较 /dev/shm 虚拟文件系统映射、内核参数限制（shmmax）与生命周期清理。
 
 ---
 

@@ -1,6 +1,6 @@
 # 15.1.1.2 DevSecOps 文化与安全冠军网络
 
-在各个研发小队培养 Security Champions，将安全工具（SAST/DAST/SCA）自动化嵌入 CI/CD 流水线。
+**介绍**: 在各个研发小队培养 Security Champions，将安全工具（SAST/DAST/SCA）自动化嵌入 CI/CD 流水线。
 
 ---
 

@@ -1,20 +1,18 @@
-# 5.2 线程、互斥量、条件变量与异步期约
+# 02 线程、互斥量、条件变量与异步期约
 
-掌握 std::thread、锁、条件变量与 future 体系，构建正确的并发程序。
+**介绍**: 掌握 std::thread、锁、条件变量与 future 体系，构建正确的并发程序。
 
-## 本节目录
+## 目录
 
-- [5.2.1 std::thread 的创建、传参与生命周期](01_std_thread_的创建_传参与生命周期/index.md)
-- [5.2.2 this thread 与线程标识](02_this_thread_与线程标识/index.md)
-- [5.2.3 互斥量与锁管理](03_互斥量与锁管理/index.md)
-- [5.2.4 死锁与多锁获取：std::lock](04_死锁与多锁获取_std_lock/index.md)
-- [5.2.5 条件变量与等待-通知模式](05_条件变量与等待_通知模式/index.md)
-- [5.2.6 call once 与一次性初始化](06_call_once_与一次性初始化/index.md)
-- [5.2.7 future、promise 与 packaged  task](07_future_promise_与_packaged_task/index.md)
-- [5.2.8 std::async 与启动策略](08_std_async_与启动策略/index.md)
-- [5.2.9 线程间异常传递与程序退出](09_线程间异常传递与程序退出/index.md)
-
----
+- [01 std::thread 的创建、传参与生命周期](01_std_thread_的创建_传参与生命周期/index.md)
+- [02 this thread 与线程标识](02_this_thread_与线程标识/index.md)
+- [03 互斥量与锁管理](03_互斥量与锁管理/index.md)
+- [04 死锁与多锁获取：std::lock](04_死锁与多锁获取_std_lock/index.md)
+- [05 条件变量与等待-通知模式](05_条件变量与等待_通知模式/index.md)
+- [06 call once 与一次性初始化](06_call_once_与一次性初始化/index.md)
+- [07 future、promise 与 packaged  task](07_future_promise_与_packaged_task/index.md)
+- [08 std::async 与启动策略](08_std_async_与启动策略/index.md)
+- [09 线程间异常传递与程序退出](09_线程间异常传递与程序退出/index.md)
 
 ## 导航
 

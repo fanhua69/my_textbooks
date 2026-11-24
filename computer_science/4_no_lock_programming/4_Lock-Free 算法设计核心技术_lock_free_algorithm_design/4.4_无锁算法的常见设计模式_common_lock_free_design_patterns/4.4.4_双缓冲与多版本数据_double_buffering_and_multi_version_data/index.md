@@ -1,6 +1,6 @@
 # 4.4.4 双缓冲与多版本数据  double buffering and multi version data
 
-介绍 double buffering、版本切换和读写隔离。
+**介绍**: 介绍 double buffering、版本切换和读写隔离。
 
 ---
 

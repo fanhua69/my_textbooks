@@ -1,6 +1,6 @@
 # 4.3.1 ABA 问题的产生过程  aba problem walkthrough
 
-用线程交错时间线展示 A→B→A 后 CAS 错误成功的原因。
+**介绍**: 用线程交错时间线展示 A→B→A 后 CAS 错误成功的原因。
 
 ---
 

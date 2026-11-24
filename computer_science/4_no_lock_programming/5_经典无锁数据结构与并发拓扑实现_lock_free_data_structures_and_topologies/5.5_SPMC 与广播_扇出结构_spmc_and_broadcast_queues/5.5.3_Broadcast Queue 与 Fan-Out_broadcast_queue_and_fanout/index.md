@@ -1,6 +1,6 @@
 # 5.5.3 Broadcast Queue 与 Fan-Out  broadcast queue and fanout
 
-介绍每消费者游标、慢消费者和数据保留策略。
+**介绍**: 介绍每消费者游标、慢消费者和数据保留策略。
 
 ---
 

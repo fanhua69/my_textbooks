@@ -1,6 +1,6 @@
-# 6.2.5 bind、占位符与 mem  fn
+# 05 bind、占位符与 mem  fn
 
-使用 std::bind 与占位符进行参数绑定，了解其与 lambda 的取舍，以及 mem_fn 的用法。
+**介绍**: 使用 std::bind 与占位符进行参数绑定，了解其与 lambda 的取舍，以及 mem_fn 的用法。
 
 ---
 

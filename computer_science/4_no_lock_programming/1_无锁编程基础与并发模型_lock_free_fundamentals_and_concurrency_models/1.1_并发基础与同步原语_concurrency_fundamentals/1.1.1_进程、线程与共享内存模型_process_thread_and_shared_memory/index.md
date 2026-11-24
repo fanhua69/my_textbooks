@@ -1,6 +1,6 @@
 # 1.1.1 进程、线程与共享内存模型 process thread and shared memory
 
-深入理解进程隔离边界、线程执行上下文、共享地址空间与内存模型、线程局部存储（TLS）、线程间通信与同步协作，以及跨系统与锁/无锁设计的工程取舍，为后续学习内存序（`std::memory_order`）、原子操作与无锁数据结构打下扎实基础。
+**介绍**: 深入理解进程隔离边界、线程执行上下文、共享地址空间与内存模型、线程局部存储（TLS）、线程间通信与同步协作，以及跨系统与锁/无锁设计的工程取舍，为后续学习内存序（`std::memory_order`）、原子操作与无锁数据结构打下扎实基础。
 
 ## 小节索引
 
@@ -17,5 +17,5 @@
 ## 导航
 
 - **上一层**：[1.1 并发基础与同步原语  concurrency fundamentals](../index.md)
-- **前一节**：[No-Lock Programming：C++ 无锁编程](../../../index.md)
+- **前一节**：[3 software_engineering_third](../../../../3_software_engineering/index.md)
 - **后一节**：[1.1.2 数据竞争、竞态条件与线程安全  data race race condition and thread safety](../1.1.2_数据竞争、竞态条件与线程安全_data_race_race_condition_and_thread_safety/index.md)

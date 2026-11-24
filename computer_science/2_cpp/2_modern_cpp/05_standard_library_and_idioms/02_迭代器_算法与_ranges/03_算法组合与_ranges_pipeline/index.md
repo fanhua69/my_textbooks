@@ -1,6 +1,6 @@
-# 5.2.3 算法组合与 ranges pipeline
+# 03 算法组合与 ranges pipeline
 
-使用 views、adaptors 和算法表达数据处理流程[cite: 4]。
+**介绍**: 使用 views、adaptors 和算法表达数据处理流程[cite: 4]。
 
 ---
 

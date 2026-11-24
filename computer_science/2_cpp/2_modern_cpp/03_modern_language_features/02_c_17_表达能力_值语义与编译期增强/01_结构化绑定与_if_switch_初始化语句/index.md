@@ -1,6 +1,6 @@
-# 3.2.1 结构化绑定与 if / switch 初始化语句
+# 01 结构化绑定与 if / switch 初始化语句
 
-掌握 pair、tuple、数组及自定义 struct/tuple-like 类型的结构化绑定（auto [x, y] = ...），以及 if/switch 条件中的作用域变量初始化语句[cite: 4, 6, 13, 14]。
+**介绍**: 掌握 pair、tuple、数组及自定义 struct/tuple-like 类型的结构化绑定（auto [x, y] = ...），以及 if/switch 条件中的作用域变量初始化语句[cite: 4, 6, 13, 14]。
 
 ---
 

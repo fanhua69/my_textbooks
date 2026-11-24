@@ -1,6 +1,6 @@
-# 4.3.2 type traits 与类型变换
+# 02 type traits 与类型变换
 
-掌握 is_same、is_base_of、remove_reference 等工具[cite: 4]。
+**介绍**: 掌握 is_same、is_base_of、remove_reference 等工具[cite: 4]。
 
 ---
 

@@ -1,6 +1,6 @@
-# 4.1.2 共享内存中的 std::atomic、内存序与无锁环形缓冲区（SPSC / MPMC）
+# 02 共享内存中的 std::atomic、内存序与无锁环形缓冲区（SPSC / MPMC）
 
-在跨进程共享映射内存上构建无锁队列，处理 acquire-release 内存序、环索引回绕与 Cache Line 隔离。
+**介绍**: 在跨进程共享映射内存上构建无锁队列，处理 acquire-release 内存序、环索引回绕与 Cache Line 隔离。
 
 ---
 

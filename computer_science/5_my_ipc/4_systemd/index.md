@@ -1,3 +1,7 @@
+# 4 systemd
+
+**介绍**: systemd
+
 ## `systemd` 简介
 
  **`systemd`** 是现代主流 **Linux 发行版**（如 Ubuntu、Debian、Fedora、RHEL 等）上的**系统与服务管理器（System and Service Manager）**，在系统引导时通常作为 **PID 1** 运行，接管早期初始化、服务编排、守护进程生命周期管理以及日志/设备/会话等系统级子系统。
@@ -90,9 +94,12 @@ System 实例与 User 实例区分：系统级服务由 root 管理的 systemd �
 
 ## 目录
 
-- [systemd 命令详解：Linux 服务与系统管理](4.1_systemd_intro/index.md)
+- [4.1 systemd 命令详解：Linux 服务与系统管理](4.1_systemd_intro/index.md)
 
 ## 导航
 
 - **上一层**：[5_my_ipc](../index.md)
 - **前一节**：[查看系统域下某个守护进程的详细状态](../3_launchd/index.md)
+
+
+- **后一节**：[6 Cross-Platform Inter-Process Communication (IPC) Engineering](../../6_ipc/index.md)

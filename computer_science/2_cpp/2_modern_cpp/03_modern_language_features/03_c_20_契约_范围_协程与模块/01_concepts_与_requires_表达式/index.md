@@ -1,6 +1,6 @@
-# 3.3.1 Concepts 与 requires 表达式
+# 01 Concepts 与 requires 表达式
 
-掌握概念定义、requires 子句与 requires 表达式、约束 subsumption 规则与诊断改善[cite: 4]。
+**介绍**: 掌握概念定义、requires 子句与 requires 表达式、约束 subsumption 规则与诊断改善[cite: 4]。
 
 ---
 

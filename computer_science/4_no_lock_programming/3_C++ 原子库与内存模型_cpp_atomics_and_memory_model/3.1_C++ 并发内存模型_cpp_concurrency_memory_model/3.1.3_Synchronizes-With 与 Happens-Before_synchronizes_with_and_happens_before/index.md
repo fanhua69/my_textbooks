@@ -1,6 +1,6 @@
 # 3.1.3 Synchronizes-With 与 Happens-Before  synchronizes with and happens before
 
-理解跨线程同步关系如何建立可见性。
+**介绍**: 理解跨线程同步关系如何建立可见性。
 
 ---
 

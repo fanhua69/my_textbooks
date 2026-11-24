@@ -1,6 +1,6 @@
 # 2.3.2 Store Buffer 与 Load Buffer  store buffer and load buffer
 
-理解存储缓冲区、加载缓冲区及其对可见顺序的影响。
+**介绍**: 理解存储缓冲区、加载缓冲区及其对可见顺序的影响。
 
 ---
 

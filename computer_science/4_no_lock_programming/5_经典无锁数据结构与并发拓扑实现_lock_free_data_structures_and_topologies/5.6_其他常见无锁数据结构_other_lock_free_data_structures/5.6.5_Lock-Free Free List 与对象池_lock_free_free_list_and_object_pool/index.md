@@ -1,6 +1,6 @@
 # 5.6.5 Lock-Free Free List 与对象池  lock free free list and object pool
 
-分析空闲节点链表、对象复用和 ABA 风险。
+**介绍**: 分析空闲节点链表、对象复用和 ABA 风险。
 
 ---
 

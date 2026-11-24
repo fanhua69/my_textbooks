@@ -1,6 +1,6 @@
-# 3.3.2 并行 STL（std::execution::seq / par / par_unseq）与 reduce / transform  reduce / scan
+# 02 并行 STL（std::execution::seq / par / par_unseq）与 reduce / transform  reduce / scan
 
-掌握并行算法执行策略、结合律/交换律正确性要求、死锁/数据竞争规避，以及 std::reduce、std::transform_reduce、std::inclusive_scan 与 std::exclusive_scan。
+**介绍**: 掌握并行算法执行策略、结合律/交换律正确性要求、死锁/数据竞争规避，以及 std::reduce、std::transform_reduce、std::inclusive_scan 与 std::exclusive_scan。
 
 ---
 

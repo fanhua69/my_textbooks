@@ -1,6 +1,6 @@
 # 2.2.1 Cache Line 与缓存层次  cache line and hierarchy
 
-理解 L1/L2/L3、缓存行、命中与未命中。
+**介绍**: 理解 L1/L2/L3、缓存行、命中与未命中。
 
 ---
 

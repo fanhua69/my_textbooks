@@ -1,6 +1,6 @@
 # 6.3.3 Epoch 推进与安全回收条件  epoch advancement and reclamation
 
-理解所有相关线程越过旧 epoch 后才能释放对象。
+**介绍**: 理解所有相关线程越过旧 epoch 后才能释放对象。
 
 ---
 

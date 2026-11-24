@@ -1,6 +1,6 @@
-# 7.3.1.1 RESTful API 设计：资源建模、HTTP 语义与成熟度模型
+# 07.4.1.1 RESTful API 设计：资源建模、HTTP 语义与成熟度模型
 
-以资源为中心设计 URI，正确使用 HTTP 方法、状态码与缓存语义，并理解 Richardson 成熟度模型。
+**介绍**: 以资源为中心设计 URI，正确使用 HTTP 方法、状态码与缓存语义，并理解 Richardson 成熟度模型。
 
 ---
 

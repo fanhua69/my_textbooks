@@ -1,6 +1,6 @@
-# 2.3.2.1 .service 启动类型、sd notify 就绪通知与 Socket Activation
+# 01 .service 启动类型、sd notify 就绪通知与 Socket Activation
 
-避免将未就绪服务视为已启动，使用 Socket 激活实现零丢连按需拉起与平滑重启。
+**介绍**: 避免将未就绪服务视为已启动，使用 Socket 激活实现零丢连按需拉起与平滑重启。
 
 ---
 

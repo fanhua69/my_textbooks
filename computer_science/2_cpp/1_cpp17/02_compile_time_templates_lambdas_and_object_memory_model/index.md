@@ -1,14 +1,12 @@
-# 2 编译期计算、模板增强、Lambda 扩展与对象/内存模型改进
+# 02 编译期计算、模板增强、Lambda 扩展与对象/内存模型改进
 
-深入 C++17 核心语言机制升级：if constexpr、constexpr lambda、折叠表达式、类模板实参推导（CTAD）、auto 非类型模板参数、强制复制消除与过对齐动态内存分配。
+**介绍**: 深入 C++17 核心语言机制升级：if constexpr、constexpr lambda、折叠表达式、类模板实参推导（CTAD）、auto 非类型模板参数、强制复制消除与过对齐动态内存分配。
 
-## 本节目录
+## 目录
 
-- [2.1 if constexpr 编译期分支与 constexpr 扩展](01_if_constexpr_与_constexpr_扩展/index.md)
-- [2.2 折叠表达式（Fold Expressions）、CTAD 与模板参数增强](02_折叠表达式_ctad_与模板参数增强/index.md)
-- [2.3 Lambda 增强、强制复制消除与内存/对象生命周期改进](03_lambda_增强_强制复制消除与内存分配改进/index.md)
-
----
+- [01 if constexpr 编译期分支与 constexpr 扩展](01_if_constexpr_与_constexpr_扩展/index.md)
+- [02 折叠表达式（Fold Expressions）、CTAD 与模板参数增强](02_折叠表达式_ctad_与模板参数增强/index.md)
+- [03 Lambda 增强、强制复制消除与内存/对象生命周期改进](03_lambda_增强_强制复制消除与内存分配改进/index.md)
 
 ## 导航
 

@@ -1,6 +1,6 @@
-# 7.4.3 已废弃特性的最终命运
+# 03 已废弃特性的最终命运
 
-了解 auto_ptr、bind1st/bind2nd、random_shuffle 与 codecvt 相关设施在后续标准中的废弃或移除情况。
+**介绍**: 了解 auto_ptr、bind1st/bind2nd、random_shuffle 与 codecvt 相关设施在后续标准中的废弃或移除情况。
 
 ---
 

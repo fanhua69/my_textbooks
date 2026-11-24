@@ -1,6 +1,6 @@
-# 6.1.2 mutex、lock_guard、scoped_lock 与 unique  lock
+# 02 mutex、lock_guard、scoped_lock 与 unique  lock
 
-掌握互斥锁、C++17 多锁死锁规避（std::scoped_lock）、RAII 锁管理和锁所有权[cite: 4, 11, 13]。
+**介绍**: 掌握互斥锁、C++17 多锁死锁规避（std::scoped_lock）、RAII 锁管理和锁所有权[cite: 4, 11, 13]。
 
 ---
 

@@ -1,6 +1,6 @@
-# 5.2.1 std::thread 的创建、传参与生命周期
+# 01 std::thread 的创建、传参与生命周期
 
-掌握线程创建、参数传递、join 与 detach，以及线程对象的移动语义与 hardware_concurrency。
+**介绍**: 掌握线程创建、参数传递、join 与 detach，以及线程对象的移动语义与 hardware_concurrency。
 
 ---
 

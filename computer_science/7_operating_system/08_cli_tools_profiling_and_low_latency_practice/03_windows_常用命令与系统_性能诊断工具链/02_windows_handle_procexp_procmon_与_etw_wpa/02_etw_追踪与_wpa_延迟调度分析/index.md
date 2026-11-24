@@ -1,6 +1,6 @@
-# 8.3.2.2 ETW 追踪（logman / xperf）与 Windows Performance Analyzer（WPA）分析
+# 02 ETW 追踪（logman / xperf）与 Windows Performance Analyzer（WPA）分析
 
-采集内核与用户态 ETW 事件，在 WPA 中分析上下文切换延迟、磁盘/网络 I/O 阻塞与 CPU 占用。
+**介绍**: 采集内核与用户态 ETW 事件，在 WPA 中分析上下文切换延迟、磁盘/网络 I/O 阻塞与 CPU 占用。
 
 ---
 

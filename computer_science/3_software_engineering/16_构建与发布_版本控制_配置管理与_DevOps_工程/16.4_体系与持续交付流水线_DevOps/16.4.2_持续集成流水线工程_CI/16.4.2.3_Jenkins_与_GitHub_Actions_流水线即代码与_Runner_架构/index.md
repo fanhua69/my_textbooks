@@ -1,6 +1,6 @@
 # 16.4.2.3 Jenkins 与 GitHub Actions：流水线即代码与 Runner 架构
 
-以代码声明流水线，理解 Jenkins 控制器/代理与 GitHub Actions 工作流、Runner 的执行模型，并落实缓存与密钥管理。
+**介绍**: 以代码声明流水线，理解 Jenkins 控制器/代理与 GitHub Actions 工作流、Runner 的执行模型，并落实缓存与密钥管理。
 
 ---
 

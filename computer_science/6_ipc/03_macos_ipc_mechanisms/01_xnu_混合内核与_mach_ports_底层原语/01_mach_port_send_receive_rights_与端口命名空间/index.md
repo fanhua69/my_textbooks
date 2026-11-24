@@ -1,6 +1,6 @@
-# 3.1.1 Mach Port、Send/Receive Rights 与端口命名空间
+# 01 Mach Port、Send/Receive Rights 与端口命名空间
 
-理解内核管理的单向消息队列、端口引用计数以及权限转移机制。
+**介绍**: 理解内核管理的单向消息队列、端口引用计数以及权限转移机制。
 
 ---
 

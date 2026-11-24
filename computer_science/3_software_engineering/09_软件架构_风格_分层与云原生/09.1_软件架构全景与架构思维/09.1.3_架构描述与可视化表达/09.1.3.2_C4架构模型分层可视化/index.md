@@ -1,6 +1,6 @@
-# 9.1.3.2 C4 架构模型分层可视化
+# 09.1.3.2 C4 架构模型分层可视化
 
-运用地图缩放思维：Context（语境图）、Container（容器图）、Component（组件图）与 Code（代码图）。
+**介绍**: 运用地图缩放思维：Context（语境图）、Container（容器图）、Component（组件图）与 Code（代码图）。
 
 ---
 

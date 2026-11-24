@@ -1,6 +1,6 @@
 # 4.3.3 Tagged Pointer 与版本计数  tagged pointer and version counter
 
-使用指针加版本号检测中间状态变化及其位宽限制。
+**介绍**: 使用指针加版本号检测中间状态变化及其位宽限制。
 
 ---
 

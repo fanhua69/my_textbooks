@@ -1,13 +1,11 @@
-# 6.5.2 缓存架构与失效治理
+# 06.5.2 缓存架构与失效治理
 
-多级缓存、失效与雪崩类风险防护。
+**介绍**: 多级缓存、失效与雪崩类风险防护。
 
-## 本节目录
+## 目录
 
-- [6.5.2.1 两级缓存 (Two-Level Cache) 与缓存失效 (Cache Invalidation) 策略](06.5.2.1_两级缓存_Two-Level_Cache_与缓存失效_Cache_Invalidation_策略/index.md)
-- [6.5.2.2 分布式缓存策略与常见三高危害防护](06.5.2.2_分布式缓存策略与常见三高危害防护/index.md)
-
----
+- [06.5.2.1 两级缓存 (Two-Level Cache) 与缓存失效 (Cache Invalidation) 策略](06.5.2.1_两级缓存_Two-Level_Cache_与缓存失效_Cache_Invalidation_策略/index.md)
+- [06.5.2.2 分布式缓存策略与常见三高危害防护](06.5.2.2_分布式缓存策略与常见三高危害防护/index.md)
 
 ## 导航
 

@@ -1,6 +1,6 @@
 # 1.2.2 SPSC：Single Producer Single Consumer  spsc single producer single consumer
 
-单生产者单消费者模型；分析单写端、单读端、head/tail 索引、环形缓冲区及其低开销优势。
+**介绍**: 单生产者单消费者模型；分析单写端、单读端、head/tail 索引、环形缓冲区及其低开销优势。
 
 ---
 

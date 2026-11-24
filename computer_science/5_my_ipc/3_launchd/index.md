@@ -1,3 +1,7 @@
+# 3 launchd
+
+**介绍**: launchd
+
 ## `launchd` 简介
 
 **`launchd`** 是 **macOS（以及 iOS / iPadOS / tvOS / watchOS）上的核心系统初始化进程与后台服务管理器**，在体系定位上相当于 Linux 中的 `systemd`（或早期的 SysV init）。

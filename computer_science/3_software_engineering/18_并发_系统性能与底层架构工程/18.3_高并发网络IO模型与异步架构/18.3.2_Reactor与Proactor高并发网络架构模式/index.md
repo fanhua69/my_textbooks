@@ -1,6 +1,6 @@
 # 18.3.2 Reactor 与 Proactor 高并发网络架构模式
 
-剖析单 Reactor 单线程、主从多 Reactor 多线程（Netty/Nginx 模型）与纯异步 Proactor 模型实现。
+**介绍**: 剖析单 Reactor 单线程、主从多 Reactor 多线程（Netty/Nginx 模型）与纯异步 Proactor 模型实现。
 
 ---
 

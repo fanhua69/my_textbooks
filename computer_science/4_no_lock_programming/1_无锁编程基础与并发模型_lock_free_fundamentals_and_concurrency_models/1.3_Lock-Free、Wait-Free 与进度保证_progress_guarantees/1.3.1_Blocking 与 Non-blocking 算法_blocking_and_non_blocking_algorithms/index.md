@@ -1,6 +1,6 @@
 # 1.3.1 Blocking 与 Non-blocking 算法  blocking and non blocking algorithms
 
-从线程暂停、调度依赖和系统整体进度角度理解阻塞与非阻塞。
+**介绍**: 从线程暂停、调度依赖和系统整体进度角度理解阻塞与非阻塞。
 
 ---
 

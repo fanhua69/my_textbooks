@@ -1,13 +1,11 @@
-# 8.4.1 网络通信协议
+# 08.4.1 网络通信协议
 
-跨机器通信的传输层与应用层协议。
+**介绍**: 跨机器通信的传输层与应用层协议。
 
-## 本节目录
+## 目录
 
-- [8.4.1.1 TCP/IP 与 UDP：可靠传输与低延迟传输的取舍](08.4.1.1_TCP_IP_与_UDP_可靠传输与低延迟传输的取舍/index.md)
-- [8.4.1.2 HTTP / HTTPS 与 WebSocket](08.4.1.2_HTTP_HTTPS_与_WebSocket/index.md)
-
----
+- [08.4.1.1 TCP/IP 与 UDP：可靠传输与低延迟传输的取舍](08.4.1.1_TCP_IP_与_UDP_可靠传输与低延迟传输的取舍/index.md)
+- [08.4.1.2 HTTP / HTTPS 与 WebSocket](08.4.1.2_HTTP_HTTPS_与_WebSocket/index.md)
 
 ## 导航
 

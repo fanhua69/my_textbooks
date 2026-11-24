@@ -1,6 +1,6 @@
-# 2.4.1 noexcept 说明符与条件 noexcept
+# 01 noexcept 说明符与条件 noexcept
 
-掌握 noexcept 与 noexcept(expr) 的写法，以及违反约定时 std::terminate 的行为。
+**介绍**: 掌握 noexcept 与 noexcept(expr) 的写法，以及违反约定时 std::terminate 的行为。
 
 ---
 

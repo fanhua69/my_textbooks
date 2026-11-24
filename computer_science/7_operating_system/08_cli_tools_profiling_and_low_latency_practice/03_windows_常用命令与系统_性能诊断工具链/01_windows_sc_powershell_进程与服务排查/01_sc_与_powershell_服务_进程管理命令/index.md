@@ -1,6 +1,6 @@
-# 8.3.1.1 sc 与 PowerShell Get-Service / Get-Process 服务与进程管理
+# 01 sc 与 PowerShell Get-Service / Get-Process 服务与进程管理
 
-查询服务配置/运行状态、启停服务与通过 PowerShell 筛选进程线程及资源占用。
+**介绍**: 查询服务配置/运行状态、启停服务与通过 PowerShell 筛选进程线程及资源占用。
 
 ---
 

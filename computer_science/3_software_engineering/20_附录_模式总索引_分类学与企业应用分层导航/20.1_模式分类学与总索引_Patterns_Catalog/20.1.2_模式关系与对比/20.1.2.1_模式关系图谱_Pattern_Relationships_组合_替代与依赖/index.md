@@ -1,6 +1,6 @@
 # 20.1.2.1 模式关系图谱 (Pattern Relationships)：组合、替代与依赖
 
-描述模式之间的组合（如 Repository + Unit of Work）、替代（如 Strategy 与 State）与依赖关系。
+**介绍**: 描述模式之间的组合（如 Repository + Unit of Work）、替代（如 Strategy 与 State）与依赖关系。
 
 ---
 

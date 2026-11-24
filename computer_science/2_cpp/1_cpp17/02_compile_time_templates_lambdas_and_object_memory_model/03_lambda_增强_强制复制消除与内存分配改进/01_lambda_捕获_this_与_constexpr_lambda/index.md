@@ -1,6 +1,6 @@
-# 2.3.1 Lambda 按值捕获 *this（[*this]）与 constexpr Lambda
+# 01 Lambda 按值捕获 *this（[*this]）与 constexpr Lambda
 
-掌握 [*this] 在异步任务与多线程回调中拷贝当前对象防止悬空引用，以及 constexpr 闭包对象的编译期调用。
+**介绍**: 掌握 [*this] 在异步任务与多线程回调中拷贝当前对象防止悬空引用，以及 constexpr 闭包对象的编译期调用。
 
 ---
 

@@ -1,6 +1,6 @@
-# 2.2.2.2 systemd PID 1 初始化、Target 依赖与并行启动
+# 02 systemd PID 1 初始化、Target 依赖与并行启动
 
-掌握 sysinit.target / basic.target / multi-user.target 演进与依赖有向无环图调度。
+**介绍**: 掌握 sysinit.target / basic.target / multi-user.target 演进与依赖有向无环图调度。
 
 ---
 

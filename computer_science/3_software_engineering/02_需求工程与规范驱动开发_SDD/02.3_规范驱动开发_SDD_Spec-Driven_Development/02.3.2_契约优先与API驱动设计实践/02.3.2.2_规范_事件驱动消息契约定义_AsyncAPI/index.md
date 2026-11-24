@@ -1,6 +1,6 @@
-# 2.3.2.2 AsyncAPI 规范：事件驱动消息契约定义
+# 02.3.2.2 AsyncAPI 规范：事件驱动消息契约定义
 
-为 Kafka/RabbitMQ 异步事件消息定义 Channel、Payload Schema 与发布订阅契约。
+**介绍**: 为 Kafka/RabbitMQ 异步事件消息定义 Channel、Payload Schema 与发布订阅契约。
 
 ---
 

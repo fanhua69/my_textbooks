@@ -1,14 +1,12 @@
-# 5.3 主流文件系统特性与持久化语义（fsync / F FULLFSYNC / Flush）
+# 03 主流文件系统特性与持久化语义（fsync / F FULLFSYNC / Flush）
 
-对比 ext4/XFS、APFS、NTFS/ReFS 的结构与日志/写时复制特性，掌握跨平台落盘持久化语义差异。
+**介绍**: 对比 ext4/XFS、APFS、NTFS/ReFS 的结构与日志/写时复制特性，掌握跨平台落盘持久化语义差异。
 
-## 本节目录
+## 目录
 
-- [5.3.1 Linux 文件系统（ext4 / XFS）与 fsync / fdatasync 持久化语义](01_linux_文件系统与_fsync_fdatasync_语义/index.md)
-- [5.3.2 macOS APFS（克隆/快照/空间共享）与 F FULLFSYNC 落盘保证](02_macos_apfs_特性与_f_fullfsync_落盘保证/index.md)
-- [5.3.3 Windows NTFS / ReFS 与 FlushFileBuffers / WriteFile 异步刷盘](03_windows_ntfs_refs_与持久化刷盘机制/index.md)
-
----
+- [01 Linux 文件系统（ext4 / XFS）与 fsync / fdatasync 持久化语义](01_linux_文件系统与_fsync_fdatasync_语义/index.md)
+- [02 macOS APFS（克隆/快照/空间共享）与 F FULLFSYNC 落盘保证](02_macos_apfs_特性与_f_fullfsync_落盘保证/index.md)
+- [03 Windows NTFS / ReFS 与 FlushFileBuffers / WriteFile 异步刷盘](03_windows_ntfs_refs_与持久化刷盘机制/index.md)
 
 ## 导航
 

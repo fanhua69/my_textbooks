@@ -1,6 +1,6 @@
 # 20.1.1.4 工程质量模式分类：测试与反模式
 
-登记 Test Double、Test Pyramid 等测试模式，以及 God Object、Big Ball of Mud 等设计缺陷。
+**介绍**: 登记 Test Double、Test Pyramid 等测试模式，以及 God Object、Big Ball of Mud 等设计缺陷。
 
 ---
 

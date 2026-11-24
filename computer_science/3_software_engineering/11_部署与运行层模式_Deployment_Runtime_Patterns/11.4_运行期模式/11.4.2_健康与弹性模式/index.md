@@ -1,13 +1,11 @@
 # 11.4.2 健康与弹性模式
 
-让平台能发现并修复问题。
+**介绍**: 让平台能发现并修复问题。
 
-## 本节目录
+## 目录
 
 - [11.4.2.1 健康检查 API (Health Check API)：存活、就绪与启动探针](11.4.2.1_健康检查_API_Health_Check_API_存活_就绪与启动探针/index.md)
 - [11.4.2.2 自愈 (Self-Healing) 与自动扩缩容 (Autoscaling)](11.4.2.2_自愈_Self-Healing_与自动扩缩容_Autoscaling/index.md)
-
----
 
 ## 导航
 

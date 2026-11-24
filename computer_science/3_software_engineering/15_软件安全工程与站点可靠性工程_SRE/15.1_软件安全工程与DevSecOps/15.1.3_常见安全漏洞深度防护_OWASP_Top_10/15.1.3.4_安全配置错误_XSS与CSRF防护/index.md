@@ -1,6 +1,6 @@
 # 15.1.3.4 安全配置错误、XSS 与 CSRF 防护
 
-防御跨站脚本 (XSS / CSP 策略) 与跨站请求伪造 (CSRF Token / SameSite Cookie)，关闭默认配置与暴露的调试端口。
+**介绍**: 防御跨站脚本 (XSS / CSP 策略) 与跨站请求伪造 (CSRF Token / SameSite Cookie)，关闭默认配置与暴露的调试端口。
 
 ---
 

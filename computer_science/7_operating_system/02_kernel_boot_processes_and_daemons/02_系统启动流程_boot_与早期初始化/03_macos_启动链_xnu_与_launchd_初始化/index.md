@@ -1,13 +1,11 @@
-# 2.2.3 macOS 启动链：Secure ROM / iBoot -> XNU -> launchd（PID 1）
+# 03 macOS 启动链：Secure ROM / iBoot -> XNU -> launchd（PID 1）
 
-剖析苹果芯片签名验证链、APFS 根卷/快照挂载与 launchd 作为 PID 1 的服务初始化。
+**介绍**: 剖析苹果芯片签名验证链、APFS 根卷/快照挂载与 launchd 作为 PID 1 的服务初始化。
 
-## 本节目录
+## 目录
 
-- [2.2.3.1 Boot ROM、iBoot 阶段与密封 APFS 根卷/系统快照](01_boot_rom_iboot_阶段与密封_apfs_根卷_系统快照/index.md)
-- [2.2.3.2 XNU 内核启动与 launchd 域初始化](02_xnu_内核启动与_launchd_域初始化/index.md)
-
----
+- [01 Boot ROM、iBoot 阶段与密封 APFS 根卷/系统快照](01_boot_rom_iboot_阶段与密封_apfs_根卷_系统快照/index.md)
+- [02 XNU 内核启动与 launchd 域初始化](02_xnu_内核启动与_launchd_域初始化/index.md)
 
 ## 导航
 

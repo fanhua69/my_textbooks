@@ -1,6 +1,6 @@
-# 3.1.3 std::any、std::any cast 与 std::byte 原始字节操作
+# 03 std::any、std::any cast 与 std::byte 原始字节操作
 
-掌握类型擦除值容器 std::any 的小缓冲优化与类型安全转换，以及 std::byte 与按位运算替代 unsigned char 表达原始字节。
+**介绍**: 掌握类型擦除值容器 std::any 的小缓冲优化与类型安全转换，以及 std::byte 与按位运算替代 unsigned char 表达原始字节。
 
 ---
 

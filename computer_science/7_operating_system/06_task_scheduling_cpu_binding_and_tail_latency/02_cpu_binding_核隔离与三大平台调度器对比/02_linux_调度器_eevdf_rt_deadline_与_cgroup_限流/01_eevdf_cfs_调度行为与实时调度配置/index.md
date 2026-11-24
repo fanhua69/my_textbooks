@@ -1,6 +1,6 @@
-# 6.2.2.1 EEVDF / CFS 调度行为与 SCHED FIFO / SCHED DEADLINE 配置
+# 01 EEVDF / CFS 调度行为与 SCHED FIFO / SCHED DEADLINE 配置
 
-掌握 Linux 调度策略设置、权限要求（CAP_SYS_NICE）与实时线程运行风险。
+**介绍**: 掌握 Linux 调度策略设置、权限要求（CAP_SYS_NICE）与实时线程运行风险。
 
 ---
 

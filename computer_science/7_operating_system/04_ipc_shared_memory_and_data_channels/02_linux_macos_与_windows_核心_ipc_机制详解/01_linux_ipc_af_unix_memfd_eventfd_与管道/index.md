@@ -1,6 +1,6 @@
-# 4.2.1 Linux IPC：UNIX Domain Socket（SCM RIGHTS）、memfd + File Sealing、eventfd 与管道
+# 01 Linux IPC：UNIX Domain Socket（SCM RIGHTS）、memfd + File Sealing、eventfd 与管道
 
-掌握流/数据报/顺序包本地套接字、匿名内存文件封印防篡改、eventfd 轻量事件通知与 epoll 集成。
+**介绍**: 掌握流/数据报/顺序包本地套接字、匿名内存文件封印防篡改、eventfd 轻量事件通知与 epoll 集成。
 
 ---
 

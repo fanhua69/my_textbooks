@@ -1,13 +1,11 @@
-# 2.2.2 Linux 启动链：固件 -> Bootloader -> initramfs -> systemd（PID 1）
+# 02 Linux 启动链：固件 -> Bootloader -> initramfs -> systemd（PID 1）
 
-掌握早期用户态钩子、root 切换、Unit 依赖解析、Socket/D-Bus 激活与并行服务拉起。
+**介绍**: 掌握早期用户态钩子、root 切换、Unit 依赖解析、Socket/D-Bus 激活与并行服务拉起。
 
-## 本节目录
+## 目录
 
-- [2.2.2.1 initramfs 阶段、udev 设备冷插拔与 switch  root](01_initramfs_阶段_udev_设备冷插拔与_switch_root/index.md)
-- [2.2.2.2 systemd PID 1 初始化、Target 依赖与并行启动](02_systemd_pid_1_初始化_target_依赖与并行启动/index.md)
-
----
+- [01 initramfs 阶段、udev 设备冷插拔与 switch  root](01_initramfs_阶段_udev_设备冷插拔与_switch_root/index.md)
+- [02 systemd PID 1 初始化、Target 依赖与并行启动](02_systemd_pid_1_初始化_target_依赖与并行启动/index.md)
 
 ## 导航
 

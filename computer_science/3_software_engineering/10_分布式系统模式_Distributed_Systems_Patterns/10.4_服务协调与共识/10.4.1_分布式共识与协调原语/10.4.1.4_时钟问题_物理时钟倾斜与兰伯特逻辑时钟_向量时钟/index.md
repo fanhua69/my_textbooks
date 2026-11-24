@@ -1,6 +1,6 @@
 # 10.4.1.4 时钟问题：物理时钟倾斜与兰伯特逻辑时钟/向量时钟
 
-认识物理时钟不可靠性（NTP 漂移），掌握兰伯特时间戳（Lamport Timestamps）全序与向量时钟（Vector Clock）并发因果检测。
+**介绍**: 认识物理时钟不可靠性（NTP 漂移），掌握兰伯特时间戳（Lamport Timestamps）全序与向量时钟（Vector Clock）并发因果检测。
 
 ---
 

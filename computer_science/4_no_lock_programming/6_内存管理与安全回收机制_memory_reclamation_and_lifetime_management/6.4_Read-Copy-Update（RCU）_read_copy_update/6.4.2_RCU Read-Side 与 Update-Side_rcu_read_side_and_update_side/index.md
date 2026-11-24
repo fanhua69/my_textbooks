@@ -1,6 +1,6 @@
 # 6.4.2 RCU Read-Side 与 Update-Side  rcu read side and update side
 
-区分读侧访问协议与更新者复制、替换和回收流程。
+**介绍**: 区分读侧访问协议与更新者复制、替换和回收流程。
 
 ---
 

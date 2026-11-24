@@ -1,6 +1,6 @@
-# 5.4.2 optional、variant、any 与 expected
+# 02 optional、variant、any 与 expected
 
-比较可选值、和类型、动态类型与错误结果[cite: 4, 13]。
+**介绍**: 比较可选值、和类型、动态类型与错误结果[cite: 4, 13]。
 
 ---
 

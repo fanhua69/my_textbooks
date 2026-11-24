@@ -1,13 +1,11 @@
 # 18.3 高并发网络 I/O 模型与异步架构
 
-掌握支撑百万级并发连接的网络 I/O 多路复用与高吞吐事件驱动框架。
+**介绍**: 掌握支撑百万级并发连接的网络 I/O 多路复用与高吞吐事件驱动框架。
 
-## 本节目录
+## 目录
 
 - [18.3.1 I/O 多路复用演进：select/poll、epoll/kqueue 与 io_uring](18.3.1_IO多路复用演进_epoll_kqueue_io_uring/index.md)
 - [18.3.2 Reactor 与 Proactor 高并发网络架构模式](18.3.2_Reactor与Proactor高并发网络架构模式/index.md)
-
----
 
 ## 导航
 

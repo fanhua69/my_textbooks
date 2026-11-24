@@ -1,6 +1,6 @@
 # 7.3.3 SMT/Hyper-Threading 的影响  smt and hyper threading
 
-分析逻辑核共享执行资源对延迟和吞吐量的影响。
+**介绍**: 分析逻辑核共享执行资源对延迟和吞吐量的影响。
 
 ---
 

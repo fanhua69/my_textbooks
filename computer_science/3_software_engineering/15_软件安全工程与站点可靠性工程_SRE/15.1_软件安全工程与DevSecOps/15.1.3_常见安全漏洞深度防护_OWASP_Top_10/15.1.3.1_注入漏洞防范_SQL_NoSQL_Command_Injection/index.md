@@ -1,6 +1,6 @@
 # 15.1.3.1 注入漏洞防范 (SQL / NoSQL / Command Injection)
 
-剖析字符拼接攻击机理，全面普及参数化查询（Prepared Statements）与 ORM 安全调用规范。
+**介绍**: 剖析字符拼接攻击机理，全面普及参数化查询（Prepared Statements）与 ORM 安全调用规范。
 
 ---
 

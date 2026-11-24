@@ -1,6 +1,6 @@
-# 2.2.2 类模板实参推导（CTAD）、推导指引（Deduction Guides）与 auto 列表初始化推导
+# 02 类模板实参推导（CTAD）、推导指引（Deduction Guides）与 auto 列表初始化推导
 
-掌握无需显式写模板实参构造类模板（如 std::pair / std::lock_guard / 自定义容器）、编写自定义 deduction guide，以及 auto x{v}（单元素推导为 T）与 auto x{a,b} 规则变化。
+**介绍**: 掌握无需显式写模板实参构造类模板（如 std::pair / std::lock_guard / 自定义容器）、编写自定义 deduction guide，以及 auto x{v}（单元素推导为 T）与 auto x{a,b} 规则变化。
 
 ---
 

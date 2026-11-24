@@ -1,6 +1,6 @@
-# 7.4.2.1 SID、Access Token、Mandatory Integrity Control（MIC）与 DACL
+# 01 SID、Access Token、Mandatory Integrity Control（MIC）与 DACL
 
-掌握低/中/高/System 完整性级别对跨级别写入的阻止，以及通过 SDDL 配置管道/共享内存 ACL。
+**介绍**: 掌握低/中/高/System 完整性级别对跨级别写入的阻止，以及通过 SDDL 配置管道/共享内存 ACL。
 
 ---
 

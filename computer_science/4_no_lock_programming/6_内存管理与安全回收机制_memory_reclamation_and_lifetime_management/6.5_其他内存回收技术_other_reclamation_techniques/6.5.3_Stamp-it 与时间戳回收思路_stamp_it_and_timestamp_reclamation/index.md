@@ -1,6 +1,6 @@
 # 6.5.3 Stamp-it 与时间戳回收思路  stamp it and timestamp reclamation
 
-了解基于时间戳或活动区间的回收方案。
+**介绍**: 了解基于时间戳或活动区间的回收方案。
 
 ---
 

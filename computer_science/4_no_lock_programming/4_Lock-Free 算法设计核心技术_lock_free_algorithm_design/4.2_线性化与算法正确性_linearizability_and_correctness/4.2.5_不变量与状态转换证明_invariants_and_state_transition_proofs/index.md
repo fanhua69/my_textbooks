@@ -1,6 +1,6 @@
 # 4.2.5 不变量与状态转换证明  invariants and state transition proofs
 
-建立队列、栈和节点生命周期的不变量。
+**介绍**: 建立队列、栈和节点生命周期的不变量。
 
 ---
 

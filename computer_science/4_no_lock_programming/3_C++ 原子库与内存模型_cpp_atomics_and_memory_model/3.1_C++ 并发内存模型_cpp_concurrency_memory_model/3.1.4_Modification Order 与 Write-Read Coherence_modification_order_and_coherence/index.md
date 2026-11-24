@@ -1,6 +1,6 @@
 # 3.1.4 Modification Order 与 Write-Read Coherence  modification order and coherence
 
-理解单个原子对象的修改顺序及一致性约束。
+**介绍**: 理解单个原子对象的修改顺序及一致性约束。
 
 ---
 

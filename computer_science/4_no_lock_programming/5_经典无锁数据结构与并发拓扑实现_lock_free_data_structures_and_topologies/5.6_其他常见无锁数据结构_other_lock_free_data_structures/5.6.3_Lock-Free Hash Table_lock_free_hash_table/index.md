@@ -1,6 +1,6 @@
 # 5.6.3 Lock-Free Hash Table  lock free hash table
 
-分析并发查找、插入、删除、扩容和桶迁移。
+**介绍**: 分析并发查找、插入、删除、扩容和桶迁移。
 
 ---
 

@@ -1,6 +1,6 @@
-# 5.2.8 std::async 与启动策略
+# 08 std::async 与启动策略
 
-区分 launch::async 与 launch::deferred，理解 async 返回 future 的析构阻塞行为。
+**介绍**: 区分 launch::async 与 launch::deferred，理解 async 返回 future 的析构阻塞行为。
 
 ---
 

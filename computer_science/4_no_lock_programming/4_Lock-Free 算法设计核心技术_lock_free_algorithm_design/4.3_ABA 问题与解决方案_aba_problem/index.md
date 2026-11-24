@@ -1,16 +1,14 @@
 # 4.3 ABA 问题与解决方案  aba problem
 
-深入理解 CAS 只比较位模式所造成的状态误判及其缓解方案。
+**介绍**: 深入理解 CAS 只比较位模式所造成的状态误判及其缓解方案。
 
-## 本节目录
+## 目录
 
-- [4.3.1 ABA 问题的产生过程  aba problem walkthrough](4.3.1_ABA%20问题的产生过程_aba_problem_walkthrough/index.md)
-- [4.3.2 指针复用与内存释放导致的 ABA  pointer reuse and reclamation](4.3.2_指针复用与内存释放导致的%20ABA_pointer_reuse_and_reclamation/index.md)
-- [4.3.3 Tagged Pointer 与版本计数  tagged pointer and version counter](4.3.3_Tagged%20Pointer%20与版本计数_tagged_pointer_and_version_counter/index.md)
+- [4.3.1 ABA 问题的产生过程  aba problem walkthrough](4.3.1_ABA%20%E9%97%AE%E9%A2%98%E7%9A%84%E4%BA%A7%E7%94%9F%E8%BF%87%E7%A8%8B_aba_problem_walkthrough/index.md)
+- [4.3.2 指针复用与内存释放导致的 ABA  pointer reuse and reclamation](4.3.2_%E6%8C%87%E9%92%88%E5%A4%8D%E7%94%A8%E4%B8%8E%E5%86%85%E5%AD%98%E9%87%8A%E6%94%BE%E5%AF%BC%E8%87%B4%E7%9A%84%20ABA_pointer_reuse_and_reclamation/index.md)
+- [4.3.3 Tagged Pointer 与版本计数  tagged pointer and version counter](4.3.3_Tagged%20Pointer%20%E4%B8%8E%E7%89%88%E6%9C%AC%E8%AE%A1%E6%95%B0_tagged_pointer_and_version_counter/index.md)
 - [4.3.4 Double-Width CAS  double width cas](4.3.4_Double-Width%20CAS_double_width_cas/index.md)
-- [4.3.5 ABA 的其他处理策略  other aba mitigation](4.3.5_ABA%20的其他处理策略_other_aba_mitigation/index.md)
-
----
+- [4.3.5 ABA 的其他处理策略  other aba mitigation](4.3.5_ABA%20%E7%9A%84%E5%85%B6%E4%BB%96%E5%A4%84%E7%90%86%E7%AD%96%E7%95%A5_other_aba_mitigation/index.md)
 
 ## 导航
 

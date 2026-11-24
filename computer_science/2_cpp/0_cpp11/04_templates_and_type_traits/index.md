@@ -1,14 +1,12 @@
-# 4 模板与类型萃取
+# 04 模板与类型萃取
 
-掌握变参模板、别名模板、SFINAE 与 type_traits，构建类型安全的泛型代码。
+**介绍**: 掌握变参模板、别名模板、SFINAE 与 type_traits，构建类型安全的泛型代码。
 
-## 本节目录
+## 目录
 
-- [4.1 变参模板、别名模板与外部模板](01_变参模板_别名模板与外部模板/index.md)
-- [4.2 type traits 与 ratio](02_type_traits_与_ratio/index.md)
-- [4.3 SFINAE 与模板元编程基础](03_sfinae_与模板元编程基础/index.md)
-
----
+- [01 变参模板、别名模板与外部模板](01_变参模板_别名模板与外部模板/index.md)
+- [02 type traits 与 ratio](02_type_traits_与_ratio/index.md)
+- [03 SFINAE 与模板元编程基础](03_sfinae_与模板元编程基础/index.md)
 
 ## 导航
 

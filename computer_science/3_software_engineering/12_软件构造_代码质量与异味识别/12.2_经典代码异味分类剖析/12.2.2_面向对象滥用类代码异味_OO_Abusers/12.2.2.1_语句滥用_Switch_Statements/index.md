@@ -1,6 +1,6 @@
 # 12.2.2.1 Switch 语句滥用 (Switch Statements)
 
-同一种类型判断分支在多个地方重复出现；运用以多态取代条件表达式（Replace Conditional with Polymorphism）。
+**介绍**: 同一种类型判断分支在多个地方重复出现；运用以多态取代条件表达式（Replace Conditional with Polymorphism）。
 
 ---
 

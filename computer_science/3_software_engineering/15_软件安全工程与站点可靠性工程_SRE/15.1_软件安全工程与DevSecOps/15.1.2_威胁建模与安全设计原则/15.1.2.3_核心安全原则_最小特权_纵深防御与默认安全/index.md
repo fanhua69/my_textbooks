@@ -1,6 +1,6 @@
 # 15.1.2.3 核心安全原则：最小特权、纵深防御与默认安全
 
-严格践行 Principle of Least Privilege、多层安全防线防穿透（Defense in Depth）以及默认关闭所有危险端口与特权。
+**介绍**: 严格践行 Principle of Least Privilege、多层安全防线防穿透（Defense in Depth）以及默认关闭所有危险端口与特权。
 
 ---
 

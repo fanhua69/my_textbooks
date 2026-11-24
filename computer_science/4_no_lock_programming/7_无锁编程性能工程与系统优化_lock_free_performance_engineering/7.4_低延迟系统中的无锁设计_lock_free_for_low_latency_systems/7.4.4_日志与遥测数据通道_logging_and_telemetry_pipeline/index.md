@@ -1,6 +1,6 @@
 # 7.4.4 日志与遥测数据通道  logging and telemetry pipeline
 
-比较 SPSC/MPSC 日志汇聚和异步落盘架构。
+**介绍**: 比较 SPSC/MPSC 日志汇聚和异步落盘架构。
 
 ---
 

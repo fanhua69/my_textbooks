@@ -1,15 +1,13 @@
-# 3.5.5 C++ 现代设计惯用法
+# 03.5.5 C++ 现代设计惯用法
 
-面向 C++ 的静态多态、编译期组合与接口隐藏技巧。
+**介绍**: 面向 C++ 的静态多态、编译期组合与接口隐藏技巧。
 
-## 本节目录
+## 目录
 
-- [3.5.5.1 策略式设计 (Policy-Based Design)](03.5.5.1_策略式设计_Policy-Based_Design/index.md)
-- [3.5.5.2 奇异递归模板模式 (CRTP)](03.5.5.2_奇异递归模板模式_CRTP/index.md)
-- [3.5.5.3 PImpl 惯用法与编译防火墙](03.5.5.3_PImpl_惯用法与编译防火墙/index.md)
-- [3.5.5.4 类型擦除 (Type Erasure)](03.5.5.4_类型擦除_Type_Erasure/index.md)
-
----
+- [03.5.5.1 策略式设计 (Policy-Based Design)](03.5.5.1_策略式设计_Policy-Based_Design/index.md)
+- [03.5.5.2 奇异递归模板模式 (CRTP)](03.5.5.2_奇异递归模板模式_CRTP/index.md)
+- [03.5.5.3 PImpl 惯用法与编译防火墙](03.5.5.3_PImpl_惯用法与编译防火墙/index.md)
+- [03.5.5.4 类型擦除 (Type Erasure)](03.5.5.4_类型擦除_Type_Erasure/index.md)
 
 ## 导航
 

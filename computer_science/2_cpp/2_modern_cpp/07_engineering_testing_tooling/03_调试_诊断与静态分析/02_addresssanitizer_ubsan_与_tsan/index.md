@@ -1,6 +1,6 @@
-# 7.3.2 AddressSanitizer、UBSan 与 TSan
+# 02 AddressSanitizer、UBSan 与 TSan
 
-理解内存错误、未定义行为和数据竞争检测[cite: 4]。
+**介绍**: 理解内存错误、未定义行为和数据竞争检测[cite: 4]。
 
 ---
 

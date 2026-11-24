@@ -1,6 +1,6 @@
 # 16.4.1.1 CALMS 框架五大支柱深度解析
 
-深入剖析 Culture（跨职能信任）、Automation（全流程自动化）、Lean（消灭在制品浪费）、Measurement（指标驱动）、Sharing（知识开放）。
+**介绍**: 深入剖析 Culture（跨职能信任）、Automation（全流程自动化）、Lean（消灭在制品浪费）、Measurement（指标驱动）、Sharing（知识开放）。
 
 ---
 

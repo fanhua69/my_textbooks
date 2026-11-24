@@ -1,6 +1,6 @@
 # 7.2.2 Padding、Alignment 与 False Sharing  padding alignment and false sharing
 
-使用 alignas 和布局隔离高频写变量。
+**介绍**: 使用 alignas 和布局隔离高频写变量。
 
 ---
 

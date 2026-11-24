@@ -1,6 +1,6 @@
-# 7.3.5 Core dump、崩溃分析与符号信息
+# 05 Core dump、崩溃分析与符号信息
 
-理解崩溃转储、debug symbols 和 backtrace[cite: 4]。
+**介绍**: 理解崩溃转储、debug symbols 和 backtrace[cite: 4]。
 
 ---
 

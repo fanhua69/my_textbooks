@@ -1,6 +1,6 @@
-# 1.3.2.1 Scrum 角色、事件与工件全解
+# 01.3.2.1 Scrum 角色、事件与工件全解
 
-掌握 PO/SM/Dev 职责划分，Sprint 计划、站会、评审与回顾会，以及 Product/Sprint Backlog 维护。
+**介绍**: 掌握 PO/SM/Dev 职责划分，Sprint 计划、站会、评审与回顾会，以及 Product/Sprint Backlog 维护。
 
 ---
 

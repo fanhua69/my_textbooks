@@ -1,6 +1,6 @@
 # 3.3.5 memory  order acq rel memory order acq rel
 
-理解读改写操作同时具有 acquire 和 release 语义的场景。
+**介绍**: 理解读改写操作同时具有 acquire 和 release 语义的场景。
 
 ---
 

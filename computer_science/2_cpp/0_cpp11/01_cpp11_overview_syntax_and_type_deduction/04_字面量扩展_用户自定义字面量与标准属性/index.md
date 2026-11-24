@@ -1,15 +1,13 @@
-# 1.4 字面量扩展、用户自定义字面量与标准属性
+# 04 字面量扩展、用户自定义字面量与标准属性
 
-掌握原始字符串、Unicode 字面量、用户自定义字面量以及 C++11 的属性语法。
+**介绍**: 掌握原始字符串、Unicode 字面量、用户自定义字面量以及 C++11 的属性语法。
 
-## 本节目录
+## 目录
 
-- [1.4.1 原始字符串字面量](01_原始字符串字面量/index.md)
-- [1.4.2 Unicode 字符与字符串字面量](02_unicode_字符与字符串字面量/index.md)
-- [1.4.3 用户自定义字面量](03_用户自定义字面量/index.md)
-- [1.4.4 标准属性：[[noreturn]] 与 [[carries  dependency]]](04_标准属性_noreturn_与_carries_dependency/index.md)
-
----
+- [01 原始字符串字面量](01_原始字符串字面量/index.md)
+- [02 Unicode 字符与字符串字面量](02_unicode_字符与字符串字面量/index.md)
+- [03 用户自定义字面量](03_用户自定义字面量/index.md)
+- [04 标准属性：[[noreturn]] 与 [[carries  dependency]]](04_标准属性_noreturn_与_carries_dependency/index.md)
 
 ## 导航
 

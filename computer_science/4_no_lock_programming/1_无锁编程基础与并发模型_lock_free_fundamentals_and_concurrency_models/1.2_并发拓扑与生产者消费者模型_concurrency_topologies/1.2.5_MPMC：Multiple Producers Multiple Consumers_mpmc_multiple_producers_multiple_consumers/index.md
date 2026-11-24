@@ -1,6 +1,6 @@
 # 1.2.5 MPMC：Multiple Producers Multiple Consumers  mpmc multiple producers multiple consumers
 
-多生产者多消费者模型；分析双端并发竞争、队列状态协调、吞吐量与复杂度。
+**介绍**: 多生产者多消费者模型；分析双端并发竞争、队列状态协调、吞吐量与复杂度。
 
 ---
 

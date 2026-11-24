@@ -1,6 +1,6 @@
-# 6.1.4 enable  shared from this
+# 04 enable  shared from this
 
-安全地从成员函数获取指向自身的 shared_ptr，避免重复创建控制块。
+**介绍**: 安全地从成员函数获取指向自身的 shared_ptr，避免重复创建控制块。
 
 ---
 

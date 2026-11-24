@@ -1,6 +1,6 @@
-# 7.3.2.2 错误响应模型 (Error Response Model)：RFC 7807 Problem Details
+# 07.4.2.2 错误响应模型 (Error Response Model)：RFC 7807 Problem Details
 
-定义机器可读的错误结构、稳定错误码与可诊断信息，避免暴露内部实现细节。
+**介绍**: 定义机器可读的错误结构、稳定错误码与可诊断信息，避免暴露内部实现细节。
 
 ---
 

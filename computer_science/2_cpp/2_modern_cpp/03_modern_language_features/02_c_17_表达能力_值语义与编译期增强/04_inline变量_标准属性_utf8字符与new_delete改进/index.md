@@ -1,6 +1,6 @@
-# 3.2.4 inline 变量、标准属性（[[nodiscard]]/[[maybe unused]]）、UTF-8 字符与 new/delete 改进
+# 04 inline 变量、标准属性（[[nodiscard]]/[[maybe unused]]）、UTF-8 字符与 new/delete 改进
 
-理解头文件 inline 变量消除多重定义冲突、[[nodiscard]] 与 [[maybe_unused]] 属性、UTF-8 字符字面量（u8'a'）、强制复制消除，以及 new T[n]{} 默认值初始化和对齐感知 operator new/delete[cite: 4, 6, 13, 14]。
+**介绍**: 理解头文件 inline 变量消除多重定义冲突、[[nodiscard]] 与 [[maybe_unused]] 属性、UTF-8 字符字面量（u8'a'）、强制复制消除，以及 new T[n]{} 默认值初始化和对齐感知 operator new/delete[cite: 4, 6, 13, 14]。
 
 ---
 

@@ -1,6 +1,6 @@
-# 2.2.3.1 Boot ROM、iBoot 阶段与密封 APFS 根卷/系统快照
+# 01 Boot ROM、iBoot 阶段与密封 APFS 根卷/系统快照
 
-理解 SSV（Signed System Volume）完整性保护、内核缓存加载与启动安全策略。
+**介绍**: 理解 SSV（Signed System Volume）完整性保护、内核缓存加载与启动安全策略。
 
 ---
 

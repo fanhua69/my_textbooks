@@ -1,6 +1,6 @@
-# 5.4.5 span、bit、utility、std::function / std::bind 与 source  location
+# 05 span、bit、utility、std::function / std::bind 与 source  location
 
-掌握非拥有视图、位操作、可调用对象包装与源码位置辅助工具[cite: 4, 5, 7, 8, 9, 11]。
+**介绍**: 掌握非拥有视图、位操作、可调用对象包装与源码位置辅助工具[cite: 4, 5, 7, 8, 9, 11]。
 
 ---
 

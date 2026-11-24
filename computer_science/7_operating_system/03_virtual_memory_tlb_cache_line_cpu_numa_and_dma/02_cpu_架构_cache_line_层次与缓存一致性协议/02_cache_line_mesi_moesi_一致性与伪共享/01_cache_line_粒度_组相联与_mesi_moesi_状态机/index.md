@@ -1,6 +1,6 @@
-# 3.2.2.1 Cache Line 粒度、组相联映射、MESI/MOESI 状态机与缓冲队列
+# 01 Cache Line 粒度、组相联映射、MESI/MOESI 状态机与缓冲队列
 
-理解缓存行失效广播、Store Buffer 与 Invalidate Queue 对多核可见性与延迟的影响。
+**介绍**: 理解缓存行失效广播、Store Buffer 与 Invalidate Queue 对多核可见性与延迟的影响。
 
 ---
 

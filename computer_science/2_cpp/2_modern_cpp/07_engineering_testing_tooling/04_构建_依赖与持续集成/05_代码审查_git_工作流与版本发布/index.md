@@ -1,6 +1,6 @@
-# 7.4.5 代码审查、Git 工作流与版本发布
+# 05 代码审查、Git 工作流与版本发布
 
-掌握 review、branch strategy、semantic versioning[cite: 4]。
+**介绍**: 掌握 review、branch strategy、semantic versioning[cite: 4]。
 
 ---
 

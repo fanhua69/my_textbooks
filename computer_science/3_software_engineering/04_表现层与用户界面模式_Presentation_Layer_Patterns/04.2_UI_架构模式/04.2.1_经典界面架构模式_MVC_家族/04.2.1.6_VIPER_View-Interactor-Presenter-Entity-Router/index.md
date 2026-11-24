@@ -1,6 +1,6 @@
-# 4.2.1.6 VIPER：View-Interactor-Presenter-Entity-Router
+# 04.2.1.6 VIPER：View-Interactor-Presenter-Entity-Router
 
-以职责极度拆分的五角色组织界面模块，把用例交互 (Interactor) 与路由 (Router) 独立出来，对应整洁架构在移动端的落地与样板代码代价。
+**介绍**: 以职责极度拆分的五角色组织界面模块，把用例交互 (Interactor) 与路由 (Router) 独立出来，对应整洁架构在移动端的落地与样板代码代价。
 
 ---
 

@@ -1,6 +1,6 @@
-# 6.1.2 shared_ptr 与 make  shared
+# 02 shared_ptr 与 make  shared
 
-理解引用计数与控制块，掌握 make_shared、allocate_shared 与自定义删除器。
+**介绍**: 理解引用计数与控制块，掌握 make_shared、allocate_shared 与自定义删除器。
 
 ---
 

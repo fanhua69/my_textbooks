@@ -1,6 +1,6 @@
-# 2.2.2 拷贝构造、拷贝赋值与析构
+# 02 拷贝构造、拷贝赋值与析构
 
-理解 copy constructor、copy assignment 和析构函数的职责[cite: 4]。
+**介绍**: 理解 copy constructor、copy assignment 和析构函数的职责[cite: 4]。
 
 ---
 

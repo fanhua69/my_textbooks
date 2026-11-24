@@ -1,6 +1,6 @@
-# 1.5.2 与 auto、引用和 const 的搭配
+# 02 与 auto、引用和 const 的搭配
 
-区分 auto、auto&、const auto& 与 auto&& 的拷贝与修改语义，避免不必要的复制。
+**介绍**: 区分 auto、auto&、const auto& 与 auto&& 的拷贝与修改语义，避免不必要的复制。
 
 ---
 

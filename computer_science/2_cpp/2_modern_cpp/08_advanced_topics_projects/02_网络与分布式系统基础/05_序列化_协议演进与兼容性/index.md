@@ -1,6 +1,6 @@
-# 8.2.5 序列化、协议演进与兼容性
+# 05 序列化、协议演进与兼容性
 
-理解 schema、wire format 和向前/向后兼容[cite: 4]。
+**介绍**: 理解 schema、wire format 和向前/向后兼容[cite: 4]。
 
 ---
 

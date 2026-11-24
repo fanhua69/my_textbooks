@@ -1,6 +1,6 @@
-# 3.3.1.2 Linux NUMA、macOS 统一内存（UMA）与 Windows 内存节点/工作集对比
+# 02 Linux NUMA、macOS 统一内存（UMA）与 Windows 内存节点/工作集对比
 
-对比多路服务器 NUMA、苹果统一内存架构与 Windows 内存节点及工作集调优机制。
+**介绍**: 对比多路服务器 NUMA、苹果统一内存架构与 Windows 内存节点及工作集调优机制。
 
 ---
 

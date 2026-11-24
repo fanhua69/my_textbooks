@@ -1,6 +1,6 @@
-# 6.6.2 scoped  allocator adaptor
+# 02 scoped  allocator adaptor
 
-掌握嵌套容器中分配器的传播规则，以及 scoped_allocator_adaptor 的使用。
+**介绍**: 掌握嵌套容器中分配器的传播规则，以及 scoped_allocator_adaptor 的使用。
 
 ---
 

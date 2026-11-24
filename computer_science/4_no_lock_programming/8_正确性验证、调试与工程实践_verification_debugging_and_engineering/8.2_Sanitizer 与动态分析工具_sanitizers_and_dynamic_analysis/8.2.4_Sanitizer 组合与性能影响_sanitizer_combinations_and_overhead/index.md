@@ -1,6 +1,6 @@
 # 8.2.4 Sanitizer 组合与性能影响  sanitizer combinations and overhead
 
-理解工具组合限制、运行开销和误报/漏报边界。
+**介绍**: 理解工具组合限制、运行开销和误报/漏报边界。
 
 ---
 

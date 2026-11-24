@@ -1,6 +1,6 @@
 # 3.5.3 C++20：atomic wait/notify 与新原子设施  cpp20 atomic wait notify
 
-介绍 wait、notify_one、notify_all、atomic_ref、atomic_flag 测试操作等。
+**介绍**: 介绍 wait、notify_one、notify_all、atomic_ref、atomic_flag 测试操作等。
 
 ---
 

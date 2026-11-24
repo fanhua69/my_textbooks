@@ -1,6 +1,6 @@
-# 1.3.4.1 Basecamp Shape Up 方法：定案、下注与周期构建
+# 01.3.4.1 Basecamp Shape Up 方法：定案、下注与周期构建
 
-学习 Shaping（界定范围粗细适中）、Betting Table（按项目下注承诺）与 6 周交付 + 2 周缓冲冷却期机制。
+**介绍**: 学习 Shaping（界定范围粗细适中）、Betting Table（按项目下注承诺）与 6 周交付 + 2 周缓冲冷却期机制。
 
 ---
 

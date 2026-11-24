@@ -1,6 +1,6 @@
-# 2.1.2 C++17 constexpr 扩展（局部变量、if/循环、constexpr lambda）与 static assert 无消息形式
+# 02 C++17 constexpr 扩展（局部变量、if/循环、constexpr lambda）与 static assert 无消息形式
 
-掌握 constexpr 函数中使用局部变量、if/switch、for/while 循环与 constexpr lambda，以及 static_assert(cond) 省略提示字符串的用法。
+**介绍**: 掌握 constexpr 函数中使用局部变量、if/switch、for/while 循环与 constexpr lambda，以及 static_assert(cond) 省略提示字符串的用法。
 
 ---
 

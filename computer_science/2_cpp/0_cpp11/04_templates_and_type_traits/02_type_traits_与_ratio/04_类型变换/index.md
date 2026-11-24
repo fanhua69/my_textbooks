@@ -1,6 +1,6 @@
-# 4.2.4 类型变换
+# 04 类型变换
 
-掌握 remove_reference、decay、conditional、common_type、underlying_type 与 result_of 等变换。
+**介绍**: 掌握 remove_reference、decay、conditional、common_type、underlying_type 与 result_of 等变换。
 
 ---
 

@@ -1,6 +1,6 @@
-# 4.2.1.3 MVVM (Model-View-ViewModel)
+# 04.2.1.3 MVVM (Model-View-ViewModel)
 
-以 ViewModel 暴露可绑定状态与命令，借助数据绑定同步视图，理解其与声明式 UI 的天然契合及绑定调试难题。
+**介绍**: 以 ViewModel 暴露可绑定状态与命令，借助数据绑定同步视图，理解其与声明式 UI 的天然契合及绑定调试难题。
 
 ---
 

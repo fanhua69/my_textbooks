@@ -1,6 +1,6 @@
-# 7.3.1.3 GraphQL：按需查询、Schema 设计与 N+1 问题
+# 07.4.1.3 GraphQL：按需查询、Schema 设计与 N+1 问题
 
-以强类型 Schema 让客户端声明所需字段，分析复杂度限制、DataLoader 与缓存难点。
+**介绍**: 以强类型 Schema 让客户端声明所需字段，分析复杂度限制、DataLoader 与缓存难点。
 
 ---
 

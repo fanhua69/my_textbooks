@@ -1,6 +1,6 @@
-# 7.1.5 API 设计、ABI 稳定性与版本策略
+# 05 API 设计、ABI 稳定性与版本策略
 
-理解 source compatibility、binary compatibility 和演进策略[cite: 4]。
+**介绍**: 理解 source compatibility、binary compatibility 和演进策略[cite: 4]。
 
 ---
 

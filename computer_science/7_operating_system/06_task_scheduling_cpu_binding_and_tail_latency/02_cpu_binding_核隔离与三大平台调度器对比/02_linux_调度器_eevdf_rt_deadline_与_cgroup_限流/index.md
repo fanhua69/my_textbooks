@@ -1,13 +1,11 @@
-# 6.2.2 Linux 调度器（EEVDF / CFS / RT / Deadline）与 cgroup cpu.max 限流
+# 02 Linux 调度器（EEVDF / CFS / RT / Deadline）与 cgroup cpu.max 限流
 
-重点剖析 cgroup cpu.max 周期性限流引发的突发性几十毫秒延迟毛刺及规避方案。
+**介绍**: 重点剖析 cgroup cpu.max 周期性限流引发的突发性几十毫秒延迟毛刺及规避方案。
 
-## 本节目录
+## 目录
 
-- [6.2.2.1 EEVDF / CFS 调度行为与 SCHED FIFO / SCHED DEADLINE 配置](01_eevdf_cfs_调度行为与实时调度配置/index.md)
-- [6.2.2.2 cgroup v2 cpu.max 限流尖峰与低延迟部署规范](02_cgroup_v2_cpu_max_限流尖峰与低延迟部署规范/index.md)
-
----
+- [01 EEVDF / CFS 调度行为与 SCHED FIFO / SCHED DEADLINE 配置](01_eevdf_cfs_调度行为与实时调度配置/index.md)
+- [02 cgroup v2 cpu.max 限流尖峰与低延迟部署规范](02_cgroup_v2_cpu_max_限流尖峰与低延迟部署规范/index.md)
 
 ## 导航
 

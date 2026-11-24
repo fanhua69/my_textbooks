@@ -1,14 +1,12 @@
-# 7.2 苹果平台安全机制：TCC / PPPC、Security Framework 与 Authorization Services
+# 02 苹果平台安全机制：TCC / PPPC、Security Framework 与 Authorization Services
 
-深入 macOS 终端状态与控制工程核心安全机制，理解权限判定链、签名信任与特权授权协作。
+**介绍**: 深入 macOS 终端状态与控制工程核心安全机制，理解权限判定链、签名信任与特权授权协作。
 
-## 本节目录
+## 目录
 
-- [7.2.1 TCC（透明、同意与控制）机制、权限服务与企业/MDM PPPC 策略](01_tcc_与_mdm_pppc_策略机制/index.md)
-- [7.2.2 Security Framework：Keychain、证书/信任评估与代码签名校验](02_security_framework_keychain_证书信任与代码签名校验/index.md)
-- [7.2.3 Authorization Services：授权权利（Rights）、授权数据库、特权执行与授权插件](03_authorization_services_特权授权与授权插件/index.md)
-
----
+- [01 TCC（透明、同意与控制）机制、权限服务与企业/MDM PPPC 策略](01_tcc_与_mdm_pppc_策略机制/index.md)
+- [02 Security Framework：Keychain、证书/信任评估与代码签名校验](02_security_framework_keychain_证书信任与代码签名校验/index.md)
+- [03 Authorization Services：授权权利（Rights）、授权数据库、特权执行与授权插件](03_authorization_services_特权授权与授权插件/index.md)
 
 ## 导航
 

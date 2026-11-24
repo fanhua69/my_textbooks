@@ -1,6 +1,6 @@
 # 3.2.7 std::atomic  ref atomic ref
 
-介绍 C++20 atomic_ref、对既有对象进行原子访问的条件与限制。
+**介绍**: 介绍 C++20 atomic_ref、对既有对象进行原子访问的条件与限制。
 
 ---
 

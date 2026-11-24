@@ -1,6 +1,6 @@
-# 6.3.3 lock-free、wait-free 与 obstruction-free
+# 03 lock-free、wait-free 与 obstruction-free
 
-区分进度保证，不把 lock-free 等同于更快[cite: 4]。
+**介绍**: 区分进度保证，不把 lock-free 等同于更快[cite: 4]。
 
 ---
 

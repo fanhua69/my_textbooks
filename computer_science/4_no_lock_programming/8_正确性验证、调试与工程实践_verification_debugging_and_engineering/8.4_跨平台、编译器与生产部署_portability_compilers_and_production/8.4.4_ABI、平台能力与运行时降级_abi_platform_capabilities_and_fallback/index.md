@@ -1,6 +1,6 @@
 # 8.4.4 ABI、平台能力与运行时降级  abi platform capabilities and fallback
 
-设计能力检测、可移植接口和锁式回退策略。
+**介绍**: 设计能力检测、可移植接口和锁式回退策略。
 
 ---
 

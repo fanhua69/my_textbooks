@@ -1,6 +1,6 @@
-# 8.2.3.1 内容路由器 (Content-Based Router)、消息过滤器 (Message Filter) 与接收者列表 (Recipient List)
+# 08.2.3.1 内容路由器 (Content-Based Router)、消息过滤器 (Message Filter) 与接收者列表 (Recipient List)
 
-依据消息内容、条件与静态/动态列表进行分发与过滤。
+**介绍**: 依据消息内容、条件与静态/动态列表进行分发与过滤。
 
 ---
 

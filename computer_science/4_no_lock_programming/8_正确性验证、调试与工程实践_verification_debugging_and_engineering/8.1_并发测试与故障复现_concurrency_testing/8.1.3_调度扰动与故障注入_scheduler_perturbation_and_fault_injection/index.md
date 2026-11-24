@@ -1,6 +1,6 @@
 # 8.1.3 调度扰动与故障注入  scheduler perturbation and fault injection
 
-通过 yield、延迟、暂停和随机扰动放大竞态窗口。
+**介绍**: 通过 yield、延迟、暂停和随机扰动放大竞态窗口。
 
 ---
 

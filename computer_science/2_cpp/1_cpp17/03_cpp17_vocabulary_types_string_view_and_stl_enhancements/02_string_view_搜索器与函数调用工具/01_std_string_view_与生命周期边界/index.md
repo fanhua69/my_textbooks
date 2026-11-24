@@ -1,6 +1,6 @@
-# 3.2.1 std::string view 切片/前缀后缀/子串与悬空指针生命周期陷阱
+# 01 std::string view 切片/前缀后缀/子串与悬空指针生命周期陷阱
 
-掌握非拥有字符序列视图、substr/remove_prefix/remove_suffix、无结尾 '\0' 保证及避免绑定临时字符串导致的悬空引用。
+**介绍**: 掌握非拥有字符序列视图、substr/remove_prefix/remove_suffix、无结尾 '\0' 保证及避免绑定临时字符串导致的悬空引用。
 
 ---
 

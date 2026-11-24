@@ -1,15 +1,13 @@
-# 8 常用命令行工具、内核性能剖析与低延迟实战
+# 08 常用命令行工具、内核性能剖析与低延迟实战
 
-系统掌握 Linux、macOS 与 Windows 常用运维与底层诊断命令、性能剖析工具链（perf / ftrace / cyclictest / Valgrind / VTune / gperf / dtrace / Instruments / ETW），并通过低延迟工程实验闭环验证。
+**介绍**: 系统掌握 Linux、macOS 与 Windows 常用运维与底层诊断命令、性能剖析工具链（perf / ftrace / cyclictest / Valgrind / VTune / gperf / dtrace / Instruments / ETW），并通过低延迟工程实验闭环验证。
 
-## 本节目录
+## 目录
 
-- [8.1 Linux 常用命令与内核/性能剖析工具链](01_linux_常用命令与内核_性能剖析工具链/index.md)
-- [8.2 macOS 常用命令与系统/性能诊断工具链](02_macos_常用命令与系统_性能诊断工具链/index.md)
-- [8.3 Windows 常用命令与系统/性能诊断工具链](03_windows_常用命令与系统_性能诊断工具链/index.md)
-- [8.4 低延迟与跨平台系统工程综合实战](04_低延迟与跨平台系统工程综合实战/index.md)
-
----
+- [01 Linux 常用命令与内核/性能剖析工具链](01_linux_常用命令与内核_性能剖析工具链/index.md)
+- [02 macOS 常用命令与系统/性能诊断工具链](02_macos_常用命令与系统_性能诊断工具链/index.md)
+- [03 Windows 常用命令与系统/性能诊断工具链](03_windows_常用命令与系统_性能诊断工具链/index.md)
+- [04 低延迟与跨平台系统工程综合实战](04_低延迟与跨平台系统工程综合实战/index.md)
 
 ## 导航
 

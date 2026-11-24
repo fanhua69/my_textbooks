@@ -1,13 +1,11 @@
-# 7.2.3 Authorization Services：授权权利（Rights）、授权数据库、特权执行与授权插件
+# 03 Authorization Services：授权权利（Rights）、授权数据库、特权执行与授权插件
 
-深入 AuthorizationCreate / AuthorizationCopyRights 工作流、系统授权策略与登录/提权授权插件边界。
+**介绍**: 深入 AuthorizationCreate / AuthorizationCopyRights 工作流、系统授权策略与登录/提权授权插件边界。
 
-## 本节目录
+## 目录
 
-- [7.2.3.1 AuthorizationCreate / AuthorizationCopyRights 与授权数据库规则](01_authorization_api_与授权数据库规则/index.md)
-- [7.2.3.2 特权守护进程协作与 Authorization Plug-in 边界约束](02_特权守护进程协作与_authorization_plug_in_边界约束/index.md)
-
----
+- [01 AuthorizationCreate / AuthorizationCopyRights 与授权数据库规则](01_authorization_api_与授权数据库规则/index.md)
+- [02 特权守护进程协作与 Authorization Plug-in 边界约束](02_特权守护进程协作与_authorization_plug_in_边界约束/index.md)
 
 ## 导航
 

@@ -1,6 +1,6 @@
-# 2.3.3 new T[n]{} 默认值初始化、过对齐动态内存分配（std::align_val_t）与 std::hardware  destructive interference size
+# 03 new T[n]{} 默认值初始化、过对齐动态内存分配（std::align_val_t）与 std::hardware  destructive interference size
 
-掌握 new T[n]{} 对数组元素执行值初始化、operator new/delete 重载对齐参数（std::align_val_t）及硬件缓存行干扰尺寸查询常量。
+**介绍**: 掌握 new T[n]{} 对数组元素执行值初始化、operator new/delete 重载对齐参数（std::align_val_t）及硬件缓存行干扰尺寸查询常量。
 
 ---
 

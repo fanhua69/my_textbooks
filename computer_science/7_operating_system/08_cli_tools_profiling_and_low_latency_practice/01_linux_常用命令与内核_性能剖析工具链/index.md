@@ -1,13 +1,11 @@
-# 8.1 Linux 常用命令与内核/性能剖析工具链
+# 01 Linux 常用命令与内核/性能剖析工具链
 
-熟练使用 Linux 命令行与内核观测工具定位调度抖动、缓存未命中、锁争用与系统调用瓶颈。
+**介绍**: 熟练使用 Linux 命令行与内核观测工具定位调度抖动、缓存未命中、锁争用与系统调用瓶颈。
 
-## 本节目录
+## 目录
 
-- [8.1.1 系统与资源日常命令：ps、top/htop、systemctl、journalctl、numactl、taskset、chrt、vmstat、iostat、ss、lsof](01_linux_日常运维与调度_内存_网络命令/index.md)
-- [8.1.2 内核追踪与性能剖析：perf、ftrace、strace、cyclictest、Valgrind、VTune 与 gperf](02_linux_perf_ftrace_cyclictest_valgrind_vtune_gperf/index.md)
-
----
+- [01 系统与资源日常命令：ps、top/htop、systemctl、journalctl、numactl、taskset、chrt、vmstat、iostat、ss、lsof](01_linux_日常运维与调度_内存_网络命令/index.md)
+- [02 内核追踪与性能剖析：perf、ftrace、strace、cyclictest、Valgrind、VTune 与 gperf](02_linux_perf_ftrace_cyclictest_valgrind_vtune_gperf/index.md)
 
 ## 导航
 

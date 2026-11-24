@@ -1,6 +1,6 @@
-# 7.2.3 Mock、Stub、Fake 与 Test Double
+# 03 Mock、Stub、Fake 与 Test Double
 
-区分测试替身及其使用场景[cite: 4]。
+**介绍**: 区分测试替身及其使用场景[cite: 4]。
 
 ---
 

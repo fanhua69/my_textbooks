@@ -1,6 +1,6 @@
-# 4.4.2.1 单向数据流与 Flux / Redux 架构
+# 04.4.2.1 单向数据流与 Flux / Redux 架构
 
-以 Action → Dispatcher/Reducer → Store → View 的单向闭环建立可预测状态，并支持时间旅行调试。
+**介绍**: 以 Action → Dispatcher/Reducer → Store → View 的单向闭环建立可预测状态，并支持时间旅行调试。
 
 ---
 

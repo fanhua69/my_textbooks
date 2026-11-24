@@ -1,6 +1,6 @@
-# 2.2.4 Rule of Three、Five 与 Zero
+# 04 Rule of Three、Five 与 Zero
 
-掌握特殊成员函数管理策略及 Rule of Zero 的优先级[cite: 4]。
+**介绍**: 掌握特殊成员函数管理策略及 Rule of Zero 的优先级[cite: 4]。
 
 ---
 

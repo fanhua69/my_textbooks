@@ -1,6 +1,6 @@
-# 6.1.3 weak ptr 与循环引用
+# 03 weak ptr 与循环引用
 
-使用 weak_ptr 打破循环引用，理解 lock 与 expired 的用法。
+**介绍**: 使用 weak_ptr 打破循环引用，理解 lock 与 expired 的用法。
 
 ---
 

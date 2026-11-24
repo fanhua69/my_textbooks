@@ -1,6 +1,6 @@
 # 16.1.3.1 Monorepo vs Multirepo 架构权衡与构建加速
 
-对比大单仓原子变更与多仓库独立发布的利弊，引入 Bazel / Nx / Turborepo 增量构建缓存加速。
+**介绍**: 对比大单仓原子变更与多仓库独立发布的利弊，引入 Bazel / Nx / Turborepo 增量构建缓存加速。
 
 ---
 

@@ -1,6 +1,6 @@
 # 5.4.6 MPMC 的扩展性与热点分析  mpmc scalability and contention
 
-分析 CAS 重试、缓存行争用、NUMA 和线程数扩展。
+**介绍**: 分析 CAS 重试、缓存行争用、NUMA 和线程数扩展。
 
 ---
 

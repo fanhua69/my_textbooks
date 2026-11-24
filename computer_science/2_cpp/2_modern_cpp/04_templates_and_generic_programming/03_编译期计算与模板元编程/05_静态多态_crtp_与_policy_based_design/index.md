@@ -1,6 +1,6 @@
-# 4.3.5 静态多态：CRTP 与 policy-based design
+# 05 静态多态：CRTP 与 policy-based design
 
-理解静态分派、零运行时开销抽象及其复杂性[cite: 4]。
+**介绍**: 理解静态分派、零运行时开销抽象及其复杂性[cite: 4]。
 
 ---
 

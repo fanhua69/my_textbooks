@@ -1,6 +1,6 @@
-# 6.5.5 Unicode 字符串类型与 codecvt
+# 05 Unicode 字符串类型与 codecvt
 
-掌握 u16string、u32string、wstring_convert 与 codecvt 刻面，并了解其后续被废弃的情况。
+**介绍**: 掌握 u16string、u32string、wstring_convert 与 codecvt 刻面，并了解其后续被废弃的情况。
 
 ---
 

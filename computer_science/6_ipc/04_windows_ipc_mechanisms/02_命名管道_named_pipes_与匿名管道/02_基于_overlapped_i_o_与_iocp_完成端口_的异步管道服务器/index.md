@@ -1,6 +1,6 @@
-# 4.2.2 基于 Overlapped I/O 与 IOCP（完成端口）的异步管道服务器
+# 02 基于 Overlapped I/O 与 IOCP（完成端口）的异步管道服务器
 
-结合 I/O Completion Ports 实现高吞吐、低线程开销的异步管道通信。
+**介绍**: 结合 I/O Completion Ports 实现高吞吐、低线程开销的异步管道通信。
 
 ---
 

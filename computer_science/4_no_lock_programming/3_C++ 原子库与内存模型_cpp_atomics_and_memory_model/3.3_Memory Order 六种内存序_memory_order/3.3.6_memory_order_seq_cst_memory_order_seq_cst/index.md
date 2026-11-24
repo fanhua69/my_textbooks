@@ -1,6 +1,6 @@
 # 3.3.6 memory  order seq cst memory order seq cst
 
-理解 sequential consistency 的全局顺序保证及其成本。
+**介绍**: 理解 sequential consistency 的全局顺序保证及其成本。
 
 ---
 

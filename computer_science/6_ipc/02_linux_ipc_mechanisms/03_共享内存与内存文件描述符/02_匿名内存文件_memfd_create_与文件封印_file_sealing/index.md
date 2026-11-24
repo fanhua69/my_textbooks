@@ -1,6 +1,6 @@
-# 2.3.2 匿名内存文件 memfd create 与文件封印（File Sealing）
+# 02 匿名内存文件 memfd create 与文件封印（File Sealing）
 
-使用 memfd 避免命名冲突，并通过 F_SEAL_SHRINK / F_SEAL_WRITE 防止对端恶意截断引发 SIGBUS。
+**介绍**: 使用 memfd 避免命名冲突，并通过 F_SEAL_SHRINK / F_SEAL_WRITE 防止对端恶意截断引发 SIGBUS。
 
 ---
 

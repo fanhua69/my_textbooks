@@ -1,6 +1,6 @@
 # 7.1.1 Throughput、Latency 与 Operations per Second  throughput latency and ops
 
-明确吞吐量、单次延迟、单位时间操作数的定义。
+**介绍**: 明确吞吐量、单次延迟、单位时间操作数的定义。
 
 ---
 

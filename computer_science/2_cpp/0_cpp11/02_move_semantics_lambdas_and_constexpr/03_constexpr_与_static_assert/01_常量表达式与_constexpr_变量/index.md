@@ -1,6 +1,6 @@
-# 2.3.1 常量表达式与 constexpr 变量
+# 01 常量表达式与 constexpr 变量
 
-理解常量表达式的定义，区分 const 与 constexpr，掌握 constexpr 变量的使用。
+**介绍**: 理解常量表达式的定义，区分 const 与 constexpr，掌握 constexpr 变量的使用。
 
 ---
 

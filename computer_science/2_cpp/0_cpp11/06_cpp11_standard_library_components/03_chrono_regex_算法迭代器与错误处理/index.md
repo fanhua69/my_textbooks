@@ -1,18 +1,16 @@
-# 6.3 chrono、regex、算法迭代器与错误处理
+# 03 chrono、regex、算法迭代器与错误处理
 
-掌握时间库、正则库、容器与算法的 C++11 增强，以及统一的错误处理设施。
+**介绍**: 掌握时间库、正则库、容器与算法的 C++11 增强，以及统一的错误处理设施。
 
-## 本节目录
+## 目录
 
-- [6.3.1 chrono 时间库](01_chrono_时间库/index.md)
-- [6.3.2 regex 正则表达式库](02_regex_正则表达式库/index.md)
-- [6.3.3 容器接口的 C++11 变化](03_容器接口的_cpp11_变化/index.md)
-- [6.3.4 迭代器与 begin/end 自由函数](04_迭代器与_begin_end_自由函数/index.md)
-- [6.3.5 新增与增强的算法](05_新增与增强的算法/index.md)
-- [6.3.6 system error 与错误码体系](06_system_error_与错误码体系/index.md)
-- [6.3.7 exception ptr 与嵌套异常](07_exception_ptr_与嵌套异常/index.md)
-
----
+- [01 chrono 时间库](01_chrono_时间库/index.md)
+- [02 regex 正则表达式库](02_regex_正则表达式库/index.md)
+- [03 容器接口的 C++11 变化](03_容器接口的_cpp11_变化/index.md)
+- [04 迭代器与 begin/end 自由函数](04_迭代器与_begin_end_自由函数/index.md)
+- [05 新增与增强的算法](05_新增与增强的算法/index.md)
+- [06 system error 与错误码体系](06_system_error_与错误码体系/index.md)
+- [07 exception ptr 与嵌套异常](07_exception_ptr_与嵌套异常/index.md)
 
 ## 导航
 

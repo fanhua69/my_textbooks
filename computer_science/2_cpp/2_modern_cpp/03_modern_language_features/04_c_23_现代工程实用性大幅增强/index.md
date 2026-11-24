@@ -1,15 +1,13 @@
-# 3.4 C++23：现代工程实用性大幅增强
+# 04 C++23：现代工程实用性大幅增强
 
-系统掌握 C++23 核心语言与库特性，在保持低开销的同时提升表达力与安全性[cite: 4]。
+**介绍**: 系统掌握 C++23 核心语言与库特性，在保持低开销的同时提升表达力与安全性[cite: 4]。
 
-## 本节目录
+## 目录
 
-- [3.4.1 deducing this（显式对象参数）与递归 lambda 简化](01_deducing_this_与递归_lambda_简化/index.md)
-- [3.4.2 if consteval、constexpr 扩展与多维下标运算符](02_if_consteval_constexpr_扩展与多维下标/index.md)
-- [3.4.3 std::expected、std::mdspan 与 std::print](03_std_expected_std_mdspan_与_std_print/index.md)
-- [3.4.4 C++23 Ranges 适配器、views 扩展与 flat  map / flat set](04_c_23_ranges_扩展与_flat_map_flat_set/index.md)
-
----
+- [01 deducing this（显式对象参数）与递归 lambda 简化](01_deducing_this_与递归_lambda_简化/index.md)
+- [02 if consteval、constexpr 扩展与多维下标运算符](02_if_consteval_constexpr_扩展与多维下标/index.md)
+- [03 std::expected、std::mdspan 与 std::print](03_std_expected_std_mdspan_与_std_print/index.md)
+- [04 C++23 Ranges 适配器、views 扩展与 flat  map / flat set](04_c_23_ranges_扩展与_flat_map_flat_set/index.md)
 
 ## 导航
 

@@ -1,6 +1,6 @@
-# 8.1.4 对齐（alignof/alignas）、对象表示与字节序
+# 04 对齐（alignof/alignas）、对象表示与字节序
 
-掌握 alignment、object representation、endianness[cite: 4, 12]。
+**介绍**: 掌握 alignment、object representation、endianness[cite: 4, 12]。
 
 ---
 

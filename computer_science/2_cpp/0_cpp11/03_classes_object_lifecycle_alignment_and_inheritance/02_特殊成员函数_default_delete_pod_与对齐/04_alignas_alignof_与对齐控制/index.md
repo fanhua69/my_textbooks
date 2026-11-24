@@ -1,6 +1,6 @@
-# 3.2.4 alignas、alignof 与对齐控制
+# 04 alignas、alignof 与对齐控制
 
-掌握对齐说明符、alignof 运算符与 max_align_t，理解对齐与填充对对象布局的影响。
+**介绍**: 掌握对齐说明符、alignof 运算符与 max_align_t，理解对齐与填充对对象布局的影响。
 
 ---
 

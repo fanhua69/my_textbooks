@@ -1,6 +1,6 @@
-# 6.3.6 system error 与错误码体系
+# 06 system error 与错误码体系
 
-理解 error_code、error_condition、error_category 与 errc 的关系，以及标准库如何使用它们。
+**介绍**: 理解 error_code、error_condition、error_category 与 errc 的关系，以及标准库如何使用它们。
 
 ---
 

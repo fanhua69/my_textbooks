@@ -1,6 +1,6 @@
-# 6.1.4 shared mutex、latch、barrier 与读写锁
+# 04 shared mutex、latch、barrier 与读写锁
 
-理解共享/独占锁语义、一次性/循环同步屏障、适用场景和公平性问题[cite: 4]。
+**介绍**: 理解共享/独占锁语义、一次性/循环同步屏障、适用场景和公平性问题[cite: 4]。
 
 ---
 

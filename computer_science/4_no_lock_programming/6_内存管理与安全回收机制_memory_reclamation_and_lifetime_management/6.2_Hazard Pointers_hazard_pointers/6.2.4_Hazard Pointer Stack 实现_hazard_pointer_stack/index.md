@@ -1,6 +1,6 @@
 # 6.2.4 Hazard Pointer Stack 实现  hazard pointer stack
 
-为 Treiber Stack 加入安全节点保护。
+**介绍**: 为 Treiber Stack 加入安全节点保护。
 
 ---
 

@@ -1,6 +1,6 @@
 # 2.1.1 原子性、可见性与有序性  atomicity visibility and ordering
 
-区分 atomicity、visibility、ordering 三个概念。
+**介绍**: 区分 atomicity、visibility、ordering 三个概念。
 
 ---
 

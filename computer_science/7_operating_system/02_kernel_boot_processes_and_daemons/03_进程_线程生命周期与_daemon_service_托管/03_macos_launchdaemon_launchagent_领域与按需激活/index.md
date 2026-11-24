@@ -1,13 +1,11 @@
-# 2.3.3 macOS LaunchDaemon、LaunchAgent、领域（Domain）与按需激活（On-Demand）
+# 03 macOS LaunchDaemon、LaunchAgent、领域（Domain）与按需激活（On-Demand）
 
-深入系统域/GUI 域/用户域、MachServices/Sockets/Paths 触发器、plist 权限与精简环境变量陷阱。
+**介绍**: 深入系统域/GUI 域/用户域、MachServices/Sockets/Paths 触发器、plist 权限与精简环境变量陷阱。
 
-## 本节目录
+## 目录
 
-- [2.3.3.1 LaunchDaemon（系统域）与 LaunchAgent（用户/GUI 域）边界](01_launchdaemon_系统域_与_launchagent_用户_gui_域_边界/index.md)
-- [2.3.3.2 On-Demand 触发器、KeepAlive、plist 权限与环境变量陷阱](02_on_demand_触发器_keepalive_plist_权限与环境变量陷阱/index.md)
-
----
+- [01 LaunchDaemon（系统域）与 LaunchAgent（用户/GUI 域）边界](01_launchdaemon_系统域_与_launchagent_用户_gui_域_边界/index.md)
+- [02 On-Demand 触发器、KeepAlive、plist 权限与环境变量陷阱](02_on_demand_触发器_keepalive_plist_权限与环境变量陷阱/index.md)
 
 ## 导航
 

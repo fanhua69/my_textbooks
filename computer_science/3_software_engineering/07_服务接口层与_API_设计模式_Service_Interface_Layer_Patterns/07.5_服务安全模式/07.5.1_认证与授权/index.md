@@ -1,13 +1,11 @@
-# 7.4.1 认证与授权
+# 07.5.1 认证与授权
 
-验证「你是谁」并决定「你能做什么」。
+**介绍**: 验证「你是谁」并决定「你能做什么」。
 
-## 本节目录
+## 目录
 
-- [7.4.1.1 认证 (Authentication) 与授权 (Authorization) 基础](07.4.1.1_认证_Authentication_与授权_Authorization_基础/index.md)
-- [7.4.1.2 访问控制模型：RBAC 与 ABAC](07.4.1.2_访问控制模型_RBAC_与_ABAC/index.md)
-
----
+- [07.5.1.1 认证 (Authentication) 与授权 (Authorization) 基础](07.5.1.1_认证_Authentication_与授权_Authorization_基础/index.md)
+- [07.5.1.2 访问控制模型：RBAC 与 ABAC](07.5.1.2_访问控制模型_RBAC_与_ABAC/index.md)
 
 ## 导航
 

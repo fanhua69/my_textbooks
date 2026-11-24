@@ -1,13 +1,11 @@
-# 2.3.4 Windows Service、SCM 状态机、Session 0 隔离与服务恢复策略
+# 04 Windows Service、SCM 状态机、Session 0 隔离与服务恢复策略
 
-掌握服务控制处理器、启动超时/依赖顺序、Session 0 隔离限制及失败重启策略。
+**介绍**: 掌握服务控制处理器、启动超时/依赖顺序、Session 0 隔离限制及失败重启策略。
 
-## 本节目录
+## 目录
 
-- [2.3.4.1 SCM 服务生命周期状态机与 ServiceMain / HandlerEx](01_scm_服务生命周期状态机与_servicemain_handlerex/index.md)
-- [2.3.4.2 Session 0 隔离限制与服务崩溃自动恢复配置](02_session_0_隔离限制与服务崩溃自动恢复配置/index.md)
-
----
+- [01 SCM 服务生命周期状态机与 ServiceMain / HandlerEx](01_scm_服务生命周期状态机与_servicemain_handlerex/index.md)
+- [02 Session 0 隔离限制与服务崩溃自动恢复配置](02_session_0_隔离限制与服务崩溃自动恢复配置/index.md)
 
 ## 导航
 

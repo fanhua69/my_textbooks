@@ -1,6 +1,6 @@
-# 2.3.1 RAII 的思想与适用范围
+# 01 RAII 的思想与适用范围
 
-理解 Resource Acquisition Is Initialization 及其对异常安全的价值[cite: 4]。
+**介绍**: 理解 Resource Acquisition Is Initialization 及其对异常安全的价值[cite: 4]。
 
 ---
 

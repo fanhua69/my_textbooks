@@ -1,6 +1,6 @@
 # 15.1.2.2 PASTA 风险导向威胁建模与攻击树
 
-运用 Process for Attack Simulation and Threat Analysis (PASTA) 结合业务影响构建攻击树分析漏洞利用链路。
+**介绍**: 运用 Process for Attack Simulation and Threat Analysis (PASTA) 结合业务影响构建攻击树分析漏洞利用链路。
 
 ---
 

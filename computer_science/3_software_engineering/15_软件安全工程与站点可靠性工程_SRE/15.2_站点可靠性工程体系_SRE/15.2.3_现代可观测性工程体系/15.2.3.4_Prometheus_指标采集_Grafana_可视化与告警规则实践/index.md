@@ -1,6 +1,6 @@
 # 15.2.3.4 Prometheus 指标采集、Grafana 可视化与告警规则实践
 
-掌握 Prometheus 拉取模型、指标类型与 PromQL，使用 Grafana 构建看板，并编写基于 SLO 的告警规则 (Alerting)。
+**介绍**: 掌握 Prometheus 拉取模型、指标类型与 PromQL，使用 Grafana 构建看板，并编写基于 SLO 的告警规则 (Alerting)。
 
 ---
 

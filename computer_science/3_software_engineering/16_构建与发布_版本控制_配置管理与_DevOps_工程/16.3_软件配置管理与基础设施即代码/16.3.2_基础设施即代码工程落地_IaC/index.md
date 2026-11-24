@@ -1,14 +1,12 @@
 # 16.3.2 基础设施即代码 (IaC) 工程落地
 
-使用代码定义、版本化、测试和调配完整的云端基础设施。
+**介绍**: 使用代码定义、版本化、测试和调配完整的云端基础设施。
 
-## 本节目录
+## 目录
 
 - [16.3.2.1 声明式 vs 指令式 IaC 哲学](16.3.2.1_声明式vs指令式IaC哲学/index.md)
 - [16.3.2.2 Terraform / Pulumi 状态管理与漂移检测](16.3.2.2_状态管理与漂移检测_Terraform_Pulumi/index.md)
 - [16.3.2.3 不可变基础设施理念 (Immutable Infrastructure)](16.3.2.3_不可变基础设施理念_Immutable_Infrastructure/index.md)
-
----
 
 ## 导航
 

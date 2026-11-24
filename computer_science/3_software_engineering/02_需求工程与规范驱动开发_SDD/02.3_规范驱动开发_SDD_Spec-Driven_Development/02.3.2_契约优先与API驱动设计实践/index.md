@@ -1,14 +1,12 @@
-# 2.3.2 契约优先与 API 驱动设计实践
+# 02.3.2 契约优先与 API 驱动设计实践
 
-掌握主流接口契约规范的编写与全自动工程化链条构建。
+**介绍**: 掌握主流接口契约规范的编写与全自动工程化链条构建。
 
-## 本节目录
+## 目录
 
-- [2.3.2.1 OpenAPI / Swagger 规范设计与治理](02.3.2.1_规范设计与治理_OpenAPI_Swagger/index.md)
-- [2.3.2.2 AsyncAPI 规范：事件驱动消息契约定义](02.3.2.2_规范_事件驱动消息契约定义_AsyncAPI/index.md)
-- [2.3.2.3 Protocol Buffers / gRPC 二进制契约与兼容演进](02.3.2.3_二进制契约与兼容演进_Protocol_Buffers_gRPC/index.md)
-
----
+- [02.3.2.1 OpenAPI / Swagger 规范设计与治理](02.3.2.1_规范设计与治理_OpenAPI_Swagger/index.md)
+- [02.3.2.2 AsyncAPI 规范：事件驱动消息契约定义](02.3.2.2_规范_事件驱动消息契约定义_AsyncAPI/index.md)
+- [02.3.2.3 Protocol Buffers / gRPC 二进制契约与兼容演进](02.3.2.3_二进制契约与兼容演进_Protocol_Buffers_gRPC/index.md)
 
 ## 导航
 

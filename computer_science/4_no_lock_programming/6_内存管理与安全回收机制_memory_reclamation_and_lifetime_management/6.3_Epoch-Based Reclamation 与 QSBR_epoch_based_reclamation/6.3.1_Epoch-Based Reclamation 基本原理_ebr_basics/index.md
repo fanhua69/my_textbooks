@@ -1,6 +1,6 @@
 # 6.3.1 Epoch-Based Reclamation 基本原理  ebr basics
 
-理解全局 epoch、线程本地 epoch 和 retired 节点。
+**介绍**: 理解全局 epoch、线程本地 epoch 和 retired 节点。
 
 ---
 

@@ -1,6 +1,6 @@
-# 6.4.2 false sharing 与数据布局
+# 02 false sharing 与数据布局
 
-识别伪共享并理解 padding 和对齐策略[cite: 4]。
+**介绍**: 识别伪共享并理解 padding 和对齐策略[cite: 4]。
 
 ---
 

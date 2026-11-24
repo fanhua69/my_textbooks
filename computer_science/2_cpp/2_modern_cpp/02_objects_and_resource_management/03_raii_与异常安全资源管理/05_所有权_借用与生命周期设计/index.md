@@ -1,6 +1,6 @@
-# 2.3.5 所有权、借用与生命周期设计
+# 05 所有权、借用与生命周期设计
 
-区分 owning/non-owning、observer 与 lifetime contract[cite: 4]。
+**介绍**: 区分 owning/non-owning、observer 与 lifetime contract[cite: 4]。
 
 ---
 

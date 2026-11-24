@@ -1,6 +1,6 @@
-# 6.6.3 std::align、addressof 与未初始化内存算法
+# 03 std::align、addressof 与未初始化内存算法
 
-掌握 std::align、std::addressof，以及 uninitialized_copy_n 等工具。
+**介绍**: 掌握 std::align、std::addressof，以及 uninitialized_copy_n 等工具。
 
 ---
 

@@ -1,6 +1,6 @@
-# 3.3.1 macOS 共享内存（shm_open / mach_vm_remap）与 xpc  shmem
+# 01 macOS 共享内存（shm_open / mach_vm_remap）与 xpc  shmem
 
-解决沙盒环境下 POSIX 共享内存命名受限问题，结合 XPC 传递共享内存区域实现高速数据面。
+**介绍**: 解决沙盒环境下 POSIX 共享内存命名受限问题，结合 XPC 传递共享内存区域实现高速数据面。
 
 ---
 

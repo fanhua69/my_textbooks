@@ -1,6 +1,6 @@
-# 4.2.1 CreateNamedPipe、消息模式（PIPE TYPE MESSAGE）与事务读取
+# 01 CreateNamedPipe、消息模式（PIPE TYPE MESSAGE）与事务读取
 
-利用原生消息边界、多实例并发连接及客户端模拟（ImpersonateNamedPipeClient）构建服务。
+**介绍**: 利用原生消息边界、多实例并发连接及客户端模拟（ImpersonateNamedPipeClient）构建服务。
 
 ---
 

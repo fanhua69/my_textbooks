@@ -1,6 +1,6 @@
-# 4.1.2 directory iterator、recursive directory iterator 与 directory entry 缓存
+# 02 directory iterator、recursive directory iterator 与 directory entry 缓存
 
-掌握单层与递归目录遍历、跳过目录/跟随符号链接选项及 directory_entry 缓存状态减少重复系统调用。
+**介绍**: 掌握单层与递归目录遍历、跳过目录/跟随符号链接选项及 directory_entry 缓存状态减少重复系统调用。
 
 ---
 

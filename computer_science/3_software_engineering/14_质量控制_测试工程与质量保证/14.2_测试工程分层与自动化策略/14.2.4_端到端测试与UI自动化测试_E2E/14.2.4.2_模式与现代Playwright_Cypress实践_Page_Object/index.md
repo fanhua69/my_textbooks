@@ -1,6 +1,6 @@
 # 14.2.4.2 Page Object 模式与现代 Playwright / Cypress 实践
 
-将页面元素定位与业务操作封装为 Page Object 模型，屏蔽 UI 频繁变动对测试用例主体的侵蚀。
+**介绍**: 将页面元素定位与业务操作封装为 Page Object 模型，屏蔽 UI 频繁变动对测试用例主体的侵蚀。
 
 ---
 

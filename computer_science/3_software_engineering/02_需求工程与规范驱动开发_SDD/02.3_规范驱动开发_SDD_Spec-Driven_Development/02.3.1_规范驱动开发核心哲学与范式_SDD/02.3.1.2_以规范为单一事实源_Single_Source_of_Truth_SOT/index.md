@@ -1,6 +1,6 @@
-# 2.3.1.2 以规范为单一事实源 (Single Source of Truth, SOT)
+# 02.3.1.2 以规范为单一事实源 (Single Source of Truth, SOT)
 
-将规范纳入版本管理，使其自动生成代码脚手架、Mock 桩、文档、SDK 与测试套件。
+**介绍**: 将规范纳入版本管理，使其自动生成代码脚手架、Mock 桩、文档、SDK 与测试套件。
 
 ---
 

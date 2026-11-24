@@ -1,6 +1,6 @@
 # 1.2.7 扩展拓扑：N-to-1、1-to-N 与 N-to-M  extended producer consumer topologies
 
-讨论多队列汇聚、广播、扇出、分片队列及拓扑组合。
+**介绍**: 讨论多队列汇聚、广播、扇出、分片队列及拓扑组合。
 
 ---
 

@@ -1,6 +1,6 @@
 # 4.4.2 发布后不再修改  publish then immutability
 
-使用 release/acquire 发布完整构造的对象。
+**介绍**: 使用 release/acquire 发布完整构造的对象。
 
 ---
 

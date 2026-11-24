@@ -1,17 +1,15 @@
-# 6.5 字符串、数值与整数类型库
+# 05 字符串、数值与整数类型库
 
-掌握 C++11 新增的定长整数、数值特性、字符串转换与 Unicode 支持。
+**介绍**: 掌握 C++11 新增的定长整数、数值特性、字符串转换与 Unicode 支持。
 
-## 本节目录
+## 目录
 
-- [6.5.1 定长整数类型：cstdint 与 cinttypes](01_定长整数类型_cstdint_与_cinttypes/index.md)
-- [6.5.2 numeric limits 与数值特性](02_numeric_limits_与数值特性/index.md)
-- [6.5.3 C99 数学函数与浮点环境](03_c99_数学函数与浮点环境/index.md)
-- [6.5.4 字符串与数值转换](04_字符串与数值转换/index.md)
-- [6.5.5 Unicode 字符串类型与 codecvt](05_unicode_字符串类型与_codecvt/index.md)
-- [6.5.6 时间与货币的格式化 I/O](06_时间与货币的格式化_i_o/index.md)
-
----
+- [01 定长整数类型：cstdint 与 cinttypes](01_定长整数类型_cstdint_与_cinttypes/index.md)
+- [02 numeric limits 与数值特性](02_numeric_limits_与数值特性/index.md)
+- [03 C99 数学函数与浮点环境](03_c99_数学函数与浮点环境/index.md)
+- [04 字符串与数值转换](04_字符串与数值转换/index.md)
+- [05 Unicode 字符串类型与 codecvt](05_unicode_字符串类型与_codecvt/index.md)
+- [06 时间与货币的格式化 I/O](06_时间与货币的格式化_i_o/index.md)
 
 ## 导航
 

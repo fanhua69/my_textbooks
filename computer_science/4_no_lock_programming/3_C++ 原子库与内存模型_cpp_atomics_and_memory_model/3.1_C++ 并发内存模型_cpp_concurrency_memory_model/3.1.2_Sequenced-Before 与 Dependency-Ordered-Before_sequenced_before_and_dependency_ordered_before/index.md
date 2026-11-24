@@ -1,6 +1,6 @@
 # 3.1.2 Sequenced-Before 与 Dependency-Ordered-Before  sequenced before and dependency ordered before
 
-掌握线程内求值顺序及依赖关系术语。
+**介绍**: 掌握线程内求值顺序及依赖关系术语。
 
 ---
 

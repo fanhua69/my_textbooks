@@ -1,6 +1,6 @@
-# 7.3.2.1 基于 Audit Token 与 SecCode/Signing Requirement 的对端认证
+# 01 基于 Audit Token 与 SecCode/Signing Requirement 的对端认证
 
-在连接建立及敏感接口调用处校验 Audit Token 对应的代码签名属性，拒绝非法调用方。
+**介绍**: 在连接建立及敏感接口调用处校验 Audit Token 对应的代码签名属性，拒绝非法调用方。
 
 ---
 

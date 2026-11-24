@@ -1,6 +1,6 @@
 # 14.2.2.3 单元测试 FIRST 原则实践
 
-贯彻 Fast（毫秒级执行）、Independent（无先后依赖）、Repeatable（跨环境可复现）、Self-Validating（无人工核对）与 Timely（编写及时）。
+**介绍**: 贯彻 Fast（毫秒级执行）、Independent（无先后依赖）、Repeatable（跨环境可复现）、Self-Validating（无人工核对）与 Timely（编写及时）。
 
 ---
 

@@ -1,6 +1,6 @@
-# 4.1.5 extern template 与显式实例化
+# 05 extern template 与显式实例化
 
-使用 extern template 抑制隐式实例化，缩短编译时间并减少目标文件体积。
+**介绍**: 使用 extern template 抑制隐式实例化，缩短编译时间并减少目标文件体积。
 
 ---
 

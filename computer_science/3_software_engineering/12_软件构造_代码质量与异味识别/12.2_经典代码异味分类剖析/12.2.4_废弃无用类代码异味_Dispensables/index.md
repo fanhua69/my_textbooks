@@ -1,16 +1,14 @@
 # 12.2.4 废弃无用类代码异味 (Dispensables)
 
-识别系统中应该被清理的无价值冗余残留物。
+**介绍**: 识别系统中应该被清理的无价值冗余残留物。
 
-## 本节目录
+## 目录
 
 - [12.2.4.1 重复代码 (Duplicated Code)](12.2.4.1_重复代码_Duplicated_Code/index.md)
 - [12.2.4.2 冗赘类 (Lazy Class / Freeloader)](12.2.4.2_冗赘类_Lazy_Class_Freeloader/index.md)
 - [12.2.4.3 纯数据类 (Data Class)](12.2.4.3_纯数据类_Data_Class/index.md)
 - [12.2.4.4 死代码 (Dead Code)](12.2.4.4_死代码_Dead_Code/index.md)
 - [12.2.4.5 投机性泛化 (Speculative Generality)](12.2.4.5_投机性泛化_Speculative_Generality/index.md)
-
----
 
 ## 导航
 

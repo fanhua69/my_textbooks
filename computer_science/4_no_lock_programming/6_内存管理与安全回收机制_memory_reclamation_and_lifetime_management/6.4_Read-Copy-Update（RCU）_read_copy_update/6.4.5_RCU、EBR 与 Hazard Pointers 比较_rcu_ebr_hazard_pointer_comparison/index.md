@@ -1,6 +1,6 @@
 # 6.4.5 RCU、EBR 与 Hazard Pointers 比较  rcu ebr hazard pointer comparison
 
-从读侧成本、写侧成本、线程停顿和内存占用比较。
+**介绍**: 从读侧成本、写侧成本、线程停顿和内存占用比较。
 
 ---
 

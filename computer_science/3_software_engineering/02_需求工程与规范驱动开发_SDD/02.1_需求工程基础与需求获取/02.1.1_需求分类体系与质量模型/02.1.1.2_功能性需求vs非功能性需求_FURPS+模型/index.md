@@ -1,6 +1,6 @@
-# 2.1.1.2 功能性需求 vs 非功能性需求：FURPS+ 模型
+# 02.1.1.2 功能性需求 vs 非功能性需求：FURPS+ 模型
 
-深入解析功能性 (Functionality)、易用性 (Usability)、可靠性 (Reliability)、性能 (Performance) 与可支持性 (Supportability)。
+**介绍**: 深入解析功能性 (Functionality)、易用性 (Usability)、可靠性 (Reliability)、性能 (Performance) 与可支持性 (Supportability)。
 
 ---
 

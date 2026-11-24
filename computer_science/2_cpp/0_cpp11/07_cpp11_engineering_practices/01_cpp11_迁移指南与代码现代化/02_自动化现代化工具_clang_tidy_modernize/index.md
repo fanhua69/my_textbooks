@@ -1,6 +1,6 @@
-# 7.1.2 自动化现代化工具：clang-tidy modernize
+# 02 自动化现代化工具：clang-tidy modernize
 
-使用 clang-tidy 的 modernize 检查批量改写 nullptr、auto、范围 for 与 override 等。
+**介绍**: 使用 clang-tidy 的 modernize 检查批量改写 nullptr、auto、范围 for 与 override 等。
 
 ---
 

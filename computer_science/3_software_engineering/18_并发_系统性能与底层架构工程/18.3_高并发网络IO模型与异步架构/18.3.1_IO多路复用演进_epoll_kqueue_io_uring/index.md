@@ -1,6 +1,6 @@
 # 18.3.1 I/O 多路复用演进：select/poll、epoll/kqueue 与 io_uring
 
-对比同步阻塞、非阻塞轮询、事件驱动多路复用以及现代 Linux 异步 I/O 引擎 io_uring 底层机制。
+**介绍**: 对比同步阻塞、非阻塞轮询、事件驱动多路复用以及现代 Linux 异步 I/O 引擎 io_uring 底层机制。
 
 ---
 

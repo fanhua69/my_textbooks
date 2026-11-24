@@ -1,6 +1,6 @@
-# 6.2.2 无序容器与 std::hash
+# 02 无序容器与 std::hash
 
-掌握 unordered_set、unordered_map 等无序容器，理解桶接口、负载因子与自定义哈希。
+**介绍**: 掌握 unordered_set、unordered_map 等无序容器，理解桶接口、负载因子与自定义哈希。
 
 ---
 

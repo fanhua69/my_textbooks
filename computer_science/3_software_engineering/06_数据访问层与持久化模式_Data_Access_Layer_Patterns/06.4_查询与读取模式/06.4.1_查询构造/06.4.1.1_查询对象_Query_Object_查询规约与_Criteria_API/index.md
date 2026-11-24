@@ -1,6 +1,6 @@
-# 6.4.1.1 查询对象 (Query Object)、查询规约与 Criteria API
+# 06.4.1.1 查询对象 (Query Object)、查询规约与 Criteria API
 
-把查询条件建模为对象，复用规约组合条件，并对比 Criteria API、DSL 与原生 SQL 的取舍。
+**介绍**: 把查询条件建模为对象，复用规约组合条件，并对比 Criteria API、DSL 与原生 SQL 的取舍。
 
 ---
 

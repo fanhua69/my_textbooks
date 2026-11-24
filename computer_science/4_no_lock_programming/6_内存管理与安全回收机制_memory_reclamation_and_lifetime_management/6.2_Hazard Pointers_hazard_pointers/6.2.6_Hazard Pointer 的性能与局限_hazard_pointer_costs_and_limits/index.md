@@ -1,6 +1,6 @@
 # 6.2.6 Hazard Pointer 的性能与局限  hazard pointer costs and limits
 
-分析记录数量、扫描成本、线程注册和 API 设计。
+**介绍**: 分析记录数量、扫描成本、线程注册和 API 设计。
 
 ---
 

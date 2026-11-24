@@ -1,6 +1,6 @@
-# 3.2.1 底层 C API（libxpc / xpc connection t）与序列化类型系统
+# 01 底层 C API（libxpc / xpc connection t）与序列化类型系统
 
-掌握 xpc_dictionary、xpc_shmem、事件处理器与 C/C++ 无 Objective-C 运行时依赖集成。
+**介绍**: 掌握 xpc_dictionary、xpc_shmem、事件处理器与 C/C++ 无 Objective-C 运行时依赖集成。
 
 ---
 

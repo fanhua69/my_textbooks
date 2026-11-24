@@ -1,6 +1,6 @@
-# 6.5.2.1 两级缓存 (Two-Level Cache) 与缓存失效 (Cache Invalidation) 策略
+# 06.5.2.1 两级缓存 (Two-Level Cache) 与缓存失效 (Cache Invalidation) 策略
 
-组合本地缓存与分布式缓存，并以 TTL、事件失效与版本号控制多级缓存的一致性。
+**介绍**: 组合本地缓存与分布式缓存，并以 TTL、事件失效与版本号控制多级缓存的一致性。
 
 ---
 

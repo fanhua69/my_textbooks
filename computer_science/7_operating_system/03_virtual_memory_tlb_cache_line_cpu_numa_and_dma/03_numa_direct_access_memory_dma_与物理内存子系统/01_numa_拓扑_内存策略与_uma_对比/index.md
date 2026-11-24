@@ -1,13 +1,11 @@
-# 3.3.1 NUMA 节点拓扑、跨节点访存延迟、内存策略与 macOS UMA 对比
+# 01 NUMA 节点拓扑、跨节点访存延迟、内存策略与 macOS UMA 对比
 
-剖析非统一内存访问节点间互连延迟、本地/交错分配策略与 Apple Silicon 统一内存的差异。
+**介绍**: 剖析非统一内存访问节点间互连延迟、本地/交错分配策略与 Apple Silicon 统一内存的差异。
 
-## 本节目录
+## 目录
 
-- [3.3.1.1 NUMA 节点、本地 vs 远程内存访问延迟与 numactl / mbind / set  mempolicy](01_numa_节点_远程访存延迟与内存策略接口/index.md)
-- [3.3.1.2 Linux NUMA、macOS 统一内存（UMA）与 Windows 内存节点/工作集对比](02_三平台_numa_uma_与内存节点特性对比/index.md)
-
----
+- [01 NUMA 节点、本地 vs 远程内存访问延迟与 numactl / mbind / set  mempolicy](01_numa_节点_远程访存延迟与内存策略接口/index.md)
+- [02 Linux NUMA、macOS 统一内存（UMA）与 Windows 内存节点/工作集对比](02_三平台_numa_uma_与内存节点特性对比/index.md)
 
 ## 导航
 

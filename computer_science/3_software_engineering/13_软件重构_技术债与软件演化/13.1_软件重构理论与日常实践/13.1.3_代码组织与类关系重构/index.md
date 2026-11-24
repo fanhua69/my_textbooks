@@ -1,14 +1,12 @@
 # 13.1.3 代码组织与类关系重构
 
-改善类内部与类之间的结构职责划分。
+**介绍**: 改善类内部与类之间的结构职责划分。
 
-## 本节目录
+## 目录
 
 - [13.1.3.1 提炼类、移动方法与移动字段技巧](13.1.3.1_提炼类_移动方法与移动字段技巧/index.md)
 - [13.1.3.2 以委托取代继承 (Replace Inheritance with Delegation)](13.1.3.2_以委托取代继承_Replace_Inheritance_with_Delegation/index.md)
 - [13.1.3.3 封装字段 (Encapsulate Field) 与封装集合](13.1.3.3_封装字段_Encapsulate_Field_与封装集合/index.md)
-
----
 
 ## 导航
 

@@ -1,6 +1,6 @@
-# 6.3.1 chrono 时间库
+# 01 chrono 时间库
 
-掌握 duration、time_point 与三种时钟，以及 duration_cast 与时间精度控制。
+**介绍**: 掌握 duration、time_point 与三种时钟，以及 duration_cast 与时间精度控制。
 
 ---
 

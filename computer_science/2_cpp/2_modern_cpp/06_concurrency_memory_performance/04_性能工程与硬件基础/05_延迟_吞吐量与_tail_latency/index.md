@@ -1,6 +1,6 @@
-# 6.4.5 延迟、吞吐量与 tail latency
+# 05 延迟、吞吐量与 tail latency
 
-区分 latency/throughput，理解 p95/p99 和排队效应[cite: 4]。
+**介绍**: 区分 latency/throughput，理解 p95/p99 和排队效应[cite: 4]。
 
 ---
 

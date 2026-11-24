@@ -1,6 +1,6 @@
-# 3.2.3 按需启动（On-Demand）、连接中断（Interruption）与作废（Invalidation）
+# 03 按需启动（On-Demand）、连接中断（Interruption）与作废（Invalidation）
 
-处理特权 Helper 进程动态拉起、崩溃恢复与防止循环引用的生命周期管理。
+**介绍**: 处理特权 Helper 进程动态拉起、崩溃恢复与防止循环引用的生命周期管理。
 
 ---
 

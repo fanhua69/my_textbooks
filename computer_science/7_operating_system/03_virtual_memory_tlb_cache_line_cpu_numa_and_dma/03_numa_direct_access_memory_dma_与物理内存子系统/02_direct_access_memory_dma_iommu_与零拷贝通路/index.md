@@ -1,13 +1,11 @@
-# 3.3.2 Direct Access Memory：DMA、IOMMU/SMMU、缓存一致性与零拷贝通路
+# 02 Direct Access Memory：DMA、IOMMU/SMMU、缓存一致性与零拷贝通路
 
-深入硬件直接内存访问（DMA）与总线/内存映射机制，消除 CPU 参与数据搬运的开销。
+**介绍**: 深入硬件直接内存访问（DMA）与总线/内存映射机制，消除 CPU 参与数据搬运的开销。
 
-## 本节目录
+## 目录
 
-- [3.3.2.1 DMA 控制器、Scatter-Gather、总线地址与 IOMMU / SMMU 地址转换](01_dma_原理_scatter_gather_与_iommu_smmu/index.md)
-- [3.3.2.2 零拷贝 I/O、用户态映射与跨组件直接内存访问模式](02_零拷贝_i_o_用户态映射与直接内存访问模式/index.md)
-
----
+- [01 DMA 控制器、Scatter-Gather、总线地址与 IOMMU / SMMU 地址转换](01_dma_原理_scatter_gather_与_iommu_smmu/index.md)
+- [02 零拷贝 I/O、用户态映射与跨组件直接内存访问模式](02_零拷贝_i_o_用户态映射与直接内存访问模式/index.md)
 
 ## 导航
 

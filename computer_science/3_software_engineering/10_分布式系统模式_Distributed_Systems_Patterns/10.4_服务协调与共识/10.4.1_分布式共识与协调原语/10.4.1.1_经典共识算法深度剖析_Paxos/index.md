@@ -1,6 +1,6 @@
 # 10.4.1.1 Paxos 经典共识算法深度剖析
 
-拆解 Leslie Lamport 的 Basic Paxos 两阶段提议流程（Prepare/Promise, Accept/Accepted）与 Multi-Paxos 领导人选举优化。
+**介绍**: 拆解 Leslie Lamport 的 Basic Paxos 两阶段提议流程（Prepare/Promise, Accept/Accepted）与 Multi-Paxos 领导人选举优化。
 
 ---
 

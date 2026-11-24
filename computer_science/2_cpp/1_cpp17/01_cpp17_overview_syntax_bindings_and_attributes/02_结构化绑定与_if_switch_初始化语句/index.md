@@ -1,13 +1,11 @@
-# 1.2 结构化绑定（Structured Bindings）与 if / switch 初始化语句
+# 02 结构化绑定（Structured Bindings）与 if / switch 初始化语句
 
-掌握解构元组/结构体/数组与条件作用域变量声明，消除冗余临时变量与作用域污染。
+**介绍**: 掌握解构元组/结构体/数组与条件作用域变量声明，消除冗余临时变量与作用域污染。
 
-## 本节目录
+## 目录
 
-- [1.2.1 结构化绑定：解包 std::pair、std::tuple、数组、聚合结构体与自定义 tuple-like 类型](01_结构化绑定解包规则与_cv_ref_修饰/index.md)
-- [1.2.2 if 与 switch 语句中的初始化语句（if (init; cond) / switch (init; cond)）](02_if_与_switch_初始化语句/index.md)
-
----
+- [01 结构化绑定：解包 std::pair、std::tuple、数组、聚合结构体与自定义 tuple-like 类型](01_结构化绑定解包规则与_cv_ref_修饰/index.md)
+- [02 if 与 switch 语句中的初始化语句（if (init; cond) / switch (init; cond)）](02_if_与_switch_初始化语句/index.md)
 
 ## 导航
 

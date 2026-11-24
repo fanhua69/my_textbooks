@@ -1,6 +1,6 @@
-# 2.2.1.1 安全启动信任链（Secure Boot / Verified Boot）
+# 01 安全启动信任链（Secure Boot / Verified Boot）
 
-理解从硬件根信任到固件、Bootloader 与内核镜像逐级签名校验的完整链条。
+**介绍**: 理解从硬件根信任到固件、Bootloader 与内核镜像逐级签名校验的完整链条。
 
 ---
 

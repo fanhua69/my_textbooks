@@ -1,6 +1,6 @@
-# 9.1.2.2 ATAM 架构权衡分析方法实操
+# 09.1.2.2 ATAM 架构权衡分析方法实操
 
-组织 ATAM 评估会议，识别敏感点（Sensitivity Points）、权衡点（Trade-offs）与风险主题。
+**介绍**: 组织 ATAM 评估会议，识别敏感点（Sensitivity Points）、权衡点（Trade-offs）与风险主题。
 
 ---
 

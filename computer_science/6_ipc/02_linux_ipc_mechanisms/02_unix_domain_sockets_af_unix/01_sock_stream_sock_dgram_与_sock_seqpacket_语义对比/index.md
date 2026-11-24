@@ -1,6 +1,6 @@
-# 2.2.1 SOCK STREAM、SOCK DGRAM 与 SOCK SEQPACKET 语义对比
+# 01 SOCK STREAM、SOCK DGRAM 与 SOCK SEQPACKET 语义对比
 
-分析消息边界保留、可靠性、背压控制及抽象命名空间（Abstract Namespace）特性。
+**介绍**: 分析消息边界保留、可靠性、背压控制及抽象命名空间（Abstract Namespace）特性。
 
 ---
 

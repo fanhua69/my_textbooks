@@ -1,13 +1,11 @@
-# 8.1.1 系统与资源日常命令：ps、top/htop、systemctl、journalctl、numactl、taskset、chrt、vmstat、iostat、ss、lsof
+# 01 系统与资源日常命令：ps、top/htop、systemctl、journalctl、numactl、taskset、chrt、vmstat、iostat、ss、lsof
 
-快速检查服务状态、NUMA 节点分布、CPU 亲和性、实时优先级、虚拟内存/I/O 指标与本地套接字/句柄占用。
+**介绍**: 快速检查服务状态、NUMA 节点分布、CPU 亲和性、实时优先级、虚拟内存/I/O 指标与本地套接字/句柄占用。
 
-## 本节目录
+## 目录
 
-- [8.1.1.1 进程、服务与日志排查：ps、top/htop、systemctl、journalctl、lsof、ss](01_linux_进程_服务_日志与套接字排查命令/index.md)
-- [8.1.1.2 调度、亲和性、NUMA 与内存/I/O 观测：taskset、chrt、numactl、vmstat、iostat](02_linux_调度_亲和性_numa_与内存_i_o_观测命令/index.md)
-
----
+- [01 进程、服务与日志排查：ps、top/htop、systemctl、journalctl、lsof、ss](01_linux_进程_服务_日志与套接字排查命令/index.md)
+- [02 调度、亲和性、NUMA 与内存/I/O 观测：taskset、chrt、numactl、vmstat、iostat](02_linux_调度_亲和性_numa_与内存_i_o_观测命令/index.md)
 
 ## 导航
 

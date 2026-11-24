@@ -1,6 +1,6 @@
 # 7.3.5 忙等、pause 与自适应等待  spin pause and adaptive waiting
 
-比较纯忙等、处理器 pause、yield、睡眠和自适应策略。
+**介绍**: 比较纯忙等、处理器 pause、yield、睡眠和自适应策略。
 
 ---
 

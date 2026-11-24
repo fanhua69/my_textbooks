@@ -1,6 +1,6 @@
 # 10.2.1.4 TCC 模式 (Try-Confirm-Cancel)
 
-实现 Try-Confirm-Cancel 业务层两阶段资源预留与提交，处理空回滚、悬挂与幂等三大难题。
+**介绍**: 实现 Try-Confirm-Cancel 业务层两阶段资源预留与提交，处理空回滚、悬挂与幂等三大难题。
 
 ---
 

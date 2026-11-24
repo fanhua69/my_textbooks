@@ -1,6 +1,6 @@
 # 16.1.3.3 约定式提交规范 (Conventional Commits) 与自动 Changelog
 
-推行 feat/fix/docs/refactor/chore 结构化提交信息规范，驱动 Release 工具自动生成版本日志与触发版本自增。
+**介绍**: 推行 feat/fix/docs/refactor/chore 结构化提交信息规范，驱动 Release 工具自动生成版本日志与触发版本自增。
 
 ---
 

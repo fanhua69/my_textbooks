@@ -1,6 +1,6 @@
-# 5.5.2 文件流与二进制 I/O
+# 02 文件流与二进制 I/O
 
-掌握 ifstream、ofstream、fstream 及二进制读写[cite: 4]。
+**介绍**: 掌握 ifstream、ofstream、fstream 及二进制读写[cite: 4]。
 
 ---
 

@@ -1,6 +1,6 @@
-# 4.4.2 迭代器、范围与自定义 range
+# 02 迭代器、范围与自定义 range
 
-理解 iterator category/concept 和 range 接口[cite: 4]。
+**介绍**: 理解 iterator category/concept 和 range 接口[cite: 4]。
 
 ---
 

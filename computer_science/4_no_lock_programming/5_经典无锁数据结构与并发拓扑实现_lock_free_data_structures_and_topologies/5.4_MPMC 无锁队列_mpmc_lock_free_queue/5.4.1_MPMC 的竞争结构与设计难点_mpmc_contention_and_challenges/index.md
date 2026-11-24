@@ -1,6 +1,6 @@
 # 5.4.1 MPMC 的竞争结构与设计难点  mpmc contention and challenges
 
-分析 head/tail 竞争、槽位所有权、空满判断和节点回收。
+**介绍**: 分析 head/tail 竞争、槽位所有权、空满判断和节点回收。
 
 ---
 

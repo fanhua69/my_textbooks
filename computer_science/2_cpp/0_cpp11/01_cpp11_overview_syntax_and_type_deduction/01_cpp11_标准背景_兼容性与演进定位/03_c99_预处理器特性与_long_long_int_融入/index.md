@@ -1,6 +1,6 @@
-# 1.1.3 C99 预处理器特性与 long long int 融入
+# 03 C99 预处理器特性与 long long int 融入
 
-介绍 C++11 吸收的 C99 特性：__func__、可变参数宏、_Pragma、long long 以及相邻字符串字面量拼接。
+**介绍**: 介绍 C++11 吸收的 C99 特性：__func__、可变参数宏、_Pragma、long long 以及相邻字符串字面量拼接。
 
 ---
 

@@ -1,6 +1,6 @@
-# 1.3.4 [[nodiscard]]、[[maybe unused]]、[[fallthrough]] 与属性命名空间/枚举器属性
+# 04 [[nodiscard]]、[[maybe unused]]、[[fallthrough]] 与属性命名空间/枚举器属性
 
-掌握 [[nodiscard]] 防止忽略关键返回值、[[maybe_unused]] 抑制未使用变量/参数/类型告警、[[fallthrough]] 显式标注 switch 穿透，以及 using ns: 与枚举器/命名空间属性扩展。
+**介绍**: 掌握 [[nodiscard]] 防止忽略关键返回值、[[maybe_unused]] 抑制未使用变量/参数/类型告警、[[fallthrough]] 显式标注 switch 穿透，以及 using ns: 与枚举器/命名空间属性扩展。
 
 ---
 

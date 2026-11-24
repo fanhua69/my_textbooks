@@ -1,6 +1,6 @@
-# 4.4.3 定制点：ADL、tag invoke 与 customization point
+# 03 定制点：ADL、tag invoke 与 customization point
 
-认识泛型库中的定制机制及其权衡[cite: 4]。
+**介绍**: 认识泛型库中的定制机制及其权衡[cite: 4]。
 
 ---
 

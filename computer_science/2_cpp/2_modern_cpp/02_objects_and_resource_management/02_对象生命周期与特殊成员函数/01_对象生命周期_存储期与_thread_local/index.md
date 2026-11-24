@@ -1,6 +1,6 @@
-# 2.2.1 对象生命周期、存储期与 thread  local
+# 01 对象生命周期、存储期与 thread  local
 
-区分 automatic、static、std::thread_local 与 dynamic storage duration[cite: 4, 6, 12]。
+**介绍**: 区分 automatic、static、std::thread_local 与 dynamic storage duration[cite: 4, 6, 12]。
 
 ---
 

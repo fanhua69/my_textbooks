@@ -1,19 +1,17 @@
 # 1.2 并发拓扑与生产者消费者模型  concurrency topologies
 
-以生产者和消费者的数量关系为主线，系统介绍 SPSC、SPMC、MPSC、MPMC 等常见并发拓扑。这些拓扑是选择队列、环形缓冲区和任务调度结构的基础。
+**介绍**: 以生产者和消费者的数量关系为主线，系统介绍 SPSC、SPMC、MPSC、MPMC 等常见并发拓扑。这些拓扑是选择队列、环形缓冲区和任务调度结构的基础。
 
-## 本节目录
+## 目录
 
 - [1.2.1 生产者与消费者模型概览  producer consumer model overview](1.2.1_生产者与消费者模型概览_producer_consumer_model_overview/index.md)
-- [1.2.2 SPSC：Single Producer Single Consumer  spsc single producer single consumer](1.2.2_SPSC：Single%20Producer%20Single%20Consumer_spsc_single_producer_single_consumer/index.md)
-- [1.2.3 SPMC：Single Producer Multiple Consumers  spmc single producer multiple consumers](1.2.3_SPMC：Single%20Producer%20Multiple%20Consumers_spmc_single_producer_multiple_consumers/index.md)
-- [1.2.4 MPSC：Multiple Producers Single Consumer  mpsc multiple producers single consumer](1.2.4_MPSC：Multiple%20Producers%20Single%20Consumer_mpsc_multiple_producers_single_consumer/index.md)
-- [1.2.5 MPMC：Multiple Producers Multiple Consumers  mpmc multiple producers multiple consumers](1.2.5_MPMC：Multiple%20Producers%20Multiple%20Consumers_mpmc_multiple_producers_multiple_consumers/index.md)
-- [1.2.6 模型对比：SPSC、SPMC、MPSC 与 MPMC  compare spsc spmc mpsc mpmc](1.2.6_模型对比：SPSC、SPMC、MPSC%20与%20MPMC_compare_spsc_spmc_mpsc_mpmc/index.md)
-- [1.2.7 扩展拓扑：N-to-1、1-to-N 与 N-to-M  extended producer consumer topologies](1.2.7_扩展拓扑：N-to-1、1-to-N%20与%20N-to-M_extended_producer_consumer_topologies/index.md)
+- [1.2.2 SPSC：Single Producer Single Consumer  spsc single producer single consumer](1.2.2_SPSC%EF%BC%9ASingle%20Producer%20Single%20Consumer_spsc_single_producer_single_consumer/index.md)
+- [1.2.3 SPMC：Single Producer Multiple Consumers  spmc single producer multiple consumers](1.2.3_SPMC%EF%BC%9ASingle%20Producer%20Multiple%20Consumers_spmc_single_producer_multiple_consumers/index.md)
+- [1.2.4 MPSC：Multiple Producers Single Consumer  mpsc multiple producers single consumer](1.2.4_MPSC%EF%BC%9AMultiple%20Producers%20Single%20Consumer_mpsc_multiple_producers_single_consumer/index.md)
+- [1.2.5 MPMC：Multiple Producers Multiple Consumers  mpmc multiple producers multiple consumers](1.2.5_MPMC%EF%BC%9AMultiple%20Producers%20Multiple%20Consumers_mpmc_multiple_producers_multiple_consumers/index.md)
+- [1.2.6 模型对比：SPSC、SPMC、MPSC 与 MPMC  compare spsc spmc mpsc mpmc](1.2.6_%E6%A8%A1%E5%9E%8B%E5%AF%B9%E6%AF%94%EF%BC%9ASPSC%E3%80%81SPMC%E3%80%81MPSC%20%E4%B8%8E%20MPMC_compare_spsc_spmc_mpsc_mpmc/index.md)
+- [1.2.7 扩展拓扑：N-to-1、1-to-N 与 N-to-M  extended producer consumer topologies](1.2.7_%E6%89%A9%E5%B1%95%E6%8B%93%E6%89%91%EF%BC%9AN-to-1%E3%80%811-to-N%20%E4%B8%8E%20N-to-M_extended_producer_consumer_topologies/index.md)
 - [1.2.8 有界与无界队列  bounded and unbounded queues](1.2.8_有界与无界队列_bounded_and_unbounded_queues/index.md)
-
----
 
 ## 导航
 

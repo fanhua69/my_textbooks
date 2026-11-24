@@ -1,6 +1,6 @@
 # 1.2.8 有界与无界队列  bounded and unbounded queues
 
-比较 bounded queue 与 unbounded queue 的容量、内存分配、背压和失败语义。
+**介绍**: 比较 bounded queue 与 unbounded queue 的容量、内存分配、背压和失败语义。
 
 ---
 

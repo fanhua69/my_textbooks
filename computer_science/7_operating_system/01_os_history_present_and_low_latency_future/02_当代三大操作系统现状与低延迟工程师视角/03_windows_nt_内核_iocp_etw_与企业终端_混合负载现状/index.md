@@ -1,13 +1,11 @@
-# 1.2.3 Windows：NT 内核、IOCP/ETW 与企业终端/混合负载现状
+# 03 Windows：NT 内核、IOCP/ETW 与企业终端/混合负载现状
 
-理解 NT 对象管理器、I/O 完成端口、ETW 追踪、Session 0 隔离与企业服务/安全架构。
+**介绍**: 理解 NT 对象管理器、I/O 完成端口、ETW 追踪、Session 0 隔离与企业服务/安全架构。
 
-## 本节目录
+## 目录
 
-- [1.2.3.1 Windows 高并发 I/O 与系统可观测性现状](01_windows_高并发_i_o_与系统可观测性现状/index.md)
-- [1.2.3.2 Windows 会话隔离、服务托管与安全边界现状](02_windows_会话隔离_服务托管与安全边界现状/index.md)
-
----
+- [01 Windows 高并发 I/O 与系统可观测性现状](01_windows_高并发_i_o_与系统可观测性现状/index.md)
+- [02 Windows 会话隔离、服务托管与安全边界现状](02_windows_会话隔离_服务托管与安全边界现状/index.md)
 
 ## 导航
 

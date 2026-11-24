@@ -1,6 +1,6 @@
-# 1.3.4.2 双轨敏捷：探索轨与交付轨协同
+# 01.3.4.2 双轨敏捷：探索轨与交付轨协同
 
-掌握产品探索（Discovery Track）与技术交付（Delivery Track）的异步并行推进模式。
+**介绍**: 掌握产品探索（Discovery Track）与技术交付（Delivery Track）的异步并行推进模式。
 
 ---
 

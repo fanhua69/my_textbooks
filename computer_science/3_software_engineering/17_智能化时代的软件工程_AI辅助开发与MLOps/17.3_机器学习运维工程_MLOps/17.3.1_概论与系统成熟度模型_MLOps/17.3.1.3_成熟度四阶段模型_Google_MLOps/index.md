@@ -1,6 +1,6 @@
 # 17.3.1.3 Google MLOps 成熟度四阶段模型
 
-从 Level 0 手动驱动、Level 1 自动化 ML 流水线，演进到 Level 2 全自动化 CI/CD 与持续训练 (CT) 流水线。
+**介绍**: 从 Level 0 手动驱动、Level 1 自动化 ML 流水线，演进到 Level 2 全自动化 CI/CD 与持续训练 (CT) 流水线。
 
 ---
 

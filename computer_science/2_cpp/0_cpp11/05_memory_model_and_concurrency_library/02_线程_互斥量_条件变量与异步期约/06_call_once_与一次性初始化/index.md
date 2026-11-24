@@ -1,6 +1,6 @@
-# 5.2.6 call once 与一次性初始化
+# 06 call once 与一次性初始化
 
-使用 once_flag 与 call_once 实现线程安全的一次性初始化。
+**介绍**: 使用 once_flag 与 call_once 实现线程安全的一次性初始化。
 
 ---
 

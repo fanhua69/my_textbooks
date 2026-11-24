@@ -1,6 +1,6 @@
-# 6.3.1.1 优先级反转成因、Priority Inheritance 与 Priority Ceiling
+# 01 优先级反转成因、Priority Inheritance 与 Priority Ceiling
 
-拆解高/中/低优先级任务争用共享锁导致的延迟放大，以及优先级继承/天花板协议。
+**介绍**: 拆解高/中/低优先级任务争用共享锁导致的延迟放大，以及优先级继承/天花板协议。
 
 ---
 

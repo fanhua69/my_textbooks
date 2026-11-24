@@ -1,6 +1,6 @@
-# 7.3.1.1 非特权 App / LaunchAgent / CLI 与特权 root LaunchDaemon / System Extension 分工
+# 01 非特权 App / LaunchAgent / CLI 与特权 root LaunchDaemon / System Extension 分工
 
-将界面交互、用户态状态采集与系统级策略下发/特权执行拆分为独立进程并明确信任契约。
+**介绍**: 将界面交互、用户态状态采集与系统级策略下发/特权执行拆分为独立进程并明确信任契约。
 
 ---
 

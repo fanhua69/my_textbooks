@@ -1,6 +1,6 @@
 # 5.2.3 SPSC 入队与出队实现  spsc enqueue dequeue
 
-逐步实现 push/pop、空满判断和索引更新。
+**介绍**: 逐步实现 push/pop、空满判断和索引更新。
 
 ---
 

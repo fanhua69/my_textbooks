@@ -1,6 +1,6 @@
-# 4.3.1 CreateFileMapping（INVALID HANDLE VALUE）与 MapViewOfFile
+# 01 CreateFileMapping（INVALID HANDLE VALUE）与 MapViewOfFile
 
-基于页文件（Pagefile-backed）创建命名或匿名共享内存视图，支持大页（SEC_LARGE_PAGES）。
+**介绍**: 基于页文件（Pagefile-backed）创建命名或匿名共享内存视图，支持大页（SEC_LARGE_PAGES）。
 
 ---
 

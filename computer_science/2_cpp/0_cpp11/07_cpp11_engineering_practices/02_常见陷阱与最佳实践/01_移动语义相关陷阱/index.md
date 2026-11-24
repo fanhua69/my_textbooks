@@ -1,6 +1,6 @@
-# 7.2.1 移动语义相关陷阱
+# 01 移动语义相关陷阱
 
-分析移动后使用、对 const 对象 move 以及误用 return std::move 的问题。
+**介绍**: 分析移动后使用、对 const 对象 move 以及误用 return std::move 的问题。
 
 ---
 

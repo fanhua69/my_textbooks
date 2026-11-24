@@ -1,6 +1,6 @@
-# 6.4.4 基准测试、profiling 与 flame graph
+# 04 基准测试、profiling 与 flame graph
 
-掌握可重复测量、统计波动和热点分析[cite: 4]。
+**介绍**: 掌握可重复测量、统计波动和热点分析[cite: 4]。
 
 ---
 

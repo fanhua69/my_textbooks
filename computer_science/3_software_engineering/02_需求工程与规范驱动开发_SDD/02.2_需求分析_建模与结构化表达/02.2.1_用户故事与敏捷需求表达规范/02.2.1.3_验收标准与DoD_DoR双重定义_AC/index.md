@@ -1,6 +1,6 @@
-# 2.2.1.3 验收标准 (AC) 与 DoD / DoR 双重定义
+# 02.2.1.3 验收标准 (AC) 与 DoD / DoR 双重定义
 
-编写场景化 Acceptance Criteria，制定 Definition of Ready (DoR) 与 Definition of Done (DoD) 质量门禁。
+**介绍**: 编写场景化 Acceptance Criteria，制定 Definition of Ready (DoR) 与 Definition of Done (DoD) 质量门禁。
 
 ---
 

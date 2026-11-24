@@ -1,17 +1,15 @@
-# 6.2 新容器、tuple 与 function/bind
+# 02 新容器、tuple 与 function/bind
 
-掌握 C++11 新增的容器与通用工具，以及可调用对象的统一封装。
+**介绍**: 掌握 C++11 新增的容器与通用工具，以及可调用对象的统一封装。
 
-## 本节目录
+## 目录
 
-- [6.2.1 array 与 forward  list](01_array_与_forward_list/index.md)
-- [6.2.2 无序容器与 std::hash](02_无序容器与_std_hash/index.md)
-- [6.2.3 pair 与 tuple](03_pair_与_tuple/index.md)
-- [6.2.4 function 与可调用对象](04_function_与可调用对象/index.md)
-- [6.2.5 bind、占位符与 mem  fn](05_bind_占位符与_mem_fn/index.md)
-- [6.2.6 reference wrapper：ref 与 cref](06_reference_wrapper_ref_与_cref/index.md)
-
----
+- [01 array 与 forward  list](01_array_与_forward_list/index.md)
+- [02 无序容器与 std::hash](02_无序容器与_std_hash/index.md)
+- [03 pair 与 tuple](03_pair_与_tuple/index.md)
+- [04 function 与可调用对象](04_function_与可调用对象/index.md)
+- [05 bind、占位符与 mem  fn](05_bind_占位符与_mem_fn/index.md)
+- [06 reference wrapper：ref 与 cref](06_reference_wrapper_ref_与_cref/index.md)
 
 ## 导航
 

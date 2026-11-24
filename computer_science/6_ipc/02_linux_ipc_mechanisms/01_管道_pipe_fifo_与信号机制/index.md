@@ -1,13 +1,11 @@
-# 2.1 管道（Pipe / FIFO）与信号机制
+# 01 管道（Pipe / FIFO）与信号机制
 
-理解 UNIX 最经典的字节流管道、命名管道与异步进程通知。
+**介绍**: 理解 UNIX 最经典的字节流管道、命名管道与异步进程通知。
 
-## 本节目录
+## 目录
 
-- [2.1.1 匿名管道（pipe / pipe2）与命名管道（mkfifo）](01_匿名管道_pipe_pipe2_与命名管道_mkfifo/index.md)
-- [2.1.2 信号（Signal）与实时信号（sigqueue）](02_信号_signal_与实时信号_sigqueue/index.md)
-
----
+- [01 匿名管道（pipe / pipe2）与命名管道（mkfifo）](01_匿名管道_pipe_pipe2_与命名管道_mkfifo/index.md)
+- [02 信号（Signal）与实时信号（sigqueue）](02_信号_signal_与实时信号_sigqueue/index.md)
 
 ## 导航
 

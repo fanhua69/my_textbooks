@@ -1,13 +1,11 @@
-# 7.2.1 远程调用边界模式
+# 07.3.1 远程调用边界模式
 
-减少远程调用次数与数据传输开销。
+**介绍**: 减少远程调用次数与数据传输开销。
 
-## 本节目录
+## 目录
 
-- [7.2.1.1 远程外观 (Remote Facade) 与数据传输对象 (DTO)](07.2.1.1_远程外观与数据传输对象_Remote_Facade_DTO/index.md)
-- [7.2.1.2 数据传输对象装配器 (DTO Assembler)](07.2.1.2_数据传输对象装配器_DTO_Assembler/index.md)
-
----
+- [07.3.1.1 远程外观 (Remote Facade) 与数据传输对象 (DTO)](07.3.1.1_远程外观与数据传输对象_Remote_Facade_DTO/index.md)
+- [07.3.1.2 数据传输对象装配器 (DTO Assembler)](07.3.1.2_数据传输对象装配器_DTO_Assembler/index.md)
 
 ## 导航
 

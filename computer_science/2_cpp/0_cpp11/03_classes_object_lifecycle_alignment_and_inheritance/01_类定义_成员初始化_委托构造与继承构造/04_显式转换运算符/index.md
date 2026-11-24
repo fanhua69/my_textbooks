@@ -1,6 +1,6 @@
-# 3.1.4 显式转换运算符
+# 04 显式转换运算符
 
-使用 explicit operator bool 等显式转换，理解上下文转换规则及其取代安全 bool 惯用法的原因。
+**介绍**: 使用 explicit operator bool 等显式转换，理解上下文转换规则及其取代安全 bool 惯用法的原因。
 
 ---
 

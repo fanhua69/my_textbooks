@@ -1,6 +1,6 @@
 # 6.5.2 Deferred Reclamation 与 Retire List  deferred reclamation and retire list
 
-理解延迟回收队列及批量销毁。
+**介绍**: 理解延迟回收队列及批量销毁。
 
 ---
 

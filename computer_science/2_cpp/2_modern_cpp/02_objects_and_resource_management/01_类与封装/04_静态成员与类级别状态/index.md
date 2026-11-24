@@ -1,6 +1,6 @@
-# 2.1.4 静态成员与类级别状态
+# 04 静态成员与类级别状态
 
-理解 static data member、static member function 及其适用边界[cite: 4]。
+**介绍**: 理解 static data member、static member function 及其适用边界[cite: 4]。
 
 ---
 

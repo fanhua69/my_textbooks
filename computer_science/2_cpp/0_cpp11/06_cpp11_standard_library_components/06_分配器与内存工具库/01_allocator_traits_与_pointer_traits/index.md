@@ -1,6 +1,6 @@
-# 6.6.1 allocator_traits 与 pointer  traits
+# 01 allocator_traits 与 pointer  traits
 
-理解分配器 traits 如何为自定义分配器提供默认实现，以及 pointer_traits 的用途。
+**介绍**: 理解分配器 traits 如何为自定义分配器提供默认实现，以及 pointer_traits 的用途。
 
 ---
 

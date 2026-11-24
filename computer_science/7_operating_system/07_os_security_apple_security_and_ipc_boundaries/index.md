@@ -1,15 +1,13 @@
-# 7 操作系统安全模型、苹果安全机制与 IPC 通信边界
+# 07 操作系统安全模型、苹果安全机制与 IPC 通信边界
 
-系统讲解权限与访问控制模型、代码签名与沙盒、IPC 攻击面防护，深入剖析苹果生态下的 TCC / PPPC、Security Framework、Authorization Services 与特权/非特权多进程 XPC 通信边界设计，并对比 Linux 与 Windows 安全机制。
+**介绍**: 系统讲解权限与访问控制模型、代码签名与沙盒、IPC 攻击面防护，深入剖析苹果生态下的 TCC / PPPC、Security Framework、Authorization Services 与特权/非特权多进程 XPC 通信边界设计，并对比 Linux 与 Windows 安全机制。
 
-## 本节目录
+## 目录
 
-- [7.1 操作系统安全基础与 IPC 信任边界](01_操作系统安全基础与_ipc_信任边界/index.md)
-- [7.2 苹果平台安全机制：TCC / PPPC、Security Framework 与 Authorization Services](02_苹果平台安全机制_tcc_pppc_security_framework_与_authorization_services/index.md)
-- [7.3 macOS 特权与非特权多进程 XPC 通信边界设计](03_macos_特权与非特权多进程_xpc_通信边界设计/index.md)
-- [7.4 Linux 与 Windows 安全与 IPC 权限边界对比](04_linux_与_windows_安全与_ipc_权限边界对比/index.md)
-
----
+- [01 操作系统安全基础与 IPC 信任边界](01_操作系统安全基础与_ipc_信任边界/index.md)
+- [02 苹果平台安全机制：TCC / PPPC、Security Framework 与 Authorization Services](02_苹果平台安全机制_tcc_pppc_security_framework_与_authorization_services/index.md)
+- [03 macOS 特权与非特权多进程 XPC 通信边界设计](03_macos_特权与非特权多进程_xpc_通信边界设计/index.md)
+- [04 Linux 与 Windows 安全与 IPC 权限边界对比](04_linux_与_windows_安全与_ipc_权限边界对比/index.md)
 
 ## 导航
 

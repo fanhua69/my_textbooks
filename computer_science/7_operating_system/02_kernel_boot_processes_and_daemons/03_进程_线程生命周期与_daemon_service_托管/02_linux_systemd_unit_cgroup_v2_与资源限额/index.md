@@ -1,13 +1,11 @@
-# 2.3.2 Linux systemd Unit（.service/.socket/.slice）、cgroup v2 追踪与资源限额
+# 02 Linux systemd Unit（.service/.socket/.slice）、cgroup v2 追踪与资源限额
 
-掌握启动类型、Socket 激活、cgroup 进程树精确追踪及 CPU/内存/PIDs 限额对延迟的影响。
+**介绍**: 掌握启动类型、Socket 激活、cgroup 进程树精确追踪及 CPU/内存/PIDs 限额对延迟的影响。
 
-## 本节目录
+## 目录
 
-- [2.3.2.1 .service 启动类型、sd notify 就绪通知与 Socket Activation](01_service_启动类型_sd_notify_就绪通知与_socket_activation/index.md)
-- [2.3.2.2 cgroup v2 进程组追踪、cpu.max 限流与内存/PIDs 保护](02_cgroup_v2_进程组追踪_cpu_max_限流与内存_pids_保护/index.md)
-
----
+- [01 .service 启动类型、sd notify 就绪通知与 Socket Activation](01_service_启动类型_sd_notify_就绪通知与_socket_activation/index.md)
+- [02 cgroup v2 进程组追踪、cpu.max 限流与内存/PIDs 保护](02_cgroup_v2_进程组追踪_cpu_max_限流与内存_pids_保护/index.md)
 
 ## 导航
 

@@ -1,6 +1,6 @@
 # 9.4.4 Wait-Free Queue 与有界步数算法  wait free queue
 
-研究 wait-free 队列及其复杂度和工程代价。
+**介绍**: 研究 wait-free 队列及其复杂度和工程代价。
 
 ---
 

@@ -1,6 +1,6 @@
-# 3.2.2.2 伪共享（False Sharing）成因、定位与 Cache Line 对齐隔离
+# 02 伪共享（False Sharing）成因、定位与 Cache Line 对齐隔离
 
-识别跨核高频写入不同变量却落在同一 Cache Line 的性能退化，使用 alignas 隔离热变量。
+**介绍**: 识别跨核高频写入不同变量却落在同一 Cache Line 的性能退化，使用 alignas 隔离热变量。
 
 ---
 

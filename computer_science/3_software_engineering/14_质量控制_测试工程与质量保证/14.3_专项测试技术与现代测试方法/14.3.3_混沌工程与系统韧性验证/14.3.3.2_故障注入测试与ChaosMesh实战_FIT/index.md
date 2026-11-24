@@ -1,6 +1,6 @@
 # 14.3.3.2 故障注入测试 (FIT) 与 Chaos Mesh 实战
 
-运用 Chaos Mesh / Chaos Monkey 对 Kubernetes 集群注入 Pod 随机终止、跨机房丢包延迟等混沌实验。
+**介绍**: 运用 Chaos Mesh / Chaos Monkey 对 Kubernetes 集群注入 Pod 随机终止、跨机房丢包延迟等混沌实验。
 
 ---
 

@@ -1,13 +1,11 @@
-# 8.3 Windows 常用命令与系统/性能诊断工具链
+# 03 Windows 常用命令与系统/性能诊断工具链
 
-掌握 Windows 命令行、服务/句柄排查与 ETW 高精度性能分析工具。
+**介绍**: 掌握 Windows 命令行、服务/句柄排查与 ETW 高精度性能分析工具。
 
-## 本节目录
+## 目录
 
-- [8.3.1 服务、进程与系统信息命令：sc、Get-Service、Get-Process、tasklist、systeminfo](01_windows_sc_powershell_进程与服务排查/index.md)
-- [8.3.2 句柄、进程与 ETW 剖析：handle、Process Explorer / Monitor、logman / xperf / WPA](02_windows_handle_procexp_procmon_与_etw_wpa/index.md)
-
----
+- [01 服务、进程与系统信息命令：sc、Get-Service、Get-Process、tasklist、systeminfo](01_windows_sc_powershell_进程与服务排查/index.md)
+- [02 句柄、进程与 ETW 剖析：handle、Process Explorer / Monitor、logman / xperf / WPA](02_windows_handle_procexp_procmon_与_etw_wpa/index.md)
 
 ## 导航
 

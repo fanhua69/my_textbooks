@@ -1,6 +1,6 @@
-# 7.1.2 SOLID 与依赖倒置原则
+# 02 SOLID 与依赖倒置原则
 
-掌握 SRP、OCP、LSP、ISP、DIP 及其适用边界[cite: 4]。
+**介绍**: 掌握 SRP、OCP、LSP、ISP、DIP 及其适用边界[cite: 4]。
 
 ---
 

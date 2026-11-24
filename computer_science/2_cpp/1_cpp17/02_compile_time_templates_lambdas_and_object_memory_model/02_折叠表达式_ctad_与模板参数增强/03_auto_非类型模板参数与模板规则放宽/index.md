@@ -1,6 +1,6 @@
-# 2.2.3 auto 非类型模板参数（template <auto N>）、包展开 using 声明与模板模板参数匹配放宽
+# 03 auto 非类型模板参数（template <auto N>）、包展开 using 声明与模板模板参数匹配放宽
 
-掌握非类型模板参数自动推导类型、using Base<Ts>...::member 成员包展开及模板模板参数匹配规则放宽。
+**介绍**: 掌握非类型模板参数自动推导类型、using Base<Ts>...::member 成员包展开及模板模板参数匹配规则放宽。
 
 ---
 

@@ -1,14 +1,12 @@
-# 3.1 虚拟地址空间、页表、TLB 与缺页异常（Page Fault）
+# 01 虚拟地址空间、页表、TLB 与缺页异常（Page Fault）
 
-消除热路径中的隐式缺页与 TLB 刷新抖动，掌握地址翻译缓存与内存映射/锁定原语。
+**介绍**: 消除热路径中的隐式缺页与 TLB 刷新抖动，掌握地址翻译缓存与内存映射/锁定原语。
 
-## 本节目录
+## 目录
 
-- [3.1.1 多级页表遍历（Page Walk）、TLB 命中/失效、PCID/ASID 与 TLB Shootdown 代价](01_多级页表_tlb_pcid_asid_与_tlb_shootdown_代价/index.md)
-- [3.1.2 Minor/Major Page Fault、写时复制（COW）与热路径防缺页](02_page_fault_cow_与热路径防缺页策略/index.md)
-- [3.1.3 mmap / munmap / madvise 与 Windows VirtualAlloc / VirtualProtect 对比](03_mmap_madvise_与_virtualalloc_语义对比/index.md)
-
----
+- [01 多级页表遍历（Page Walk）、TLB 命中/失效、PCID/ASID 与 TLB Shootdown 代价](01_多级页表_tlb_pcid_asid_与_tlb_shootdown_代价/index.md)
+- [02 Minor/Major Page Fault、写时复制（COW）与热路径防缺页](02_page_fault_cow_与热路径防缺页策略/index.md)
+- [03 mmap / munmap / madvise 与 Windows VirtualAlloc / VirtualProtect 对比](03_mmap_madvise_与_virtualalloc_语义对比/index.md)
 
 ## 导航
 

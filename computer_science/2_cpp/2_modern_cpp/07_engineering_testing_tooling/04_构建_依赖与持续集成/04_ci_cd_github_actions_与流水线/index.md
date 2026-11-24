@@ -1,6 +1,6 @@
-# 7.4.4 CI/CD：GitHub Actions 与流水线
+# 04 CI/CD：GitHub Actions 与流水线
 
-构建自动测试、构建矩阵、制品和发布流程[cite: 4]。
+**介绍**: 构建自动测试、构建矩阵、制品和发布流程[cite: 4]。
 
 ---
 

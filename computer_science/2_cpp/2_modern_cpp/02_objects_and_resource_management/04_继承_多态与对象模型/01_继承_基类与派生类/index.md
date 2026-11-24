@@ -1,6 +1,6 @@
-# 2.4.1 继承、基类与派生类
+# 01 继承、基类与派生类
 
-掌握 public/protected/private inheritance 与可替换性[cite: 4]。
+**介绍**: 掌握 public/protected/private inheritance 与可替换性[cite: 4]。
 
 ---
 

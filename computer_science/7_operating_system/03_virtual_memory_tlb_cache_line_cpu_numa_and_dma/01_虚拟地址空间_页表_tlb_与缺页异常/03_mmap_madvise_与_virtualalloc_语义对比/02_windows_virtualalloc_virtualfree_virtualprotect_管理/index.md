@@ -1,6 +1,6 @@
-# 3.1.3.2 Windows VirtualAlloc / VirtualFree / VirtualProtect 内存管理
+# 02 Windows VirtualAlloc / VirtualFree / VirtualProtect 内存管理
 
-区分 MEM_RESERVE 与 MEM_COMMIT 阶段，理解页面保护修改对工作集与锁的影响。
+**介绍**: 区分 MEM_RESERVE 与 MEM_COMMIT 阶段，理解页面保护修改对工作集与锁的影响。
 
 ---
 

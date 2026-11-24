@@ -1,13 +1,11 @@
-# 6.3.1 对象关系行为模式
+# 06.3.1 对象关系行为模式
 
-追踪变更、避免重复加载并控制加载时机。
+**介绍**: 追踪变更、避免重复加载并控制加载时机。
 
-## 本节目录
+## 目录
 
-- [6.3.1.1 工作单元 (Unit of Work)](06.3.1.1_工作单元_Unit_of_Work/index.md)
-- [6.3.1.2 标识映射 (Identity Map) 与延迟加载 (Lazy Load)](06.3.1.2_标识映射_Identity_Map_与延迟加载_Lazy_Load/index.md)
-
----
+- [06.3.1.1 工作单元 (Unit of Work)](06.3.1.1_工作单元_Unit_of_Work/index.md)
+- [06.3.1.2 标识映射 (Identity Map) 与延迟加载 (Lazy Load)](06.3.1.2_标识映射_Identity_Map_与延迟加载_Lazy_Load/index.md)
 
 ## 导航
 

@@ -1,6 +1,6 @@
-# 7.2.3.1 AuthorizationCreate / AuthorizationCopyRights 与授权数据库规则
+# 01 AuthorizationCreate / AuthorizationCopyRights 与授权数据库规则
 
-理解授权权利（Rights）请求、外部授权机制、交互提示与授权令牌在进程间传递的注意事项。
+**介绍**: 理解授权权利（Rights）请求、外部授权机制、交互提示与授权令牌在进程间传递的注意事项。
 
 ---
 

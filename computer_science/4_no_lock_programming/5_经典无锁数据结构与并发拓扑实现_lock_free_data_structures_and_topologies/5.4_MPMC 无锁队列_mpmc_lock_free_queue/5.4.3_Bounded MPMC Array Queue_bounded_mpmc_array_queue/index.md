@@ -1,6 +1,6 @@
 # 5.4.3 Bounded MPMC Array Queue  bounded mpmc array queue
 
-研究固定容量数组队列、序列号和槽位状态转换。
+**介绍**: 研究固定容量数组队列、序列号和槽位状态转换。
 
 ---
 

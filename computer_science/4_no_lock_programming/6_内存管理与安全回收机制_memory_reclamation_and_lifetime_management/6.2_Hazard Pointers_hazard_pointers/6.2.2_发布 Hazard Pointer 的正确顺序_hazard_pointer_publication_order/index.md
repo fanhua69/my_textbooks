@@ -1,6 +1,6 @@
 # 6.2.2 发布 Hazard Pointer 的正确顺序  hazard pointer publication order
 
-分析 load、store、验证指针及内存序配合。
+**介绍**: 分析 load、store、验证指针及内存序配合。
 
 ---
 

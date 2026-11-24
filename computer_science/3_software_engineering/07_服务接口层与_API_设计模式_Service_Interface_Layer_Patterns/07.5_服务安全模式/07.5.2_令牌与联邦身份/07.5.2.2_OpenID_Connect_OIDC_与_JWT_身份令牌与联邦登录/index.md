@@ -1,6 +1,6 @@
-# 7.4.2.2 OpenID Connect (OIDC) 与 JWT：身份令牌与联邦登录
+# 07.5.2.2 OpenID Connect (OIDC) 与 JWT：身份令牌与联邦登录
 
-在 OAuth 2.0 之上建立标准化身份层，掌握 ID Token 校验与 JWT 的安全使用要点。
+**介绍**: 在 OAuth 2.0 之上建立标准化身份层，掌握 ID Token 校验与 JWT 的安全使用要点。
 
 ---
 

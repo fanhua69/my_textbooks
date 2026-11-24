@@ -1,6 +1,6 @@
 # 5.2.2 SPSC 的 Release-Acquire 配对  spsc release acquire
 
-分析生产者发布 tail 与消费者 acquire 读取 tail 的同步关系。
+**介绍**: 分析生产者发布 tail 与消费者 acquire 读取 tail 的同步关系。
 
 ---
 

@@ -1,6 +1,6 @@
 # 6.2.3 扫描 Hazard Records 与延迟释放  scan hazard records
 
-介绍 retired 节点扫描、批量回收和复杂度。
+**介绍**: 介绍 retired 节点扫描、批量回收和复杂度。
 
 ---
 

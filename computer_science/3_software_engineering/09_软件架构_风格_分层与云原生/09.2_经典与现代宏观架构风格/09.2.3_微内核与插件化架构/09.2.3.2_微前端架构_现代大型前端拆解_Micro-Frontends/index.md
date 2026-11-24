@@ -1,6 +1,6 @@
-# 9.2.3.2 微前端架构 (Micro-Frontends)：现代大型前端拆解
+# 09.2.3.2 微前端架构 (Micro-Frontends)：现代大型前端拆解
 
-学习 Webpack 模块联邦（Module Federation）、微应用路由隔离与跨团队前端独立自治交付。
+**介绍**: 学习 Webpack 模块联邦（Module Federation）、微应用路由隔离与跨团队前端独立自治交付。
 
 ---
 

@@ -1,12 +1,10 @@
-# 6.4.1 查询构造
+# 06.4.1 查询构造
 
-以对象化方式构造查询而非拼接 SQL。
+**介绍**: 以对象化方式构造查询而非拼接 SQL。
 
-## 本节目录
+## 目录
 
-- [6.4.1.1 查询对象 (Query Object)、查询规约与 Criteria API](06.4.1.1_查询对象_Query_Object_查询规约与_Criteria_API/index.md)
-
----
+- [06.4.1.1 查询对象 (Query Object)、查询规约与 Criteria API](06.4.1.1_查询对象_Query_Object_查询规约与_Criteria_API/index.md)
 
 ## 导航
 

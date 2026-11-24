@@ -1,6 +1,6 @@
-# 6.2.2 原子操作与 std::atomic
+# 02 原子操作与 std::atomic
 
-理解原子对象、原子操作、is_lock_free/is_always_lock_free 与不可分割性[cite: 4, 11]。
+**介绍**: 理解原子对象、原子操作、is_lock_free/is_always_lock_free 与不可分割性[cite: 4, 11]。
 
 ---
 

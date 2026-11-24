@@ -1,6 +1,6 @@
-# 7.5.1 实战一：线程安全任务队列与线程池
+# 01 实战一：线程安全任务队列与线程池
 
-综合运用 thread、mutex、condition_variable、future 与 packaged_task 实现线程池。
+**介绍**: 综合运用 thread、mutex、condition_variable、future 与 packaged_task 实现线程池。
 
 ---
 

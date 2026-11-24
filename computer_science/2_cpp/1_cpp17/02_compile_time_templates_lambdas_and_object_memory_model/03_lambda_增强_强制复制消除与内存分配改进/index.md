@@ -1,14 +1,12 @@
-# 2.3 Lambda 增强、强制复制消除与内存/对象生命周期改进
+# 03 Lambda 增强、强制复制消除与内存/对象生命周期改进
 
-掌握按值捕获 *this、标准保证的复制消除（Guaranteed Copy Elision）、new T[n]{} 值初始化与对齐感知动态内存分配。
+**介绍**: 掌握按值捕获 *this、标准保证的复制消除（Guaranteed Copy Elision）、new T[n]{} 值初始化与对齐感知动态内存分配。
 
-## 本节目录
+## 目录
 
-- [2.3.1 Lambda 按值捕获 *this（[*this]）与 constexpr Lambda](01_lambda_捕获_this_与_constexpr_lambda/index.md)
-- [2.3.2 强制复制消除（Guaranteed Copy Elision）与 prvalue 纯右值语义重塑](02_强制复制消除与_prvalue_语义/index.md)
-- [2.3.3 new T[n]{} 默认值初始化、过对齐动态内存分配（std::align_val_t）与 std::hardware  destructive interference size](03_new_值初始化_对齐分配与缓存行常量/index.md)
-
----
+- [01 Lambda 按值捕获 *this（[*this]）与 constexpr Lambda](01_lambda_捕获_this_与_constexpr_lambda/index.md)
+- [02 强制复制消除（Guaranteed Copy Elision）与 prvalue 纯右值语义重塑](02_强制复制消除与_prvalue_语义/index.md)
+- [03 new T[n]{} 默认值初始化、过对齐动态内存分配（std::align_val_t）与 std::hardware  destructive interference size](03_new_值初始化_对齐分配与缓存行常量/index.md)
 
 ## 导航
 

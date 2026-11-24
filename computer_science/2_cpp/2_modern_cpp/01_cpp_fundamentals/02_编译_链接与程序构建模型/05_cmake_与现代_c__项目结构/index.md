@@ -1,6 +1,6 @@
-# 1.2.5 CMake 与现代 C++ 项目结构
+# 05 CMake 与现代 C++ 项目结构
 
-学习 target-based CMake、依赖管理、配置与构建目录组织[cite: 4]。
+**介绍**: 学习 target-based CMake、依赖管理、配置与构建目录组织[cite: 4]。
 
 ---
 

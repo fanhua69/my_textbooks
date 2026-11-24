@@ -1,14 +1,12 @@
-# 1.1.2 Linux、BSD/Mach（XNU）与 Windows NT 的诞生与架构分叉
+# 02 Linux、BSD/Mach（XNU）与 Windows NT 的诞生与架构分叉
 
-对比三大内核家族在可抢占性、驱动模型、I/O 架构与向后兼容性上的历史取舍与演进轨迹。
+**介绍**: 对比三大内核家族在可抢占性、驱动模型、I/O 架构与向后兼容性上的历史取舍与演进轨迹。
 
-## 本节目录
+## 目录
 
-- [1.1.2.1 Linux 宏内核演进与抢占模型变迁](01_linux_宏内核演进与抢占模型变迁/index.md)
-- [1.1.2.2 Mach 微内核、BSD 子系统与 XNU 混合内核融合](02_mach_微内核_bsd_子系统与_xnu_混合内核融合/index.md)
-- [1.1.2.3 Windows NT 内核设计与向后兼容子系统](03_windows_nt_内核设计与向后兼容子系统/index.md)
-
----
+- [01 Linux 宏内核演进与抢占模型变迁](01_linux_宏内核演进与抢占模型变迁/index.md)
+- [02 Mach 微内核、BSD 子系统与 XNU 混合内核融合](02_mach_微内核_bsd_子系统与_xnu_混合内核融合/index.md)
+- [03 Windows NT 内核设计与向后兼容子系统](03_windows_nt_内核设计与向后兼容子系统/index.md)
 
 ## 导航
 

@@ -1,14 +1,12 @@
-# 7.3 编译器与标准库支持情况
+# 03 编译器与标准库支持情况
 
-了解各主流实现对 C++11 的支持程度与差异，在工程中做出稳妥的选择。
+**介绍**: 了解各主流实现对 C++11 的支持程度与差异，在工程中做出稳妥的选择。
 
-## 本节目录
+## 目录
 
-- [7.3.1 主流编译器的 C++11 支持矩阵](01_主流编译器的_cpp11_支持矩阵/index.md)
-- [7.3.2 编译选项与   cplusplus 检测](02_编译选项与_cplusplus_检测/index.md)
-- [7.3.3 标准库实现差异：libstdc++、libc++ 与 MSVC STL](03_标准库实现差异_libstdcpp_libcpp_与_msvc_stl/index.md)
-
----
+- [01 主流编译器的 C++11 支持矩阵](01_主流编译器的_cpp11_支持矩阵/index.md)
+- [02 编译选项与   cplusplus 检测](02_编译选项与_cplusplus_检测/index.md)
+- [03 标准库实现差异：libstdc++、libc++ 与 MSVC STL](03_标准库实现差异_libstdcpp_libcpp_与_msvc_stl/index.md)
 
 ## 导航
 

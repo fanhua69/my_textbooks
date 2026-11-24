@@ -1,6 +1,6 @@
-# 4.2.3 类型关系查询
+# 03 类型关系查询
 
-使用 is_same、is_base_of 与 is_convertible 判断类型之间的关系。
+**介绍**: 使用 is_same、is_base_of 与 is_convertible 判断类型之间的关系。
 
 ---
 

@@ -1,6 +1,6 @@
 # 2.3.3 Memory Fence 与 Barrier  memory fence and barrier
 
-介绍硬件屏障的作用、成本和架构差异。
+**介绍**: 介绍硬件屏障的作用、成本和架构差异。
 
 ---
 

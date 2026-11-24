@@ -1,6 +1,6 @@
-# 4.2.1.2 MVP (Model-View-Presenter)
+# 04.2.1.2 MVP (Model-View-Presenter)
 
-以 Presenter 完全隔离视图与模型，区分被动视图 (Passive View) 与监督控制器 (Supervising Controller)，提升视图层可测试性。
+**介绍**: 以 Presenter 完全隔离视图与模型，区分被动视图 (Passive View) 与监督控制器 (Supervising Controller)，提升视图层可测试性。
 
 ---
 

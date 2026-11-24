@@ -1,6 +1,6 @@
-# 5.3.1 实战项目：跨三平台低延迟共享内存无锁消息总线
+# 01 实战项目：跨三平台低延迟共享内存无锁消息总线
 
-实现支持 Linux（memfd + futex）、macOS（xpc_shmem/shm + ulock）与 Windows（FileMapping + WaitOnAddress）的统一总线。
+**介绍**: 实现支持 Linux（memfd + futex）、macOS（xpc_shmem/shm + ulock）与 Windows（FileMapping + WaitOnAddress）的统一总线。
 
 ---
 

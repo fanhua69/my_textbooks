@@ -1,6 +1,6 @@
-# 1.1.4 如何阅读标准、提案与编译器文档
+# 04 如何阅读标准、提案与编译器文档
 
-认识 ISO C++ 标准、WG21 papers、cppreference 与编译器文档的用途[cite: 4]。
+**介绍**: 认识 ISO C++ 标准、WG21 papers、cppreference 与编译器文档的用途[cite: 4]。
 
 ---
 

@@ -1,6 +1,6 @@
-# 4.3.4 declval 与成员检测惯用法
+# 04 declval 与成员检测惯用法
 
-使用 declval 与 decltype 构造成员存在性检测，实现简单的 trait。
+**介绍**: 使用 declval 与 decltype 构造成员存在性检测，实现简单的 trait。
 
 ---
 

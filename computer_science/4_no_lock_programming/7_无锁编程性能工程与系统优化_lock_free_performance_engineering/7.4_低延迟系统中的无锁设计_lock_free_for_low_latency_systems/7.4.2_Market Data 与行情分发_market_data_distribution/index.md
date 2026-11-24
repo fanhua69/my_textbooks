@@ -1,6 +1,6 @@
 # 7.4.2 Market Data 与行情分发  market data distribution
 
-分析行情采集、解码、扇出和订阅者隔离。
+**介绍**: 分析行情采集、解码、扇出和订阅者隔离。
 
 ---
 

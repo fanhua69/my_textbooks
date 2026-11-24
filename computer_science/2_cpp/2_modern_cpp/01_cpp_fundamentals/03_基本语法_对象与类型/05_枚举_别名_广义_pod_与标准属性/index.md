@@ -1,6 +1,6 @@
-# 1.3.5 枚举、别名、广义 POD 与标准属性
+# 05 枚举、别名、广义 POD 与标准属性
 
-学习 enum class、using、struct、class、广义 POD（Trivial / Standard-layout）以及 [[nodiscard]]、[[maybe_unused]]、[[fallthrough]] 等标准属性[cite: 4, 12, 13, 14]。
+**介绍**: 学习 enum class、using、struct、class、广义 POD（Trivial / Standard-layout）以及 [[nodiscard]]、[[maybe_unused]]、[[fallthrough]] 等标准属性[cite: 4, 12, 13, 14]。
 
 ---
 

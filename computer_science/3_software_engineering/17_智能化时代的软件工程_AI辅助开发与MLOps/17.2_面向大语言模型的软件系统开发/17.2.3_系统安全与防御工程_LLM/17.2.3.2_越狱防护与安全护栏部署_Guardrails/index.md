@@ -1,6 +1,6 @@
 # 17.2.3.2 越狱防护与安全护栏 (Guardrails) 部署
 
-在输入端与输出端部署前置校验与安全护栏（NeMo Guardrails / Llama Guard），拦截越狱话术与敏感隐私外泄。
+**介绍**: 在输入端与输出端部署前置校验与安全护栏（NeMo Guardrails / Llama Guard），拦截越狱话术与敏感隐私外泄。
 
 ---
 

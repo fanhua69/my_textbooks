@@ -1,6 +1,6 @@
-# 5.1.4 thread local 存储期
+# 04 thread local 存储期
 
-掌握 thread_local 变量的初始化与销毁时机，以及与静态存储期的区别。
+**介绍**: 掌握 thread_local 变量的初始化与销毁时机，以及与静态存储期的区别。
 
 ---
 

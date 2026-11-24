@@ -1,6 +1,6 @@
-# 8.1.1.1 进程、服务与日志排查：ps、top/htop、systemctl、journalctl、lsof、ss
+# 01 进程、服务与日志排查：ps、top/htop、systemctl、journalctl、lsof、ss
 
-定位异常进程、服务启动失败、文件描述符/本地 Socket 占用与系统/单元日志。
+**介绍**: 定位异常进程、服务启动失败、文件描述符/本地 Socket 占用与系统/单元日志。
 
 ---
 

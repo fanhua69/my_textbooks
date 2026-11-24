@@ -1,6 +1,6 @@
-# 4.3.1 模板元编程的基本模型
+# 01 模板元编程的基本模型
 
-理解 template instantiation 如何承担编译期计算[cite: 4]。
+**介绍**: 理解 template instantiation 如何承担编译期计算[cite: 4]。
 
 ---
 

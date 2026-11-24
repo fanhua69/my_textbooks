@@ -1,6 +1,6 @@
 # 17.3.5.1 数据漂移 (Data Drift) 与概念漂移 (Concept Drift) 检测
 
-运用 Kolmogorov-Smirnov 检验、PSI（群体稳定性指标）等统计学方法，实时监控线上输入特征与预测目标的分布偏移。
+**介绍**: 运用 Kolmogorov-Smirnov 检验、PSI（群体稳定性指标）等统计学方法，实时监控线上输入特征与预测目标的分布偏移。
 
 ---
 

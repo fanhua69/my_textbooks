@@ -1,6 +1,6 @@
-# 1.4.1 值类别：lvalue、xvalue 与 prvalue
+# 01 值类别：lvalue、xvalue 与 prvalue
 
-建立 glvalue、rvalue 等值类别的完整关系图[cite: 4]。
+**介绍**: 建立 glvalue、rvalue 等值类别的完整关系图[cite: 4]。
 
 ---
 

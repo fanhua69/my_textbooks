@@ -1,6 +1,6 @@
 # 1.1.2 数据竞争、竞态条件与线程安全 data race race condition and thread safety
 
-深入区分 **Data Race（数据竞争）**、**Race Condition（竞态条件）**、**Thread Safety（线程安全）** 与 **Reentrant（可重入性）**，彻底理解 C++ 内存模型下数据竞争为何属于**未定义行为（Undefined Behavior, UB）**，并掌握排查、消除竞态与编写可靠并发代码的工程准则。
+**介绍**: 深入区分 **Data Race（数据竞争）**、**Race Condition（竞态条件）**、**Thread Safety（线程安全）** 与 **Reentrant（可重入性）**，彻底理解 C++ 内存模型下数据竞争为何属于**未定义行为（Undefined Behavior, UB）**，并掌握排查、消除竞态与编写可靠并发代码的工程准则。
 
 ## 小节索引
 

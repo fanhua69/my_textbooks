@@ -1,15 +1,13 @@
-# 3.3 override、final、inline namespace 与右角括号
+# 03 override、final、inline namespace 与右角括号
 
-掌握继承与命名空间相关的新关键字，以及对旧语法缺陷的修正。
+**介绍**: 掌握继承与命名空间相关的新关键字，以及对旧语法缺陷的修正。
 
-## 本节目录
+## 目录
 
-- [3.3.1 override 与 final](01_override_与_final/index.md)
-- [3.3.2 成员函数引用限定符](02_成员函数引用限定符/index.md)
-- [3.3.3 inline namespace 与库版本管理](03_inline_namespace_与库版本管理/index.md)
-- [3.3.4 右角括号](04_右角括号/index.md)
-
----
+- [01 override 与 final](01_override_与_final/index.md)
+- [02 成员函数引用限定符](02_成员函数引用限定符/index.md)
+- [03 inline namespace 与库版本管理](03_inline_namespace_与库版本管理/index.md)
+- [04 右角括号](04_右角括号/index.md)
 
 ## 导航
 

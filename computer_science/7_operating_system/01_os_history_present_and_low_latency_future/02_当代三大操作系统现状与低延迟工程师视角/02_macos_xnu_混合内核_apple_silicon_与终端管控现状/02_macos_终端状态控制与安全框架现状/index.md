@@ -1,6 +1,6 @@
-# 1.2.2.2 macOS 终端状态控制与安全框架现状
+# 02 macOS 终端状态控制与安全框架现状
 
-梳理 LaunchDaemon、System Extension、XPC、TCC/PPPC 与 MDM 在现代企业终端管理中的定位。
+**介绍**: 梳理 LaunchDaemon、System Extension、XPC、TCC/PPPC 与 MDM 在现代企业终端管理中的定位。
 
 ---
 

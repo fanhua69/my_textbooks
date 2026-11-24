@@ -1,6 +1,6 @@
-# 1.2.2 声明、定义与 One Definition Rule
+# 02 声明、定义与 One Definition Rule
 
-区分 declaration、definition、ODR-use 与违反 ODR 的后果[cite: 4]。
+**介绍**: 区分 declaration、definition、ODR-use 与违反 ODR 的后果[cite: 4]。
 
 ---
 

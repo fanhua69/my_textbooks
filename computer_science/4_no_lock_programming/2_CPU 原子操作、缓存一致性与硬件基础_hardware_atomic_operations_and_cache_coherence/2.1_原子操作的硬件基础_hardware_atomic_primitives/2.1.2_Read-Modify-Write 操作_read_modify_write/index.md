@@ -1,6 +1,6 @@
 # 2.1.2 Read-Modify-Write 操作  read modify write
 
-理解 fetch_add、exchange、compare-exchange 等读改写操作。
+**介绍**: 理解 fetch_add、exchange、compare-exchange 等读改写操作。
 
 ---
 

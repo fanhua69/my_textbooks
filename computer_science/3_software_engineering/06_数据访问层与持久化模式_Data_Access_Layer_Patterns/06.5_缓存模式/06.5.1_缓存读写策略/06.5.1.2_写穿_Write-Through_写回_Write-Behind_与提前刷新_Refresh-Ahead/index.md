@@ -1,6 +1,6 @@
-# 6.5.1.2 写穿 (Write-Through)、写回 (Write-Behind) 与提前刷新 (Refresh-Ahead)
+# 06.5.1.2 写穿 (Write-Through)、写回 (Write-Behind) 与提前刷新 (Refresh-Ahead)
 
-权衡写策略在一致性、写延迟与丢数风险上的差异，并用提前刷新平滑热点过期。
+**介绍**: 权衡写策略在一致性、写延迟与丢数风险上的差异，并用提前刷新平滑热点过期。
 
 ---
 

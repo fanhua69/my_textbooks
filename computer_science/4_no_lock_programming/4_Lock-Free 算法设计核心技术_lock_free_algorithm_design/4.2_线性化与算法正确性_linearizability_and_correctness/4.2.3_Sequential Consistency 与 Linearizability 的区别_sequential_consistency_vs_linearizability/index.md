@@ -1,6 +1,6 @@
 # 4.2.3 Sequential Consistency 与 Linearizability 的区别  sequential consistency vs linearizability
 
-区分内存模型的顺序保证与对象操作的实时语义。
+**介绍**: 区分内存模型的顺序保证与对象操作的实时语义。
 
 ---
 

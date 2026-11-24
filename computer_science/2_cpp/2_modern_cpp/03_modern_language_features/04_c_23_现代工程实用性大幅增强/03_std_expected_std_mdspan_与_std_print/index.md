@@ -1,6 +1,6 @@
-# 3.4.3 std::expected、std::mdspan 与 std::print
+# 03 std::expected、std::mdspan 与 std::print
 
-掌握预期值/错误值 monadic 操作、多维非拥有视图 mdspan 与标准格式化输出 print/println[cite: 4]。
+**介绍**: 掌握预期值/错误值 monadic 操作、多维非拥有视图 mdspan 与标准格式化输出 print/println[cite: 4]。
 
 ---
 

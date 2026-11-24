@@ -1,6 +1,6 @@
 # 17.3.2.1 数据版本控制：DVC 与大文件存储集成
 
-运用 Data Version Control (DVC) 将庞大的数据集与模型权重哈希版本化纳入 Git 追踪，底层对接 S3/GCS 对象存储。
+**介绍**: 运用 Data Version Control (DVC) 将庞大的数据集与模型权重哈希版本化纳入 Git 追踪，底层对接 S3/GCS 对象存储。
 
 ---
 

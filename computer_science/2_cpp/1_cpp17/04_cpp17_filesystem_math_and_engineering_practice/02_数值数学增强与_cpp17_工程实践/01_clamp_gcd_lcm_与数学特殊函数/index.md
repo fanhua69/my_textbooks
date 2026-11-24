@@ -1,6 +1,6 @@
-# 4.2.1 std::clamp、std::gcd、std::lcm 与 C++17 数学特殊函数
+# 01 std::clamp、std::gcd、std::lcm 与 C++17 数学特殊函数
 
-掌握数值钳位 std::clamp、最大公约数/最小公倍数 std::gcd / std::lcm 以及贝塞尔、勒让德、黎曼 zeta、椭圆积分等特殊数学函数。
+**介绍**: 掌握数值钳位 std::clamp、最大公约数/最小公倍数 std::gcd / std::lcm 以及贝塞尔、勒让德、黎曼 zeta、椭圆积分等特殊数学函数。
 
 ---
 

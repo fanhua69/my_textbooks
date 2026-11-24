@@ -1,8 +1,8 @@
 # 3.3 Memory Order 六种内存序  memory order
 
-深入理解 relaxed、consume、acquire、release、acq_rel、seq_cst 的语义和适用场景。
+**介绍**: 深入理解 relaxed、consume、acquire、release、acq_rel、seq_cst 的语义和适用场景。
 
-## 本节目录
+## 目录
 
 - [3.3.1 memory  order relaxed memory order relaxed](3.3.1_memory_order_relaxed_memory_order_relaxed/index.md)
 - [3.3.2 memory  order consume memory order consume](3.3.2_memory_order_consume_memory_order_consume/index.md)
@@ -11,8 +11,6 @@
 - [3.3.5 memory  order acq rel memory order acq rel](3.3.5_memory_order_acq_rel_memory_order_acq_rel/index.md)
 - [3.3.6 memory  order seq cst memory order seq cst](3.3.6_memory_order_seq_cst_memory_order_seq_cst/index.md)
 - [3.3.7 六种内存序对照与选择方法  memory order comparison](3.3.7_六种内存序对照与选择方法_memory_order_comparison/index.md)
-
----
 
 ## 导航
 

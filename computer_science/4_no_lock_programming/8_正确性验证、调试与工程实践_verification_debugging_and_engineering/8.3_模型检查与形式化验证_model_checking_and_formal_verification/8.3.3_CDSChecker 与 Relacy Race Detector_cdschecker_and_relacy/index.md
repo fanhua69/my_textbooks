@@ -1,6 +1,6 @@
 # 8.3.3 CDSChecker 与 Relacy Race Detector  cdschecker and relacy
 
-了解专门用于并发算法探索和验证的工具及其使用边界。
+**介绍**: 了解专门用于并发算法探索和验证的工具及其使用边界。
 
 ---
 

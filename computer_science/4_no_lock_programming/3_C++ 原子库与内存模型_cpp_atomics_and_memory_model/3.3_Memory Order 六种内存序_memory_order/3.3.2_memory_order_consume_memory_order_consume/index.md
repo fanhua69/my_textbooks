@@ -1,6 +1,6 @@
 # 3.3.2 memory  order consume memory order consume
 
-介绍依赖序语义、历史实现困难及实际使用时的注意事项。
+**介绍**: 介绍依赖序语义、历史实现困难及实际使用时的注意事项。
 
 ---
 

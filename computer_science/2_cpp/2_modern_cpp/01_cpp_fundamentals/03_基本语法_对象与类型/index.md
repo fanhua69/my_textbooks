@@ -1,16 +1,14 @@
-# 1.3 基本语法、对象与类型
+# 03 基本语法、对象与类型
 
-掌握表达式、语句、对象生命周期和 C++ 类型系统的基本概念[cite: 4]。
+**介绍**: 掌握表达式、语句、对象生命周期和 C++ 类型系统的基本概念[cite: 4]。
 
-## 本节目录
+## 目录
 
-- [1.3.1 变量、对象、初始化与作用域](01_变量_对象_初始化与作用域/index.md)
-- [1.3.2 基本类型、字面量与类型转换](02_基本类型_字面量与类型转换/index.md)
-- [1.3.3 const、constexpr 与 consteval](03_const_constexpr_与_consteval/index.md)
-- [1.3.4 auto、decltype 与类型推导](04_auto_decltype_与类型推导/index.md)
-- [1.3.5 枚举、别名、广义 POD 与标准属性](05_枚举_别名_广义_pod_与标准属性/index.md)
-
----
+- [01 变量、对象、初始化与作用域](01_变量_对象_初始化与作用域/index.md)
+- [02 基本类型、字面量与类型转换](02_基本类型_字面量与类型转换/index.md)
+- [03 const、constexpr 与 consteval](03_const_constexpr_与_consteval/index.md)
+- [04 auto、decltype 与类型推导](04_auto_decltype_与类型推导/index.md)
+- [05 枚举、别名、广义 POD 与标准属性](05_枚举_别名_广义_pod_与标准属性/index.md)
 
 ## 导航
 

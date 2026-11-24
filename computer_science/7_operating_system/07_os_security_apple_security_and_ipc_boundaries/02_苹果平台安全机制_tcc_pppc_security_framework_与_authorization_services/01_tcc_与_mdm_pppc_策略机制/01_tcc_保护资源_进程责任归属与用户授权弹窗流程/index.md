@@ -1,6 +1,6 @@
-# 7.2.1.1 TCC 保护资源、进程责任归属与用户授权弹窗流程
+# 01 TCC 保护资源、进程责任归属与用户授权弹窗流程
 
-理解 Full Disk Access、Accessibility、AppleEvents、Camera/Microphone 等权限的判定与授权逻辑。
+**介绍**: 理解 Full Disk Access、Accessibility、AppleEvents、Camera/Microphone 等权限的判定与授权逻辑。
 
 ---
 

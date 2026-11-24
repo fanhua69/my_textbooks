@@ -1,6 +1,6 @@
-# 2.3.4 static assert 编译期断言
+# 04 static assert 编译期断言
 
-使用 static_assert 校验类型特征、常量与平台假设，并给出清晰的诊断信息。
+**介绍**: 使用 static_assert 校验类型特征、常量与平台假设，并给出清晰的诊断信息。
 
 ---
 

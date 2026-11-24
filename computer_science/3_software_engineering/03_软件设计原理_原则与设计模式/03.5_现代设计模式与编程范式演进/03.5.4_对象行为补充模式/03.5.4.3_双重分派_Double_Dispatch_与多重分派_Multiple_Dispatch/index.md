@@ -1,6 +1,6 @@
-# 3.5.4.3 双重分派 (Double Dispatch) 与多重分派 (Multiple Dispatch)
+# 03.5.4.3 双重分派 (Double Dispatch) 与多重分派 (Multiple Dispatch)
 
-理解 Visitor 背后的分派机制，以及在 C++ 中用虚函数、std::visit 与重载实现多分派。
+**介绍**: 理解 Visitor 背后的分派机制，以及在 C++ 中用虚函数、std::visit 与重载实现多分派。
 
 ---
 

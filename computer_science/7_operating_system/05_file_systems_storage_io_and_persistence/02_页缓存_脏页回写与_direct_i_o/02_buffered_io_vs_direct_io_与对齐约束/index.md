@@ -1,6 +1,6 @@
-# 5.2.2 Buffered I/O vs Direct I/O（O DIRECT / FILE FLAG NO BUFFERING）与对齐约束
+# 02 Buffered I/O vs Direct I/O（O DIRECT / FILE FLAG NO BUFFERING）与对齐约束
 
-理解绕过页缓存避免双重缓存与额外拷贝的原理，以及块大小/内存地址对齐限制。
+**介绍**: 理解绕过页缓存避免双重缓存与额外拷贝的原理，以及块大小/内存地址对齐限制。
 
 ---
 

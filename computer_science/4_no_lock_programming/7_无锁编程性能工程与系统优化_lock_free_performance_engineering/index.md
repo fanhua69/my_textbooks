@@ -1,15 +1,13 @@
 # 7 无锁编程性能工程与系统优化  lock free performance engineering
 
-将算法正确性转化为可测量的系统性能。重点关注缓存一致性、原子竞争、内存布局、NUMA、线程亲和性和尾延迟。
+**介绍**: 将算法正确性转化为可测量的系统性能。重点关注缓存一致性、原子竞争、内存布局、NUMA、线程亲和性和尾延迟。
 
-## 本节目录
+## 目录
 
 - [7.1 性能指标与基准测试  metrics and benchmarking](7.1_性能指标与基准测试_metrics_and_benchmarking/index.md)
 - [7.2 缓存与内存布局优化  cache and memory layout optimization](7.2_缓存与内存布局优化_cache_and_memory_layout_optimization/index.md)
-- [7.3 线程调度与 NUMA 优化  thread scheduling and numa](7.3_线程调度与%20NUMA%20优化_thread_scheduling_and_numa/index.md)
+- [7.3 线程调度与 NUMA 优化  thread scheduling and numa](7.3_%E7%BA%BF%E7%A8%8B%E8%B0%83%E5%BA%A6%E4%B8%8E%20NUMA%20%E4%BC%98%E5%8C%96_thread_scheduling_and_numa/index.md)
 - [7.4 低延迟系统中的无锁设计  lock free for low latency systems](7.4_低延迟系统中的无锁设计_lock_free_for_low_latency_systems/index.md)
-
----
 
 ## 导航
 

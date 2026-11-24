@@ -1,6 +1,6 @@
-# 6.1.1 std::thread、std::jthread 与线程生命周期
+# 01 std::thread、std::jthread 与线程生命周期
 
-理解线程创建、join、detach、stop_token 协作取消与异常处理[cite: 4, 11]。
+**介绍**: 理解线程创建、join、detach、stop_token 协作取消与异常处理[cite: 4, 11]。
 
 ---
 

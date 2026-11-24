@@ -1,6 +1,6 @@
-# 3.5.3.1 Reactive Streams 规范与异步非阻塞数据流
+# 03.5.3.1 Reactive Streams 规范与异步非阻塞数据流
 
-掌握 Publisher、Subscriber、Subscription 与 Processor 四大接口契约与事件流转。
+**介绍**: 掌握 Publisher、Subscriber、Subscription 与 Processor 四大接口契约与事件流转。
 
 ---
 

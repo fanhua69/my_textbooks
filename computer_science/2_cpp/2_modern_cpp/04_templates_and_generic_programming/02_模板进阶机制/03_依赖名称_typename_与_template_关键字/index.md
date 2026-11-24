@@ -1,6 +1,6 @@
-# 4.2.3 依赖名称、typename 与 template 关键字
+# 03 依赖名称、typename 与 template 关键字
 
-理解 dependent name 的解析规则[cite: 4]。
+**介绍**: 理解 dependent name 的解析规则[cite: 4]。
 
 ---
 

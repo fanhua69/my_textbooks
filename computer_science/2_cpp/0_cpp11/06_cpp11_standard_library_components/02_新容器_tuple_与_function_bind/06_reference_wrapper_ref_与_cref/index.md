@@ -1,6 +1,6 @@
-# 6.2.6 reference wrapper：ref 与 cref
+# 06 reference wrapper：ref 与 cref
 
-使用 reference_wrapper 在按值传递的接口中传递引用，如 bind 与 thread 的参数。
+**介绍**: 使用 reference_wrapper 在按值传递的接口中传递引用，如 bind 与 thread 的参数。
 
 ---
 

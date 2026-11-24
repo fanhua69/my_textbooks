@@ -1,14 +1,12 @@
-# 3.3 NUMA 架构、Direct Access Memory（DMA / 零拷贝）与物理内存子系统
+# 03 NUMA 架构、Direct Access Memory（DMA / 零拷贝）与物理内存子系统
 
-掌握多 Socket NUMA 拓扑、Direct Access Memory（DMA / IOMMU / GPUDirect / 共享内存零拷贝）以及内核/用户态内存分配与回收机制。
+**介绍**: 掌握多 Socket NUMA 拓扑、Direct Access Memory（DMA / IOMMU / GPUDirect / 共享内存零拷贝）以及内核/用户态内存分配与回收机制。
 
-## 本节目录
+## 目录
 
-- [3.3.1 NUMA 节点拓扑、跨节点访存延迟、内存策略与 macOS UMA 对比](01_numa_拓扑_内存策略与_uma_对比/index.md)
-- [3.3.2 Direct Access Memory：DMA、IOMMU/SMMU、缓存一致性与零拷贝通路](02_direct_access_memory_dma_iommu_与零拷贝通路/index.md)
-- [3.3.3 内核/用户态内存分配器、大页（HugeTLB）与回收/淘汰机制](03_内存分配器_大页与回收淘汰机制/index.md)
-
----
+- [01 NUMA 节点拓扑、跨节点访存延迟、内存策略与 macOS UMA 对比](01_numa_拓扑_内存策略与_uma_对比/index.md)
+- [02 Direct Access Memory：DMA、IOMMU/SMMU、缓存一致性与零拷贝通路](02_direct_access_memory_dma_iommu_与零拷贝通路/index.md)
+- [03 内核/用户态内存分配器、大页（HugeTLB）与回收/淘汰机制](03_内存分配器_大页与回收淘汰机制/index.md)
 
 ## 导航
 

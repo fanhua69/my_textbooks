@@ -1,6 +1,6 @@
-# 2.2.2 辅助数据（cmsg）：SCM_RIGHTS 与 SCM  CREDENTIALS
+# 02 辅助数据（cmsg）：SCM_RIGHTS 与 SCM  CREDENTIALS
 
-实现跨进程传递文件描述符（fd）以及基于内核验证的 ucred 身份认证。
+**介绍**: 实现跨进程传递文件描述符（fd）以及基于内核验证的 ucred 身份认证。
 
 ---
 

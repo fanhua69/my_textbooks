@@ -1,17 +1,15 @@
-# 6.1 智能指针：unique_ptr、shared_ptr 与 weak  ptr
+# 01 智能指针：unique_ptr、shared_ptr 与 weak  ptr
 
-掌握 C++11 智能指针的所有权语义、使用方式与常见陷阱。
+**介绍**: 掌握 C++11 智能指针的所有权语义、使用方式与常见陷阱。
 
-## 本节目录
+## 目录
 
-- [6.1.1 unique ptr 与独占所有权](01_unique_ptr_与独占所有权/index.md)
-- [6.1.2 shared_ptr 与 make  shared](02_shared_ptr_与_make_shared/index.md)
-- [6.1.3 weak ptr 与循环引用](03_weak_ptr_与循环引用/index.md)
-- [6.1.4 enable  shared from this](04_enable_shared_from_this/index.md)
-- [6.1.5 智能指针的线程安全与原子操作](05_智能指针的线程安全与原子操作/index.md)
-- [6.1.6 auto ptr 的废弃与迁移](06_auto_ptr_的废弃与迁移/index.md)
-
----
+- [01 unique ptr 与独占所有权](01_unique_ptr_与独占所有权/index.md)
+- [02 shared_ptr 与 make  shared](02_shared_ptr_与_make_shared/index.md)
+- [03 weak ptr 与循环引用](03_weak_ptr_与循环引用/index.md)
+- [04 enable  shared from this](04_enable_shared_from_this/index.md)
+- [05 智能指针的线程安全与原子操作](05_智能指针的线程安全与原子操作/index.md)
+- [06 auto ptr 的废弃与迁移](06_auto_ptr_的废弃与迁移/index.md)
 
 ## 导航
 

@@ -1,6 +1,6 @@
-# 6.4.4 shuffle 与 rand 的迁移
+# 04 shuffle 与 rand 的迁移
 
-使用 shuffle 取代 random_shuffle，并将旧代码中的 rand() 迁移到 <random>。
+**介绍**: 使用 shuffle 取代 random_shuffle，并将旧代码中的 rand() 迁移到 <random>。
 
 ---
 

@@ -1,6 +1,6 @@
-# 8.1.1.2 调度、亲和性、NUMA 与内存/I/O 观测：taskset、chrt、numactl、vmstat、iostat
+# 02 调度、亲和性、NUMA 与内存/I/O 观测：taskset、chrt、numactl、vmstat、iostat
 
-验证线程绑核、调度策略、跨节点内存分布及上下文切换/缺页/I/O 等待趋势。
+**介绍**: 验证线程绑核、调度策略、跨节点内存分布及上下文切换/缺页/I/O 等待趋势。
 
 ---
 

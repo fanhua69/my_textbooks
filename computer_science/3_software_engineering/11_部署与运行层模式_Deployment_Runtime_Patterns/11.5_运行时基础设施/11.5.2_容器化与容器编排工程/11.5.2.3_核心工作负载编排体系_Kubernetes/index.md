@@ -1,6 +1,6 @@
 # 11.5.2.3 Kubernetes 核心工作负载编排体系
 
-掌握 Deployment 滚动更新、StatefulSet 存储挂载、Service 服务暴露、Ingress 路由与 ConfigMap/Secret 配置注入。
+**介绍**: 掌握 Deployment 滚动更新、StatefulSet 存储挂载、Service 服务暴露、Ingress 路由与 ConfigMap/Secret 配置注入。
 
 ---
 

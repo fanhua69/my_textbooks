@@ -1,16 +1,14 @@
 # 3 C++ 原子库与内存模型  cpp atomics and memory model
 
-系统掌握 C++11 引入的内存模型与原子库，并追踪 C++14/17/20/23/26 的相关演进。重点理解 memory_order、happens-before 和正确发布数据的方式。
+**介绍**: 系统掌握 C++11 引入的内存模型与原子库，并追踪 C++14/17/20/23/26 的相关演进。重点理解 memory_order、happens-before 和正确发布数据的方式。
 
-## 本节目录
+## 目录
 
-- [3.1 C++ 并发内存模型  cpp concurrency memory model](3.1_C++%20并发内存模型_cpp_concurrency_memory_model/index.md)
-- [3.2 std::atomic 全面介绍  std atomic](3.2_std__atomic%20全面介绍_std_atomic/index.md)
-- [3.3 Memory Order 六种内存序  memory order](3.3_Memory%20Order%20六种内存序_memory_order/index.md)
+- [3.1 C++ 并发内存模型  cpp concurrency memory model](3.1_C%2B%2B%20%E5%B9%B6%E5%8F%91%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B_cpp_concurrency_memory_model/index.md)
+- [3.2 std::atomic 全面介绍  std atomic](3.2_std__atomic%20%E5%85%A8%E9%9D%A2%E4%BB%8B%E7%BB%8D_std_atomic/index.md)
+- [3.3 Memory Order 六种内存序  memory order](3.3_Memory%20Order%20%E5%85%AD%E7%A7%8D%E5%86%85%E5%AD%98%E5%BA%8F_memory_order/index.md)
 - [3.4 Fence、发布订阅与同步模式  fences and synchronization patterns](3.4_Fence、发布订阅与同步模式_fences_and_synchronization_patterns/index.md)
-- [3.5 C++ 标准演进与并发设施  cpp standard evolution](3.5_C++%20标准演进与并发设施_cpp_standard_evolution/index.md)
-
----
+- [3.5 C++ 标准演进与并发设施  cpp standard evolution](3.5_C%2B%2B%20%E6%A0%87%E5%87%86%E6%BC%94%E8%BF%9B%E4%B8%8E%E5%B9%B6%E5%8F%91%E8%AE%BE%E6%96%BD_cpp_standard_evolution/index.md)
 
 ## 导航
 

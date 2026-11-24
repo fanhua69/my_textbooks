@@ -1,6 +1,6 @@
 # 8.3.1 状态空间与线程交错爆炸  state space and interleaving explosion
 
-理解并发状态组合数量为何快速增长。
+**介绍**: 理解并发状态组合数量为何快速增长。
 
 ---
 

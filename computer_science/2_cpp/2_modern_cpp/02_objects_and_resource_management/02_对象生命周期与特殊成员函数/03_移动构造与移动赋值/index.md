@@ -1,6 +1,6 @@
-# 2.2.3 移动构造与移动赋值
+# 03 移动构造与移动赋值
 
-理解 move semantics、资源转移、noexcept 移动与 moved-from state[cite: 4, 5, 12]。
+**介绍**: 理解 move semantics、资源转移、noexcept 移动与 moved-from state[cite: 4, 5, 12]。
 
 ---
 

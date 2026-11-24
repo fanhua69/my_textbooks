@@ -1,12 +1,10 @@
-# 8.3.2 可靠消费模式
+# 08.3.2 可靠消费模式
 
-在至少一次投递下保证处理正确。
+**介绍**: 在至少一次投递下保证处理正确。
 
-## 本节目录
+## 目录
 
-- [8.3.2.1 幂等接收者 (Idempotent Receiver) 与收件箱模式 (Inbox Pattern)](08.3.2.1_幂等接收者_Idempotent_Receiver_与收件箱模式_Inbox_Pattern/index.md)
-
----
+- [08.3.2.1 幂等接收者 (Idempotent Receiver) 与收件箱模式 (Inbox Pattern)](08.3.2.1_幂等接收者_Idempotent_Receiver_与收件箱模式_Inbox_Pattern/index.md)
 
 ## 导航
 

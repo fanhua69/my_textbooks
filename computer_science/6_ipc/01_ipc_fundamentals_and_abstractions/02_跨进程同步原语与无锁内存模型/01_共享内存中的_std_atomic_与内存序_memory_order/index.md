@@ -1,6 +1,6 @@
-# 1.2.1 共享内存中的 std::atomic 与内存序（Memory Order）
+# 01 共享内存中的 std::atomic 与内存序（Memory Order）
 
-理解 lock-free 原子对象在跨进程映射内存中的合法性要求、缓存一致性与 acquire-release 语义。
+**介绍**: 理解 lock-free 原子对象在跨进程映射内存中的合法性要求、缓存一致性与 acquire-release 语义。
 
 ---
 

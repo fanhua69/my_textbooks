@@ -1,6 +1,6 @@
-# 5.2.3 互斥量与锁管理
+# 03 互斥量与锁管理
 
-掌握 mutex 家族与 lock_guard、unique_lock，理解 RAII 加锁与所有权转移。
+**介绍**: 掌握 mutex 家族与 lock_guard、unique_lock，理解 RAII 加锁与所有权转移。
 
 ---
 

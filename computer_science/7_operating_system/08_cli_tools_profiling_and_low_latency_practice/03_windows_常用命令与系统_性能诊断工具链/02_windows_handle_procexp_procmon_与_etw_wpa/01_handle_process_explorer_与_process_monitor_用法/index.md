@@ -1,6 +1,6 @@
-# 8.3.2.1 handle、Process Explorer 与 Process Monitor 句柄与 IPC 追踪
+# 01 handle、Process Explorer 与 Process Monitor 句柄与 IPC 追踪
 
-排查未关闭的命名管道/事件/文件映射句柄，追踪进程行为、访问被拒与跨进程交互。
+**介绍**: 排查未关闭的命名管道/事件/文件映射句柄，追踪进程行为、访问被拒与跨进程交互。
 
 ---
 

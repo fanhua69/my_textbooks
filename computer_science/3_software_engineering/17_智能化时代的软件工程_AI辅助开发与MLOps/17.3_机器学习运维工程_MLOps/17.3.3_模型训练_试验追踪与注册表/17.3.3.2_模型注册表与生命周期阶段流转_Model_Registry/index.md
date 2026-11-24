@@ -1,6 +1,6 @@
 # 17.3.3.2 模型注册表 (Model Registry) 与生命周期阶段流转
 
-集中管理模型版本元数据，实现从 Candidate -> Staging -> Production -> Archived 的严格审批流转与审计追踪。
+**介绍**: 集中管理模型版本元数据，实现从 Candidate -> Staging -> Production -> Archived 的严格审批流转与审计追踪。
 
 ---
 

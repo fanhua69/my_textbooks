@@ -1,14 +1,12 @@
-# 5.3.1 领域模型构件
+# 05.3.1 领域模型构件
 
-用实体、值对象、聚合与领域事件表达业务概念。
+**介绍**: 用实体、值对象、聚合与领域事件表达业务概念。
 
-## 本节目录
+## 目录
 
-- [5.3.1.1 实体 (Entity) 与值对象 (Value Object)：身份语义、不可变性与相等性](05.3.1.1_实体_Entity_与值对象_Value_Object_身份语义_不可变性与相等性/index.md)
-- [5.3.1.2 聚合 (Aggregate) 与聚合根 (Aggregate Root)：一致性边界与事务边界](05.3.1.2_聚合_Aggregate_与聚合根_Aggregate_Root_一致性边界与事务边界/index.md)
-- [5.3.1.3 领域事件 (Domain Event)：业务事实的建模、发布与订阅](05.3.1.3_领域事件_Domain_Event_业务事实的建模_发布与订阅/index.md)
-
----
+- [05.3.1.1 实体 (Entity) 与值对象 (Value Object)：身份语义、不可变性与相等性](05.3.1.1_实体_Entity_与值对象_Value_Object_身份语义_不可变性与相等性/index.md)
+- [05.3.1.2 聚合 (Aggregate) 与聚合根 (Aggregate Root)：一致性边界与事务边界](05.3.1.2_聚合_Aggregate_与聚合根_Aggregate_Root_一致性边界与事务边界/index.md)
+- [05.3.1.3 领域事件 (Domain Event)：业务事实的建模、发布与订阅](05.3.1.3_领域事件_Domain_Event_业务事实的建模_发布与订阅/index.md)
 
 ## 导航
 

@@ -1,6 +1,6 @@
 # 17.1.3.2 Cursor / Copilot / CLI Agent 高级交互最佳工程实践
 
-掌握上下文引用技巧（@Files, @Docs, @Codebase）、多文件协同修改与小步提示避免模型幻觉。
+**介绍**: 掌握上下文引用技巧（@Files, @Docs, @Codebase）、多文件协同修改与小步提示避免模型幻觉。
 
 ---
 

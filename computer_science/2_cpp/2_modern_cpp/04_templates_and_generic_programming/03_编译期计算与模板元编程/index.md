@@ -1,16 +1,14 @@
-# 4.3 编译期计算与模板元编程
+# 03 编译期计算与模板元编程
 
-学习如何在编译期表达算法、类型计算和约束[cite: 4]。
+**介绍**: 学习如何在编译期表达算法、类型计算和约束[cite: 4]。
 
-## 本节目录
+## 目录
 
-- [4.3.1 模板元编程的基本模型](01_模板元编程的基本模型/index.md)
-- [4.3.2 type traits 与类型变换](02_type_traits_与类型变换/index.md)
-- [4.3.3 constexpr 与 consteval 计算](03_constexpr_与_consteval_计算/index.md)
-- [4.3.4 Concepts 与约束组合](04_concepts_与约束组合/index.md)
-- [4.3.5 静态多态：CRTP 与 policy-based design](05_静态多态_crtp_与_policy_based_design/index.md)
-
----
+- [01 模板元编程的基本模型](01_模板元编程的基本模型/index.md)
+- [02 type traits 与类型变换](02_type_traits_与类型变换/index.md)
+- [03 constexpr 与 consteval 计算](03_constexpr_与_consteval_计算/index.md)
+- [04 Concepts 与约束组合](04_concepts_与约束组合/index.md)
+- [05 静态多态：CRTP 与 policy-based design](05_静态多态_crtp_与_policy_based_design/index.md)
 
 ## 导航
 

@@ -1,6 +1,6 @@
-# 2.4.2 Linux futex 原理与跨进程同步封装
+# 02 Linux futex 原理与跨进程同步封装
 
-理解 FUTEX_WAIT / FUTEX_WAKE 底层系统调用及 Robust Mutex 崩溃恢复机制。
+**介绍**: 理解 FUTEX_WAIT / FUTEX_WAKE 底层系统调用及 Robust Mutex 崩溃恢复机制。
 
 ---
 

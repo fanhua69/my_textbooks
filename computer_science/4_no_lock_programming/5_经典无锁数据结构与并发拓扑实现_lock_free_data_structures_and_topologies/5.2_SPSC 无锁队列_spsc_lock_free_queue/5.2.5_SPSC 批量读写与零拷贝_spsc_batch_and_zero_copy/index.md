@@ -1,6 +1,6 @@
 # 5.2.5 SPSC 批量读写与零拷贝  spsc batch and zero copy
 
-介绍批量提交、批量消费、reserve/commit 接口。
+**介绍**: 介绍批量提交、批量消费、reserve/commit 接口。
 
 ---
 

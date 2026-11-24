@@ -1,6 +1,6 @@
-# 4.4.2 ALPC（Advanced Local Procedure Call）、MS-RPC 与 Out-of-Proc COM
+# 02 ALPC（Advanced Local Procedure Call）、MS-RPC 与 Out-of-Proc COM
 
-理解 Windows 系统服务背后高速内核通道 ALPC 的架构定位及上层 RPC/COM 接口。
+**介绍**: 理解 Windows 系统服务背后高速内核通道 ALPC 的架构定位及上层 RPC/COM 接口。
 
 ---
 

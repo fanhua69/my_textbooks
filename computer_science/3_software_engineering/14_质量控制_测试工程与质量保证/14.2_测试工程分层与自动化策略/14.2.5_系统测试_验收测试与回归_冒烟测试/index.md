@@ -1,13 +1,11 @@
 # 14.2.5 系统测试、验收测试与回归/冒烟测试
 
-覆盖单元与集成之上的整体验证与变更保护。
+**介绍**: 覆盖单元与集成之上的整体验证与变更保护。
 
-## 本节目录
+## 目录
 
 - [14.2.5.1 系统测试 (System Testing) 与验收测试 (Acceptance Testing)](14.2.5.1_系统测试_System_Testing_与验收测试_Acceptance_Testing/index.md)
 - [14.2.5.2 回归测试 (Regression Testing) 与冒烟测试 (Smoke Testing)](14.2.5.2_回归测试_Regression_Testing_与冒烟测试_Smoke_Testing/index.md)
-
----
 
 ## 导航
 

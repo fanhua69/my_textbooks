@@ -1,6 +1,6 @@
 # 4.3.4 Double-Width CAS  double width cas
 
-介绍双字 CAS 的硬件支持、平台限制与可移植性问题。
+**介绍**: 介绍双字 CAS 的硬件支持、平台限制与可移植性问题。
 
 ---
 

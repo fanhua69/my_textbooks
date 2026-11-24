@@ -1,6 +1,6 @@
 # 7.2.5 Prefetch 与分支预测  prefetch and branch prediction
 
-理解预取、分支可预测性及优化的测量边界。
+**介绍**: 理解预取、分支可预测性及优化的测量边界。
 
 ---
 

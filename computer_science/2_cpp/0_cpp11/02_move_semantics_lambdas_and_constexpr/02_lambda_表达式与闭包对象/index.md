@@ -1,17 +1,15 @@
-# 2.2 Lambda 表达式与闭包对象
+# 02 Lambda 表达式与闭包对象
 
-掌握 lambda 的语法、捕获规则与闭包类型，并安全地将其与标准库结合使用。
+**介绍**: 掌握 lambda 的语法、捕获规则与闭包类型，并安全地将其与标准库结合使用。
 
-## 本节目录
+## 目录
 
-- [2.2.1 Lambda 语法与基本用法](01_lambda_语法与基本用法/index.md)
-- [2.2.2 捕获列表：按值、按引用与 this 捕获](02_捕获列表_按值_按引用与_this_捕获/index.md)
-- [2.2.3 闭包类型与 mutable](03_闭包类型与_mutable/index.md)
-- [2.2.4 返回类型规则与 C++11 的限制](04_返回类型规则与_cpp11_的限制/index.md)
-- [2.2.5 Lambda 与 std::function、函数指针](05_lambda_与_std_function_函数指针/index.md)
-- [2.2.6 捕获的生命周期陷阱](06_捕获的生命周期陷阱/index.md)
-
----
+- [01 Lambda 语法与基本用法](01_lambda_语法与基本用法/index.md)
+- [02 捕获列表：按值、按引用与 this 捕获](02_捕获列表_按值_按引用与_this_捕获/index.md)
+- [03 闭包类型与 mutable](03_闭包类型与_mutable/index.md)
+- [04 返回类型规则与 C++11 的限制](04_返回类型规则与_cpp11_的限制/index.md)
+- [05 Lambda 与 std::function、函数指针](05_lambda_与_std_function_函数指针/index.md)
+- [06 捕获的生命周期陷阱](06_捕获的生命周期陷阱/index.md)
 
 ## 导航
 

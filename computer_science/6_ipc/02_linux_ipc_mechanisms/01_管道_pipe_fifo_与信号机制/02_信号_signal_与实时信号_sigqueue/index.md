@@ -1,6 +1,6 @@
-# 2.1.2 信号（Signal）与实时信号（sigqueue）
+# 02 信号（Signal）与实时信号（sigqueue）
 
-理解异步信号安全（Async-Signal-Safe）约束、信号掩码及 sigval 载荷传递局限。
+**介绍**: 理解异步信号安全（Async-Signal-Safe）约束、信号掩码及 sigval 载荷传递局限。
 
 ---
 

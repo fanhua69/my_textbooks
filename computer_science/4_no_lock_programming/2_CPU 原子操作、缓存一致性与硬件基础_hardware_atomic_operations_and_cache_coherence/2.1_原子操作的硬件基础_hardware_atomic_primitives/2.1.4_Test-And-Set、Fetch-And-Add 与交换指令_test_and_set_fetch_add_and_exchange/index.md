@@ -1,6 +1,6 @@
 # 2.1.4 Test-And-Set、Fetch-And-Add 与交换指令  test and set fetch add and exchange
 
-了解常见原子指令族及其算法用途。
+**介绍**: 了解常见原子指令族及其算法用途。
 
 ---
 

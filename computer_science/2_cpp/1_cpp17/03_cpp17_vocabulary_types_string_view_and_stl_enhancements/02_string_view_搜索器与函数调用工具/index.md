@@ -1,13 +1,11 @@
-# 3.2 std::string_view、字符串搜索器与 std::invoke / std::apply / as  const
+# 02 std::string_view、字符串搜索器与 std::invoke / std::apply / as  const
 
-掌握零拷贝字符串视图生命周期约束、 Boyer-Moore 搜索器及统一可调用对象调用与元组解包工具。
+**介绍**: 掌握零拷贝字符串视图生命周期约束、 Boyer-Moore 搜索器及统一可调用对象调用与元组解包工具。
 
-## 本节目录
+## 目录
 
-- [3.2.1 std::string view 切片/前缀后缀/子串与悬空指针生命周期陷阱](01_std_string_view_与生命周期边界/index.md)
-- [3.2.2 std::invoke、std::apply、std::make from tuple、std::as const 与 Boyer-Moore 搜索器](02_invoke_apply_as_const_与搜索器/index.md)
-
----
+- [01 std::string view 切片/前缀后缀/子串与悬空指针生命周期陷阱](01_std_string_view_与生命周期边界/index.md)
+- [02 std::invoke、std::apply、std::make from tuple、std::as const 与 Boyer-Moore 搜索器](02_invoke_apply_as_const_与搜索器/index.md)
 
 ## 导航
 

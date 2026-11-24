@@ -1,14 +1,12 @@
-# 2.2 UNIX Domain Sockets（AF UNIX）
+# 02 UNIX Domain Sockets（AF UNIX）
 
-全面掌握 Linux 本地服务通信主力机制：流式、数据报、顺序包及控制消息。
+**介绍**: 全面掌握 Linux 本地服务通信主力机制：流式、数据报、顺序包及控制消息。
 
-## 本节目录
+## 目录
 
-- [2.2.1 SOCK STREAM、SOCK DGRAM 与 SOCK SEQPACKET 语义对比](01_sock_stream_sock_dgram_与_sock_seqpacket_语义对比/index.md)
-- [2.2.2 辅助数据（cmsg）：SCM_RIGHTS 与 SCM  CREDENTIALS](02_辅助数据_cmsg_scm_rights_与_scm_credentials/index.md)
-- [2.2.3 结合 epoll 的高并发本地事件循环](03_结合_epoll_的高并发本地事件循环/index.md)
-
----
+- [01 SOCK STREAM、SOCK DGRAM 与 SOCK SEQPACKET 语义对比](01_sock_stream_sock_dgram_与_sock_seqpacket_语义对比/index.md)
+- [02 辅助数据（cmsg）：SCM_RIGHTS 与 SCM  CREDENTIALS](02_辅助数据_cmsg_scm_rights_与_scm_credentials/index.md)
+- [03 结合 epoll 的高并发本地事件循环](03_结合_epoll_的高并发本地事件循环/index.md)
 
 ## 导航
 

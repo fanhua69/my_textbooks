@@ -1,6 +1,6 @@
 # 1.1.5.1 锁竞争的成因、微观开销与吞吐退化
 
-> **简介**：当多个线程高频争用同一把锁（如 `std::mutex`）时，并发性能往往不仅停滞，甚至会随着线程数增加而出现反扩展（Scalability Collapse / Retrograde Scaling）。
+**介绍**: > **简介**：当多个线程高频争用同一把锁（如 `std::mutex`）时，并发性能往往不仅停滞，甚至会随着线程数增加而出现反扩展（Scalability Collapse / Retrograde Scaling）。
 
 ---
 

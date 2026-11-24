@@ -1,13 +1,11 @@
-# 3.1.1 抽象、封装与信息隐藏
+# 03.1.1 抽象、封装与信息隐藏
 
-理解 Parnas 信息隐藏原则与现代接口抽象的设计边界。
+**介绍**: 理解 Parnas 信息隐藏原则与现代接口抽象的设计边界。
 
-## 本节目录
+## 目录
 
-- [3.1.1.1 Parnas 信息隐藏原则与模块边界设计](03.1.1.1_信息隐藏原则与模块边界设计_Parnas/index.md)
-- [3.1.1.2 抽象泄漏定律（Law of Leaky Abstractions）及其应对](03.1.1.2_抽象泄漏定律及其应对_Law_of_Leaky_Abstractions/index.md)
-
----
+- [03.1.1.1 Parnas 信息隐藏原则与模块边界设计](03.1.1.1_信息隐藏原则与模块边界设计_Parnas/index.md)
+- [03.1.1.2 抽象泄漏定律（Law of Leaky Abstractions）及其应对](03.1.1.2_抽象泄漏定律及其应对_Law_of_Leaky_Abstractions/index.md)
 
 ## 导航
 

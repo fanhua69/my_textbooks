@@ -1,6 +1,6 @@
-# 1.1.2.2 Mach 微内核、BSD 子系统与 XNU 混合内核融合
+# 02 Mach 微内核、BSD 子系统与 XNU 混合内核融合
 
-解析 NeXTSTEP / macOS 如何将 Mach IPC/VM/调度与 FreeBSD VFS/网络/POSIX 融合为 XNU。
+**介绍**: 解析 NeXTSTEP / macOS 如何将 Mach IPC/VM/调度与 FreeBSD VFS/网络/POSIX 融合为 XNU。
 
 ---
 

@@ -1,6 +1,6 @@
-# 2.2.5 Lambda 与 std::function、函数指针
+# 05 Lambda 与 std::function、函数指针
 
-理解无捕获 lambda 到函数指针的转换，以及 std::function 的类型擦除开销。
+**介绍**: 理解无捕获 lambda 到函数指针的转换，以及 std::function 的类型擦除开销。
 
 ---
 

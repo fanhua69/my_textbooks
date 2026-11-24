@@ -1,6 +1,6 @@
-# 8.3.1 自定义 allocator 与内存资源 PMR
+# 01 自定义 allocator 与内存资源 PMR
 
-掌握 polymorphic_allocator 和 memory_resource[cite: 4]。
+**介绍**: 掌握 polymorphic_allocator 和 memory_resource[cite: 4]。
 
 ---
 

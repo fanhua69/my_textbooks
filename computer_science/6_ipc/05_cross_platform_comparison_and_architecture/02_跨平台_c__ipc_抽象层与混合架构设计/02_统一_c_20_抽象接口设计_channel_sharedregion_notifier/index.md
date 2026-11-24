@@ -1,6 +1,6 @@
-# 5.2.2 统一 C++20 抽象接口设计（Channel / SharedRegion / Notifier）
+# 02 统一 C++20 抽象接口设计（Channel / SharedRegion / Notifier）
 
-运用 RAII、C ABI 边界与策略模式封装平台后端，避免虚函数进入热路径。
+**介绍**: 运用 RAII、C ABI 边界与策略模式封装平台后端，避免虚函数进入热路径。
 
 ---
 

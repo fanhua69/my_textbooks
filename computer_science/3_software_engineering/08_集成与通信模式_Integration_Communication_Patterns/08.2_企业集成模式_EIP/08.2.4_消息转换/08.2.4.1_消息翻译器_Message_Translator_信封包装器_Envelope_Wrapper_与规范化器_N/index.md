@@ -1,6 +1,6 @@
-# 8.2.4.1 消息翻译器 (Message Translator)、信封包装器 (Envelope Wrapper) 与规范化器 (Normalizer)
+# 08.2.4.1 消息翻译器 (Message Translator)、信封包装器 (Envelope Wrapper) 与规范化器 (Normalizer)
 
-在系统间转换数据格式，以统一信封传递元数据，并把多种格式规范化为内部标准模型。
+**介绍**: 在系统间转换数据格式，以统一信封传递元数据，并把多种格式规范化为内部标准模型。
 
 ---
 

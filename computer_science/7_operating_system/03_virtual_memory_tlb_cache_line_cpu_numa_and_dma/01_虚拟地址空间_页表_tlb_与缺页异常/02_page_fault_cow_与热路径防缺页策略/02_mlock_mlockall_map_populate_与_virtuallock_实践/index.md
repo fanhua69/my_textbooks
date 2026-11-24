@@ -1,6 +1,6 @@
-# 3.1.2.2 mlock / mlockall / MAP POPULATE 与 VirtualLock 实践
+# 02 mlock / mlockall / MAP POPULATE 与 VirtualLock 实践
 
-在启动阶段完成物理页 fault 与锁定，防止运行期热路径触发缺页或被换出。
+**介绍**: 在启动阶段完成物理页 fault 与锁定，防止运行期热路径触发缺页或被换出。
 
 ---
 

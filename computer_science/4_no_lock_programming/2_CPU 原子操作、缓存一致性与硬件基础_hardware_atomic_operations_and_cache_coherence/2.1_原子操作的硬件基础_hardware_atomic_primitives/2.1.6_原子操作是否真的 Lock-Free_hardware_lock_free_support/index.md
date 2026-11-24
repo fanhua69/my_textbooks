@@ -1,6 +1,6 @@
 # 2.1.6 原子操作是否真的 Lock-Free  hardware lock free support
 
-理解硬件支持、编译器实现和库回退路径；使用 is_lock_free 与 is_always_lock_free。
+**介绍**: 理解硬件支持、编译器实现和库回退路径；使用 is_lock_free 与 is_always_lock_free。
 
 ---
 

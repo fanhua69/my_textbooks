@@ -1,6 +1,6 @@
 # 7.2.3 批处理与 Amortization  batching and amortization
 
-通过批量入队/出队摊薄原子操作成本。
+**介绍**: 通过批量入队/出队摊薄原子操作成本。
 
 ---
 

@@ -1,6 +1,6 @@
-# 3.1.2.1 缺页类型分类、写时复制（COW）与透明大页（THP）抖动
+# 01 缺页类型分类、写时复制（COW）与透明大页（THP）抖动
 
-剖析磁盘 I/O 导致的 Major Fault、零页/COW 导致的 Minor Fault 以及 THP 合并/分裂带来的延迟尖峰。
+**介绍**: 剖析磁盘 I/O 导致的 Major Fault、零页/COW 导致的 Minor Fault 以及 THP 合并/分裂带来的延迟尖峰。
 
 ---
 

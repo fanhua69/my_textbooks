@@ -1,6 +1,6 @@
-# 3.2.4 Audit Token 校验与代码签名（Code Signing Requirement）安全加固
+# 04 Audit Token 校验与代码签名（Code Signing Requirement）安全加固
 
-使用 xpc_connection_get_audit_token 与 SecCodeCopyGuestWithAttributes 防范未授权客户端。
+**介绍**: 使用 xpc_connection_get_audit_token 与 SecCodeCopyGuestWithAttributes 防范未授权客户端。
 
 ---
 

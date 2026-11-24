@@ -1,6 +1,6 @@
 # 8.2.2 AddressSanitizer（ASan）  address sanitizer
 
-检测 use-after-free、越界访问和内存错误。
+**介绍**: 检测 use-after-free、越界访问和内存错误。
 
 ---
 

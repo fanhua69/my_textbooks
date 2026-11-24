@@ -1,6 +1,6 @@
-# 5.3.1 std::string、string view 与数值字符串转换
+# 01 std::string、string view 与数值字符串转换
 
-理解所有权、生命周期、悬空 view 风险，以及 std::to_string / std::stoi / std::from_chars[cite: 4, 5, 13]。
+**介绍**: 理解所有权、生命周期、悬空 view 风险，以及 std::to_string / std::stoi / std::from_chars[cite: 4, 5, 13]。
 
 ---
 

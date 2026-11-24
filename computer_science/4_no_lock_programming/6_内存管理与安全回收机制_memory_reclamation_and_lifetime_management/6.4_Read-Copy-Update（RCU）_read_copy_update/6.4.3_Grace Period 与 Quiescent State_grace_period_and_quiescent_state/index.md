@@ -1,6 +1,6 @@
 # 6.4.3 Grace Period 与 Quiescent State  grace period and quiescent state
 
-理解宽限期如何确保旧读者退出。
+**介绍**: 理解宽限期如何确保旧读者退出。
 
 ---
 

@@ -1,6 +1,6 @@
-# 6.5.2 numeric limits 与数值特性
+# 02 numeric limits 与数值特性
 
-掌握 numeric_limits 的 constexpr 接口，以及对浮点特性的查询。
+**介绍**: 掌握 numeric_limits 的 constexpr 接口，以及对浮点特性的查询。
 
 ---
 

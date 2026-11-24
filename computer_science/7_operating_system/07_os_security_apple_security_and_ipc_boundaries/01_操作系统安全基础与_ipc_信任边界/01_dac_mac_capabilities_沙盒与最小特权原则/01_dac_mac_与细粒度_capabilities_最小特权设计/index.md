@@ -1,6 +1,6 @@
-# 7.1.1.1 DAC、MAC 与细粒度 Capabilities / 最小特权设计
+# 01 DAC、MAC 与细粒度 Capabilities / 最小特权设计
 
-拆分高权限操作与普通业务逻辑，避免全量 root/SYSTEM 权限贯穿整个进程。
+**介绍**: 拆分高权限操作与普通业务逻辑，避免全量 root/SYSTEM 权限贯穿整个进程。
 
 ---
 

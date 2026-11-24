@@ -1,6 +1,6 @@
-# 5.5.1 iostream 与流状态
+# 01 iostream 与流状态
 
-理解 stream state、缓冲和格式标志[cite: 4]。
+**介绍**: 理解 stream state、缓冲和格式标志[cite: 4]。
 
 ---
 

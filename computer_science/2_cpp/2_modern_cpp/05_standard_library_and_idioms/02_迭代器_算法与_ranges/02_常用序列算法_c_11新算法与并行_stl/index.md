@@ -1,6 +1,6 @@
-# 5.2.2 常用非修改与修改序列算法（含 C++11 新算法与 C++17 并行 STL）
+# 02 常用非修改与修改序列算法（含 C++11 新算法与 C++17 并行 STL）
 
-掌握 find、transform、remove、partition、sort、all_of/any_of/none_of、copy_if、iota，以及 C++17 并行策略（std::execution::seq/par/par_unseq）与 reduce / transform_reduce / inclusive_scan[cite: 4, 11, 13]。
+**介绍**: 掌握 find、transform、remove、partition、sort、all_of/any_of/none_of、copy_if、iota，以及 C++17 并行策略（std::execution::seq/par/par_unseq）与 reduce / transform_reduce / inclusive_scan[cite: 4, 11, 13]。
 
 ---
 

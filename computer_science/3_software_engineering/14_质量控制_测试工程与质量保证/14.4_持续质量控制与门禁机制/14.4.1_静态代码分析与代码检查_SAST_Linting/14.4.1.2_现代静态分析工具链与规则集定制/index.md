@@ -1,6 +1,6 @@
 # 14.4.1.2 现代静态分析工具链与规则集定制
 
-配置 SonarQube、Semgrep、ESLint 与 Clang-Tidy，定制特定业务安全规则并开展误报（False Positives）治理。
+**介绍**: 配置 SonarQube、Semgrep、ESLint 与 Clang-Tidy，定制特定业务安全规则并开展误报（False Positives）治理。
 
 ---
 

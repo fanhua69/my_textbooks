@@ -1,6 +1,6 @@
-# 4.2.1 type_traits 概览与 integral  constant
+# 01 type_traits 概览与 integral  constant
 
-理解 integral_constant、true_type 与 false_type 如何构成 type_traits 的基础。
+**介绍**: 理解 integral_constant、true_type 与 false_type 如何构成 type_traits 的基础。
 
 ---
 

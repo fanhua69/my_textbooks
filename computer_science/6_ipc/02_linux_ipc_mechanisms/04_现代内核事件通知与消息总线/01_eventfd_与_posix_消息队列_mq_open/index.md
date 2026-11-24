@@ -1,6 +1,6 @@
-# 2.4.1 eventfd 与 POSIX 消息队列（mq open）
+# 01 eventfd 与 POSIX 消息队列（mq open）
 
-使用 eventfd 配合 epoll 实现极轻量内核计数器唤醒，对比优先级消息队列。
+**介绍**: 使用 eventfd 配合 epoll 实现极轻量内核计数器唤醒，对比优先级消息队列。
 
 ---
 

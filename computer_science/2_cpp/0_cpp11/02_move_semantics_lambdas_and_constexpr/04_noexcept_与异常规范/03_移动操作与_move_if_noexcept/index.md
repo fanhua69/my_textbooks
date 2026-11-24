@@ -1,6 +1,6 @@
-# 2.4.3 移动操作与 move  if noexcept
+# 03 移动操作与 move  if noexcept
 
-理解 vector 扩容为何依赖 noexcept 移动，以及强异常安全保证下的取舍。
+**介绍**: 理解 vector 扩容为何依赖 noexcept 移动，以及强异常安全保证下的取舍。
 
 ---
 

@@ -1,6 +1,6 @@
-# 1.1.2 C++11 废弃与移除特性
+# 02 C++11 废弃与移除特性
 
-了解 auto 旧含义、export 模板、动态异常规范、auto_ptr、bind1st/bind2nd 等被移除或废弃的特性及其替代方案。
+**介绍**: 了解 auto 旧含义、export 模板、动态异常规范、auto_ptr、bind1st/bind2nd 等被移除或废弃的特性及其替代方案。
 
 ---
 

@@ -1,6 +1,6 @@
-# 6.5.1 定长整数类型：cstdint 与 cinttypes
+# 01 定长整数类型：cstdint 与 cinttypes
 
-掌握 int32_t、int_fast*_t、intptr_t 等类型，以及格式化宏的使用。
+**介绍**: 掌握 int32_t、int_fast*_t、intptr_t 等类型，以及格式化宏的使用。
 
 ---
 

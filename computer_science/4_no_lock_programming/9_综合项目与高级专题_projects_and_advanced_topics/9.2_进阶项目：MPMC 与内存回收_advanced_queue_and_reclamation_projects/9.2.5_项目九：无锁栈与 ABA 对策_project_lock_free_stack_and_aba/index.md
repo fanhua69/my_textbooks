@@ -1,6 +1,6 @@
 # 9.2.5 项目九：无锁栈与 ABA 对策  project lock free stack and aba
 
-实现 Treiber Stack，并比较 tagged pointer 与安全回收策略。
+**介绍**: 实现 Treiber Stack，并比较 tagged pointer 与安全回收策略。
 
 ---
 

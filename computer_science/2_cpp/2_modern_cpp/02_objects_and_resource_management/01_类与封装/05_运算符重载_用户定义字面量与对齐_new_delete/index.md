@@ -1,6 +1,6 @@
-# 2.1.5 运算符重载、用户定义字面量与对齐 new/delete
+# 05 运算符重载、用户定义字面量与对齐 new/delete
 
-学习运算符重载规则、User-Defined Literals 及 C++17 过对齐动态内存分配 operator new/delete（std::align_val_t）[cite: 4, 12, 14]。
+**介绍**: 学习运算符重载规则、User-Defined Literals 及 C++17 过对齐动态内存分配 operator new/delete（std::align_val_t）[cite: 4, 12, 14]。
 
 ---
 

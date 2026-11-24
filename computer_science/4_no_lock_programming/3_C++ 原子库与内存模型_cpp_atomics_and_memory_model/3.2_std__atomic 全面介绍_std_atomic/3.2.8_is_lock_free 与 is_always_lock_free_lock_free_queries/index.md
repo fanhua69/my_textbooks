@@ -1,6 +1,6 @@
 # 3.2.8 is_lock_free 与 is  always lock free lock free queries
 
-判断具体原子类型和目标平台是否提供无锁实现。
+**介绍**: 判断具体原子类型和目标平台是否提供无锁实现。
 
 ---
 

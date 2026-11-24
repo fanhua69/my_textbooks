@@ -1,6 +1,6 @@
-# 2.3.4.1 BDD 行为驱动开发：Gherkin 业务可读语法
+# 02.3.4.1 BDD 行为驱动开发：Gherkin 业务可读语法
 
-使用 Cucumber / SpecFlow 编写 Given-When-Then 业务场景规范，打通产品、测试与研发的自然语言契约。
+**介绍**: 使用 Cucumber / SpecFlow 编写 Given-When-Then 业务场景规范，打通产品、测试与研发的自然语言契约。
 
 ---
 

@@ -1,6 +1,6 @@
-# 8.2.1.2 vm stat、memory pressure、sysctl 与系统内存/内核参数检查
+# 02 vm stat、memory pressure、sysctl 与系统内存/内核参数检查
 
-观察活跃/非活跃/压缩/换出内存页统计、系统内存压力状态与关键 sysctl 内核参数。
+**介绍**: 观察活跃/非活跃/压缩/换出内存页统计、系统内存压力状态与关键 sysctl 内核参数。
 
 ---
 

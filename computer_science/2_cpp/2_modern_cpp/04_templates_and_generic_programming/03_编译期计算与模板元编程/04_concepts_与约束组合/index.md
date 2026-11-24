@@ -1,6 +1,6 @@
-# 4.3.4 Concepts 与约束组合
+# 04 Concepts 与约束组合
 
-使用 requires、concept definition 和 subsumption[cite: 4]。
+**介绍**: 使用 requires、concept definition 和 subsumption[cite: 4]。
 
 ---
 

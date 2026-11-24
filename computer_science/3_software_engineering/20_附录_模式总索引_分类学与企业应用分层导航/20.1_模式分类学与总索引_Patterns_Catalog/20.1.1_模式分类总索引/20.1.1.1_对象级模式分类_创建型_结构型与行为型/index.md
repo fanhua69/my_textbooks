@@ -1,6 +1,6 @@
 # 20.1.1.1 对象级模式分类：创建型、结构型与行为型
 
-以对象创建、对象结构与对象行为三类组织 GoF 与现代设计模式（如 Factory、Builder、Adapter、Decorator、Strategy、Observer）。
+**介绍**: 以对象创建、对象结构与对象行为三类组织 GoF 与现代设计模式（如 Factory、Builder、Adapter、Decorator、Strategy、Observer）。
 
 ---
 

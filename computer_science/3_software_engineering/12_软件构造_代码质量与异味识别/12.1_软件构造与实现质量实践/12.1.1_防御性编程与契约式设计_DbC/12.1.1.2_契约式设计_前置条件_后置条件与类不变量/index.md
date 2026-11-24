@@ -1,6 +1,6 @@
 # 12.1.1.2 契约式设计：前置条件、后置条件与类不变量
 
-运用 Bertrand Meyer 的契约理论，明确规定调用方义务（Preconditions）与供应方保证（Postconditions）。
+**介绍**: 运用 Bertrand Meyer 的契约理论，明确规定调用方义务（Preconditions）与供应方保证（Postconditions）。
 
 ---
 

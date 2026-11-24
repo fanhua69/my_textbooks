@@ -1,6 +1,6 @@
-# 8.2.2 同步 I/O 与异步 I/O
+# 02 同步 I/O 与异步 I/O
 
-比较 blocking、non-blocking、事件驱动和异步模型[cite: 4]。
+**介绍**: 比较 blocking、non-blocking、事件驱动和异步模型[cite: 4]。
 
 ---
 

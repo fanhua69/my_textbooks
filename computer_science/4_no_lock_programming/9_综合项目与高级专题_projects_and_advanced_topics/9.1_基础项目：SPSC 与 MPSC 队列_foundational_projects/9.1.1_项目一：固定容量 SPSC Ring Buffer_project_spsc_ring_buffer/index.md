@@ -1,6 +1,6 @@
 # 9.1.1 项目一：固定容量 SPSC Ring Buffer  project spsc ring buffer
 
-实现模板化 SPSC 队列，支持 push/pop、批量操作、容量策略和单元测试。
+**介绍**: 实现模板化 SPSC 队列，支持 push/pop、批量操作、容量策略和单元测试。
 
 ---
 

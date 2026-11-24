@@ -1,13 +1,11 @@
-# 3.1.1 多级页表遍历（Page Walk）、TLB 命中/失效、PCID/ASID 与 TLB Shootdown 代价
+# 01 多级页表遍历（Page Walk）、TLB 命中/失效、PCID/ASID 与 TLB Shootdown 代价
 
-剖析多级页表遍历开销、TLB 大小与关联度限制、PCID/ASID 隔离以及跨核 TLB Shootdown 抖动。
+**介绍**: 剖析多级页表遍历开销、TLB 大小与关联度限制、PCID/ASID 隔离以及跨核 TLB Shootdown 抖动。
 
-## 本节目录
+## 目录
 
-- [3.1.1.1 4级/5级页表遍历、L1/L2 TLB 与 ASID / PCID 机制](01_4级_5级页表遍历与_tlb_asid_pcid_机制/index.md)
-- [3.1.1.2 TLB Shootdown 跨核核间中断（IPI）与低延迟规避](02_tlb_shootdown_跨核核间中断_ipi_与低延迟规避/index.md)
-
----
+- [01 4级/5级页表遍历、L1/L2 TLB 与 ASID / PCID 机制](01_4级_5级页表遍历与_tlb_asid_pcid_机制/index.md)
+- [02 TLB Shootdown 跨核核间中断（IPI）与低延迟规避](02_tlb_shootdown_跨核核间中断_ipi_与低延迟规避/index.md)
 
 ## 导航
 

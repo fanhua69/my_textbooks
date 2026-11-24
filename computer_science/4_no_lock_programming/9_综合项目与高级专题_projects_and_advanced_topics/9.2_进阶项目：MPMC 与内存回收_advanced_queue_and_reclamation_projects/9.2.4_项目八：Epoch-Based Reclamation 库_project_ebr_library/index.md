@@ -1,6 +1,6 @@
 # 9.2.4 项目八：Epoch-Based Reclamation 库  project ebr library
 
-实现 epoch 管理、临界区登记、宽限期和延迟回收。
+**介绍**: 实现 epoch 管理、临界区登记、宽限期和延迟回收。
 
 ---
 

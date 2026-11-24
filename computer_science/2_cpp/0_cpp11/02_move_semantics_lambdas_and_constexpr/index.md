@@ -1,15 +1,13 @@
-# 2 移动语义、Lambda 与 constexpr
+# 02 移动语义、Lambda 与 constexpr
 
-掌握右值引用与移动语义、Lambda 闭包以及编译期常量表达式，这是 C++11 性能与表达力提升的核心。
+**介绍**: 掌握右值引用与移动语义、Lambda 闭包以及编译期常量表达式，这是 C++11 性能与表达力提升的核心。
 
-## 本节目录
+## 目录
 
-- [2.1 右值引用、移动语义与完美转发](01_右值引用_移动语义与完美转发/index.md)
-- [2.2 Lambda 表达式与闭包对象](02_lambda_表达式与闭包对象/index.md)
-- [2.3 constexpr 与 static  assert](03_constexpr_与_static_assert/index.md)
-- [2.4 noexcept 与异常规范](04_noexcept_与异常规范/index.md)
-
----
+- [01 右值引用、移动语义与完美转发](01_右值引用_移动语义与完美转发/index.md)
+- [02 Lambda 表达式与闭包对象](02_lambda_表达式与闭包对象/index.md)
+- [03 constexpr 与 static  assert](03_constexpr_与_static_assert/index.md)
+- [04 noexcept 与异常规范](04_noexcept_与异常规范/index.md)
 
 ## 导航
 

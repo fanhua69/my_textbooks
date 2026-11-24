@@ -1,13 +1,11 @@
-# 2.3.1 PCB/TCB、fork/vfork/posix spawn/CreateProcess、线程组与僵尸/孤儿回收
+# 01 PCB/TCB、fork/vfork/posix spawn/CreateProcess、线程组与僵尸/孤儿回收
 
-对比 fork 页表复制开销与 posix_spawn 轻量创建、进程组/会话控制终端以及 waitpid/信号回收语义。
+**介绍**: 对比 fork 页表复制开销与 posix_spawn 轻量创建、进程组/会话控制终端以及 waitpid/信号回收语义。
 
-## 本节目录
+## 目录
 
-- [2.3.1.1 fork/COW、vfork、posix spawn 与 CreateProcess 开销对比](01_fork_cow_vfork_posix_spawn_与_createprocess_开销对比/index.md)
-- [2.3.1.2 进程组、会话、控制终端与僵尸/孤儿进程回收](02_进程组_会话_控制终端与僵尸_孤儿进程回收/index.md)
-
----
+- [01 fork/COW、vfork、posix spawn 与 CreateProcess 开销对比](01_fork_cow_vfork_posix_spawn_与_createprocess_开销对比/index.md)
+- [02 进程组、会话、控制终端与僵尸/孤儿进程回收](02_进程组_会话_控制终端与僵尸_孤儿进程回收/index.md)
 
 ## 导航
 

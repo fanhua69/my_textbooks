@@ -1,6 +1,6 @@
 # 5.6.1 Treiber Stack：无锁栈  treiber stack
 
-使用 CAS 更新栈顶，分析 ABA 与节点回收。
+**介绍**: 使用 CAS 更新栈顶，分析 ABA 与节点回收。
 
 ---
 

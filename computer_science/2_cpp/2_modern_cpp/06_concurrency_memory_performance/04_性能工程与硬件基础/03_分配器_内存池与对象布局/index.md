@@ -1,6 +1,6 @@
-# 6.4.3 分配器、内存池与对象布局
+# 03 分配器、内存池与对象布局
 
-理解 allocator、pool、fragmentation 和 allocation cost[cite: 4]。
+**介绍**: 理解 allocator、pool、fragmentation 和 allocation cost[cite: 4]。
 
 ---
 

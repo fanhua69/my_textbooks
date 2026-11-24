@@ -1,6 +1,6 @@
-# 2.4.5 对象切片与组合优于继承
+# 05 对象切片与组合优于继承
 
-识别 slicing，并比较 inheritance 与 composition[cite: 4]。
+**介绍**: 识别 slicing，并比较 inheritance 与 composition[cite: 4]。
 
 ---
 

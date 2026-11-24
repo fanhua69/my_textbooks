@@ -1,6 +1,6 @@
 # 6.2.1 Hazard Pointer 基本思想  hazard pointer basics
 
-理解 hazard record、保护指针和 retired list。
+**介绍**: 理解 hazard record、保护指针和 retired list。
 
 ---
 

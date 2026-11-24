@@ -1,6 +1,6 @@
-# 5.5.3 流缓冲、同步与性能
+# 03 流缓冲、同步与性能
 
-理解缓冲区、flush、sync_with_stdio 和性能权衡[cite: 4]。
+**介绍**: 理解缓冲区、flush、sync_with_stdio 和性能权衡[cite: 4]。
 
 ---
 

@@ -1,13 +1,11 @@
-# 8.1.2 内核追踪与性能剖析：perf、ftrace、strace、cyclictest、Valgrind、VTune 与 gperf
+# 02 内核追踪与性能剖析：perf、ftrace、strace、cyclictest、Valgrind、VTune 与 gperf
 
-使用 perf 采样热点与 cache/TLB miss、ftrace 追踪调度/唤醒/中断、cyclictest 测调度抖动、Valgrind/VTune/gperf 分析内存与热点。
+**介绍**: 使用 perf 采样热点与 cache/TLB miss、ftrace 追踪调度/唤醒/中断、cyclictest 测调度抖动、Valgrind/VTune/gperf 分析内存与热点。
 
-## 本节目录
+## 目录
 
-- [8.1.2.1 perf 硬件性能计数器、ftrace 内核追踪与 cyclictest 延迟基准](01_perf_ftrace_与_cyclictest_实战/index.md)
-- [8.1.2.2 strace 系统调用追踪与 Valgrind / VTune / gperf 深度剖析](02_strace_与_valgrind_vtune_gperf_剖析/index.md)
-
----
+- [01 perf 硬件性能计数器、ftrace 内核追踪与 cyclictest 延迟基准](01_perf_ftrace_与_cyclictest_实战/index.md)
+- [02 strace 系统调用追踪与 Valgrind / VTune / gperf 深度剖析](02_strace_与_valgrind_vtune_gperf_剖析/index.md)
 
 ## 导航
 

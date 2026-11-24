@@ -1,13 +1,11 @@
-# 9.3.3 服务网格与 Serverless 架构
+# 09.3.3 服务网格与 Serverless 架构
 
-学习基础设施层与应用业务逻辑彻底解耦的云原生终局形态。
+**介绍**: 学习基础设施层与应用业务逻辑彻底解耦的云原生终局形态。
 
-## 本节目录
+## 目录
 
-- [9.3.3.1 服务网格 (Service Mesh)：Sidecar 数据面与控制面](09.3.3.1_服务网格_Sidecar数据面与控制面_Service_Mesh/index.md)
-- [9.3.3.2 Serverless 与 FaaS 无服务器架构模式](09.3.3.2_与FaaS无服务器架构模式_Serverless/index.md)
-
----
+- [09.3.3.1 服务网格 (Service Mesh)：Sidecar 数据面与控制面](09.3.3.1_服务网格_Sidecar数据面与控制面_Service_Mesh/index.md)
+- [09.3.3.2 Serverless 与 FaaS 无服务器架构模式](09.3.3.2_与FaaS无服务器架构模式_Serverless/index.md)
 
 ## 导航
 

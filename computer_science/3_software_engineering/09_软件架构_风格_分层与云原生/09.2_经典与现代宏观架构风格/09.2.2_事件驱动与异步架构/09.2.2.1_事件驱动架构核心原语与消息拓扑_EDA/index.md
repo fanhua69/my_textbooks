@@ -1,6 +1,6 @@
-# 9.2.2.1 事件驱动架构 (EDA) 核心原语与消息拓扑
+# 09.2.2.1 事件驱动架构 (EDA) 核心原语与消息拓扑
 
-区分事件通知（Event Notification）与事件携带状态转移（ECST），掌握 Broker vs Mediator 拓扑。
+**介绍**: 区分事件通知（Event Notification）与事件携带状态转移（ECST），掌握 Broker vs Mediator 拓扑。
 
 ---
 

@@ -1,13 +1,11 @@
-# 7.4.2 Windows 安全模型：SID、Access Token、完整性级别、ACL 与 Impersonation
+# 02 Windows 安全模型：SID、Access Token、完整性级别、ACL 与 Impersonation
 
-理解安全描述符、完整性级别写入限制、命名管道安全设置与客户端模拟风险控制。
+**介绍**: 理解安全描述符、完整性级别写入限制、命名管道安全设置与客户端模拟风险控制。
 
-## 本节目录
+## 目录
 
-- [7.4.2.1 SID、Access Token、Mandatory Integrity Control（MIC）与 DACL](01_sid_access_token_mic_与_dacl_权限控制/index.md)
-- [7.4.2.2 命名管道客户端模拟（ImpersonateNamedPipeClient）与安全陷阱](02_命名管道客户端模拟与安全陷阱/index.md)
-
----
+- [01 SID、Access Token、Mandatory Integrity Control（MIC）与 DACL](01_sid_access_token_mic_与_dacl_权限控制/index.md)
+- [02 命名管道客户端模拟（ImpersonateNamedPipeClient）与安全陷阱](02_命名管道客户端模拟与安全陷阱/index.md)
 
 ## 导航
 

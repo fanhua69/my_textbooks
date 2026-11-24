@@ -1,6 +1,6 @@
-# 5.3.2 macOS APFS（克隆/快照/空间共享）与 F FULLFSYNC 落盘保证
+# 02 macOS APFS（克隆/快照/空间共享）与 F FULLFSYNC 落盘保证
 
-掌握 APFS 写时复制克隆/快照机制，以及 macOS 上 fsync 与 F_FULLFSYNC 在驱动/设备缓存刷盘上的差异。
+**介绍**: 掌握 APFS 写时复制克隆/快照机制，以及 macOS 上 fsync 与 F_FULLFSYNC 在驱动/设备缓存刷盘上的差异。
 
 ---
 

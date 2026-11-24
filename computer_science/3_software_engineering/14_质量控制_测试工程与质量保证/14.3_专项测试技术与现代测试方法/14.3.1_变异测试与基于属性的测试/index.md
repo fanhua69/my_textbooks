@@ -1,13 +1,11 @@
 # 14.3.1 变异测试与基于属性的测试
 
-探索评估测试用例有效性与自动化发现深层隐藏边界的现代前沿技术。
+**介绍**: 探索评估测试用例有效性与自动化发现深层隐藏边界的现代前沿技术。
 
-## 本节目录
+## 目录
 
 - [14.3.1.1 变异测试 (Mutation Testing)：检验测试套件的杀伤力](14.3.1.1_变异测试_检验测试套件的杀伤力_Mutation_Testing/index.md)
 - [14.3.1.2 基于属性的测试 (Property-Based Testing / Hypothesis)](14.3.1.2_基于属性的测试_Property-Based_Testing_Hypothesis/index.md)
-
----
 
 ## 导航
 

@@ -1,6 +1,6 @@
-# 6.3.2 compare exchange 与 CAS 循环
+# 02 compare exchange 与 CAS 循环
 
-理解 expected 参数、弱/强 CAS 和重试循环[cite: 4]。
+**介绍**: 理解 expected 参数、弱/强 CAS 和重试循环[cite: 4]。
 
 ---
 

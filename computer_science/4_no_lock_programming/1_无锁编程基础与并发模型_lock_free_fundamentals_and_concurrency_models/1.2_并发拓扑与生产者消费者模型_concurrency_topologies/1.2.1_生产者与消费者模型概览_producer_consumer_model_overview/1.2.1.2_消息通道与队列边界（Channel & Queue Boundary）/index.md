@@ -1,6 +1,6 @@
 # 1.2.1.2 消息通道与队列边界（Channel & Queue Boundary）
 
-> **简介**：消息通道/队列（Queue / Channel / Ring Buffer）是连接 Producer 与 Consumer 的契约边界，决定了数据如何传递、内存如何归属以及同步如何发生。
+**介绍**: > **简介**：消息通道/队列（Queue / Channel / Ring Buffer）是连接 Producer 与 Consumer 的契约边界，决定了数据如何传递、内存如何归属以及同步如何发生。
 
 ---
 

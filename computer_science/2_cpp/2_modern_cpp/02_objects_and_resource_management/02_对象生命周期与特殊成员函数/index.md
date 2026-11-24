@@ -1,16 +1,14 @@
-# 2.2 对象生命周期与特殊成员函数
+# 02 对象生命周期与特殊成员函数
 
-系统掌握对象从创建到销毁的生命周期，以及编译器生成的特殊成员函数[cite: 4]。
+**介绍**: 系统掌握对象从创建到销毁的生命周期，以及编译器生成的特殊成员函数[cite: 4]。
 
-## 本节目录
+## 目录
 
-- [2.2.1 对象生命周期、存储期与 thread  local](01_对象生命周期_存储期与_thread_local/index.md)
-- [2.2.2 拷贝构造、拷贝赋值与析构](02_拷贝构造_拷贝赋值与析构/index.md)
-- [2.2.3 移动构造与移动赋值](03_移动构造与移动赋值/index.md)
-- [2.2.4 Rule of Three、Five 与 Zero](04_rule_of_three_five_与_zero/index.md)
-- [2.2.5 =default、=delete 与特殊成员函数生成规则](05_default_delete_与特殊成员函数生成规则/index.md)
-
----
+- [01 对象生命周期、存储期与 thread  local](01_对象生命周期_存储期与_thread_local/index.md)
+- [02 拷贝构造、拷贝赋值与析构](02_拷贝构造_拷贝赋值与析构/index.md)
+- [03 移动构造与移动赋值](03_移动构造与移动赋值/index.md)
+- [04 Rule of Three、Five 与 Zero](04_rule_of_three_five_与_zero/index.md)
+- [05 =default、=delete 与特殊成员函数生成规则](05_default_delete_与特殊成员函数生成规则/index.md)
 
 ## 导航
 

@@ -1,6 +1,6 @@
 # 2.1.3 Compare-And-Swap 与 Compare-And-Exchange  cas and compare exchange
 
-理解 CAS 的比较、条件写入、旧值返回及失败语义。
+**介绍**: 理解 CAS 的比较、条件写入、旧值返回及失败语义。
 
 ---
 

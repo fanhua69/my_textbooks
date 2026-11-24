@@ -1,6 +1,6 @@
-# 5.2.9 线程间异常传递与程序退出
+# 09 线程间异常传递与程序退出
 
-使用 exception_ptr 跨线程传播异常，理解 std::terminate 与 quick_exit/at_quick_exit 的行为差异。
+**介绍**: 使用 exception_ptr 跨线程传播异常，理解 std::terminate 与 quick_exit/at_quick_exit 的行为差异。
 
 ---
 

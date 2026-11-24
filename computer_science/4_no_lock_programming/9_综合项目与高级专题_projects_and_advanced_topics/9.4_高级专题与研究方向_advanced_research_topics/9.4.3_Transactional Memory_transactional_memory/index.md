@@ -1,6 +1,6 @@
 # 9.4.3 Transactional Memory  transactional memory
 
-介绍硬件/软件事务内存及其与 lock-free 的区别。
+**介绍**: 介绍硬件/软件事务内存及其与 lock-free 的区别。
 
 ---
 

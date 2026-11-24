@@ -1,6 +1,6 @@
 # 7.2.4 预分配与无动态分配路径  preallocation and allocation free path
 
-避免关键路径 malloc/free 和不可预测的分配延迟。
+**介绍**: 避免关键路径 malloc/free 和不可预测的分配延迟。
 
 ---
 

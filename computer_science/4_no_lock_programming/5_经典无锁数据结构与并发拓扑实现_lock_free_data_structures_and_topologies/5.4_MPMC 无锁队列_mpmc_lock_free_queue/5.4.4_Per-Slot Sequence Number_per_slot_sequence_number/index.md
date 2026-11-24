@@ -1,6 +1,6 @@
 # 5.4.4 Per-Slot Sequence Number  per slot sequence number
 
-理解每个槽位的序列号如何区分可写、可读和不同轮次。
+**介绍**: 理解每个槽位的序列号如何区分可写、可读和不同轮次。
 
 ---
 

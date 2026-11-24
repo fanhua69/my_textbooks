@@ -1,6 +1,6 @@
 # 3.3.4 memory  order release memory order release
 
-理解 release store 如何发布此前的普通内存写入。
+**介绍**: 理解 release store 如何发布此前的普通内存写入。
 
 ---
 

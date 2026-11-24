@@ -1,6 +1,6 @@
 # 9.3.1 项目十：多拓扑消息总线  project multi topology message bus
 
-组合 SPSC、MPSC、MPMC 通道，提供统一接口和拓扑配置。
+**介绍**: 组合 SPSC、MPSC、MPMC 通道，提供统一接口和拓扑配置。
 
 ---
 

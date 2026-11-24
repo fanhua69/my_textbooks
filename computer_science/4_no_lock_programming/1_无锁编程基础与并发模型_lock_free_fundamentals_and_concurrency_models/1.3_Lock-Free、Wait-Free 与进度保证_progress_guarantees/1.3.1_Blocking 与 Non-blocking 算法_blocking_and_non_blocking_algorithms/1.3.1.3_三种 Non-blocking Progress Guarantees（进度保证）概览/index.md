@@ -1,6 +1,6 @@
 # 1.3.1.3 三种 Non-blocking Progress Guarantees（进度保证）概览
 
-> **简介**：非阻塞并不是一个单一的性能档位，而是一组强度逐级递增的 Progress Guarantees（进度保证）：
+**介绍**: > **简介**：非阻塞并不是一个单一的性能档位，而是一组强度逐级递增的 Progress Guarantees（进度保证）：
 
 ---
 

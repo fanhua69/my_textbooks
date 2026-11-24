@@ -1,6 +1,6 @@
-# 7.2.1.2 MDM / 企业 PPPC（Privacy Preferences Policy Control）配置与排障
+# 02 MDM / 企业 PPPC（Privacy Preferences Policy Control）配置与排障
 
-掌握通过 MDM 下发 PPPC 策略时的 Bundle ID / Designated Requirement 匹配与常见不生效原因。
+**介绍**: 掌握通过 MDM 下发 PPPC 策略时的 Bundle ID / Designated Requirement 匹配与常见不生效原因。
 
 ---
 

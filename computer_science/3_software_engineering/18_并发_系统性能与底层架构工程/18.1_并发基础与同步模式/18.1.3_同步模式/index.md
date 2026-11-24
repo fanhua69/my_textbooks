@@ -1,14 +1,12 @@
 # 18.1.3 同步模式
 
-协调线程访问共享状态与相互等待的原语与模式。
+**介绍**: 协调线程访问共享状态与相互等待的原语与模式。
 
-## 本节目录
+## 目录
 
 - [18.1.3.1 互斥锁 (Mutex) 与读写锁 (Reader-Writer Lock)](18.1.3.1_互斥锁_Mutex_与读写锁_Reader-Writer_Lock/index.md)
 - [18.1.3.2 条件变量 (Condition Variable)、信号量 (Semaphore) 与屏障 (Barrier)](18.1.3.2_条件变量_Condition_Variable_信号量_Semaphore_与屏障_Barrier/index.md)
 - [18.1.3.3 监视器 (Monitor) 模式与生产者-消费者 (Producer-Consumer)](18.1.3.3_监视器_Monitor_模式与生产者-消费者_Producer-Consumer/index.md)
-
----
 
 ## 导航
 

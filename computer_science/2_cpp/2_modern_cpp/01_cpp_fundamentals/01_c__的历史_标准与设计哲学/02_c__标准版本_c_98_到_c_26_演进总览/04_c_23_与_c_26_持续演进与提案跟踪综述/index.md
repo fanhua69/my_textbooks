@@ -1,6 +1,6 @@
-# 1.1.2.4 C++23 与 C++26 持续演进与提案跟踪综述
+# 04 C++23 与 C++26 持续演进与提案跟踪综述
 
-综述 C++23 的 deducing this、if consteval、std::expected、mdspan、flat_map/flat_set、print 与 ranges 扩展，以及 C++26 的重点 WG21 提案方向[cite: 4]。
+**介绍**: 综述 C++23 的 deducing this、if consteval、std::expected、mdspan、flat_map/flat_set、print 与 ranges 扩展，以及 C++26 的重点 WG21 提案方向[cite: 4]。
 
 ---
 

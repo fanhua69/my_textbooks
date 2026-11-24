@@ -1,6 +1,6 @@
 # 10.4.1.3 分布式锁实现与租约安全防范
 
-分析基于 Redis Redlock 的争议与时钟漂移风险，剖析基于 etcd/ZooKeeper 临时有序节点与租约机制（Lease）的安全分布式锁。
+**介绍**: 分析基于 Redis Redlock 的争议与时钟漂移风险，剖析基于 etcd/ZooKeeper 临时有序节点与租约机制（Lease）的安全分布式锁。
 
 ---
 

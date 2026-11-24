@@ -1,6 +1,6 @@
-# 3.3.3 App Group 容器、NSDistributedNotificationCenter 与 System Extension 通信
+# 03 App Group 容器、NSDistributedNotificationCenter 与 System Extension 通信
 
-掌握沙盒应用间共享容器、轻量广播及 EndpointSecurity / NetworkExtension 的 IPC 规范。
+**介绍**: 掌握沙盒应用间共享容器、轻量广播及 EndpointSecurity / NetworkExtension 的 IPC 规范。
 
 ---
 

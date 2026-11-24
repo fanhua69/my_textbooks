@@ -1,6 +1,6 @@
-# 3.1.1.2 TLB Shootdown 跨核核间中断（IPI）与低延迟规避
+# 02 TLB Shootdown 跨核核间中断（IPI）与低延迟规避
 
-分析多线程频繁 mmap/munmap/mprotect 引发的核间中断抖动，通过预分配与池化规避。
+**介绍**: 分析多线程频繁 mmap/munmap/mprotect 引发的核间中断抖动，通过预分配与池化规避。
 
 ---
 

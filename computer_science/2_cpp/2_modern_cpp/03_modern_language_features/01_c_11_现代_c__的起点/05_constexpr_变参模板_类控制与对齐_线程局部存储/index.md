@@ -1,6 +1,6 @@
-# 3.1.5 constexpr、变参模板、类控制与内存对齐（alignof/alignas/thread local/POD）
+# 05 constexpr、变参模板、类控制与内存对齐（alignof/alignas/thread local/POD）
 
-掌握 constexpr、变参模板与 using 别名模板、委托/继承构造、override/final、=default/=delete、static_assert、用户自定义字面量、扩展 friend 声明、inline namespace、广义 POD、alignof/alignas 与 thread_local[cite: 4, 5, 6, 12]。
+**介绍**: 掌握 constexpr、变参模板与 using 别名模板、委托/继承构造、override/final、=default/=delete、static_assert、用户自定义字面量、扩展 friend 声明、inline namespace、广义 POD、alignof/alignas 与 thread_local[cite: 4, 5, 6, 12]。
 
 ---
 

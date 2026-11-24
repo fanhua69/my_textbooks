@@ -1,13 +1,11 @@
-# 5.3.2 领域服务与对象生命周期
+# 05.3.2 领域服务与对象生命周期
 
-处理不属于单个实体的行为与对象创建。
+**介绍**: 处理不属于单个实体的行为与对象创建。
 
-## 本节目录
+## 目录
 
-- [5.3.2.1 领域服务 (Domain Service) 与应用服务 (Application Service) 的职责划分](05.3.2.1_领域服务_Domain_Service_与应用服务_Application_Service_的职责划分/index.md)
-- [5.3.2.2 工厂 (Factory)：领域对象的创建与重建](05.3.2.2_工厂_Factory_领域对象的创建与重建/index.md)
-
----
+- [05.3.2.1 领域服务 (Domain Service) 与应用服务 (Application Service) 的职责划分](05.3.2.1_领域服务_Domain_Service_与应用服务_Application_Service_的职责划分/index.md)
+- [05.3.2.2 工厂 (Factory)：领域对象的创建与重建](05.3.2.2_工厂_Factory_领域对象的创建与重建/index.md)
 
 ## 导航
 

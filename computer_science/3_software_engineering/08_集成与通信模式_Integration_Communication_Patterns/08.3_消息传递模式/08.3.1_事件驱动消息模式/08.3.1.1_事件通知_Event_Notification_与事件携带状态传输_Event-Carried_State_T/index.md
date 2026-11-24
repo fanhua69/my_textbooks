@@ -1,6 +1,6 @@
-# 8.3.1.1 事件通知 (Event Notification) 与事件携带状态传输 (Event-Carried State Transfer)
+# 08.3.1.1 事件通知 (Event Notification) 与事件携带状态传输 (Event-Carried State Transfer)
 
-对比仅通知与携带数据两种事件风格，权衡耦合度、回查成本与数据冗余。
+**介绍**: 对比仅通知与携带数据两种事件风格，权衡耦合度、回查成本与数据冗余。
 
 ---
 

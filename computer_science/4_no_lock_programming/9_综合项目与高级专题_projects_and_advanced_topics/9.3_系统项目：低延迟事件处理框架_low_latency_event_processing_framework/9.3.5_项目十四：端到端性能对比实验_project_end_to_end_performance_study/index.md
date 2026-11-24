@@ -1,6 +1,6 @@
 # 9.3.5 项目十四：端到端性能对比实验  project end to end performance study
 
-比较 mutex queue、SPSC、MPSC、MPMC 在不同负载下的吞吐量和尾延迟。
+**介绍**: 比较 mutex queue、SPSC、MPSC、MPMC 在不同负载下的吞吐量和尾延迟。
 
 ---
 

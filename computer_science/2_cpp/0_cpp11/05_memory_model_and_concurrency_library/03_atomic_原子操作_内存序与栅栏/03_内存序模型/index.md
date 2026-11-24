@@ -1,14 +1,12 @@
-# 5.3.3 内存序模型
+# 03 内存序模型
 
-理解 happens-before、synchronizes-with 与六种 memory_order 之间的关系。
+**介绍**: 理解 happens-before、synchronizes-with 与六种 memory_order 之间的关系。
 
-## 本节目录
+## 目录
 
-- [5.3.3.1 顺序一致性 seq  cst](01_顺序一致性_seq_cst/index.md)
-- [5.3.3.2 获取-释放语义](02_获取_释放语义/index.md)
-- [5.3.3.3 松弛序与 consume](03_松弛序与_consume/index.md)
-
----
+- [01 顺序一致性 seq  cst](01_顺序一致性_seq_cst/index.md)
+- [02 获取-释放语义](02_获取_释放语义/index.md)
+- [03 松弛序与 consume](03_松弛序与_consume/index.md)
 
 ## 导航
 

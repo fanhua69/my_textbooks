@@ -1,6 +1,6 @@
 # 6.2.5 Hazard Pointer Queue 实现  hazard pointer queue
 
-分析队列中 head、tail 和 next 指针的保护需求。
+**介绍**: 分析队列中 head、tail 和 next 指针的保护需求。
 
 ---
 

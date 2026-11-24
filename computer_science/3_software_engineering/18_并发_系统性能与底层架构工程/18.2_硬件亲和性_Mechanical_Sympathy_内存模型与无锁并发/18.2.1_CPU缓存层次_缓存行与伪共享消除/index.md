@@ -1,6 +1,6 @@
 # 18.2.1 CPU 缓存层次、缓存行与伪共享消除
 
-理解 L1/L2/L3 缓存局部性原理、缓存行填充（Cache Line Padding）消除多核伪共享（False Sharing）性能雪崩。
+**介绍**: 理解 L1/L2/L3 缓存局部性原理、缓存行填充（Cache Line Padding）消除多核伪共享（False Sharing）性能雪崩。
 
 ---
 

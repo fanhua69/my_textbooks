@@ -1,13 +1,11 @@
-# 3.1.3 mmap / munmap / madvise 与 Windows VirtualAlloc / VirtualProtect 对比
+# 03 mmap / munmap / madvise 与 Windows VirtualAlloc / VirtualProtect 对比
 
-对比匿名映射、文件映射、保护属性修改与内存建议标志在三平台下的实现与副作用。
+**介绍**: 对比匿名映射、文件映射、保护属性修改与内存建议标志在三平台下的实现与副作用。
 
-## 本节目录
+## 目录
 
-- [3.1.3.1 POSIX mmap / munmap / madvise（MADV DONTNEED / MADV HUGEPAGE）](01_posix_mmap_munmap_madvise_语义与副作用/index.md)
-- [3.1.3.2 Windows VirtualAlloc / VirtualFree / VirtualProtect 内存管理](02_windows_virtualalloc_virtualfree_virtualprotect_管理/index.md)
-
----
+- [01 POSIX mmap / munmap / madvise（MADV DONTNEED / MADV HUGEPAGE）](01_posix_mmap_munmap_madvise_语义与副作用/index.md)
+- [02 Windows VirtualAlloc / VirtualFree / VirtualProtect 内存管理](02_windows_virtualalloc_virtualfree_virtualprotect_管理/index.md)
 
 ## 导航
 

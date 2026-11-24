@@ -1,6 +1,6 @@
-# 3.2.2.2 控制器 (Controller)、纯虚构 (Pure Fabrication) 与间接性
+# 03.2.2.2 控制器 (Controller)、纯虚构 (Pure Fabrication) 与间接性
 
-通过用例控制器协调系统事件，借助纯虚构类（如 Repository/Service）与间接中间层维持领域模型的高内聚。
+**介绍**: 通过用例控制器协调系统事件，借助纯虚构类（如 Repository/Service）与间接中间层维持领域模型的高内聚。
 
 ---
 

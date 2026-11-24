@@ -1,16 +1,14 @@
-# 6.1 线程与同步原语
+# 01 线程与同步原语
 
-掌握 C++ 标准线程库及基本同步手段[cite: 4]。
+**介绍**: 掌握 C++ 标准线程库及基本同步手段[cite: 4]。
 
-## 本节目录
+## 目录
 
-- [6.1.1 std::thread、std::jthread 与线程生命周期](01_std_thread_std_jthread_与线程生命周期/index.md)
-- [6.1.2 mutex、lock_guard、scoped_lock 与 unique  lock](02_mutex_lock_guard_scoped_lock_与_unique_lock/index.md)
-- [6.1.3 condition variable 与等待谓词](03_condition_variable_与等待谓词/index.md)
-- [6.1.4 shared mutex、latch、barrier 与读写锁](04_shared_mutex_latch_barrier_与读写锁/index.md)
-- [6.1.5 future、promise、async 与 packaged  task](05_future_promise_async_与_packaged_task/index.md)
-
----
+- [01 std::thread、std::jthread 与线程生命周期](01_std_thread_std_jthread_与线程生命周期/index.md)
+- [02 mutex、lock_guard、scoped_lock 与 unique  lock](02_mutex_lock_guard_scoped_lock_与_unique_lock/index.md)
+- [03 condition variable 与等待谓词](03_condition_variable_与等待谓词/index.md)
+- [04 shared mutex、latch、barrier 与读写锁](04_shared_mutex_latch_barrier_与读写锁/index.md)
+- [05 future、promise、async 与 packaged  task](05_future_promise_async_与_packaged_task/index.md)
 
 ## 导航
 

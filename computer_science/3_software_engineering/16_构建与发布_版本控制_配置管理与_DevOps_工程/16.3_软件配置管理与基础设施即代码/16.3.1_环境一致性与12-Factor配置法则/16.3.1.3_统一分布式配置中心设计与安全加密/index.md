@@ -1,6 +1,6 @@
 # 16.3.1.3 统一分布式配置中心设计与安全加密
 
-运用 Nacos / Consul / Spring Cloud Config 实现动态热更新配置推送、版本回滚与敏感密码密钥加密托管。
+**介绍**: 运用 Nacos / Consul / Spring Cloud Config 实现动态热更新配置推送、版本回滚与敏感密码密钥加密托管。
 
 ---
 

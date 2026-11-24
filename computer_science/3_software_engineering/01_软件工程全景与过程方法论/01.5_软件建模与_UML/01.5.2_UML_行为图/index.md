@@ -1,13 +1,11 @@
-# 1.5.2 UML 行为图
+# 01.5.2 UML 行为图
 
-描述系统动态交互、流程与状态变迁。
+**介绍**: 描述系统动态交互、流程与状态变迁。
 
-## 本节目录
+## 目录
 
-- [1.5.2.1 顺序图 (Sequence Diagram)：对象交互、生命线与组合片段](01.5.2.1_顺序图_Sequence_Diagram_对象交互_生命线与组合片段/index.md)
-- [1.5.2.2 活动图 (Activity Diagram) 与状态机图 (State Machine Diagram)](01.5.2.2_活动图_Activity_Diagram_与状态机图_State_Machine_Diagram/index.md)
-
----
+- [01.5.2.1 顺序图 (Sequence Diagram)：对象交互、生命线与组合片段](01.5.2.1_顺序图_Sequence_Diagram_对象交互_生命线与组合片段/index.md)
+- [01.5.2.2 活动图 (Activity Diagram) 与状态机图 (State Machine Diagram)](01.5.2.2_活动图_Activity_Diagram_与状态机图_State_Machine_Diagram/index.md)
 
 ## 导航
 

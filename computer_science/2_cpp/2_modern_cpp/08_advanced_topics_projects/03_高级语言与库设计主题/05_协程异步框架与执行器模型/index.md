@@ -1,6 +1,6 @@
-# 8.3.5 协程异步框架与执行器模型
+# 05 协程异步框架与执行器模型
 
-理解 coroutine 与 scheduler/executor 的组合方式[cite: 4]。
+**介绍**: 理解 coroutine 与 scheduler/executor 的组合方式[cite: 4]。
 
 ---
 

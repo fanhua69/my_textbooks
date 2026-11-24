@@ -1,6 +1,6 @@
-# 8.2.2.1 点对点通道与发布-订阅通道 (Point-to-Point / Publish-Subscribe Channel)
+# 08.2.2.1 点对点通道与发布-订阅通道 (Point-to-Point / Publish-Subscribe Channel)
 
-对比单消费者与多订阅者的投递语义，理解消费组、主题与广播的设计取舍。
+**介绍**: 对比单消费者与多订阅者的投递语义，理解消费组、主题与广播的设计取舍。
 
 ---
 

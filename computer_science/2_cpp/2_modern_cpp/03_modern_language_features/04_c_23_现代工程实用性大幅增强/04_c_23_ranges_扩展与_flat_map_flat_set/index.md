@@ -1,6 +1,6 @@
-# 3.4.4 C++23 Ranges 适配器、views 扩展与 flat  map / flat set
+# 04 C++23 Ranges 适配器、views 扩展与 flat  map / flat set
 
-掌握 zip、chunk、slide、enumerate 等 views 以及连续内存扁平关联容器的缓存局部性优势[cite: 4]。
+**介绍**: 掌握 zip、chunk、slide、enumerate 等 views 以及连续内存扁平关联容器的缓存局部性优势[cite: 4]。
 
 ---
 

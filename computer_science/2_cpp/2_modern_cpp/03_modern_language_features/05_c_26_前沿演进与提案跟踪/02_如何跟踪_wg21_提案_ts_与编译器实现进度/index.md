@@ -1,6 +1,6 @@
-# 3.5.2 如何跟踪 WG21 提案、TS 与编译器实现进度
+# 02 如何跟踪 WG21 提案、TS 与编译器实现进度
 
-掌握从纸面提案到 Working Draft 合并、特征测试宏（Feature-Test Macros）检查与多编译器兼容写法[cite: 4]。
+**介绍**: 掌握从纸面提案到 Working Draft 合并、特征测试宏（Feature-Test Macros）检查与多编译器兼容写法[cite: 4]。
 
 ---
 

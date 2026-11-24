@@ -1,6 +1,6 @@
 # 1.2.1 生产者与消费者模型概览  producer consumer model overview
 
-定义 producer、consumer、消息传递、队列边界及并发访问角色。
+**介绍**: 定义 producer、consumer、消息传递、队列边界及并发访问角色。
 
 ---
 

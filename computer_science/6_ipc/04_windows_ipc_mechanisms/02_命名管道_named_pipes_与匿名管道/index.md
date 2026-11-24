@@ -1,13 +1,11 @@
-# 4.2 命名管道（Named Pipes）与匿名管道
+# 02 命名管道（Named Pipes）与匿名管道
 
-掌握 Windows 本地及局域网服务间最常用的双向消息/字节流管道。
+**介绍**: 掌握 Windows 本地及局域网服务间最常用的双向消息/字节流管道。
 
-## 本节目录
+## 目录
 
-- [4.2.1 CreateNamedPipe、消息模式（PIPE TYPE MESSAGE）与事务读取](01_createnamedpipe_消息模式_pipe_type_message_与事务读取/index.md)
-- [4.2.2 基于 Overlapped I/O 与 IOCP（完成端口）的异步管道服务器](02_基于_overlapped_i_o_与_iocp_完成端口_的异步管道服务器/index.md)
-
----
+- [01 CreateNamedPipe、消息模式（PIPE TYPE MESSAGE）与事务读取](01_createnamedpipe_消息模式_pipe_type_message_与事务读取/index.md)
+- [02 基于 Overlapped I/O 与 IOCP（完成端口）的异步管道服务器](02_基于_overlapped_i_o_与_iocp_完成端口_的异步管道服务器/index.md)
 
 ## 导航
 

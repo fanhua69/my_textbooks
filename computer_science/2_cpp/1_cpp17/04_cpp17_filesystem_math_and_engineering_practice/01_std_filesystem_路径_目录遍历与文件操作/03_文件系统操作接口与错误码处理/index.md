@@ -1,6 +1,6 @@
-# 4.1.3 文件状态/权限查询、创建/复制/重命名/删除、空间查询与 error code 重载
+# 03 文件状态/权限查询、创建/复制/重命名/删除、空间查询与 error code 重载
 
-掌握 file_status/perms、create_directories、copy_file、rename、remove/remove_all、space 及不抛异常的 std::error_code 重载用法。
+**介绍**: 掌握 file_status/perms、create_directories、copy_file、rename、remove/remove_all、space 及不抛异常的 std::error_code 重载用法。
 
 ---
 

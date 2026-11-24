@@ -1,6 +1,6 @@
-# 3.2.4.1 面向接口编程 (Programming to an Interface)
+# 03.2.4.1 面向接口编程 (Programming to an Interface)
 
-依赖抽象而非具体实现，借助接口、抽象类、C++ 概念 (Concepts) 与模板约束实现可替换与可测试的设计。
+**介绍**: 依赖抽象而非具体实现，借助接口、抽象类、C++ 概念 (Concepts) 与模板约束实现可替换与可测试的设计。
 
 ---
 

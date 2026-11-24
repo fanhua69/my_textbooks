@@ -1,6 +1,6 @@
-# 3.1.1 auto、decltype、尾置返回类型与类型推导规则
+# 01 auto、decltype、尾置返回类型与类型推导规则
 
-掌握 auto 自动类型推导、decltype 表达式类型查询、Trailing Return Type（箭头语法）及与引用/const 组合时的推导细节[cite: 4, 5, 12]。
+**介绍**: 掌握 auto 自动类型推导、decltype 表达式类型查询、Trailing Return Type（箭头语法）及与引用/const 组合时的推导细节[cite: 4, 5, 12]。
 
 ---
 

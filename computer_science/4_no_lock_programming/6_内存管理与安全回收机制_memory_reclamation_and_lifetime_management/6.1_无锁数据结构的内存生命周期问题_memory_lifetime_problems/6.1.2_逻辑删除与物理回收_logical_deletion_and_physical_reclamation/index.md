@@ -1,6 +1,6 @@
 # 6.1.2 逻辑删除与物理回收  logical deletion and physical reclamation
 
-区分节点从数据结构中不可见与内存真正可释放。
+**介绍**: 区分节点从数据结构中不可见与内存真正可释放。
 
 ---
 

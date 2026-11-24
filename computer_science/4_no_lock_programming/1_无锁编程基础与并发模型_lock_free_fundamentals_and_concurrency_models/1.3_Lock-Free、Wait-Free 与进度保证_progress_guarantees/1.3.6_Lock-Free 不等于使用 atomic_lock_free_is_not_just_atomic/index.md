@@ -1,6 +1,6 @@
 # 1.3.6 Lock-Free 不等于使用 atomic  lock free is not just atomic
 
-分析 atomic、CAS 与算法整体进度保证之间的区别。
+**介绍**: 分析 atomic、CAS 与算法整体进度保证之间的区别。
 
 ---
 

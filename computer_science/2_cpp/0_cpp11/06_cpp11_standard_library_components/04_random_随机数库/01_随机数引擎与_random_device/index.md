@@ -1,6 +1,6 @@
-# 6.4.1 随机数引擎与 random  device
+# 01 随机数引擎与 random  device
 
-了解 mt19937、minstd_rand 等引擎的特性，以及 random_device 作为熵源的使用。
+**介绍**: 了解 mt19937、minstd_rand 等引擎的特性，以及 random_device 作为熵源的使用。
 
 ---
 

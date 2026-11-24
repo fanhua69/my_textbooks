@@ -1,6 +1,6 @@
 # 17.3.4.1 模型服务化 (Model Serving) 架构与通信协议
 
-运用 Triton Inference Server / TorchServe / vLLM 搭建推理集群，支持动态批处理 (Dynamic Batching) 与持续批处理。
+**介绍**: 运用 Triton Inference Server / TorchServe / vLLM 搭建推理集群，支持动态批处理 (Dynamic Batching) 与持续批处理。
 
 ---
 

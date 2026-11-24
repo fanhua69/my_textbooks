@@ -1,13 +1,11 @@
-# 8.2 macOS 常用命令与系统/性能诊断工具链
+# 02 macOS 常用命令与系统/性能诊断工具链
 
-掌握 macOS 终端命令、安全与权限检查工具以及苹果性能剖析手段。
+**介绍**: 掌握 macOS 终端命令、安全与权限检查工具以及苹果性能剖析手段。
 
-## 本节目录
+## 目录
 
-- [8.2.1 服务、进程、内存与日志命令：launchctl、ps、top、vm stat、memory pressure、log、sysctl](01_macos_launchctl_内存压力_统一日志与内核参数/index.md)
-- [8.2.2 代码签名、TCC/权限与剖析工具：codesign、spctl、security、tccutil、lsof、dtrace / sample / spindump / Instruments](02_macos_codesign_tcc_dtrace_sample_instruments/index.md)
-
----
+- [01 服务、进程、内存与日志命令：launchctl、ps、top、vm stat、memory pressure、log、sysctl](01_macos_launchctl_内存压力_统一日志与内核参数/index.md)
+- [02 代码签名、TCC/权限与剖析工具：codesign、spctl、security、tccutil、lsof、dtrace / sample / spindump / Instruments](02_macos_codesign_tcc_dtrace_sample_instruments/index.md)
 
 ## 导航
 

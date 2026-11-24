@@ -1,6 +1,6 @@
 # 5.1.1 Ring Buffer 基本原理  ring buffer basics
 
-理解 head、tail、容量、取模与环形存储布局。
+**介绍**: 理解 head、tail、容量、取模与环形存储布局。
 
 ---
 

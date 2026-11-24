@@ -1,6 +1,6 @@
-# 3.4.3.4 模板方法模式 (Template Method)：好莱坞原则与算法骨架复用
+# 03.4.3.4 模板方法模式 (Template Method)：好莱坞原则与算法骨架复用
 
-在基类中固定算法执行骨架，开放钩子与特定步骤给子类重写，践行'Don't call us, we'll call you'。
+**介绍**: 在基类中固定算法执行骨架，开放钩子与特定步骤给子类重写，践行'Don't call us, we'll call you'。
 
 ---
 

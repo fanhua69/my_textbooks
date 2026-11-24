@@ -1,6 +1,6 @@
-# 8.1.5 平台抽象：POSIX、Windows 与 macOS
+# 05 平台抽象：POSIX、Windows 与 macOS
 
-比较平台 API 并设计可移植边界[cite: 4]。
+**介绍**: 比较平台 API 并设计可移植边界[cite: 4]。
 
 ---
 

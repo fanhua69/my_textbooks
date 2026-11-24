@@ -1,6 +1,6 @@
-# 2.4.2 虚函数、override 与 final
+# 02 虚函数、override 与 final
 
-理解动态绑定、虚函数表的常见实现及 override/final 接口约束[cite: 4, 5, 12]。
+**介绍**: 理解动态绑定、虚函数表的常见实现及 override/final 接口约束[cite: 4, 5, 12]。
 
 ---
 

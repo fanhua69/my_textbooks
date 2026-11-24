@@ -1,13 +1,11 @@
-# 7.2.2 Security Framework：Keychain、证书/信任评估与代码签名校验
+# 02 Security Framework：Keychain、证书/信任评估与代码签名校验
 
-掌握钥匙串访问控制与数据保护、证书链信任评估，以及通过静态/动态代码签名与 Requirement 校验调用方。
+**介绍**: 掌握钥匙串访问控制与数据保护、证书链信任评估，以及通过静态/动态代码签名与 Requirement 校验调用方。
 
-## 本节目录
+## 目录
 
-- [7.2.2.1 Keychain 访问控制、Data Protection 与 SecTrust 证书校验](01_keychain_访问控制_data_protection_与_sectrust_校验/index.md)
-- [7.2.2.2 Code Signing、Entitlements 与 SecRequirement 调用方验证](02_code_signing_entitlements_与_secrequirement_验证/index.md)
-
----
+- [01 Keychain 访问控制、Data Protection 与 SecTrust 证书校验](01_keychain_访问控制_data_protection_与_sectrust_校验/index.md)
+- [02 Code Signing、Entitlements 与 SecRequirement 调用方验证](02_code_signing_entitlements_与_secrequirement_验证/index.md)
 
 ## 导航
 

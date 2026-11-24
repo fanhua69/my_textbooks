@@ -1,15 +1,13 @@
-# 4.3 SFINAE 与模板元编程基础
+# 03 SFINAE 与模板元编程基础
 
-理解 SFINAE 与 enable_if 的工作机制，掌握 C++11 风格的编译期条件选择。
+**介绍**: 理解 SFINAE 与 enable_if 的工作机制，掌握 C++11 风格的编译期条件选择。
 
-## 本节目录
+## 目录
 
-- [4.3.1 SFINAE 基本规则与表达式 SFINAE](01_sfinae_基本规则与表达式_sfinae/index.md)
-- [4.3.2 enable if 与重载约束](02_enable_if_与重载约束/index.md)
-- [4.3.3 标签分发与编译期选择](03_标签分发与编译期选择/index.md)
-- [4.3.4 declval 与成员检测惯用法](04_declval_与成员检测惯用法/index.md)
-
----
+- [01 SFINAE 基本规则与表达式 SFINAE](01_sfinae_基本规则与表达式_sfinae/index.md)
+- [02 enable if 与重载约束](02_enable_if_与重载约束/index.md)
+- [03 标签分发与编译期选择](03_标签分发与编译期选择/index.md)
+- [04 declval 与成员检测惯用法](04_declval_与成员检测惯用法/index.md)
 
 ## 导航
 

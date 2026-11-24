@@ -1,6 +1,6 @@
 # 20.2.1.1 六层企业应用模式体系总览
 
-表现层 (MVC/MVP/MVVM/Front Controller) → 业务逻辑层 (Transaction Script/Domain Model/Service Layer/DDD) → 数据访问层 (DAO/Repository/Data Mapper/Active Record/Unit of Work) → 服务接口层 (Remote Facade/DTO/REST/RPC/gRPC) → 集成与通信层 (Message Broker/Event Bus/EIP/Pub-Sub) → 部署与运行层 (Process/Container/Kubernetes/Sidecar/Load Balancer)。
+**介绍**: 表现层 (MVC/MVP/MVVM/Front Controller) → 业务逻辑层 (Transaction Script/Domain Model/Service Layer/DDD) → 数据访问层 (DAO/Repository/Data Mapper/Active Record/Unit of Work) → 服务接口层 (Remote Facade/DTO/REST/RPC/gRPC) → 集成与通信层 (Message Broker/Event Bus/EIP/Pub-Sub) → 部署与运行层 (Process/Container/Kubernetes/Sidecar/Load Balancer)。
 
 ---
 

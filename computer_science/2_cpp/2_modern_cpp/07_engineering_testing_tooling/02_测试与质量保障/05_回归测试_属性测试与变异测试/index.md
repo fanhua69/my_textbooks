@@ -1,6 +1,6 @@
-# 7.2.5 回归测试、属性测试与变异测试
+# 05 回归测试、属性测试与变异测试
 
-建立回归防护，并用 property/mutation testing 检验测试能力[cite: 4]。
+**介绍**: 建立回归防护，并用 property/mutation testing 检验测试能力[cite: 4]。
 
 ---
 

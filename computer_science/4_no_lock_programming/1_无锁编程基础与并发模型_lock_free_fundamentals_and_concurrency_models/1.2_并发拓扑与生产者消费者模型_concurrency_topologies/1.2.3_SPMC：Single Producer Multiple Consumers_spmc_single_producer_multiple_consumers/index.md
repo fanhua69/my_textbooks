@@ -1,6 +1,6 @@
 # 1.2.3 SPMC：Single Producer Multiple Consumers  spmc single producer multiple consumers
 
-单生产者多消费者模型；分析多消费者竞争、任务分发、消费端索引协调与典型应用。
+**介绍**: 单生产者多消费者模型；分析多消费者竞争、任务分发、消费端索引协调与典型应用。
 
 ---
 

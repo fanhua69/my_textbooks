@@ -1,6 +1,6 @@
 # 3.4.4 Double-Checked Initialization  double checked initialization
 
-分析双重检查初始化的正确实现条件及常见错误。
+**介绍**: 分析双重检查初始化的正确实现条件及常见错误。
 
 ---
 

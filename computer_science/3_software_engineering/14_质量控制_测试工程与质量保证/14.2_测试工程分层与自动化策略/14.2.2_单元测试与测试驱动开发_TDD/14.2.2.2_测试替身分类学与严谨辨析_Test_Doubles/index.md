@@ -1,6 +1,6 @@
 # 14.2.2.2 测试替身 (Test Doubles) 分类学与严谨辨析
 
-精确区分 Gerard Meszaros 提出的五类替身：Dummy（占位符）、Stub（打桩输出）、Spy（间谍记录）、Mock（行为验证）与 Fake（轻量真实内存实现）。
+**介绍**: 精确区分 Gerard Meszaros 提出的五类替身：Dummy（占位符）、Stub（打桩输出）、Spy（间谍记录）、Mock（行为验证）与 Fake（轻量真实内存实现）。
 
 ---
 

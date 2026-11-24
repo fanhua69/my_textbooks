@@ -1,6 +1,6 @@
-# 5.4.1.1 DDD 战略设计：通用语言与限界上下文
+# 05.4.1.1 DDD 战略设计：通用语言与限界上下文
 
-确立 Ubiquitous Language，划分 Bounded Context，绘制上下文映射图（防腐层 ACL、共享内核、客户-供应）。
+**介绍**: 确立 Ubiquitous Language，划分 Bounded Context，绘制上下文映射图（防腐层 ACL、共享内核、客户-供应）。
 
 ---
 

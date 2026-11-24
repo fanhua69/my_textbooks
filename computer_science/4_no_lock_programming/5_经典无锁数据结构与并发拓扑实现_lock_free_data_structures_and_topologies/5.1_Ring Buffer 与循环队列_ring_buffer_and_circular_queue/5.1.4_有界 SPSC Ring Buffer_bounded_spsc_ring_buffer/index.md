@@ -1,6 +1,6 @@
 # 5.1.4 有界 SPSC Ring Buffer  bounded spsc ring buffer
 
-实现单生产者单消费者的固定容量环形队列。
+**介绍**: 实现单生产者单消费者的固定容量环形队列。
 
 ---
 

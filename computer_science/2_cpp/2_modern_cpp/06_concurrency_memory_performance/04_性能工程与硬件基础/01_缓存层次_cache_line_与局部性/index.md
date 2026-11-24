@@ -1,6 +1,6 @@
-# 6.4.1 缓存层次、cache line 与局部性
+# 01 缓存层次、cache line 与局部性
 
-理解 cache hierarchy、spatial/temporal locality[cite: 4]。
+**介绍**: 理解 cache hierarchy、spatial/temporal locality[cite: 4]。
 
 ---
 

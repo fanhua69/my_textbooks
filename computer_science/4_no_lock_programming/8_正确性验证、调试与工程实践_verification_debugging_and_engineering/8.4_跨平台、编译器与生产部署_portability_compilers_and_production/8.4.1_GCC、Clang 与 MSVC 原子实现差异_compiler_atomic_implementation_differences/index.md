@@ -1,6 +1,6 @@
 # 8.4.1 GCC、Clang 与 MSVC 原子实现差异  compiler atomic implementation differences
 
-比较实现支持、诊断、内建函数和目标平台差异。
+**介绍**: 比较实现支持、诊断、内建函数和目标平台差异。
 
 ---
 

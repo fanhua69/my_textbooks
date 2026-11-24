@@ -1,6 +1,6 @@
 # 14.2.2.4 GoogleTest 与 C++ 单元测试实践：Fixture、参数化测试与 gMock
 
-掌握 GoogleTest 的断言、测试夹具 (Fixture)、类型/值参数化测试，并用 gMock 实现测试替身与调用期望验证。
+**介绍**: 掌握 GoogleTest 的断言、测试夹具 (Fixture)、类型/值参数化测试，并用 gMock 实现测试替身与调用期望验证。
 
 ---
 

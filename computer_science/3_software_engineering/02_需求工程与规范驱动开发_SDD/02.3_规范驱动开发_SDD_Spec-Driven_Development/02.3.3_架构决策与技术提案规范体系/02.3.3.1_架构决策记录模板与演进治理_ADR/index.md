@@ -1,6 +1,6 @@
-# 2.3.3.1 架构决策记录 (ADR) 模板与演进治理
+# 02.3.3.1 架构决策记录 (ADR) 模板与演进治理
 
-掌握 ADR 的状态流转（Proposed/Accepted/Deprecated/Superseded），记录上下文、决策与正面/负面后果。
+**介绍**: 掌握 ADR 的状态流转（Proposed/Accepted/Deprecated/Superseded），记录上下文、决策与正面/负面后果。
 
 ---
 

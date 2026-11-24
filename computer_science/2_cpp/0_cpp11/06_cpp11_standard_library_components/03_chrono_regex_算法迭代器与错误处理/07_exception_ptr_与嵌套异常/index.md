@@ -1,6 +1,6 @@
-# 6.3.7 exception ptr 与嵌套异常
+# 07 exception ptr 与嵌套异常
 
-掌握 current_exception、rethrow_exception，以及 nested_exception 与 throw_with_nested 的使用。
+**介绍**: 掌握 current_exception、rethrow_exception，以及 nested_exception 与 throw_with_nested 的使用。
 
 ---
 

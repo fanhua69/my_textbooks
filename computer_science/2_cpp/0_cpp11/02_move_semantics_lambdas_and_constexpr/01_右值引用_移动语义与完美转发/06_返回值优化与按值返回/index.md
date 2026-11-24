@@ -1,6 +1,6 @@
-# 2.1.6 返回值优化与按值返回
+# 06 返回值优化与按值返回
 
-理解 RVO/NRVO、拷贝省略与移动的先后关系，避免滥用 return std::move(local)。
+**介绍**: 理解 RVO/NRVO、拷贝省略与移动的先后关系，避免滥用 return std::move(local)。
 
 ---
 

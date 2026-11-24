@@ -1,6 +1,6 @@
-# 3.3.1.1 NUMA 节点、本地 vs 远程内存访问延迟与 numactl / mbind / set  mempolicy
+# 01 NUMA 节点、本地 vs 远程内存访问延迟与 numactl / mbind / set  mempolicy
 
-避免跨 NUMA 节点频繁读写导致的延迟上升，掌握线程与内存本地化配置方法。
+**介绍**: 避免跨 NUMA 节点频繁读写导致的延迟上升，掌握线程与内存本地化配置方法。
 
 ---
 

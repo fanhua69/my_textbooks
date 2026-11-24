@@ -1,6 +1,6 @@
 # 3.2.4 compare_exchange_weak 与 compare  exchange strong compare exchange weak and strong
 
-理解 expected 参数、成功/失败内存序、伪失败及循环使用模式。
+**介绍**: 理解 expected 参数、成功/失败内存序、伪失败及循环使用模式。
 
 ---
 

@@ -1,6 +1,6 @@
-# 2.4.2.2 范围蔓延 (Scope Creep) 与镀金现象的识别与治理
+# 02.4.2.2 范围蔓延 (Scope Creep) 与镀金现象的识别与治理
 
-分析需求不断膨胀（Scope Creep）与工程师盲目实现额外功能（Gold Plating）的根因与防范措施。
+**介绍**: 分析需求不断膨胀（Scope Creep）与工程师盲目实现额外功能（Gold Plating）的根因与防范措施。
 
 ---
 

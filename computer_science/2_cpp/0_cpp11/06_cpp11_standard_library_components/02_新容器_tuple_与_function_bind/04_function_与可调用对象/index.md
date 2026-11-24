@@ -1,6 +1,6 @@
-# 6.2.4 function 与可调用对象
+# 04 function 与可调用对象
 
-理解 std::function 对函数指针、成员函数指针、lambda 与仿函数的统一封装及其开销。
+**介绍**: 理解 std::function 对函数指针、成员函数指针、lambda 与仿函数的统一封装及其开销。
 
 ---
 

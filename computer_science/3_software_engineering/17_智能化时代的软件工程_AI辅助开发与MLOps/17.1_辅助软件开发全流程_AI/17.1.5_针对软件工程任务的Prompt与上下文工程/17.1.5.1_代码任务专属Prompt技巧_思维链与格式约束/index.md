@@ -1,6 +1,6 @@
 # 17.1.5.1 代码任务专属 Prompt 技巧：思维链与格式约束
 
-掌握 Chain-of-Thought（思维链）、分步反思与 JSON Schema / Pydantic 强类型结构化输出控制。
+**介绍**: 掌握 Chain-of-Thought（思维链）、分步反思与 JSON Schema / Pydantic 强类型结构化输出控制。
 
 ---
 

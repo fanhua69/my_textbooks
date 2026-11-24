@@ -1,6 +1,6 @@
 # 18.4.4 全栈性能剖析 (Profiling) 与火焰图 (Flame Graphs) 调优
 
-利用 perf / eBPF / Async-Profiler 生成 On-CPU、Off-CPU 与内存分配火焰图，精确诊断热点路径与锁竞争。
+**介绍**: 利用 perf / eBPF / Async-Profiler 生成 On-CPU、Off-CPU 与内存分配火焰图，精确诊断热点路径与锁竞争。
 
 ---
 

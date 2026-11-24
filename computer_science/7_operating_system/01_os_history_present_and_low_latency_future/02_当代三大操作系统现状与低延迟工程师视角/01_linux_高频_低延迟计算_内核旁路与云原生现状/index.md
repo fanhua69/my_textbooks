@@ -1,13 +1,11 @@
-# 1.2.1 Linux：高频/低延迟计算、内核旁路与云原生现状
+# 01 Linux：高频/低延迟计算、内核旁路与云原生现状
 
-剖析 PREEMPT_RT、io_uring、DPDK/RDMA、eBPF 与 cgroup v2 在微秒级延迟敏感系统中的优势与瓶颈。
+**介绍**: 剖析 PREEMPT_RT、io_uring、DPDK/RDMA、eBPF 与 cgroup v2 在微秒级延迟敏感系统中的优势与瓶颈。
 
-## 本节目录
+## 目录
 
-- [1.2.1.1 内核旁路（DPDK / RDMA / AF XDP）与异步批处理（io uring）](01_内核旁路与异步批处理_io_uring/index.md)
-- [1.2.1.2 容器化、cgroup v2 与多租户噪声邻居问题](02_容器化_cgroup_v2_与多租户噪声邻居问题/index.md)
-
----
+- [01 内核旁路（DPDK / RDMA / AF XDP）与异步批处理（io uring）](01_内核旁路与异步批处理_io_uring/index.md)
+- [02 容器化、cgroup v2 与多租户噪声邻居问题](02_容器化_cgroup_v2_与多租户噪声邻居问题/index.md)
 
 ## 导航
 

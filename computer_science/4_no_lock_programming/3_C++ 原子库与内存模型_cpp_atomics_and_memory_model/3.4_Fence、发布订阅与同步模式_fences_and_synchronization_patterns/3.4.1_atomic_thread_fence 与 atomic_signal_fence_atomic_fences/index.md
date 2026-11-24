@@ -1,6 +1,6 @@
 # 3.4.1 atomic_thread_fence 与 atomic  signal fence atomic fences
 
-理解线程间屏障与编译器信号屏障的区别。
+**介绍**: 理解线程间屏障与编译器信号屏障的区别。
 
 ---
 

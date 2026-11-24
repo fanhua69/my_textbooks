@@ -1,6 +1,6 @@
 # 2.1.5 x86-64 与 ARM64 原子指令概览  x86 64 and arm64 atomic instructions
 
-对比 LOCK 前缀、CMPXCHG、LL/SC、LSE 等机制；注意架构与实现差异。
+**介绍**: 对比 LOCK 前缀、CMPXCHG、LL/SC、LSE 等机制；注意架构与实现差异。
 
 ---
 

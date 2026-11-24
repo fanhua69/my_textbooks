@@ -1,13 +1,11 @@
-# 7.3.2 XPC 服务端调用方校验（Audit Token / Signing Requirement）与严格参数校验
+# 02 XPC 服务端调用方校验（Audit Token / Signing Requirement）与严格参数校验
 
-利用内核签发的 Audit Token 结合代码签名校验连接合法性，实施协议白名单、安全编解码与输入边界检查。
+**介绍**: 利用内核签发的 Audit Token 结合代码签名校验连接合法性，实施协议白名单、安全编解码与输入边界检查。
 
-## 本节目录
+## 目录
 
-- [7.3.2.1 基于 Audit Token 与 SecCode/Signing Requirement 的对端认证](01_基于_audit_token_与_signing_requirement_的对端认证/index.md)
-- [7.3.2.2 XPC 协议契约最小化、NSSecureCoding 白名单与参数合法性校验](02_xpc_协议契约最小化与输入参数校验/index.md)
-
----
+- [01 基于 Audit Token 与 SecCode/Signing Requirement 的对端认证](01_基于_audit_token_与_signing_requirement_的对端认证/index.md)
+- [02 XPC 协议契约最小化、NSSecureCoding 白名单与参数合法性校验](02_xpc_协议契约最小化与输入参数校验/index.md)
 
 ## 导航
 

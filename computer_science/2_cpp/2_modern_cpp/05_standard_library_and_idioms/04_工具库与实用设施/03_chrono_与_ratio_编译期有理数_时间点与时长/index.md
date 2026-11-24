@@ -1,6 +1,6 @@
-# 5.4.3 chrono 与 std::ratio：编译期有理数、时间点与时长
+# 03 chrono 与 std::ratio：编译期有理数、时间点与时长
 
-掌握 std::ratio 编译期有理数分数算术及其支撑的 duration、time_point、clock 和日历设施[cite: 4, 5, 11]。
+**介绍**: 掌握 std::ratio 编译期有理数分数算术及其支撑的 duration、time_point、clock 和日历设施[cite: 4, 5, 11]。
 
 ---
 

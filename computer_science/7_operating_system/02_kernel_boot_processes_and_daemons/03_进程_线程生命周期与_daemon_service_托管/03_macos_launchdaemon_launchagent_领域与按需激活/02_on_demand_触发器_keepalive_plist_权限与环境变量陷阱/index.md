@@ -1,6 +1,6 @@
-# 2.3.3.2 On-Demand 触发器、KeepAlive、plist 权限与环境变量陷阱
+# 02 On-Demand 触发器、KeepAlive、plist 权限与环境变量陷阱
 
-掌握 MachServices/Sockets 按需拉起、root:wheel 0644 权限要求与非交互环境变量显式配置。
+**介绍**: 掌握 MachServices/Sockets 按需拉起、root:wheel 0644 权限要求与非交互环境变量显式配置。
 
 ---
 

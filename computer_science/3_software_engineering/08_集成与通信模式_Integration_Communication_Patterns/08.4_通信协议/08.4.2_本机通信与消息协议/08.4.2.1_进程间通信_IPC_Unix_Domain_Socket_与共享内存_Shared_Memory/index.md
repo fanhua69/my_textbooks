@@ -1,6 +1,6 @@
-# 8.4.2.1 进程间通信 (IPC)：Unix Domain Socket 与共享内存 (Shared Memory)
+# 08.4.2.1 进程间通信 (IPC)：Unix Domain Socket 与共享内存 (Shared Memory)
 
-对比本机通信机制的延迟与开销，掌握共享内存的同步与生命周期管理要点。
+**介绍**: 对比本机通信机制的延迟与开销，掌握共享内存的同步与生命周期管理要点。
 
 ---
 

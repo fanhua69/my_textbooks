@@ -1,6 +1,6 @@
 # 8.4.3 CMake、CTest 与 CI 并发测试  cmake ctest and ci
 
-组织测试目标、Sanitizer 构建和持续集成。
+**介绍**: 组织测试目标、Sanitizer 构建和持续集成。
 
 ---
 

@@ -1,6 +1,6 @@
 # 7.1.4 Google Benchmark 与自定义压测  google benchmark and load test
 
-设计单线程、多线程和不同竞争度的基准。
+**介绍**: 设计单线程、多线程和不同竞争度的基准。
 
 ---
 

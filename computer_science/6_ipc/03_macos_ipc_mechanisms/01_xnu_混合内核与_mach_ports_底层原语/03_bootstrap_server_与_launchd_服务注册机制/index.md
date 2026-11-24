@@ -1,6 +1,6 @@
-# 3.1.3 Bootstrap Server 与 launchd 服务注册机制
+# 03 Bootstrap Server 与 launchd 服务注册机制
 
-理解 macOS 启动守护进程（LaunchDaemon / LaunchAgent）如何通过 MachService 暴露端点。
+**介绍**: 理解 macOS 启动守护进程（LaunchDaemon / LaunchAgent）如何通过 MachService 暴露端点。
 
 ---
 

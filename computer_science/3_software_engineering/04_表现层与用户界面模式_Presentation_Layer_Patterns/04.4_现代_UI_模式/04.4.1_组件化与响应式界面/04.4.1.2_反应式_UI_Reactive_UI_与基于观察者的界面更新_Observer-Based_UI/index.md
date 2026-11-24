@@ -1,6 +1,6 @@
-# 4.4.1.2 反应式 UI (Reactive UI) 与基于观察者的界面更新 (Observer-Based UI)
+# 04.4.1.2 反应式 UI (Reactive UI) 与基于观察者的界面更新 (Observer-Based UI)
 
-以数据流与订阅机制驱动视图更新，理解细粒度响应式 (Signals) 与虚拟 DOM 差异化更新的取舍。
+**介绍**: 以数据流与订阅机制驱动视图更新，理解细粒度响应式 (Signals) 与虚拟 DOM 差异化更新的取舍。
 
 ---
 

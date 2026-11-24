@@ -1,6 +1,6 @@
 # 5.6.2 Lock-Free Linked List  lock free linked list
 
-介绍逻辑删除、标记指针和物理摘链。
+**介绍**: 介绍逻辑删除、标记指针和物理摘链。
 
 ---
 

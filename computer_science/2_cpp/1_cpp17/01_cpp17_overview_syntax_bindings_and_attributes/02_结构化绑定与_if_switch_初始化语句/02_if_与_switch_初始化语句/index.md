@@ -1,6 +1,6 @@
-# 1.2.2 if 与 switch 语句中的初始化语句（if (init; cond) / switch (init; cond)）
+# 02 if 与 switch 语句中的初始化语句（if (init; cond) / switch (init; cond)）
 
-掌握在 if 与 switch 条件前声明并初始化局部变量（如 map::try_emplace / find 结果绑定），缩小变量生命周期作用域。
+**介绍**: 掌握在 if 与 switch 条件前声明并初始化局部变量（如 map::try_emplace / find 结果绑定），缩小变量生命周期作用域。
 
 ---
 

@@ -1,6 +1,6 @@
-# 1.4.3 求值顺序、sequenced-before 与副作用
+# 03 求值顺序、sequenced-before 与副作用
 
-理解 sequencing 规则（含 C++17 强化的求值顺序保证）及其对未定义行为的影响[cite: 4]。
+**介绍**: 理解 sequencing 规则（含 C++17 强化的求值顺序保证）及其对未定义行为的影响[cite: 4]。
 
 ---
 

@@ -1,6 +1,6 @@
 # 2.2.3 Cache Line Ping-Pong  cache line ping pong
 
-分析多个核心反复写同一缓存行造成的通信开销。
+**介绍**: 分析多个核心反复写同一缓存行造成的通信开销。
 
 ---
 

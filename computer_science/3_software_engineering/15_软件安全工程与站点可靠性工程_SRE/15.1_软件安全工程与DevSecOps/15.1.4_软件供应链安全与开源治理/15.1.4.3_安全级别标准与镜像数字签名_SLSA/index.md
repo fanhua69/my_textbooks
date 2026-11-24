@@ -1,6 +1,6 @@
 # 15.1.4.3 SLSA 安全级别标准与镜像数字签名
 
-贯彻 Supply-chain Levels for Software Artifacts (SLSA) 框架，使用 Sigstore / Cosign 对容器镜像进行数字签名验证。
+**介绍**: 贯彻 Supply-chain Levels for Software Artifacts (SLSA) 框架，使用 Sigstore / Cosign 对容器镜像进行数字签名验证。
 
 ---
 

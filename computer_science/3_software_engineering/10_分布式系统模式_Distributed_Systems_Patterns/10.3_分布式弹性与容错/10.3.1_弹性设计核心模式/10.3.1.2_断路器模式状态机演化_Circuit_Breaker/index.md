@@ -1,6 +1,6 @@
 # 10.3.1.2 断路器模式 (Circuit Breaker) 状态机演化
 
-详细剖析 Closed（闭合正常）、Open（打开熔断快速失败）与 Half-Open（半开试探恢复）三态流转机制与回退降级（Fallback）。
+**介绍**: 详细剖析 Closed（闭合正常）、Open（打开熔断快速失败）与 Half-Open（半开试探恢复）三态流转机制与回退降级（Fallback）。
 
 ---
 

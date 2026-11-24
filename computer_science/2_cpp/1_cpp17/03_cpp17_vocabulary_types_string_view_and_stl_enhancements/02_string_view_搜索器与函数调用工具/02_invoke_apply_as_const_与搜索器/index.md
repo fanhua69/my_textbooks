@@ -1,6 +1,6 @@
-# 3.2.2 std::invoke、std::apply、std::make from tuple、std::as const 与 Boyer-Moore 搜索器
+# 02 std::invoke、std::apply、std::make from tuple、std::as const 与 Boyer-Moore 搜索器
 
-掌握统一调用函数/成员函数/成员指针的 std::invoke、将 tuple 展开传参的 std::apply、构造对象的 std::make_from_tuple、加 const 的 std::as_const 及 booyer_moore_searcher / booyer_moore_horspool_searcher。
+**介绍**: 掌握统一调用函数/成员函数/成员指针的 std::invoke、将 tuple 展开传参的 std::apply、构造对象的 std::make_from_tuple、加 const 的 std::as_const 及 booyer_moore_searcher / booyer_moore_horspool_searcher。
 
 ---
 

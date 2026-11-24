@@ -1,6 +1,6 @@
 # 15.2.3.2 OpenTelemetry (OTel) 统一标准与上下文透传
 
-掌握 OpenTelemetry 统一遥测数据规范，实现跨进程与线程池的 TraceId / SpanId 追踪上下文透传。
+**介绍**: 掌握 OpenTelemetry 统一遥测数据规范，实现跨进程与线程池的 TraceId / SpanId 追踪上下文透传。
 
 ---
 

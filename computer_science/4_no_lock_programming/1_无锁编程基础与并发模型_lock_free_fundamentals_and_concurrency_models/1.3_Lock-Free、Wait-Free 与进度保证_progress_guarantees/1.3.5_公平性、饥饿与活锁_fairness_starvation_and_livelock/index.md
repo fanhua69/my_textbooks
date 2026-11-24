@@ -1,6 +1,6 @@
 # 1.3.5 公平性、饥饿与活锁  fairness starvation and livelock
 
-理解 lock-free 不等于公平，也不保证每个线程都能及时完成。
+**介绍**: 理解 lock-free 不等于公平，也不保证每个线程都能及时完成。
 
 ---
 

@@ -1,6 +1,6 @@
-# 2.2.4.2 smss、csrss、wininit 与 Session 0 / Session 1 建立
+# 02 smss、csrss、wininit 与 Session 0 / Session 1 建立
 
-理解会话管理器如何创建 Session 0 承载服务与 Session 1+ 承载交互式登录会话。
+**介绍**: 理解会话管理器如何创建 Session 0 承载服务与 Session 1+ 承载交互式登录会话。
 
 ---
 

@@ -1,6 +1,6 @@
 # 1.2.4 MPSC：Multiple Producers Single Consumer  mpsc multiple producers single consumer
 
-多生产者单消费者模型；分析生产端并发入队、单消费者出队、CAS 竞争及日志汇聚场景。
+**介绍**: 多生产者单消费者模型；分析生产端并发入队、单消费者出队、CAS 竞争及日志汇聚场景。
 
 ---
 

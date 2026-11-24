@@ -1,6 +1,6 @@
-# 1.5.1.3 组件图 (Component Diagram) 与部署图 (Deployment Diagram)
+# 01.5.1.3 组件图 (Component Diagram) 与部署图 (Deployment Diagram)
 
-描述组件的提供/需求接口与依赖，以及软件制品到物理/虚拟节点的部署映射。
+**介绍**: 描述组件的提供/需求接口与依赖，以及软件制品到物理/虚拟节点的部署映射。
 
 ---
 

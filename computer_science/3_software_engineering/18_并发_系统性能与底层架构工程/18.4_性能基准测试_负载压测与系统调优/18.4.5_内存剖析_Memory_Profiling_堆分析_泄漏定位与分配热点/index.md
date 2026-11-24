@@ -1,6 +1,6 @@
 # 18.4.5 内存剖析 (Memory Profiling)：堆分析、泄漏定位与分配热点
 
-使用 heap profiler、Valgrind/ASan 与分配追踪定位内存增长、碎片与高频分配路径。
+**介绍**: 使用 heap profiler、Valgrind/ASan 与分配追踪定位内存增长、碎片与高频分配路径。
 
 ---
 

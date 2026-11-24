@@ -1,6 +1,6 @@
-# 6.5.6 时间与货币的格式化 I/O
+# 06 时间与货币的格式化 I/O
 
-使用 get_time、put_time、get_money 与 put_money 进行格式化输入输出。
+**介绍**: 使用 get_time、put_time、get_money 与 put_money 进行格式化输入输出。
 
 ---
 

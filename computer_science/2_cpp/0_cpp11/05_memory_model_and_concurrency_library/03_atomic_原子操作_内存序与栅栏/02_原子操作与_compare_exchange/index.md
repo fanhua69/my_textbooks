@@ -1,6 +1,6 @@
-# 5.3.2 原子操作与 compare  exchange
+# 02 原子操作与 compare  exchange
 
-掌握 load/store、fetch_*、exchange 与 compare_exchange_weak/strong 的语义与选择。
+**介绍**: 掌握 load/store、fetch_*、exchange 与 compare_exchange_weak/strong 的语义与选择。
 
 ---
 

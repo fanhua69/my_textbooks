@@ -1,6 +1,6 @@
-# 8.4.1.2 HTTP / HTTPS 与 WebSocket
+# 08.4.1.2 HTTP / HTTPS 与 WebSocket
 
-掌握 HTTP 版本演进、TLS 握手与长连接，以及 WebSocket 的全双工通信与心跳管理。
+**介绍**: 掌握 HTTP 版本演进、TLS 握手与长连接，以及 WebSocket 的全双工通信与心跳管理。
 
 ---
 

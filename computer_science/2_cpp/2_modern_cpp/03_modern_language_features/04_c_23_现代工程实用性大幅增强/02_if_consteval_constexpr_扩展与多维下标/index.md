@@ -1,6 +1,6 @@
-# 3.4.2 if consteval、constexpr 扩展与多维下标运算符
+# 02 if consteval、constexpr 扩展与多维下标运算符
 
-区分编译期/运行期上下文、constexpr 增强能力以及 operator[] 支持多参数与默认实参[cite: 4]。
+**介绍**: 区分编译期/运行期上下文、constexpr 增强能力以及 operator[] 支持多参数与默认实参[cite: 4]。
 
 ---
 

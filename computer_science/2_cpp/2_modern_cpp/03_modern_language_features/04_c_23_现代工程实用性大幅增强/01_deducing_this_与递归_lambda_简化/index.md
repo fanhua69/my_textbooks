@@ -1,6 +1,6 @@
-# 3.4.1 deducing this（显式对象参数）与递归 lambda 简化
+# 01 deducing this（显式对象参数）与递归 lambda 简化
 
-掌握显式对象参数统一 cv/ref 限定重载、CRTP 简化与自递归 lambda 写法[cite: 4]。
+**介绍**: 掌握显式对象参数统一 cv/ref 限定重载、CRTP 简化与自递归 lambda 写法[cite: 4]。
 
 ---
 

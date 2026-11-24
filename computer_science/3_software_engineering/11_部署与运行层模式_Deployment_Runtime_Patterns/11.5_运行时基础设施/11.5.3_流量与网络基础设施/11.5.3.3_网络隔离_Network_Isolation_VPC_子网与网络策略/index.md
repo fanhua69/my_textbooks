@@ -1,6 +1,6 @@
 # 11.5.3.3 网络隔离 (Network Isolation)：VPC、子网与网络策略
 
-以网络分区、安全组与 NetworkPolicy 限制横向移动，实现纵深防御。
+**介绍**: 以网络分区、安全组与 NetworkPolicy 限制横向移动，实现纵深防御。
 
 ---
 

@@ -1,6 +1,6 @@
-# 2.3.4 异常安全保证、noexcept 与 std::exception  ptr
+# 04 异常安全保证、noexcept 与 std::exception  ptr
 
-理解基本/强/不抛出保证、noexcept 说明符与运算符，以及跨线程/延迟重抛异常的 std::exception_ptr[cite: 4, 11, 12]。
+**介绍**: 理解基本/强/不抛出保证、noexcept 说明符与运算符，以及跨线程/延迟重抛异常的 std::exception_ptr[cite: 4, 11, 12]。
 
 ---
 

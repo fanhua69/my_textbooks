@@ -1,6 +1,6 @@
 # 1.1.3 互斥锁、读写锁与自旋锁 mutex rwlock and spinlock
 
-深入剖析 `std::mutex` / `std::timed_mutex`、读写锁（`std::shared_mutex` / `pthread_rwlock_t`）与自旋锁（Spinlock）的语义、同步机制、开销成本、适用场景与公平性/饥饿权衡，帮助在传统同步原语与低延迟无锁方案之间做出稳健的工程决策。
+**介绍**: 深入剖析 `std::mutex` / `std::timed_mutex`、读写锁（`std::shared_mutex` / `pthread_rwlock_t`）与自旋锁（Spinlock）的语义、同步机制、开销成本、适用场景与公平性/饥饿权衡，帮助在传统同步原语与低延迟无锁方案之间做出稳健的工程决策。
 
 ## 小节索引
 
