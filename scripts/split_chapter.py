@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 import argparse
 import re
+import shutil
+import subprocess
 import sys
 from dataclasses import dataclass
 from pathlib import Path
@@ -54,6 +56,39 @@ def find_chapter_dir(root: Path, chapter_id: str) -> Path:
     if len(matches) > 1:
         print(f"提示: 找到多个匹配目录，默认使用第一个: {matches[0]}", file=sys.stderr)
 
+    return matches[0]
+
+
+def find_chapter_entry(root: Path, chapter_id: str) -> tuple[Path, str]:
+    """Return the matched directory or Markdown file and its kind."""
+    start = root.resolve()
+    book_root = find_book_root(start)
+    prefix = f"{chapter_id}_"
+    matches: list[tuple[Path, str]] = []
+
+    candidates = [start] if start.exists() else []
+    if start.is_dir():
+        candidates.extend(p for p in book_root.rglob("*") if p.is_dir())
+    candidates.extend(p for p in book_root.rglob("*") if p.is_file())
+
+    for path in candidates:
+        if path.is_dir():
+            clean_name = path.name.strip()
+            if clean_name == chapter_id or clean_name.startswith(prefix):
+                matches.append((path, "directory"))
+        elif path.is_file() and path.suffix.lower() == ".md":
+            stem = path.stem.strip()
+            if stem == chapter_id or stem.startswith(prefix):
+                matches.append((path, "file"))
+
+    matches = list(dict.fromkeys(matches))
+    matches.sort(key=lambda item: (item[1], str(item[0])))
+    if not matches:
+        raise FileNotFoundError(
+            f"错误: 在书籍根目录 '{book_root}' 下未找到以 '{chapter_id}' 对应的章节目录或 Markdown 文件"
+        )
+    if len(matches) > 1:
+        print(f"提示: 找到多个匹配项，默认使用第一个: {matches[0][0]}", file=sys.stderr)
     return matches[0]
 
 
@@ -199,6 +234,14 @@ def build_links_block(entries: list[tuple[str, str, str]]) -> str:
     return "\n".join(out_lines)
 
 
+def build_file_links_block(entries: list[tuple[str, str, str]]) -> str:
+    out_lines = ["## 小节索引", ""]
+    for sub_id, display_title, file_name in entries:
+        encoded_file = file_name.replace(" ", "%20")
+        out_lines.append(f"- [{sub_id} {display_title}](./{encoded_file})")
+    return "\n".join(out_lines)
+
+
 def update_parent_index(
     content: str,
     spans: list[SectionSpan],
@@ -216,9 +259,166 @@ def update_parent_index(
     return "\n\n".join(parts) + "\n"
 
 
+def split_directory_chapter(
+    target_dir: Path,
+    chapter_id: str,
+    dry_run: bool,
+    force: bool,
+    keep_source: bool,
+) -> tuple[bool, Path]:
+    """Split a directory chapter's index.md directly into sibling Markdown files."""
+    index_file = target_dir / "index.md"
+    if not index_file.is_file():
+        raise FileNotFoundError(f"错误: 未找到文件 '{index_file}'")
+
+    content = index_file.read_text(encoding="utf-8")
+    spans = split_sections_with_spans(content)
+    if not spans:
+        return False, index_file
+
+    if not dry_run:
+        book_root = find_book_root(index_file)
+        removed_dir = book_root / "removed"
+        removed_dir.mkdir(parents=True, exist_ok=True)
+
+        directory_suffix = re.sub(
+            r"^\d+(?:\.\d+)*[_\s]+",
+            "",
+            target_dir.name,
+        ).strip()
+        archived_name = (
+            f"{chapter_id}_{directory_suffix}_index.md"
+            if directory_suffix
+            else f"{chapter_id}_index.md"
+        )
+        archived_file = removed_dir / archived_name
+        if archived_file.exists() and not force:
+            print(f"      removed目录中已存在归档文件（使用 --force 覆盖）: {archived_file}")
+        else:
+            shutil.copy2(index_file, archived_file)
+            print(f"\n已归档原 index.md: {archived_file}")
+
+    print(f"源目录: {target_dir}")
+    print(f"共检测到 {len(spans)} 个有效 '##' 片段:\n")
+
+    link_entries: list[tuple[str, str, str]] = []
+    for idx, span in enumerate(spans, start=1):
+        sub_id = f"{chapter_id}.{idx}"
+        display_title = clean_title(span.raw_title)
+        safe_title = sanitize_dirname(span.raw_title)
+        raw_body = normalize_sec_body(span.body)
+        clean_body = shift_sub_headings(raw_body)
+        summary = extract_summary(display_title, clean_body)
+
+        raw_file_name = f"{sub_id}_{safe_title}.md"
+        sub_file_name = trim_utf8_bytes(raw_file_name, max_bytes=180)
+        sub_file_path = target_dir / sub_file_name
+        link_entries.append((sub_id, display_title, sub_file_name))
+        print(f"  [{idx}] {sub_file_name}")
+
+        if dry_run:
+            continue
+        if sub_file_path.exists() and not force:
+            print(f"      跳过已存在文件（使用 --force 覆盖）: {sub_file_path}")
+            continue
+
+        sub_markdown = (
+            f"# {sub_id} {display_title}\n\n"
+            f"> **简介**：{summary}\n\n"
+            f"---\n\n"
+            f"{clean_body}\n"
+        )
+        sub_file_path.write_text(sub_markdown, encoding="utf-8")
+
+    updated_index = update_parent_index_with_files(content, spans, link_entries)
+    if dry_run:
+        print("\n(--dry-run 模式：未写入任何文件，预览 index.md 如下)")
+        print("---")
+        print(updated_index)
+        return True, index_file
+
+    if not keep_source:
+        index_file.write_text(updated_index, encoding="utf-8")
+        print(f"\n已更新目录 index.md 并移除被拆分片段: {index_file}")
+    else:
+        print("\n(--keep-source 模式：未修改 index.md)")
+    return True, index_file
+
+
+def split_file_chapter(
+    source_file: Path,
+    chapter_id: str,
+    dry_run: bool,
+    force: bool,
+    keep_source: bool,
+) -> tuple[bool, Path]:
+    """Convert a Markdown file into a same-name directory, then split it."""
+    target_dir = source_file.with_name(source_file.stem)
+    print(f"源文件: {source_file}")
+    print(f"新建目录: {target_dir}")
+
+    if dry_run:
+        new_index = target_dir / "index.md"
+        print(f"  [{target_dir.name}/index.md]")
+        content = source_file.read_text(encoding="utf-8")
+        spans = split_sections_with_spans(content)
+        if not spans:
+            return False, target_dir
+        print(f"共检测到 {len(spans)} 个有效 '##' 片段:\n")
+        return split_directory_dry_run(target_dir, chapter_id, spans)
+
+    target_dir.mkdir(parents=True, exist_ok=True)
+    index_file = target_dir / "index.md"
+    if index_file.exists() and not force:
+        raise FileExistsError(f"目标 index.md 已存在（使用 --force 覆盖）: {index_file}")
+
+    shutil.move(str(source_file), str(index_file))
+    print(f"已移动原文件并重命名为: {index_file}")
+    return split_directory_chapter(
+        target_dir,
+        chapter_id,
+        dry_run=False,
+        force=force,
+        keep_source=keep_source,
+    )
+
+
+def split_directory_dry_run(
+    target_dir: Path,
+    chapter_id: str,
+    spans: list[SectionSpan],
+) -> tuple[bool, Path]:
+    """Preview file-mode split without creating or moving files."""
+    for idx, span in enumerate(spans, start=1):
+        display_title = clean_title(span.raw_title)
+        safe_title = sanitize_dirname(span.raw_title)
+        sub_id = f"{chapter_id}.{idx}"
+        sub_file_name = trim_utf8_bytes(
+            f"{sub_id}_{safe_title}.md",
+            max_bytes=180,
+        )
+        print(f"  [{idx}] {target_dir.name}/{sub_file_name}")
+    return True, target_dir
+
+
+def update_parent_index_with_files(
+    content: str,
+    spans: list[SectionSpan],
+    link_entries: list[tuple[str, str, str]],
+) -> str:
+    lines = content.splitlines(keepends=True)
+    first_start = spans[0].start_line
+    last_end = spans[-1].end_line
+    prefix_text = "".join(lines[:first_start]).rstrip()
+    suffix_text = "".join(lines[last_end:]).strip()
+    links_block = build_file_links_block(link_entries)
+    parts = [p for p in (prefix_text, links_block, suffix_text) if p]
+    return "\n\n".join(parts) + "\n"
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(
-        description="按 '##' 二级标题拆分指定章节下的 index.md 为子目录与子 index.md，并回写父 index.md 链接"
+        description="按 '##' 二级标题拆分章节目录的 index.md，或拆分章节 Markdown 文件到同名目录"
     )
     parser.add_argument("chapter_id", help="章节号，例如 1.1.1 或 2.1.4")
     parser.add_argument("--dry-run", action="store_true", help="仅预览将创建的目录与文件，不实际写入")
@@ -230,73 +430,52 @@ def main() -> int:
     root_path = Path(args.root)
 
     try:
-        target_dir = find_chapter_dir(root_path, args.chapter_id)
+        target_entry, entry_kind = find_chapter_entry(root_path, args.chapter_id)
     except FileNotFoundError as exc:
         print(str(exc), file=sys.stderr)
         return 1
 
-    index_file = target_dir / "index.md"
-    if not index_file.is_file():
-        print(f"错误: 未找到文件 '{index_file}'", file=sys.stderr)
-        return 1
-
-    content = index_file.read_text(encoding="utf-8")
-    spans = split_sections_with_spans(content)
-
-    if not spans:
-        print(f"提示: '{index_file}' 中未找到任何可拆分的 '##' 二级标题片段。", file=sys.stderr)
-        return 1
-
-    print(f"源目录: {target_dir}")
-    print(f"共检测到 {len(spans)} 个有效 '##' 片段:\n")
-
-    link_entries: list[tuple[str, str, str]] = []
-
-    for idx, span in enumerate(spans, start=1):
-        sub_id = f"{args.chapter_id}.{idx}"
-        display_title = clean_title(span.raw_title)
-        safe_title = sanitize_dirname(span.raw_title)
-        raw_dir_name = f"{sub_id}_{safe_title}"
-        sub_dir_name = trim_utf8_bytes(raw_dir_name, max_bytes=180)
-        sub_dir_path = target_dir / sub_dir_name
-        sub_index_path = sub_dir_path / "index.md"
-        raw_body = normalize_sec_body(span.body)
-        clean_body = shift_sub_headings(raw_body)
-        summary = extract_summary(display_title, clean_body)
-
-        sub_markdown = (
-            f"# {sub_id} {display_title}\n\n"
-            f"> **简介**：{summary}\n\n"
-            f"---\n\n"
-            f"{clean_body}\n"
+    if entry_kind == "directory":
+        split_directory_chapter(
+            target_dir=target_entry,
+            chapter_id=args.chapter_id,
+            dry_run=args.dry_run,
+            force=args.force,
+            keep_source=args.keep_source,
+        )
+    else:
+        split_file_chapter(
+            source_file=target_entry,
+            chapter_id=args.chapter_id,
+            dry_run=args.dry_run,
+            force=args.force,
+            keep_source=args.keep_source,
         )
 
-        link_entries.append((sub_id, display_title, sub_dir_name))
-        print(f"  [{idx}] {sub_dir_name}/index.md")
-
-        if args.dry_run:
-            continue
-
-        sub_dir_path.mkdir(parents=True, exist_ok=True)
-        if sub_index_path.exists() and not args.force:
-            print(f"      跳过已存在文件（使用 --force 覆盖）: {sub_index_path}")
-            continue
-
-        sub_index_path.write_text(sub_markdown, encoding="utf-8")
-
-    updated_parent = update_parent_index(content, spans, link_entries)
-
     if args.dry_run:
-        print("\n(--dry-run 模式：未写入任何文件，预览父 index.md 如下)")
-        print("---")
-        print(updated_parent)
-    else:
-        if not args.keep_source:
-            index_file.write_text(updated_parent, encoding="utf-8")
-            print(f"\n已更新父目录索引并移除被拆分片段: {index_file}")
-        else:
-            print("\n(--keep-source 模式：未修改父 index.md)")
-        print("拆分完成。")
+        return 0
+
+    print("拆分完成。")
+
+    scripts_dir = Path(__file__).resolve().parent
+    book_root = find_book_root(root_path)
+    subprocess.run(
+        [
+            sys.executable,
+            str(scripts_dir / "check_folder_names.py"),
+            "--root",
+            str(book_root),
+        ],
+        check=True,
+    )
+    subprocess.run(
+        [
+            sys.executable,
+            str(scripts_dir / "check_chapter_links.py"),
+            str(book_root),
+        ],
+        check=True,
+    )
 
     return 0
 

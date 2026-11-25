@@ -82,6 +82,11 @@ def discover(root_path: Path) -> Section:
             entry
             for entry in section.directory.iterdir()
             if not entry.name.startswith(".")
+            and not (
+                section.directory == root_path
+                and entry.is_dir()
+                and entry.name == "removed"
+            )
         ]
         for entry in entries:
             if entry.is_dir():

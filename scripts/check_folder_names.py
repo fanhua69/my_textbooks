@@ -103,6 +103,7 @@ def collect_renames(root: Path) -> list[tuple[Path, Path]]:
                 path.is_dir()
                 and not path.is_symlink()
                 and not path.name.startswith(".")
+                and not (parent == root and path.name == "removed")
             )
             or (
                 path.is_file()
