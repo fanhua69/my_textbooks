@@ -1,0 +1,127 @@
+# 2.2.10 std::string_view
+
+**介绍**: `std::string_view`（C++17 引入，定义于 `<string_view>`）是一个轻量级、非拥有式（non-owning）的只读字符串视图。
+
+---
+
+## 1. 核心概念
+
+`std::string_view` 本质上只保存了两个成员：**指向字符序列起始位置的指针**和**字符串长度**（在 64 位平台上通常为 $2 \times \text{sizeof}(\text{size\_t}) = 16$ 字节）。
+
+它的核心价值在于：**在不分配堆内存、不拷贝字符数据的前提下，以统一的方式观察和读取各种字符串来源**（如 `std::string`、C 风格字符串 `const char*`、字符数组、以及某段带长度的原始字符缓冲区）。
+
+---
+
+## 2. 为什么需要 `std::string_view`？
+
+在 C++17 之前，如果一个只读函数接受 `const std::string&`：
+- 传入字符串字面量（如 `"hello"`）或 `const char*` 时，会**隐式构造一个临时的 `std::string`**，可能触发堆内存分配与数据拷贝。
+- 如果只需要处理原字符串的某个子串，调用 `std::string::substr()` 同样会生成一个全新的 `std::string` 对象。
+
+改用 `std::string_view` 后：
+- **传值开销极小**：仅拷贝指针和长度，推荐直接按值传递（`std::string_view sv`），无需加 `const&`。
+- **零拷贝切片**：`substr()` 返回的依然是 `std::string_view`，时间复杂度为 $O(1)$，无任何内存分配。
+- **接口统一**：一份函数签名即可无缝兼容 `std::string`、`const char*` 与字符串字面量。
+
+### 代码示例
+
+```cpp
+#include <iostream>
+#include <string>
+#include <string_view>
+
+void print_prefix(std::string_view sv, std::size_t n) {
+    // substr 返回的依然是视图，无内存分配
+    std::cout << sv.substr(0, n) << '\n';
+}
+
+int main() {
+    std::string s = "Hello, Modern C++!";
+    const char* cstr = "C-style string";
+
+    print_prefix(s, 5);         // 输出: Hello
+    print_prefix(cstr, 7);      // 输出: C-style
+    print_prefix("Literal", 4); // 输出: Lite
+}
+```
+
+---
+
+## 3. 常用操作与接口特点
+
+`std::string_view` 的只读接口与 `std::string` 高度一致，但**不提供任何修改底层字符的方法**（没有 `push_back`、`append`，`operator[]` 也只返回 `const char&`）。
+
+- **观察与访问**：`size()` / `length()`、`empty()`、`front()`、`back()`、`data()`、下标 `[]`、`at()`。
+- **视图裁剪（仅移动视图窗口，不修改底层数据）**：
+  - `remove_prefix(n)`：将视图起点向后移动 $n$ 个字符（`data()` 前进，`size()` 减少 $n$）。
+  - `remove_suffix(n)`：将视图终点向前移动 $n$ 个字符（`size()` 减少 $n$）。
+  - `substr(pos, count)`：返回一个新的 `std::string_view` 子视图。
+- **查找与前缀/后缀检查**：`find()`、`rfind()`、`find_first_of()`，以及 C++20 新增的 `starts_with()`、`ends_with()`、`contains()`（C++23）。
+
+### 视图裁剪示例
+
+```cpp
+#include <iostream>
+#include <string_view>
+
+int main() {
+    std::string_view sv = "  [INFO] System ready  ";
+
+    // 去掉前导和尾部空格（只调整视图范围，未改动原字符串）
+    sv.remove_prefix(2);
+    sv.remove_suffix(2);
+
+    std::cout << sv << '\n'; // 输出: [INFO] System ready
+}
+```
+
+---
+
+## 4. 使用注意事项（常见陷阱）
+
+### 4.1 生命周期与悬空视图（Dangling View）
+
+由于 `std::string_view` **不拥有**底层字符内存，一旦底层数据被销毁或重新分配，视图就会变成悬空指针，继续访问将触发**未定义行为（UB）**。
+
+1. **绑定到即将销毁的临时 `std::string`**：
+   ```cpp
+   std::string make_temp() { return "temporary"; }
+
+   // 危险：make_temp() 返回的临时对象在完整表达式结束时即被析构，bad 立即悬空！
+   std::string_view bad = make_temp();
+   ```
+2. **原 `std::string` 发生扩容或修改导致缓冲区失效**：
+   ```cpp
+   std::string s = "abc";
+   std::string_view sv = s;
+   s.append("defghijklmnopqrstuvwxyz"); // 触发重新分配内存，sv 失效
+   ```
+3. **从函数返回局部字符数组的 `std::string_view`**：
+   函数内部的局部 `char buf[]` 在函数返回后销毁，返回的视图指向已释放的栈内存。
+
+### 4.2 不保证以空字符 `'\0'` 结尾
+
+`std::string_view` 依靠内部存储的 `size()` 来确定边界，**不保证 `sv.data()` 指向的字符序列以 `'\0'` 结尾**（例如执行过 `remove_suffix` 或 `substr` 之后）。
+
+- **错误做法**：直接把 `sv.data()` 传给依赖 `'\0'` 结尾的 C 标准库函数（如 `std::fopen`、`printf("%s", ...)`、`std::atoi`）。
+- **正确做法**：如果必须调用 C 接口，先显式构造 `std::string(sv)` 再调用 `.c_str()`；或者优先使用支持传入长度的现代接口（如 `std::from_chars`）。
+
+---
+
+## 5. `std::string_view` 与 `const std::string&` 选型对比
+
+| 使用场景 | 推荐类型 | 原因 |
+| :--- | :--- | :--- |
+| 只读函数参数，需兼容多种字符串来源或子串切片 | `std::string_view` | 避免临时 `std::string` 的堆分配与拷贝，按值传递开销极低 |
+| 需要长期保存字符串（如类成员变量、全局缓存） | `std::string` | 拥有独立内存所有权，避免底层数据销毁引发悬空 |
+| 需要直接传递给仅接受 `const char*` 的 C API | `const std::string&` 或 `std::string(sv).c_str()` | `std::string` 保证缓冲区末尾存在 `'\0'` |
+| 构造新 `std::string` 并希望利用移动语义接管资源 | `std::string`（按值接收并 `std::move`） | `std::string_view` 无法直接转移堆内存所有权 |
+
+
+## 导航
+
+- **上一层**：[父级](../index.md)
+- **前一节**：[2.2.9 std::scoped_lock](../2.2.9_std::scoped_lock/index.md)
+- **后一节**：[2.2.11 std::char_traits](../2.2.11_std::char_traits/index.md)
+- **folder**：[2.2.11 std::char_traits](./2.2.10.3_folder/index.md)
+

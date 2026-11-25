@@ -2,11 +2,17 @@
 """
 check_folder_names.py - Recursively normalize numbered directory names.
 
+此脚本只重命名目录和 Markdown 文件，不读取或修改任何 Markdown 文件内容。
+目录及文件中的链接由 check_chapter_links.py 负责更新。
+
 Examples:
     1.01_Alpha
     1.02_Beta
         1.02.1_First
         1.02.2_Second
+    Direct Markdown files are also sections:
+        1.03_Notes.md
+        1.04_Exercises.md
 
 Usage:
     python3 check_folder_names.py --dry-run
@@ -22,7 +28,8 @@ import sys
 from pathlib import Path
 
 
-NUMBERED_NAME_RE = re.compile(r"^(\d+(?:\.\d+)*)_(.+)$")
+NUMBERED_NAME_RE = re.compile(r"^(\d+(?:\.\d+)*)[_\s]+(.+)$")
+CONTAINER_FILES = {"index.md", "contents.md"}
 
 
 def number_parts(number: str) -> list[int]:
@@ -30,20 +37,23 @@ def number_parts(number: str) -> list[int]:
 
 
 def parse_directory(directory: Path) -> tuple[str | None, str]:
-    match = NUMBERED_NAME_RE.match(directory.name)
+    name = directory.name
+    if directory.is_file() and name.lower().endswith(".md"):
+        name = name[:-3]
+    match = NUMBERED_NAME_RE.match(name)
     if not match:
-        return None, directory.name
+        return None, name
     return match.group(1), match.group(2)
 
 
-def sort_siblings(directories: list[Path]) -> list[Path]:
-    def key(directory: Path) -> tuple:
-        number, suffix = parse_directory(directory)
+def sort_siblings(entries: list[Path]) -> list[Path]:
+    def key(entry: Path) -> tuple:
+        number, suffix = parse_directory(entry)
         if number:
-            return (0, number_parts(number), suffix, directory.name)
-        return (1, directory.name.casefold(), directory.name)
+            return (0, number_parts(number), suffix, entry.name.casefold(), entry.name)
+        return (1, suffix.casefold(), entry.name.casefold(), entry.name)
 
-    return sorted(directories, key=key)
+    return sorted(entries, key=key)
 
 
 def discover_book_roots(current_dir: Path, home_dir: Path) -> list[Path]:
@@ -86,27 +96,40 @@ def collect_renames(root: Path) -> list[tuple[Path, Path]]:
         target_parent: Path,
         parent_number: str | None,
     ) -> None:
-        directories = [
+        entries = [
             path
             for path in parent.iterdir()
-            if path.is_dir()
-            and not path.is_symlink()
-            and not path.name.startswith(".")
+            if (
+                path.is_dir()
+                and not path.is_symlink()
+                and not path.name.startswith(".")
+            )
+            or (
+                path.is_file()
+                and path.suffix.lower() == ".md"
+                and path.name not in CONTAINER_FILES
+                and not path.name.startswith(".")
+            )
         ]
-        ordered = sort_siblings(directories)
+        ordered = sort_siblings(entries)
         number_width = len(str(len(ordered)))
 
-        for index, directory in enumerate(ordered, start=1):
-            _, suffix = parse_directory(directory)
+        for index, entry in enumerate(ordered, start=1):
+            _, suffix = parse_directory(entry)
             if parent_number:
                 target_number = f"{parent_number}.{index:0{number_width}d}"
             else:
                 target_number = str(index)
 
-            target_name = f"{target_number}_{suffix}"
-            target = target_parent / target_name
-            renames.append((directory, target))
-            visit(directory, target, target_number)
+            if entry.is_dir():
+                target_name = f"{target_number}_{suffix}"
+                target = target_parent / target_name
+                renames.append((entry, target))
+                visit(entry, target, target_number)
+            else:
+                target_name = f"{target_number}_{suffix}.md"
+                target = target_parent / target_name
+                renames.append((entry, target))
 
     visit(root, root, None)
     return renames
@@ -160,7 +183,7 @@ def rename_safely(
 
 def main() -> int:
     parser = argparse.ArgumentParser(
-        description="递归检查并统一所有子目录的编号",
+        description="递归统一目录下子目录与 Markdown 文件的节号、节名和排序",
     )
     parser.add_argument(
         "--dry-run",

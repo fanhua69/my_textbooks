@@ -1,0 +1,560 @@
+# 2.2.11 std::char_traits
+
+**介绍**: std::char_traits
+
+---
+
+# `std::char_traits`：字符操作策略与 `std::basic_string`
+
+## 1. 概述
+
+`std::char_traits` 是 C++ 标准库提供的字符操作特征类（character
+traits）。它为字符类型定义一组统一的操作，例如：
+
+-   字符相等与大小比较
+-   字符序列比较
+-   查找字符
+-   复制与移动字符序列
+-   字符类型与整数类型之间的转换
+-   表示和判断 EOF（End Of File）
+
+它最重要的用途，是作为 `std::basic_string`、`std::basic_string_view`
+以及字符流相关设施的字符操作策略。
+
+可以先记住这句话：
+
+> `std::basic_string` 管理字符串；`std::char_traits`
+> 描述字符操作语义；`std::allocator` 提供内存分配策略。
+
+`char_traits` 并不是字符串容器，也不负责分配字符串缓冲区。
+
+## 2. 从 `std::string` 看 `char_traits`
+
+`std::string` 并不是一个独立实现的字符串类，而是 `std::basic_string`
+的类型别名。概念上可以写成：
+
+``` cpp
+using string = std::basic_string<
+    char,
+    std::char_traits<char>,
+    std::allocator<char>
+>;
+```
+
+`basic_string` 的模板形式为：
+
+``` cpp
+template<
+    class CharT,
+    class Traits = std::char_traits<CharT>,
+    class Allocator = std::allocator<CharT>
+>
+class basic_string;
+```
+
+三个模板参数分别表示：
+
+  模板参数      职责           默认类型
+  ------------- -------------- ---------------------------
+  `CharT`       字符类型       由使用者指定
+  `Traits`      字符操作语义   `std::char_traits<CharT>`
+  `Allocator`   内存分配策略   `std::allocator<CharT>`
+
+例如：
+
+``` cpp
+std::basic_string<char>       s1; // 等价于常见的 std::string
+std::basic_string<wchar_t>    s2; // 常见别名为 std::wstring
+std::basic_string<char16_t>   s3; // std::u16string
+std::basic_string<char32_t>   s4; // std::u32string
+std::basic_string<char8_t>    s5; // C++20: std::u8string
+```
+
+这里的重点是：`basic_string`
+不必把所有字符操作都硬编码在容器内部，而是可以通过 `Traits`
+参数获得这些操作。
+
+## 3. 主要接口
+
+下面列出 `std::char_traits` 中最值得先掌握的接口。具体成员的签名和
+`constexpr` 状态应以目标 C++ 标准版本及标准库实现为准。
+
+### 3.1 类型别名
+
+``` cpp
+using char_type  = CharT;
+using int_type   = /* 能表示字符值及 EOF 的整数类型 */;
+using off_type   = /* 流偏移类型 */;
+using pos_type   = /* 流位置类型 */;
+using state_type = /* 转换状态类型 */;
+```
+
+其中最重要的是：
+
+-   `char_type`：字符类型。
+-   `int_type`：用于字符流读取结果的整数类型。它需要能表示字符值以及额外的
+    EOF 状态。
+
+### 3.2 字符级操作
+
+``` cpp
+static constexpr bool eq(
+    const char_type& c1,
+    const char_type& c2);
+
+static constexpr bool lt(
+    const char_type& c1,
+    const char_type& c2);
+
+static constexpr void assign(
+    char_type& dst,
+    const char_type& src);
+```
+
+-   `eq(a, b)`：判断两个字符在 Traits 定义的语义下是否相等。
+-   `lt(a, b)`：判断一个字符是否小于另一个字符。
+-   `assign(dst, src)`：将一个字符赋给另一个字符。
+
+这些操作为更高层的字符序列算法提供基础。
+
+### 3.3 字符序列操作
+
+``` cpp
+static int compare(
+    const char_type* s1,
+    const char_type* s2,
+    std::size_t n);
+
+static std::size_t length(
+    const char_type* s);
+
+static const char_type* find(
+    const char_type* s,
+    std::size_t n,
+    const char_type& ch);
+
+static char_type* move(
+    char_type* dst,
+    const char_type* src,
+    std::size_t n);
+
+static char_type* copy(
+    char_type* dst,
+    const char_type* src,
+    std::size_t n);
+
+static char_type* assign(
+    char_type* dst,
+    std::size_t n,
+    char_type ch);
+```
+
+  操作        含义
+  ----------- ------------------------------------
+  `compare`   比较两个字符序列
+  `length`    计算以空字符终止的字符序列长度
+  `find`      在指定长度范围内查找字符
+  `move`      移动字符序列，允许源和目标区域重叠
+  `copy`      复制字符序列，源和目标区域不得重叠
+  `assign`    将指定字符写入目标序列的多个位置
+
+注意：`length()` 适用于以 Traits 的空字符值终止的序列；`find()`
+则只在给定的 `n` 个字符范围内搜索。
+
+### 3.4 EOF 与整数转换
+
+字符流读取需要区分两种情况：
+
+1.  读取到了一个字符。
+2.  没有读取到字符，例如到达文件末尾。
+
+如果读取接口只返回 `char`，就可能无法可靠地区分所有字符值与 EOF。因此
+Traits 提供 `int_type` 及相关转换操作：
+
+``` cpp
+static constexpr int_type to_int_type(
+    const char_type& c);
+
+static constexpr char_type to_char_type(
+    const int_type& c);
+
+static constexpr bool eq_int_type(
+    const int_type& c1,
+    const int_type& c2);
+
+static constexpr int_type eof();
+
+static constexpr int_type not_eof(
+    const int_type& c);
+```
+
+示例：
+
+``` cpp
+#include <iostream>
+#include <string>
+
+int main()
+{
+    using traits = std::char_traits<char>;
+
+    int c = std::cin.get();
+
+    if (traits::eq_int_type(c, traits::eof()))
+    {
+        std::cout << "EOF\n";
+    }
+    else
+    {
+        char ch = traits::to_char_type(c);
+        std::cout << ch << '\n';
+    }
+}
+```
+
+`eof()` 返回 Traits 所定义的 EOF 值。不要假设所有字符类型的 `int_type`
+都必须是 `int`，也不要把任意 `char` 值直接与 EOF 混为一谈。
+
+## 4. 一个教学版简化实现
+
+下面用模板展示 `char_traits`
+的基本设计思路。它不是标准库的完整实现，也不能替代标准对 Traits 的要求。
+
+``` cpp
+#include <cstddef>
+#include <cstring>
+
+template<class CharT>
+struct MyCharTraits
+{
+    using char_type = CharT;
+
+    static constexpr bool eq(
+        const char_type& a,
+        const char_type& b)
+    {
+        return a == b;
+    }
+
+    static constexpr bool lt(
+        const char_type& a,
+        const char_type& b)
+    {
+        return a < b;
+    }
+
+    static int compare(
+        const char_type* s1,
+        const char_type* s2,
+        std::size_t n)
+    {
+        for (std::size_t i = 0; i < n; ++i)
+        {
+            if (lt(s1[i], s2[i]))
+                return -1;
+
+            if (lt(s2[i], s1[i]))
+                return 1;
+        }
+
+        return 0;
+    }
+
+    static std::size_t length(const char_type* s)
+    {
+        std::size_t n = 0;
+
+        while (!eq(s[n], char_type{}))
+            ++n;
+
+        return n;
+    }
+
+    static const char_type* find(
+        const char_type* s,
+        std::size_t n,
+        const char_type& ch)
+    {
+        for (std::size_t i = 0; i < n; ++i)
+        {
+            if (eq(s[i], ch))
+                return s + i;
+        }
+
+        return nullptr;
+    }
+
+    static char_type* copy(
+        char_type* dst,
+        const char_type* src,
+        std::size_t n)
+    {
+        // 前提：源和目标范围不重叠
+        for (std::size_t i = 0; i < n; ++i)
+            dst[i] = src[i];
+
+        return dst;
+    }
+
+    static char_type* move(
+        char_type* dst,
+        const char_type* src,
+        std::size_t n)
+    {
+        // 此示例通过 memmove 演示重叠安全的移动
+        return static_cast<char_type*>(
+            std::memmove(dst, src, n * sizeof(char_type))
+        );
+    }
+};
+```
+
+这段代码说明了几个设计要点：
+
+-   操作被组织为 `static` 成员函数，因此不需要创建 Traits 对象。
+-   `CharT` 决定字符类型。
+-   更高层的字符串类可以通过 Traits 获得统一的字符操作接口。
+-   通用实现可以使用循环；特定字符类型还可以使用更高效的底层操作。
+
+这只是教学模型。完整的标准 Traits
+还需要提供标准要求的类型别名、成员函数和相应语义；自定义 Traits
+也必须满足 `basic_string` 等组件对 Traits 的要求。
+
+## 5. `copy()` 和 `move()` 的区别
+
+这是理解字符序列操作时最重要的细节之一。
+
+假设有一个数组：
+
+``` cpp
+char buffer[] = "abcdef";
+```
+
+希望把前四个字符 `abcd` 移动到下标 2 开始的位置。
+
+目标操作相当于：
+
+``` cpp
+// 将 [0, 4) 移动到 [2, 6)
+std::memmove(buffer + 2, buffer, 4);
+```
+
+结果是：
+
+``` text
+原始：a b c d e f
+结果：a b a b c d
+```
+
+如果简单地从前往后逐个赋值：
+
+``` cpp
+for (int i = 0; i < 4; ++i)
+    buffer[i + 2] = buffer[i];
+```
+
+写入 `buffer[2]` 时，原本的 `buffer[2]`（字符
+`c`）就被覆盖了。后续读取会得到错误结果。
+
+因此：
+
+  函数       内存区域重叠   典型底层对应
+  ---------- -------------- --------------
+  `copy()`   不允许         `memcpy`
+  `move()`   允许           `memmove`
+
+这里的 `move()` 指字符序列的内存移动，不是 C++11
+的移动构造函数或移动赋值运算符，也不是 `std::move`。
+
+## 6. 标准库如何优化 `char_traits<char>`
+
+概念上，通用实现可以通过循环完成比较、查找和复制。但对于
+`char`，标准库实现通常能够利用专门优化的实现。
+
+例如，某些标准库实现会使用：
+
+  Traits 操作   可能使用的底层操作
+  ------------- ----------------------------
+  `compare()`   `memcmp` 或编译器内建函数
+  `length()`    `strlen` 或编译器内建函数
+  `find()`      `memchr` 或编译器内建函数
+  `copy()`      `memcpy` 或编译器内建函数
+  `move()`      `memmove` 或编译器内建函数
+
+这些是实现优化方式，不是 C++
+标准强制规定的实现细节。不同标准库、编译器、目标平台和编译选项可能采用不同方案。
+
+另外，`memcmp` 比较的是字节值，而通用 Traits 的比较语义是由字符 Traits
+定义的。标准库只有在相应字符类型和实现条件下，才能使用这种优化。
+
+## 7. 自定义 Traits：不区分大小写的字符串
+
+Traits 的可定制性允许程序员改变字符串的字符比较语义。
+
+例如，下面演示一个 ASCII 范围内不区分大小写的字符串 Traits：
+
+``` cpp
+#include <cctype>
+#include <cstddef>
+#include <string>
+
+struct CaseInsensitiveTraits : std::char_traits<char>
+{
+    static bool eq(char a, char b) noexcept
+    {
+        return fold(a) == fold(b);
+    }
+
+    static bool lt(char a, char b) noexcept
+    {
+        return fold(a) < fold(b);
+    }
+
+    static int compare(
+        const char* a,
+        const char* b,
+        std::size_t n)
+    {
+        for (std::size_t i = 0; i < n; ++i)
+        {
+            const auto x = fold(a[i]);
+            const auto y = fold(b[i]);
+
+            if (x < y) return -1;
+            if (x > y) return 1;
+        }
+
+        return 0;
+    }
+
+private:
+    static unsigned char fold(char c) noexcept
+    {
+        return static_cast<unsigned char>(
+            std::tolower(static_cast<unsigned char>(c))
+        );
+    }
+};
+
+using ci_string =
+    std::basic_string<char, CaseInsensitiveTraits>;
+```
+
+使用示例：
+
+``` cpp
+#include <cassert>
+
+int main()
+{
+    ci_string a = "Hello";
+    ci_string b = "hello";
+
+    assert(a == b);
+}
+```
+
+这个示例的目的，是展示 Traits 如何影响 `basic_string` 的比较行为。
+
+需要注意：
+
+-   该例主要针对 ASCII 文本，不是完整的 Unicode 大小写折叠方案。
+-   `std::tolower` 受 C locale 影响。
+-   自定义 Traits 的 `eq()`、`lt()`、`compare()`
+    等操作必须保持语义一致。
+-   如果要用于生产代码，应完整检查目标 C++ 标准对自定义 Traits
+    的要求，并补齐或确认继承得到的其他操作是否符合预期。
+
+## 8. Traits Pattern 与 Policy-based Design
+
+`std::char_traits` 是 C++ 泛型编程中很典型的 Traits 设计。
+
+它与 Policy-based Design（基于策略的设计）有密切关系：
+
+-   容器或算法负责整体流程。
+-   Traits 负责提供某类类型相关的操作语义。
+-   模板参数在编译期选择具体策略。
+
+在 `basic_string` 中，可以把职责关系概括为：
+
+``` text
+std::basic_string<CharT, Traits, Allocator>
+        |
+        +-- CharT
+        |     字符的具体类型
+        |
+        +-- Traits
+        |     字符如何比较、查找、复制和转换
+        |
+        +-- Allocator
+              字符存储所使用的内存如何分配
+```
+
+相关设计概念：
+
+  概念                      说明
+  ------------------------- ----------------------------------------------
+  Traits Pattern            将与类型相关的操作和信息集中在 Traits 类型中
+  Policy-based Design       通过模板参数选择行为策略
+  Generic Programming       让同一套算法适用于不同类型
+  Template Specialization   为特定类型提供专门实现
+  Compile-time Selection    通过模板参数在编译期确定使用哪种策略
+
+## 9. C++ 标准版本演进
+
+  ----------------------------------------------------------------------------
+  标准版本                            相关变化
+  ----------------------------------- ----------------------------------------
+  C++98                               已有 `char_traits`、`basic_string`
+                                      等基础设施
+
+  C++11                               增加 `char16_t`、`char32_t`
+                                      等字符类型及相应支持
+
+  C++17                               `char_traits` 的多项操作获得 `constexpr`
+                                      支持
+
+  C++20                               引入 `char8_t` 及
+                                      `char_traits<char8_t>`；进一步扩展相关
+                                      `constexpr` 能力
+  ----------------------------------------------------------------------------
+
+具体成员的 `constexpr`
+状态应以相应标准版本的规范为准，不要把某个标准库版本的源码细节误认为所有版本都相同。
+
+## 10. 总结
+
+理解 `std::char_traits`，重点掌握以下几点：
+
+1.  它是字符操作语义的抽象，不是字符串容器。
+2.  `std::string` 本质上是
+    `std::basic_string<char, std::char_traits<char>, std::allocator<char>>`。
+3.  `eq()`、`lt()`、`compare()` 定义字符比较相关的语义。
+4.  `copy()` 与 `move()` 的关键区别是是否允许源、目标内存区域重叠。
+5.  `int_type`、`eof()` 和转换函数用于解决字符读取结果与 EOF
+    的区分问题。
+6.  标准库可以针对常用字符类型提供专门优化，但具体实现由标准库决定。
+7.  自定义 Traits 展示了 Traits Pattern 和 Policy-based Design 的思想。
+
+一句话概括：
+
+> `std::char_traits` 把"字符应该如何操作"从字符串容器中抽离出来，使
+> `std::basic_string` 能够以泛型方式支持不同字符类型和字符操作语义。
+
+## 11. 参考资料
+
+-   [C++ draft：Character traits](https://eel.is/c++draft/char.traits)
+-   [C++ draft：`basic_string`](https://eel.is/c++draft/basic.string)
+-   [cppreference：`std::char_traits`](https://en.cppreference.com/w/cpp/string/char_traits)
+-   [GCC
+    libstdc++：`char_traits.h`](https://github.com/gcc-mirror/gcc/blob/master/libstdc++-v3/include/bits/char_traits.h)
+-   [LLVM
+    libc++：`char_traits`](https://github.com/llvm/llvm-project/tree/main/libcxx/include)
+
+
+
+## 导航
+
+- **上一层**：[父级](../index.md)
+- **前一节**：[2.2.10 std::string_view](../2.2.10_std::string_view/index.md)
+- **后一节**：[TODO_NEXT]
