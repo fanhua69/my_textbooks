@@ -11,13 +11,13 @@ Usage:
   python3 gemini-code-1794576208405.py 0_software_engineering.json --update-nav
 
 Options:
-  --force       目标教材目录已存在时允许覆盖同名 index.md（会重置 index.md 为初始模板，谨慎使用）
-  --update-nav  仅更新已存在 index.md 中的导航栏（上一节 / 返回上级 / 下一节），保留手写正文内容
+  --force       允许覆盖已存在的 contents.md / index.md（会重置为初始模板，谨慎使用）
+  --update-nav  仅更新已存在 contents.md / index.md 中的导航栏，保留手写正文内容
 
 Navigation logic:
-  - 上一节：指向前一节（同级前驱兄弟）。若本节为第一节，则指向上一级 index.md 的兄弟的前一个 index.md（递归回溯）。
-  - 下一节：指向后一节（同级后继兄弟）。若本节为最后一节，则指向上一级 index.md 的兄弟的后一个 index.md（递归回溯）。
-  - 返回上级：指向直接父级 index.md。
+  - 上一节：指向前一节（同级前驱兄弟）。若本节为第一节，则指向上一级目录的兄弟的前一个 index.md（递归回溯）。
+  - 下一节：指向后一节（同级后继兄弟）。若本节为最后一节，则指向上一级目录的兄弟的后一个 index.md（递归回溯）。
+  - 返回上级：指向直接父级的 contents.md 或 index.md。
 """
 
 from __future__ import annotations
@@ -116,7 +116,7 @@ class OutlineNode:
         """
         前一节链接逻辑：
         指向前一节（同级前驱兄弟）。如果本节为第一节，则指向上一级 index.md 的兄弟的前一个 index.md。
-        若所有祖先均为第一节，则指向根目录 index.md。
+        若所有祖先均为第一节，则指向根目录 contents.md。
         """
         if self.parent is None:
             return None
@@ -306,11 +306,11 @@ def main() -> int:
     )
     parser.add_argument(
         "--force", action="store_true",
-        help="目标教材目录已存在时允许覆盖同名 index.md（会重置为初始模板，请谨慎使用）",
+        help="允许覆盖已存在的 contents.md / index.md（会重置为初始模板，请谨慎使用）",
     )
     parser.add_argument(
         "--update-nav", action="store_true",
-        help="仅更新已存在的 index.md 的导航栏，保留手写正文内容；缺失文件则新建",
+        help="仅更新已存在 contents.md / index.md 的导航栏，保留手写正文内容；缺失文件则新建",
     )
     args = parser.parse_args()
 
@@ -330,7 +330,7 @@ def main() -> int:
         print(f"目标路径已存在且不是目录：{root_dir}", file=sys.stderr)
         return 1
 
-    root_index_path = root_dir / "index.md"
+    root_index_path = root_dir / "contents.md"
     root_intro = data.get("intro") or data.get("description") or f"欢迎阅读《{data['title']}》教程。"
 
     root_node = OutlineNode(
@@ -360,14 +360,14 @@ def main() -> int:
     existing = [n.index_path for n in all_nodes if n.index_path.exists()]
     if existing and not args.force and not args.update_nav:
         print(
-            f"发现 {len(existing)} 个已存在的 index.md。\n"
+            f"发现 {len(existing)} 个已存在的 contents.md / index.md。\n"
             f"- 如需仅更新导航栏并保留手写正文内容，请使用：--update-nav\n"
             f"- 如需全量覆盖重置为初始模板，请备份后使用：--force",
             file=sys.stderr,
         )
         return 2
 
-    # 逐个生成或更新各级目录的 index.md
+    # 生成或更新根目录 contents.md 及各级目录的 index.md
     for node in all_nodes:
         node.dir_path.mkdir(parents=True, exist_ok=True)
 
@@ -398,7 +398,7 @@ def main() -> int:
 
     mode_str = "更新导航栏" if args.update_nav else "生成/覆盖"
     print(f"完成：{root_dir}（模式：{mode_str}）")
-    print(f"成功处理 {len(all_nodes)} 个 index.md 文件（包含主目录及所有层级目录）")
+    print(f"成功处理 {len(all_nodes)} 个文件（根目录 contents.md 及各级 index.md）")
     print("导航结构：上一节（兄弟或回溯上一级兄弟的前一个） / 返回上级（直接父级） / 下一节（兄弟或回溯上一级兄弟的后一个）")
     return 0
 

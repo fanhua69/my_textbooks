@@ -1,0 +1,138 @@
+# 2.1.05 fold expression
+
+**介绍**: C++17 引入的折叠表达式（Fold Expression），用于在表达式层面直接展开变参模板（Variadic Templates）的参数包，消除递归模板实例化，简化代码并降低编译期开销。
+
+---
+
+## 1. 为什么需要折叠表达式？
+
+在 C++11/14 中，如果我们想对一个参数包中的所有参数做求和、逻辑与或打印，通常必须写**递归模板**（外加一个递归终止重载）：
+
+```cpp
+// C++11 写法：需要递归和终止条件，啰嗦且增加实例化深度
+template <typename T>
+auto sum_legacy(T&& last) {
+    return std::forward<T>(last);
+}
+
+template <typename First, typename... Rest>
+auto sum_legacy(First&& first, Rest&&... rest) {
+    return std::forward<First>(first) + sum_legacy(std::forward<Rest>(rest)...);
+}
+```
+
+到了 **C++17**，折叠表达式可以直接在表达式层面把参数包“折叠”展开，一行搞定，代码更短、编译期开销也更小。
+
+---
+
+## 2. 四种折叠语法与展开规则
+
+折叠表达式必须用圆括号 `(...)` 包起来，且**至少包含一个未展开的参数包**。共有四种形式（设参数包为 $E_1, E_2, \dots, E_n$，二元运算符为 $\text{op}$）：
+
+| 类型 | 语法形式 | 展开规则 |
+| :--- | :--- | :--- |
+| **一元右折**（Unary right fold） | `( pack op ... )` | $(E_1 \text{ op } (E_2 \text{ op } (\dots \text{ op } E_n)))$ |
+| **一元左折**（Unary left fold） | `( ... op pack )` | $(((E_1 \text{ op } E_2) \text{ op } \dots) \text{ op } E_n)$ |
+| **二元右折**（Binary right fold） | `( pack op ... op init )` | $(E_1 \text{ op } (E_2 \text{ op } (\dots \text{ op } (E_n \text{ op } \text{init}))))$ |
+| **二元左折**（Binary left fold） | `( init op ... op pack )` | $(((( \text{init} \text{ op } E_1) \text{ op } E_2) \dots) \text{ op } E_n)$ |
+
+> **记忆技巧**：看 `...` 在哪一边——`pack` 在前、`...` 在后，说明从右往左结合（右折）；`...` 在前、`pack` 在后，说明从左往右结合（左折）。二元折叠中两侧必须使用**同一个**二元运算符 `op`。
+
+---
+
+## 3. 空参数包（0 个参数）的规则
+
+实际写泛型代码时，参数包**为空**（传入 0 个参数）是很常见的边界情况，折叠表达式对此有明确规定：
+
+1. **二元折叠**：即使参数包为空，结果也是初始值 `init`（例如 `(0 + ... + args)` 在 `args` 为空时结果为 `0`）。
+2. **一元折叠（空包）**：**仅对少数运算符合法**，否则直接编译报错：
+   * `&&` $\rightarrow$ `true`
+   * `||` $\rightarrow$ `false`
+   * `,`（逗号运算符） $\rightarrow$ `void()`
+   * **其他运算符（如 `+`、`*`）在空包下会编译失败**。因此，如果允许传 0 个参数，**强烈建议使用二元折叠提供初始值**（如 `(args + ... + 0)`）。
+
+---
+
+## 4. 常见实用示例
+
+### 4.1 数值计算与逻辑判断
+
+```cpp
+#include <utility>
+
+template <typename... Args>
+auto sum_all(Args&&... args) {
+    // 若 args 为空，返回 int{} 即 0；否则从左到右累加
+    return (0 + ... + std::forward<Args>(args));
+}
+
+template <typename... Preds>
+bool all_true(Preds... preds) {
+    // 空包时返回 true；遇到 false 具有短路特性
+    return (preds && ...);
+}
+```
+
+### 4.2 利用逗号运算符 `,` 顺序执行动作（如打印、emplace）
+
+逗号运算符会先求左侧表达式的值，丢弃结果后求右侧表达式的值。结合折叠表达式，非常适合对每个参数执行操作：
+
+```cpp
+#include <iostream>
+#include <utility>
+#include <vector>
+
+template <typename... Args>
+void print_line(const Args&... args) {
+    ((std::cout << args << ' '), ...); // 一元右折，依次输出每个参数
+    std::cout << '\n';
+}
+
+template <typename Container, typename... Ts>
+void push_many(Container& c, Ts&&... items) {
+    (c.push_back(std::forward<Ts>(items)), ...);
+}
+
+int main() {
+    print_line(1, 2.5, "hello", '!');
+
+    std::vector<int> v;
+    push_many(v, 10, 20, 30);
+}
+```
+
+### 4.3 结合 Lambda 对每个元素做不同变换后再折叠
+
+```cpp
+#include <cstddef>
+#include <iostream>
+
+template <typename... Args>
+void print_indexed(Args&&... args) {
+    std::size_t idx = 0;
+    // 用 lambda 包装对单个参数的逻辑，再用逗号折叠展开
+    ([&](const auto& x) {
+        std::cout << "[" << idx++ << "] = " << x << "\n";
+    }(args), ...);
+}
+```
+
+---
+
+## 5. 注意事项与工程细节
+
+1. **运算符优先级与结合性差异**：
+   * 算术运算中，左折和右折在浮点数下可能因舍入顺序不同产生微小差异；对于重载了 `operator+` 的自定义类型（如字符串拼接、矩阵运算），左右折的语义和性能也可能不同。
+   * 逗号 `,` 运算符在用户自定义重载时行为可能不符合直觉，严谨的泛型库中通常写为 `(void(expr), ...)` 强制调用内置逗号运算符。
+2. **可用运算符范围**：
+   * 支持绝大多数 C++ 二元运算符（`+`、`-`、`*` `/` `%` `^` `&` `|` `=` `<` `>` `<<` `>>` `+=` `-=` `*=` `/=` `%=` `^=` `&=` `|=` `<<=` `>>=` `==` `!=` `<=` `>=` `&&` `||` `,` `.*` `->*`）。
+3. **后续标准演进**：
+   * C++20 在泛型 lambda 模板参数（`[]<typename... Ts>(Ts&&... args)`）中让折叠表达式写起来更自然；C++26 进一步在包相关特性（如 pack indexing 等）上继续扩展模板元编程的表达力。
+
+---
+
+## 导航
+
+- **上一层**：[父级](../index.md)
+- **前一节**：[2.1.04 parameter pack](../2.1.04_parameter_pack/index.md)
+- **后一节**：[2.1.06 variadic template](../2.1.06_variadic_template/index.md)

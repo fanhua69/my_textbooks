@@ -16,6 +16,7 @@ Usage:
 from __future__ import annotations
 
 import argparse
+import os
 import re
 import sys
 from pathlib import Path
@@ -43,6 +44,38 @@ def sort_siblings(directories: list[Path]) -> list[Path]:
         return (1, directory.name.casefold(), directory.name)
 
     return sorted(directories, key=key)
+
+
+def discover_book_roots(current_dir: Path, home_dir: Path) -> list[Path]:
+    """Find the nearest book root, or all book roots under home as a fallback."""
+    current_dir = current_dir.resolve()
+    home_dir = home_dir.resolve()
+
+    if (current_dir / "contents.md").is_file():
+        return [current_dir]
+
+    if current_dir == home_dir or home_dir in current_dir.parents:
+        for ancestor in current_dir.parents:
+            if (ancestor / "contents.md").is_file():
+                return [ancestor]
+            if ancestor == home_dir:
+                break
+
+    def raise_walk_error(error: OSError) -> None:
+        raise error
+
+    roots: list[Path] = []
+    for directory, subdirectories, files in os.walk(home_dir, onerror=raise_walk_error):
+        directory_path = Path(directory)
+        subdirectories[:] = [
+            name
+            for name in subdirectories
+            if not (directory_path / name).is_symlink()
+        ]
+        if "contents.md" in files and (directory_path / "contents.md").is_file():
+            roots.append(directory_path)
+
+    return sorted(roots)
 
 
 def collect_renames(root: Path) -> list[tuple[Path, Path]]:
@@ -136,18 +169,36 @@ def main() -> int:
     )
     parser.add_argument(
         "--root",
-        default=".",
-        help="要检查的根目录（默认：当前目录）",
+        help="指定检查根目录；省略时自动根据 contents.md 查找书籍根目录",
     )
     args = parser.parse_args()
 
-    root = Path(args.root).resolve()
-    if not root.is_dir():
-        print(f"错误: 根目录不存在: {root}", file=sys.stderr)
+    if args.root is not None:
+        roots = [Path(args.root).resolve()]
+    else:
+        try:
+            roots = discover_book_roots(Path.cwd(), Path.home())
+        except OSError as exc:
+            print(f"错误: 搜索书籍根目录失败: {exc}", file=sys.stderr)
+            return 1
+
+    invalid_roots = [root for root in roots if not root.is_dir()]
+    if invalid_roots:
+        for root in invalid_roots:
+            print(f"错误: 根目录不存在: {root}", file=sys.stderr)
         return 1
 
-    renames = collect_renames(root)
-    rename_safely(renames, args.dry_run)
+    if not roots:
+        print(
+            f"错误: 当前目录及其上级目录、{Path.home()} 下均未找到 contents.md",
+            file=sys.stderr,
+        )
+        return 1
+
+    for root in roots:
+        print(f"检查书籍根目录: {root}")
+        renames = collect_renames(root)
+        rename_safely(renames, args.dry_run)
     return 0
 
 
