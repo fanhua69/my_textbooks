@@ -14,21 +14,41 @@ class SectionSpan:
     body: str
 
 
+def find_book_root(start: Path) -> Path:
+    current = start.resolve()
+    if not current.is_dir():
+        current = current.parent
+
+    while True:
+        if (current / "contents.md").is_file():
+            return current
+        if current.parent == current:
+            return start.resolve() if start.resolve().is_dir() else start.resolve().parent
+        current = current.parent
+
+
 def find_chapter_dir(root: Path, chapter_id: str) -> Path:
+    start = root.resolve()
+    book_root = find_book_root(start)
     prefix = f"{chapter_id}_"
     matches: list[Path] = []
 
-    for p in root.rglob("*"):
+    if start.is_dir() and (start.name.strip() == chapter_id or start.name.strip().startswith(prefix)):
+        matches.append(start)
+
+    for p in book_root.rglob("*"):
         if not p.is_dir():
             continue
         clean_name = p.name.strip()
         if clean_name.startswith(prefix) or clean_name == chapter_id:
             matches.append(p)
 
+    matches = list(dict.fromkeys(matches))
+
     matches.sort(key=lambda p: str(p))
     if not matches:
         raise FileNotFoundError(
-            f"错误: 在 '{root.resolve()}' 下未找到以 '{chapter_id}_' 开头的目录"
+            f"错误: 在书籍根目录 '{book_root}' 下未找到以 '{chapter_id}_' 开头的章节目录"
         )
 
     if len(matches) > 1:
@@ -38,7 +58,10 @@ def find_chapter_dir(root: Path, chapter_id: str) -> Path:
 
 
 def clean_title(name: str) -> str:
-    cleaned = re.sub(r"^\d+\.\s+", "", name.strip())
+    cleaned = name.strip()
+    cleaned = re.sub(r"^\d+(?:[.．]\d+)+(?:[.．、])?\s*", "", cleaned)
+    cleaned = re.sub(r"^\d+\\?[.．、]\s*", "", cleaned)
+    cleaned = re.sub(r"^[零〇一二三四五六七八九十百千万两]+[.．、]\s*", "", cleaned)
     cleaned = re.sub(r"\s+", " ", cleaned).strip()
     return cleaned
 
@@ -111,7 +134,7 @@ def normalize_sec_body(sec_body: str) -> str:
 
 
 def shift_sub_headings(text: str) -> str:
-    """将子小节正文（代码块外）中 ### 及更深层级标题的 '#' 减一（### -> ##, #### -> ###, ##### -> ####）。"""
+    """清理子小节标题的序号，并将 ### 及更深层级标题的 '#' 减一。"""
     out_lines: list[str] = []
     in_code = False
 
@@ -123,11 +146,13 @@ def shift_sub_headings(text: str) -> str:
             continue
 
         if not in_code:
-            m = re.match(r"^(\s*)(#{3,})(\s+.*)$", line)
+            m = re.match(r"^(\s*)(#{2,6})(\s+)(.*)$", line)
             if m:
                 indent, hashes, rest = m.group(1), m.group(2), m.group(3)
-                new_hashes = "#" * (len(hashes) - 1)
-                out_lines.append(f"{indent}{new_hashes}{rest}")
+                title = m.group(4)
+                new_hashes = "#" * (len(hashes) - 1) if len(hashes) >= 3 else hashes
+                cleaned_title = clean_title(title)
+                out_lines.append(f"{indent}{new_hashes} {cleaned_title}")
                 continue
 
         out_lines.append(line)

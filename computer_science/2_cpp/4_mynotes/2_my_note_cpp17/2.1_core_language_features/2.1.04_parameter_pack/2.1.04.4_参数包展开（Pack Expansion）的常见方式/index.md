@@ -1,0 +1,93 @@
+# 2.1.04.4 参数包展开（Pack Expansion）的常见方式
+
+**介绍**: > **简介**：参数包不能直接使用，必须通过特定方式展开。
+
+---
+
+参数包不能直接使用，必须通过特定方式**展开**。
+
+## 方式一：递归展开（C++11 经典写法）
+通过定义一个“终止函数”（重载）和一个“递归函数”，每次剥离出第一个参数处理，剩余的继续递归。
+
+```cpp
+#include <iostream>
+
+// 1. 递归终止函数（无参版本）
+void print() {
+    std::cout << std::endl;
+}
+
+// 2. 递归展开函数（每次提取第一个参数 T first）
+template <typename T, typename... Args>
+void print(T first, Args... rest) {
+    std::cout << first << " ";
+    print(rest...); // 将剩余参数包解包并递归调用
+}
+
+// 调用：print(1, 2.5, "Hello"); -> 输出: 1 2.5 Hello
+```
+
+## 方式二：折叠表达式（Fold Expressions，C++17 推荐）
+C++17 引入了折叠表达式，无需写递归即可对参数包中的所有元素应用二元运算符，代码极其简洁。
+
+```cpp
+#include <iostream>
+
+// 一元右折叠求和： (args + ...) 等价于 (arg1 + (arg2 + arg3))
+template <typename... Args>
+auto sum(Args... args) {
+    return (args + ...); 
+}
+
+// 逗号表达式折叠打印
+template <typename... Args>
+void printAll(Args... args) {
+    ((std::cout << args << " "), ...);
+    std::cout << '\n';
+}
+
+// 调用：sum(1, 2, 3, 4); -> 返回 10
+```
+
+## 方式三：结合 `if constexpr` 编译期分支（C++17）
+在单个函数内通过编译期判断参数包是否为空，替代函数重载。
+
+```cpp
+#include <iostream>
+
+template <typename T, typename... Args>
+void printModern(T first, Args... rest) {
+    std::cout << first << " ";
+    if constexpr (sizeof...(rest) > 0) {
+        printModern(rest...); // 仅当 rest 不为空时才实例化此分支
+    } else {
+        std::cout << '\n';
+    }
+}
+```
+
+## 方式四：初始化列表技巧（C++11 黑科技）
+利用数组初始化列表的求值顺序（从左到右），在不使用递归的情况下执行操作。
+
+```cpp
+#include <iostream>
+
+template <typename... Args>
+void printTrick(Args... args) {
+    // 逗号表达式 (动作, 0) 保证列表元素全为 0，利用 ... 展开执行每个动作
+    int dummy[] = { 0, ( (std::cout << args << " "), 0 )... };
+    (void)dummy; // 消除未使用变量的编译警告
+    std::cout << '\n';
+}
+```
+
+---
+
+
+---
+
+## 导航
+
+- **上一层**：[2.1.04 C++ 参数包（Parameter Pack）详解](../index.md)
+- **前一节**：[2.1.04.3 两者的协作与关键对比](../2.1.04.3_两者的协作与关键对比/index.md)
+- **后一节**：[2.1.04.5 展开模式（Pattern）速查表](../2.1.04.5_展开模式（Pattern）速查表/index.md)

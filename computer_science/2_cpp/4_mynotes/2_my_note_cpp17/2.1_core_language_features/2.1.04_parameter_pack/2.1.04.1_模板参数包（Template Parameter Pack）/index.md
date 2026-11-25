@@ -1,0 +1,59 @@
+# 2.1.04.1 模板参数包（Template Parameter Pack）
+
+**介绍**: > **简介**：模板参数包表示零个或多个模板参数（可以是类型参数、非类型模板参数 NTTP，甚至 C++17 起还可以是模板模板参数）。
+
+---
+
+**模板参数包**表示**零个或多个模板参数**（可以是类型参数、非类型模板参数 NTTP，甚至 C++17 起还可以是模板模板参数）。
+
+## 声明位置与语法
+写在模板形参列表（`template <...>`）中，省略号 `...` 紧跟在参数关键字或参数名旁：
+
+```cpp
+// 1. 类型模板参数包（最常见）
+template <typename... Ts>
+struct TypeList {};
+
+// 2. 非类型模板参数包（NTTP，如编译期整数、指针、引用等）
+template <int... Ns>
+struct IndexSeq {};
+
+// 3. 混合普通参数与模板参数包（通常放在最后，但并非绝对）
+template <typename Head, typename... Tail>
+struct PairChain {
+    Head head;
+    PairChain<Tail...> tail;
+};
+```
+
+## 核心特征与规则
+* **允许为空（0 个）**：`TypeList<>` 或 `IndexSeq<>` 在语法上完全合法。
+* **位置灵活性**：模板参数包**不一定**非要放在模板形参列表的最后（C++11 起就支持，只要后续参数能被推导或有默认实参即可），但放在末尾最直观、最不易引发推导歧义。
+* **查询长度**：使用 `sizeof...(Ts)` 在编译期获取包中元素的个数，返回 `std::size_t` 类型的常量表达式。
+* **展开场景**：常用于组合类型、实例化类模板、配合 `std::tuple` / `std::index_sequence` / `std::integer_sequence` 做元编程。
+
+```cpp
+#include <cstddef>
+#include <type_traits>
+
+template <typename... Ts>
+struct PackInfo {
+    static constexpr std::size_t size = sizeof...(Ts);
+    // C++17 折叠表达式检查是否全部为整型
+    static constexpr bool all_integral = (std::is_integral_v<Ts> && ...);
+};
+
+// PackInfo<int, long, short>::size == 3, all_integral == true
+// PackInfo<>::size == 0, all_integral == true（空包折叠需注意单位元规则）
+```
+
+---
+
+
+---
+
+## 导航
+
+- **上一层**：[2.1.04 C++ 参数包（Parameter Pack）详解](../index.md)
+- **前一节**：[2.1.04 C++ 参数包（Parameter Pack）详解](../index.md)
+- **后一节**：[2.1.04.2 函数参数包（Function Parameter Pack）](../2.1.04.2_%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0%E5%8C%85%EF%BC%88Function%20Parameter%20Pack%EF%BC%89/index.md)

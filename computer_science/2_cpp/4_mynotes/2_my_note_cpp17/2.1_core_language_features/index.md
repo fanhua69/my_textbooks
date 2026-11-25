@@ -9,7 +9,7 @@
 - [2.1.01 structured bindings](2.1.01_structured_bindings/index.md)
 - [2.1.02 if and switch initialization](2.1.02_if_and_switch_initialization/index.md)
 - [2.1.03 inline variables](2.1.03_inline_variables/index.md)
-- [2.1.04 parameter pack](2.1.04_parameter_pack/index.md)
+- [2.1.04 C++ 参数包（Parameter Pack）详解](2.1.04_parameter_pack/index.md)
 - [2.1.05 fold expression](2.1.05_fold_expression/index.md)
 - [2.1.06 variadic template](2.1.06_variadic_template/index.md)
 - [2.1.07 constexpr expansion](2.1.07_constexpr_expansion/index.md)

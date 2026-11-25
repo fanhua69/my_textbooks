@@ -1,0 +1,61 @@
+# 2.1.04.2 函数参数包（Function Parameter Pack）
+
+**介绍**: > **简介**：函数参数包表示零个或多个函数实参，其类型通常由对应的模板参数包（或 `auto` / 统一类型）推导而来。
+
+---
+
+**函数参数包**表示**零个或多个函数实参**，其类型通常由对应的模板参数包（或 `auto` / 统一类型）推导而来。
+
+## 声明位置与语法
+写在函数形参列表（`(...)`）中，`...` 位于类型之后、形参名之前（若形参名省略，则直接跟在类型后）：
+
+```cpp
+// 1. 搭配模板参数包：每个形参拥有各自推导出的类型
+template <typename... Args>
+void log_values(Args... args) {}
+
+// 2. 转发引用参数包：保留实参的左值/右值属性（万能引用 + 参数包）
+template <typename... Args>
+void forward_all(Args&&... args) {}
+
+// 3. 匿名函数参数包（不需要在函数体内直接引用参数名时）
+template <typename... Args>
+constexpr std::size_t arg_count(Args...) {
+    return sizeof...(Args);
+}
+```
+
+## 核心特征与规则
+* **与模板参数包的对应关系**：`Args...` 作为函数形参类型时，表示“由 `Args` 中每个类型依次实例化出一个函数形参”。如果传入 3 个实参 `1, "hi", 3.14`，函数签名等价于 `void f(int, const char*, double)`。
+* **允许为空（0 个）**：`log_values()` 合法，此时参数包长度为 0。
+* **位置规则**：函数参数包**通常放在函数形参列表末尾**；若放在前面，后续形参往往需要显式指定或通过默认实参/推导规则确定，否则容易导致模板参数推导失败。
+* **展开场景**：在函数体内通过递归、折叠表达式（C++17）、初始化列表或 `std::forward<Args>(args)...` 逐个消费或转发实参。
+
+```cpp
+#include <iostream>
+#include <utility>
+
+// C++17 折叠表达式直接打印所有函数参数
+template <typename... Args>
+void print_line(const Args&... args) {
+    ((std::cout << args << ' '), ...);
+    std::cout << '\n';
+}
+
+// 完美转发给另一个可调用对象
+template <typename Func, typename... Args>
+decltype(auto) invoke_with(Func&& f, Args&&... args) {
+    return std::forward<Func>(f)(std::forward<Args>(args)...);
+}
+```
+
+---
+
+
+---
+
+## 导航
+
+- **上一层**：[2.1.04 C++ 参数包（Parameter Pack）详解](../index.md)
+- **前一节**：[2.1.04.1 模板参数包（Template Parameter Pack）](../2.1.04.1_%E6%A8%A1%E6%9D%BF%E5%8F%82%E6%95%B0%E5%8C%85%EF%BC%88Template%20Parameter%20Pack%EF%BC%89/index.md)
+- **后一节**：[2.1.04.3 两者的协作与关键对比](../2.1.04.3_两者的协作与关键对比/index.md)
