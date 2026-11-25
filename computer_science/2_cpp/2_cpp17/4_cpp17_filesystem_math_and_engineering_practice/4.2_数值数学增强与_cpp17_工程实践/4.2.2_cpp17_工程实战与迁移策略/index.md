@@ -8,4 +8,4 @@
 
 ← 上一节：[4.2.1 std::clamp、std::gcd、std::lcm 与 C++17 数学特殊函数](../4.2.1_clamp_gcd_lcm_与数学特殊函数/index.md)
 ↑ 返回上级：[4.2 数值/数学增强与 C++17 工程实践闭环](../index.md)
-下一节：[3 modern_cpp](../../../../3_modern_cpp/index.md)
+下一节：无

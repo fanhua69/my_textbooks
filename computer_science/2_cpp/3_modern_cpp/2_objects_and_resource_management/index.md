@@ -12,5 +12,5 @@
 ## 导航
 
 ← 上一节：[1 C++ 语言基础与演进脉络](../1_cpp_fundamentals/index.md)
-↑ 返回上级：[Modern C++ Learning](../index.md)
+↑ 返回上级：[3 Modern C++ Learning](../contents.md)
 下一节：[3 现代 C++ 核心语言特性（分标准演进：C++11 / C++17 / C++20 / C++23 / C++26）](../3_modern_language_features/index.md) →

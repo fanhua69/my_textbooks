@@ -13,5 +13,5 @@
 ## 导航
 
 ← 上一节：[2 类、对象与资源管理](../2_objects_and_resource_management/index.md)
-↑ 返回上级：[Modern C++ Learning](../index.md)
+↑ 返回上级：[3 Modern C++ Learning](../contents.md)
 下一节：[4 模板与泛型编程](../4_templates_and_generic_programming/index.md) →

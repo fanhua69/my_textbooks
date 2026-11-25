@@ -37,5 +37,5 @@
 ## 导航
 
 - **上一层**：[1 cpp11](../index.md)
-- **前一节**：[3 modern_cpp](../../../3_modern_cpp/index.md)
+- **前一节**：[4 mynotes](../../contents.md)
 - **后一节**：[1.2 standard library additions and improvements](../1.2_standard_library_additions_and_improvements/index.md)

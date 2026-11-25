@@ -9,6 +9,6 @@
 
 ## 导航
 
-- **上一层**：[4 mynotes](../index.md)
-- **前一节**：[3 modern_cpp](../../3_modern_cpp/index.md)
-- **后一节**：[2 _cpp17](../2_cpp17/index.md)
+- **上一层**：[4 mynotes](../contents.md)
+- **前一节**：[4 mynotes](../contents.md)
+- **后一节**：[2 _cpp17](../2_my_note_cpp17/index.md)

@@ -13,5 +13,5 @@
 ## 导航
 
 ← 上一节：[4 模板与泛型编程](../4_templates_and_generic_programming/index.md)
-↑ 返回上级：[Modern C++ Learning](../index.md)
+↑ 返回上级：[3 Modern C++ Learning](../contents.md)
 下一节：[6 并发、内存模型与性能](../6_concurrency_memory_performance/index.md) →

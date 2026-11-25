@@ -92,6 +92,9 @@ class Section:
 
     @property
     def index_path(self) -> Path:
+        contents_path = self.directory / "contents.md"
+        if contents_path.is_file():
+            return contents_path
         return self.directory / "index.md"
 
     @property
@@ -127,7 +130,9 @@ def discover(root: Path) -> Section:
     root_section = Section(
         directory=root,
         name=root.name,
-        existed_before=(root / "index.md").is_file(),
+        existed_before=(
+            (root / "contents.md").is_file() or (root / "index.md").is_file()
+        ),
     )
 
     def walk(section: Section) -> None:
@@ -135,7 +140,9 @@ def discover(root: Path) -> Section:
         for child in section.directory.iterdir():
             if not child.is_dir() or child.name.startswith("."):
                 continue
-            has_index = (child / "index.md").is_file()
+            has_index = (
+                (child / "contents.md").is_file() or (child / "index.md").is_file()
+            )
             children.append(
                 Section(
                     directory=child,
@@ -611,7 +618,7 @@ def check_section(
     changed = created
 
     if created:
-        details.append(f"新建 index.md（{section.clean_name}）")
+        details.append(f"新建 {section.index_path.name}（{section.clean_name}）")
 
     lines, meta_changed = check_and_update_title_and_intro(section, lines, details)
     if meta_changed:
@@ -699,9 +706,7 @@ def check_section(
 
 
 def display_path(section: Section, root: Path) -> str:
-    if section.directory == root:
-        return "index.md"
-    return (section.directory.relative_to(root) / "index.md").as_posix()
+    return section.index_path.relative_to(root).as_posix()
 
 
 def main() -> int:
@@ -751,7 +756,7 @@ def main() -> int:
             result.section.index_path.write_text(result.new_text, encoding="utf-8")
 
     print(
-        f"\n共 {len(results)} 个 index.md（新建 {created_count} 个）："
+        f"\n共 {len(results)} 个 contents.md / index.md（新建 {created_count} 个）："
         f"正确 {counts['ok']}，需要更新 {counts['wrong']}，缺少链接/文件 {counts['missing']}"
     )
     if args.check:

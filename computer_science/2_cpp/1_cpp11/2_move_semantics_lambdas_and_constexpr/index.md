@@ -12,5 +12,5 @@
 ## 导航
 
 ← 上一节：[1 C++11 概览、语法与类型推导](../1_cpp11_overview_syntax_and_type_deduction/index.md)
-↑ 返回上级：[C++11 Learning](../index.md)
+↑ 返回上级：[1 C++11 Learning](../contents.md)
 下一节：[3 类、对象生命周期、对齐与继承](../3_classes_object_lifecycle_alignment_and_inheritance/index.md) →

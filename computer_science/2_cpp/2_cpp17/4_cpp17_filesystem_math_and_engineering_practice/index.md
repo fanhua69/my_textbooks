@@ -10,5 +10,5 @@
 ## 导航
 
 ← 上一节：[3 C++17 现代词汇类型、字符串视图、工具库与容器/算法增强](../3_cpp17_vocabulary_types_string_view_and_stl_enhancements/index.md)
-↑ 返回上级：[C++17 全景式深度课程大纲（语言增强、编译期计算、值语义、并行算法、文件系统与标准库全量特性）](../index.md)
-下一节：[3 modern_cpp](../../3_modern_cpp/index.md)
+↑ 返回上级：[2 C++17 全景式深度课程大纲（语言增强、编译期计算、值语义、并行算法、文件系统与标准库全量特性）](../contents.md)
+下一节：无

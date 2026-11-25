@@ -11,6 +11,6 @@
 
 ## 导航
 
-← 上一节：[2 cpp](../../../index.md)
+← 上一节：[1 C++11 Learning](../../contents.md)
 ↑ 返回上级：[1 C++11 概览、语法与类型推导](../index.md)
 下一节：[1.2 auto、decltype、尾置返回类型与类型推导](../1.2_auto_decltype_尾置返回类型与类型推导/index.md) →

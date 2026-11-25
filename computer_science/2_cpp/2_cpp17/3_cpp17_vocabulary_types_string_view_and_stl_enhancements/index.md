@@ -11,5 +11,5 @@
 ## 导航
 
 ← 上一节：[2 编译期计算、模板增强、Lambda 扩展与对象/内存模型改进](../2_compile_time_templates_lambdas_and_object_memory_model/index.md)
-↑ 返回上级：[C++17 全景式深度课程大纲（语言增强、编译期计算、值语义、并行算法、文件系统与标准库全量特性）](../index.md)
+↑ 返回上级：[2 C++17 全景式深度课程大纲（语言增强、编译期计算、值语义、并行算法、文件系统与标准库全量特性）](../contents.md)
 下一节：[4 std::filesystem 文件系统库、数值/数学扩展与工程落地](../4_cpp17_filesystem_math_and_engineering_practice/index.md) →

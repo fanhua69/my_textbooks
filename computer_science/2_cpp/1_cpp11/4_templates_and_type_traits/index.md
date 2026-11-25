@@ -11,5 +11,5 @@
 ## 导航
 
 ← 上一节：[3 类、对象生命周期、对齐与继承](../3_classes_object_lifecycle_alignment_and_inheritance/index.md)
-↑ 返回上级：[C++11 Learning](../index.md)
+↑ 返回上级：[1 C++11 Learning](../contents.md)
 下一节：[5 内存模型与并发库](../5_memory_model_and_concurrency_library/index.md) →
