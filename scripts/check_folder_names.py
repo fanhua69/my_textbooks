@@ -47,7 +47,7 @@ def sort_siblings(directories: list[Path]) -> list[Path]:
 
 
 def discover_book_roots(current_dir: Path, home_dir: Path) -> list[Path]:
-    """Find the nearest book root, or all book roots under home as a fallback."""
+    """Find the nearest book root, or all book roots below the current directory."""
     current_dir = current_dir.resolve()
     home_dir = home_dir.resolve()
 
@@ -65,7 +65,7 @@ def discover_book_roots(current_dir: Path, home_dir: Path) -> list[Path]:
         raise error
 
     roots: list[Path] = []
-    for directory, subdirectories, files in os.walk(home_dir, onerror=raise_walk_error):
+    for directory, subdirectories, files in os.walk(current_dir, onerror=raise_walk_error):
         directory_path = Path(directory)
         subdirectories[:] = [
             name
@@ -190,7 +190,7 @@ def main() -> int:
 
     if not roots:
         print(
-            f"错误: 当前目录及其上级目录、{Path.home()} 下均未找到 contents.md",
+            f"错误: 当前目录及其上级目录、当前目录的子目录中均未找到 contents.md",
             file=sys.stderr,
         )
         return 1

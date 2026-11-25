@@ -12,6 +12,6 @@
 
 ## 导航
 
-← 上一节：[1 C++11 Learning](../index.md)
+← 上一节：[2 cpp](../../index.md)
 ↑ 返回上级：[C++11 Learning](../index.md)
 下一节：[2 移动语义、Lambda 与 constexpr](../2_move_semantics_lambdas_and_constexpr/index.md) →

@@ -6,9 +6,9 @@
 
 ## 目录
 
-- [2.1.1 structured bindings](2.1.1_structured_bindings/index.md)
-- [2.1.2 if and switch initialization](2.1.2_if_and_switch_initialization/index.md)
-- [2.1.3 inline variables](2.1.3_inline_variables/index.md)
+- [2.1.01 structured bindings](2.1.01_structured_bindings/index.md)
+- [2.1.02 if and switch initialization](2.1.02_if_and_switch_initialization/index.md)
+- [2.1.03 inline variables](2.1.03_inline_variables/index.md)
 - [2.1.04 parameter pack](2.1.04_parameter_pack/index.md)
 - [2.1.05 fold expression](2.1.05_fold_expression/index.md)
 - [2.1.06 variadic template](2.1.06_variadic_template/index.md)
@@ -20,6 +20,6 @@
 
 ## 导航
 
-- **上一层**：无
-- **前一节**：无
-- **后一节**：[2.1.1 structured bindings](2.1.1_structured_bindings/index.md)
+- **上一层**：[2 _cpp17](../index.md)
+- **前一节**：[1 cpp11](../../1_cpp11/index.md)
+- **后一节**：[2.2 standard template library](../2.2_standard_template_library/index.md)
