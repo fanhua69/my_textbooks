@@ -9,9 +9,7 @@ from pathlib import Path
 
 from insert_chapter import (
     DIR_NAME_RE,
-    build_index_md,
     chapter_to_dir_suffix,
-    chapter_to_intro_text,
     list_numbered_dirs,
     number_parts,
 )
@@ -55,9 +53,8 @@ def add_chapter(
     chapter_name: str,
     dry_run: bool = False,
 ) -> Path:
-    parent_num, section_num = resolve_parent_num_and_section_num(current_dir)
+    _, section_num = resolve_parent_num_and_section_num(current_dir)
     dir_suffix = chapter_to_dir_suffix(chapter_name)
-    clean_chapter = chapter_to_intro_text(chapter_name)
     new_dir = current_dir / f"{section_num}_{dir_suffix}"
 
     if new_dir.exists():
@@ -70,21 +67,6 @@ def add_chapter(
     else:
         new_dir.mkdir()
         print(f"已创建目录: {new_dir.name}")
-
-    index_content = build_index_md(
-        number=section_num,
-        chapter_name=clean_chapter,
-        parent_num=parent_num,
-    )
-    index_path = new_dir / "_index.md"
-    if dry_run:
-        print(f"[DRY] 将写入: {index_path}")
-        print("--- _index.md 预览 ---")
-        print(index_content)
-        print("---------------------")
-    else:
-        index_path.write_text(index_content, encoding="utf-8")
-        print(f"已写入   : {index_path}")
     return new_dir
 
 

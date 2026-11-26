@@ -1,0 +1,18 @@
+# 1.3 client-side-patterns-blpapi
+
+**介绍**: client-side-patterns-blpapi
+
+
+## 目录
+
+- [1.3.1 ref-counted-identity-caching](1.3.1_ref-counted-identity-caching.md)
+- [1.3.2 batch-checks-event-driven-auth](1.3.2_batch-checks-event-driven-auth.md)
+
+---
+
+## 导航
+
+⬅️ 上一节：[1.2 control-data-plane-separation](../1.2_control-data-plane-separation/_index.md)
+⏺️ 当前节：[1.3 client-side-patterns-blpapi](_index.md)
+➡️ 下一节：[2 in-memory-data-structures](../../2_in-memory-data-structures/_index.md)
+⬆️ 返回上级：[1 architecture-foundations](../_index.md)

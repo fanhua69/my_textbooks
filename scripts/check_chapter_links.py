@@ -18,7 +18,7 @@ H2 = re.compile(r"^##\s+(.+?)\s*$")
 INTRO_LINE = re.compile(
     r"^\s*(?:\*\*)?介绍(?:\*\*)?\s*[：:]\s*(.*?)\s*$"
 )
-TOC_HEADINGS = {"目录", "本节目录", "本章目录", "子目录", "子章节"}
+TOC_HEADINGS = {"小节索引", "目录", "本节目录", "本章目录", "子目录", "子章节"}
 NAV_HEADINGS = {"导航"}
 NAV_LINE = re.compile(
     r"^\s*(?:[-*+]\s*)?(?:⬅️|➡️|⬆️|⏺️|<span[^>]*>\s*(?:⟵|⟶)\s*</span>|⟵|⟶|⤴|←|→|↑|•)?\s*"
@@ -159,6 +159,11 @@ def normalized_title(section: Section) -> str:
     return title
 
 
+def normalized_intro(text: str) -> str:
+    intro = re.sub(r"^\d+(?:\.\d+)*(?:[\s._-]+)?", "", text.strip()).strip()
+    return intro
+
+
 def relative_link(source: Section, target: Section) -> str:
     rel = Path(os.path.relpath(target.index_path, source.directory)).as_posix()
     if any(char in rel for char in " ()"):
@@ -167,20 +172,22 @@ def relative_link(source: Section, target: Section) -> str:
 
 
 def sibling_section(section: Section, offset: int) -> Section | None:
-    if section.parent is None:
-        return None
-
-    siblings = sorted(section.parent.children, key=lambda sibling: sort_key(sibling.name))
-    position = next(
-        (index for index, sibling in enumerate(siblings) if sibling is section),
-        -1,
-    )
-    if position < 0:
-        return None
-    target_position = position + offset
-    if target_position < 0 or target_position >= len(siblings):
-        return None
-    return siblings[target_position]
+    current = section
+    while current.parent is not None:
+        siblings = sorted(
+            current.parent.children,
+            key=lambda sibling: sort_key(sibling.name),
+        )
+        position = next(
+            (index for index, sibling in enumerate(siblings) if sibling is current),
+            -1,
+        )
+        if position >= 0:
+            target_position = position + offset
+            if 0 <= target_position < len(siblings):
+                return siblings[target_position]
+        current = current.parent
+    return None
 
 
 def strip_generated_sections(text: str) -> str:
@@ -254,6 +261,7 @@ def rebuild_markdown(section: Section, root: Section) -> tuple[str, bool]:
     intro = existing_intro
     if intro is None or not intro:
         intro = title
+    intro = normalized_intro(intro)
 
     lines = [f"# {title}", "", f"**介绍**: {intro}", ""]
     if content_lines:

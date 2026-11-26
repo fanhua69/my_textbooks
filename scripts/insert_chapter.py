@@ -19,6 +19,7 @@ from typing import List, Optional, Tuple
 
 NUMBER_ONLY_RE = re.compile(r"^\d+(?:\.\d+)*$")
 DIR_NAME_RE = re.compile(r"^(\d+(?:\.\d+)*)_(.+)$")
+CONTAINER_MD_NAMES = {"_index.md", "_contents.md"}
 
 
 def validate_section_num(num: str) -> str:
@@ -94,6 +95,44 @@ def list_numbered_dirs(parent: Path) -> List[Tuple[List[int], str, Path]]:
     return result
 
 
+def list_numbered_markdown_files(parent: Path) -> List[Tuple[List[int], str, Path]]:
+    result: List[Tuple[List[int], str, Path]] = []
+    for p in parent.iterdir():
+        if (
+            not p.is_file()
+            or p.suffix.lower() != ".md"
+            or p.name.lower() in CONTAINER_MD_NAMES
+        ):
+            continue
+        m = DIR_NAME_RE.match(p.stem)
+        if m:
+            raw_num = m.group(1)
+            result.append((number_parts(raw_num), raw_num, p))
+    result.sort(key=lambda item: item[0])
+    return result
+
+
+def list_numbered_entries(parent: Path) -> List[Tuple[List[int], str, Path]]:
+    result = list_numbered_dirs(parent) + list_numbered_markdown_files(parent)
+    result.sort(key=lambda item: item[0])
+    return result
+
+
+def find_entry_by_parts(parent: Path, target_parts: List[int]) -> Optional[Path]:
+    for _, _, path in list_numbered_entries(parent):
+        m = DIR_NAME_RE.match(path.name if path.is_dir() else path.stem)
+        if m and number_parts(m.group(1)) == target_parts:
+            return path
+    return None
+
+
+def parent_prefers_markdown(parent: Path) -> bool:
+    """目标节所在目录以 Markdown 文件为主时，插入同类型 Markdown 节。"""
+    md_count = len(list_numbered_markdown_files(parent))
+    dir_count = len(list_numbered_dirs(parent))
+    return md_count > dir_count
+
+
 def find_dir_by_parts(parent: Path, target_parts: List[int]) -> Optional[Path]:
     for parts, _, path in list_numbered_dirs(parent):
         if parts == target_parts:
@@ -121,7 +160,7 @@ def resolve_level_widths(
         parent_prefix = prefix[:-1]
         siblings = [
             item
-            for item in list_numbered_dirs(current)
+            for item in list_numbered_entries(current)
             if len(item[0]) == depth and item[0][:-1] == parent_prefix
         ]
         existing_count = len(siblings)
@@ -150,49 +189,6 @@ def resolve_level_widths(
     return widths
 
 
-def rename_subtree(
-    subtree_root: Path,
-    old_prefix_parts: List[int],
-    new_prefix_parts: List[int],
-    widths: List[int],
-    dry_run: bool = False,
-) -> None:
-    to_rename: List[Tuple[Path, str]] = []
-
-    def collect(current: Path) -> None:
-        for child in sorted(current.iterdir(), key=lambda p: p.name, reverse=True):
-            if child.is_dir():
-                collect(child)
-        m = DIR_NAME_RE.match(current.name)
-        if m:
-            raw_number = m.group(1)
-            raw_components = raw_number.split(".")
-            cur_parts = number_parts(raw_number)
-            if is_same_or_descendant_parts(old_prefix_parts, cur_parts):
-                updated_parts = replace_prefix_parts(
-                    cur_parts, old_prefix_parts, new_prefix_parts
-                )
-                formatted_prefix = format_parts(
-                    updated_parts[: len(new_prefix_parts)], widths
-                )
-                suffix_components = raw_components[len(old_prefix_parts) :]
-                new_num_str = ".".join(
-                    [formatted_prefix, *suffix_components]
-                )
-                new_name = f"{new_num_str}_{m.group(2)}"
-                to_rename.append((current, new_name))
-
-    collect(subtree_root)
-
-    for old_path, new_name in to_rename:
-        new_path = old_path.parent / new_name
-        if dry_run:
-            print(f"  [DRY] 重命名: {old_path.name}  →  {new_name}")
-        else:
-            print(f"  重命名: {old_path.name}  →  {new_name}")
-            old_path.rename(new_path)
-
-
 def find_parent_dir(
     textbook_root: Path, target_parts: List[int], widths: List[int]
 ) -> Path:
@@ -214,29 +210,6 @@ def find_parent_dir(
             )
     return current
 
-
-def build_index_md(
-    number: str,
-    chapter_name: str,
-    parent_num: Optional[str],
-) -> str:
-    heading_title = f"{number} {chapter_name}"
-    intro_line = f"介绍：{chapter_name}"
-    parent_link = "../_index.md" if parent_num else "(教材根目录)"
-    return f"""# {heading_title}
-
-{intro_line}
-
----
-
-## 导航
-
-- **上一层**：[父级]({parent_link})
-- **前一节**：[TODO_PREV]
-- **后一节**：[TODO_NEXT]
-"""
-
-
 def insert_chapter(
     textbook_root: Path,
     section_num: str,
@@ -251,7 +224,8 @@ def insert_chapter(
     parent_dir_probe = find_parent_dir(
         textbook_root, target_parts, [calc_width(999)] * len(target_parts)
     )
-    existing = find_dir_by_parts(parent_dir_probe, target_parts)
+    existing = find_entry_by_parts(parent_dir_probe, target_parts)
+    prefer_markdown = parent_prefers_markdown(parent_dir_probe)
     widths = resolve_level_widths(
         textbook_root, target_parts, has_existing_at_target=(existing is not None)
     )
@@ -259,14 +233,15 @@ def insert_chapter(
     formatted_target_num = format_parts(target_parts, widths)
     new_dir_name = f"{formatted_target_num}_{dir_suffix}"
     level_count = (
-        len(list_numbered_dirs(parent_dir_probe)) + 1
+        len(list_numbered_entries(parent_dir_probe)) + 1
         if existing is not None
-        else max(len(list_numbered_dirs(parent_dir_probe)) + 1, target_parts[-1])
+        else max(len(list_numbered_entries(parent_dir_probe)) + 1, target_parts[-1])
     )
 
     print(f"目标编号 : {formatted_target_num} (输入: {raw_num})")
     print(f"当前层总节数(插入后): {level_count} → 该层数字位宽: {widths[-1]}")
-    print(f"新目录名 : {new_dir_name}")
+    new_markdown_name = f"{formatted_target_num}_{dir_suffix}.md"
+    print(f"新节点名 : {new_markdown_name if prefer_markdown else new_dir_name}")
     print(f"题目     : {formatted_target_num} {clean_chapter}")
     print(f"介绍     : 介绍：{clean_chapter}")
     print()
@@ -282,7 +257,7 @@ def insert_chapter(
         print(f"注意: 编号 {formatted_target_num} 已存在 → {existing.name}")
         print("将把该节点及之后的所有兄弟节点整体 +1（并按新位宽格式化）后，再插入新节点。\n")
 
-    siblings = list_numbered_dirs(parent_dir)
+    siblings = list_numbered_entries(parent_dir)
     to_shift = [
         (parts, num_str, path)
         for parts, num_str, path in siblings
@@ -301,38 +276,46 @@ def insert_chapter(
             old_formatted = format_parts(parts, widths)
             new_formatted = format_parts(shifted_parts, widths)
             print(f"后移子树: {old_formatted}  →  {new_formatted}")
-            rename_subtree(path, parts, shifted_parts, widths, dry_run=dry_run)
+            if path.is_dir():
+                match = DIR_NAME_RE.match(path.name)
+                if match is not None:
+                    new_name = f"{new_formatted}_{match.group(2)}"
+                    new_path = path.parent / new_name
+                    if dry_run:
+                        print(f"  [DRY] 重命名: {path.name}  →  {new_name}")
+                    else:
+                        print(f"  重命名: {path.name}  →  {new_name}")
+                        path.rename(new_path)
+            else:
+                match = DIR_NAME_RE.match(path.stem)
+                if match is not None:
+                    new_name = f"{new_formatted}_{match.group(2)}.md"
+                    new_path = path.parent / new_name
+                    if dry_run:
+                        print(f"  [DRY] 重命名: {path.name}  →  {new_name}")
+                    else:
+                        print(f"  重命名: {path.name}  →  {new_name}")
+                        path.rename(new_path)
             print()
     else:
         print("没有需要后移的同级节点，直接插入。\n")
 
-    new_path = parent_dir / new_dir_name
+    new_path = (
+        parent_dir / new_markdown_name
+        if prefer_markdown
+        else parent_dir / new_dir_name
+    )
     if new_path.exists():
-        raise FileExistsError(f"目录已存在: {new_path}")
+        raise FileExistsError(f"节点已存在: {new_path}")
 
     if dry_run:
-        print(f"[DRY] 将创建目录: {new_path}")
+        print(f"[DRY] 将创建{'Markdown 文件' if prefer_markdown else '目录'}: {new_path}")
+    elif prefer_markdown:
+        new_path.touch()
+        print(f"已创建Markdown文件: {new_path.relative_to(textbook_root)}")
     else:
         new_path.mkdir(parents=False)
         print(f"已创建目录: {new_path.relative_to(textbook_root)}")
-
-    p_parts = parent_number_parts(target_parts)
-    p_formatted = format_parts(p_parts, widths[:-1]) if p_parts is not None else None
-    index_content = build_index_md(
-        number=formatted_target_num,
-        chapter_name=clean_chapter,
-        parent_num=p_formatted,
-    )
-
-    index_path = new_path / "_index.md"
-    if dry_run:
-        print(f"[DRY] 将写入: {index_path}")
-        print("--- _index.md 预览 ---")
-        print(index_content)
-        print("---------------------")
-    else:
-        index_path.write_text(index_content, encoding="utf-8")
-        print(f"已写入   : {index_path.relative_to(textbook_root)}")
 
     print("\n完成。")
     return new_path
@@ -351,6 +334,12 @@ def main() -> None:
 
     has_chapter = any(
         p.is_dir() and DIR_NAME_RE.match(p.name)
+        for p in textbook_root.iterdir()
+    ) or any(
+        p.is_file()
+        and p.suffix.lower() == ".md"
+        and p.name.lower() not in CONTAINER_MD_NAMES
+        and DIR_NAME_RE.match(p.stem)
         for p in textbook_root.iterdir()
     )
     if not has_chapter:

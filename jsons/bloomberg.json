@@ -1,0 +1,330 @@
+{
+  "title": "Low-Latency Entitlement Systems Engineering in Modern C++",
+  "title_zh": "现代 C++ 低延迟权限（Entitlement）系统架构与工程实战",
+  "language": "bilingual",
+  "description": "A comprehensive engineering guide and hands-on system design curriculum for building high-throughput, sub-microsecond entitlement engines in C++17/20, grounded in financial data distribution architectures.",
+  "navigation": {
+    "mode": "hierarchical",
+    "numbering": true
+  },
+  "parts": [
+    {
+      "title": "Architecture Foundations & Control/Data Plane Separation",
+      "title_zh": "架构基石与控制面/数据面分离设计",
+      "slug": "architecture-foundations",
+      "intro": "确立低延迟权限系统的核心设计边界：明确公开机制与通用架构优化的区别，深入拆解 Control Plane 与 Data Plane 的职责隔离，并从 BLPAPI 客户端缓存与句柄设计中提炼通用性能原则。",
+      "sections": [
+        {
+          "title": "Core Design Goals & Architectural Boundaries",
+          "title_zh": "核心设计目标与架构边界界定",
+          "slug": "core-design-goals",
+          "intro": "分析金融数据与交易功能权限校验的亚微秒级延迟、强一致性与安全合规要求，区分生产环境公开机制与底层通用架构优化。",
+          "subsections": [
+            {
+              "title": "Latency, Consistency & Security Trade-offs",
+              "title_zh": "低延迟、强一致性与安全合规的权衡",
+              "slug": "latency-consistency-security",
+              "intro": "探讨高并发查询热路径（Hot Path）上的尾延迟（P99/P99.9）控制与权限撤销实时性之间的矛盾与平衡。"
+            },
+            {
+              "title": "Public API Mechanisms vs. Backend Engine Optimizations",
+              "title_zh": "公开客户端 API 机制与后端引擎通用优化的边界",
+              "slug": "public-api-vs-backend-optimizations",
+              "intro": "对比公开文档可确认的客户端机制（本地缓存、引用计数句柄、批量校验、异步事件队列）与后端高并发内存引擎的架构设计原则。"
+            }
+          ]
+        },
+        {
+          "title": "Control Plane vs. Data Plane Separation",
+          "title_zh": "控制面（Control Plane）与数据面（Data Plane）分离",
+          "slug": "control-data-plane-separation",
+          "intro": "将权限变更、数据库同步与版本管理隔离至控制面，确保数据面在线查询热路径零数据库访问、零网络 RPC 与零复杂规则计算。",
+          "subsections": [
+            {
+              "title": "Control Plane Responsibilities & State Management",
+              "title_zh": "控制面职责：权限变更、同步与版本演进",
+              "slug": "control-plane-responsibilities",
+              "intro": "设计用户订阅关系变更接收、数据源校验、增量聚合及权限快照版本号管理。"
+            },
+            {
+              "title": "Data Plane Zero-I/O Hot Path Design",
+              "title_zh": "数据面热路径：纯内存只读索引查询",
+              "slug": "data-plane-zero-io-hot-path",
+              "intro": "构建纯内存只读查询接口（如 EntitlementCache::hasAccess），消除查询路径上的动态分配与阻塞等待。"
+            }
+          ]
+        },
+        {
+          "title": "Client-Side Patterns from BLPAPI",
+          "title_zh": "从 BLPAPI 公开设计看高性能权限交互模式",
+          "slug": "client-side-patterns-blpapi",
+          "intro": "剖析金融数据接口在客户端侧减少通信与拷贝开销的典型设计模式。",
+          "subsections": [
+            {
+              "title": "Reference-Counted Identity & Session Caching",
+              "title_zh": "引用计数句柄（Identity）与会话级授权缓存",
+              "slug": "ref-counted-identity-caching",
+              "intro": "分析如何通过引用计数避免授权上下文的深拷贝，并在会话生命周期内复用已验证的权限集合。"
+            },
+            {
+              "title": "Batch Entitlement Checks & Event-Driven Authorization",
+              "title_zh": "批量权限校验（hasEntitlements）与异步事件队列",
+              "slug": "batch-checks-event-driven-auth",
+              "intro": "通过单次批量接口合并多次鉴权开销，并利用 IEventQueue 解耦异步授权结果分发。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "In-Memory Data Structures & Cache-Friendly Layout",
+      "title_zh": "百万级内存数据结构与 CPU 缓存局部性优化",
+      "slug": "in-memory-data-structures",
+      "intro": "针对百万级用户与数百万条权限记录的存储与检索需求，对比哈希表、位图、排序数组与反向索引的时空复杂度及 CPU Cache 表现。",
+      "sections": [
+        {
+          "title": "Indexing Strategies for 2M+ Entitlement Records",
+          "title_zh": "200 万条权限记录的多维索引选型",
+          "slug": "indexing-strategies-2m-records",
+          "intro": "在百万用户与多维产品权限映射下，评估不同索引结构的查询延迟、内存占用与更新成本。",
+          "subsections": [
+            {
+              "title": "Hash Tables & Open Addressing vs. Node-Based Maps",
+              "title_zh": "哈希索引：节点式 unordered_map 与开放寻址扁平哈希表",
+              "slug": "hash-tables-open-addressing",
+              "intro": "剖析 std::unordered_map 的指针追逐（Pointer Chasing）与扩容抖动问题，对比扁平哈希表（Flat Hash Map）的缓存友好性。"
+            },
+            {
+              "title": "Dense Integer Bitmaps & Bitwise Operations",
+              "title_zh": "稠密整数 Bitmap 与 O(1) 位运算鉴权",
+              "slug": "dense-integer-bitmaps",
+              "intro": "利用 uint64_t 数组将单次权限判断压缩为下标计算与位与（Bitwise AND）指令，探讨 Roaring Bitmap 在稀疏场景下的折中。"
+            },
+            {
+              "title": "Sorted Vectors & Multi-Level Hybrid Indexes",
+              "title_zh": "排序数组（Sorted Vector）与多级混合索引",
+              "slug": "sorted-vectors-hybrid-indexes",
+              "intro": "结合连续内存二分查找与位图/哈希表，针对冷热用户与不同权限密度设计混合存储结构。"
+            }
+          ]
+        },
+        {
+          "title": "Reverse Index for Targeted Invalidation",
+          "title_zh": "反向索引（Reverse Index）与精准增量更新",
+          "slug": "reverse-index-invalidation",
+          "intro": "建立 EntitlementId 到 UserId 集合的映射，解决单产品权限变更时的全表扫描瓶颈。",
+          "subsections": [
+            {
+              "title": "Designing EntitlementId -> Users Mappings",
+              "title_zh": "反向索引结构设计与内存开销控制",
+              "slug": "entitlement-to-users-mapping",
+              "intro": "实现双向索引维护，在产品订阅变更或权限撤销时快速定位受影响的用户子集。"
+            }
+          ]
+        },
+        {
+          "title": "Hardware-Aware Memory & CPU Optimizations",
+          "title_zh": "硬件感知内存布局与底层 CPU 性能调优",
+          "slug": "hardware-aware-optimizations",
+          "intro": "从 L1/L2 Cache Line、内存池预分配到 SIMD 指令集，消除微秒级以下的性能损耗。",
+          "subsections": [
+            {
+              "title": "Cache Locality, Padding & Avoiding False Sharing",
+              "title_zh": "数据局部性、内存对齐与消除伪共享（False Sharing）",
+              "slug": "cache-locality-false-sharing",
+              "intro": "使用 alignas(64) 与结构体重排（AoS vs. SoA）隔离读写热点，避免多核缓存行乒乓效应。"
+            },
+            {
+              "title": "Memory Pools, Object Reuse & Pre-allocation",
+              "title_zh": "内存池（Arena/Pool）、对象复用与运行时零分配",
+              "slug": "memory-pools-preallocation",
+              "intro": "通过启动期预分配与定制分配器消除热路径上的 malloc/new 系统调用与内存碎片。"
+            },
+            {
+              "title": "Batch Lookup & SIMD Bitwise Acceleration",
+              "title_zh": "批量权限检查与 SIMD 位运算加速",
+              "slug": "batch-lookup-simd",
+              "intro": "利用 AVX2/NEON 指令并行处理多权限位图掩码匹配，并减少协议层序列化与零拷贝（Zero-Copy）传输开销。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "High-Concurrency Read Paths & Lock-Free Synchronization",
+      "title_zh": "高并发无锁读取与多线程同步机制",
+      "slug": "high-concurrency-synchronization",
+      "intro": "解决百线程并发查询下的锁竞争与尾延迟飙升问题，深入对比读写锁、分片、不可变快照与 RCU 机制的工程取舍。",
+      "sections": [
+        {
+          "title": "Eliminating Lock Contention on the Read Path",
+          "title_zh": "消除查询热路径的锁竞争",
+          "slug": "eliminating-read-lock-contention",
+          "intro": "量化分析全局互斥锁在百纳秒级查询中的排队延迟，探索分层降锁策略。",
+          "subsections": [
+            {
+              "title": "RWLock, Sharding & Thread-Local Caching",
+              "title_zh": "读写锁（std::shared_mutex）、数据分片与线程本地缓存",
+              "slug": "rwlock-sharding-tls",
+              "intro": "评估读写锁在写饥饿与缓存行争用下的局限，使用一致性哈希分片（Sharding）与 Thread-Local Cache 降低冲突。"
+            },
+            {
+              "title": "Pragmatic Concurrency: When Not to Use Lock-Free",
+              "title_zh": "务实并发原则：为什么不盲目追求全无锁",
+              "slug": "pragmatic-concurrency-tradeoffs",
+              "intro": "分析无锁算法在调试复杂度、ABA 问题与内存回收上的隐性成本，对比分段锁在稳定尾延迟上的工程优势。"
+            }
+          ]
+        },
+        {
+          "title": "Immutable Snapshots & Atomic Pointer Swap",
+          "title_zh": "不可变快照（Immutable Snapshot）与原子指针切换",
+          "slug": "immutable-snapshots-atomic-swap",
+          "intro": "通过写时复制与原子指针发布实现读线程完全无锁的并发读取。",
+          "subsections": [
+            {
+              "title": "Double Buffering & Copy-on-Write (COW) Construction",
+              "title_zh": "双缓冲（Double Buffering）与写时复制（COW）构建",
+              "slug": "double-buffering-cow",
+              "intro": "后台线程在独立内存空间构建并校验新快照，确保活跃读线程视图绝对不可变。"
+            },
+            {
+              "title": "C++17 Atomic Shared Pointer & Memory Ordering",
+              "title_zh": "C++17 原子智能指针与内存序（Memory Ordering）保障",
+              "slug": "atomic-shared-ptr-memory-ordering",
+              "intro": "详解 std::atomic_load / std::atomic_store（及 C++20 std::atomic<std::shared_ptr>）的 acquire-release 语义与无锁替代方案。"
+            }
+          ]
+        },
+        {
+          "title": "RCU (Read-Copy-Update) & Safe Memory Reclamation",
+          "title_zh": "RCU 机制与无锁读下的安全内存回收",
+          "slug": "rcu-safe-memory-reclamation",
+          "intro": "深入解决无锁读线程持有旧快照指针期间的内存安全释放难题。",
+          "subsections": [
+            {
+              "title": "Epoch-Based Reclamation (EBR) & Hazard Pointers",
+              "title_zh": "基于纪元的回收（EBR）与风险指针（Hazard Pointers）",
+              "slug": "ebr-and-hazard-pointers",
+              "intro": "对比不同安全内存回收（SMR）算法在宽限期（Grace Period）追踪、吞吐量与容错性上的表现。"
+            },
+            {
+              "title": "Lock-Free Ring Buffers (SPSC / MPSC / MPMC)",
+              "title_zh": "无锁环形队列（Ring Buffer）在事件传递中的应用",
+              "slug": "lock-free-ring-buffers",
+              "intro": "实现单生产者单消费者（SPSC）与多生产者单消费者（MPSC）无锁队列，用于控制面到数据面的更新事件投递。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Large-Scale Data Synchronization & Distributed Consistency",
+      "title_zh": "大规模数据库增量同步与分布式缓存一致性",
+      "slug": "large-scale-data-synchronization",
+      "intro": "围绕 ComDB2 / ComDBG 等权威数据库的大规模同步场景，设计高吞吐全量/增量同步流水线及分布式实时权限撤销机制。",
+      "sections": [
+        {
+          "title": "Database Synchronization Pipeline (ComDB2 / ComDBG)",
+          "title_zh": "权威数据库（ComDB2 / ComDBG）全量与增量同步流水线",
+          "slug": "database-sync-pipeline",
+          "intro": "构建从持久化存储到内存引擎的可靠同步通道，支持冷启动全量加载与运行时低延迟增量追平。",
+          "subsections": [
+            {
+              "title": "Cold-Start Full Sync & Snapshot Checkpointing",
+              "title_zh": "冷启动全量同步与批量装载优化",
+              "slug": "cold-start-full-sync",
+              "intro": "利用批量拉取（Batch Processing）、并行反序列化与预排序构建，缩短 200 万条记录的初始化时间。"
+            },
+            {
+              "title": "Incremental Change Data Capture (CDC) & Versioning",
+              "title_zh": "增量变更捕获（CDC）、幂等重放与序列号校验",
+              "slug": "incremental-cdc-versioning",
+              "intro": "基于单调递增事务序列号（Sequence Number / LSN）处理乱序、重复与丢包，保证最终状态与权威库严格一致。"
+            }
+          ]
+        },
+        {
+          "title": "Real-Time Revocation & Distributed Cache Invalidation",
+          "title_zh": "权限实时撤销与分布式缓存失效传播",
+          "slug": "real-time-revocation-invalidation",
+          "intro": "解决高危场景下权限被撤销后，多节点分布式内存缓存必须在毫秒级内完成失效的工程挑战。",
+          "subsections": [
+            {
+              "title": "Event-Driven Push vs. Versioned Polling",
+              "title_zh": "事件驱动推送（Pub/Sub）与版本心跳校验双保险",
+              "slug": "event-driven-push-vs-polling",
+              "intro": "结合低延迟消息总线主动推送撤销指令与周期性水位线（Watermark）对账，防止消息丢失导致的越权访问。"
+            },
+            {
+              "title": "Backpressure, Degradation & Consistency Guarantees",
+              "title_zh": "背压控制（Backpressure）与断网降级安全策略",
+              "slug": "backpressure-degradation-safety",
+              "intro": "当同步链路发生积压或分区故障时，设计基于 TTL 租约的 Fail-Closed 保护机制与流量背压控制。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Capstone Project: High-Performance C++17 Entitlement Engine & Benchmarking",
+      "title_zh": "综合实战：从零构建 C++17 高性能权限引擎与性能基准测试",
+      "slug": "capstone-entitlement-engine",
+      "intro": "将架构理论落地为可运行的 C++17 工程项目：支持 200 万条权限记录、无锁并发读、后台增量快照切换，并通过 Google Benchmark 与生产级监控体系验证极限性能。",
+      "sections": [
+        {
+          "title": "System Implementation in C++17",
+          "title_zh": "C++17 完整引擎设计与核心模块实现",
+          "slug": "system-implementation-cpp17",
+          "intro": "遵循现代 C++ 最佳实践（从 C++98 演进至 C++17/20），实现完整的双缓冲快照权限引擎。",
+          "subsections": [
+            {
+              "title": "Core Data Structures: UserBitmap & ShardedIndex",
+              "title_zh": "核心存储层实现：稠密位图与分片用户索引",
+              "slug": "core-data-structures-impl",
+              "intro": "编写支持 O(1) 单点查询与批量掩码查询的 UserEntitlements 位图及只读快照容器。"
+            },
+            {
+              "title": "Background Sync Worker & Atomic Snapshot Publisher",
+              "title_zh": "后台增量更新线程与原子快照发布器",
+              "slug": "background-worker-snapshot-publisher",
+              "intro": "实现接收增量变更批次、COW 克隆局部索引并原子切换全局读取视图的完整闭环。"
+            },
+            {
+              "title": "RCU vs. Atomic Shared Pointer Implementation Comparison",
+              "title_zh": "RCU 纪元回收与原子智能指针方案代码对比",
+              "slug": "rcu-vs-atomic-shared-ptr-impl",
+              "intro": "在同一测试框架下分别实现两种快照生命周期管理方案，剖析汇编指令与引用计数原子操作开销。"
+            }
+          ]
+        },
+        {
+          "title": "Benchmarking, Profiling & Production Observability",
+          "title_zh": "基准测试、性能剖析与生产级可观测性",
+          "slug": "benchmarking-profiling-observability",
+          "intro": "建立科学的性能评估体系，量化吞吐量与分位延迟，并衔接 Grafana / Prometheus 监控实践。",
+          "subsections": [
+            {
+              "title": "Google Benchmark: Throughput, P50, P99 & P99.9",
+              "title_zh": "基于 Google Benchmark 的吞吐量与尾延迟（P50/P99/P99.9）测试",
+              "slug": "google-benchmark-tail-latency",
+              "intro": "模拟 200 万条记录与 100 并发读线程 + 后台高频写入负载，测量不同并发模型下的延迟分布。"
+            },
+            {
+              "title": "CPU Profiling with perf & Cache Miss Analysis",
+              "title_zh": "使用 Linux perf 与 FlameGraph 定位 Cache Miss 与伪共享",
+              "slug": "perf-cache-miss-analysis",
+              "intro": "采集 L1/LLC Cache Miss、分支预测失败及原子指令周期占比，完成数据驱动的二次调优。"
+            },
+            {
+              "title": "Production Metrics (Prometheus / Grafana) & Interview Storytelling",
+              "title_zh": "生产监控（Prometheus / Grafana）与 Senior C++ 面试技术叙事",
+              "slug": "production-metrics-interview-prep",
+              "intro": "梳理核心 SLA 指标埋点、C++98 到 C++17 服务迁移经验总结，以及针对高频面试追问的系统化应答框架。"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

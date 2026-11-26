@@ -1,0 +1,18 @@
+# 4.2 real-time-revocation-invalidation
+
+**介绍**: real-time-revocation-invalidation
+
+
+## 目录
+
+- [4.2.1 event-driven-push-vs-polling](4.2.1_event-driven-push-vs-polling.md)
+- [4.2.2 backpressure-degradation-safety](4.2.2_backpressure-degradation-safety.md)
+
+---
+
+## 导航
+
+⬅️ 上一节：[4.1 database-sync-pipeline](../4.1_database-sync-pipeline/_index.md)
+⏺️ 当前节：[4.2 real-time-revocation-invalidation](_index.md)
+➡️ 下一节：[5 capstone-entitlement-engine](../../5_capstone-entitlement-engine/_index.md)
+⬆️ 返回上级：[4 large-scale-data-synchronization](../_index.md)

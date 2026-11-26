@@ -1,0 +1,19 @@
+# 5.1 system-implementation-cpp17
+
+**介绍**: system-implementation-cpp17
+
+
+## 目录
+
+- [5.1.1 core-data-structures-impl](5.1.1_core-data-structures-impl.md)
+- [5.1.2 background-worker-snapshot-publisher](5.1.2_background-worker-snapshot-publisher.md)
+- [5.1.3 rcu-vs-atomic-shared-ptr-impl](5.1.3_rcu-vs-atomic-shared-ptr-impl.md)
+
+---
+
+## 导航
+
+⬅️ 上一节：[4 large-scale-data-synchronization](../../4_large-scale-data-synchronization/_index.md)
+⏺️ 当前节：[5.1 system-implementation-cpp17](_index.md)
+➡️ 下一节：[5.2 benchmarking-profiling-observability](../5.2_benchmarking-profiling-observability/_index.md)
+⬆️ 返回上级：[5 capstone-entitlement-engine](../_index.md)

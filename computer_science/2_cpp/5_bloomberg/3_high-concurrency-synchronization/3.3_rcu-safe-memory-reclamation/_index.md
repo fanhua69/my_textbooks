@@ -1,0 +1,18 @@
+# 3.3 rcu-safe-memory-reclamation
+
+**介绍**: rcu-safe-memory-reclamation
+
+
+## 目录
+
+- [3.3.1 ebr-and-hazard-pointers](3.3.1_ebr-and-hazard-pointers.md)
+- [3.3.2 lock-free-ring-buffers](3.3.2_lock-free-ring-buffers.md)
+
+---
+
+## 导航
+
+⬅️ 上一节：[3.2 immutable-snapshots-atomic-swap](../3.2_immutable-snapshots-atomic-swap/_index.md)
+⏺️ 当前节：[3.3 rcu-safe-memory-reclamation](_index.md)
+➡️ 下一节：[4 large-scale-data-synchronization](../../4_large-scale-data-synchronization/_index.md)
+⬆️ 返回上级：[3 high-concurrency-synchronization](../_index.md)

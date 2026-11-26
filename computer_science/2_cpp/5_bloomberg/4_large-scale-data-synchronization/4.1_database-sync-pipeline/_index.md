@@ -1,0 +1,18 @@
+# 4.1 database-sync-pipeline
+
+**介绍**: database-sync-pipeline
+
+
+## 目录
+
+- [4.1.1 cold-start-full-sync](4.1.1_cold-start-full-sync.md)
+- [4.1.2 incremental-cdc-versioning](4.1.2_incremental-cdc-versioning.md)
+
+---
+
+## 导航
+
+⬅️ 上一节：[3 high-concurrency-synchronization](../../3_high-concurrency-synchronization/_index.md)
+⏺️ 当前节：[4.1 database-sync-pipeline](_index.md)
+➡️ 下一节：[4.2 real-time-revocation-invalidation](../4.2_real-time-revocation-invalidation/_index.md)
+⬆️ 返回上级：[4 large-scale-data-synchronization](../_index.md)
