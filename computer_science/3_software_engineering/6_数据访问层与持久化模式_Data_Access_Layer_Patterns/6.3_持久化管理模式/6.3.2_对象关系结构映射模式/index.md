@@ -2,14 +2,18 @@
 
 **介绍**: 把对象结构映射为表结构的关键技术。
 
+
 ## 目录
 
-- [6.3.2.1 嵌入值 (Embedded Value)、值对象映射与序列化大对象 (Serialized LOB)](6.3.2.1_嵌入值_Embedded_Value_值对象映射与序列化大对象_Serialized_LOB/index.md)
-- [6.3.2.2 外键映射 (Foreign Key Mapping) 与关联表映射 (Association Table Mapping)](6.3.2.2_外键映射_Foreign_Key_Mapping_与关联表映射_Association_Table_Mappi/index.md)
-- [6.3.2.3 继承映射：单表继承、类表继承与具体表继承 (Inheritance Mapping)](6.3.2.3_继承映射_单表继承_类表继承与具体表继承_Inheritance_Mapping/index.md)
+- [6.3.2.1 嵌入值 (Embedded Value)、值对象映射与序列化大对象 (Serialized LOB)](6.3.2.1_嵌入值_Embedded_Value_值对象映射与序列化大对象_Serialized_LOB.md)
+- [6.3.2.2 外键映射 (Foreign Key Mapping) 与关联表映射 (Association Table Mapping)](6.3.2.2_外键映射_Foreign_Key_Mapping_与关联表映射_Association_Table_Mappi.md)
+- [6.3.2.3 继承映射：单表继承、类表继承与具体表继承 (Inheritance Mapping)](6.3.2.3_继承映射_单表继承_类表继承与具体表继承_Inheritance_Mapping.md)
+
+---
 
 ## 导航
 
-← 上一节：[6.3.1 对象关系行为模式](../6.3.1_对象关系行为模式/index.md)
-↑ 返回上级：[6.3 持久化管理模式](../index.md)
-下一节：[6.3.3 并发与一致性控制](../6.3.3_并发与一致性控制/index.md) →
+⬅️ 上一节：[6.3.1.2 标识映射 (Identity Map) 与延迟加载 (Lazy Load)](../6.3.1_对象关系行为模式/6.3.1.2_标识映射_Identity_Map_与延迟加载_Lazy_Load.md)
+⏺️ 当前节：[6.3.2 对象关系结构映射模式](index.md)
+➡️ 下一节：[6.3.2.1 嵌入值 (Embedded Value)、值对象映射与序列化大对象 (Serialized LOB)](6.3.2.1_嵌入值_Embedded_Value_值对象映射与序列化大对象_Serialized_LOB.md)
+⬆️ 返回上级：[6.3 持久化管理模式](../index.md)

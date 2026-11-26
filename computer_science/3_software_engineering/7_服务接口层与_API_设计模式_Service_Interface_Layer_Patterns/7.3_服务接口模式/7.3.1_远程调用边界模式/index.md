@@ -2,13 +2,17 @@
 
 **介绍**: 减少远程调用次数与数据传输开销。
 
+
 ## 目录
 
-- [7.3.1.1 远程外观 (Remote Facade) 与数据传输对象 (DTO)](7.3.1.1_远程外观与数据传输对象_Remote_Facade_DTO/index.md)
-- [7.3.1.2 数据传输对象装配器 (DTO Assembler)](7.3.1.2_数据传输对象装配器_DTO_Assembler/index.md)
+- [7.3.1.1 远程外观 (Remote Facade) 与数据传输对象 (DTO)](7.3.1.1_远程外观与数据传输对象_Remote_Facade_DTO.md)
+- [7.3.1.2 数据传输对象装配器 (DTO Assembler)](7.3.1.2_数据传输对象装配器_DTO_Assembler.md)
+
+---
 
 ## 导航
 
-← 上一节：[7.2 测试节题目](../../7.2_新加测试节3/index.md)
-↑ 返回上级：[7.2 服务接口模式](../index.md)
-下一节：[7.3.2 API 网关与 BFF 模式](../7.3.2_API_网关与_BFF_模式/index.md) →
+⬅️ 上一节：[7.3 服务接口模式](../index.md)
+⏺️ 当前节：[7.3.1 远程调用边界模式](index.md)
+➡️ 下一节：[7.3.1.1 远程外观 (Remote Facade) 与数据传输对象 (DTO)](7.3.1.1_远程外观与数据传输对象_Remote_Facade_DTO.md)
+⬆️ 返回上级：[7.3 服务接口模式](../index.md)

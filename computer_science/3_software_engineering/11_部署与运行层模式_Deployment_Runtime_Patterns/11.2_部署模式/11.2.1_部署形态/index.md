@@ -2,14 +2,18 @@
 
 **介绍**: 按层次与服务密度选择部署形态。
 
+
 ## 目录
 
-- [11.2.1.1 单层、两层、三层与 N 层部署](11.2.1.1_单层_两层_三层与_N_层部署/index.md)
-- [11.2.1.2 每主机单服务 (Service per Host) 与每主机多服务 (Multiple Services per Host)](11.2.1.2_每主机单服务_Service_per_Host_与每主机多服务_Multiple_Services_per_H/index.md)
-- [11.2.1.3 容器化部署 (Containerized Deployment) 模式：单进程容器与 Pod 组合](11.2.1.3_容器化部署_Containerized_Deployment_模式_单进程容器与_Pod_组合/index.md)
+- [11.2.1.1 单层、两层、三层与 N 层部署](11.2.1.1_单层_两层_三层与_N_层部署.md)
+- [11.2.1.2 每主机单服务 (Service per Host) 与每主机多服务 (Multiple Services per Host)](11.2.1.2_每主机单服务_Service_per_Host_与每主机多服务_Multiple_Services_per_H.md)
+- [11.2.1.3 容器化部署 (Containerized Deployment) 模式：单进程容器与 Pod 组合](11.2.1.3_容器化部署_Containerized_Deployment_模式_单进程容器与_Pod_组合.md)
+
+---
 
 ## 导航
 
-← 上一节：[11.1 部署架构](../../11.1_部署架构/index.md)
-↑ 返回上级：[11.2 部署模式](../index.md)
-下一节：[11.2.2 边车模式族](../11.2.2_边车模式族/index.md) →
+⬅️ 上一节：[11.2 部署模式](../index.md)
+⏺️ 当前节：[11.2.1 部署形态](index.md)
+➡️ 下一节：[11.2.1.1 单层、两层、三层与 N 层部署](11.2.1.1_单层_两层_三层与_N_层部署.md)
+⬆️ 返回上级：[11.2 部署模式](../index.md)

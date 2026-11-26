@@ -2,6 +2,7 @@
 
 **介绍**: 从代码一线的防御性编程、契约式设计、错误管理与并发安全出发，系统掌握经典代码异味 (Code Smells)、设计异味 (Design Smells) 与架构异味 (Architectural Smells) 的全景分类与诊断方法。
 
+
 ## 目录
 
 - [12.1 软件构造与实现质量实践](12.1_软件构造与实现质量实践/index.md)
@@ -9,8 +10,11 @@
 - [12.3 设计异味与组件退化](12.3_设计异味与组件退化/index.md)
 - [12.4 架构异味与系统侵蚀](12.4_架构异味与系统侵蚀/index.md)
 
+---
+
 ## 导航
 
-← 上一节：[11 部署与运行层模式 (Deployment & Runtime Patterns)](../11_部署与运行层模式_Deployment_Runtime_Patterns/index.md)
-↑ 返回上级：[software_engineering_third](../index.md)
-下一节：[13 软件重构、技术债与软件演化](../13_软件重构_技术债与软件演化/index.md) →
+⬅️ 上一节：[11.6.1.5 灾难恢复 (Disaster Recovery)：RTO 与 RPO 指标及灾备演练](../11_部署与运行层模式_Deployment_Runtime_Patterns/11.6_可靠性与可用性架构/11.6.1_高可用架构设计与容灾/11.6.1.5_灾难恢复_Disaster_Recovery_RTO_与_RPO_指标及灾备演练.md)
+⏺️ 当前节：[12 软件构造、代码质量与异味识别](index.md)
+➡️ 下一节：[12.1 软件构造与实现质量实践](12.1_软件构造与实现质量实践/index.md)
+⬆️ 返回上级：[3 software_engineering_third](../contents.md)

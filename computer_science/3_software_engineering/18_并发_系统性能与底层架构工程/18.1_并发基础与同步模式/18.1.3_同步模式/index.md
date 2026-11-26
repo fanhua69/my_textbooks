@@ -2,14 +2,18 @@
 
 **介绍**: 协调线程访问共享状态与相互等待的原语与模式。
 
+
 ## 目录
 
-- [18.1.3.1 互斥锁 (Mutex) 与读写锁 (Reader-Writer Lock)](18.1.3.1_互斥锁_Mutex_与读写锁_Reader-Writer_Lock/index.md)
-- [18.1.3.2 条件变量 (Condition Variable)、信号量 (Semaphore) 与屏障 (Barrier)](18.1.3.2_条件变量_Condition_Variable_信号量_Semaphore_与屏障_Barrier/index.md)
-- [18.1.3.3 监视器 (Monitor) 模式与生产者-消费者 (Producer-Consumer)](18.1.3.3_监视器_Monitor_模式与生产者-消费者_Producer-Consumer/index.md)
+- [18.1.3.1 互斥锁 (Mutex) 与读写锁 (Reader-Writer Lock)](18.1.3.1_互斥锁_Mutex_与读写锁_Reader-Writer_Lock.md)
+- [18.1.3.2 条件变量 (Condition Variable)、信号量 (Semaphore) 与屏障 (Barrier)](18.1.3.2_条件变量_Condition_Variable_信号量_Semaphore_与屏障_Barrier.md)
+- [18.1.3.3 监视器 (Monitor) 模式与生产者-消费者 (Producer-Consumer)](18.1.3.3_监视器_Monitor_模式与生产者-消费者_Producer-Consumer.md)
+
+---
 
 ## 导航
 
-← 上一节：[18.1.2 并发缺陷分类与诊断](../18.1.2_并发缺陷分类与诊断/index.md)
-↑ 返回上级：[18.1 并发基础与同步模式](../index.md)
-下一节：[18.2 硬件亲和性 (Mechanical Sympathy)、内存模型与无锁并发](../../18.2_硬件亲和性_Mechanical_Sympathy_内存模型与无锁并发/index.md) →
+⬅️ 上一节：[18.1.2.3 活锁 (Livelock) 与饥饿 (Starvation)](../18.1.2_并发缺陷分类与诊断/18.1.2.3_活锁_Livelock_与饥饿_Starvation.md)
+⏺️ 当前节：[18.1.3 同步模式](index.md)
+➡️ 下一节：[18.1.3.1 互斥锁 (Mutex) 与读写锁 (Reader-Writer Lock)](18.1.3.1_互斥锁_Mutex_与读写锁_Reader-Writer_Lock.md)
+⬆️ 返回上级：[18.1 并发基础与同步模式](../index.md)

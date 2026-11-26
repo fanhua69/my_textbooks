@@ -2,6 +2,7 @@
 
 **介绍**: 企业应用最核心的一层：系统梳理业务逻辑的组织方式（事务脚本、领域模型、表模块、服务层）、领域逻辑战术构件、DDD 战略设计与业务规则表达模式。
 
+
 ## 目录
 
 - [5.1 业务逻辑层基础](5.1_业务逻辑层基础/index.md)
@@ -10,8 +11,11 @@
 - [5.4 领域驱动设计 (DDD) 战略设计](5.4_领域驱动设计_DDD_战略设计/index.md)
 - [5.5 业务规则模式](5.5_业务规则模式/index.md)
 
+---
+
 ## 导航
 
-← 上一节：[4 表现层与用户界面模式 (Presentation Layer Patterns)](../4_表现层与用户界面模式_Presentation_Layer_Patterns/index.md)
-↑ 返回上级：[software_engineering_third](../index.md)
-下一节：[6 数据访问层与持久化模式 (Data Access Layer Patterns)](../6_数据访问层与持久化模式_Data_Access_Layer_Patterns/index.md) →
+⬅️ 上一节：[4.4.2.4 状态管理模式对比：集中式 Store、原子状态与有限状态机驱动 UI](../4_表现层与用户界面模式_Presentation_Layer_Patterns/4.4_现代_UI_模式/4.4.2_单向数据流与状态管理模式/4.4.2.4_状态管理模式对比_集中式_Store_原子状态与有限状态机驱动_UI.md)
+⏺️ 当前节：[5 业务逻辑层与领域模型模式 (Business Logic Layer Patterns)](index.md)
+➡️ 下一节：[5.1 业务逻辑层基础](5.1_业务逻辑层基础/index.md)
+⬆️ 返回上级：[3 software_engineering_third](../contents.md)

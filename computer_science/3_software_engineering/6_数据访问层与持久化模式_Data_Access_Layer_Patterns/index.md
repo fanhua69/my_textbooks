@@ -2,6 +2,7 @@
 
 **介绍**: 研究业务逻辑如何访问数据库、文件、缓存等持久化资源：数据源访问模式、对象关系映射、查询模式、缓存模式以及数据库架构与数据分布。
 
+
 ## 目录
 
 - [6.1 数据访问基础](6.1_数据访问基础/index.md)
@@ -11,8 +12,11 @@
 - [6.5 缓存模式](6.5_缓存模式/index.md)
 - [6.6 数据库架构与数据分布](6.6_数据库架构与数据分布/index.md)
 
+---
+
 ## 导航
 
-← 上一节：[5 业务逻辑层与领域模型模式 (Business Logic Layer Patterns)](../5_业务逻辑层与领域模型模式_Business_Logic_Layer_Patterns/index.md)
-↑ 返回上级：[software_engineering_third](../index.md)
-下一节：[7 服务接口层与 API 设计模式 (Service Interface Layer Patterns)](../7_服务接口层与_API_设计模式_Service_Interface_Layer_Patterns/index.md) →
+⬅️ 上一节：[5.5.2.2 用 GoF 行为模式承载业务规则：责任链、状态与策略](../5_业务逻辑层与领域模型模式_Business_Logic_Layer_Patterns/5.5_业务规则模式/5.5.2_规则的执行与校验/5.5.2.2_用_GoF_行为模式承载业务规则_责任链_状态与策略.md)
+⏺️ 当前节：[6 数据访问层与持久化模式 (Data Access Layer Patterns)](index.md)
+➡️ 下一节：[6.1 数据访问基础](6.1_数据访问基础/index.md)
+⬆️ 返回上级：[3 software_engineering_third](../contents.md)

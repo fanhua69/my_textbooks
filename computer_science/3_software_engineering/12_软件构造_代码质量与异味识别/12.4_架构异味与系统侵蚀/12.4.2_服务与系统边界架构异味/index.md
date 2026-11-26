@@ -2,14 +2,18 @@
 
 **介绍**: 掌握微服务化改造中最容易踩中的边界划分陷阱。
 
+
 ## 目录
 
-- [12.4.2.1 神级服务 (God Service / God Component)](12.4.2.1_神级服务_God_Service_God_Component/index.md)
-- [12.4.2.2 分布式单体 (Distributed Monolith)](12.4.2.2_分布式单体_Distributed_Monolith/index.md)
-- [12.4.2.3 纳米服务蔓延 (Nanoservices)](12.4.2.3_纳米服务蔓延_Nanoservices/index.md)
+- [12.4.2.1 神级服务 (God Service / God Component)](12.4.2.1_神级服务_God_Service_God_Component.md)
+- [12.4.2.2 分布式单体 (Distributed Monolith)](12.4.2.2_分布式单体_Distributed_Monolith.md)
+- [12.4.2.3 纳米服务蔓延 (Nanoservices)](12.4.2.3_纳米服务蔓延_Nanoservices.md)
+
+---
 
 ## 导航
 
-← 上一节：[12.4.1 宏观架构退化与系统侵蚀](../12.4.1_宏观架构退化与系统侵蚀/index.md)
-↑ 返回上级：[12.4 架构异味与系统侵蚀](../index.md)
-下一节：[12.4.3 通信与数据架构异味](../12.4.3_通信与数据架构异味/index.md) →
+⬅️ 上一节：[12.4.1.5 意外架构 (Accidental Architecture)](../12.4.1_宏观架构退化与系统侵蚀/12.4.1.5_意外架构_Accidental_Architecture.md)
+⏺️ 当前节：[12.4.2 服务与系统边界架构异味](index.md)
+➡️ 下一节：[12.4.2.1 神级服务 (God Service / God Component)](12.4.2.1_神级服务_God_Service_God_Component.md)
+⬆️ 返回上级：[12.4 架构异味与系统侵蚀](../index.md)

@@ -2,16 +2,20 @@
 
 **介绍**: 消除系统单点故障，构建具备多重冗余保护的容灾系统。
 
+
 ## 目录
 
-- [11.6.1.1 无状态服务设计与水平弹性伸缩](11.6.1.1_无状态服务设计与水平弹性伸缩/index.md)
-- [11.6.1.2 冗余部署、故障转移 (Failover) 与脑裂防范](11.6.1.2_冗余部署_故障转移与脑裂防范_Failover/index.md)
-- [11.6.1.3 优雅降级 (Graceful Degradation) 与用户体验兜底](11.6.1.3_优雅降级与用户体验兜底_Graceful_Degradation/index.md)
-- [11.6.1.4 主动-主动 (Active-Active) 与主动-被动 (Active-Passive) 高可用拓扑](11.6.1.4_主动-主动_Active-Active_与主动-被动_Active-Passive_高可用拓扑/index.md)
-- [11.6.1.5 灾难恢复 (Disaster Recovery)：RTO 与 RPO 指标及灾备演练](11.6.1.5_灾难恢复_Disaster_Recovery_RTO_与_RPO_指标及灾备演练/index.md)
+- [11.6.1.1 无状态服务设计与水平弹性伸缩](11.6.1.1_无状态服务设计与水平弹性伸缩.md)
+- [11.6.1.2 冗余部署、故障转移 (Failover) 与脑裂防范](11.6.1.2_冗余部署_故障转移与脑裂防范_Failover.md)
+- [11.6.1.3 优雅降级 (Graceful Degradation) 与用户体验兜底](11.6.1.3_优雅降级与用户体验兜底_Graceful_Degradation.md)
+- [11.6.1.4 主动-主动 (Active-Active) 与主动-被动 (Active-Passive) 高可用拓扑](11.6.1.4_主动-主动_Active-Active_与主动-被动_Active-Passive_高可用拓扑.md)
+- [11.6.1.5 灾难恢复 (Disaster Recovery)：RTO 与 RPO 指标及灾备演练](11.6.1.5_灾难恢复_Disaster_Recovery_RTO_与_RPO_指标及灾备演练.md)
+
+---
 
 ## 导航
 
-← 上一节：[11.5 运行时基础设施](../../11.5_运行时基础设施/index.md)
-↑ 返回上级：[11.6 可靠性与可用性架构](../index.md)
-下一节：[12 软件构造、代码质量与异味识别](../../../12_软件构造_代码质量与异味识别/index.md) →
+⬅️ 上一节：[11.6 可靠性与可用性架构](../index.md)
+⏺️ 当前节：[11.6.1 高可用架构设计与容灾](index.md)
+➡️ 下一节：[11.6.1.1 无状态服务设计与水平弹性伸缩](11.6.1.1_无状态服务设计与水平弹性伸缩.md)
+⬆️ 返回上级：[11.6 可靠性与可用性架构](../index.md)

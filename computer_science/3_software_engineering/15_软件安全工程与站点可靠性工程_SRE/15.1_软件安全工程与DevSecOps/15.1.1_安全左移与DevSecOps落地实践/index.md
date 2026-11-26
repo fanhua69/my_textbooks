@@ -2,13 +2,17 @@
 
 **介绍**: 将安全责任从后期审计前移到每个开发者的日常工作流中。
 
+
 ## 目录
 
-- [15.1.1.1 安全左移哲学（Shift-Left Security）](15.1.1.1_安全左移哲学_Shift-Left_Security/index.md)
-- [15.1.1.2 DevSecOps 文化与安全冠军网络](15.1.1.2_文化与安全冠军网络_DevSecOps/index.md)
+- [15.1.1.1 安全左移哲学（Shift-Left Security）](15.1.1.1_安全左移哲学_Shift-Left_Security.md)
+- [15.1.1.2 DevSecOps 文化与安全冠军网络](15.1.1.2_文化与安全冠军网络_DevSecOps.md)
+
+---
 
 ## 导航
 
-← 上一节：[14 质量控制、测试工程与质量保证](../../../14_质量控制_测试工程与质量保证/index.md)
-↑ 返回上级：[15.1 软件安全工程与 DevSecOps](../index.md)
-下一节：[15.1.2 威胁建模与安全设计原则](../15.1.2_威胁建模与安全设计原则/index.md) →
+⬅️ 上一节：[15.1 软件安全工程与 DevSecOps](../index.md)
+⏺️ 当前节：[15.1.1 安全左移与 DevSecOps 落地实践](index.md)
+➡️ 下一节：[15.1.1.1 安全左移哲学（Shift-Left Security）](15.1.1.1_安全左移哲学_Shift-Left_Security.md)
+⬆️ 返回上级：[15.1 软件安全工程与 DevSecOps](../index.md)
