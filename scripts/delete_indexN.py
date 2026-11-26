@@ -2,10 +2,10 @@
 # -*- coding: utf-8 -*-
 
 """
-Recursively delete all index<digits>.md files (index1.md, index2.md,
-index01.md, ...) under the target directory and all its subdirectories.
+Recursively delete all _index<digits>.md files
+under the target directory and all its subdirectories.
 
-index.md is never touched.
+_index.md is never touched.
 
 Usage:
     python delete_indexN.py TARGET_DIR            # delete files
@@ -18,7 +18,7 @@ import sys
 from pathlib import Path
 
 # Match index<digits>.md, e.g. index1.md, index2.md, index01.md.
-PATTERN = re.compile(r"^index\d+\.md$")
+PATTERN = re.compile(r"^_index\d+\.md$")
 
 
 def main():
@@ -41,7 +41,7 @@ def main():
     print(f"Target: {root}\n")
 
     targets = sorted(
-        p for p in root.rglob("index*.md")
+        p for p in root.rglob("*index*.md")
         if p.is_file() and PATTERN.match(p.name)
     )
 

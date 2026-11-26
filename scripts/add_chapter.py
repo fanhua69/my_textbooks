@@ -76,10 +76,10 @@ def add_chapter(
         chapter_name=clean_chapter,
         parent_num=parent_num,
     )
-    index_path = new_dir / "index.md"
+    index_path = new_dir / "_index.md"
     if dry_run:
         print(f"[DRY] 将写入: {index_path}")
-        print("--- index.md 预览 ---")
+        print("--- _index.md 预览 ---")
         print(index_content)
         print("---------------------")
     else:

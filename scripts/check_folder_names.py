@@ -29,7 +29,7 @@ from pathlib import Path
 
 
 NUMBERED_NAME_RE = re.compile(r"^(\d+(?:\.\d+)*)[_\s]+(.+)$")
-CONTAINER_FILES = {"index.md", "contents.md"}
+CONTAINER_FILES = {"_index.md", "_contents.md"}
 
 
 def number_parts(number: str) -> list[int]:
@@ -61,12 +61,12 @@ def discover_book_roots(current_dir: Path, home_dir: Path) -> list[Path]:
     current_dir = current_dir.resolve()
     home_dir = home_dir.resolve()
 
-    if (current_dir / "contents.md").is_file():
+    if (current_dir / "_contents.md").is_file():
         return [current_dir]
 
     if current_dir == home_dir or home_dir in current_dir.parents:
         for ancestor in current_dir.parents:
-            if (ancestor / "contents.md").is_file():
+            if (ancestor / "_contents.md").is_file():
                 return [ancestor]
             if ancestor == home_dir:
                 break
@@ -82,7 +82,7 @@ def discover_book_roots(current_dir: Path, home_dir: Path) -> list[Path]:
             for name in subdirectories
             if not (directory_path / name).is_symlink()
         ]
-        if "contents.md" in files and (directory_path / "contents.md").is_file():
+        if "_contents.md" in files and (directory_path / "_contents.md").is_file():
             roots.append(directory_path)
 
     return sorted(roots)
@@ -193,7 +193,7 @@ def main() -> int:
     )
     parser.add_argument(
         "--root",
-        help="指定检查根目录；省略时自动根据 contents.md 查找书籍根目录",
+        help="指定检查根目录；省略时自动根据 _contents.md 查找书籍根目录",
     )
     args = parser.parse_args()
 
@@ -214,7 +214,7 @@ def main() -> int:
 
     if not roots:
         print(
-            f"错误: 当前目录及其上级目录、当前目录的子目录中均未找到 contents.md",
+            f"错误: 当前目录及其上级目录、当前目录的子目录中均未找到 _contents.md",
             file=sys.stderr,
         )
         return 1

@@ -8,11 +8,11 @@ Rules:
 1. Match filename with directory name first (exact match).
 2. If no exact match, remove leading section numbers (e.g. 1.2.3_)
    from both names and compare again.
-3. Copy the source file into the matched directory as index.md.
-4. If index.md (or index2.md, index3.md, ...) already exists:
+3. Copy the source file into the matched directory as _index.md.
+4. If _index.md (or _index2.md, _index3.md, ...) already exists:
    - If any of them has identical content to the source file: skip copying.
-   - Otherwise: save the source file as the next available indexN.md
-     (index2.md, index3.md, ...). Existing files are never overwritten.
+   - Otherwise: save the source file as the next available _indexN.md
+     (_index2.md, _index3.md, ...). Existing files are never overwritten.
 5. Skip files whose matching directory cannot be found.
 
 Usage:
@@ -33,8 +33,8 @@ from pathlib import Path
 # 1.2.3_
 SECTION_PREFIX = re.compile(r"^\d+(?:\.\d+)*_")
 
-# Match index.md, index2.md, index3.md, ...
-INDEX_FILE = re.compile(r"^index(\d*)\.md$")
+# Match _index.md, _index2.md, _index3.md, ...
+INDEX_FILE = re.compile(r"^_index(\d*)\.md$")
 
 
 def normalize_name(name: str) -> str:
@@ -96,18 +96,17 @@ def get_destination_file(target_dir: Path, source_file: Path):
     Determine the destination file.
 
     Returns a tuple (destination, duplicate_of):
-    - (index.md, None)       : no index.md yet, copy as index.md
-    - (indexN.md, None)      : content differs, copy as next free indexN.md
+    - (_index.md, None)      : no _index.md yet, copy as _index.md
+    - (_indexN.md, None)     : content differs, copy as next free _indexN.md
     - (None, existing_file)  : identical content already exists, skip copying
     """
 
-    index_file = target_dir / "index.md"
-
-    # No existing index.md.
+    index_file = target_dir / "_index.md"
+    # No existing _index.md.
     if not index_file.exists():
         return index_file, None
 
-    # Collect all existing index.md / indexN.md files.
+    # Collect all existing _index.md / _indexN.md files.
     existing = {}
     for p in target_dir.iterdir():
         m = INDEX_FILE.match(p.name)
@@ -120,12 +119,12 @@ def get_destination_file(target_dir: Path, source_file: Path):
         if existing[number].read_bytes() == source_bytes:
             return None, existing[number]
 
-    # Otherwise use the next available number (index2.md, index3.md, ...).
+    # Otherwise use the next available number (_index2.md, _index3.md, ...).
     number = 2
     while number in existing:
         number += 1
 
-    return target_dir / f"index{number}.md", None
+    return target_dir / f"_index{number}.md", None
 
 
 def restore_index_files(source_dir: Path, target_dir: Path):
@@ -193,7 +192,7 @@ def restore_index_files(source_dir: Path, target_dir: Path):
         # Copy file.
         shutil.copy2(source_file, destination)
 
-        if destination.name == "index.md":
+        if destination.name == "_index.md":
             print(f"[COPY] {source_file.name} -> {destination}")
             copied += 1
         else:
@@ -201,8 +200,8 @@ def restore_index_files(source_dir: Path, target_dir: Path):
             renamed += 1
 
     print("\n========== Summary ==========")
-    print(f"New index.md:          {copied}")
-    print(f"Saved as indexN.md:    {renamed}")
+    print(f"New _index.md:         {copied}")
+    print(f"Saved as _indexN.md:   {renamed}")
     print(f"Identical (not copied): {identical}")
     print(f"Skipped (no match):    {skipped}")
     print("=============================")

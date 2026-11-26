@@ -38,10 +38,13 @@ class Section:
     def index_path(self) -> Path:
         if self.markdown_path is not None:
             return self.markdown_path
-        contents = self.directory / "contents.md"
+        index = self.directory / "_index.md"
+        if index.is_file():
+            return index
+        contents = self.directory / "_contents.md"
         if contents.is_file():
             return contents
-        return self.directory / "index.md"
+        return self.directory / "_index.md"
 
     @property
     def clean_name(self) -> str:
@@ -99,7 +102,7 @@ def discover(root_path: Path) -> Section:
             elif (
                 entry.is_file()
                 and entry.suffix.lower() == ".md"
-                and entry.name.lower() not in {"index.md", "contents.md"}
+                and entry.name.lower() not in {"_index.md", "_contents.md"}
             ):
                 section.children.append(
                     Section(
@@ -161,6 +164,23 @@ def relative_link(source: Section, target: Section) -> str:
     if any(char in rel for char in " ()"):
         return quote(rel, safe="/-._~")
     return rel
+
+
+def sibling_section(section: Section, offset: int) -> Section | None:
+    if section.parent is None:
+        return None
+
+    siblings = sorted(section.parent.children, key=lambda sibling: sort_key(sibling.name))
+    position = next(
+        (index for index, sibling in enumerate(siblings) if sibling is section),
+        -1,
+    )
+    if position < 0:
+        return None
+    target_position = position + offset
+    if target_position < 0 or target_position >= len(siblings):
+        return None
+    return siblings[target_position]
 
 
 def strip_generated_sections(text: str) -> str:
@@ -241,9 +261,8 @@ def rebuild_markdown(section: Section, root: Section) -> tuple[str, bool]:
         lines.append("")
 
     flat = list(iter_sections(root))
-    position = flat.index(section)
-    previous = flat[position - 1] if position > 0 else None
-    following = flat[position + 1] if position + 1 < len(flat) else None
+    previous = sibling_section(section, -1)
+    following = sibling_section(section, 1)
     parent = section.parent
 
     titles = {id(node): normalized_title(node) for node in flat}
@@ -263,7 +282,7 @@ def rebuild_markdown(section: Section, root: Section) -> tuple[str, bool]:
             f"({relative_link(section, previous)})"
         )
     else:
-        lines.append("⬅️ 上一节：无（这是教材的第一页）")
+        lines.append("⬅️ 上一节：无（这是本目录的第一页）")
 
     lines.append(f"⏺️ 当前节：[{titles[id(section)]}]({relative_link(section, section)})")
 
@@ -273,7 +292,7 @@ def rebuild_markdown(section: Section, root: Section) -> tuple[str, bool]:
             f"({relative_link(section, following)})"
         )
     else:
-        lines.append("➡️ 下一节：无（这是教材的最后一页）")
+        lines.append("➡️ 下一节：无（这是本目录的最后一页）")
 
     if parent is not None:
         lines.append(
@@ -303,11 +322,6 @@ def main() -> int:
         default=".",
         help="教材根目录，默认当前目录",
     )
-    parser.add_argument(
-        "--check",
-        action="store_true",
-        help="只报告需要重建的文件，不写入",
-    )
     args = parser.parse_args()
 
     root_path = Path(args.root).resolve()
@@ -326,17 +340,12 @@ def main() -> int:
             continue
         changed_count += 1
         print(display)
-        if not args.check:
-            section.index_path.write_text(rebuilt, encoding="utf-8")
+        section.index_path.write_text(rebuilt, encoding="utf-8")
 
     print(
         f"\n共检查 {len(sections)} 个 Markdown 文件："
         f"需要重建 {changed_count} 个"
     )
-    if args.check:
-        print("未修改文件（--check）")
-        return 1 if changed_count else 0
-
     print("已统一重建目录和前后上级导航")
     return 0
 

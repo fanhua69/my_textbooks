@@ -5,8 +5,8 @@
 """
 Recursively collect all files from a textbook directory.
 
-index.md files are renamed with their directory section number:
-    1.2.2/index.md -> 1.2.2_index.md
+_index.md files are renamed with their directory section number:
+1.2.2/_index.md -> 1.2.2_index.md
 
 Other files are prefixed with the same section number when they are
 inside a numbered directory:
@@ -63,7 +63,7 @@ def collect_index_files(source_dir: Path, dest_dir: Path):
 
         if src.parent == source_dir:
             target_name = src.name
-        elif src.name.lower() == "index.md":
+        elif src.name.lower() == "_index.md":
             if section_number:
                 target_name = f"{section_number}_index.md"
             else:

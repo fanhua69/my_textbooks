@@ -222,7 +222,7 @@ def build_index_md(
 ) -> str:
     heading_title = f"{number} {chapter_name}"
     intro_line = f"介绍：{chapter_name}"
-    parent_link = "../index.md" if parent_num else "(教材根目录)"
+    parent_link = "../_index.md" if parent_num else "(教材根目录)"
     return f"""# {heading_title}
 
 {intro_line}
@@ -324,10 +324,10 @@ def insert_chapter(
         parent_num=p_formatted,
     )
 
-    index_path = new_path / "index.md"
+    index_path = new_path / "_index.md"
     if dry_run:
         print(f"[DRY] 将写入: {index_path}")
-        print("--- index.md 预览 ---")
+        print("--- _index.md 预览 ---")
         print(index_content)
         print("---------------------")
     else:
