@@ -5,11 +5,11 @@
 
 ## 目录
 
-- [1 architecture-foundations](1_architecture-foundations/_index.md)
-- [2 in-memory-data-structures](2_in-memory-data-structures/_index.md)
-- [3 high-concurrency-synchronization](3_high-concurrency-synchronization/_index.md)
-- [4 large-scale-data-synchronization](4_large-scale-data-synchronization/_index.md)
-- [5 capstone-entitlement-engine](5_capstone-entitlement-engine/_index.md)
+- [1 architecture foundations](1_architecture-foundations/_index.md)
+- [2 in memory data structures](2_in-memory-data-structures/_index.md)
+- [3 high concurrency synchronization](3_high-concurrency-synchronization/_index.md)
+- [4 large scale data synchronization](4_large-scale-data-synchronization/_index.md)
+- [5 capstone entitlement engine](5_capstone-entitlement-engine/_index.md)
 
 ---
 

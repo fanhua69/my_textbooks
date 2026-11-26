@@ -148,15 +148,24 @@ def title_of(section: Section) -> str:
     return raw_title or section.clean_name
 
 
+def display_title_text(title: str) -> str:
+    words = title.split("-")
+    if len(words) > 1 and all(word.strip() for word in words) and not any(
+        char.isspace() for char in title
+    ):
+        return " ".join(words)
+    return title
+
+
 def normalized_title(section: Section) -> str:
     title = title_of(section)
     number = section.section_number
     if number:
         title = re.sub(r"^\d+(?:\.\d+)*[\s._-]+", "", title).strip()
-        return f"{number} {title}".strip()
+        return f"{number} {display_title_text(title)}".strip()
 
     title = re.sub(r"^\d+(?:\.\d+)*[\s._-]+", "", title).strip()
-    return title
+    return display_title_text(title)
 
 
 def normalized_intro(text: str) -> str:

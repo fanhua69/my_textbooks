@@ -1,17 +1,17 @@
-# 2.2 reverse-index-invalidation
+# 2.2 reverse index invalidation
 
 **介绍**: reverse-index-invalidation
 
 
 ## 目录
 
-- [2.2.1 entitlement-to-users-mapping](2.2.1_entitlement-to-users-mapping.md)
+- [2.2.1 entitlement to users mapping](2.2.1_entitlement-to-users-mapping.md)
 
 ---
 
 ## 导航
 
-⬅️ 上一节：[2.1 indexing-strategies-2m-records](../2.1_indexing-strategies-2m-records/_index.md)
-⏺️ 当前节：[2.2 reverse-index-invalidation](_index.md)
-➡️ 下一节：[2.3 hardware-aware-optimizations](../2.3_hardware-aware-optimizations/_index.md)
-⬆️ 返回上级：[2 in-memory-data-structures](../_index.md)
+⬅️ 上一节：[2.1 indexing strategies 2m records](../2.1_indexing-strategies-2m-records/_index.md)
+⏺️ 当前节：[2.2 reverse index invalidation](_index.md)
+➡️ 下一节：[2.3 hardware aware optimizations](../2.3_hardware-aware-optimizations/_index.md)
+⬆️ 返回上级：[2 in memory data structures](../_index.md)
