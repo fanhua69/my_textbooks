@@ -20,9 +20,9 @@ import shutil
 import subprocess
 import sys
 from pathlib import Path
-from typing import List, Tuple
+from typing import Tuple
 
-from book_paths import find_book_root
+from book_paths import find_book_root, find_section_entries
 
 
 # ---------------------------------------------------------------------------
@@ -44,28 +44,12 @@ def parse_slug(slug: str) -> Tuple[str, str]:
     return m.group(1), m.group(2)
 
 
-def number_parts(num: str) -> List[int]:
-    return [int(x) for x in num.split(".")]
-
-
 def find_section_dir(textbook_root: Path, target_num: str) -> Path:
-    target_parts = number_parts(target_num)
-    matches: List[Path] = []
-
-    def visit(parent: Path, depth: int) -> None:
-        expected_parts = target_parts[: depth + 1]
-        for child in parent.iterdir():
-            if not child.is_dir() or child.is_symlink():
-                continue
-            match = NUMBER_RE.match(child.name)
-            if match is None or number_parts(match.group(1)) != expected_parts:
-                continue
-            if depth == len(target_parts) - 1:
-                matches.append(child)
-            else:
-                visit(child, depth + 1)
-
-    visit(textbook_root, 0)
+    matches = [
+        path
+        for path, kind in find_section_entries(textbook_root, target_num)
+        if kind == "directory"
+    ]
     if not matches:
         raise FileNotFoundError(
             f"在教材根目录 {textbook_root} 下找不到编号为 {target_num} 的目录。"

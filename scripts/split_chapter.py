@@ -7,7 +7,7 @@ import sys
 from dataclasses import dataclass
 from pathlib import Path
 
-from book_paths import find_book_root
+from book_paths import find_book_root, find_section_entries
 from index_paths import index_filename
 
 
@@ -20,24 +20,12 @@ class SectionSpan:
 
 
 def find_chapter_dir(root: Path, chapter_id: str) -> Path:
-    start = root.resolve()
-    book_root = find_book_root(start)
-    prefix = f"{chapter_id}_"
-    matches: list[Path] = []
-
-    if start.is_dir() and (start.name.strip() == chapter_id or start.name.strip().startswith(prefix)):
-        matches.append(start)
-
-    for p in book_root.rglob("*"):
-        if not p.is_dir():
-            continue
-        clean_name = p.name.strip()
-        if clean_name.startswith(prefix) or clean_name == chapter_id:
-            matches.append(p)
-
-    matches = list(dict.fromkeys(matches))
-
-    matches.sort(key=lambda p: str(p))
+    book_root = find_book_root(root)
+    matches = [
+        path
+        for path, kind in find_section_entries(root, chapter_id)
+        if kind == "directory"
+    ]
     if not matches:
         raise FileNotFoundError(
             f"错误: 在书籍根目录 '{book_root}' 下未找到以 '{chapter_id}_' 开头的章节目录"
@@ -51,28 +39,8 @@ def find_chapter_dir(root: Path, chapter_id: str) -> Path:
 
 def find_chapter_entry(root: Path, chapter_id: str) -> tuple[Path, str]:
     """Return the matched directory or Markdown file and its kind."""
-    start = root.resolve()
-    book_root = find_book_root(start)
-    prefix = f"{chapter_id}_"
-    matches: list[tuple[Path, str]] = []
-
-    candidates = [start] if start.exists() else []
-    if start.is_dir():
-        candidates.extend(p for p in book_root.rglob("*") if p.is_dir())
-    candidates.extend(p for p in book_root.rglob("*") if p.is_file())
-
-    for path in candidates:
-        if path.is_dir():
-            clean_name = path.name.strip()
-            if clean_name == chapter_id or clean_name.startswith(prefix):
-                matches.append((path, "directory"))
-        elif path.is_file() and path.suffix.lower() == ".md":
-            stem = path.stem.strip()
-            if stem == chapter_id or stem.startswith(prefix):
-                matches.append((path, "file"))
-
-    matches = list(dict.fromkeys(matches))
-    matches.sort(key=lambda item: (item[1], str(item[0])))
+    book_root = find_book_root(root)
+    matches = find_section_entries(root, chapter_id)
     if not matches:
         raise FileNotFoundError(
             f"错误: 在书籍根目录 '{book_root}' 下未找到以 '{chapter_id}' 对应的章节目录或 Markdown 文件"

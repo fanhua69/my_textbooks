@@ -3,7 +3,11 @@
 from __future__ import annotations
 
 import os
+import re
 from pathlib import Path
+
+
+SECTION_NUMBER_RE = re.compile(r"^(\d+(?:\.\d+)*)(?:_|$)")
 
 
 def find_book_root(start: Path) -> Path:
@@ -23,6 +27,35 @@ def find_book_root(start: Path) -> Path:
     raise FileNotFoundError(
         f"从当前目录向上至 home 目录未找到包含 contents.md 的教材根目录: {start}"
     )
+
+
+def find_section_entries(start: Path, section_num: str) -> list[tuple[Path, str]]:
+    """Find matching section directories and Markdown files under the containing book."""
+    book_root = find_book_root(start)
+    number_match = re.fullmatch(r"\d+(?:\.\d+)*", section_num.strip())
+    if number_match is None:
+        return []
+    expected_number = tuple(int(part) for part in section_num.strip().split("."))
+    matches: list[tuple[Path, str]] = []
+
+    for path in book_root.rglob("*"):
+        if path.is_dir():
+            kind = "directory"
+            name = path.name.strip()
+        elif path.is_file() and path.suffix.lower() == ".md":
+            kind = "file"
+            name = path.stem.strip()
+        else:
+            continue
+
+        match = SECTION_NUMBER_RE.match(name)
+        if match is None:
+            continue
+        number = tuple(int(part) for part in match.group(1).split("."))
+        if number == expected_number:
+            matches.append((path, kind))
+
+    return sorted(matches, key=lambda item: (item[1], str(item[0])))
 
 
 def discover_book_roots(start: Path) -> list[Path]:

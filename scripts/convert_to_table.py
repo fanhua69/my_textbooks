@@ -12,36 +12,25 @@ import argparse
 import sys
 from pathlib import Path
 
-from book_paths import find_book_root
+from book_paths import find_book_root, find_section_entries
 from index_paths import index_filename
 
 
 def find_chapter_markdown(start: Path, section_num: str) -> Path:
-    start = start.resolve()
-    book_root = find_book_root(start)
-    prefix = f"{section_num}_"
+    entries = find_section_entries(start, section_num)
     matches: list[tuple[Path, str]] = []
 
-    candidates: list[Path] = [start] if start.exists() else []
-    if start.is_dir():
-        candidates.extend(p for p in book_root.rglob("*") if p.is_dir())
-    candidates.extend(p for p in book_root.rglob("*") if p.is_file())
+    for path, kind in entries:
+        if kind == "directory":
+            index_path = path / index_filename(path)
+            if index_path.is_file():
+                matches.append((index_path, kind))
+        else:
+            matches.append((path, kind))
 
-    for path in candidates:
-        if path.is_dir():
-            name = path.name.strip()
-            if name == section_num or name.startswith(prefix):
-                index_path = path / index_filename(path)
-                if index_path.is_file():
-                    matches.append((index_path, "directory"))
-        elif path.is_file() and path.suffix.lower() == ".md":
-            stem = path.stem.strip()
-            if stem == section_num or stem.startswith(prefix):
-                matches.append((path, "file"))
-
-    matches = list(dict.fromkeys(matches))
     matches.sort(key=lambda item: (item[1], str(item[0])))
     if not matches:
+        book_root = find_book_root(start)
         raise FileNotFoundError(
             f"在书籍根目录 '{book_root}' 下未找到节号为 '{section_num}' 的 Markdown 文件"
         )

@@ -89,8 +89,7 @@ def collect_renames(root: Path) -> list[tuple[Path, Path]]:
 
         for index, entry in enumerate(ordered, start=1):
             _, suffix = parse_directory(entry)
-            if entry.is_dir():
-                suffix = suffix.replace(" ", "_")
+            suffix = suffix.replace(" ", "_")
             if parent_number:
                 target_number = f"{parent_number}.{index:0{number_width}d}"
             else:

@@ -20,6 +20,8 @@ import shutil
 import sys
 from pathlib import Path
 
+from book_paths import find_section_entries
+
 
 NUMBERED_DIR_RE = re.compile(r"^(\d+(?:\.\d+)*)_(.+)$")
 NUMBER_RE = re.compile(r"^\d+(?:\.\d+)*$")
@@ -88,15 +90,11 @@ def number_parts(number: str) -> list[int]:
 
 
 def find_chapter(root: Path, number: str) -> Path:
-    matches = []
-    for path in root.rglob("*"):
-        if not path.is_dir():
-            continue
-        match = NUMBERED_DIR_RE.match(path.name)
-        if match and match.group(1) == number:
-            matches.append(path)
-
-    matches.sort(key=lambda path: str(path))
+    matches = [
+        path
+        for path, kind in find_section_entries(root, number)
+        if kind == "directory"
+    ]
     if not matches:
         raise FileNotFoundError(f"找不到编号为 {number} 的章节目录")
     if len(matches) > 1:
