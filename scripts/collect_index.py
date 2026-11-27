@@ -5,8 +5,8 @@
 """
 Recursively collect all files from a textbook directory.
 
-_index.md files are renamed with their directory section number:
-1.2.2/_index.md -> 1.2.2_index.md
+Index marker files retain their numbered directory index name:
+2.1_data/2.1.0_index.md -> 2.1.0_index.md
 
 Other files are prefixed with the same section number when they are
 inside a numbered directory:
@@ -21,6 +21,8 @@ import shutil
 import sys
 from pathlib import Path
 import re
+
+from index_paths import index_filename, index_marker_parts, is_index_marker_name
 
 
 SECTION_PREFIX = re.compile(r"^(\d+(?:\.\d+)*)[_\s]+")
@@ -61,13 +63,14 @@ def collect_index_files(source_dir: Path, dest_dir: Path):
     for src in sorted(source_files, key=lambda p: p.as_posix()):
         section_number = get_section_number(src.parent, source_dir)
 
-        if src.parent == source_dir:
+        if is_index_marker_name(src.name):
+            marker_parts = index_marker_parts(src.name)
+            target_name = index_filename(
+                src.parent,
+                marker_parts[1] if marker_parts is not None else 1,
+            )
+        elif src.parent == source_dir:
             target_name = src.name
-        elif src.name.lower() == "_index.md":
-            if section_number:
-                target_name = f"{section_number}_index.md"
-            else:
-                target_name = f"{src.parent.name}_index.md"
         elif section_number:
             target_name = f"{section_number}_{src.name}"
         else:

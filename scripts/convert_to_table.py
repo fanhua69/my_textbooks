@@ -12,13 +12,16 @@ import argparse
 import sys
 from pathlib import Path
 
+from index_paths import index_filename
+
+
 def find_book_root(start: Path) -> Path:
     current = start.resolve()
     if not current.is_dir():
         current = current.parent
 
     while True:
-        if (current / "_contents.md").is_file():
+        if (current / "contents.md").is_file():
             return current
         if current.parent == current:
             return start.resolve() if start.resolve().is_dir() else start.resolve().parent
@@ -40,7 +43,7 @@ def find_chapter_markdown(start: Path, section_num: str) -> Path:
         if path.is_dir():
             name = path.name.strip()
             if name == section_num or name.startswith(prefix):
-                index_path = path / "_index.md"
+                index_path = path / index_filename(path)
                 if index_path.is_file():
                     matches.append((index_path, "directory"))
         elif path.is_file() and path.suffix.lower() == ".md":

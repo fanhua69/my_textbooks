@@ -7,6 +7,8 @@ import sys
 from dataclasses import dataclass
 from pathlib import Path
 
+from index_paths import index_filename
+
 
 @dataclass
 class SectionSpan:
@@ -22,7 +24,7 @@ def find_book_root(start: Path) -> Path:
         current = current.parent
 
     while True:
-        if (current / "_contents.md").is_file():
+        if (current / "contents.md").is_file():
             return current
         if current.parent == current:
             return start.resolve() if start.resolve().is_dir() else start.resolve().parent
@@ -230,7 +232,9 @@ def build_links_block(entries: list[tuple[str, str, str]]) -> str:
     out_lines = ["## 小节索引", ""]
     for sub_id, display_title, sub_dir_name in entries:
         encoded_dir = sub_dir_name.replace(" ", "%20")
-        out_lines.append(f"- [{sub_id} {display_title}](./{encoded_dir}/_index.md)")
+        out_lines.append(
+            f"- [{sub_id} {display_title}](./{encoded_dir}/{index_filename(sub_dir_name)})"
+        )
     return "\n".join(out_lines)
 
 
@@ -266,8 +270,8 @@ def split_directory_chapter(
     force: bool,
     keep_source: bool,
 ) -> tuple[bool, Path]:
-    """Split a directory chapter's _index.md directly into sibling Markdown files."""
-    index_file = target_dir / "_index.md"
+    """Split a directory chapter's numbered index file into sibling Markdown files."""
+    index_file = target_dir / index_filename(target_dir)
     if not index_file.is_file():
         raise FileNotFoundError(f"错误: 未找到文件 '{index_file}'")
 
@@ -281,16 +285,7 @@ def split_directory_chapter(
         removed_dir = book_root / "removed"
         removed_dir.mkdir(parents=True, exist_ok=True)
 
-        directory_suffix = re.sub(
-            r"^\d+(?:\.\d+)*[_\s]+",
-            "",
-            target_dir.name,
-        ).strip()
-        archived_name = (
-            f"{chapter_id}_{directory_suffix}_index.md"
-            if directory_suffix
-            else f"{chapter_id}_index.md"
-        )
+        archived_name = index_filename(target_dir)
         archived_file = removed_dir / archived_name
         if archived_file.exists() and not force:
             print(f"      removed目录中已存在归档文件（使用 --force 覆盖）: {archived_file}")
@@ -332,14 +327,16 @@ def split_directory_chapter(
 
     updated_index = update_parent_index_with_files(content, spans, link_entries)
     if dry_run:
-        print("\n(--dry-run 模式：未写入任何文件，预览 _index.md 如下)")
+        print(
+            f"\n(--dry-run 模式：未写入任何文件，预览 {index_file.name} 如下)"
+        )
         print("---")
         print(updated_index)
         return True, index_file
 
     if not keep_source:
         index_file.write_text(updated_index, encoding="utf-8")
-        print(f"\n已更新目录 _index.md 并移除被拆分片段: {index_file}")
+        print(f"\n已更新目录索引并移除被拆分片段: {index_file}")
     else:
         print("\n(--keep-source 模式：未修改索引文件)")
     return True, index_file
@@ -358,8 +355,8 @@ def split_file_chapter(
     print(f"新建目录: {target_dir}")
 
     if dry_run:
-        new_index = target_dir / "_index.md"
-        print(f"  [{target_dir.name}/_index.md]")
+        new_index = target_dir / index_filename(target_dir)
+        print(f"  [{new_index}]")
         content = source_file.read_text(encoding="utf-8")
         spans = split_sections_with_spans(content)
         if not spans:
@@ -368,9 +365,11 @@ def split_file_chapter(
         return split_directory_dry_run(target_dir, chapter_id, spans)
 
     target_dir.mkdir(parents=True, exist_ok=True)
-    index_file = target_dir / "_index.md"
+    index_file = target_dir / index_filename(target_dir)
     if index_file.exists() and not force:
-        raise FileExistsError(f"目标 _index.md 已存在（使用 --force 覆盖）: {index_file}")
+        raise FileExistsError(
+            f"目标 {index_file.name} 已存在（使用 --force 覆盖）: {index_file}"
+        )
 
     shutil.move(str(source_file), str(index_file))
     print(f"已移动原文件并重命名为: {index_file}")
@@ -418,12 +417,12 @@ def update_parent_index_with_files(
 
 def main() -> int:
     parser = argparse.ArgumentParser(
-        description="按 '##' 二级标题拆分章节目录的 _index.md，或拆分章节 Markdown 文件到同名目录"
+        description="按 '##' 二级标题拆分章节目录的编号索引文件，或拆分章节 Markdown 文件到同名目录"
     )
     parser.add_argument("chapter_id", help="章节号，例如 1.1.1 或 2.1.4")
     parser.add_argument("--dry-run", action="store_true", help="仅预览将创建的目录与文件，不实际写入")
-    parser.add_argument("--force", action="store_true", help="若目标 _index.md 已存在则覆盖")
-    parser.add_argument("--keep-source", action="store_true", help="保留父 _index.md 中已被拆分的 '##' 片段")
+    parser.add_argument("--force", action="store_true", help="若目标编号索引文件已存在则覆盖")
+    parser.add_argument("--keep-source", action="store_true", help="保留父索引文件中已被拆分的 '##' 片段")
     parser.add_argument("--root", default=".", help="递归查找章节目录的根路径（默认: 当前目录）")
 
     args = parser.parse_args()

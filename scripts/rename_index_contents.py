@@ -1,17 +1,20 @@
 #!/usr/bin/env python3
-"""Rename textbook index.md and contents.md files to underscore-prefixed names."""
+"""Rename legacy index files to numbered markers and normalize contents names."""
 
 from __future__ import annotations
 
 import argparse
 import os
+import re
 import sys
 from pathlib import Path
 
+from index_paths import index_filename
 
-RENAMES = {
-    "index.md": "_index.md",
-    "contents.md": "_contents.md",
+INDEX_SOURCE = re.compile(r"^(?:~|_)?index(\d*)\.md$", re.IGNORECASE)
+CONTENTS_RENAMES = {
+    "~contents.md": "contents.md",
+    "_contents.md": "contents.md",
 }
 
 
@@ -33,9 +36,14 @@ def collect_renames(root: Path) -> list[tuple[Path, Path]]:
             if not (Path(directory) / name).is_symlink()
         ]
         for filename in filenames:
-            target_name = RENAMES.get(filename)
-            if target_name is None:
-                continue
+            index_match = INDEX_SOURCE.fullmatch(filename)
+            if index_match is not None:
+                duplicate = int(index_match.group(1) or 1)
+                target_name = index_filename(Path(directory), duplicate)
+            else:
+                target_name = CONTENTS_RENAMES.get(filename)
+                if target_name is None:
+                    continue
             source = Path(directory) / filename
             renames.append((source, source.with_name(target_name)))
 
@@ -85,7 +93,7 @@ def rename_index_contents(root: Path, dry_run: bool = False) -> int:
 
 def main() -> int:
     parser = argparse.ArgumentParser(
-        description="递归将 index.md 和 contents.md 重命名为 _index.md 和 _contents.md",
+        description="递归将索引文件重命名为目录编号对应的 .0_index.md",
     )
     parser.add_argument(
         "root",

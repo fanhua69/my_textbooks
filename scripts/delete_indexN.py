@@ -2,10 +2,10 @@
 # -*- coding: utf-8 -*-
 
 """
-Recursively delete all _index<digits>.md files
+Recursively delete all numbered 0_index<digits>.md files
 under the target directory and all its subdirectories.
 
-_index.md is never touched.
+The primary <section>.0_index.md file in each directory is never touched.
 
 Usage:
     python delete_indexN.py TARGET_DIR            # delete files
@@ -17,13 +17,13 @@ import re
 import sys
 from pathlib import Path
 
-# Match index<digits>.md, e.g. index1.md, index2.md, index01.md.
-PATTERN = re.compile(r"^_index\d+\.md$")
+# Match numbered duplicate index files, e.g. 2.1.0_index2.md.
+PATTERN = re.compile(r"^.+\.0_index\d+\.md$")
 
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Delete all index<digits>.md files recursively."
+        description="Delete numbered duplicate 0_index<digits>.md files recursively."
     )
     parser.add_argument("target", help="Target directory")
     parser.add_argument(

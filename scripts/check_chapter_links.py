@@ -11,6 +11,8 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from urllib.parse import quote
 
+from index_paths import index_filename, is_index_marker_name
+
 
 NUMBER_PREFIX = re.compile(r"^(\d+(?:\.\d+)*)(?:[\s._-]+(.*))?$")
 H1 = re.compile(r"^#\s+(.+?)\s*$")
@@ -38,13 +40,13 @@ class Section:
     def index_path(self) -> Path:
         if self.markdown_path is not None:
             return self.markdown_path
-        index = self.directory / "_index.md"
+        index = self.directory / index_filename(self.directory)
         if index.is_file():
             return index
-        contents = self.directory / "_contents.md"
+        contents = self.directory / "contents.md"
         if contents.is_file():
             return contents
-        return self.directory / "_index.md"
+        return index
 
     @property
     def clean_name(self) -> str:
@@ -102,7 +104,8 @@ def discover(root_path: Path) -> Section:
             elif (
                 entry.is_file()
                 and entry.suffix.lower() == ".md"
-                and entry.name.lower() not in {"_index.md", "_contents.md"}
+                and entry.name.lower() != "contents.md"
+                and not is_index_marker_name(entry.name)
             ):
                 section.children.append(
                     Section(

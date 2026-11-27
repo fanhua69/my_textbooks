@@ -17,9 +17,11 @@ import sys
 from pathlib import Path
 from typing import List, Optional, Tuple
 
+from index_paths import is_index_marker_name
+
 NUMBER_ONLY_RE = re.compile(r"^\d+(?:\.\d+)*$")
 DIR_NAME_RE = re.compile(r"^(\d+(?:\.\d+)*)_(.+)$")
-CONTAINER_MD_NAMES = {"_index.md", "_contents.md"}
+CONTAINER_MD_NAMES = {"contents.md"}
 
 
 def validate_section_num(num: str) -> str:
@@ -102,6 +104,7 @@ def list_numbered_markdown_files(parent: Path) -> List[Tuple[List[int], str, Pat
             not p.is_file()
             or p.suffix.lower() != ".md"
             or p.name.lower() in CONTAINER_MD_NAMES
+            or is_index_marker_name(p.name)
         ):
             continue
         m = DIR_NAME_RE.match(p.stem)

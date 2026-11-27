@@ -11,6 +11,8 @@ import sys
 from pathlib import Path
 from typing import Any
 
+from index_paths import index_filename, is_index_marker_name
+
 
 def safe_component(value: str) -> str:
     value = value.strip()
@@ -114,7 +116,10 @@ def create_json_markdown_files(raw_node: dict[str, Any], parent: Path) -> None:
 
         filename = Path(filename).name
         if filename and filename.lower().endswith(".md"):
-            if filename.lower() not in {"_index.md", "_contents.md"}:
+            if (
+                filename.lower() != "contents.md"
+                and not is_index_marker_name(filename)
+            ):
                 create_markdown_file(parent / filename)
 
 
@@ -131,7 +136,7 @@ def create_outline(
         if children:
             child_dir = parent / slug
             child_dir.mkdir(parents=True, exist_ok=True)
-            create_markdown_file(child_dir / "_index.md")
+            create_markdown_file(child_dir / index_filename(child_dir))
             create_json_markdown_files(child, child_dir)
             create_outline(children, child_dir, number)
         else:
@@ -146,7 +151,7 @@ def create_folder_and_files(json_file: Path, output_dir: Path) -> Path:
 
     root_dir = output_dir / safe_component(data["title"])
     root_dir.mkdir(parents=True, exist_ok=True)
-    create_markdown_file(root_dir / "_contents.md")
+    create_markdown_file(root_dir / "contents.md")
     create_json_markdown_files(data, root_dir)
     create_outline(get_children(data), root_dir, "")
     return root_dir

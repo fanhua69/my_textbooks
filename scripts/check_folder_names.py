@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-"""
-check_folder_names.py - Recursively normalize numbered directory names.
+"""Recursively normalize numbered directories, Markdown files, and index files.
 
-此脚本只重命名目录和 Markdown 文件，不读取或修改任何 Markdown 文件内容。
+此脚本不读取或修改 Markdown 内容。索引文件会保留体积最大的一份，
+其余索引文件删除，并将保留文件命名为目录节号对应的 .0_index.md。
 目录及文件中的链接由 check_chapter_links.py 负责更新。
 
 Examples:
@@ -27,9 +27,11 @@ import re
 import sys
 from pathlib import Path
 
+from index_paths import index_filename, is_index_marker_name
+
 
 NUMBERED_NAME_RE = re.compile(r"^(\d+(?:\.\d+)*)[_\s]+(.+)$")
-CONTAINER_FILES = {"_index.md", "_contents.md"}
+CONTAINER_FILES = {"contents.md"}
 
 
 def number_parts(number: str) -> list[int]:
@@ -61,12 +63,12 @@ def discover_book_roots(current_dir: Path, home_dir: Path) -> list[Path]:
     current_dir = current_dir.resolve()
     home_dir = home_dir.resolve()
 
-    if (current_dir / "_contents.md").is_file():
+    if (current_dir / "contents.md").is_file():
         return [current_dir]
 
     if current_dir == home_dir or home_dir in current_dir.parents:
         for ancestor in current_dir.parents:
-            if (ancestor / "_contents.md").is_file():
+            if (ancestor / "contents.md").is_file():
                 return [ancestor]
             if ancestor == home_dir:
                 break
@@ -82,7 +84,7 @@ def discover_book_roots(current_dir: Path, home_dir: Path) -> list[Path]:
             for name in subdirectories
             if not (directory_path / name).is_symlink()
         ]
-        if "_contents.md" in files and (directory_path / "_contents.md").is_file():
+        if "contents.md" in files and (directory_path / "contents.md").is_file():
             roots.append(directory_path)
 
     return sorted(roots)
@@ -109,6 +111,7 @@ def collect_renames(root: Path) -> list[tuple[Path, Path]]:
                 path.is_file()
                 and path.suffix.lower() == ".md"
                 and path.name not in CONTAINER_FILES
+                and not is_index_marker_name(path.name)
                 and not path.name.startswith(".")
             )
         ]
@@ -182,9 +185,70 @@ def rename_safely(
         print(f"  已重命名: {old.name}  ->  {target.name}")
 
 
+def normalize_index_files(
+    root: Path,
+    dry_run: bool,
+    directory_targets: dict[Path, Path] | None = None,
+) -> None:
+    directory_targets = directory_targets or {}
+
+    def raise_walk_error(error: OSError) -> None:
+        raise error
+
+    for directory, _, _ in os.walk(root, onerror=raise_walk_error):
+        directory_path = Path(directory)
+        index_files = [
+            path
+            for path in directory_path.iterdir()
+            if path.is_file() and is_index_marker_name(path.name)
+        ]
+        if not index_files:
+            continue
+
+        largest = max(
+            index_files,
+            key=lambda path: (
+                path.stat().st_size,
+                path.name.casefold(),
+                path.name,
+            ),
+        )
+        target_directory = directory_targets.get(directory_path, directory_path)
+        target = target_directory / index_filename(target_directory)
+        candidates = set(index_files)
+
+        if (
+            not dry_run
+            and target != largest
+            and (target.exists() or target.is_symlink())
+            and target not in candidates
+        ):
+            raise FileExistsError(f"索引目标文件已存在且不属于待整理索引: {target}")
+
+        print(f"整理索引文件: {directory_path}")
+        print(f"  [保留，{largest.stat().st_size} 字节] {largest.name}")
+        for path in index_files:
+            if path != largest:
+                action = "预览删除" if dry_run else "删除"
+                print(f"  [{action}] {path.name}")
+
+        if dry_run:
+            if largest != target:
+                print(f"  [预览重命名] {largest.name} -> {target.name}")
+            continue
+
+        for path in index_files:
+            if path != largest:
+                path.unlink()
+
+        if largest != target:
+            largest.rename(target)
+            print(f"  [重命名] {largest.name} -> {target.name}")
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(
-        description="递归统一目录下子目录与 Markdown 文件的节号、节名和排序",
+        description="递归整理目录和 Markdown 文件编号，并规范化每个目录的索引文件",
     )
     parser.add_argument(
         "--dry-run",
@@ -193,7 +257,7 @@ def main() -> int:
     )
     parser.add_argument(
         "--root",
-        help="指定检查根目录；省略时自动根据 _contents.md 查找书籍根目录",
+        help="指定检查根目录；省略时自动根据 contents.md 查找书籍根目录",
     )
     args = parser.parse_args()
 
@@ -214,15 +278,23 @@ def main() -> int:
 
     if not roots:
         print(
-            f"错误: 当前目录及其上级目录、当前目录的子目录中均未找到 _contents.md",
+            f"错误: 当前目录及其上级目录、当前目录的子目录中均未找到 contents.md",
             file=sys.stderr,
         )
         return 1
 
     for root in roots:
         print(f"检查书籍根目录: {root}")
-        renames = collect_renames(root)
-        rename_safely(renames, args.dry_run)
+        try:
+            renames = collect_renames(root)
+            directory_targets = {
+                old: target for old, target in renames if old.is_dir()
+            }
+            rename_safely(renames, args.dry_run)
+            normalize_index_files(root, args.dry_run, directory_targets)
+        except OSError as exc:
+            print(f"错误: 处理书籍根目录失败: {exc}", file=sys.stderr)
+            return 1
     return 0
 
 

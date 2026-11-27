@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Flatten leaf textbook directories containing only _index.md into Markdown files."""
+"""Flatten leaf textbook directories containing only a numbered index file."""
 
 from __future__ import annotations
 
@@ -8,16 +8,18 @@ import os
 import sys
 from pathlib import Path
 
+from index_paths import index_filename
+
 
 def discover_book_roots(current_dir: Path) -> list[Path]:
     """Find the nearest book root, or all book roots below the current directory."""
     current_dir = current_dir.resolve()
 
-    if (current_dir / "_contents.md").is_file():
+    if (current_dir / "contents.md").is_file():
         return [current_dir]
 
     for ancestor in current_dir.parents:
-        if (ancestor / "_contents.md").is_file():
+        if (ancestor / "contents.md").is_file():
             return [ancestor]
 
     def raise_walk_error(error: OSError) -> None:
@@ -33,14 +35,14 @@ def discover_book_roots(current_dir: Path) -> list[Path]:
             for name in subdirectories
             if not (directory_path / name).is_symlink()
         ]
-        if "_contents.md" in files and (directory_path / "_contents.md").is_file():
+        if "contents.md" in files and (directory_path / "contents.md").is_file():
             roots.append(directory_path)
 
     return sorted(roots)
 
 
 def find_leaf_index_directories(root: Path) -> list[Path]:
-    """Return directories whose only entry is a regular _index.md file."""
+    """Return directories whose only entry is the expected numbered index file."""
     candidates: list[Path] = []
 
     def raise_walk_error(error: OSError) -> None:
@@ -59,7 +61,7 @@ def find_leaf_index_directories(root: Path) -> list[Path]:
         entries = list(directory_path.iterdir())
         if (
             len(entries) == 1
-            and entries[0].name == "_index.md"
+            and entries[0].name == index_filename(directory_path)
             and entries[0].is_file()
             and not entries[0].is_symlink()
         ):
@@ -69,7 +71,7 @@ def find_leaf_index_directories(root: Path) -> list[Path]:
 
 
 def change_folders_to_files(root: Path, dry_run: bool = False) -> int:
-    """Move eligible _index.md files to their parent and remove their directories."""
+    """Move eligible numbered index files to their parent and remove their directories."""
     root = root.resolve()
     if not root.is_dir():
         raise NotADirectoryError(f"Book root not found: {root}")
@@ -82,7 +84,7 @@ def change_folders_to_files(root: Path, dry_run: bool = False) -> int:
     print(f"符合条件的叶子目录: {len(candidates)}\n")
 
     for directory in candidates:
-        source = directory / "_index.md"
+        source = directory / index_filename(directory)
         destination = directory.parent / f"{directory.name}.md"
 
         if destination.exists() or destination.is_symlink():
@@ -125,12 +127,12 @@ def change_folders_to_files(root: Path, dry_run: bool = False) -> int:
 
 def main() -> int:
     parser = argparse.ArgumentParser(
-        description="将仅含 _index.md 的叶子目录转换为同名 Markdown 文件"
+        description="将仅含编号索引文件的叶子目录转换为同名 Markdown 文件"
     )
     parser.add_argument(
         "--root",
         type=Path,
-        help="指定书籍根目录；省略时根据 _contents.md 自动查找",
+        help="指定书籍根目录；省略时根据 contents.md 自动查找",
     )
     parser.add_argument(
         "--dry-run",
@@ -151,7 +153,7 @@ def main() -> int:
     if len(roots) != 1:
         if not roots:
             print(
-                "未找到书籍根目录（包含 _contents.md 的目录）；请使用 --root 指定。",
+                "未找到书籍根目录（包含 contents.md 的目录）；请使用 --root 指定。",
                 file=sys.stderr,
             )
         else:

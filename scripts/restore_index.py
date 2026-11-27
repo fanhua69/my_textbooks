@@ -8,11 +8,11 @@ Rules:
 1. Match filename with directory name first (exact match).
 2. If no exact match, remove leading section numbers (e.g. 1.2.3_)
    from both names and compare again.
-3. Copy the source file into the matched directory as _index.md.
-4. If _index.md (or _index2.md, _index3.md, ...) already exists:
+3. Copy the source file into the matched directory as its numbered 0_index.md.
+4. If that index (or its numbered duplicates) already exists:
    - If any of them has identical content to the source file: skip copying.
-   - Otherwise: save the source file as the next available _indexN.md
-     (_index2.md, _index3.md, ...). Existing files are never overwritten.
+   - Otherwise: save the source as the next available numbered index duplicate.
+   Existing files are never overwritten.
 5. Skip files whose matching directory cannot be found.
 
 Usage:
@@ -26,16 +26,14 @@ import sys
 from collections import defaultdict
 from pathlib import Path
 
+from index_paths import directory_identifier, index_filename, index_marker_parts
+
 
 # Match section numbers such as:
 # 1_
 # 1.2_
 # 1.2.3_
 SECTION_PREFIX = re.compile(r"^\d+(?:\.\d+)*_")
-
-# Match _index.md, _index2.md, _index3.md, ...
-INDEX_FILE = re.compile(r"^_index(\d*)\.md$")
-
 
 def normalize_name(name: str) -> str:
     """Remove the leading section number."""
@@ -47,6 +45,7 @@ def build_directory_index(target_dir: Path):
 
     exact_index = defaultdict(list)
     normalized_index = defaultdict(list)
+    identifier_index = defaultdict(list)
 
     # Include target root itself, as well as all subdirectories.
     directories = [target_dir] + [
@@ -56,16 +55,27 @@ def build_directory_index(target_dir: Path):
     for directory in directories:
         exact_index[directory.name].append(directory)
         normalized_index[normalize_name(directory.name)].append(directory)
+        identifier_index[directory_identifier(directory)].append(directory)
 
-    return exact_index, normalized_index
+    return exact_index, normalized_index, identifier_index
 
 
 def find_target_directory(
     filename: str,
     exact_index,
-    normalized_index
+    normalized_index,
+    identifier_index,
 ):
     """Find matching directory. Exact match has priority."""
+
+    marker = index_marker_parts(f"{filename}.md")
+    if marker is not None:
+        matches = identifier_index.get(marker[0], [])
+        if len(matches) == 1:
+            return matches[0]
+        if len(matches) > 1:
+            print(f"[AMBIGUOUS] Index marker section: {marker[0]}")
+        return None
 
     # 1. Try exact match.
     matches = exact_index.get(filename, [])
@@ -96,20 +106,21 @@ def get_destination_file(target_dir: Path, source_file: Path):
     Determine the destination file.
 
     Returns a tuple (destination, duplicate_of):
-    - (_index.md, None)      : no _index.md yet, copy as _index.md
-    - (_indexN.md, None)     : content differs, copy as next free _indexN.md
+    - (section.0_index.md, None)  : no primary index yet
+    - (section.0_indexN.md, None) : content differs, copy as next free index
     - (None, existing_file)  : identical content already exists, skip copying
     """
 
-    index_file = target_dir / "_index.md"
-    # No existing _index.md.
+    index_file = target_dir / index_filename(target_dir)
+    # No primary numbered index file.
     if not index_file.exists():
         return index_file, None
 
-    # Collect all existing _index.md / _indexN.md files.
+    # Collect existing numbered index files for this directory.
+    index_pattern = re.compile(rf"^{re.escape(index_file.stem)}(\d*)\.md$")
     existing = {}
     for p in target_dir.iterdir():
-        m = INDEX_FILE.match(p.name)
+        m = index_pattern.match(p.name)
         if m and p.is_file():
             existing[int(m.group(1) or 1)] = p
 
@@ -119,12 +130,12 @@ def get_destination_file(target_dir: Path, source_file: Path):
         if existing[number].read_bytes() == source_bytes:
             return None, existing[number]
 
-    # Otherwise use the next available number (_index2.md, _index3.md, ...).
+    # Otherwise use the next available numbered index suffix.
     number = 2
     while number in existing:
         number += 1
 
-    return target_dir / f"_index{number}.md", None
+    return target_dir / index_filename(target_dir, number), None
 
 
 def restore_index_files(source_dir: Path, target_dir: Path):
@@ -143,7 +154,7 @@ def restore_index_files(source_dir: Path, target_dir: Path):
         )
 
     # Build directory lookup indexes.
-    exact_index, normalized_index = build_directory_index(target_dir)
+    exact_index, normalized_index, identifier_index = build_directory_index(target_dir)
 
     # Only process .md files directly inside source_dir.
     source_files = sorted(
@@ -168,7 +179,8 @@ def restore_index_files(source_dir: Path, target_dir: Path):
         matched_dir = find_target_directory(
             directory_name,
             exact_index,
-            normalized_index
+            normalized_index,
+            identifier_index,
         )
 
         if matched_dir is None:
@@ -192,7 +204,7 @@ def restore_index_files(source_dir: Path, target_dir: Path):
         # Copy file.
         shutil.copy2(source_file, destination)
 
-        if destination.name == "_index.md":
+        if destination.name == index_filename(matched_dir):
             print(f"[COPY] {source_file.name} -> {destination}")
             copied += 1
         else:
@@ -200,8 +212,8 @@ def restore_index_files(source_dir: Path, target_dir: Path):
             renamed += 1
 
     print("\n========== Summary ==========")
-    print(f"New _index.md:         {copied}")
-    print(f"Saved as _indexN.md:   {renamed}")
+    print(f"New numbered index:    {copied}")
+    print(f"Saved as indexN:       {renamed}")
     print(f"Identical (not copied): {identical}")
     print(f"Skipped (no match):    {skipped}")
     print("=============================")
