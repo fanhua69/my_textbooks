@@ -7,20 +7,21 @@ from pathlib import Path
 
 
 def find_book_root(start: Path) -> Path:
-    """Return the nearest ancestor containing ``contents.md``."""
+    """Return the nearest ancestor containing ``contents.md``, stopping at home."""
     current = start.expanduser().resolve()
+    home_dir = Path.home().resolve()
     if not current.is_dir():
         current = current.parent
 
     while True:
         if (current / "contents.md").is_file():
             return current
-        if current.parent == current:
+        if current == home_dir or current.parent == current:
             break
         current = current.parent
 
     raise FileNotFoundError(
-        f"从当前目录向上未找到包含 contents.md 的教材根目录: {start}"
+        f"从当前目录向上至 home 目录未找到包含 contents.md 的教材根目录: {start}"
     )
 
 
