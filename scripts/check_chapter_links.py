@@ -11,6 +11,7 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from urllib.parse import quote
 
+from book_paths import find_book_root
 from index_paths import index_filename, is_index_marker_name
 
 
@@ -339,12 +340,20 @@ def main() -> int:
     parser.add_argument(
         "root",
         nargs="?",
-        default=".",
-        help="教材根目录，默认当前目录",
+        help="教材根目录；省略时从当前目录向上查找 contents.md",
     )
     args = parser.parse_args()
 
-    root_path = Path(args.root).resolve()
+    try:
+        root_path = (
+            Path(args.root).expanduser().resolve()
+            if args.root is not None
+            else find_book_root(Path.cwd())
+        )
+    except OSError as exc:
+        print(f"错误: 无法确定教材根目录: {exc}", file=sys.stderr)
+        return 1
+
     if not root_path.is_dir():
         print(f"错误: 根目录不存在: {root_path}", file=sys.stderr)
         return 1

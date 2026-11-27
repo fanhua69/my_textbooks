@@ -12,20 +12,8 @@ import argparse
 import sys
 from pathlib import Path
 
+from book_paths import find_book_root
 from index_paths import index_filename
-
-
-def find_book_root(start: Path) -> Path:
-    current = start.resolve()
-    if not current.is_dir():
-        current = current.parent
-
-    while True:
-        if (current / "contents.md").is_file():
-            return current
-        if current.parent == current:
-            return start.resolve() if start.resolve().is_dir() else start.resolve().parent
-        current = current.parent
 
 
 def find_chapter_markdown(start: Path, section_num: str) -> Path:

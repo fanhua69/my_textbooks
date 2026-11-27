@@ -8,37 +8,8 @@ import os
 import sys
 from pathlib import Path
 
+from book_paths import discover_book_roots
 from index_paths import index_filename
-
-
-def discover_book_roots(current_dir: Path) -> list[Path]:
-    """Find the nearest book root, or all book roots below the current directory."""
-    current_dir = current_dir.resolve()
-
-    if (current_dir / "contents.md").is_file():
-        return [current_dir]
-
-    for ancestor in current_dir.parents:
-        if (ancestor / "contents.md").is_file():
-            return [ancestor]
-
-    def raise_walk_error(error: OSError) -> None:
-        raise error
-
-    roots: list[Path] = []
-    for directory, subdirectories, files in os.walk(
-        current_dir, onerror=raise_walk_error
-    ):
-        directory_path = Path(directory)
-        subdirectories[:] = [
-            name
-            for name in subdirectories
-            if not (directory_path / name).is_symlink()
-        ]
-        if "contents.md" in files and (directory_path / "contents.md").is_file():
-            roots.append(directory_path)
-
-    return sorted(roots)
 
 
 def find_leaf_index_directories(root: Path) -> list[Path]:

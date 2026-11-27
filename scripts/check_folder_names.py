@@ -27,6 +27,7 @@ import re
 import sys
 from pathlib import Path
 
+from book_paths import discover_book_roots
 from index_paths import index_filename, is_index_marker_name
 
 
@@ -56,38 +57,6 @@ def sort_siblings(entries: list[Path]) -> list[Path]:
         return (1, suffix.casefold(), entry.name.casefold(), entry.name)
 
     return sorted(entries, key=key)
-
-
-def discover_book_roots(current_dir: Path, home_dir: Path) -> list[Path]:
-    """Find the nearest book root, or all book roots below the current directory."""
-    current_dir = current_dir.resolve()
-    home_dir = home_dir.resolve()
-
-    if (current_dir / "contents.md").is_file():
-        return [current_dir]
-
-    if current_dir == home_dir or home_dir in current_dir.parents:
-        for ancestor in current_dir.parents:
-            if (ancestor / "contents.md").is_file():
-                return [ancestor]
-            if ancestor == home_dir:
-                break
-
-    def raise_walk_error(error: OSError) -> None:
-        raise error
-
-    roots: list[Path] = []
-    for directory, subdirectories, files in os.walk(current_dir, onerror=raise_walk_error):
-        directory_path = Path(directory)
-        subdirectories[:] = [
-            name
-            for name in subdirectories
-            if not (directory_path / name).is_symlink()
-        ]
-        if "contents.md" in files and (directory_path / "contents.md").is_file():
-            roots.append(directory_path)
-
-    return sorted(roots)
 
 
 def collect_renames(root: Path) -> list[tuple[Path, Path]]:
@@ -120,6 +89,8 @@ def collect_renames(root: Path) -> list[tuple[Path, Path]]:
 
         for index, entry in enumerate(ordered, start=1):
             _, suffix = parse_directory(entry)
+            if entry.is_dir():
+                suffix = suffix.replace(" ", "_")
             if parent_number:
                 target_number = f"{parent_number}.{index:0{number_width}d}"
             else:
@@ -265,7 +236,7 @@ def main() -> int:
         roots = [Path(args.root).resolve()]
     else:
         try:
-            roots = discover_book_roots(Path.cwd(), Path.home())
+            roots = discover_book_roots(Path.cwd())
         except OSError as exc:
             print(f"错误: 搜索书籍根目录失败: {exc}", file=sys.stderr)
             return 1

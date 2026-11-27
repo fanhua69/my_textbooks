@@ -7,6 +7,7 @@ import sys
 from dataclasses import dataclass
 from pathlib import Path
 
+from book_paths import find_book_root
 from index_paths import index_filename
 
 
@@ -16,19 +17,6 @@ class SectionSpan:
     start_line: int
     end_line: int
     body: str
-
-
-def find_book_root(start: Path) -> Path:
-    current = start.resolve()
-    if not current.is_dir():
-        current = current.parent
-
-    while True:
-        if (current / "contents.md").is_file():
-            return current
-        if current.parent == current:
-            return start.resolve() if start.resolve().is_dir() else start.resolve().parent
-        current = current.parent
 
 
 def find_chapter_dir(root: Path, chapter_id: str) -> Path:
