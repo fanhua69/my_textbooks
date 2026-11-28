@@ -55,10 +55,20 @@ def find_chapter_entry(root: Path, chapter_id: str) -> tuple[Path, str]:
     return matches[0]
 
 
+def _strip_outer_emphasis(text: str) -> str:
+    for marker in ("***", "___", "**", "__", "*", "_"):
+        if text.startswith(marker) and text.endswith(marker):
+            return text[len(marker) : -len(marker)].strip()
+    return text
+
+
 def clean_title(name: str) -> str:
     cleaned = name.strip()
+    cleaned = _strip_outer_emphasis(cleaned)
     cleaned = re.sub(r"^\d+(?:[.．]\d+)+(?:[.．、])?\s*", "", cleaned)
+    cleaned = _strip_outer_emphasis(cleaned)
     cleaned = re.sub(r"^\d+\\?[.．、]\s*", "", cleaned)
+    cleaned = _strip_outer_emphasis(cleaned)
     cleaned = re.sub(r"^[零〇一二三四五六七八九十百千万两]+[.．、]\s*", "", cleaned)
     cleaned = re.sub(r"\s+", " ", cleaned).strip()
     return cleaned
@@ -83,6 +93,7 @@ def split_sections_with_spans(content: str) -> list[SectionSpan]:
     raw_spans: list[SectionSpan] = []
     current_raw_title: str | None = None
     current_start: int | None = None
+    first_h1: tuple[int, str] | None = None
     in_code = False
 
     for idx, line in enumerate(lines):
@@ -92,6 +103,10 @@ def split_sections_with_spans(content: str) -> list[SectionSpan]:
             continue
 
         if not in_code:
+            h1 = re.match(r"^\s*#\s+(?!#)(.+)$", stripped_line)
+            if first_h1 is None and h1:
+                first_h1 = (idx, h1.group(1).strip())
+
             m = re.match(r"^\s*##\s+(?!#)(.+)$", stripped_line)
             if m:
                 if current_raw_title is not None and current_start is not None:
@@ -119,7 +134,34 @@ def split_sections_with_spans(content: str) -> list[SectionSpan]:
         )
 
     excluded = {"导航", "小节索引"}
-    return [s for s in raw_spans if s.raw_title.strip() not in excluded]
+    section_spans = [
+        span for span in raw_spans if span.raw_title.strip() not in excluded
+    ]
+    if section_spans:
+        return section_spans
+
+    fallback_end = raw_spans[0].start_line if raw_spans else len(lines)
+    if first_h1 is None:
+        raw_title = "主体内容"
+        body_lines = lines[:fallback_end]
+    else:
+        heading_line, raw_title = first_h1
+        body_lines = lines[:fallback_end]
+        if heading_line < fallback_end:
+            body_lines = body_lines[:heading_line] + body_lines[heading_line + 1 :]
+    while body_lines and (
+        not body_lines[-1].strip()
+        or re.fullmatch(r"\s*(?:-{3,}|\*{3,}|_{3,})\s*", body_lines[-1])
+    ):
+        body_lines.pop()
+    return [
+        SectionSpan(
+            raw_title=raw_title,
+            start_line=0,
+            end_line=len(lines),
+            body="".join(body_lines).strip(),
+        )
+    ]
 
 
 def normalize_sec_body(sec_body: str) -> str:
@@ -255,7 +297,7 @@ def split_directory_chapter(
             print(f"\n已归档原索引文件: {archived_file}")
 
     print(f"源目录: {target_dir}")
-    print(f"共检测到 {len(spans)} 个有效 '##' 片段:\n")
+    print(f"共检测到 {len(spans)} 个可拆分片段:\n")
 
     link_entries: list[tuple[str, str, str]] = []
     for idx, span in enumerate(spans, start=1):
@@ -323,7 +365,7 @@ def split_file_chapter(
         spans = split_sections_with_spans(content)
         if not spans:
             return False, target_dir
-        print(f"共检测到 {len(spans)} 个有效 '##' 片段:\n")
+        print(f"共检测到 {len(spans)} 个可拆分片段:\n")
         return split_directory_dry_run(target_dir, chapter_id, spans)
 
     target_dir.mkdir(parents=True, exist_ok=True)
