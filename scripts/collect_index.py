@@ -6,7 +6,7 @@
 Recursively collect all files from a textbook directory.
 
 Index marker files retain their numbered directory index name:
-2.1_data/2.1.0_index.md -> 2.1.0_index.md
+2.1_data/2.1.0_index.md -> 2.1.0_index.md (English-named directory)
 
 Other files are prefixed with the same section number when they are
 inside a numbered directory:

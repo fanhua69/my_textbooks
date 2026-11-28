@@ -1,5 +1,7 @@
 # Bloomberg 经历面试准备指南：高性能实时权限服务（High-Performance Real-Time Entitlement Services）
 
+**介绍**: Bloomberg 经历面试准备指南：高性能实时权限服务（High-Performance Real-Time Entitlement Services）
+
 > **简历排版优先提醒**：在当前简历的 Bloomberg 段落中，第 2 条（`I developed and supported...`）与第 3 条（`Developed and supported...`）内容重复。请务必**删除以 `I` 开头的那一条**，保持全文动作词开头风格统一。
 
 ---
@@ -67,3 +69,13 @@
 ### Q3: How did you ensure data consistency across multi-million-record datasets between ComDB2 and ComDBG?
 > **参考回答**：
 > "We combined real-time event-driven pipelines with scheduled reconciliation jobs. Under normal conditions, incremental changes propagated via message queues kept the systems in sync with very low latency. To guard against transient network blips or dropped messages, we also automated periodic verification and sync pipelines via Bloomberg Terminal Timed Jobs, alongside Grafana and GUTS alerting to catch any lag or anomalies early."
+
+
+---
+
+## 导航
+
+⬅️ 上一节：[1.1 bpipe_and_emsx](1.1_1.6%20bpipe_and_emsx/1.1.0_index.md)
+⏺️ 当前节：[Bloomberg 经历面试准备指南：高性能实时权限服务（High-Performance Real-Time Entitlement Services）](bloomberg.md)
+➡️ 下一节：[Bloomberg 核心系统解析：B-Pipe 与 EMSX](Bloomberg%20B-Pipe%20%E4%B8%8E%20EMSX%20%E4%B8%9A%E5%8A%A1%E5%8F%8A%E6%9E%B6%E6%9E%84%E8%A7%A3%E6%9E%90.md)
+⬆️ 返回上级：[1 my_low_latency](contents.md)

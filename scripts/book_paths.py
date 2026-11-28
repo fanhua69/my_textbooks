@@ -8,24 +8,25 @@ from pathlib import Path
 
 
 SECTION_NUMBER_RE = re.compile(r"^(\d+(?:\.\d+)*)(?:_|$)")
+BOOK_MARKER_NAMES = ("目录.md", "contents.md")
 
 
 def find_book_root(start: Path) -> Path:
-    """Return the nearest ancestor containing ``contents.md``, stopping at home."""
+    """Return the nearest ancestor containing a book marker file, stopping at home."""
     current = start.expanduser().resolve()
     home_dir = Path.home().resolve()
     if not current.is_dir():
         current = current.parent
 
     while True:
-        if (current / "contents.md").is_file():
+        if any((current / name).is_file() for name in BOOK_MARKER_NAMES):
             return current
         if current == home_dir or current.parent == current:
             break
         current = current.parent
 
     raise FileNotFoundError(
-        f"从当前目录向上至 home 目录未找到包含 contents.md 的教材根目录: {start}"
+        f"从当前目录向上至 home 目录未找到教材目录标记文件: {start}"
     )
 
 
@@ -80,7 +81,10 @@ def discover_book_roots(start: Path) -> list[Path]:
             for name in subdirectories
             if not (directory_path / name).is_symlink()
         ]
-        if "contents.md" in files and (directory_path / "contents.md").is_file():
+        if any(
+            name in files and (directory_path / name).is_file()
+            for name in BOOK_MARKER_NAMES
+        ):
             roots.append(directory_path)
 
     return sorted(roots)

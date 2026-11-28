@@ -8,7 +8,7 @@ Rules:
 1. Match filename with directory name first (exact match).
 2. If no exact match, remove leading section numbers (e.g. 1.2.3_)
    from both names and compare again.
-3. Copy the source file into the matched directory as its numbered 0_index.md.
+3. Copy the source file into the matched directory as its numbered language-specific index.
 4. If that index (or its numbered duplicates) already exists:
    - If any of them has identical content to the source file: skip copying.
    - Otherwise: save the source as the next available numbered index duplicate.
@@ -106,8 +106,8 @@ def get_destination_file(target_dir: Path, source_file: Path):
     Determine the destination file.
 
     Returns a tuple (destination, duplicate_of):
-    - (section.0_index.md, None)  : no primary index yet
-    - (section.0_indexN.md, None) : content differs, copy as next free index
+    - (section index filename, None)  : no primary index yet
+    - (numbered duplicate index filename, None) : content differs
     - (None, existing_file)  : identical content already exists, skip copying
     """
 

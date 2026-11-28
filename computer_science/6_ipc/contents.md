@@ -5,16 +5,16 @@
 
 ## 目录
 
-- [1 IPC 基础理论与核心抽象](1_ipc_fundamentals_and_abstractions/_index.md)
-- [2 Linux 平台 IPC 机制深度剖析](2_linux_ipc_mechanisms/_index.md)
-- [3 macOS（XNU / Darwin）平台 IPC 机制深度剖析](3_macos_ipc_mechanisms/_index.md)
-- [4 Windows 平台 IPC 机制深度剖析](4_windows_ipc_mechanisms/_index.md)
-- [5 三大平台横评、跨平台抽象设计与实战](5_cross_platform_comparison_and_architecture/_index.md)
+- [1 IPC 基础理论与核心抽象](1_ipc_fundamentals_and_abstractions/1.0_简介.md)
+- [2 Linux 平台 IPC 机制深度剖析](2_linux_ipc_mechanisms/2.0_简介.md)
+- [3 macOS（XNU / Darwin）平台 IPC 机制深度剖析](3_macos_ipc_mechanisms/3.0_index.md)
+- [4 Windows 平台 IPC 机制深度剖析](4_windows_ipc_mechanisms/4.0_index.md)
+- [5 三大平台横评、跨平台抽象设计与实战](5_cross_platform_comparison_and_architecture/5.0_简介.md)
 
 ---
 
 ## 导航
 
 ⬅️ 上一节：无（这是本目录的第一页）
-⏺️ 当前节：[6 Cross-Platform Inter-Process Communication (IPC) Engineering](_contents.md)
+⏺️ 当前节：[6 Cross-Platform Inter-Process Communication (IPC) Engineering](contents.md)
 ➡️ 下一节：无（这是本目录的最后一页）

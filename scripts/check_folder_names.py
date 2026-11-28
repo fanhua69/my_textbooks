@@ -2,7 +2,7 @@
 """Recursively normalize numbered directories, Markdown files, and index files.
 
 此脚本不读取或修改 Markdown 内容。索引文件会保留体积最大的一份，
-其余索引文件删除，并将保留文件命名为目录节号对应的 .0_index.md。
+其余索引文件删除，并将保留文件命名为目录节号对应的 .0_简介.md 或 .0_index.md。
 目录及文件中的链接由 check_chapter_links.py 负责更新。
 
 Examples:
@@ -32,7 +32,7 @@ from index_paths import index_filename, is_index_marker_name
 
 
 NUMBERED_NAME_RE = re.compile(r"^(\d+(?:\.\d+)*)[_\s]+(.+)$")
-CONTAINER_FILES = {"contents.md"}
+CONTAINER_FILES = {"目录.md", "contents.md"}
 
 
 def number_parts(number: str) -> list[int]:
@@ -227,7 +227,7 @@ def main() -> int:
     )
     parser.add_argument(
         "--root",
-        help="指定检查根目录；省略时自动根据 contents.md 查找书籍根目录",
+        help="指定检查根目录；省略时自动根据教材目录标记文件查找书籍根目录",
     )
     args = parser.parse_args()
 
@@ -248,7 +248,7 @@ def main() -> int:
 
     if not roots:
         print(
-            f"错误: 当前目录及其上级目录、当前目录的子目录中均未找到 contents.md",
+            f"错误: 当前目录及其上级目录、当前目录的子目录中均未找到教材目录标记文件",
             file=sys.stderr,
         )
         return 1

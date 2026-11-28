@@ -21,7 +21,7 @@ from index_paths import is_index_marker_name
 
 NUMBER_ONLY_RE = re.compile(r"^\d+(?:\.\d+)*$")
 DIR_NAME_RE = re.compile(r"^(\d+(?:\.\d+)*)_(.+)$")
-CONTAINER_MD_NAMES = {"contents.md"}
+CONTAINER_MD_NAMES = {"目录.md", "contents.md"}
 
 
 def validate_section_num(num: str) -> str:

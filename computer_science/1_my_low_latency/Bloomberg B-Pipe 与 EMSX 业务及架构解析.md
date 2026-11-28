@@ -1,5 +1,7 @@
 # Bloomberg 核心系统解析：B-Pipe 与 EMSX
 
+**介绍**: Bloomberg 核心系统解析：B-Pipe 与 EMSX
+
 在彭博（Bloomberg）的金融技术体系中，**B-Pipe** 和 **EMSX** 是买方与卖方机构最核心的两个“实时数据通道”和“电子交易执行”产品。理解这两者的业务定位以及它们与\*\*权限服务（Entitlement Services）\*\*的耦合方式，能帮助你在金融/低延迟 C++ 面试中精准传达工作的业务价值。
 
 ---
@@ -51,3 +53,13 @@
 > * For **EMSX**, we governed trader and API access to multi-asset execution workflows and broker routing.
 
 > Because both systems are extremely latency-sensitive and read-heavy, we relied on local in-memory caching, Redis, and asynchronous message-queue invalidation so permission updates propagated in near real time without adding database overhead to the hot path."
+
+
+---
+
+## 导航
+
+⬅️ 上一节：[Bloomberg 经历面试准备指南：高性能实时权限服务（High-Performance Real-Time Entitlement Services）](bloomberg.md)
+⏺️ 当前节：[Bloomberg 核心系统解析：B-Pipe 与 EMSX](Bloomberg%20B-Pipe%20%E4%B8%8E%20EMSX%20%E4%B8%9A%E5%8A%A1%E5%8F%8A%E6%9E%B6%E6%9E%84%E8%A7%A3%E6%9E%90.md)
+➡️ 下一节：[bpipe_and_emsx](bpipe_and_emsx.md)
+⬆️ 返回上级：[1 my_low_latency](contents.md)

@@ -44,9 +44,10 @@ class Section:
         index = self.directory / index_filename(self.directory)
         if index.is_file():
             return index
-        contents = self.directory / "contents.md"
-        if contents.is_file():
-            return contents
+        for marker_name in ("目录.md", "contents.md"):
+            marker = self.directory / marker_name
+            if marker.is_file():
+                return marker
         return index
 
     @property
@@ -105,7 +106,7 @@ def discover(root_path: Path) -> Section:
             elif (
                 entry.is_file()
                 and entry.suffix.lower() == ".md"
-                and entry.name.lower() != "contents.md"
+                and entry.name.lower() not in {"目录.md", "contents.md"}
                 and not is_index_marker_name(entry.name)
             ):
                 section.children.append(
@@ -340,7 +341,7 @@ def main() -> int:
     parser.add_argument(
         "root",
         nargs="?",
-        help="教材根目录；省略时从当前目录向上查找 contents.md",
+        help="教材根目录；省略时从当前目录向上查找教材目录标记文件",
     )
     args = parser.parse_args()
 

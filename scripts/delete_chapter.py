@@ -7,7 +7,7 @@
     python delete_chapter.py "05.2.1" --dry-run        # 只预览
 
 说明:
-    - 可在教材目录内任意位置运行；脚本会向上查找 contents.md
+    - 可在教材目录内任意位置运行；脚本会向上查找教材目录标记文件
     - 参数可以是纯编号 "05.2.1"，也可以是完整目录名 "05.2.1_xxx"
     - 删除后由 check_folder_names.py 整理编号，再由 check_chapter_links.py 更新导航
 """

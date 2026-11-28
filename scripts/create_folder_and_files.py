@@ -11,7 +11,7 @@ import sys
 from pathlib import Path
 from typing import Any
 
-from index_paths import index_filename, is_index_marker_name
+from index_paths import contents_filename, index_filename, is_index_marker_name
 
 
 def safe_component(value: str) -> str:
@@ -117,7 +117,7 @@ def create_json_markdown_files(raw_node: dict[str, Any], parent: Path) -> None:
         filename = Path(filename).name
         if filename and filename.lower().endswith(".md"):
             if (
-                filename.lower() != "contents.md"
+                filename.lower() not in {"目录.md", "contents.md"}
                 and not is_index_marker_name(filename)
             ):
                 create_markdown_file(parent / filename)
@@ -151,9 +151,9 @@ def create_folder_and_files(json_file: Path, output_dir: Path) -> Path:
 
     root_dir = output_dir / safe_component(data["title"])
     root_dir.mkdir(parents=True, exist_ok=True)
-    create_markdown_file(root_dir / "contents.md")
     create_json_markdown_files(data, root_dir)
     create_outline(get_children(data), root_dir, "")
+    create_markdown_file(root_dir / contents_filename(root_dir))
     return root_dir
 
 

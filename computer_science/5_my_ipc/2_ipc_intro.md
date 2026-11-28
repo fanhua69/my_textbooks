@@ -98,15 +98,11 @@ macOS 继承了 **BSD / Mach 混合内核（XNU）** 的体系结构，其 IPC �
 | **跨 Linux / macOS 的 C++ 本地服务通信** | **UNIX Domain Socket** 或 **共享内存** | POSIX 接口通用，跨平台
 
 
+---
 
 ## 导航
 
-- **上一层**：[5_my_ipc](../index.md))
-- **前一节**：[1 intro](../1_new/index.md)
-- **后一节**：[3 launchd](../3_launchd/index.md)
-
-<!-- 
-  链接占位说明：
-  - TODO_PREV / TODO_NEXT 由后续扫描脚本自动替换为真正的相对路径
-  - 父级链接已指向 ../index.md（同级目录的上一层）
--->
+⬅️ 上一节：[1 intro](1_new.md)
+⏺️ 当前节：[2 IPC Intro](2_ipc_intro.md)
+➡️ 下一节：[3 launchd](3_launchd.md)
+⬆️ 返回上级：[5 my_ipc](contents.md)

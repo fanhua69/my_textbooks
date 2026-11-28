@@ -103,7 +103,7 @@ def main() -> int:
     parser.add_argument(
         "--root",
         type=Path,
-        help="指定书籍根目录；省略时根据 contents.md 自动查找",
+        help="指定书籍根目录；省略时根据教材目录标记文件自动查找",
     )
     parser.add_argument(
         "--dry-run",
@@ -124,7 +124,7 @@ def main() -> int:
     if len(roots) != 1:
         if not roots:
             print(
-                "未找到书籍根目录（包含 contents.md 的目录）；请使用 --root 指定。",
+                "未找到书籍根目录（包含教材目录标记文件的目录）；请使用 --root 指定。",
                 file=sys.stderr,
             )
         else:

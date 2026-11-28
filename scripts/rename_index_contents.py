@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Rename legacy index files to numbered markers and normalize contents names."""
+"""Rename legacy index files to Chinese numbered markers and normalize contents names."""
 
 from __future__ import annotations
 
@@ -9,13 +9,18 @@ import re
 import sys
 from pathlib import Path
 
-from index_paths import index_filename
+from index_paths import contents_filename, index_filename
 
 INDEX_SOURCE = re.compile(r"^(?:~|_)?index(\d*)\.md$", re.IGNORECASE)
-CONTENTS_RENAMES = {
-    "~contents.md": "contents.md",
-    "_contents.md": "contents.md",
-}
+NUMBERED_INDEX_SOURCE = re.compile(
+    r"^(?P<identifier>\d+(?:\.\d+)*)(?:\.0)?_index(?P<duplicate>\d*)\.md$",
+    re.IGNORECASE,
+)
+NUMBERED_CHINESE_INDEX_SOURCE = re.compile(
+    r"^(?P<identifier>\d+(?:\.\d+)*)(?:\.0)?_简介(?P<duplicate>\d*)\.md$",
+    re.IGNORECASE,
+)
+CONTENTS_SOURCES = {"~contents.md", "_contents.md", "contents.md", "目录.md"}
 
 
 def collect_renames(root: Path) -> list[tuple[Path, Path]]:
@@ -41,9 +46,19 @@ def collect_renames(root: Path) -> list[tuple[Path, Path]]:
                 duplicate = int(index_match.group(1) or 1)
                 target_name = index_filename(Path(directory), duplicate)
             else:
-                target_name = CONTENTS_RENAMES.get(filename)
-                if target_name is None:
-                    continue
+                numbered_match = NUMBERED_INDEX_SOURCE.fullmatch(filename)
+                if numbered_match is not None:
+                    duplicate = int(numbered_match.group("duplicate") or 1)
+                    target_name = index_filename(Path(directory), duplicate)
+                else:
+                    chinese_match = NUMBERED_CHINESE_INDEX_SOURCE.fullmatch(filename)
+                    if chinese_match is not None:
+                        duplicate = int(chinese_match.group("duplicate") or 1)
+                        target_name = index_filename(Path(directory), duplicate)
+                    else:
+                        if filename not in CONTENTS_SOURCES:
+                            continue
+                        target_name = contents_filename(Path(directory))
             source = Path(directory) / filename
             renames.append((source, source.with_name(target_name)))
 
@@ -93,7 +108,7 @@ def rename_index_contents(root: Path, dry_run: bool = False) -> int:
 
 def main() -> int:
     parser = argparse.ArgumentParser(
-        description="递归将索引文件重命名为目录编号对应的 .0_index.md",
+        description="递归将索引文件按目录语言重命名为 .0_简介.md 或 .0_index.md",
     )
     parser.add_argument(
         "root",

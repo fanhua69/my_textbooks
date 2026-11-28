@@ -1,3 +1,7 @@
+# bpipe_and_emsx
+
+**介绍**: bpipe_and_emsx
+
 {
   "title": "bpipe_and_emsx",
   "language": "zh-CN",
@@ -854,3 +858,13 @@
     }
   ]
 }
+
+
+---
+
+## 导航
+
+⬅️ 上一节：[Bloomberg 核心系统解析：B-Pipe 与 EMSX](Bloomberg%20B-Pipe%20%E4%B8%8E%20EMSX%20%E4%B8%9A%E5%8A%A1%E5%8F%8A%E6%9E%B6%E6%9E%84%E8%A7%A3%E6%9E%90.md)
+⏺️ 当前节：[bpipe_and_emsx](bpipe_and_emsx.md)
+➡️ 下一节：无（这是本目录的最后一页）
+⬆️ 返回上级：[1 my_low_latency](contents.md)
