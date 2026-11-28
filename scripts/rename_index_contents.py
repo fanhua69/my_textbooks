@@ -36,7 +36,7 @@ def collect_renames(root: Path) -> list[tuple[Path, Path]]:
         onerror=raise_walk_error,
         followlinks=False,
     ):
-        if Path(directory).name == ".meta":
+        if Path(directory).name in {".meta", ".removed"}:
             subdirectories[:] = []
             continue
         subdirectories[:] = [

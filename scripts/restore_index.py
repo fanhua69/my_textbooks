@@ -26,7 +26,7 @@ import sys
 from collections import defaultdict
 from pathlib import Path
 
-from book_paths import find_book_root
+from book_paths import find_book_root, list_directories
 from index_paths import (
     directory_identifier,
     index_filename,
@@ -56,9 +56,11 @@ def build_directory_index(target_dir: Path):
     identifier_index = defaultdict(list)
 
     # Include target root itself, as well as all subdirectories.
-    directories = [target_dir] + [
-        p for p in target_dir.rglob("*") if p.is_dir()
-    ]
+    directories = list_directories(
+        target_dir,
+        recursive=True,
+        include_start=True,
+    )
 
     for directory in directories:
         exact_index[directory.name].append(directory)

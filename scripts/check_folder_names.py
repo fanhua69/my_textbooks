@@ -4,6 +4,7 @@
 每个教材根目录的索引文件集中存放于 .meta，并以节号命名为 1_index.md、
 1.1_index.md 等。迁移时只调整旧索引中的相对链接，不改正文内容。
 目录及文件中的链接由 check_chapter_links.py 负责更新。
+整理完成后，会把无子项且只有目录索引的叶子目录转换为同名 Markdown 文件。
 
 Examples:
     1.01_Alpha
@@ -28,6 +29,7 @@ import sys
 from pathlib import Path
 
 from book_paths import discover_book_roots
+from change_folder_to_file import change_folders_to_files
 from index_paths import (
     index_filename,
     is_index_marker_name,
@@ -179,7 +181,7 @@ def normalize_index_files(
             print(f"  [预览重命名] {old.name} -> {new.name}")
         for directory, subdirectories, files in os.walk(root):
             subdirectories[:] = [
-                name for name in subdirectories if name != ".meta"
+                name for name in subdirectories if name not in {".meta", ".removed"}
             ]
             for filename in files:
                 if is_index_marker_name(filename):
@@ -249,6 +251,9 @@ def main() -> int:
             }
             rename_safely(renames, args.dry_run)
             normalize_index_files(root, args.dry_run, directory_targets)
+            result = change_folders_to_files(root, dry_run=args.dry_run)
+            if result:
+                return result
         except OSError as exc:
             print(f"错误: 处理书籍根目录失败: {exc}", file=sys.stderr)
             return 1

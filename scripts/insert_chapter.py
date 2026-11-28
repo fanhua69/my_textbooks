@@ -17,9 +17,9 @@ import sys
 from pathlib import Path
 from typing import List, Optional, Tuple
 
+from book_paths import find_direct_section_entries, list_section_entries
 from index_paths import (
     index_filename,
-    is_index_marker_name,
     metadata_directory,
     metadata_index_path,
     migrate_indexes_to_metadata,
@@ -27,7 +27,6 @@ from index_paths import (
 
 NUMBER_ONLY_RE = re.compile(r"^\d+(?:\.\d+)*$")
 DIR_NAME_RE = re.compile(r"^(\d+(?:\.\d+)*)_(.+)$")
-CONTAINER_MD_NAMES = {"目录.md", "contents.md"}
 
 
 def validate_section_num(num: str) -> str:
@@ -92,8 +91,8 @@ def replace_prefix_parts(
 
 def list_numbered_dirs(parent: Path) -> List[Tuple[List[int], str, Path]]:
     result: List[Tuple[List[int], str, Path]] = []
-    for p in parent.iterdir():
-        if not p.is_dir():
+    for p, kind in list_section_entries(parent):
+        if kind != "directory":
             continue
         m = DIR_NAME_RE.match(p.name)
         if m:
@@ -105,13 +104,8 @@ def list_numbered_dirs(parent: Path) -> List[Tuple[List[int], str, Path]]:
 
 def list_numbered_markdown_files(parent: Path) -> List[Tuple[List[int], str, Path]]:
     result: List[Tuple[List[int], str, Path]] = []
-    for p in parent.iterdir():
-        if (
-            not p.is_file()
-            or p.suffix.lower() != ".md"
-            or p.name.lower() in CONTAINER_MD_NAMES
-            or is_index_marker_name(p.name)
-        ):
+    for p, kind in list_section_entries(parent):
+        if kind != "file":
             continue
         m = DIR_NAME_RE.match(p.stem)
         if m:
@@ -128,11 +122,8 @@ def list_numbered_entries(parent: Path) -> List[Tuple[List[int], str, Path]]:
 
 
 def find_entry_by_parts(parent: Path, target_parts: List[int]) -> Optional[Path]:
-    for _, _, path in list_numbered_entries(parent):
-        m = DIR_NAME_RE.match(path.name if path.is_dir() else path.stem)
-        if m and number_parts(m.group(1)) == target_parts:
-            return path
-    return None
+    matches = find_direct_section_entries(parent, format_parts(target_parts))
+    return matches[0][0] if matches else None
 
 
 def parent_prefers_markdown(parent: Path) -> bool:
@@ -143,10 +134,12 @@ def parent_prefers_markdown(parent: Path) -> bool:
 
 
 def find_dir_by_parts(parent: Path, target_parts: List[int]) -> Optional[Path]:
-    for parts, _, path in list_numbered_dirs(parent):
-        if parts == target_parts:
-            return path
-    return None
+    matches = find_direct_section_entries(
+        parent,
+        format_parts(target_parts),
+        kind="directory",
+    )
+    return matches[0][0] if matches else None
 
 
 def has_prefix_in_children(parent: Path, prefix_parts: List[int]) -> bool:
@@ -366,16 +359,7 @@ def main() -> None:
 
     textbook_root = Path.cwd().resolve()
 
-    has_chapter = any(
-        p.is_dir() and DIR_NAME_RE.match(p.name)
-        for p in textbook_root.iterdir()
-    ) or any(
-        p.is_file()
-        and p.suffix.lower() == ".md"
-        and p.name.lower() not in CONTAINER_MD_NAMES
-        and DIR_NAME_RE.match(p.stem)
-        for p in textbook_root.iterdir()
-    )
+    has_chapter = bool(list_section_entries(textbook_root))
     if not has_chapter:
         print(f"警告: 当前目录 {textbook_root} 下没有发现「数字_名字」格式的章节目录。")
         print("请确认你是在教材根目录下运行本脚本。\n")

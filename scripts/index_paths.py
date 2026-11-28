@@ -72,7 +72,8 @@ def migrate_indexes_to_metadata(book_root: Path) -> int:
         folder = Path(directory)
         subdirectories[:] = [
             name for name in subdirectories
-            if name != META_DIRECTORY and not (folder / name).is_symlink()
+            if name not in {META_DIRECTORY, ".removed"}
+            and not (folder / name).is_symlink()
         ]
         if folder == meta or meta in folder.parents:
             continue
@@ -142,7 +143,8 @@ def rebase_metadata_links(book_root: Path) -> None:
         folder = Path(directory)
         subdirectories[:] = [
             name for name in subdirectories
-            if name != META_DIRECTORY and not (folder / name).is_symlink()
+            if name not in {META_DIRECTORY, ".removed"}
+            and not (folder / name).is_symlink()
         ]
         if folder == book_root:
             continue

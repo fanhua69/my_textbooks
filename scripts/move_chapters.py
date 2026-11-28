@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-move_chapters.py - Move one or a range of numbered chapter directories.
+move_chapters.py - Move one or a range of numbered sections.
 
 Usage:
     python3 move_chapters.py 1.10 1.2
@@ -8,8 +8,9 @@ Usage:
     python3 move_chapters.py 1.01-1.20 1.60 --dry-run
 
 Directories keep their existing names; section numbers are not changed.
-Run the script from the textbook root or another directory that contains
-all source and target chapter directories.
+Source sections may be directories or Markdown files; the target must be a
+directory. Run the script from the textbook root or another directory that
+contains all source and target sections.
 """
 
 from __future__ import annotations
@@ -90,14 +91,20 @@ def number_parts(number: str) -> list[int]:
     return [int(part) for part in number.split(".")]
 
 
-def find_chapter(root: Path, number: str) -> Path:
+def find_chapter(
+    root: Path,
+    number: str,
+    *,
+    require_directory: bool = False,
+) -> Path:
     matches = [
         path
         for path, kind in find_section_entries(root, number)
-        if kind == "directory"
+        if not require_directory or kind == "directory"
     ]
     if not matches:
-        raise FileNotFoundError(f"找不到编号为 {number} 的章节目录")
+        entry_kind = "章节目录" if require_directory else "章节或 Markdown 文件"
+        raise FileNotFoundError(f"找不到编号为 {number} 的{entry_kind}")
     if len(matches) > 1:
         locations = "\n".join(f"  {path}" for path in matches)
         raise RuntimeError(
@@ -126,7 +133,7 @@ def move_chapters(
     target_number = parse_number(target_spec)
 
     sources = [find_chapter(root, number) for number in source_numbers]
-    target = find_chapter(root, target_number)
+    target = find_chapter(root, target_number, require_directory=True)
 
     source_parents = {path.parent.resolve() for path in sources}
     if len(source_parents) != 1:
@@ -141,7 +148,6 @@ def move_chapters(
     target_children = {
         child.name: child
         for child in target.iterdir()
-        if child.is_dir()
     }
     collisions = [
         source.name

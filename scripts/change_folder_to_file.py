@@ -8,12 +8,18 @@ import os
 import sys
 from pathlib import Path
 
-from book_paths import discover_book_roots
-from index_paths import metadata_index_path, migrate_indexes_to_metadata
+from book_paths import META_DIRECTORY, REMOVED_DIRECTORY, discover_book_roots
+from index_paths import (
+    is_index_marker_name,
+    metadata_index_path,
+    migrate_indexes_to_metadata,
+)
+
+CONTAINER_INDEX_NAMES = {"目录.md", "contents.md"}
 
 
 def find_leaf_index_directories(root: Path) -> list[Path]:
-    """Return empty leaf directories that have a central metadata index."""
+    """Return leaves with only index files and a central or local index."""
     candidates: list[Path] = []
 
     def raise_walk_error(error: OSError) -> None:
@@ -24,17 +30,42 @@ def find_leaf_index_directories(root: Path) -> list[Path]:
         subdirectories[:] = [
             name
             for name in subdirectories
-            if not (directory_path / name).is_symlink()
+            if name not in {META_DIRECTORY, REMOVED_DIRECTORY}
+            and not (directory_path / name).is_symlink()
         ]
         if directory_path == root:
             continue
 
         entries = list(directory_path.iterdir())
         index_path = metadata_index_path(root, directory_path)
+        non_index_entries = [
+            entry
+            for entry in entries
+            if not (
+                entry.is_file()
+                and not entry.is_symlink()
+                and (
+                    is_index_marker_name(entry.name)
+                    or entry.name in CONTAINER_INDEX_NAMES
+                )
+            )
+        ]
+        has_local_index = any(
+            entry.is_file()
+            and not entry.is_symlink()
+            and (
+                is_index_marker_name(entry.name)
+                or entry.name in CONTAINER_INDEX_NAMES
+            )
+            for entry in entries
+        )
         if (
-            not entries
-            and index_path.is_file()
-            and not index_path.is_symlink()
+            not subdirectories
+            and not non_index_entries
+            and (
+                (index_path.is_file() and not index_path.is_symlink())
+                or has_local_index
+            )
         ):
             candidates.append(directory_path)
 
@@ -47,7 +78,8 @@ def change_folders_to_files(root: Path, dry_run: bool = False) -> int:
     if not root.is_dir():
         raise NotADirectoryError(f"Book root not found: {root}")
 
-    migrate_indexes_to_metadata(root)
+    if not dry_run:
+        migrate_indexes_to_metadata(root)
     candidates = find_leaf_index_directories(root)
     blocked = 0
     moved = 0

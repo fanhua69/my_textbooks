@@ -7,12 +7,12 @@ import argparse
 import sys
 from pathlib import Path
 
-from book_paths import find_book_root
+from book_paths import find_book_root, list_section_entries
 from index_paths import metadata_index_path, migrate_indexes_to_metadata
 from insert_chapter import (
     DIR_NAME_RE,
     chapter_to_dir_suffix,
-    list_numbered_dirs,
+    list_numbered_entries,
     number_parts,
 )
 
@@ -20,7 +20,7 @@ from insert_chapter import (
 def first_available_section_num(textbook_root: Path) -> str:
     used_numbers = {
         parts[0]
-        for parts, _, _ in list_numbered_dirs(textbook_root)
+        for parts, _, _ in list_numbered_entries(textbook_root)
         if len(parts) == 1
     }
     section_num = 1
@@ -40,7 +40,7 @@ def resolve_parent_num_and_section_num(
     parent_num = ".".join(str(part) for part in parent_parts)
     used_numbers = {
         parts[-1]
-        for parts, _, _ in list_numbered_dirs(current_dir)
+        for parts, _, _ in list_numbered_entries(current_dir)
         if len(parts) == len(parent_parts) + 1 and parts[:-1] == parent_parts
     }
     section_num = 1
@@ -87,9 +87,8 @@ def main() -> None:
     args = parser.parse_args()
 
     current_dir = Path.cwd().resolve()
-    has_chapter = DIR_NAME_RE.match(current_dir.name) is not None or any(
-        path.is_dir() and DIR_NAME_RE.match(path.name) is not None
-        for path in current_dir.iterdir()
+    has_chapter = DIR_NAME_RE.match(current_dir.name) is not None or bool(
+        list_section_entries(current_dir)
     )
     if not has_chapter:
         print(f"警告: 当前目录 {current_dir} 下没有发现「数字_名字」格式的章节目录。")

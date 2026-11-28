@@ -89,6 +89,7 @@ def trim_utf8_bytes(text: str, max_bytes: int = 180) -> str:
 
 
 def split_sections_with_spans(content: str) -> list[SectionSpan]:
+    """Split at H2 headings and include any leading title/preamble as the first span."""
     lines = content.splitlines(keepends=True)
     raw_spans: list[SectionSpan] = []
     current_raw_title: str | None = None
@@ -138,6 +139,33 @@ def split_sections_with_spans(content: str) -> list[SectionSpan]:
         span for span in raw_spans if span.raw_title.strip() not in excluded
     ]
     if section_spans:
+        leading_end = raw_spans[0].start_line
+        leading_lines = lines[:leading_end]
+        if first_h1 is not None and first_h1[0] < leading_end:
+            leading_title = first_h1[1]
+            heading_line = first_h1[0]
+            leading_lines = (
+                leading_lines[:heading_line] + leading_lines[heading_line + 1 :]
+            )
+        else:
+            leading_title = "主体内容"
+        while leading_lines and (
+            not leading_lines[-1].strip()
+            or re.fullmatch(r"\s*(?:-{3,}|\*{3,}|_{3,})\s*", leading_lines[-1])
+        ):
+            leading_lines.pop()
+        leading_body = "".join(leading_lines).strip()
+        has_leading_title = first_h1 is not None and first_h1[0] < leading_end
+        if leading_body or has_leading_title:
+            section_spans.insert(
+                0,
+                SectionSpan(
+                    raw_title=leading_title,
+                    start_line=0,
+                    end_line=leading_end,
+                    body=leading_body,
+                ),
+            )
         return section_spans
 
     fallback_end = raw_spans[0].start_line if raw_spans else len(lines)
@@ -271,6 +299,7 @@ def split_directory_chapter(
     dry_run: bool,
     force: bool,
     keep_source: bool,
+    archive_original: bool = True,
 ) -> tuple[bool, Path]:
     """Split a directory chapter's numbered index file into sibling Markdown files."""
     book_root = find_book_root(target_dir)
@@ -284,17 +313,16 @@ def split_directory_chapter(
     if not spans:
         return False, index_file
 
-    if not dry_run:
-        removed_dir = metadata_directory(book_root) / "removed"
-        removed_dir.mkdir(parents=True, exist_ok=True)
-
-        archived_name = index_filename(target_dir)
-        archived_file = removed_dir / archived_name
+    if not dry_run and archive_original:
+        removed_dir = book_root / ".removed"
+        archived_file = removed_dir / index_file.name
         if archived_file.exists() and not force:
-            print(f"      removed目录中已存在归档文件（使用 --force 覆盖）: {archived_file}")
-        else:
-            shutil.copy2(index_file, archived_file)
-            print(f"\n已归档原索引文件: {archived_file}")
+            raise FileExistsError(
+                f"归档文件已存在（使用 --force 覆盖）: {archived_file}"
+            )
+        removed_dir.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(index_file, archived_file)
+        print(f"\n已将原索引文件复制到: {archived_file}")
 
     print(f"源目录: {target_dir}")
     print(f"共检测到 {len(spans)} 个可拆分片段:\n")
@@ -378,6 +406,16 @@ def split_file_chapter(
             f"目标 {index_file.name} 已存在（使用 --force 覆盖）: {index_file}"
         )
 
+    removed_dir = book_root / ".removed"
+    archived_file = removed_dir / source_file.name
+    if archived_file.exists() and not force:
+        raise FileExistsError(
+            f"归档文件已存在（使用 --force 覆盖）: {archived_file}"
+        )
+    removed_dir.mkdir(parents=True, exist_ok=True)
+    shutil.copy2(source_file, archived_file)
+    print(f"已将原文件复制到: {archived_file}")
+
     shutil.move(str(source_file), str(index_file))
     print(f"已移动原文件并重命名为: {index_file}")
     return split_directory_chapter(
@@ -386,6 +424,7 @@ def split_file_chapter(
         dry_run=False,
         force=force,
         keep_source=keep_source,
+        archive_original=False,
     )
 
 
