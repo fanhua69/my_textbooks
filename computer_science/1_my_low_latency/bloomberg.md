@@ -75,7 +75,7 @@
 
 ## 导航
 
-⬅️ 上一节：[1.1 bpipe_and_emsx](1.1_1.6%20bpipe_and_emsx/1.1.0_index.md)
+⬅️ 上一节：[1.1 bpipe_and_emsx](.meta/1.1_index.md)
 ⏺️ 当前节：[Bloomberg 经历面试准备指南：高性能实时权限服务（High-Performance Real-Time Entitlement Services）](bloomberg.md)
 ➡️ 下一节：[Bloomberg 核心系统解析：B-Pipe 与 EMSX](Bloomberg%20B-Pipe%20%E4%B8%8E%20EMSX%20%E4%B8%9A%E5%8A%A1%E5%8F%8A%E6%9E%B6%E6%9E%84%E8%A7%A3%E6%9E%90.md)
-⬆️ 返回上级：[1 my_low_latency](contents.md)
+⬆️ 返回上级：[1 my_low_latency](.meta/contents.md)

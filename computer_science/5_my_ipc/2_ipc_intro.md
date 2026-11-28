@@ -105,4 +105,4 @@ macOS 继承了 **BSD / Mach 混合内核（XNU）** 的体系结构，其 IPC �
 ⬅️ 上一节：[1 intro](1_new.md)
 ⏺️ 当前节：[2 IPC Intro](2_ipc_intro.md)
 ➡️ 下一节：[3 launchd](3_launchd.md)
-⬆️ 返回上级：[5 my_ipc](contents.md)
+⬆️ 返回上级：[5 my_ipc](.meta/contents.md)

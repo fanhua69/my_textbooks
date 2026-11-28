@@ -12,7 +12,13 @@ from pathlib import Path
 from urllib.parse import quote
 
 from book_paths import find_book_root
-from index_paths import index_filename, is_index_marker_name
+from index_paths import (
+    is_index_marker_name,
+    metadata_contents_path,
+    metadata_index_path,
+    metadata_directory,
+    migrate_indexes_to_metadata,
+)
 
 
 NUMBER_PREFIX = re.compile(r"^(\d+(?:\.\d+)*)(?:[\s._-]+(.*))?$")
@@ -33,6 +39,7 @@ NAV_LINE = re.compile(
 class Section:
     directory: Path
     name: str
+    book_root: Path
     parent: Section | None = None
     children: list[Section] = field(default_factory=list)
     markdown_path: Path | None = None
@@ -41,14 +48,9 @@ class Section:
     def index_path(self) -> Path:
         if self.markdown_path is not None:
             return self.markdown_path
-        index = self.directory / index_filename(self.directory)
-        if index.is_file():
-            return index
-        for marker_name in ("目录.md", "contents.md"):
-            marker = self.directory / marker_name
-            if marker.is_file():
-                return marker
-        return index
+        if self.directory == self.book_root:
+            return metadata_contents_path(self.book_root)
+        return metadata_index_path(self.book_root, self.directory)
 
     @property
     def clean_name(self) -> str:
@@ -82,6 +84,7 @@ def discover(root_path: Path) -> Section:
     root = Section(
         directory=root_path,
         name=root_path.name,
+        book_root=root_path,
     )
 
     def walk(section: Section) -> None:
@@ -100,6 +103,7 @@ def discover(root_path: Path) -> Section:
                 children = Section(
                     directory=entry,
                     name=entry.name,
+                    book_root=root_path,
                     parent=section,
                 )
                 section.children.append(children)
@@ -113,6 +117,7 @@ def discover(root_path: Path) -> Section:
                     Section(
                         directory=section.directory,
                         name=entry.stem,
+                        book_root=root_path,
                         parent=section,
                         markdown_path=entry,
                     )
@@ -179,7 +184,9 @@ def normalized_intro(text: str) -> str:
 
 
 def relative_link(source: Section, target: Section) -> str:
-    rel = Path(os.path.relpath(target.index_path, source.directory)).as_posix()
+    rel = Path(
+        os.path.relpath(target.index_path, source.index_path.parent)
+    ).as_posix()
     if any(char in rel for char in " ()"):
         return quote(rel, safe="/-._~")
     return rel
@@ -327,6 +334,7 @@ def rebuild_markdown(section: Section, root: Section) -> tuple[str, bool]:
 
 
 def all_markdown_sections(root: Section):
+    metadata_directory(root.book_root).mkdir(parents=True, exist_ok=True)
     for section in iter_sections(root):
         if not section.index_path.exists():
             section.index_path.parent.mkdir(parents=True, exist_ok=True)
@@ -357,6 +365,12 @@ def main() -> int:
 
     if not root_path.is_dir():
         print(f"错误: 根目录不存在: {root_path}", file=sys.stderr)
+        return 1
+
+    try:
+        migrate_indexes_to_metadata(root_path)
+    except OSError as exc:
+        print(f"错误: 无法迁移索引到 .meta: {exc}", file=sys.stderr)
         return 1
 
     root = discover(root_path)

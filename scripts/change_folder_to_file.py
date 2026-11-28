@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Flatten leaf textbook directories containing only a numbered index file."""
+"""Flatten empty leaf textbook directories with an index in the root .meta folder."""
 
 from __future__ import annotations
 
@@ -9,11 +9,11 @@ import sys
 from pathlib import Path
 
 from book_paths import discover_book_roots
-from index_paths import index_filename
+from index_paths import metadata_index_path, migrate_indexes_to_metadata
 
 
 def find_leaf_index_directories(root: Path) -> list[Path]:
-    """Return directories whose only entry is the expected numbered index file."""
+    """Return empty leaf directories that have a central metadata index."""
     candidates: list[Path] = []
 
     def raise_walk_error(error: OSError) -> None:
@@ -30,11 +30,11 @@ def find_leaf_index_directories(root: Path) -> list[Path]:
             continue
 
         entries = list(directory_path.iterdir())
+        index_path = metadata_index_path(root, directory_path)
         if (
-            len(entries) == 1
-            and entries[0].name == index_filename(directory_path)
-            and entries[0].is_file()
-            and not entries[0].is_symlink()
+            not entries
+            and index_path.is_file()
+            and not index_path.is_symlink()
         ):
             candidates.append(directory_path)
 
@@ -47,6 +47,7 @@ def change_folders_to_files(root: Path, dry_run: bool = False) -> int:
     if not root.is_dir():
         raise NotADirectoryError(f"Book root not found: {root}")
 
+    migrate_indexes_to_metadata(root)
     candidates = find_leaf_index_directories(root)
     blocked = 0
     moved = 0
@@ -55,7 +56,7 @@ def change_folders_to_files(root: Path, dry_run: bool = False) -> int:
     print(f"符合条件的叶子目录: {len(candidates)}\n")
 
     for directory in candidates:
-        source = directory / index_filename(directory)
+        source = metadata_index_path(root, directory)
         destination = directory.parent / f"{directory.name}.md"
 
         if destination.exists() or destination.is_symlink():
@@ -98,7 +99,7 @@ def change_folders_to_files(root: Path, dry_run: bool = False) -> int:
 
 def main() -> int:
     parser = argparse.ArgumentParser(
-        description="将仅含编号索引文件的叶子目录转换为同名 Markdown 文件"
+        description="将空叶子目录及其 .meta 索引转换为同名 Markdown 文件"
     )
     parser.add_argument(
         "--root",

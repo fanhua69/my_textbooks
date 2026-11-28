@@ -5,8 +5,8 @@
 """
 Recursively collect all files from a textbook directory.
 
-Index marker files retain their numbered directory index name:
-2.1_data/2.1.0_index.md -> 2.1.0_index.md (English-named directory)
+Central metadata index files retain their section-numbered names:
+.meta/2.1_index.md -> 2.1_index.md
 
 Other files are prefixed with the same section number when they are
 inside a numbered directory:
@@ -63,7 +63,9 @@ def collect_index_files(source_dir: Path, dest_dir: Path):
     for src in sorted(source_files, key=lambda p: p.as_posix()):
         section_number = get_section_number(src.parent, source_dir)
 
-        if is_index_marker_name(src.name):
+        if src.parent.name == ".meta":
+            target_name = src.name
+        elif is_index_marker_name(src.name):
             marker_parts = index_marker_parts(src.name)
             target_name = index_filename(
                 src.parent,

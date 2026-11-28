@@ -8,7 +8,6 @@ from pathlib import Path
 
 
 SECTION_NUMBER_RE = re.compile(r"^(\d+(?:\.\d+)*)(?:_|$)")
-BOOK_MARKER_NAMES = ("目录.md", "contents.md")
 
 
 def find_book_root(start: Path) -> Path:
@@ -19,7 +18,11 @@ def find_book_root(start: Path) -> Path:
         current = current.parent
 
     while True:
-        if any((current / name).is_file() for name in BOOK_MARKER_NAMES):
+        has_metadata_contents = (current / ".meta" / "contents.md").is_file()
+        has_legacy_contents = current.name != ".meta" and any(
+            (current / name).is_file() for name in ("目录.md", "contents.md")
+        )
+        if has_metadata_contents or has_legacy_contents:
             return current
         if current == home_dir or current.parent == current:
             break
@@ -40,6 +43,8 @@ def find_section_entries(start: Path, section_num: str) -> list[tuple[Path, str]
     matches: list[tuple[Path, str]] = []
 
     for path in book_root.rglob("*"):
+        if ".meta" in path.relative_to(book_root).parts:
+            continue
         if path.is_dir():
             kind = "directory"
             name = path.name.strip()
@@ -76,15 +81,19 @@ def discover_book_roots(start: Path) -> list[Path]:
     roots: list[Path] = []
     for directory, subdirectories, files in os.walk(current, onerror=raise_walk_error):
         directory_path = Path(directory)
+        if directory_path.name == ".meta":
+            subdirectories[:] = []
+            continue
         subdirectories[:] = [
             name
             for name in subdirectories
             if not (directory_path / name).is_symlink()
         ]
-        if any(
+        has_root_marker = (directory_path / ".meta" / "contents.md").is_file() or any(
             name in files and (directory_path / name).is_file()
-            for name in BOOK_MARKER_NAMES
-        ):
+            for name in ("目录.md", "contents.md")
+        )
+        if has_root_marker:
             roots.append(directory_path)
 
     return sorted(roots)

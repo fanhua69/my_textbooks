@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Rename legacy index files to Chinese numbered markers and normalize contents names."""
+"""Move legacy numbered index files into the textbook's .meta directory."""
 
 from __future__ import annotations
 
@@ -9,7 +9,8 @@ import re
 import sys
 from pathlib import Path
 
-from index_paths import contents_filename, index_filename
+from book_paths import discover_book_roots
+from index_paths import index_filename, migrate_indexes_to_metadata
 
 INDEX_SOURCE = re.compile(r"^(?:~|_)?index(\d*)\.md$", re.IGNORECASE)
 NUMBERED_INDEX_SOURCE = re.compile(
@@ -35,6 +36,9 @@ def collect_renames(root: Path) -> list[tuple[Path, Path]]:
         onerror=raise_walk_error,
         followlinks=False,
     ):
+        if Path(directory).name == ".meta":
+            subdirectories[:] = []
+            continue
         subdirectories[:] = [
             name
             for name in subdirectories
@@ -55,12 +59,18 @@ def collect_renames(root: Path) -> list[tuple[Path, Path]]:
                     if chinese_match is not None:
                         duplicate = int(chinese_match.group("duplicate") or 1)
                         target_name = index_filename(Path(directory), duplicate)
+                    elif filename in CONTENTS_SOURCES:
+                        target_name = (
+                            "contents.md"
+                            if filename in {"~contents.md", "_contents.md"}
+                            else filename
+                        )
                     else:
-                        if filename not in CONTENTS_SOURCES:
-                            continue
-                        target_name = contents_filename(Path(directory))
+                        continue
             source = Path(directory) / filename
-            renames.append((source, source.with_name(target_name)))
+            target = source.with_name(target_name)
+            if source != target:
+                renames.append((source, target))
 
     return sorted(renames, key=lambda item: item[0].as_posix())
 
@@ -98,6 +108,16 @@ def rename_index_contents(root: Path, dry_run: bool = False) -> int:
         renamed += 1
         print(f"[完成] {source.relative_to(root)} -> {target.relative_to(root)}")
 
+    if not dry_run:
+        try:
+            roots = discover_book_roots(root)
+            for book_root in roots:
+                moved = migrate_indexes_to_metadata(book_root)
+                print(f"[完成] 已迁移 {moved} 个索引文件到 {book_root / '.meta'}")
+        except OSError as error:
+            print(f"[失败] 无法迁移索引到 .meta: {error}", file=sys.stderr)
+            return 1
+
     if dry_run:
         print(f"\n预览完成: {len(renames) - skipped} 个可重命名，{skipped} 个跳过或失败。")
     else:
@@ -108,7 +128,7 @@ def rename_index_contents(root: Path, dry_run: bool = False) -> int:
 
 def main() -> int:
     parser = argparse.ArgumentParser(
-        description="递归将索引文件按目录语言重命名为 .0_简介.md 或 .0_index.md",
+        description="递归将索引文件集中迁移到各教材根目录的 .meta 中",
     )
     parser.add_argument(
         "root",

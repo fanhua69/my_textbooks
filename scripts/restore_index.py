@@ -8,7 +8,7 @@ Rules:
 1. Match filename with directory name first (exact match).
 2. If no exact match, remove leading section numbers (e.g. 1.2.3_)
    from both names and compare again.
-3. Copy the source file into the matched directory as its numbered language-specific index.
+3. Copy the source file into the textbook root's .meta directory as its numbered index.
 4. If that index (or its numbered duplicates) already exists:
    - If any of them has identical content to the source file: skip copying.
    - Otherwise: save the source as the next available numbered index duplicate.
@@ -26,7 +26,15 @@ import sys
 from collections import defaultdict
 from pathlib import Path
 
-from index_paths import directory_identifier, index_filename, index_marker_parts
+from book_paths import find_book_root
+from index_paths import (
+    directory_identifier,
+    index_filename,
+    index_marker_parts,
+    metadata_directory,
+    metadata_index_path,
+    migrate_indexes_to_metadata,
+)
 
 
 # Match section numbers such as:
@@ -111,7 +119,8 @@ def get_destination_file(target_dir: Path, source_file: Path):
     - (None, existing_file)  : identical content already exists, skip copying
     """
 
-    index_file = target_dir / index_filename(target_dir)
+    book_root = find_book_root(target_dir)
+    index_file = metadata_index_path(book_root, target_dir)
     # No primary numbered index file.
     if not index_file.exists():
         return index_file, None
@@ -119,7 +128,7 @@ def get_destination_file(target_dir: Path, source_file: Path):
     # Collect existing numbered index files for this directory.
     index_pattern = re.compile(rf"^{re.escape(index_file.stem)}(\d*)\.md$")
     existing = {}
-    for p in target_dir.iterdir():
+    for p in index_file.parent.iterdir():
         m = index_pattern.match(p.name)
         if m and p.is_file():
             existing[int(m.group(1) or 1)] = p
@@ -135,7 +144,7 @@ def get_destination_file(target_dir: Path, source_file: Path):
     while number in existing:
         number += 1
 
-    return target_dir / index_filename(target_dir, number), None
+    return metadata_directory(book_root) / index_filename(target_dir, number), None
 
 
 def restore_index_files(source_dir: Path, target_dir: Path):
@@ -152,6 +161,7 @@ def restore_index_files(source_dir: Path, target_dir: Path):
         raise NotADirectoryError(
             f"Target directory not found: {target_dir}"
         )
+    migrate_indexes_to_metadata(find_book_root(target_dir))
 
     # Build directory lookup indexes.
     exact_index, normalized_index, identifier_index = build_directory_index(target_dir)

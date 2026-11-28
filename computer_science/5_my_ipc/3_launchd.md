@@ -49,5 +49,5 @@ launchctl list
 
 ⬅️ 上一节：[2 IPC Intro](2_ipc_intro.md)
 ⏺️ 当前节：[3 launchd](3_launchd.md)
-➡️ 下一节：[4 systemd](4_systemd/4.0_index.md)
-⬆️ 返回上级：[5 my_ipc](contents.md)
+➡️ 下一节：[4 systemd](.meta/4_index.md)
+⬆️ 返回上级：[5 my_ipc](.meta/contents.md)

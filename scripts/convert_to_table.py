@@ -13,16 +13,18 @@ import sys
 from pathlib import Path
 
 from book_paths import find_book_root, find_section_entries
-from index_paths import index_filename
+from index_paths import metadata_index_path, migrate_indexes_to_metadata
 
 
 def find_chapter_markdown(start: Path, section_num: str) -> Path:
+    book_root = find_book_root(start)
+    migrate_indexes_to_metadata(book_root)
     entries = find_section_entries(start, section_num)
     matches: list[tuple[Path, str]] = []
 
     for path, kind in entries:
         if kind == "directory":
-            index_path = path / index_filename(path)
+            index_path = metadata_index_path(book_root, path)
             if index_path.is_file():
                 matches.append((index_path, kind))
         else:
@@ -30,7 +32,6 @@ def find_chapter_markdown(start: Path, section_num: str) -> Path:
 
     matches.sort(key=lambda item: (item[1], str(item[0])))
     if not matches:
-        book_root = find_book_root(start)
         raise FileNotFoundError(
             f"在书籍根目录 '{book_root}' 下未找到节号为 '{section_num}' 的 Markdown 文件"
         )

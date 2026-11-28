@@ -11,7 +11,12 @@ import sys
 from pathlib import Path
 from typing import Any
 
-from index_paths import contents_filename, index_filename, is_index_marker_name
+from index_paths import (
+    is_index_marker_name,
+    metadata_contents_path,
+    metadata_directory,
+    metadata_index_path,
+)
 
 
 def safe_component(value: str) -> str:
@@ -127,6 +132,7 @@ def create_outline(
     raw_children: list[dict[str, Any]],
     parent: Path,
     number_prefix: str,
+    book_root: Path,
 ) -> None:
     for index, child in enumerate(raw_children, 1):
         number = f"{number_prefix}.{index}" if number_prefix else str(index)
@@ -136,9 +142,9 @@ def create_outline(
         if children:
             child_dir = parent / slug
             child_dir.mkdir(parents=True, exist_ok=True)
-            create_markdown_file(child_dir / index_filename(child_dir))
+            create_markdown_file(metadata_index_path(book_root, child_dir))
             create_json_markdown_files(child, child_dir)
-            create_outline(children, child_dir, number)
+            create_outline(children, child_dir, number, book_root)
         else:
             filename = f"{number}_{re.sub(r'^\d+(?:\.\d+)*[_\s]+', '', slug)}.md"
             create_markdown_file(parent / filename)
@@ -151,9 +157,10 @@ def create_folder_and_files(json_file: Path, output_dir: Path) -> Path:
 
     root_dir = output_dir / safe_component(data["title"])
     root_dir.mkdir(parents=True, exist_ok=True)
+    metadata_directory(root_dir).mkdir(parents=True, exist_ok=True)
     create_json_markdown_files(data, root_dir)
-    create_outline(get_children(data), root_dir, "")
-    create_markdown_file(root_dir / contents_filename(root_dir))
+    create_outline(get_children(data), root_dir, "", root_dir)
+    create_markdown_file(metadata_contents_path(root_dir))
     return root_dir
 
 

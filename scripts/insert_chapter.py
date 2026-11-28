@@ -17,7 +17,13 @@ import sys
 from pathlib import Path
 from typing import List, Optional, Tuple
 
-from index_paths import is_index_marker_name
+from index_paths import (
+    index_filename,
+    is_index_marker_name,
+    metadata_directory,
+    metadata_index_path,
+    migrate_indexes_to_metadata,
+)
 
 NUMBER_ONLY_RE = re.compile(r"^\d+(?:\.\d+)*$")
 DIR_NAME_RE = re.compile(r"^(\d+(?:\.\d+)*)_(.+)$")
@@ -255,7 +261,11 @@ def insert_chapter(
         f"{parent_dir.relative_to(textbook_root) if parent_dir != textbook_root else '(教材根目录)'}"
     )
     print()
-
+    insert_path = (
+        parent_dir / new_markdown_name
+        if prefer_markdown
+        else parent_dir / new_dir_name
+    )
     if existing is not None:
         print(f"注意: 编号 {formatted_target_num} 已存在 → {existing.name}")
         print("将把该节点及之后的所有兄弟节点整体 +1（并按新位宽格式化）后，再插入新节点。\n")
@@ -266,6 +276,10 @@ def insert_chapter(
         for parts, num_str, path in siblings
         if len(parts) == len(target_parts) and parts >= target_parts
     ]
+    if insert_path.exists() and all(path != insert_path for _, _, path in to_shift):
+        raise FileExistsError(f"节点已存在: {insert_path}")
+    if not dry_run:
+        migrate_indexes_to_metadata(textbook_root)
 
     if to_shift:
         print(f"需要重编号/后移的同级节点（共 {len(to_shift)} 个）:")
@@ -273,6 +287,8 @@ def insert_chapter(
             print(f"  {path.name}")
         print()
 
+        metadata_renames: list[tuple[Path, Path]] = []
+        meta_dir = metadata_directory(textbook_root)
         for parts, _, path in sorted(to_shift, key=lambda item: item[0], reverse=True):
             shifted_parts = list(parts)
             shifted_parts[-1] += 1
@@ -287,6 +303,12 @@ def insert_chapter(
                     if dry_run:
                         print(f"  [DRY] 重命名: {path.name}  →  {new_name}")
                     else:
+                        metadata_renames.append(
+                            (
+                                meta_dir / index_filename(path),
+                                meta_dir / index_filename(new_path),
+                            )
+                        )
                         print(f"  重命名: {path.name}  →  {new_name}")
                         path.rename(new_path)
             else:
@@ -300,28 +322,37 @@ def insert_chapter(
                         print(f"  重命名: {path.name}  →  {new_name}")
                         path.rename(new_path)
             print()
+        if not dry_run:
+            sources = {old for old, _ in metadata_renames if old.is_file()}
+            for _, target in metadata_renames:
+                if target.exists() and target not in sources:
+                    raise FileExistsError(f"元数据索引目标已存在: {target}")
+            temporary_renames: list[tuple[Path, Path]] = []
+            for index, (old, new) in enumerate(metadata_renames):
+                if not old.is_file() or old == new:
+                    continue
+                temporary = meta_dir / f".__insert_index_{index}.tmp"
+                old.rename(temporary)
+                temporary_renames.append((temporary, new))
+            for temporary, target in temporary_renames:
+                temporary.rename(target)
     else:
         print("没有需要后移的同级节点，直接插入。\n")
 
-    new_path = (
-        parent_dir / new_markdown_name
-        if prefer_markdown
-        else parent_dir / new_dir_name
-    )
-    if new_path.exists():
-        raise FileExistsError(f"节点已存在: {new_path}")
-
     if dry_run:
-        print(f"[DRY] 将创建{'Markdown 文件' if prefer_markdown else '目录'}: {new_path}")
+        print(f"[DRY] 将创建{'Markdown 文件' if prefer_markdown else '目录'}: {insert_path}")
     elif prefer_markdown:
-        new_path.touch()
-        print(f"已创建Markdown文件: {new_path.relative_to(textbook_root)}")
+        insert_path.touch()
+        print(f"已创建Markdown文件: {insert_path.relative_to(textbook_root)}")
     else:
-        new_path.mkdir(parents=False)
-        print(f"已创建目录: {new_path.relative_to(textbook_root)}")
+        insert_path.mkdir(parents=False)
+        index_path = metadata_index_path(textbook_root, insert_path)
+        index_path.parent.mkdir(parents=True, exist_ok=True)
+        index_path.touch()
+        print(f"已创建目录: {insert_path.relative_to(textbook_root)}")
 
     print("\n完成。")
-    return new_path
+    return insert_path
 
 
 def main() -> None:

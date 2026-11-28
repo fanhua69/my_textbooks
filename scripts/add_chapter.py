@@ -7,6 +7,8 @@ import argparse
 import sys
 from pathlib import Path
 
+from book_paths import find_book_root
+from index_paths import metadata_index_path, migrate_indexes_to_metadata
 from insert_chapter import (
     DIR_NAME_RE,
     chapter_to_dir_suffix,
@@ -53,12 +55,15 @@ def add_chapter(
     chapter_name: str,
     dry_run: bool = False,
 ) -> Path:
+    book_root = find_book_root(current_dir)
     _, section_num = resolve_parent_num_and_section_num(current_dir)
     dir_suffix = chapter_to_dir_suffix(chapter_name)
     new_dir = current_dir / f"{section_num}_{dir_suffix}"
 
     if new_dir.exists():
         raise FileExistsError(f"目录已存在: {new_dir}")
+    if not dry_run:
+        migrate_indexes_to_metadata(book_root)
 
     print(f"自动选择第一个可用节号: {section_num}")
     print(f"新目录名 : {new_dir.name}")
@@ -66,6 +71,9 @@ def add_chapter(
         print(f"[DRY] 将创建目录: {new_dir}")
     else:
         new_dir.mkdir()
+        index_path = metadata_index_path(book_root, new_dir)
+        index_path.parent.mkdir(parents=True, exist_ok=True)
+        index_path.touch()
         print(f"已创建目录: {new_dir.name}")
     return new_dir
 

@@ -8,7 +8,12 @@ from dataclasses import dataclass
 from pathlib import Path
 
 from book_paths import find_book_root, find_section_entries
-from index_paths import index_filename
+from index_paths import (
+    index_filename,
+    metadata_directory,
+    metadata_index_path,
+    migrate_indexes_to_metadata,
+)
 
 
 @dataclass
@@ -187,9 +192,8 @@ def extract_summary(sec_title: str, clean_body: str) -> str:
 def build_links_block(entries: list[tuple[str, str, str]]) -> str:
     out_lines = ["## 小节索引", ""]
     for sub_id, display_title, sub_dir_name in entries:
-        encoded_dir = sub_dir_name.replace(" ", "%20")
         out_lines.append(
-            f"- [{sub_id} {display_title}](./{encoded_dir}/{index_filename(sub_dir_name)})"
+            f"- [{sub_id} {display_title}](./{index_filename(sub_dir_name)})"
         )
     return "\n".join(out_lines)
 
@@ -227,7 +231,9 @@ def split_directory_chapter(
     keep_source: bool,
 ) -> tuple[bool, Path]:
     """Split a directory chapter's numbered index file into sibling Markdown files."""
-    index_file = target_dir / index_filename(target_dir)
+    book_root = find_book_root(target_dir)
+    migrate_indexes_to_metadata(book_root)
+    index_file = metadata_index_path(book_root, target_dir)
     if not index_file.is_file():
         raise FileNotFoundError(f"错误: 未找到文件 '{index_file}'")
 
@@ -237,8 +243,7 @@ def split_directory_chapter(
         return False, index_file
 
     if not dry_run:
-        book_root = find_book_root(index_file)
-        removed_dir = book_root / "removed"
+        removed_dir = metadata_directory(book_root) / "removed"
         removed_dir.mkdir(parents=True, exist_ok=True)
 
         archived_name = index_filename(target_dir)
@@ -311,7 +316,8 @@ def split_file_chapter(
     print(f"新建目录: {target_dir}")
 
     if dry_run:
-        new_index = target_dir / index_filename(target_dir)
+        book_root = find_book_root(source_file)
+        new_index = metadata_index_path(book_root, target_dir)
         print(f"  [{new_index}]")
         content = source_file.read_text(encoding="utf-8")
         spans = split_sections_with_spans(content)
@@ -321,7 +327,10 @@ def split_file_chapter(
         return split_directory_dry_run(target_dir, chapter_id, spans)
 
     target_dir.mkdir(parents=True, exist_ok=True)
-    index_file = target_dir / index_filename(target_dir)
+    book_root = find_book_root(target_dir)
+    migrate_indexes_to_metadata(book_root)
+    index_file = metadata_index_path(book_root, target_dir)
+    index_file.parent.mkdir(parents=True, exist_ok=True)
     if index_file.exists() and not force:
         raise FileExistsError(
             f"目标 {index_file.name} 已存在（使用 --force 覆盖）: {index_file}"

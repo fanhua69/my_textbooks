@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-"""Recursively normalize numbered directories, Markdown files, and index files.
+"""Recursively normalize numbered directories and centralize indexes under .meta.
 
-此脚本不读取或修改 Markdown 内容。索引文件会保留体积最大的一份，
-其余索引文件删除，并将保留文件命名为目录节号对应的 .0_简介.md 或 .0_index.md。
+每个教材根目录的索引文件集中存放于 .meta，并以节号命名为 1_index.md、
+1.1_index.md 等。迁移时只调整旧索引中的相对链接，不改正文内容。
 目录及文件中的链接由 check_chapter_links.py 负责更新。
 
 Examples:
@@ -28,7 +28,12 @@ import sys
 from pathlib import Path
 
 from book_paths import discover_book_roots
-from index_paths import index_filename, is_index_marker_name
+from index_paths import (
+    index_filename,
+    is_index_marker_name,
+    metadata_directory,
+    migrate_indexes_to_metadata,
+)
 
 
 NUMBERED_NAME_RE = re.compile(r"^(\d+(?:\.\d+)*)[_\s]+(.+)$")
@@ -161,64 +166,46 @@ def normalize_index_files(
     directory_targets: dict[Path, Path] | None = None,
 ) -> None:
     directory_targets = directory_targets or {}
+    meta = metadata_directory(root)
+    rename_pairs = [
+        (meta / index_filename(old), meta / index_filename(target))
+        for old, target in directory_targets.items()
+        if old != target
+    ]
+    rename_pairs = [(old, new) for old, new in rename_pairs if old.is_file() and old != new]
 
-    def raise_walk_error(error: OSError) -> None:
-        raise error
+    if dry_run:
+        for old, new in rename_pairs:
+            print(f"  [预览重命名] {old.name} -> {new.name}")
+        for directory, subdirectories, files in os.walk(root):
+            subdirectories[:] = [
+                name for name in subdirectories if name != ".meta"
+            ]
+            for filename in files:
+                if is_index_marker_name(filename):
+                    print(f"  [预览迁移] {Path(directory) / filename} -> {meta}")
+        return
 
-    for directory, _, _ in os.walk(root, onerror=raise_walk_error):
-        directory_path = Path(directory)
-        index_files = [
-            path
-            for path in directory_path.iterdir()
-            if path.is_file() and is_index_marker_name(path.name)
-        ]
-        if not index_files:
-            continue
+    sources = {old for old, _ in rename_pairs}
+    for _, target in rename_pairs:
+        if target.exists() and target not in sources:
+            raise FileExistsError(f"元数据索引目标已存在: {target}")
 
-        largest = max(
-            index_files,
-            key=lambda path: (
-                path.stat().st_size,
-                path.name.casefold(),
-                path.name,
-            ),
-        )
-        target_directory = directory_targets.get(directory_path, directory_path)
-        target = target_directory / index_filename(target_directory)
-        candidates = set(index_files)
+    temporary_pairs: list[tuple[Path, Path]] = []
+    for index, (old, new) in enumerate(rename_pairs):
+        temporary = meta / f".__index_rename_{index}.tmp"
+        old.rename(temporary)
+        temporary_pairs.append((temporary, new))
+    for temporary, target in temporary_pairs:
+        temporary.rename(target)
 
-        if (
-            not dry_run
-            and target != largest
-            and (target.exists() or target.is_symlink())
-            and target not in candidates
-        ):
-            raise FileExistsError(f"索引目标文件已存在且不属于待整理索引: {target}")
-
-        print(f"整理索引文件: {directory_path}")
-        print(f"  [保留，{largest.stat().st_size} 字节] {largest.name}")
-        for path in index_files:
-            if path != largest:
-                action = "预览删除" if dry_run else "删除"
-                print(f"  [{action}] {path.name}")
-
-        if dry_run:
-            if largest != target:
-                print(f"  [预览重命名] {largest.name} -> {target.name}")
-            continue
-
-        for path in index_files:
-            if path != largest:
-                path.unlink()
-
-        if largest != target:
-            largest.rename(target)
-            print(f"  [重命名] {largest.name} -> {target.name}")
+    moved = migrate_indexes_to_metadata(root)
+    print(f"已将 {moved} 个目录索引迁移到 {meta}")
 
 
 def main() -> int:
     parser = argparse.ArgumentParser(
-        description="递归整理目录和 Markdown 文件编号，并规范化每个目录的索引文件",
+        description="递归整理章节编号并将索引集中存放到教材根目录的 .meta",
     )
     parser.add_argument(
         "--dry-run",

@@ -20,7 +20,8 @@ import shutil
 import sys
 from pathlib import Path
 
-from book_paths import find_section_entries
+from book_paths import find_book_root, find_section_entries
+from index_paths import migrate_indexes_to_metadata
 
 
 NUMBERED_DIR_RE = re.compile(r"^(\d+(?:\.\d+)*)_(.+)$")
@@ -166,6 +167,9 @@ def move_chapters(
         if answer != "yes":
             print("已取消。")
             return
+
+    if not dry_run:
+        migrate_indexes_to_metadata(find_book_root(root))
 
     for source in sources:
         destination = target / source.name
