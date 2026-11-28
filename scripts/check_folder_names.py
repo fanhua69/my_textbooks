@@ -39,7 +39,12 @@ from index_paths import (
 
 
 NUMBERED_NAME_RE = re.compile(r"^(\d+(?:\.\d+)*)[_\s]+(.+)$")
-CONTAINER_FILES = {"目录.md", "contents.md"}
+CONTAINER_FILES = {
+    "目录.md",
+    "contents.md",
+    "0_CONTENTS.md",
+    "0_大纲.md",
+}
 
 
 def number_parts(number: str) -> list[int]:

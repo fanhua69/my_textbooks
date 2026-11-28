@@ -110,7 +110,12 @@ def discover(root_path: Path) -> Section:
             elif (
                 entry.is_file()
                 and entry.suffix.lower() == ".md"
-                and entry.name.lower() not in {"目录.md", "contents.md"}
+                and entry.name not in {
+                    "目录.md",
+                    "contents.md",
+                    "0_CONTENTS.md",
+                    "0_大纲.md",
+                }
                 and not is_index_marker_name(entry.name)
             ):
                 section.children.append(

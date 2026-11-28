@@ -13,6 +13,12 @@ _INDEX_MARKER = re.compile(r"^(.+)\.0_index(\d*)\.md$", re.IGNORECASE)
 _CHINESE_INDEX_MARKER = re.compile(
     r"^(\d+(?:\.\d+)*)(?:\.0)?_简介(\d*)\.md$", re.IGNORECASE
 )
+_INTRODUCTION_MARKER = re.compile(
+    r"^(.+)\.0_介绍(\d*)\.md$", re.IGNORECASE
+)
+_UPPER_INDEX_MARKER = re.compile(
+    r"^(.+)\.0_INDEX(\d*)\.md$", re.IGNORECASE
+)
 _SECTIONED_INDEX_MARKER = re.compile(
     r"^(\d+(?:\.\d+)*)_index(\d*)\.md$", re.IGNORECASE
 )
@@ -27,41 +33,101 @@ def directory_identifier(directory: Path | str) -> str:
     return match.group(1) if match else name
 
 
-def index_filename(directory: Path | str, duplicate: int = 1) -> str:
+def index_filename(
+    directory: Path | str,
+    duplicate: int = 1,
+    *,
+    chinese: bool | None = None,
+) -> str:
     identifier = directory_identifier(directory)
     suffix = "" if duplicate == 1 else str(duplicate)
-    return f"{identifier}_index{suffix}.md"
+    if chinese is None:
+        name = directory.name if isinstance(directory, Path) else str(directory)
+        chinese = bool(re.search(r"[\u3400-\u4dbf\u4e00-\u9fff]", name))
+    if chinese:
+        return f"{identifier}.0_介绍{suffix}.md"
+    return f"{identifier}.0_INDEX{suffix}.md"
 
 
 def metadata_directory(book_root: Path) -> Path:
-    return book_root / META_DIRECTORY
+    return book_root
 
 
 def metadata_contents_path(book_root: Path) -> Path:
-    return metadata_directory(book_root) / "contents.md"
+    for name in ("0_大纲.md", "0_CONTENTS.md", "contents.md", "目录.md"):
+        path = book_root / name
+        if path.is_file():
+            return path
+    name = "0_大纲.md" if re.search(
+        r"[\u3400-\u4dbf\u4e00-\u9fff]",
+        book_root.name,
+    ) else "0_CONTENTS.md"
+    return book_root / name
 
 
 def metadata_index_path(
     book_root: Path,
     section_directory: Path,
     duplicate: int = 1,
+    *,
+    chinese: bool | None = None,
 ) -> Path:
     if section_directory.resolve() == book_root.resolve():
         return metadata_contents_path(book_root)
-    return metadata_directory(book_root) / index_filename(
-        section_directory, duplicate
+    return section_directory / index_filename(
+        section_directory,
+        duplicate,
+        chinese=chinese,
     )
 
 
 def migrate_indexes_to_metadata(book_root: Path) -> int:
-    """Move legacy per-directory indexes into the book's central .meta directory."""
+    """Move legacy indexes into the correct section directory and remove .meta."""
     book_root = book_root.resolve()
-    meta = metadata_directory(book_root)
-    meta.mkdir(parents=True, exist_ok=True)
+    legacy_meta = book_root / META_DIRECTORY
     moved = 0
 
     def raise_walk_error(error: OSError) -> None:
         raise error
+
+    if legacy_meta.is_dir():
+        for name in ("contents.md", "目录.md"):
+            source = legacy_meta / name
+            if source.is_file():
+                destination = metadata_contents_path(book_root)
+                _move_metadata_files([source], destination)
+                moved += 1
+
+        section_directories: dict[str, Path] = {}
+        for directory, subdirectories, _ in os.walk(book_root):
+            folder = Path(directory)
+            subdirectories[:] = [
+                name for name in subdirectories
+                if name not in {META_DIRECTORY, ".removed"}
+                and not (folder / name).is_symlink()
+            ]
+            identifier = directory_identifier(folder)
+            if re.fullmatch(r"\d+(?:\.\d+)*", identifier):
+                section_directories[identifier] = folder
+
+        for source in sorted(legacy_meta.glob("*.md")):
+            marker = index_marker_parts(source.name)
+            if marker is None:
+                continue
+            destination_dir = section_directories.get(marker[0])
+            if destination_dir is not None:
+                destination = metadata_index_path(
+                    book_root,
+                    destination_dir,
+                    marker[1],
+                )
+                _move_metadata_files([source], destination)
+                moved += 1
+
+        try:
+            legacy_meta.rmdir()
+        except OSError:
+            pass
 
     for directory, subdirectories, filenames in os.walk(
         book_root,
@@ -75,62 +141,29 @@ def migrate_indexes_to_metadata(book_root: Path) -> int:
             if name not in {META_DIRECTORY, ".removed"}
             and not (folder / name).is_symlink()
         ]
-        if folder == meta or meta in folder.parents:
+        if folder == legacy_meta:
             continue
-
-        marker_files = [
-            folder / name
-            for name in filenames
-            if (folder / name).is_file()
-            and not (folder / name).is_symlink()
-            and is_index_marker_name(name)
-        ]
-        content_files = [
-            folder / name
-            for name in filenames
-            if name in {"目录.md", "contents.md"}
-            and (folder / name).is_file()
-            and not (folder / name).is_symlink()
-        ]
         if folder == book_root:
-            if content_files:
-                _move_metadata_files(content_files, metadata_contents_path(book_root))
-                moved += len(content_files)
-            for marker_file in marker_files:
-                _move_metadata_files(
-                    [marker_file],
-                    metadata_directory(book_root) / marker_file.name,
-                )
-                moved += 1
-            continue
-
-        relative_parts = folder.relative_to(book_root).parts
-        if "removed" in relative_parts:
-            archive_parts = relative_parts[relative_parts.index("removed") + 1 :]
-            archive_dir = metadata_directory(book_root) / "removed" / Path(
-                *archive_parts
-            )
-            for name in filenames:
-                if not _ARCHIVED_INDEX.fullmatch(name):
-                    continue
+            for name in ("目录.md", "contents.md"):
                 source = folder / name
-                if source.is_file() and not source.is_symlink():
-                    _move_metadata_files([source], [archive_dir / name])
+                if source.is_file():
+                    destination = metadata_contents_path(book_root)
+                    _move_metadata_files([source], destination)
                     moved += 1
             continue
 
-        identifier = directory_identifier(folder)
-        if not re.fullmatch(r"\d+(?:\.\d+)*", identifier):
-            continue
+        for name in filenames:
+            if not is_index_marker_name(name):
+                continue
+            source = folder / name
+            marker = index_marker_parts(name)
+            if marker is None:
+                continue
+            destination = metadata_index_path(book_root, folder, marker[1])
+            if source != destination:
+                _move_metadata_files([source], destination)
+                moved += 1
 
-        marker_files.extend(content_files)
-        if marker_files:
-            _move_metadata_files(
-                marker_files, metadata_index_path(book_root, folder)
-            )
-            moved += len(marker_files)
-
-    rebase_metadata_links(book_root)
     return moved
 
 
@@ -244,6 +277,20 @@ def _move_metadata_files(sources: list[Path], destination: Path) -> None:
 
 
 def index_marker_parts(filename: str) -> tuple[str, int] | None:
+    match = _UPPER_INDEX_MARKER.fullmatch(filename)
+    if match is not None:
+        identifier = match.group(1)
+        if identifier.endswith(".0"):
+            identifier = identifier[:-2]
+        return identifier, int(match.group(2) or 1)
+
+    match = _INTRODUCTION_MARKER.fullmatch(filename)
+    if match is not None:
+        identifier = match.group(1)
+        if identifier.endswith(".0"):
+            identifier = identifier[:-2]
+        return identifier, int(match.group(2) or 1)
+
     match = _INDEX_MARKER.fullmatch(filename)
     if match is not None:
         identifier = match.group(1)
@@ -271,7 +318,9 @@ def index_marker_parts(filename: str) -> tuple[str, int] | None:
 
 def is_index_marker_name(filename: str) -> bool:
     return (
-        _INDEX_MARKER.fullmatch(filename) is not None
+        _UPPER_INDEX_MARKER.fullmatch(filename) is not None
+        or _INTRODUCTION_MARKER.fullmatch(filename) is not None
+        or _INDEX_MARKER.fullmatch(filename) is not None
         or _CHINESE_INDEX_MARKER.fullmatch(filename) is not None
         or _SECTIONED_INDEX_MARKER.fullmatch(filename) is not None
         or _LEGACY_INDEX.fullmatch(filename) is not None

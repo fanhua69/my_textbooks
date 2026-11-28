@@ -36,7 +36,13 @@ def find_book_root(start: Path) -> Path:
         has_legacy_contents = (
             not inside_auxiliary
             and any(
-                (current / name).is_file() for name in ("目录.md", "contents.md")
+                (current / name).is_file()
+                for name in (
+                    "目录.md",
+                    "contents.md",
+                    "0_CONTENTS.md",
+                    "0_大纲.md",
+                )
             )
         )
         if has_metadata_contents or has_legacy_contents:

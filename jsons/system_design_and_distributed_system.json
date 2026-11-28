@@ -1,0 +1,4754 @@
+{
+  "title": "分布式系统工程实践",
+  "language": "zh-CN",
+  "description": "以 C++ 工程实践为主线，面向金融系统、Bloomberg Entitlement、低延迟与高并发场景的分布式系统 + 系统设计教材。覆盖从理论模型到可落地的系统架构、性能工程与综合项目。",
+  "navigation": {
+    "index_filename": "index.md",
+    "hierarchy": [
+      "part",
+      "chapter",
+      "section",
+      "subsection"
+    ],
+    "prev_label": "上一节",
+    "next_label": "下一节",
+    "cross_chapter": true,
+    "cross_part": true
+  },
+  "parts": [
+    {
+      "title": "基础与建模",
+      "slug": "01_基础与建模_Foundations",
+      "intro": "建立分布式系统的问题意识、系统模型、时间观与系统设计目标。",
+      "chapters": [
+        {
+          "title": "分布式系统概述与系统设计目标",
+          "slug": "01_分布式系统概述与系统设计目标_Overview_and_Goals",
+          "intro": "从工程视角说明为什么要分布式，以及代价、目标与权衡。",
+          "sections": [
+            {
+              "title": "为什么需要分布式",
+              "slug": "01_为什么需要分布式_Why_Distributed",
+              "intro": "容量、可用性、地理分布与隔离四类驱动力，以及金融场景的具体体现。",
+              "subsections": [
+                {
+                  "title": "单机容量天花板",
+                  "slug": "01_单机容量天花板_Single_Machine_Limits",
+                  "intro": "CPU、内存、磁盘与网络带宽的物理极限，以及交易系统中的典型瓶颈点。"
+                },
+                {
+                  "title": "可用性与故障隔离需求",
+                  "slug": "02_可用性与故障隔离_Availability_and_Isolation",
+                  "intro": "单点故障的业务代价，以及通过冗余实现故障域隔离的动机。"
+                },
+                {
+                  "title": "地理分布与监管要求",
+                  "slug": "03_地理分布与监管_Geographic_and_Regulatory",
+                  "intro": "跨区域低延迟接入、数据驻留与合规驱动的分布需求。"
+                },
+                {
+                  "title": "业务隔离与多租户",
+                  "slug": "04_业务隔离与多租户_Business_Isolation",
+                  "intro": "不同客户、策略、资产类别之间的隔离需求及其对架构的影响。"
+                }
+              ]
+            },
+            {
+              "title": "分布式八大谬误",
+              "slug": "02_分布式八大谬误_Eight_Fallacies",
+              "intro": "网络可靠、延迟为零等错误假设及其在交易系统中的后果。",
+              "subsections": [
+                {
+                  "title": "网络是可靠的",
+                  "slug": "01_网络是可靠的_Network_is_Reliable",
+                  "intro": "丢包、乱序、重复与分区在真实网络中的表现，以及对订单与行情的影响。"
+                },
+                {
+                  "title": "延迟为零",
+                  "slug": "02_延迟为零_Latency_is_Zero",
+                  "intro": "物理距离、序列化、队列与调度带来的延迟，以及尾延迟放大效应。"
+                },
+                {
+                  "title": "带宽是无限的",
+                  "slug": "03_带宽是无限的_Bandwidth_is_Infinite",
+                  "intro": "行情扇出、快照与日志复制对带宽的实际消耗。"
+                },
+                {
+                  "title": "网络是安全的",
+                  "slug": "04_网络是安全的_Network_is_Secure",
+                  "intro": "中间人、重放与窃听风险，以及金融系统必须默认的安全假设。"
+                },
+                {
+                  "title": "拓扑不会改变",
+                  "slug": "05_拓扑不会改变_Topology_Doesnt_Change",
+                  "intro": "节点上下线、机房切换与路由变化对服务发现和连接管理的冲击。"
+                },
+                {
+                  "title": "只有一个管理员与传输代价为零",
+                  "slug": "06_管理员与传输代价_Admin_and_Transport_Cost",
+                  "intro": "多团队协作、配置漂移以及序列化/拷贝的真实成本。"
+                }
+              ]
+            },
+            {
+              "title": "金融系统中的分布式场景",
+              "slug": "03_金融系统中的分布式场景_Finance_Scenarios",
+              "intro": "行情分发、订单路由、清结算、权限服务、风控与对账的分布式形态。",
+              "subsections": [
+                {
+                  "title": "行情采集与分发",
+                  "slug": "01_行情采集与分发_Market_Data",
+                  "intro": "多源接入、归一化、组播扇出与丢包恢复的典型架构。"
+                },
+                {
+                  "title": "订单接入与路由",
+                  "slug": "02_订单接入与路由_Order_Routing",
+                  "intro": "网关、会话管理、智能路由与多市场接入。"
+                },
+                {
+                  "title": "撮合与风控",
+                  "slug": "03_撮合与风控_Matching_and_Risk",
+                  "intro": "确定性撮合引擎与前置/实时风控的协同。"
+                },
+                {
+                  "title": "清结算与对账",
+                  "slug": "04_清结算与对账_Settlement",
+                  "intro": "账务一致性、日终批处理与差异修复流程。"
+                },
+                {
+                  "title": "权限与数据许可",
+                  "slug": "05_权限与数据许可_Entitlement",
+                  "intro": "Entitlement 检查在订阅与查询路径上的位置。"
+                }
+              ]
+            },
+            {
+              "title": "核心术语与系统分类",
+              "slug": "04_核心术语与系统分类_Terminology",
+              "intro": "节点、副本、分区、事件、状态机、服务边界等术语的统一定义。",
+              "subsections": [
+                {
+                  "title": "节点、进程与副本",
+                  "slug": "01_节点进程与副本_Node_Process_Replica",
+                  "intro": "物理机、容器、进程与逻辑副本的层次关系。"
+                },
+                {
+                  "title": "分区、分片与副本集",
+                  "slug": "02_分区分片与副本集_Partition_Shard",
+                  "intro": "数据水平拆分与副本组的基本概念。"
+                },
+                {
+                  "title": "事件、命令与状态机",
+                  "slug": "03_事件命令与状态机_Event_Command_SM",
+                  "intro": "事件溯源与复制状态机中的核心抽象。"
+                },
+                {
+                  "title": "服务边界与上下文",
+                  "slug": "04_服务边界与上下文_Service_Boundary",
+                  "intro": "领域驱动设计中的限界上下文在分布式中的映射。"
+                }
+              ]
+            },
+            {
+              "title": "系统设计目标与权衡矩阵",
+              "slug": "05_系统设计目标与权衡矩阵_Design_Goals_and_Tradeoffs",
+              "intro": "延迟、吞吐、可用性、一致性、成本、可运维性之间的权衡；金融系统的优先级排序。",
+              "subsections": [
+                {
+                  "title": "延迟 vs 吞吐",
+                  "slug": "01_延迟vs吞吐_Latency_vs_Throughput",
+                  "intro": "批处理增益与尾延迟之间的经典权衡。"
+                },
+                {
+                  "title": "一致性 vs 可用性",
+                  "slug": "02_一致性vs可用性_Consistency_vs_Availability",
+                  "intro": "CAP/PACELC 在具体业务场景下的落地选择。"
+                },
+                {
+                  "title": "成本 vs 冗余",
+                  "slug": "03_成本vs冗余_Cost_vs_Redundancy",
+                  "intro": "多活、异地容灾的真实成本模型。"
+                },
+                {
+                  "title": "可运维性与复杂度",
+                  "slug": "04_可运维性与复杂度_Operability",
+                  "intro": "系统复杂度上升对排障与变更的影响。"
+                },
+                {
+                  "title": "金融场景优先级排序示例",
+                  "slug": "05_金融优先级排序_Finance_Priority",
+                  "intro": "撮合、行情、风控、清结算各自的目标排序差异。"
+                }
+              ]
+            },
+            {
+              "title": "容量规划与增长模型",
+              "slug": "06_容量规划与增长模型_Capacity_Planning",
+              "intro": "从业务指标反推 QPS、带宽、存储与机器规模；预留与弹性。",
+              "subsections": [
+                {
+                  "title": "业务指标到技术指标的映射",
+                  "slug": "01_业务到技术指标映射_Business_to_Tech",
+                  "intro": "订单量、行情更新率、订阅数如何转化为 QPS 与带宽。"
+                },
+                {
+                  "title": "峰值与平均负载建模",
+                  "slug": "02_峰值与平均负载_Peak_vs_Average",
+                  "intro": "开盘、重大事件期间的尖峰特征与预留策略。"
+                },
+                {
+                  "title": "存储与日志增长预估",
+                  "slug": "03_存储与日志增长_Storage_Growth",
+                  "intro": "WAL、快照、历史行情的增长曲线与清理策略。"
+                },
+                {
+                  "title": "弹性与超卖风险",
+                  "slug": "04_弹性与超卖风险_Elasticity",
+                  "intro": "自动扩缩容的边界与金融系统中谨慎使用的原因。"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "系统模型与故障模型",
+          "slug": "02_系统模型与故障模型_System_and_Failure_Models",
+          "intro": "用形式化模型约束对系统行为的推理。",
+          "sections": [
+            {
+              "title": "同步、异步与部分同步",
+              "slug": "01_同步、异步与部分同步_Timing_Models",
+              "intro": "三种时间模型及其对可解问题的影响。",
+              "subsections": [
+                {
+                  "title": "同步模型假设与局限",
+                  "slug": "01_同步模型_Synchronous_Model",
+                  "intro": "有界延迟与有界处理时间的理想假设。"
+                },
+                {
+                  "title": "异步模型与 FLP",
+                  "slug": "02_异步模型与FLP_Asynchronous_Model",
+                  "intro": "无时间假设下共识的不可能性。"
+                },
+                {
+                  "title": "部分同步与 GST",
+                  "slug": "03_部分同步与GST_Partial_Synchrony",
+                  "intro": "全局稳定时间后系统进入同步的现实模型。"
+                },
+                {
+                  "title": "对算法设计的实际影响",
+                  "slug": "04_对算法设计的影响_Impact_on_Algorithms",
+                  "intro": "超时、租约与选举在不同模型下的正确性。"
+                }
+              ]
+            },
+            {
+              "title": "故障类型",
+              "slug": "02_故障类型_Failure_Types",
+              "intro": "崩溃、遗漏、时序与拜占庭故障的区别。",
+              "subsections": [
+                {
+                  "title": "崩溃故障（Crash）",
+                  "slug": "01_崩溃故障_Crash",
+                  "intro": "进程停止响应，是最常见也最易处理的故障。"
+                },
+                {
+                  "title": "遗漏故障（Omission）",
+                  "slug": "02_遗漏故障_Omission",
+                  "intro": "消息发送或接收失败，但进程本身继续运行。"
+                },
+                {
+                  "title": "时序故障（Timing）",
+                  "slug": "03_时序故障_Timing",
+                  "intro": "响应超出预期时间边界，导致超时误判。"
+                },
+                {
+                  "title": "拜占庭故障（Byzantine）",
+                  "slug": "04_拜占庭故障_Byzantine",
+                  "intro": "任意行为，包括恶意与软件缺陷导致的不一致。"
+                },
+                {
+                  "title": "故障模型的选择与代价",
+                  "slug": "05_故障模型选择_Model_Selection",
+                  "intro": "金融系统通常假设崩溃+网络故障，而非完整拜占庭。"
+                }
+              ]
+            },
+            {
+              "title": "网络分区与超时",
+              "slug": "03_网络分区与超时_Partitions_and_Timeouts",
+              "intro": "超时无法区分慢与死，以及由此带来的设计约束。",
+              "subsections": [
+                {
+                  "title": "分区的本质与表现",
+                  "slug": "01_分区的本质_Partition_Nature",
+                  "intro": "网络断开、拥塞与路由黑洞导致的连通性丧失。"
+                },
+                {
+                  "title": "超时的二义性",
+                  "slug": "02_超时的二义性_Timeout_Ambiguity",
+                  "intro": "慢与死不可区分，以及由此产生的重复执行风险。"
+                },
+                {
+                  "title": "分区下的可用性选择",
+                  "slug": "03_分区下的可用性_Availability_under_Partition",
+                  "intro": "CP 与 AP 系统在分区时的具体行为差异。"
+                },
+                {
+                  "title": "工程上的超时设置实践",
+                  "slug": "04_超时设置实践_Timeout_Practice",
+                  "intro": "分层超时、抖动与自适应超时的常见做法。"
+                }
+              ]
+            },
+            {
+              "title": "故障检测器",
+              "slug": "04_故障检测器_Failure_Detectors",
+              "intro": "心跳、Phi Accrual 与租约机制。",
+              "subsections": [
+                {
+                  "title": "心跳与超时检测",
+                  "slug": "01_心跳与超时_Heartbeat",
+                  "intro": "最简单的故障检测实现及其误报问题。"
+                },
+                {
+                  "title": "Phi Accrual 故障检测器",
+                  "slug": "02_Phi_Accrual_Phi_Accrual",
+                  "intro": "基于历史延迟分布的自适应怀疑值。"
+                },
+                {
+                  "title": "租约（Lease）机制",
+                  "slug": "03_租约机制_Lease",
+                  "intro": "有时限的持有权，以及在 leader 选举中的应用。"
+                },
+                {
+                  "title": "检测器的完整性与准确性权衡",
+                  "slug": "04_完整性与准确性_Completeness_Accuracy",
+                  "intro": "最终检测到所有故障 vs 不误判活节点。"
+                }
+              ]
+            },
+            {
+              "title": "故障域与爆炸半径",
+              "slug": "05_故障域与爆炸半径_Failure_Domains",
+              "intro": "进程、机器、机架、可用区、地域的分层故障域设计。",
+              "subsections": [
+                {
+                  "title": "故障域层次划分",
+                  "slug": "01_故障域层次_Domain_Hierarchy",
+                  "intro": "从进程到地域的常见分层及隔离手段。"
+                },
+                {
+                  "title": "爆炸半径控制",
+                  "slug": "02_爆炸半径控制_Blast_Radius",
+                  "intro": "限制故障影响范围的设计原则与实践。"
+                },
+                {
+                  "title": "亲和性与反亲和性部署",
+                  "slug": "03_亲和性与反亲和性_Affinity",
+                  "intro": "副本放置策略对可用性的影响。"
+                },
+                {
+                  "title": "金融系统中的典型故障域案例",
+                  "slug": "04_金融故障域案例_Finance_Cases",
+                  "intro": "撮合引擎、行情网关与权限服务的部署实践。"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "时间、时钟与事件顺序",
+          "slug": "03_时间、时钟与事件顺序_Time_Clocks_Ordering",
+          "intro": "解决“谁先谁后”的问题，是日志、共识和审计的基础。",
+          "sections": [
+            {
+              "title": "物理时钟与时间同步",
+              "slug": "01_物理时钟与时间同步_Physical_Clocks",
+              "intro": "NTP、PTP、时钟漂移与硬件时间戳。",
+              "subsections": [
+                {
+                  "title": "时钟漂移与误差来源",
+                  "slug": "01_时钟漂移与误差_Clock_Drift",
+                  "intro": "晶振精度、温度与 OS 调度对时间的影响。"
+                },
+                {
+                  "title": "NTP 原理与局限",
+                  "slug": "02_NTP原理与局限_NTP",
+                  "intro": "软件同步的精度上限与金融场景的不足。"
+                },
+                {
+                  "title": "PTP 与硬件时间戳",
+                  "slug": "03_PTP与硬件时间戳_PTP",
+                  "intro": "精密时间协议与网卡硬件辅助。"
+                },
+                {
+                  "title": "金融系统中的时钟要求",
+                  "slug": "04_金融时钟要求_Finance_Clock",
+                  "intro": "MiFID II 等监管对精度与可追溯性的具体要求。"
+                }
+              ]
+            },
+            {
+              "title": "Lamport 逻辑时钟",
+              "slug": "02_Lamport 逻辑时钟_Lamport_Clocks",
+              "intro": "happens-before 关系与全序扩展。",
+              "subsections": [
+                {
+                  "title": "happens-before 关系",
+                  "slug": "01_happens-before关系_Happens_Before",
+                  "intro": "因果先行的形式化定义。"
+                },
+                {
+                  "title": "Lamport 时钟算法",
+                  "slug": "02_Lamport时钟算法_Lamport_Algorithm",
+                  "intro": "计数器更新与消息携带规则。"
+                },
+                {
+                  "title": "全序扩展与并发事件",
+                  "slug": "03_全序扩展_Total_Order",
+                  "intro": "如何把偏序扩展为全序，以及并发的判定。"
+                },
+                {
+                  "title": "在日志与调试中的应用",
+                  "slug": "04_日志与调试应用_Log_and_Debug",
+                  "intro": "因果日志排序与分布式调试。"
+                }
+              ]
+            },
+            {
+              "title": "向量时钟与版本向量",
+              "slug": "03_向量时钟与版本向量_Vector_Clocks",
+              "intro": "并发检测与冲突识别。",
+              "subsections": [
+                {
+                  "title": "向量时钟结构与更新规则",
+                  "slug": "01_向量时钟结构_Vector_Structure",
+                  "intro": "每个节点维护的版本向量及其合并。"
+                },
+                {
+                  "title": "并发检测",
+                  "slug": "02_并发检测_Concurrency_Detection",
+                  "intro": "如何准确判断两个事件是否并发。"
+                },
+                {
+                  "title": "版本向量在复制中的应用",
+                  "slug": "03_版本向量应用_Version_Vectors",
+                  "intro": "多副本下的冲突检测与解决提示。"
+                },
+                {
+                  "title": "空间开销与裁剪",
+                  "slug": "04_空间开销与裁剪_Space_and_Pruning",
+                  "intro": "节点动态变化时的向量膨胀与裁剪策略。"
+                }
+              ]
+            },
+            {
+              "title": "混合逻辑时钟 HLC",
+              "slug": "04_混合逻辑时钟 HLC_Hybrid_Logical_Clocks",
+              "intro": "兼顾物理时间可读性与因果顺序。",
+              "subsections": [
+                {
+                  "title": "HLC 的动机与结构",
+                  "slug": "01_HLC动机与结构_HLC_Motivation",
+                  "intro": "物理时间 + 逻辑计数器的组合。"
+                },
+                {
+                  "title": "HLC 更新与比较规则",
+                  "slug": "02_HLC更新与比较_HLC_Rules",
+                  "intro": "发送、接收与本地事件的处理。"
+                },
+                {
+                  "title": "与 TrueTime 的对比",
+                  "slug": "03_与TrueTime对比_vs_TrueTime",
+                  "intro": "不确定性窗口与因果保证的差异。"
+                },
+                {
+                  "title": "在分布式数据库中的落地",
+                  "slug": "04_分布式数据库落地_DB_Usage",
+                  "intro": "CockroachDB 等系统中的实际使用。"
+                }
+              ]
+            },
+            {
+              "title": "金融合规时间戳",
+              "slug": "05_金融合规时间戳_Regulatory_Timestamps",
+              "intro": "监管对时钟精度与可追溯性的要求（如 MiFID II）及工程落地。",
+              "subsections": [
+                {
+                  "title": "监管精度要求概述",
+                  "slug": "01_监管精度要求_Regulatory_Precision",
+                  "intro": "微秒级、纳秒级要求与适用业务。"
+                },
+                {
+                  "title": "时间戳的产生与绑定",
+                  "slug": "02_时间戳产生与绑定_Timestamp_Generation",
+                  "intro": "在网关、撮合、行情路径上的打点位置。"
+                },
+                {
+                  "title": "可追溯与审计链",
+                  "slug": "03_可追溯与审计链_Traceability",
+                  "intro": "从原始事件到监管报告的完整时间链路。"
+                },
+                {
+                  "title": "工程落地常见问题",
+                  "slug": "04_工程落地问题_Implementation_Issues",
+                  "intro": "跨主机对齐、闰秒、夏令时与故障场景。"
+                }
+              ]
+            },
+            {
+              "title": "事件时间、处理时间与水印",
+              "slug": "06_事件时间与水印_Event_Time_and_Watermarks",
+              "intro": "流处理中的时间语义与乱序处理基础。",
+              "subsections": [
+                {
+                  "title": "事件时间 vs 处理时间",
+                  "slug": "01_事件时间vs处理时间_Event_vs_Processing",
+                  "intro": "两种时间语义的定义与适用场景。"
+                },
+                {
+                  "title": "水印机制",
+                  "slug": "02_水印机制_Watermarks",
+                  "intro": "表示“不会再有更早事件”的进度信号。"
+                },
+                {
+                  "title": "乱序与延迟到达处理",
+                  "slug": "03_乱序与延迟_Out_of_Order",
+                  "intro": "允许的乱序窗口与迟到数据处理策略。"
+                },
+                {
+                  "title": "在金融流计算中的应用",
+                  "slug": "04_金融流计算应用_Finance_Stream",
+                  "intro": "成交统计、风险指标与窗口聚合的时间处理。"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "可扩展性与可用性模式",
+          "slug": "04_可扩展性与可用性模式_Scalability_and_Availability",
+          "intro": "系统设计中最常用的模式与决策框架。",
+          "sections": [
+            {
+              "title": "水平扩展与垂直扩展",
+              "slug": "01_水平扩展与垂直扩展_Scale_Out_and_Up",
+              "intro": "无状态服务、有状态服务与分片边界。",
+              "subsections": [
+                {
+                  "title": "垂直扩展的边界",
+                  "slug": "01_垂直扩展边界_Scale_Up_Limits",
+                  "intro": "单机性能提升的边际收益递减。"
+                },
+                {
+                  "title": "无状态服务的水平扩展",
+                  "slug": "02_无状态水平扩展_Stateless_Scale_Out",
+                  "intro": "网关、API 层的典型扩展方式。"
+                },
+                {
+                  "title": "有状态服务的分片",
+                  "slug": "03_有状态分片_Stateful_Sharding",
+                  "intro": "数据分区后的路由与再均衡问题。"
+                },
+                {
+                  "title": "扩展性设计检查清单",
+                  "slug": "04_扩展性检查清单_Scalability_Checklist",
+                  "intro": "从接入到存储的扩展性审查点。"
+                }
+              ]
+            },
+            {
+              "title": "冗余、复制与故障转移",
+              "slug": "02_冗余复制与故障转移_Redundancy_and_Failover",
+              "intro": "主动-被动、主动-主动、仲裁与脑裂防护。",
+              "subsections": [
+                {
+                  "title": "主动-被动（主备）",
+                  "slug": "01_主动被动_Active_Passive",
+                  "intro": "热备、冷备与切换流程。"
+                },
+                {
+                  "title": "主动-主动与多主",
+                  "slug": "02_主动主动_Active_Active",
+                  "intro": "写冲突与冲突解决策略。"
+                },
+                {
+                  "title": "仲裁与脑裂防护",
+                  "slug": "03_仲裁与脑裂_Quorum_Split_Brain",
+                  "intro": "多数派原则与 fencing 机制。"
+                },
+                {
+                  "title": "故障转移的自动化与演练",
+                  "slug": "04_故障转移自动化_Failover_Automation",
+                  "intro": "自动切换的风险与定期演练的必要性。"
+                }
+              ]
+            },
+            {
+              "title": "负载均衡与请求路由",
+              "slug": "03_负载均衡与请求路由_Load_Balancing",
+              "intro": "L4/L7、一致性哈希、P2C、会话保持与健康检查。",
+              "subsections": [
+                {
+                  "title": "L4 与 L7 负载均衡",
+                  "slug": "01_L4与L7_L4_L7",
+                  "intro": "四层与七层的能力差异与适用场景。"
+                },
+                {
+                  "title": "一致性哈希与虚拟节点",
+                  "slug": "02_一致性哈希_Consistent_Hashing",
+                  "intro": "节点增减时的数据迁移最小化。"
+                },
+                {
+                  "title": "Power of Two Choices",
+                  "slug": "03_P2C_P2C",
+                  "intro": "随机选两个再择优的简单高效策略。"
+                },
+                {
+                  "title": "会话保持与健康检查",
+                  "slug": "04_会话保持与健康检查_Sticky_and_Health",
+                  "intro": "有状态连接的路由与摘除不健康节点。"
+                }
+              ]
+            },
+            {
+              "title": "熔断、限流、降级与隔离",
+              "slug": "04_熔断限流降级与隔离_Resilience_Patterns",
+              "intro": "舱壁模式、bulkhead、超时与重试策略的系统设计视角。",
+              "subsections": [
+                {
+                  "title": "限流算法与场景",
+                  "slug": "01_限流算法_Rate_Limiting",
+                  "intro": "令牌桶、漏桶、滑动窗口的选择。"
+                },
+                {
+                  "title": "熔断器状态机",
+                  "slug": "02_熔断器状态机_Circuit_Breaker",
+                  "intro": "关闭、打开、半开状态的转换逻辑。"
+                },
+                {
+                  "title": "降级与舱壁隔离",
+                  "slug": "03_降级与舱壁_Degradation_Bulkhead",
+                  "intro": "核心功能保护与资源隔离。"
+                },
+                {
+                  "title": "重试的幂等与抖动",
+                  "slug": "04_重试幂等与抖动_Retry_Idempotency",
+                  "intro": "避免重试风暴的关键设计。"
+                }
+              ]
+            },
+            {
+              "title": "缓存作为扩展手段",
+              "slug": "05_缓存作为扩展手段_Caching_for_Scale",
+              "intro": "本地缓存、分布式缓存与缓存穿透/击穿/雪崩的系统级应对。",
+              "subsections": [
+                {
+                  "title": "缓存层次与命中率",
+                  "slug": "01_缓存层次_Cache_Layers",
+                  "intro": "进程内、本机、远程缓存的组合策略。"
+                },
+                {
+                  "title": "缓存一致性模型选择",
+                  "slug": "02_缓存一致性模型_Cache_Consistency",
+                  "intro": "强一致、最终一致与旁路缓存的适用场景。"
+                },
+                {
+                  "title": "穿透、击穿与雪崩防护",
+                  "slug": "03_穿透击穿雪崩_Cache_Problems",
+                  "intro": "布隆过滤器、互斥填充与随机过期。"
+                },
+                {
+                  "title": "金融热数据缓存实践",
+                  "slug": "04_金融热数据缓存_Finance_Cache",
+                  "intro": "行情、参考数据与权限结果的缓存策略。"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "C++ 网络与通信基础",
+      "slug": "02_C++ 网络与通信基础_Networking_and_Communication",
+      "intro": "分布式系统的通信底座与 C++ 实现手段。",
+      "chapters": [
+        {
+          "title": "C++ 网络编程模型",
+          "slug": "01_C++ 网络编程模型_Cpp_Network_Models",
+          "intro": "从系统调用到异步框架的完整链路。",
+          "sections": [
+            {
+              "title": "Socket 与 epoll",
+              "slug": "01_Socket 与 epoll_Socket_and_epoll",
+              "intro": "阻塞、非阻塞与事件驱动 IO 的基础。",
+              "subsections": [
+                {
+                  "title": "阻塞与非阻塞 Socket",
+                  "slug": "01_阻塞与非阻塞_Blocking_NonBlocking",
+                  "intro": "系统调用行为差异与编程模型影响。"
+                },
+                {
+                  "title": "select / poll / epoll 对比",
+                  "slug": "02_select_poll_epoll对比_IO_Multiplexing",
+                  "intro": "水平触发与边缘触发的区别与性能。"
+                },
+                {
+                  "title": "epoll 的工程使用模式",
+                  "slug": "03_epoll工程使用_Epoll_Usage",
+                  "intro": "事件循环、连接管理与常见陷阱。"
+                },
+                {
+                  "title": "在金融网关中的应用",
+                  "slug": "04_金融网关应用_Finance_Gateway",
+                  "intro": "高连接数与低延迟要求下的实现要点。"
+                }
+              ]
+            },
+            {
+              "title": "Reactor 与 Proactor",
+              "slug": "02_Reactor 与 Proactor_Reactor_and_Proactor",
+              "intro": "两种并发 IO 模式及适用场景。",
+              "subsections": [
+                {
+                  "title": "Reactor 模式详解",
+                  "slug": "01_Reactor模式_Reactor",
+                  "intro": "事件分离与分发的核心结构。"
+                },
+                {
+                  "title": "Proactor 模式详解",
+                  "slug": "02_Proactor模式_Proactor",
+                  "intro": "异步操作完成通知的模型。"
+                },
+                {
+                  "title": "两种模式的对比与选择",
+                  "slug": "03_对比与选择_Comparison",
+                  "intro": "实现复杂度、性能与可移植性权衡。"
+                },
+                {
+                  "title": "多线程 Reactor 变体",
+                  "slug": "04_多线程Reactor_MultiThread_Reactor",
+                  "intro": "主从 Reactor 与多 Reactor 的常见架构。"
+                }
+              ]
+            },
+            {
+              "title": "Asio 与 io_uring",
+              "slug": "03_Asio 与 io_uring_Asio_and_io_uring",
+              "intro": "Boost.Asio / Standalone Asio 与 Linux io_uring 的使用与取舍。",
+              "subsections": [
+                {
+                  "title": "Asio 核心概念",
+                  "slug": "01_Asio核心概念_Asio_Concepts",
+                  "intro": "io_context、socket、timer 与异步操作链。"
+                },
+                {
+                  "title": "Asio 在低延迟场景的调优",
+                  "slug": "02_Asio低延迟调优_Asio_Tuning",
+                  "intro": "strand、执行器与减少跨线程开销。"
+                },
+                {
+                  "title": "io_uring 原理与优势",
+                  "slug": "03_io_uring原理_IO_Uring",
+                  "intro": "提交队列与完成队列的零拷贝潜力。"
+                },
+                {
+                  "title": "Asio 与 io_uring 的结合与选择",
+                  "slug": "04_结合与选择_Integration_Choice",
+                  "intro": "何时使用纯 Asio，何时引入 io_uring。"
+                }
+              ]
+            },
+            {
+              "title": "零拷贝与内核旁路入门",
+              "slug": "04_零拷贝与内核旁路入门_Zero_Copy",
+              "intro": "sendfile、mmap、splice 与基础旁路思想。",
+              "subsections": [
+                {
+                  "title": "传统数据路径的拷贝开销",
+                  "slug": "01_传统数据路径_Traditional_Path",
+                  "intro": "用户态与内核态之间的多次拷贝。"
+                },
+                {
+                  "title": "sendfile 与 splice",
+                  "slug": "02_sendfile与splice_Sendfile_Splice",
+                  "intro": "内核内数据移动的系统调用。"
+                },
+                {
+                  "title": "mmap 的使用与限制",
+                  "slug": "03_mmap使用与限制_Mmap",
+                  "intro": "内存映射文件的适用场景与副作用。"
+                },
+                {
+                  "title": "内核旁路的基本思想",
+                  "slug": "04_内核旁路思想_Kernel_Bypass_Idea",
+                  "intro": "绕过内核协议栈的动机与代价。"
+                }
+              ]
+            },
+            {
+              "title": "TCP 调优与延迟敏感参数",
+              "slug": "05_TCP 调优与延迟敏感参数_TCP_Tuning",
+              "intro": "Nagle、延迟 ACK、缓冲区、拥塞控制与金融场景常用调优。",
+              "subsections": [
+                {
+                  "title": "Nagle 与 TCP_NODELAY",
+                  "slug": "01_Nagle与NODELAY_Nagle",
+                  "intro": "小包合并对延迟的影响与关闭时机。"
+                },
+                {
+                  "title": "延迟 ACK 与快速 ACK",
+                  "slug": "02_延迟ACK_Delayed_ACK",
+                  "intro": "与 Nagle 交互产生的延迟问题。"
+                },
+                {
+                  "title": "缓冲区与窗口调优",
+                  "slug": "03_缓冲区与窗口_Buffers_Windows",
+                  "intro": "SO_RCVBUF、SO_SNDBUF 与自动调优。"
+                },
+                {
+                  "title": "拥塞控制算法选择",
+                  "slug": "04_拥塞控制_Congestion_Control",
+                  "intro": "BBR、CUBIC 等在金融链路中的表现差异。"
+                }
+              ]
+            },
+            {
+              "title": "UDP 组播与可靠传输基础",
+              "slug": "06_UDP 组播与可靠传输基础_UDP_Multicast",
+              "intro": "行情分发中的组播模型与丢包恢复思路。",
+              "subsections": [
+                {
+                  "title": "UDP 组播基础",
+                  "slug": "01_UDP组播基础_UDP_Multicast_Basics",
+                  "intro": "组播地址、IGMP 与内核行为。"
+                },
+                {
+                  "title": "行情分发中的组播优势",
+                  "slug": "02_行情组播优势_Market_Data_Advantage",
+                  "intro": "一对多高效扇出与带宽节省。"
+                },
+                {
+                  "title": "丢包检测与恢复思路",
+                  "slug": "03_丢包检测与恢复_Gap_Recovery",
+                  "intro": "序列号、NAK 与快照重建。"
+                },
+                {
+                  "title": "可靠组播协议简介",
+                  "slug": "04_可靠组播协议_Reliable_Multicast",
+                  "intro": "PGM、NORM 等协议的基本思想。"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "RPC 与序列化",
+          "slug": "02_RPC 与序列化_RPC_and_Serialization",
+          "intro": "服务间调用与数据编码的工程选择。",
+          "sections": [
+            {
+              "title": "RPC 框架设计",
+              "slug": "01_RPC 框架设计_RPC_Design",
+              "intro": "同步/异步调用、连接管理、服务发现与负载均衡集成。",
+              "subsections": [
+                {
+                  "title": "同步与异步调用语义",
+                  "slug": "01_同步与异步调用_Sync_Async",
+                  "intro": "阻塞调用、Future/Promise 与回调模型。"
+                },
+                {
+                  "title": "连接管理与复用",
+                  "slug": "02_连接管理与复用_Connection_Management",
+                  "intro": "长连接、连接池与健康检查。"
+                },
+                {
+                  "title": "服务发现集成",
+                  "slug": "03_服务发现集成_Service_Discovery",
+                  "intro": "与注册中心的交互与变更通知。"
+                },
+                {
+                  "title": "负载均衡与路由策略",
+                  "slug": "04_负载均衡与路由_Load_Balancing",
+                  "intro": "在 RPC 层实现的客户端负载均衡。"
+                }
+              ]
+            },
+            {
+              "title": "Protobuf、FlatBuffers 与 SBE",
+              "slug": "02_Protobuf、FlatBuffers 与 SBE_Serialization_Formats",
+              "intro": "编码速度、体积与零拷贝访问的对比。",
+              "subsections": [
+                {
+                  "title": "Protobuf 特点与适用场景",
+                  "slug": "01_Protobuf特点_Protobuf",
+                  "intro": "向前兼容、代码生成与性能特征。"
+                },
+                {
+                  "title": "FlatBuffers 零拷贝访问",
+                  "slug": "02_FlatBuffers零拷贝_FlatBuffers",
+                  "intro": "无需解析即可访问字段的优势。"
+                },
+                {
+                  "title": "SBE 在金融中的地位",
+                  "slug": "03_SBE金融地位_SBE",
+                  "intro": "简单二进制编码与低延迟交易的匹配。"
+                },
+                {
+                  "title": "选型对比矩阵",
+                  "slug": "04_选型对比矩阵_Comparison_Matrix",
+                  "intro": "编码速度、体积、兼容性与生态的综合比较。"
+                }
+              ]
+            },
+            {
+              "title": "接口演进与兼容性",
+              "slug": "03_接口演进与兼容性_Schema_Evolution",
+              "intro": "向前/向后兼容与灰度升级。",
+              "subsections": [
+                {
+                  "title": "向前兼容与向后兼容",
+                  "slug": "01_向前向后兼容_Forward_Backward",
+                  "intro": "字段增删改的兼容性规则。"
+                },
+                {
+                  "title": "版本化策略",
+                  "slug": "02_版本化策略_Versioning",
+                  "intro": "URL、Header、内容协商等版本管理方式。"
+                },
+                {
+                  "title": "灰度与双写过渡",
+                  "slug": "03_灰度与双写_Canary_Dual_Write",
+                  "intro": "平滑升级中的数据与流量过渡。"
+                },
+                {
+                  "title": "破坏性变更的处理",
+                  "slug": "04_破坏性变更_Breaking_Changes",
+                  "intro": "何时必须引入新接口以及迁移路径。"
+                }
+              ]
+            },
+            {
+              "title": "超时、重试与幂等",
+              "slug": "04_超时、重试与幂等_Timeout_Retry_Idempotency",
+              "intro": "至少一次、至多一次与恰好一次语义的实现。",
+              "subsections": [
+                {
+                  "title": "超时的分层设置",
+                  "slug": "01_超时分层设置_Layered_Timeouts",
+                  "intro": "客户端、中间件与服务端超时的协调。"
+                },
+                {
+                  "title": "重试策略与退避",
+                  "slug": "02_重试策略与退避_Retry_Backoff",
+                  "intro": "指数退避、抖动与最大重试次数。"
+                },
+                {
+                  "title": "幂等键与去重",
+                  "slug": "03_幂等键与去重_Idempotency_Key",
+                  "intro": "客户端生成唯一键与服务端去重表。"
+                },
+                {
+                  "title": "恰好一次的近似实现",
+                  "slug": "04_恰好一次近似_Exactly_Once_Approx",
+                  "intro": "端到端语义在工程上的折中。"
+                }
+              ]
+            },
+            {
+              "title": "API 网关与协议转换",
+              "slug": "05_API 网关与协议转换_API_Gateway",
+              "intro": "南北向与东西向流量、协议桥接与限流入口。",
+              "subsections": [
+                {
+                  "title": "南北向与东西向流量",
+                  "slug": "01_南北向与东西向_North_South_East_West",
+                  "intro": "外部接入与内部服务间通信的区别。"
+                },
+                {
+                  "title": "协议转换与适配",
+                  "slug": "02_协议转换与适配_Protocol_Translation",
+                  "intro": "HTTP/REST 与内部二进制协议的桥接。"
+                },
+                {
+                  "title": "统一限流与鉴权入口",
+                  "slug": "03_统一限流与鉴权_Unified_Rate_Auth",
+                  "intro": "在网关层集中处理的安全与流量控制。"
+                },
+                {
+                  "title": "网关的高可用与扩展",
+                  "slug": "04_网关高可用与扩展_Gateway_HA",
+                  "intro": "无状态网关集群与会话保持的处理。"
+                }
+              ]
+            },
+            {
+              "title": "服务发现与配置中心",
+              "slug": "06_服务发现与配置中心_Service_Discovery",
+              "intro": "注册、健康检查、动态配置下发与版本化。",
+              "subsections": [
+                {
+                  "title": "服务注册与注销",
+                  "slug": "01_服务注册与注销_Registration",
+                  "intro": "启动注册、优雅下线与租约续期。"
+                },
+                {
+                  "title": "健康检查机制",
+                  "slug": "02_健康检查机制_Health_Check",
+                  "intro": "主动探测与被动感知的结合。"
+                },
+                {
+                  "title": "配置中心与动态下发",
+                  "slug": "03_配置中心与动态下发_Config_Center",
+                  "intro": "配置变更的推送、版本与回滚。"
+                },
+                {
+                  "title": "与 RPC/客户端的集成",
+                  "slug": "04_与RPC客户端集成_Integration",
+                  "intro": "客户端感知服务列表变化的方式。"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "消息系统与发布订阅",
+          "slug": "03_消息系统与发布订阅_Messaging_and_PubSub",
+          "intro": "事件驱动架构中的消息传递模型。",
+          "sections": [
+            {
+              "title": "消息模型",
+              "slug": "01_消息模型_Messaging_Models",
+              "intro": "队列、主题、流与日志的区别。",
+              "subsections": [
+                {
+                  "title": "点对点队列模型",
+                  "slug": "01_点对点队列_Point_to_Point",
+                  "intro": "竞争消费者与负载分担。"
+                },
+                {
+                  "title": "发布订阅主题模型",
+                  "slug": "02_发布订阅主题_Pub_Sub",
+                  "intro": "一对多广播与订阅过滤。"
+                },
+                {
+                  "title": "日志与流抽象",
+                  "slug": "03_日志与流抽象_Log_Stream",
+                  "intro": "以追加日志为核心的统一模型。"
+                },
+                {
+                  "title": "模型选择的业务映射",
+                  "slug": "04_模型选择业务映射_Model_Selection",
+                  "intro": "订单、行情、审计等场景的匹配。"
+                }
+              ]
+            },
+            {
+              "title": "Kafka 与日志抽象",
+              "slug": "02_Kafka 与日志抽象_Log_Abstraction",
+              "intro": "分区日志作为系统的“事实来源”。",
+              "subsections": [
+                {
+                  "title": "分区与副本机制",
+                  "slug": "01_分区与副本_Partition_Replica",
+                  "intro": "Kafka 分区的并行与容错基础。"
+                },
+                {
+                  "title": "生产者与消费者语义",
+                  "slug": "02_生产者与消费者_Producer_Consumer",
+                  "intro": "确认机制、消费位移与重平衡。"
+                },
+                {
+                  "title": "日志作为事实来源",
+                  "slug": "03_日志作为事实来源_Log_as_Source_of_Truth",
+                  "intro": "事件溯源与状态重建的基础。"
+                },
+                {
+                  "title": "在金融系统中的使用边界",
+                  "slug": "04_金融使用边界_Finance_Usage",
+                  "intro": "何时用 Kafka，何时用更低延迟的方案。"
+                }
+              ]
+            },
+            {
+              "title": "投递语义与顺序保证",
+              "slug": "03_投递语义与顺序保证_Delivery_Semantics",
+              "intro": "有序、去重、重放与消费位点管理。",
+              "subsections": [
+                {
+                  "title": "至少一次与至多一次",
+                  "slug": "01_至少一次与至多一次_At_Least_At_Most",
+                  "intro": "两种基本语义的实现与代价。"
+                },
+                {
+                  "title": "顺序保证的粒度",
+                  "slug": "02_顺序保证粒度_Ordering_Granularity",
+                  "intro": "分区内有序 vs 全局有序的代价。"
+                },
+                {
+                  "title": "消费位点与重放",
+                  "slug": "03_消费位点与重放_Offset_Replay",
+                  "intro": "位移提交策略与历史重放能力。"
+                },
+                {
+                  "title": "端到端去重",
+                  "slug": "04_端到端去重_End_to_End_Dedup",
+                  "intro": "业务层与中间件层的去重协作。"
+                }
+              ]
+            },
+            {
+              "title": "低延迟组播与 Aeron",
+              "slug": "04_低延迟组播与 Aeron_Multicast_and_Aeron",
+              "intro": "UDP 组播、可靠单播/组播与 Aeron 的设计思想。",
+              "subsections": [
+                {
+                  "title": "Aeron 核心设计思想",
+                  "slug": "01_Aeron核心设计_Aeron_Design",
+                  "intro": "介质（Media Driver）与发布/订阅抽象。"
+                },
+                {
+                  "title": "可靠传输机制",
+                  "slug": "02_可靠传输机制_Reliable_Transport",
+                  "intro": "NAK、重传与流量控制。"
+                },
+                {
+                  "title": "与传统消息中间件的对比",
+                  "slug": "03_与传统中间件对比_vs_Traditional",
+                  "intro": "延迟、吞吐与功能完整性的权衡。"
+                },
+                {
+                  "title": "在行情与订单路径的适用性",
+                  "slug": "04_行情与订单适用性_Market_Order_Fit",
+                  "intro": "哪些路径适合引入 Aeron 类方案。"
+                }
+              ]
+            },
+            {
+              "title": "背压与流量整形在消息层的实现",
+              "slug": "05_背压与流量整形_Backpressure_in_Messaging",
+              "intro": "生产者限速、消费者拉取与信用机制。",
+              "subsections": [
+                {
+                  "title": "推模式与拉模式",
+                  "slug": "01_推模式与拉模式_Push_Pull",
+                  "intro": "两种模式下背压的自然程度。"
+                },
+                {
+                  "title": "信用（Credit）机制",
+                  "slug": "02_信用机制_Credit",
+                  "intro": "消费者主动授予发送额度。"
+                },
+                {
+                  "title": "生产者限速策略",
+                  "slug": "03_生产者限速_Producer_Throttling",
+                  "intro": "基于队列深度或延迟的反馈控制。"
+                },
+                {
+                  "title": "金融场景中的流量整形",
+                  "slug": "04_金融流量整形_Finance_Shaping",
+                  "intro": "开盘尖峰与突发行情的平滑处理。"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "内核旁路与用户态网络进阶",
+          "slug": "04_内核旁路与用户态网络进阶_Kernel_Bypass_Advanced",
+          "intro": "低延迟网络的硬件与软件栈。",
+          "sections": [
+            {
+              "title": "DPDK 与轮询模式驱动",
+              "slug": "01_DPDK 与轮询模式驱动_DPDK",
+              "intro": "用户态收发包、内存池与 CPU 绑定。",
+              "subsections": [
+                {
+                  "title": "DPDK 基本架构",
+                  "slug": "01_DPDK基本架构_DPDK_Architecture",
+                  "intro": "PMD、内存管理与无中断收发。"
+                },
+                {
+                  "title": "轮询 vs 中断",
+                  "slug": "02_轮询vs中断_Polling_vs_Interrupt",
+                  "intro": "延迟与 CPU 利用率的权衡。"
+                },
+                {
+                  "title": "内存池与大页",
+                  "slug": "03_内存池与大页_Mempool_Hugepage",
+                  "intro": "零拷贝与减少缺页的关键配置。"
+                },
+                {
+                  "title": "在交易系统中的落地考虑",
+                  "slug": "04_交易系统落地_Trading_Considerations",
+                  "intro": "适用路径、运维复杂度与回退方案。"
+                }
+              ]
+            },
+            {
+              "title": "Solarflare Onload / TCPDirect 等技术概览",
+              "slug": "02_Onload 与内核旁路栈_Onload",
+              "intro": "透明加速与应用层改造的取舍。",
+              "subsections": [
+                {
+                  "title": "透明加速原理",
+                  "slug": "01_透明加速原理_Transparent_Acceleration",
+                  "intro": "LD_PRELOAD 与协议栈旁路。"
+                },
+                {
+                  "title": "TCPDirect 等用户态栈",
+                  "slug": "02_TCPDirect用户态栈_TCPDirect",
+                  "intro": "更彻底的用户态 TCP 实现。"
+                },
+                {
+                  "title": "应用改造成本",
+                  "slug": "03_应用改造成本_Application_Changes",
+                  "intro": "从零改动到深度适配的光谱。"
+                },
+                {
+                  "title": "选型决策因素",
+                  "slug": "04_选型决策因素_Selection_Factors",
+                  "intro": "延迟收益、兼容性与厂商锁定。"
+                }
+              ]
+            },
+            {
+              "title": "RDMA 基础与适用场景",
+              "slug": "03_RDMA 基础_RDMA",
+              "intro": "零拷贝远程内存访问在存储与消息中的应用边界。",
+              "subsections": [
+                {
+                  "title": "RDMA 操作类型",
+                  "slug": "01_RDMA操作类型_RDMA_Ops",
+                  "intro": "Write、Read、Send/Recv 与原子操作。"
+                },
+                {
+                  "title": "零拷贝与内核旁路",
+                  "slug": "02_零拷贝与内核旁路_Zero_Copy_Bypass",
+                  "intro": "CPU 不参与数据搬运的优势。"
+                },
+                {
+                  "title": "在存储与消息中的应用",
+                  "slug": "03_存储与消息应用_Storage_Messaging",
+                  "intro": "分布式存储与超低延迟消息的典型用法。"
+                },
+                {
+                  "title": "部署与运维挑战",
+                  "slug": "04_部署与运维挑战_Ops_Challenges",
+                  "intro": "网卡、交换机与软件栈的匹配要求。"
+                }
+              ]
+            },
+            {
+              "title": "硬件时间戳与精密时钟在网络中的使用",
+              "slug": "04_硬件时间戳_Hardware_Timestamps",
+              "intro": "PTP 硬件辅助与延迟测量。",
+              "subsections": [
+                {
+                  "title": "硬件时间戳的工作原理",
+                  "slug": "01_硬件时间戳原理_HW_Timestamp_Principle",
+                  "intro": "网卡在收发时打上的精确时间。"
+                },
+                {
+                  "title": "与软件时间戳的对比",
+                  "slug": "02_与软件时间戳对比_vs_SW",
+                  "intro": "精度与抖动的数量级差异。"
+                },
+                {
+                  "title": "在延迟测量中的应用",
+                  "slug": "03_延迟测量应用_Latency_Measurement",
+                  "intro": "端到端与分段延迟的精确计算。"
+                },
+                {
+                  "title": "与 PTP 的协同",
+                  "slug": "04_与PTP协同_PTP_Coordination",
+                  "intro": "时钟同步与时间戳的统一时间基。"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "一致性与共识",
+      "slug": "03_一致性与共识_Consistency_and_Consensus",
+      "intro": "分布式系统最核心的理论与实现。",
+      "chapters": [
+        {
+          "title": "一致性模型",
+          "slug": "01_一致性模型_Consistency_Models",
+          "intro": "从强到弱的一致性谱系。",
+          "sections": [
+            {
+              "title": "线性一致性",
+              "slug": "01_线性一致性_Linearizability",
+              "intro": "定义、验证方法与代价。",
+              "subsections": [
+                {
+                  "title": "线性一致性的形式定义",
+                  "slug": "01_形式定义_Formal_Definition",
+                  "intro": "实时全序与操作的原子外观。"
+                },
+                {
+                  "title": "验证方法与工具",
+                  "slug": "02_验证方法与工具_Verification",
+                  "intro": "历史记录检查与 Jepsen 类方法。"
+                },
+                {
+                  "title": "实现代价",
+                  "slug": "03_实现代价_Implementation_Cost",
+                  "intro": "协调开销与延迟影响。"
+                },
+                {
+                  "title": "金融场景中的必要性判断",
+                  "slug": "04_金融必要性判断_Finance_Necessity",
+                  "intro": "哪些操作必须线性一致，哪些可以放宽。"
+                }
+              ]
+            },
+            {
+              "title": "顺序一致性与因果一致性",
+              "slug": "02_顺序一致性与因果一致性_Sequential_and_Causal",
+              "intro": "在性能与语义之间的折中。",
+              "subsections": [
+                {
+                  "title": "顺序一致性定义",
+                  "slug": "01_顺序一致性定义_Sequential_Consistency",
+                  "intro": "所有操作存在一个全局顺序，且符合程序顺序。"
+                },
+                {
+                  "title": "因果一致性定义",
+                  "slug": "02_因果一致性定义_Causal_Consistency",
+                  "intro": "仅保证因果关系的操作被有序看到。"
+                },
+                {
+                  "title": "性能与实现复杂度对比",
+                  "slug": "03_性能与复杂度对比_Performance_Complexity",
+                  "intro": "比线性一致更易实现的原因。"
+                },
+                {
+                  "title": "实际系统中的采用情况",
+                  "slug": "04_实际系统采用_Real_Systems",
+                  "intro": "哪些存储与中间件提供这些保证。"
+                }
+              ]
+            },
+            {
+              "title": "最终一致性与 CRDT",
+              "slug": "03_最终一致性与 CRDT_Eventual_and_CRDT",
+              "intro": "无协调收敛的数据结构。",
+              "subsections": [
+                {
+                  "title": "最终一致性的含义",
+                  "slug": "01_最终一致性含义_Eventual_Meaning",
+                  "intro": "在没有更新的情况下最终达成一致。"
+                },
+                {
+                  "title": "CRDT 的基本思想",
+                  "slug": "02_CRDT基本思想_CRDT_Idea",
+                  "intro": "可交换、可结合的更新操作。"
+                },
+                {
+                  "title": "常见 CRDT 类型",
+                  "slug": "03_常见CRDT类型_CRDT_Types",
+                  "intro": "G-Counter、OR-Set、LWW-Register 等。"
+                },
+                {
+                  "title": "在金融中的适用边界",
+                  "slug": "04_金融适用边界_Finance_Boundary",
+                  "intro": "适合计数、集合，不适合资金与订单状态。"
+                }
+              ]
+            },
+            {
+              "title": "会话保证与客户端中心一致性",
+              "slug": "04_会话保证_Client_Centric",
+              "intro": "读己之写、单调读、因果会话等。",
+              "subsections": [
+                {
+                  "title": "读己之写（Read Your Writes）",
+                  "slug": "01_读己之写_Read_Your_Writes",
+                  "intro": "客户端能读到自己刚写的数据。"
+                },
+                {
+                  "title": "单调读与单调写",
+                  "slug": "02_单调读与单调写_Monotonic",
+                  "intro": "不会读到更旧版本的保证。"
+                },
+                {
+                  "title": "写后读与因果会话",
+                  "slug": "03_写后读与因果会话_Writes_Follow_Reads",
+                  "intro": "会话内因果顺序的维护。"
+                },
+                {
+                  "title": "实现方式与开销",
+                  "slug": "04_实现方式与开销_Implementation",
+                  "intro": "会话粘性、版本向量与额外元数据。"
+                }
+              ]
+            },
+            {
+              "title": "CAP 与 PACELC",
+              "slug": "05_CAP 与 PACELC_CAP_and_PACELC",
+              "intro": "正确理解定理及其对金融系统选型的意义。",
+              "subsections": [
+                {
+                  "title": "CAP 定理的准确表述",
+                  "slug": "01_CAP准确表述_CAP_Accurate",
+                  "intro": "分区时一致性与可用性的二选一。"
+                },
+                {
+                  "title": "常见误解澄清",
+                  "slug": "02_常见误解澄清_Misconceptions",
+                  "intro": "并非“三选二”，而是分区下的权衡。"
+                },
+                {
+                  "title": "PACELC 的扩展",
+                  "slug": "03_PACELC扩展_PACELC",
+                  "intro": "无分区时延迟与一致性的额外权衡。"
+                },
+                {
+                  "title": "对金融系统选型的指导",
+                  "slug": "04_金融选型指导_Finance_Guidance",
+                  "intro": "撮合、行情、账务各自的 CAP 选择。"
+                }
+              ]
+            },
+            {
+              "title": "一致性与延迟的权衡实践",
+              "slug": "06_一致性与延迟权衡_Consistency_Latency_Tradeoff",
+              "intro": "金融热路径上如何选择一致性级别。",
+              "subsections": [
+                {
+                  "title": "热路径上的一致性需求",
+                  "slug": "01_热路径一致性需求_Hot_Path_Needs",
+                  "intro": "撮合与风控对强一致的刚需程度。"
+                },
+                {
+                  "title": "可放宽一致性的路径",
+                  "slug": "02_可放宽路径_Relaxable_Paths",
+                  "intro": "行情展示、统计与非关键查询。"
+                },
+                {
+                  "title": "混合一致性架构",
+                  "slug": "03_混合一致性架构_Hybrid_Architecture",
+                  "intro": "同一系统内不同路径采用不同级别。"
+                },
+                {
+                  "title": "测量与验证方法",
+                  "slug": "04_测量与验证_Measurement",
+                  "intro": "如何量化一致性窗口与业务影响。"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "数据复制",
+          "slug": "02_数据复制_Replication",
+          "intro": "通过复制获得可用性与容错。",
+          "sections": [
+            {
+              "title": "主从复制",
+              "slug": "01_主从复制_Leader_Follower",
+              "intro": "同步、异步、半同步复制与故障切换。",
+              "subsections": [
+                {
+                  "title": "同步复制",
+                  "slug": "01_同步复制_Synchronous",
+                  "intro": "强一致但延迟与可用性代价高。"
+                },
+                {
+                  "title": "异步复制",
+                  "slug": "02_异步复制_Asynchronous",
+                  "intro": "低延迟但存在数据丢失窗口。"
+                },
+                {
+                  "title": "半同步复制",
+                  "slug": "03_半同步复制_Semi_Synchronous",
+                  "intro": "折中方案与确认策略。"
+                },
+                {
+                  "title": "故障切换与数据丢失",
+                  "slug": "04_故障切换与数据丢失_Failover_Loss",
+                  "intro": "提升与切换时的一致性保证。"
+                }
+              ]
+            },
+            {
+              "title": "多主与无主复制",
+              "slug": "02_多主与无主复制_Multi_Leader_Leaderless",
+              "intro": "冲突解决与 Quorum 读写。",
+              "subsections": [
+                {
+                  "title": "多主复制的冲突",
+                  "slug": "01_多主冲突_Multi_Leader_Conflict",
+                  "intro": "写冲突的检测与解决策略。"
+                },
+                {
+                  "title": "无主复制与 Quorum",
+                  "slug": "02_无主与Quorum_Leaderless_Quorum",
+                  "intro": "W + R > N 的读写法定人数。"
+                },
+                {
+                  "title": "读修复与反熵",
+                  "slug": "03_读修复与反熵_Read_Repair_Anti_Entropy",
+                  "intro": "最终一致的收敛机制。"
+                },
+                {
+                  "title": "适用场景判断",
+                  "slug": "04_适用场景判断_Applicability",
+                  "intro": "何时适合多主/无主，何时应避免。"
+                }
+              ]
+            },
+            {
+              "title": "复制状态机",
+              "slug": "03_复制状态机_Replicated_State_Machine",
+              "intro": "确定性状态机 + 复制日志的统一抽象。",
+              "subsections": [
+                {
+                  "title": "复制状态机原理",
+                  "slug": "01_复制状态机原理_RSM_Principle",
+                  "intro": "相同输入序列产生相同状态。"
+                },
+                {
+                  "title": "日志复制与提交",
+                  "slug": "02_日志复制与提交_Log_Replication",
+                  "intro": "从提议到提交的完整流程。"
+                },
+                {
+                  "title": "确定性要求",
+                  "slug": "03_确定性要求_Determinism",
+                  "intro": "状态机代码必须避免的非确定性来源。"
+                },
+                {
+                  "title": "与共识算法的关系",
+                  "slug": "04_与共识算法关系_vs_Consensus",
+                  "intro": "Raft/Paxos 如何支撑复制状态机。"
+                }
+              ]
+            },
+            {
+              "title": "复制延迟与读修复",
+              "slug": "04_复制延迟与读修复_Replication_Lag",
+              "intro": "可见性延迟、读己之写与反熵。",
+              "subsections": [
+                {
+                  "title": "复制延迟的来源",
+                  "slug": "01_复制延迟来源_Lag_Sources",
+                  "intro": "网络、磁盘与应用层处理。"
+                },
+                {
+                  "title": "可见性与读己之写",
+                  "slug": "02_可见性与读己之写_Visibility",
+                  "intro": "客户端如何感知到最新写入。"
+                },
+                {
+                  "title": "读修复机制",
+                  "slug": "03_读修复机制_Read_Repair",
+                  "intro": "读时发现不一致并触发修复。"
+                },
+                {
+                  "title": "反熵与后台修复",
+                  "slug": "04_反熵与后台修复_Anti_Entropy",
+                  "intro": "Merkle 树等高效差异检测。"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "共识算法",
+          "slug": "03_共识算法_Consensus_Algorithms",
+          "intro": "让多个节点就同一序列达成一致。",
+          "sections": [
+            {
+              "title": "FLP 不可能性与共识问题",
+              "slug": "01_FLP 不可能性与共识问题_FLP_and_Problem",
+              "intro": "问题定义与理论边界。",
+              "subsections": [
+                {
+                  "title": "共识问题的形式定义",
+                  "slug": "01_共识问题定义_Consensus_Definition",
+                  "intro": "一致性、合法性与终止性。"
+                },
+                {
+                  "title": "FLP 不可能性证明要点",
+                  "slug": "02_FLP证明要点_FLP_Proof",
+                  "intro": "异步系统中确定性共识的不可能。"
+                },
+                {
+                  "title": "绕过 FLP 的现实路径",
+                  "slug": "03_绕过FLP路径_Bypassing_FLP",
+                  "intro": "部分同步、随机化与故障检测器。"
+                },
+                {
+                  "title": "对工程实践的启示",
+                  "slug": "04_工程启示_Engineering_Implications",
+                  "intro": "为什么需要超时与 leader。"
+                }
+              ]
+            },
+            {
+              "title": "Paxos 与 Multi-Paxos",
+              "slug": "02_Paxos 与 Multi-Paxos_Paxos",
+              "intro": "基本 Paxos、Multi-Paxos 及其工程难点。",
+              "subsections": [
+                {
+                  "title": "基本 Paxos 角色与阶段",
+                  "slug": "01_基本Paxos_Basic_Paxos",
+                  "intro": "Proposer、Acceptor、Learner 与两阶段。"
+                },
+                {
+                  "title": "Multi-Paxos 的优化",
+                  "slug": "02_MultiPaxos优化_Multi_Paxos",
+                  "intro": "稳定 leader 下的单轮提交。"
+                },
+                {
+                  "title": "工程实现难点",
+                  "slug": "03_工程实现难点_Engineering_Hard",
+                  "intro": "活锁、成员变更与日志管理。"
+                },
+                {
+                  "title": "与 Raft 的对比",
+                  "slug": "04_与Raft对比_vs_Raft",
+                  "intro": "可理解性与工程友好度的差异。"
+                }
+              ]
+            },
+            {
+              "title": "Raft 算法详解",
+              "slug": "03_Raft 算法详解_Raft",
+              "intro": "选举、日志复制与安全性论证。",
+              "subsections": [
+                {
+                  "title": "Leader 选举",
+                  "slug": "01_Leader选举_Leader_Election",
+                  "intro": "任期、投票与选举超时。"
+                },
+                {
+                  "title": "日志复制",
+                  "slug": "02_日志复制_Log_Replication",
+                  "intro": "AppendEntries 与提交规则。"
+                },
+                {
+                  "title": "安全性论证",
+                  "slug": "03_安全性论证_Safety",
+                  "intro": "Leader 完整性与状态机安全。"
+                },
+                {
+                  "title": "常见实现陷阱",
+                  "slug": "04_常见实现陷阱_Implementation_Traps",
+                  "intro": "日志匹配、提交限制与配置变更。"
+                }
+              ]
+            },
+            {
+              "title": "成员变更与快照",
+              "slug": "04_成员变更与快照_Membership_and_Snapshots",
+              "intro": "联合共识、单步变更与日志压缩。",
+              "subsections": [
+                {
+                  "title": "联合共识（Joint Consensus）",
+                  "slug": "01_联合共识_Joint_Consensus",
+                  "intro": "两阶段成员变更的安全方式。"
+                },
+                {
+                  "title": "单步成员变更",
+                  "slug": "02_单步成员变更_Single_Step",
+                  "intro": "更简单但需额外约束的方案。"
+                },
+                {
+                  "title": "快照与日志压缩",
+                  "slug": "03_快照与日志压缩_Snapshot",
+                  "intro": "安装快照与截断旧日志。"
+                },
+                {
+                  "title": "变更过程中的可用性",
+                  "slug": "04_变更中可用性_Availability_During_Change",
+                  "intro": "如何最小化变更窗口的影响。"
+                }
+              ]
+            },
+            {
+              "title": "拜占庭容错简介",
+              "slug": "05_拜占庭容错简介_BFT_Intro",
+              "intro": "PBFT 与现代 BFT 协议的适用场景。",
+              "subsections": [
+                {
+                  "title": "拜占庭故障模型回顾",
+                  "slug": "01_拜占庭故障模型_Byzantine_Model",
+                  "intro": "任意行为与恶意节点的假设。"
+                },
+                {
+                  "title": "PBFT 基本流程",
+                  "slug": "02_PBFT基本流程_PBFT",
+                  "intro": "三阶段提交与视图切换。"
+                },
+                {
+                  "title": "现代 BFT 协议概览",
+                  "slug": "03_现代BFT概览_Modern_BFT",
+                  "intro": "HotStuff、Tendermint 等改进方向。"
+                },
+                {
+                  "title": "金融系统中的适用性",
+                  "slug": "04_金融适用性_Finance_Applicability",
+                  "intro": "高开销与信任模型限制了使用范围。"
+                }
+              ]
+            },
+            {
+              "title": "共识在金融系统中的使用边界",
+              "slug": "06_共识使用边界_Consensus_in_Finance",
+              "intro": "何时用共识、何时用定序器或主备。",
+              "subsections": [
+                {
+                  "title": "需要共识的场景",
+                  "slug": "01_需要共识的场景_When_Consensus",
+                  "intro": "配置、元数据与强一致关键路径。"
+                },
+                {
+                  "title": "定序器模式的替代",
+                  "slug": "02_定序器模式替代_Sequencer_Alternative",
+                  "intro": "单点定序 + 多副本状态机的高效方案。"
+                },
+                {
+                  "title": "主备在低延迟路径的地位",
+                  "slug": "03_主备低延迟地位_Primary_Backup",
+                  "intro": "简单可靠且延迟更优的常见选择。"
+                },
+                {
+                  "title": "混合架构实践",
+                  "slug": "04_混合架构实践_Hybrid_Practice",
+                  "intro": "不同组件采用不同协调机制的组合。"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "C++ 实现 Raft",
+          "slug": "04_C++ 实现 Raft_Implementing_Raft_in_Cpp",
+          "intro": "用 C++ 从零实现一个可测试的 Raft 库。",
+          "sections": [
+            {
+              "title": "模块划分与接口设计",
+              "slug": "01_模块划分与接口设计_Module_Design",
+              "intro": "将网络、存储、定时器与状态机解耦。",
+              "subsections": [
+                {
+                  "title": "核心模块划分",
+                  "slug": "01_核心模块划分_Module_Division",
+                  "intro": "Raft 核心、网络、存储、定时器、状态机。"
+                },
+                {
+                  "title": "接口抽象与依赖倒置",
+                  "slug": "02_接口抽象_Interface_Abstraction",
+                  "intro": "便于测试与替换的接口设计。"
+                },
+                {
+                  "title": "消息与日志条目定义",
+                  "slug": "03_消息与日志条目_Message_Log",
+                  "intro": "RPC 消息与 LogEntry 的序列化友好结构。"
+                },
+                {
+                  "title": "配置与成员管理接口",
+                  "slug": "04_配置与成员管理_Config_Membership",
+                  "intro": "动态成员变更的对外接口。"
+                }
+              ]
+            },
+            {
+              "title": "日志存储与 WAL",
+              "slug": "02_日志存储与 WAL_Log_Storage",
+              "intro": "追加写、fsync 策略与崩溃恢复。",
+              "subsections": [
+                {
+                  "title": "日志条目的持久化格式",
+                  "slug": "01_日志持久化格式_Log_Format",
+                  "intro": "追加写友好的二进制布局。"
+                },
+                {
+                  "title": "fsync 策略与延迟",
+                  "slug": "02_fsync策略与延迟_Fsync_Strategy",
+                  "intro": "每次提交 vs 批量 vs 组提交。"
+                },
+                {
+                  "title": "崩溃恢复流程",
+                  "slug": "03_崩溃恢复流程_Crash_Recovery",
+                  "intro": "从 WAL 与快照重建内存状态。"
+                },
+                {
+                  "title": "存储引擎选型考虑",
+                  "slug": "04_存储引擎选型_Storage_Choice",
+                  "intro": "自研 vs RocksDB 等现成引擎。"
+                }
+              ]
+            },
+            {
+              "title": "状态机与快照",
+              "slug": "03_状态机与快照_State_Machine_Snapshot",
+              "intro": "应用层接口与快照传输。",
+              "subsections": [
+                {
+                  "title": "状态机接口设计",
+                  "slug": "01_状态机接口_SM_Interface",
+                  "intro": "Apply、Snapshot、Restore 的抽象。"
+                },
+                {
+                  "title": "快照生成与安装",
+                  "slug": "02_快照生成与安装_Snapshot_Install",
+                  "intro": "触发条件、分块传输与一致性。"
+                },
+                {
+                  "title": "与业务状态的集成",
+                  "slug": "03_与业务状态集成_Business_Integration",
+                  "intro": "KV、订单簿等具体状态机示例。"
+                },
+                {
+                  "title": "快照与日志截断的协调",
+                  "slug": "04_快照与日志截断_Snapshot_Truncate",
+                  "intro": "保证可恢复的截断点选择。"
+                }
+              ]
+            },
+            {
+              "title": "确定性测试与故障注入",
+              "slug": "04_确定性测试与故障注入_Deterministic_Testing",
+              "intro": "模拟时钟与网络，复现并发与故障场景。",
+              "subsections": [
+                {
+                  "title": "模拟时钟与定时器",
+                  "slug": "01_模拟时钟与定时器_Mock_Clock",
+                  "intro": "可控时间推进的测试基础设施。"
+                },
+                {
+                  "title": "网络分区与消息延迟模拟",
+                  "slug": "02_网络分区与延迟_Network_Simulation",
+                  "intro": "丢包、乱序、延迟与分区的注入。"
+                },
+                {
+                  "title": "确定性调度与重放",
+                  "slug": "03_确定性调度与重放_Deterministic_Schedule",
+                  "intro": "相同种子产生相同执行轨迹。"
+                },
+                {
+                  "title": "故障场景覆盖清单",
+                  "slug": "04_故障场景覆盖_Fault_Coverage",
+                  "intro": "选举、日志分歧、成员变更等关键场景。"
+                }
+              ]
+            },
+            {
+              "title": "性能优化与批处理",
+              "slug": "05_性能优化与批处理_Performance_Tuning",
+              "intro": "批量追加、流水线与网络合并。",
+              "subsections": [
+                {
+                  "title": "日志批处理与组提交",
+                  "slug": "01_日志批处理_Batching",
+                  "intro": "合并多次追加与 fsync。"
+                },
+                {
+                  "title": "流水线复制",
+                  "slug": "02_流水线复制_Pipelining",
+                  "intro": "未确认前继续发送后续条目。"
+                },
+                {
+                  "title": "网络消息合并",
+                  "slug": "03_网络消息合并_Message_Coalescing",
+                  "intro": "减少小包与系统调用。"
+                },
+                {
+                  "title": "性能基线与回归测试",
+                  "slug": "04_性能基线与回归_Baseline_Regression",
+                  "intro": "建立可对比的性能指标与自动化检测。"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "分布式事务与协调",
+          "slug": "05_分布式事务与协调_Distributed_Transactions",
+          "intro": "跨分片、跨服务的原子性问题与协调原语。",
+          "sections": [
+            {
+              "title": "2PC 与 3PC",
+              "slug": "01_2PC 与 3PC_Two_Phase_Commit",
+              "intro": "原理、阻塞问题与恢复协议。",
+              "subsections": [
+                {
+                  "title": "两阶段提交流程",
+                  "slug": "01_两阶段提交流程_2PC_Flow",
+                  "intro": "准备与提交阶段的详细步骤。"
+                },
+                {
+                  "title": "阻塞问题与单点故障",
+                  "slug": "02_阻塞问题_Blocking",
+                  "intro": "协调者故障导致的阻塞。"
+                },
+                {
+                  "title": "三阶段提交的改进",
+                  "slug": "03_三阶段提交改进_3PC",
+                  "intro": "引入预提交以减少阻塞。"
+                },
+                {
+                  "title": "工程上的使用现状",
+                  "slug": "04_工程使用现状_Engineering_Status",
+                  "intro": "为何现代系统较少直接使用 2PC/3PC。"
+                }
+              ]
+            },
+            {
+              "title": "Saga 与 TCC",
+              "slug": "02_Saga 与 TCC_Saga_and_TCC",
+              "intro": "长事务与补偿式一致性。",
+              "subsections": [
+                {
+                  "title": "Saga 模式原理",
+                  "slug": "01_Saga模式原理_Saga",
+                  "intro": "长事务拆分为本地事务 + 补偿。"
+                },
+                {
+                  "title": "TCC 模式详解",
+                  "slug": "02_TCC模式详解_TCC",
+                  "intro": "Try-Confirm-Cancel 的三阶段业务语义。"
+                },
+                {
+                  "title": "补偿的幂等与顺序",
+                  "slug": "03_补偿幂等与顺序_Compensation",
+                  "intro": "补偿操作必须满足的条件。"
+                },
+                {
+                  "title": "在金融业务中的映射",
+                  "slug": "04_金融业务映射_Finance_Mapping",
+                  "intro": "转账、下单等场景的 Saga/TCC 设计。"
+                }
+              ]
+            },
+            {
+              "title": "Percolator 与 Spanner 思路",
+              "slug": "03_Percolator 与 Spanner 思路_Percolator_and_Spanner",
+              "intro": "基于时间戳的全局事务实现。",
+              "subsections": [
+                {
+                  "title": "Percolator 的快照隔离",
+                  "slug": "01_Percolator快照隔离_Percolator_SI",
+                  "intro": "基于时间戳的多版本与锁。"
+                },
+                {
+                  "title": "TrueTime 与外部一致性",
+                  "slug": "02_TrueTime与外部一致性_TrueTime",
+                  "intro": "不确定性窗口与等待提交。"
+                },
+                {
+                  "title": "Spanner 的全球事务",
+                  "slug": "03_Spanner全球事务_Spanner",
+                  "intro": "Paxos 组 + TrueTime 的组合。"
+                },
+                {
+                  "title": "对自建系统的启发",
+                  "slug": "04_对自建系统启发_Lessons",
+                  "intro": "可借鉴的时间戳与锁设计。"
+                }
+              ]
+            },
+            {
+              "title": "分布式锁与租约",
+              "slug": "04_分布式锁与租约_Distributed_Locks",
+              "intro": "互斥、fencing token、租约续期与死锁风险。",
+              "subsections": [
+                {
+                  "title": "互斥锁的基本实现",
+                  "slug": "01_互斥锁基本实现_Mutex",
+                  "intro": "基于共识或中心化存储的锁。"
+                },
+                {
+                  "title": "Fencing Token",
+                  "slug": "02_Fencing_Token_Fencing",
+                  "intro": "防止旧锁持有者继续写的关键机制。"
+                },
+                {
+                  "title": "租约续期与过期",
+                  "slug": "03_租约续期与过期_Lease_Renewal",
+                  "intro": "自动过期与续期失败的处理。"
+                },
+                {
+                  "title": "死锁与活锁风险",
+                  "slug": "04_死锁与活锁_Deadlock_Livelock",
+                  "intro": "多锁获取顺序与超时策略。"
+                }
+              ]
+            },
+            {
+              "title": "幂等、对账与最终修复",
+              "slug": "05_幂等对账与最终修复_Idempotency_and_Reconciliation",
+              "intro": "金融场景中事务之外的兜底机制。",
+              "subsections": [
+                {
+                  "title": "业务幂等设计",
+                  "slug": "01_业务幂等设计_Business_Idempotency",
+                  "intro": "唯一业务键与状态机去重。"
+                },
+                {
+                  "title": "对账流程与差异分类",
+                  "slug": "02_对账流程与差异_Reconciliation",
+                  "intro": "自动对账与人工介入的边界。"
+                },
+                {
+                  "title": "最终修复策略",
+                  "slug": "03_最终修复策略_Final_Repair",
+                  "intro": "补偿、冲正与人工调账。"
+                },
+                {
+                  "title": "不可变日志的支撑作用",
+                  "slug": "04_不可变日志支撑_Immutable_Log",
+                  "intro": "审计与修复的数据基础。"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "存储与数据分区",
+      "slug": "04_存储与数据分区_Storage_and_Partitioning",
+      "intro": "数据如何分布、存储与分发。",
+      "chapters": [
+        {
+          "title": "分区与路由",
+          "slug": "01_分区与路由_Partitioning_and_Routing",
+          "intro": "水平扩展的基本手段。",
+          "sections": [
+            {
+              "title": "Hash 分区与 Range 分区",
+              "slug": "01_Hash 分区与 Range 分区_Hash_and_Range",
+              "intro": "两种方案的取舍。",
+              "subsections": [
+                {
+                  "title": "Hash 分区原理与优缺点",
+                  "slug": "01_Hash分区_Hash",
+                  "intro": "均匀分布与范围查询困难。"
+                },
+                {
+                  "title": "Range 分区原理与优缺点",
+                  "slug": "02_Range分区_Range",
+                  "intro": "有序与热点风险。"
+                },
+                {
+                  "title": "混合分区策略",
+                  "slug": "03_混合分区策略_Hybrid",
+                  "intro": "Hash + Range 的常见组合。"
+                },
+                {
+                  "title": "金融数据的分区选择",
+                  "slug": "04_金融数据分区选择_Finance_Choice",
+                  "intro": "按标的、按账户、按时间的典型做法。"
+                }
+              ]
+            },
+            {
+              "title": "一致性哈希",
+              "slug": "02_一致性哈希_Consistent_Hashing",
+              "intro": "虚拟节点与负载均衡。",
+              "subsections": [
+                {
+                  "title": "一致性哈希环",
+                  "slug": "01_一致性哈希环_Hash_Ring",
+                  "intro": "节点与数据映射到环上的基本结构。"
+                },
+                {
+                  "title": "虚拟节点",
+                  "slug": "02_虚拟节点_Virtual_Nodes",
+                  "intro": "改善负载均衡与节点增减平滑度。"
+                },
+                {
+                  "title": "数据迁移量分析",
+                  "slug": "03_数据迁移量分析_Migration",
+                  "intro": "节点增减时实际迁移的数据比例。"
+                },
+                {
+                  "title": "在缓存与存储中的应用",
+                  "slug": "04_缓存与存储应用_Cache_Storage",
+                  "intro": "Memcached、分布式存储中的典型用法。"
+                }
+              ]
+            },
+            {
+              "title": "再均衡与热点处理",
+              "slug": "03_再均衡与热点处理_Rebalancing_and_Hotspots",
+              "intro": "数据迁移、热点拆分与行情热点符号处理。",
+              "subsections": [
+                {
+                  "title": "再均衡触发与策略",
+                  "slug": "01_再均衡触发与策略_Rebalance_Trigger",
+                  "intro": "负载阈值、手动与自动触发。"
+                },
+                {
+                  "title": "在线数据迁移",
+                  "slug": "02_在线数据迁移_Online_Migration",
+                  "intro": "双写、追赶与切换的无停机方案。"
+                },
+                {
+                  "title": "热点检测与拆分",
+                  "slug": "03_热点检测与拆分_Hotspot",
+                  "intro": "识别热点分区并进一步拆分。"
+                },
+                {
+                  "title": "行情热点符号的特殊处理",
+                  "slug": "04_行情热点符号_Market_Hot_Symbols",
+                  "intro": "热门标的的独立通道与限流。"
+                }
+              ]
+            },
+            {
+              "title": "分区键设计与查询模式",
+              "slug": "04_分区键设计_Partition_Key_Design",
+              "intro": "访问模式驱动的分区策略与跨分区查询代价。",
+              "subsections": [
+                {
+                  "title": "访问模式分析",
+                  "slug": "01_访问模式分析_Access_Pattern",
+                  "intro": "点查、范围查、聚合的分布特征。"
+                },
+                {
+                  "title": "分区键选择原则",
+                  "slug": "02_分区键选择原则_Key_Selection",
+                  "intro": "高基、均匀、避免热点的原则。"
+                },
+                {
+                  "title": "跨分区查询的代价",
+                  "slug": "03_跨分区查询代价_Cross_Partition",
+                  "intro": "散射聚集与二次排序的开销。"
+                },
+                {
+                  "title": "二次索引与全局索引",
+                  "slug": "04_二次索引与全局索引_Secondary_Index",
+                  "intro": "本地索引与全局索引的权衡。"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "存储引擎",
+          "slug": "02_存储引擎_Storage_Engines",
+          "intro": "单机存储是分布式存储的基石。",
+          "sections": [
+            {
+              "title": "B+ 树与 LSM-Tree",
+              "slug": "01_B+ 树与 LSM-Tree_BTree_and_LSM",
+              "intro": "读写放大与适用场景。",
+              "subsections": [
+                {
+                  "title": "B+ 树结构与读写特性",
+                  "slug": "01_B+树结构与特性_BTree",
+                  "intro": "页式结构、范围扫描友好。"
+                },
+                {
+                  "title": "LSM-Tree 结构与特性",
+                  "slug": "02_LSM结构与特性_LSM",
+                  "intro": "顺序写、多层压缩与读放大。"
+                },
+                {
+                  "title": "读写放大对比",
+                  "slug": "03_读写放大对比_Amplification",
+                  "intro": "写放大、读放大与空间放大的量化。"
+                },
+                {
+                  "title": "金融场景选型建议",
+                  "slug": "04_金融场景选型_Finance_Choice",
+                  "intro": "订单簿、账务、行情历史的不同选择。"
+                }
+              ]
+            },
+            {
+              "title": "WAL、检查点与恢复",
+              "slug": "02_WAL、检查点与恢复_WAL_and_Checkpoint",
+              "intro": "持久化与崩溃恢复的通用套路。",
+              "subsections": [
+                {
+                  "title": "WAL 的作用与实现",
+                  "slug": "01_WAL作用与实现_WAL",
+                  "intro": "先写日志再改数据的原子性保证。"
+                },
+                {
+                  "title": "检查点机制",
+                  "slug": "02_检查点机制_Checkpoint",
+                  "intro": "定期将脏页落盘并截断日志。"
+                },
+                {
+                  "title": "崩溃恢复流程",
+                  "slug": "03_崩溃恢复流程_Recovery",
+                  "intro": "分析、重做与撤销阶段。"
+                },
+                {
+                  "title": "与复制的结合",
+                  "slug": "04_与复制的结合_with_Replication",
+                  "intro": "WAL 作为复制日志的来源。"
+                }
+              ]
+            },
+            {
+              "title": "内存数据库与事件溯源",
+              "slug": "03_内存数据库与事件溯源_InMemory_and_Event_Sourcing",
+              "intro": "以日志重建状态的架构。",
+              "subsections": [
+                {
+                  "title": "内存数据库的特点",
+                  "slug": "01_内存数据库特点_InMemory_DB",
+                  "intro": "全内存驻留与持久化策略。"
+                },
+                {
+                  "title": "事件溯源原理",
+                  "slug": "02_事件溯源原理_Event_Sourcing",
+                  "intro": "状态 = 事件序列的折叠。"
+                },
+                {
+                  "title": "快照与重放优化",
+                  "slug": "03_快照与重放优化_Snapshot_Replay",
+                  "intro": "加速恢复的快照点选择。"
+                },
+                {
+                  "title": "在撮合与账务中的应用",
+                  "slug": "04_撮合与账务应用_Matching_Ledger",
+                  "intro": "确定性重放带来的可审计与可调试。"
+                }
+              ]
+            },
+            {
+              "title": "列存与分析型存储简介",
+              "slug": "04_列存与分析型存储_Columnar_Storage",
+              "intro": "金融风控与报表场景的存储选择。",
+              "subsections": [
+                {
+                  "title": "列存的基本优势",
+                  "slug": "01_列存基本优势_Columnar_Advantage",
+                  "intro": "压缩率与向量化执行。"
+                },
+                {
+                  "title": "与行存的对比",
+                  "slug": "02_与行存对比_vs_Row",
+                  "intro": "OLTP 与 OLAP 的存储适配。"
+                },
+                {
+                  "title": "金融分析场景映射",
+                  "slug": "03_金融分析场景_Finance_Analytics",
+                  "intro": "风险指标、监管报表与历史回测。"
+                },
+                {
+                  "title": "实时与离线的结合",
+                  "slug": "04_实时与离线结合_Real_Offline",
+                  "intro": "流式写入列存与批处理的协同。"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "缓存与数据分发",
+          "slug": "03_缓存与数据分发_Caching_and_Distribution",
+          "intro": "在一致性与延迟之间做平衡。",
+          "sections": [
+            {
+              "title": "缓存一致性策略",
+              "slug": "01_缓存一致性策略_Cache_Consistency",
+              "intro": "Cache-Aside、Write-Through 与失效传播。",
+              "subsections": [
+                {
+                  "title": "Cache-Aside 模式",
+                  "slug": "01_CacheAside模式_Cache_Aside",
+                  "intro": "应用负责读写缓存与数据库。"
+                },
+                {
+                  "title": "Write-Through 与 Write-Behind",
+                  "slug": "02_WriteThrough与WriteBehind_Write_Strategies",
+                  "intro": "写路径上的一致性与性能权衡。"
+                },
+                {
+                  "title": "失效传播机制",
+                  "slug": "03_失效传播机制_Invalidation",
+                  "intro": "主动失效、TTL 与版本号。"
+                },
+                {
+                  "title": "金融数据的一致性要求",
+                  "slug": "04_金融数据一致性_Finance_Consistency",
+                  "intro": "权限、参考数据与行情的不同要求。"
+                }
+              ]
+            },
+            {
+              "title": "快照加增量分发",
+              "slug": "02_快照加增量分发_Snapshot_plus_Delta",
+              "intro": "行情与参考数据常用的订阅模式。",
+              "subsections": [
+                {
+                  "title": "快照的生成与版本",
+                  "slug": "01_快照生成与版本_Snapshot",
+                  "intro": "全量状态的周期性导出。"
+                },
+                {
+                  "title": "增量流的设计",
+                  "slug": "02_增量流设计_Delta_Stream",
+                  "intro": "变更事件的顺序与完整性。"
+                },
+                {
+                  "title": "订阅端重建流程",
+                  "slug": "03_订阅端重建_Rebuild",
+                  "intro": "先快照后追增量的标准流程。"
+                },
+                {
+                  "title": "缺口检测与恢复",
+                  "slug": "04_缺口检测与恢复_Gap_Recovery",
+                  "intro": "序列号连续性检查与重传请求。"
+                }
+              ]
+            },
+            {
+              "title": "多级缓存与本地副本",
+              "slug": "03_多级缓存与本地副本_Multi_Level_Cache",
+              "intro": "进程内、共享内存与远程缓存的组合。",
+              "subsections": [
+                {
+                  "title": "进程内缓存",
+                  "slug": "01_进程内缓存_InProcess",
+                  "intro": "最低延迟但一致性最难维护。"
+                },
+                {
+                  "title": "共享内存缓存",
+                  "slug": "02_共享内存缓存_Shared_Memory",
+                  "intro": "同机多进程的高效共享。"
+                },
+                {
+                  "title": "远程分布式缓存",
+                  "slug": "03_远程分布式缓存_Remote_Cache",
+                  "intro": "Redis 等集中式缓存的定位。"
+                },
+                {
+                  "title": "多级协作策略",
+                  "slug": "04_多级协作策略_Multi_Level",
+                  "intro": "命中路径与失效路径的设计。"
+                }
+              ]
+            },
+            {
+              "title": "缓存穿透、击穿与雪崩的系统级防护",
+              "slug": "04_缓存问题防护_Cache_Protection",
+              "intro": "布隆过滤器、互斥锁、永不过期与随机过期。",
+              "subsections": [
+                {
+                  "title": "缓存穿透防护",
+                  "slug": "01_缓存穿透防护_Penetration",
+                  "intro": "布隆过滤器与空值缓存。"
+                },
+                {
+                  "title": "缓存击穿防护",
+                  "slug": "02_缓存击穿防护_Breakdown",
+                  "intro": "热点 key 的互斥重建。"
+                },
+                {
+                  "title": "缓存雪崩防护",
+                  "slug": "03_缓存雪崩防护_Avalanche",
+                  "intro": "随机过期与多级降级。"
+                },
+                {
+                  "title": "综合防护架构",
+                  "slug": "04_综合防护架构_Combined",
+                  "intro": "多层防护的组合与监控。"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "流处理与复杂事件处理",
+          "slug": "04_流处理与复杂事件处理_Stream_and_CEP",
+          "intro": "实时计算在金融系统中的位置。",
+          "sections": [
+            {
+              "title": "流处理模型与窗口",
+              "slug": "01_流处理模型与窗口_Stream_Models",
+              "intro": "事件时间、处理时间、滚动/滑动/会话窗口。",
+              "subsections": [
+                {
+                  "title": "无界流与有界批",
+                  "slug": "01_无界流与有界批_Unbounded_Bounded",
+                  "intro": "流处理与批处理的统一视角。"
+                },
+                {
+                  "title": "窗口类型详解",
+                  "slug": "02_窗口类型详解_Window_Types",
+                  "intro": "滚动、滑动、会话与全局窗口。"
+                },
+                {
+                  "title": "触发器与清理",
+                  "slug": "03_触发器与清理_Triggers",
+                  "intro": "何时输出结果与状态清理。"
+                },
+                {
+                  "title": "金融窗口计算示例",
+                  "slug": "04_金融窗口计算示例_Finance_Windows",
+                  "intro": "成交量、VWAP、波动率的窗口实现。"
+                }
+              ]
+            },
+            {
+              "title": "状态管理与精确一次语义",
+              "slug": "02_状态管理与精确一次_State_and_Exactly_Once",
+              "intro": "检查点、两阶段提交与端到端语义。",
+              "subsections": [
+                {
+                  "title": "状态后端与检查点",
+                  "slug": "01_状态后端与检查点_State_Checkpoint",
+                  "intro": "本地状态与分布式快照。"
+                },
+                {
+                  "title": "端到端精确一次",
+                  "slug": "02_端到端精确一次_E2E_Exactly_Once",
+                  "intro": "源、计算、汇的协同保证。"
+                },
+                {
+                  "title": "两阶段提交在流中的应用",
+                  "slug": "03_两阶段提交应用_2PC_in_Stream",
+                  "intro": "与外部系统交互时的原子性。"
+                },
+                {
+                  "title": "性能与语义的权衡",
+                  "slug": "04_性能与语义权衡_Performance_Semantics",
+                  "intro": "精确一次的代价与近似方案。"
+                }
+              ]
+            },
+            {
+              "title": "复杂事件处理 CEP 简介",
+              "slug": "03_复杂事件处理 CEP_CEP",
+              "intro": "模式匹配与实时风控规则引擎。",
+              "subsections": [
+                {
+                  "title": "CEP 的核心概念",
+                  "slug": "01_CEP核心概念_CEP_Concepts",
+                  "intro": "事件模式、序列与时间约束。"
+                },
+                {
+                  "title": "规则引擎与模式匹配",
+                  "slug": "02_规则引擎与模式匹配_Rules_Matching",
+                  "intro": "从规则到可执行自动机的编译。"
+                },
+                {
+                  "title": "实时风控中的应用",
+                  "slug": "03_实时风控应用_Risk_Application",
+                  "intro": "异常交易模式的实时检测。"
+                },
+                {
+                  "title": "与流处理框架的集成",
+                  "slug": "04_与流处理集成_Stream_Integration",
+                  "intro": "在 Flink 等框架上的 CEP 实现。"
+                }
+              ]
+            },
+            {
+              "title": "与消息系统、状态机的集成",
+              "slug": "04_与消息与状态机集成_Integration",
+              "intro": "从日志到物化视图的闭环。",
+              "subsections": [
+                {
+                  "title": "以日志为中心的架构",
+                  "slug": "01_以日志为中心_Log_Centric",
+                  "intro": "消息队列作为事实来源。"
+                },
+                {
+                  "title": "物化视图的维护",
+                  "slug": "02_物化视图维护_Materialized_View",
+                  "intro": "从事件流持续更新查询视图。"
+                },
+                {
+                  "title": "与复制状态机的协同",
+                  "slug": "03_与复制状态机协同_RSM_Coordination",
+                  "intro": "确定性状态机消费事件流。"
+                },
+                {
+                  "title": "端到端延迟与一致性",
+                  "slug": "04_端到端延迟与一致性_E2E",
+                  "intro": "从写入到可查询的完整路径分析。"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "低延迟与高并发工程",
+      "slug": "05_低延迟与高并发工程_Low_Latency_and_Concurrency",
+      "intro": "C++ 工程能力的核心战场。",
+      "chapters": [
+        {
+          "title": "低延迟系统设计",
+          "slug": "01_低延迟系统设计_Low_Latency_Design",
+          "intro": "把延迟当作一等设计目标。",
+          "sections": [
+            {
+              "title": "延迟预算与尾延迟",
+              "slug": "01_延迟预算与尾延迟_Latency_Budget",
+              "intro": "P99/P99.9、Coordinated Omission 与测量方法。",
+              "subsections": [
+                {
+                  "title": "延迟预算分解",
+                  "slug": "01_延迟预算分解_Budget_Breakdown",
+                  "intro": "将端到端延迟分配到各组件。"
+                },
+                {
+                  "title": "尾延迟的重要性",
+                  "slug": "02_尾延迟重要性_Tail_Latency",
+                  "intro": "P99/P99.9 对用户体验与系统稳定性的影响。"
+                },
+                {
+                  "title": "Coordinated Omission",
+                  "slug": "03_Coordinated_Omission_Coordinated_Omission",
+                  "intro": "测量中的常见陷阱与正确测量方法。"
+                },
+                {
+                  "title": "HdrHistogram 与延迟分布",
+                  "slug": "04_HdrHistogram与分布_HdrHistogram",
+                  "intro": "高精度延迟直方图的使用。"
+                }
+              ]
+            },
+            {
+              "title": "CPU 亲和性与 NUMA",
+              "slug": "02_CPU 亲和性与 NUMA_CPU_Affinity_NUMA",
+              "intro": "线程绑核、隔离核与内存本地性。",
+              "subsections": [
+                {
+                  "title": "CPU 亲和性设置",
+                  "slug": "01_CPU亲和性设置_Affinity",
+                  "intro": "pthread_setaffinity 与隔离核配置。"
+                },
+                {
+                  "title": "NUMA 架构与本地性",
+                  "slug": "02_NUMA架构与本地性_NUMA",
+                  "intro": "跨 NUMA 节点访问的代价。"
+                },
+                {
+                  "title": "内存分配与绑定",
+                  "slug": "03_内存分配与绑定_Memory_Binding",
+                  "intro": "numactl 与代码级内存策略。"
+                },
+                {
+                  "title": "低延迟线程的部署实践",
+                  "slug": "04_低延迟线程部署_Thread_Deployment",
+                  "intro": "关键路径线程的绑核与隔离。"
+                }
+              ]
+            },
+            {
+              "title": "内核旁路与用户态网络",
+              "slug": "03_内核旁路与用户态网络_Kernel_Bypass",
+              "intro": "DPDK、Solarflare Onload 等技术概览。",
+              "subsections": [
+                {
+                  "title": "内核协议栈的开销分析",
+                  "slug": "01_内核协议栈开销_Kernel_Overhead",
+                  "intro": "中断、拷贝与锁的延迟贡献。"
+                },
+                {
+                  "title": "DPDK 回顾与适用路径",
+                  "slug": "02_DPDK回顾_DPDK_Recap",
+                  "intro": "在哪些组件值得引入 DPDK。"
+                },
+                {
+                  "title": "透明加速方案",
+                  "slug": "03_透明加速方案_Transparent",
+                  "intro": "Onload 类方案的部署便利性。"
+                },
+                {
+                  "title": "混合架构选择",
+                  "slug": "04_混合架构选择_Hybrid_Choice",
+                  "intro": "关键路径旁路，非关键路径保留内核。"
+                }
+              ]
+            },
+            {
+              "title": "避免抖动：内存与系统调用",
+              "slug": "04_避免抖动：内存与系统调用_Avoid_Jitter",
+              "intro": "预分配、大页、避免缺页与锁。",
+              "subsections": [
+                {
+                  "title": "内存预分配与对象池",
+                  "slug": "01_内存预分配与对象池_Prealloc_Pool",
+                  "intro": "消除运行时分配的延迟尖峰。"
+                },
+                {
+                  "title": "大页与透明大页",
+                  "slug": "02_大页与透明大页_Hugepages",
+                  "intro": "减少 TLB 未命中的配置。"
+                },
+                {
+                  "title": "避免缺页与交换",
+                  "slug": "03_避免缺页与交换_Page_Fault",
+                  "intro": "mlock 与关闭交换的实践。"
+                },
+                {
+                  "title": "减少系统调用与锁竞争",
+                  "slug": "04_减少系统调用与锁_Syscalls_Locks",
+                  "intro": "批处理、用户态同步与无锁结构。"
+                }
+              ]
+            },
+            {
+              "title": "延迟剖析与基准测试方法论",
+              "slug": "05_延迟剖析与基准测试_Profiling_and_Benchmarking",
+              "intro": "perf、火焰图、HdrHistogram 与可复现基准。",
+              "subsections": [
+                {
+                  "title": "perf 与火焰图",
+                  "slug": "01_perf与火焰图_Perf_Flame",
+                  "intro": "CPU 热点与调用栈可视化。"
+                },
+                {
+                  "title": "延迟分布采集",
+                  "slug": "02_延迟分布采集_Latency_Collection",
+                  "intro": "在关键路径埋点与聚合。"
+                },
+                {
+                  "title": "可复现基准设计",
+                  "slug": "03_可复现基准设计_Reproducible_Benchmark",
+                  "intro": "固定负载、隔离环境与统计显著性。"
+                },
+                {
+                  "title": "回归检测与 CI 集成",
+                  "slug": "04_回归检测与CI_Regression_CI",
+                  "intro": "性能退化的自动化发现。"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "C++ 高并发编程",
+          "slug": "02_C++ 高并发编程_Cpp_Concurrency",
+          "intro": "内存模型到无锁结构的系统训练。",
+          "sections": [
+            {
+              "title": "C++ 内存模型与原子操作",
+              "slug": "01_C++ 内存模型与原子操作_Memory_Model_Atomics",
+              "intro": "memory_order 与可见性。",
+              "subsections": [
+                {
+                  "title": "happens-before 与同步",
+                  "slug": "01_happens-before与同步_Happens_Before",
+                  "intro": "C++ 内存模型中的核心关系。"
+                },
+                {
+                  "title": "memory_order 详解",
+                  "slug": "02_memory_order详解_Memory_Order",
+                  "intro": "relaxed、acquire、release、seq_cst 的语义。"
+                },
+                {
+                  "title": "原子操作的正确使用",
+                  "slug": "03_原子操作正确使用_Atomics_Usage",
+                  "intro": "常见模式与错误用法。"
+                },
+                {
+                  "title": "与硬件内存模型的对应",
+                  "slug": "04_与硬件内存模型对应_Hardware",
+                  "intro": "x86、ARM 等架构的实际保证。"
+                }
+              ]
+            },
+            {
+              "title": "无锁队列与 Disruptor 模式",
+              "slug": "02_无锁队列与 Disruptor 模式_Lockfree_Queues",
+              "intro": "SPSC/MPMC 环形队列与伪共享。",
+              "subsections": [
+                {
+                  "title": "SPSC 环形队列",
+                  "slug": "01_SPSC环形队列_SPSC",
+                  "intro": "单生产者单消费者的高效实现。"
+                },
+                {
+                  "title": "MPMC 队列的挑战",
+                  "slug": "02_MPMC队列挑战_MPMC",
+                  "intro": "多生产者多消费者的正确性与性能。"
+                },
+                {
+                  "title": "Disruptor 模式",
+                  "slug": "03_Disruptor模式_Disruptor",
+                  "intro": "预分配、缓存行填充与依赖序列。"
+                },
+                {
+                  "title": "伪共享与缓存行对齐",
+                  "slug": "04_伪共享与对齐_False_Sharing",
+                  "intro": "避免多核缓存一致性流量。"
+                }
+              ]
+            },
+            {
+              "title": "线程模型与任务调度",
+              "slug": "03_线程模型与任务调度_Threading_Models",
+              "intro": "线程池、协程与 Run-to-completion 模型。",
+              "subsections": [
+                {
+                  "title": "线程池设计",
+                  "slug": "01_线程池设计_Thread_Pool",
+                  "intro": "工作窃取、优先级与拒绝策略。"
+                },
+                {
+                  "title": "协程与用户态调度",
+                  "slug": "02_协程与用户态调度_Coroutines",
+                  "intro": "C++20 协程与栈切换开销。"
+                },
+                {
+                  "title": "Run-to-completion 模型",
+                  "slug": "03_RunToCompletion_Run_to_Completion",
+                  "intro": "单线程事件循环与确定性。"
+                },
+                {
+                  "title": "金融系统中的线程模型选择",
+                  "slug": "04_金融线程模型选择_Finance_Choice",
+                  "intro": "关键路径单线程 vs 多线程流水线。"
+                }
+              ]
+            },
+            {
+              "title": "内存分配器与对象池",
+              "slug": "04_内存分配器与对象池_Allocators_and_Pools",
+              "intro": "定制分配器与 PMR。",
+              "subsections": [
+                {
+                  "title": "标准分配器的问题",
+                  "slug": "01_标准分配器问题_Standard_Allocator",
+                  "intro": "锁、碎片与不可控延迟。"
+                },
+                {
+                  "title": "对象池设计",
+                  "slug": "02_对象池设计_Object_Pool",
+                  "intro": "固定大小与可变大小对象的池化。"
+                },
+                {
+                  "title": "C++ PMR 与多态分配器",
+                  "slug": "03_PMR与多态分配器_PMR",
+                  "intro": "标准库支持的定制分配接口。"
+                },
+                {
+                  "title": "低延迟分配策略总结",
+                  "slug": "04_低延迟分配策略_Low_Latency_Alloc",
+                  "intro": "预分配、线程本地与无锁分配器。"
+                }
+              ]
+            },
+            {
+              "title": "读写锁、RCU 与无锁数据结构进阶",
+              "slug": "05_读写锁与RCU_RCU_and_Advanced",
+              "intro": "读多写少场景下的高效同步。",
+              "subsections": [
+                {
+                  "title": "读写锁的适用与局限",
+                  "slug": "01_读写锁适用与局限_RWLock",
+                  "intro": "写饥饿与缓存行竞争。"
+                },
+                {
+                  "title": "RCU 基本思想",
+                  "slug": "02_RCU基本思想_RCU",
+                  "intro": "读无锁、写时复制与宽限期。"
+                },
+                {
+                  "title": "用户态 RCU 实现要点",
+                  "slug": "03_用户态RCU实现_Userspace_RCU",
+                  "intro": "在 C++ 中实现 RCU 的关键点。"
+                },
+                {
+                  "title": "无锁数据结构进阶模式",
+                  "slug": "04_无锁数据结构进阶_Lockfree_Advanced",
+                  "intro": "Hazard Pointer、Epoch 与内存回收。"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "背压、流控与过载保护",
+          "slug": "03_背压、流控与过载保护_Backpressure_and_Flow_Control",
+          "intro": "保证系统在压力下依然可控。",
+          "sections": [
+            {
+              "title": "排队论基础",
+              "slug": "01_排队论基础_Queueing_Basics",
+              "intro": "利特尔法则与利用率-延迟曲线。",
+              "subsections": [
+                {
+                  "title": "利特尔法则",
+                  "slug": "01_利特尔法则_Littles_Law",
+                  "intro": "L = λW 的直观理解与应用。"
+                },
+                {
+                  "title": "利用率与延迟关系",
+                  "slug": "02_利用率与延迟_Utilization_Latency",
+                  "intro": "接近满负载时延迟的急剧上升。"
+                },
+                {
+                  "title": "多级队列与优先级",
+                  "slug": "03_多级队列与优先级_Multi_Queue",
+                  "intro": "区分关键与非关键流量。"
+                },
+                {
+                  "title": "对系统设计的启示",
+                  "slug": "04_对系统设计启示_Design_Implications",
+                  "intro": "预留容量与主动限流的必要性。"
+                }
+              ]
+            },
+            {
+              "title": "限流、熔断与降级",
+              "slug": "02_限流、熔断与降级_RateLimit_CircuitBreaker",
+              "intro": "常见算法与参数选择。",
+              "subsections": [
+                {
+                  "title": "限流算法对比",
+                  "slug": "01_限流算法对比_Rate_Limit_Algorithms",
+                  "intro": "令牌桶、漏桶、固定/滑动窗口。"
+                },
+                {
+                  "title": "熔断器设计细节",
+                  "slug": "02_熔断器设计细节_Circuit_Breaker_Design",
+                  "intro": "失败率阈值、半开探测与恢复。"
+                },
+                {
+                  "title": "降级策略层次",
+                  "slug": "03_降级策略层次_Degradation_Levels",
+                  "intro": "功能降级、数据降级与拒绝服务。"
+                },
+                {
+                  "title": "参数调优与监控",
+                  "slug": "04_参数调优与监控_Tuning_Monitoring",
+                  "intro": "如何根据实际流量调整参数。"
+                }
+              ]
+            },
+            {
+              "title": "负载均衡",
+              "slug": "03_负载均衡_Load_Balancing",
+              "intro": "一致性哈希、P2C 与会话保持。",
+              "subsections": [
+                {
+                  "title": "负载均衡算法回顾",
+                  "slug": "01_负载均衡算法回顾_Algorithms",
+                  "intro": "轮询、加权、最少连接、一致性哈希。"
+                },
+                {
+                  "title": "P2C 的优势",
+                  "slug": "02_P2C优势_P2C_Advantage",
+                  "intro": "在动态负载下的优秀表现。"
+                },
+                {
+                  "title": "会话保持的实现",
+                  "slug": "03_会话保持实现_Session_Affinity",
+                  "intro": "源地址哈希与 cookie 粘性。"
+                },
+                {
+                  "title": "健康检查与摘除",
+                  "slug": "04_健康检查与摘除_Health_Removal",
+                  "intro": "快速发现并隔离故障节点。"
+                }
+              ]
+            },
+            {
+              "title": "过载保护与自适应策略",
+              "slug": "04_过载保护与自适应_Adaptive_Protection",
+              "intro": "基于延迟或队列长度的动态限流。",
+              "subsections": [
+                {
+                  "title": "基于队列长度的反馈",
+                  "slug": "01_基于队列长度反馈_Queue_Feedback",
+                  "intro": "当队列超过阈值时主动限流。"
+                },
+                {
+                  "title": "基于延迟的自适应",
+                  "slug": "02_基于延迟自适应_Latency_Adaptive",
+                  "intro": "目标延迟驱动的动态调整。"
+                },
+                {
+                  "title": "客户端与服务端协同",
+                  "slug": "03_客户端与服务端协同_Client_Server",
+                  "intro": "服务端背压信号向客户端传播。"
+                },
+                {
+                  "title": "过载下的优雅降级",
+                  "slug": "04_过载优雅降级_Graceful_Degradation",
+                  "intro": "保证核心功能在极端压力下仍可用。"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "确定性与可重放架构",
+          "slug": "04_确定性与可重放架构_Determinism_and_Replay",
+          "intro": "金融系统的一种典型高可靠架构。",
+          "sections": [
+            {
+              "title": "Sequencer 架构",
+              "slug": "01_Sequencer 架构_Sequencer_Architecture",
+              "intro": "单一定序点加多副本状态机。",
+              "subsections": [
+                {
+                  "title": "定序器的职责",
+                  "slug": "01_定序器职责_Sequencer_Role",
+                  "intro": "为所有输入事件分配全局唯一序号。"
+                },
+                {
+                  "title": "多副本状态机消费",
+                  "slug": "02_多副本状态机消费_Replica_SM",
+                  "intro": "所有副本按相同顺序执行相同逻辑。"
+                },
+                {
+                  "title": "定序器的高可用",
+                  "slug": "03_定序器高可用_Sequencer_HA",
+                  "intro": "主备切换与序号连续性保证。"
+                },
+                {
+                  "title": "与共识的对比",
+                  "slug": "04_与共识对比_vs_Consensus",
+                  "intro": "更简单、更低延迟的适用边界。"
+                }
+              ]
+            },
+            {
+              "title": "事件溯源与回放",
+              "slug": "02_事件溯源与回放_Event_Sourcing_Replay",
+              "intro": "用日志回放进行恢复、审计与调试。",
+              "subsections": [
+                {
+                  "title": "事件存储与查询",
+                  "slug": "01_事件存储与查询_Event_Store",
+                  "intro": "追加写日志与按序号/时间查询。"
+                },
+                {
+                  "title": "状态重建流程",
+                  "slug": "02_状态重建流程_State_Rebuild",
+                  "intro": "从快照 + 事件重放到当前状态。"
+                },
+                {
+                  "title": "审计与合规支撑",
+                  "slug": "03_审计与合规支撑_Audit_Compliance",
+                  "intro": "完整历史记录满足监管要求。"
+                },
+                {
+                  "title": "调试与问题复现",
+                  "slug": "04_调试与问题复现_Debug_Reproduce",
+                  "intro": "用历史事件精确复现线上问题。"
+                }
+              ]
+            },
+            {
+              "title": "确定性编程约束",
+              "slug": "03_确定性编程约束_Deterministic_Constraints",
+              "intro": "避免非确定性来源：时间、随机数、浮点与容器顺序。",
+              "subsections": [
+                {
+                  "title": "时间与随机数",
+                  "slug": "01_时间与随机数_Time_Random",
+                  "intro": "禁止直接调用系统时间与随机源。"
+                },
+                {
+                  "title": "浮点与并行计算",
+                  "slug": "02_浮点与并行计算_Float_Parallel",
+                  "intro": "浮点运算顺序与多线程归约的不确定性。"
+                },
+                {
+                  "title": "容器遍历顺序",
+                  "slug": "03_容器遍历顺序_Container_Order",
+                  "intro": "hash 容器与指针排序的陷阱。"
+                },
+                {
+                  "title": "确定性代码审查清单",
+                  "slug": "04_确定性代码审查清单_Checklist",
+                  "intro": "提交前必须检查的非确定性来源。"
+                }
+              ]
+            },
+            {
+              "title": "确定性架构下的测试与调试",
+              "slug": "04_确定性架构测试_Deterministic_Testing",
+              "intro": "输入录制、状态比对与差异定位。",
+              "subsections": [
+                {
+                  "title": "输入录制与重放",
+                  "slug": "01_输入录制与重放_Record_Replay",
+                  "intro": "完整记录外部输入以便重放。"
+                },
+                {
+                  "title": "状态比对与差异定位",
+                  "slug": "02_状态比对与差异_State_Diff",
+                  "intro": "副本间或重放与线上的状态对比。"
+                },
+                {
+                  "title": "确定性测试框架",
+                  "slug": "03_确定性测试框架_Test_Framework",
+                  "intro": "模拟环境与故障注入的集成。"
+                },
+                {
+                  "title": "线上问题复现流程",
+                  "slug": "04_线上问题复现流程_Production_Reproduce",
+                  "intro": "从日志到本地可调试环境的闭环。"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "金融系统架构",
+      "slug": "06_金融系统架构_Financial_System_Architecture",
+      "intro": "把前面的技术映射到真实业务系统。",
+      "chapters": [
+        {
+          "title": "交易系统架构",
+          "slug": "01_交易系统架构_Trading_System_Architecture",
+          "intro": "订单从入口到成交的全链路。",
+          "sections": [
+            {
+              "title": "订单流与网关",
+              "slug": "01_订单流与网关_Order_Flow_and_Gateway",
+              "intro": "接入、校验、路由与会话管理。",
+              "subsections": [
+                {
+                  "title": "接入协议与会话",
+                  "slug": "01_接入协议与会话_Protocol_Session",
+                  "intro": "FIX、专用二进制协议与会话状态。"
+                },
+                {
+                  "title": "校验与风控前置",
+                  "slug": "02_校验与风控前置_Validation_Risk",
+                  "intro": "格式、权限、限额的前置检查。"
+                },
+                {
+                  "title": "智能路由",
+                  "slug": "03_智能路由_Smart_Routing",
+                  "intro": "多市场、多通道的订单分流。"
+                },
+                {
+                  "title": "网关高可用设计",
+                  "slug": "04_网关高可用设计_Gateway_HA",
+                  "intro": "无状态化与会话迁移。"
+                }
+              ]
+            },
+            {
+              "title": "撮合引擎设计",
+              "slug": "02_撮合引擎设计_Matching_Engine",
+              "intro": "订单簿数据结构与确定性撮合。",
+              "subsections": [
+                {
+                  "title": "订单簿数据结构",
+                  "slug": "01_订单簿数据结构_Order_Book",
+                  "intro": "价格档位、队列与高效匹配。"
+                },
+                {
+                  "title": "撮合算法与优先级",
+                  "slug": "02_撮合算法与优先级_Matching_Algorithm",
+                  "intro": "价格优先、时间优先等规则。"
+                },
+                {
+                  "title": "确定性与可重放",
+                  "slug": "03_确定性与可重放_Determinism",
+                  "intro": "保证相同输入产生相同撮合结果。"
+                },
+                {
+                  "title": "性能优化要点",
+                  "slug": "04_性能优化要点_Performance",
+                  "intro": "缓存友好布局与无锁设计。"
+                }
+              ]
+            },
+            {
+              "title": "风控前置与实时风控",
+              "slug": "03_风控前置与实时风控_Risk_Controls",
+              "intro": "低延迟下的限额检查与状态同步。",
+              "subsections": [
+                {
+                  "title": "前置风控检查项",
+                  "slug": "01_前置风控检查项_Pre_Trade_Checks",
+                  "intro": "资金、持仓、频率、价格偏离等。"
+                },
+                {
+                  "title": "实时风控状态维护",
+                  "slug": "02_实时风控状态维护_Real_Time_State",
+                  "intro": "订单与成交驱动的状态更新。"
+                },
+                {
+                  "title": "低延迟实现技术",
+                  "slug": "03_低延迟实现技术_Low_Latency_Impl",
+                  "intro": "内存数据结构与无锁更新。"
+                },
+                {
+                  "title": "与撮合的协同",
+                  "slug": "04_与撮合协同_Coordination_with_Matching",
+                  "intro": "检查点与撮合结果的原子性。"
+                }
+              ]
+            },
+            {
+              "title": "高可用与切换",
+              "slug": "04_高可用与切换_HA_and_Failover",
+              "intro": "主备、双活与切换期间的一致性保证。",
+              "subsections": [
+                {
+                  "title": "主备切换流程",
+                  "slug": "01_主备切换流程_Primary_Backup",
+                  "intro": "故障检测、提升与客户端重连。"
+                },
+                {
+                  "title": "双活架构挑战",
+                  "slug": "02_双活架构挑战_Active_Active",
+                  "intro": "写冲突与定序问题。"
+                },
+                {
+                  "title": "切换期间的一致性",
+                  "slug": "03_切换期间一致性_Consistency_During",
+                  "intro": "未完成订单与状态同步。"
+                },
+                {
+                  "title": "演练与自动化",
+                  "slug": "04_演练与自动化_Drill_Automation",
+                  "intro": "定期故障演练与自动切换可靠性。"
+                }
+              ]
+            },
+            {
+              "title": "交易系统端到端系统设计案例",
+              "slug": "05_交易系统端到端设计_End_to_End_Design",
+              "intro": "从容量、延迟、一致性到故障场景的完整权衡。",
+              "subsections": [
+                {
+                  "title": "需求分析与目标设定",
+                  "slug": "01_需求分析与目标_Requirements",
+                  "intro": "延迟、吞吐、可用性的量化目标。"
+                },
+                {
+                  "title": "架构选型与权衡",
+                  "slug": "02_架构选型与权衡_Architecture_Choice",
+                  "intro": "定序器、共识、主备的选择理由。"
+                },
+                {
+                  "title": "关键路径设计",
+                  "slug": "03_关键路径设计_Critical_Path",
+                  "intro": "从网关到撮合的延迟优化。"
+                },
+                {
+                  "title": "故障场景与恢复",
+                  "slug": "04_故障场景与恢复_Failure_Recovery",
+                  "intro": "节点、网络、机房级故障的应对。"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "行情与参考数据系统",
+          "slug": "02_行情与参考数据系统_Market_and_Reference_Data",
+          "intro": "行情分发与静态数据管理。",
+          "sections": [
+            {
+              "title": "行情采集与标准化",
+              "slug": "01_行情采集与标准化_Feed_Handling",
+              "intro": "多源接入、归一化与序列号管理。",
+              "subsections": [
+                {
+                  "title": "多源接入架构",
+                  "slug": "01_多源接入架构_Multi_Source",
+                  "intro": "交易所、供应商与内部源的统一接入。"
+                },
+                {
+                  "title": "归一化与字段映射",
+                  "slug": "02_归一化与字段映射_Normalization",
+                  "intro": "不同协议到统一内部模型的转换。"
+                },
+                {
+                  "title": "序列号与连续性",
+                  "slug": "03_序列号与连续性_Sequence",
+                  "intro": "每源独立序号与全局序号的设计。"
+                },
+                {
+                  "title": "质量监控与告警",
+                  "slug": "04_质量监控与告警_Quality_Monitoring",
+                  "intro": "延迟、缺口、异常值的实时监控。"
+                }
+              ]
+            },
+            {
+              "title": "丢包恢复与快照重建",
+              "slug": "02_丢包恢复与快照重建_Gap_Recovery",
+              "intro": "序号缺口检测与重传、快照恢复。",
+              "subsections": [
+                {
+                  "title": "缺口检测机制",
+                  "slug": "01_缺口检测机制_Gap_Detection",
+                  "intro": "连续序号检查与超时判定。"
+                },
+                {
+                  "title": "重传请求与响应",
+                  "slug": "02_重传请求与响应_Retransmit",
+                  "intro": "点对点重传与组播恢复的结合。"
+                },
+                {
+                  "title": "快照重建流程",
+                  "slug": "03_快照重建流程_Snapshot_Rebuild",
+                  "intro": "全量快照 + 增量追赶的标准流程。"
+                },
+                {
+                  "title": "恢复过程中的一致性",
+                  "slug": "04_恢复过程一致性_Recovery_Consistency",
+                  "intro": "恢复期间的数据可见性控制。"
+                }
+              ]
+            },
+            {
+              "title": "订阅管理与扇出",
+              "slug": "03_订阅管理与扇出_Subscription_Fanout",
+              "intro": "大规模订阅下的扇出与带宽控制。",
+              "subsections": [
+                {
+                  "title": "订阅模型与过滤",
+                  "slug": "01_订阅模型与过滤_Subscription_Filter",
+                  "intro": "按标的、按字段的订阅粒度。"
+                },
+                {
+                  "title": "扇出架构",
+                  "slug": "02_扇出架构_Fanout_Architecture",
+                  "intro": "树形扇出与负载均衡。"
+                },
+                {
+                  "title": "带宽与流量控制",
+                  "slug": "03_带宽与流量控制_Bandwidth_Control",
+                  "intro": "限速、合并与优先级。"
+                },
+                {
+                  "title": "大规模订阅的扩展",
+                  "slug": "04_大规模订阅扩展_Scale",
+                  "intro": "百万级订阅下的内存与 CPU 优化。"
+                }
+              ]
+            },
+            {
+              "title": "参考数据与版本管理",
+              "slug": "04_参考数据与版本管理_Reference_Data",
+              "intro": "证券主数据、生效日期与一致性分发。",
+              "subsections": [
+                {
+                  "title": "参考数据模型",
+                  "slug": "01_参考数据模型_Ref_Data_Model",
+                  "intro": "证券、公司、日历等主数据实体。"
+                },
+                {
+                  "title": "版本与生效日期",
+                  "slug": "02_版本与生效日期_Version_Effective",
+                  "intro": "时间旅行查询与未来生效数据。"
+                },
+                {
+                  "title": "一致性分发",
+                  "slug": "03_一致性分发_Consistent_Distribution",
+                  "intro": "全市场统一视图的保证。"
+                },
+                {
+                  "title": "变更通知与缓存更新",
+                  "slug": "04_变更通知与缓存更新_Change_Notify",
+                  "intro": "订阅式更新与本地缓存失效。"
+                }
+              ]
+            },
+            {
+              "title": "行情系统的延迟与吞吐设计",
+              "slug": "05_行情系统延迟吞吐设计_Market_Data_Design",
+              "intro": "组播、TCP 回退与本地缓存策略。",
+              "subsections": [
+                {
+                  "title": "组播主路径设计",
+                  "slug": "01_组播主路径设计_Multicast_Primary",
+                  "intro": "低延迟主路径的架构。"
+                },
+                {
+                  "title": "TCP 回退与补救",
+                  "slug": "02_TCP回退与补救_TCP_Fallback",
+                  "intro": "组播失败时的可靠补充通道。"
+                },
+                {
+                  "title": "本地缓存与合并",
+                  "slug": "03_本地缓存与合并_Local_Cache",
+                  "intro": "客户端与中间层的缓存策略。"
+                },
+                {
+                  "title": "端到端延迟优化",
+                  "slug": "04_端到端延迟优化_E2E_Latency",
+                  "intro": "从交易所到最终用户的全链路优化。"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "清结算与对账",
+          "slug": "03_清结算与对账_Settlement_and_Reconciliation",
+          "intro": "后台系统对正确性的要求。",
+          "sections": [
+            {
+              "title": "账务模型与不变量",
+              "slug": "01_账务模型与不变量_Ledger_and_Invariants",
+              "intro": "复式记账与系统不变量。",
+              "subsections": [
+                {
+                  "title": "复式记账原理",
+                  "slug": "01_复式记账原理_Double_Entry",
+                  "intro": "借贷平衡与账户体系。"
+                },
+                {
+                  "title": "系统不变量定义",
+                  "slug": "02_系统不变量定义_Invariants",
+                  "intro": "资金守恒、持仓匹配等关键不变量。"
+                },
+                {
+                  "title": "不变量的运行时检查",
+                  "slug": "03_不变量运行时检查_Runtime_Check",
+                  "intro": "在关键路径与后台的校验。"
+                },
+                {
+                  "title": "与事件溯源的结合",
+                  "slug": "04_与事件溯源结合_Event_Sourcing",
+                  "intro": "从事件重建账务状态的验证。"
+                }
+              ]
+            },
+            {
+              "title": "日终批处理与流式处理",
+              "slug": "02_日终批处理与流式处理_Batch_vs_Streaming",
+              "intro": "两种处理模式的组合。",
+              "subsections": [
+                {
+                  "title": "日终批处理流程",
+                  "slug": "01_日终批处理流程_Batch_Process",
+                  "intro": "清算、对账、报表的典型步骤。"
+                },
+                {
+                  "title": "流式处理的优势",
+                  "slug": "02_流式处理优势_Streaming_Advantage",
+                  "intro": "更低延迟与更细粒度状态。"
+                },
+                {
+                  "title": "批流结合架构",
+                  "slug": "03_批流结合架构_Lambda_Kappa",
+                  "intro": "Lambda 与 Kappa 架构在清结算中的应用。"
+                },
+                {
+                  "title": "切换与演进路径",
+                  "slug": "04_切换与演进路径_Migration",
+                  "intro": "从纯批到批流混合的平滑演进。"
+                }
+              ]
+            },
+            {
+              "title": "对账与差异修复",
+              "slug": "03_对账与差异修复_Reconciliation",
+              "intro": "自动对账、差异分类与补偿。",
+              "subsections": [
+                {
+                  "title": "对账数据源与粒度",
+                  "slug": "01_对账数据源与粒度_Sources_Granularity",
+                  "intro": "内部账务与外部清算所数据的比对。"
+                },
+                {
+                  "title": "差异分类与优先级",
+                  "slug": "02_差异分类与优先级_Diff_Classification",
+                  "intro": "金额、数量、缺失等类型的处理优先级。"
+                },
+                {
+                  "title": "自动修复与人工介入",
+                  "slug": "03_自动修复与人工介入_Auto_Manual",
+                  "intro": "可自动处理的规则与必须人工的边界。"
+                },
+                {
+                  "title": "对账结果的审计",
+                  "slug": "04_对账结果审计_Audit",
+                  "intro": "修复操作的完整记录与可追溯。"
+                }
+              ]
+            },
+            {
+              "title": "清结算系统的一致性与审计设计",
+              "slug": "04_清结算一致性与审计_Settlement_Consistency",
+              "intro": "最终一致性窗口与不可篡改日志。",
+              "subsections": [
+                {
+                  "title": "最终一致性窗口",
+                  "slug": "01_最终一致性窗口_Eventual_Window",
+                  "intro": "业务可接受的不一致时间范围。"
+                },
+                {
+                  "title": "不可篡改日志设计",
+                  "slug": "02_不可篡改日志设计_Immutable_Log",
+                  "intro": "哈希链、签名与防篡改存储。"
+                },
+                {
+                  "title": "审计查询接口",
+                  "slug": "03_审计查询接口_Audit_Query",
+                  "intro": "支持监管与内部审计的查询能力。"
+                },
+                {
+                  "title": "与实时交易系统的边界",
+                  "slug": "04_与实时交易边界_Boundary_with_Trading",
+                  "intro": "前台与后台的一致性责任划分。"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "典型金融系统架构模式",
+          "slug": "04_典型金融系统架构模式_Architecture_Patterns",
+          "intro": "从单体到分布式的演进与常见模式。",
+          "sections": [
+            {
+              "title": "定序器 + 状态机模式",
+              "slug": "01_定序器加状态机_Sequencer_Pattern",
+              "intro": "高可靠低延迟业务的核心模式。",
+              "subsections": [
+                {
+                  "title": "模式结构回顾",
+                  "slug": "01_模式结构回顾_Structure",
+                  "intro": "定序器、日志、多副本状态机的协作。"
+                },
+                {
+                  "title": "适用业务特征",
+                  "slug": "02_适用业务特征_Applicability",
+                  "intro": "需要强顺序与可重放的业务。"
+                },
+                {
+                  "title": "扩展与分片",
+                  "slug": "03_扩展与分片_Scaling",
+                  "intro": "按业务键分片后的多定序器架构。"
+                },
+                {
+                  "title": "与微服务的结合",
+                  "slug": "04_与微服务结合_with_Microservices",
+                  "intro": "在服务边界内使用该模式。"
+                }
+              ]
+            },
+            {
+              "title": "CQRS 与读写分离在金融中的应用",
+              "slug": "02_CQRS 与读写分离_CQRS",
+              "intro": "命令与查询路径的拆分。",
+              "subsections": [
+                {
+                  "title": "CQRS 基本思想",
+                  "slug": "01_CQRS基本思想_CQRS_Idea",
+                  "intro": "命令模型与查询模型的分离。"
+                },
+                {
+                  "title": "金融中的读写路径",
+                  "slug": "02_金融读写路径_Finance_Paths",
+                  "intro": "下单路径与持仓/行情查询路径。"
+                },
+                {
+                  "title": "一致性与同步延迟",
+                  "slug": "03_一致性与同步延迟_Consistency_Lag",
+                  "intro": "查询侧最终一致的可接受范围。"
+                },
+                {
+                  "title": "实现与运维复杂度",
+                  "slug": "04_实现与运维复杂度_Complexity",
+                  "intro": "双写、同步与故障处理的额外成本。"
+                }
+              ]
+            },
+            {
+              "title": "事件驱动与异步解耦",
+              "slug": "03_事件驱动与异步解耦_Event_Driven",
+              "intro": "边界划分与最终一致性处理。",
+              "subsections": [
+                {
+                  "title": "事件驱动的边界划分",
+                  "slug": "01_事件驱动边界划分_Boundaries",
+                  "intro": "哪些交互适合异步事件。"
+                },
+                {
+                  "title": "最终一致性处理模式",
+                  "slug": "02_最终一致性处理模式_Eventual_Patterns",
+                  "intro": "补偿、重试与人工介入。"
+                },
+                {
+                  "title": "事件契约与演进",
+                  "slug": "03_事件契约与演进_Event_Contract",
+                  "intro": "事件 schema 的兼容性管理。"
+                },
+                {
+                  "title": "可观测性要求",
+                  "slug": "04_可观测性要求_Observability",
+                  "intro": "异步链路的追踪与问题定位。"
+                }
+              ]
+            },
+            {
+              "title": "多活与异地容灾架构选型",
+              "slug": "04_多活与异地容灾_Multi_Active_DR",
+              "intro": "同城双活、两地三中心与数据同步策略。",
+              "subsections": [
+                {
+                  "title": "同城双活",
+                  "slug": "01_同城双活_Same_City_Active",
+                  "intro": "低延迟同步与故障切换。"
+                },
+                {
+                  "title": "两地三中心",
+                  "slug": "02_两地三中心_Two_Regions",
+                  "intro": "异地灾备与数据同步延迟。"
+                },
+                {
+                  "title": "数据同步策略",
+                  "slug": "03_数据同步策略_Sync_Strategy",
+                  "intro": "同步复制、异步复制与冲突处理。"
+                },
+                {
+                  "title": "RTO/RPO 与成本权衡",
+                  "slug": "04_RTO_RPO与成本_RTO_RPO_Cost",
+                  "intro": "恢复目标与投入的平衡。"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Entitlement 权限与数据许可",
+      "slug": "07_Entitlement 权限与数据许可_Entitlement_Systems",
+      "intro": "围绕 Bloomberg 一类数据平台的 Entitlement 场景，讲授通用的权限系统设计；以公开接口文档中的概念为参照，不涉及任何内部实现。",
+      "chapters": [
+        {
+          "title": "Entitlement 基础",
+          "slug": "01_Entitlement 基础_Entitlement_Fundamentals",
+          "intro": "金融数据权限的业务语义。",
+          "sections": [
+            {
+              "title": "为什么金融数据需要 Entitlement",
+              "slug": "01_为什么金融数据需要 Entitlement_Why_Entitlement",
+              "intro": "数据许可、合规与按需计费的背景。",
+              "subsections": [
+                {
+                  "title": "数据许可与版权",
+                  "slug": "01_数据许可与版权_Licensing",
+                  "intro": "交易所与供应商的数据使用协议。"
+                },
+                {
+                  "title": "合规与监管要求",
+                  "slug": "02_合规与监管要求_Compliance",
+                  "intro": "谁可以看什么数据的监管约束。"
+                },
+                {
+                  "title": "按需计费模式",
+                  "slug": "03_按需计费模式_Usage_Based_Billing",
+                  "intro": "订阅与实际使用量的计费基础。"
+                },
+                {
+                  "title": "业务影响与风险",
+                  "slug": "04_业务影响与风险_Business_Impact",
+                  "intro": "未授权访问的法律与商业风险。"
+                }
+              ]
+            },
+            {
+              "title": "身份、资源与权限的建模",
+              "slug": "02_身份、资源与权限的建模_Identity_Resource_Permission",
+              "intro": "用户、应用、数据字段与 EID 概念的抽象。",
+              "subsections": [
+                {
+                  "title": "身份模型",
+                  "slug": "01_身份模型_Identity_Model",
+                  "intro": "用户、应用、服务账号的层次。"
+                },
+                {
+                  "title": "资源与 EID",
+                  "slug": "02_资源与EID_Resource_EID",
+                  "intro": "数据字段、数据集与 Entitlement ID。"
+                },
+                {
+                  "title": "权限关系",
+                  "slug": "03_权限关系_Permission_Relation",
+                  "intro": "身份对资源的允许/拒绝关系。"
+                },
+                {
+                  "title": "模型的可扩展性",
+                  "slug": "04_模型可扩展性_Model_Extensibility",
+                  "intro": "支持新数据源与新权限类型的扩展。"
+                }
+              ]
+            },
+            {
+              "title": "Entitlement 的典型流程",
+              "slug": "03_Entitlement 的典型流程_Typical_Flow",
+              "intro": "认证、授权、订阅过滤与撤销。",
+              "subsections": [
+                {
+                  "title": "认证阶段",
+                  "slug": "01_认证阶段_Authentication",
+                  "intro": "建立身份与会话。"
+                },
+                {
+                  "title": "授权与权限检查",
+                  "slug": "02_授权与权限检查_Authorization",
+                  "intro": "在订阅与查询时的实时检查。"
+                },
+                {
+                  "title": "订阅过滤",
+                  "slug": "03_订阅过滤_Subscription_Filter",
+                  "intro": "仅推送有权限的数据。"
+                },
+                {
+                  "title": "撤销与生效",
+                  "slug": "04_撤销与生效_Revocation",
+                  "intro": "权限变更后的及时生效。"
+                }
+              ]
+            },
+            {
+              "title": "BLPAPI 中的 Entitlement 概念",
+              "slug": "04_BLPAPI 中的 Entitlement 概念_BLPAPI_Concepts",
+              "intro": "基于公开 API 文档理解 Identity、EID 与权限检查的使用方式。",
+              "subsections": [
+                {
+                  "title": "Identity 对象",
+                  "slug": "01_Identity对象_Identity",
+                  "intro": "公开文档中的身份表示。"
+                },
+                {
+                  "title": "EID 与权限查询",
+                  "slug": "02_EID与权限查询_EID_Query",
+                  "intro": "如何查询与使用 EID。"
+                },
+                {
+                  "title": "权限检查 API 模式",
+                  "slug": "03_权限检查API模式_Check_API",
+                  "intro": "同步检查与异步通知的使用方式。"
+                },
+                {
+                  "title": "对自建系统的启发",
+                  "slug": "04_对自建系统启发_Lessons",
+                  "intro": "从公开接口抽象出的通用设计。"
+                }
+              ]
+            },
+            {
+              "title": "权限与计费、合规的交叉点",
+              "slug": "05_权限与计费合规_Permission_Billing_Compliance",
+              "intro": "使用量统计、审计与监管要求。",
+              "subsections": [
+                {
+                  "title": "使用量统计",
+                  "slug": "01_使用量统计_Usage_Metering",
+                  "intro": "为计费提供准确的使用数据。"
+                },
+                {
+                  "title": "审计日志要求",
+                  "slug": "02_审计日志要求_Audit_Log",
+                  "intro": "谁在何时访问了什么数据。"
+                },
+                {
+                  "title": "监管报告支撑",
+                  "slug": "03_监管报告支撑_Regulatory_Report",
+                  "intro": "满足监管查询与报告的数据基础。"
+                },
+                {
+                  "title": "交叉系统的一致性",
+                  "slug": "04_交叉系统一致性_Cross_System",
+                  "intro": "权限、计费、审计系统间的数据一致。"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "分布式权限系统设计",
+          "slug": "02_分布式权限系统设计_Distributed_Authorization_Design",
+          "intro": "把权限判定做成高可用、低延迟的服务。",
+          "sections": [
+            {
+              "title": "策略模型：RBAC 与 ABAC",
+              "slug": "01_策略模型：RBAC 与 ABAC_RBAC_and_ABAC",
+              "intro": "两种模型的表达能力与复杂度。",
+              "subsections": [
+                {
+                  "title": "RBAC 模型",
+                  "slug": "01_RBAC模型_RBAC",
+                  "intro": "角色、权限与用户的分配。"
+                },
+                {
+                  "title": "ABAC 模型",
+                  "slug": "02_ABAC模型_ABAC",
+                  "intro": "基于属性的细粒度策略。"
+                },
+                {
+                  "title": "表达能力与复杂度对比",
+                  "slug": "03_表达能力与复杂度_Expressiveness",
+                  "intro": "何时用 RBAC，何时需要 ABAC。"
+                },
+                {
+                  "title": "金融权限的模型选择",
+                  "slug": "04_金融权限模型选择_Finance_Choice",
+                  "intro": "数据字段级权限的常见建模方式。"
+                }
+              ]
+            },
+            {
+              "title": "权限数据的分发与缓存",
+              "slug": "02_权限数据的分发与缓存_Permission_Distribution",
+              "intro": "本地缓存、版本号与批量下发。",
+              "subsections": [
+                {
+                  "title": "权限数据的存储",
+                  "slug": "01_权限数据存储_Storage",
+                  "intro": "中心化存储与版本管理。"
+                },
+                {
+                  "title": "批量下发与增量更新",
+                  "slug": "02_批量下发与增量更新_Distribution",
+                  "intro": "全量快照 + 增量变更的推送。"
+                },
+                {
+                  "title": "本地缓存设计",
+                  "slug": "03_本地缓存设计_Local_Cache",
+                  "intro": "热路径上的无锁只读快照。"
+                },
+                {
+                  "title": "版本号与一致性",
+                  "slug": "04_版本号与一致性_Versioning",
+                  "intro": "缓存与中心数据的版本对齐。"
+                }
+              ]
+            },
+            {
+              "title": "实时撤销与一致性窗口",
+              "slug": "03_实时撤销与一致性窗口_Revocation_Consistency",
+              "intro": "撤销生效时间、租约与失效广播。",
+              "subsections": [
+                {
+                  "title": "撤销的业务语义",
+                  "slug": "01_撤销业务语义_Revocation_Semantics",
+                  "intro": "立即生效 vs 允许短暂窗口。"
+                },
+                {
+                  "title": "租约机制",
+                  "slug": "02_租约机制_Lease",
+                  "intro": "权限的有时限持有与续期。"
+                },
+                {
+                  "title": "失效广播",
+                  "slug": "03_失效广播_Invalidation_Broadcast",
+                  "intro": "权限变更后的主动通知。"
+                },
+                {
+                  "title": "一致性窗口的量化与监控",
+                  "slug": "04_一致性窗口量化_Window_Measurement",
+                  "intro": "实际生效延迟的测量与告警。"
+                }
+              ]
+            },
+            {
+              "title": "审计与合规日志",
+              "slug": "04_审计与合规日志_Audit_Logging",
+              "intro": "不可篡改日志与访问追溯。",
+              "subsections": [
+                {
+                  "title": "审计日志内容",
+                  "slug": "01_审计日志内容_Log_Content",
+                  "intro": "身份、资源、操作、时间与结果。"
+                },
+                {
+                  "title": "不可篡改存储",
+                  "slug": "02_不可篡改存储_Immutable_Storage",
+                  "intro": "追加写、哈希链与签名。"
+                },
+                {
+                  "title": "查询与追溯接口",
+                  "slug": "03_查询与追溯接口_Query_Trace",
+                  "intro": "支持按用户、资源、时间的检索。"
+                },
+                {
+                  "title": "保留策略与合规",
+                  "slug": "04_保留策略与合规_Retention",
+                  "intro": "满足监管的保留期与销毁。"
+                }
+              ]
+            },
+            {
+              "title": "权限系统的可扩展性与多租户",
+              "slug": "05_可扩展性与多租户_Scalability_Multi_Tenant",
+              "intro": "租户隔离、配额与热点权限处理。",
+              "subsections": [
+                {
+                  "title": "多租户隔离",
+                  "slug": "01_多租户隔离_Multi_Tenant",
+                  "intro": "数据与计算的租户级隔离。"
+                },
+                {
+                  "title": "配额与限流",
+                  "slug": "02_配额与限流_Quota_Rate",
+                  "intro": "防止单一租户耗尽资源。"
+                },
+                {
+                  "title": "热点权限处理",
+                  "slug": "03_热点权限处理_Hot_Permissions",
+                  "intro": "高频检查的权限结果缓存。"
+                },
+                {
+                  "title": "水平扩展架构",
+                  "slug": "04_水平扩展架构_Scale_Out",
+                  "intro": "无状态检查服务 + 分片权限数据。"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "C++ 实现 Entitlement 服务",
+          "slug": "03_C++ 实现 Entitlement 服务_Implementing_Entitlement_in_Cpp",
+          "intro": "面向热路径的权限检查实现。",
+          "sections": [
+            {
+              "title": "低延迟权限检查",
+              "slug": "01_低延迟权限检查_Fast_Path_Check",
+              "intro": "位图、集合与无锁只读快照。",
+              "subsections": [
+                {
+                  "title": "位图与集合表示",
+                  "slug": "01_位图与集合表示_Bitmap_Set",
+                  "intro": "高效表达大量 EID 的权限集合。"
+                },
+                {
+                  "title": "无锁只读快照",
+                  "slug": "02_无锁只读快照_Lockfree_Snapshot",
+                  "intro": "读路径完全无锁的数据结构。"
+                },
+                {
+                  "title": "检查热路径优化",
+                  "slug": "03_检查热路径优化_Hot_Path",
+                  "intro": "缓存行对齐、分支预测与批量检查。"
+                },
+                {
+                  "title": "性能目标与测量",
+                  "slug": "04_性能目标与测量_Perf_Target",
+                  "intro": "纳秒级检查的延迟预算与验证。"
+                }
+              ]
+            },
+            {
+              "title": "热更新与版本切换",
+              "slug": "02_热更新与版本切换_Hot_Reload",
+              "intro": "RCU 风格的数据结构更新。",
+              "subsections": [
+                {
+                  "title": "RCU 风格更新",
+                  "slug": "01_RCU风格更新_RCU_Update",
+                  "intro": "写时复制与宽限期等待。"
+                },
+                {
+                  "title": "版本切换原子性",
+                  "slug": "02_版本切换原子性_Version_Switch",
+                  "intro": "读者看到一致的新旧版本。"
+                },
+                {
+                  "title": "更新频率与开销",
+                  "slug": "03_更新频率与开销_Update_Cost",
+                  "intro": "高频更新下的内存与 CPU 代价。"
+                },
+                {
+                  "title": "与分发系统的衔接",
+                  "slug": "04_与分发系统衔接_with_Distribution",
+                  "intro": "接收增量后触发本地热更新。"
+                }
+              ]
+            },
+            {
+              "title": "服务接口与客户端 SDK",
+              "slug": "03_服务接口与客户端 SDK_Service_and_SDK",
+              "intro": "接口设计、超时与降级策略。",
+              "subsections": [
+                {
+                  "title": "服务接口设计",
+                  "slug": "01_服务接口设计_Service_API",
+                  "intro": "检查、订阅变更、批量查询等接口。"
+                },
+                {
+                  "title": "客户端 SDK 封装",
+                  "slug": "02_客户端SDK封装_Client_SDK",
+                  "intro": "本地缓存、异步通知与降级逻辑。"
+                },
+                {
+                  "title": "超时与重试策略",
+                  "slug": "03_超时与重试策略_Timeout_Retry",
+                  "intro": "权限检查失败时的安全默认行为。"
+                },
+                {
+                  "title": "降级与安全默认",
+                  "slug": "04_降级与安全默认_Degrade_Safe",
+                  "intro": "服务不可用时拒绝访问的保守策略。"
+                }
+              ]
+            },
+            {
+              "title": "压测与故障演练",
+              "slug": "04_压测与故障演练_Load_and_Fault_Test",
+              "intro": "延迟分布与缓存失效风暴场景。",
+              "subsections": [
+                {
+                  "title": "延迟分布压测",
+                  "slug": "01_延迟分布压测_Latency_Load",
+                  "intro": "高 QPS 下的 P99/P99.9 验证。"
+                },
+                {
+                  "title": "缓存失效风暴",
+                  "slug": "02_缓存失效风暴_Invalidation_Storm",
+                  "intro": "大规模权限变更时的系统行为。"
+                },
+                {
+                  "title": "故障注入场景",
+                  "slug": "03_故障注入场景_Fault_Injection",
+                  "intro": "网络分区、节点宕机下的表现。"
+                },
+                {
+                  "title": "回归与基准管理",
+                  "slug": "04_回归与基准管理_Regression",
+                  "intro": "性能与正确性的持续回归检测。"
+                }
+              ]
+            },
+            {
+              "title": "Entitlement 服务端到端设计案例",
+              "slug": "05_Entitlement 端到端设计_End_to_End",
+              "intro": "从数据模型、分发、检查到审计的完整架构。",
+              "subsections": [
+                {
+                  "title": "整体架构图与组件",
+                  "slug": "01_整体架构图与组件_Architecture",
+                  "intro": "中心服务、分发、检查节点与审计的协作。"
+                },
+                {
+                  "title": "数据流与一致性",
+                  "slug": "02_数据流与一致性_Data_Flow",
+                  "intro": "从权限变更到生效的完整路径。"
+                },
+                {
+                  "title": "延迟与可用性目标",
+                  "slug": "03_延迟与可用性目标_SLOs",
+                  "intro": "检查延迟与服务可用性的量化目标。"
+                },
+                {
+                  "title": "运维与演进考虑",
+                  "slug": "04_运维与演进考虑_Ops_Evolution",
+                  "intro": "扩容、升级与多区域部署。"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "安全、合规与运维",
+      "slug": "08_安全合规与运维_Security_Compliance_Ops",
+      "intro": "金融分布式系统不可缺少的横向能力。",
+      "chapters": [
+        {
+          "title": "分布式系统安全基础",
+          "slug": "01_分布式系统安全基础_Security_Fundamentals",
+          "intro": "身份、传输、存储与访问控制。",
+          "sections": [
+            {
+              "title": "认证与授权模型",
+              "slug": "01_认证与授权模型_AuthN_AuthZ",
+              "intro": "mTLS、Token、证书与细粒度授权。",
+              "subsections": [
+                {
+                  "title": "mTLS 双向认证",
+                  "slug": "01_mTLS双向认证_mTLS",
+                  "intro": "服务间身份确认的基础。"
+                },
+                {
+                  "title": "Token 与会话",
+                  "slug": "02_Token与会话_Token_Session",
+                  "intro": "短时令牌与刷新机制。"
+                },
+                {
+                  "title": "细粒度授权",
+                  "slug": "03_细粒度授权_Fine_Grained",
+                  "intro": "与 Entitlement 的结合点。"
+                },
+                {
+                  "title": "零信任思想",
+                  "slug": "04_零信任思想_Zero_Trust",
+                  "intro": "默认不信任网络的设计原则。"
+                }
+              ]
+            },
+            {
+              "title": "传输与存储加密",
+              "slug": "02_传输与存储加密_Encryption",
+              "intro": "TLS 配置、密钥管理与静态数据保护。",
+              "subsections": [
+                {
+                  "title": "TLS 配置最佳实践",
+                  "slug": "01_TLS配置最佳实践_TLS_Best",
+                  "intro": "协议版本、密码套件与证书管理。"
+                },
+                {
+                  "title": "密钥管理",
+                  "slug": "02_密钥管理_Key_Management",
+                  "intro": "密钥生成、轮换与安全存储。"
+                },
+                {
+                  "title": "静态数据加密",
+                  "slug": "03_静态数据加密_Data_at_Rest",
+                  "intro": "磁盘与备份的加密。"
+                },
+                {
+                  "title": "性能影响与硬件加速",
+                  "slug": "04_性能影响与硬件加速_Perf_HW",
+                  "intro": "加密对延迟的影响与 AES-NI 等加速。"
+                }
+              ]
+            },
+            {
+              "title": "最小权限与攻击面缩小",
+              "slug": "03_最小权限与攻击面_Least_Privilege",
+              "intro": "网络隔离、进程权限与依赖最小化。",
+              "subsections": [
+                {
+                  "title": "网络隔离与微分段",
+                  "slug": "01_网络隔离与微分段_Network_Isolation",
+                  "intro": "最小必要连通性。"
+                },
+                {
+                  "title": "进程与容器权限",
+                  "slug": "02_进程与容器权限_Process_Privilege",
+                  "intro": "非 root、capabilities 与 seccomp。"
+                },
+                {
+                  "title": "依赖最小化",
+                  "slug": "03_依赖最小化_Minimal_Deps",
+                  "intro": "减少第三方库与攻击面。"
+                },
+                {
+                  "title": "定期攻击面审查",
+                  "slug": "04_定期攻击面审查_Attack_Surface_Review",
+                  "intro": "持续评估与缩减。"
+                }
+              ]
+            },
+            {
+              "title": "安全审计与入侵检测基础",
+              "slug": "04_安全审计与检测_Audit_and_Detection",
+              "intro": "日志完整性与异常行为。",
+              "subsections": [
+                {
+                  "title": "安全审计日志",
+                  "slug": "01_安全审计日志_Security_Audit",
+                  "intro": "认证、授权失败与敏感操作记录。"
+                },
+                {
+                  "title": "日志完整性保护",
+                  "slug": "02_日志完整性保护_Log_Integrity",
+                  "intro": "防篡改与防删除。"
+                },
+                {
+                  "title": "异常行为检测",
+                  "slug": "03_异常行为检测_Anomaly",
+                  "intro": "基线与偏差告警。"
+                },
+                {
+                  "title": "响应与取证",
+                  "slug": "04_响应与取证_Response_Forensics",
+                  "intro": "事件响应流程与证据保全。"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "合规与监管要求",
+          "slug": "02_合规与监管要求_Compliance",
+          "intro": "金融场景下的特殊约束。",
+          "sections": [
+            {
+              "title": "时钟、时间戳与审计轨迹",
+              "slug": "01_时钟时间戳与审计_Clock_and_Audit",
+              "intro": "监管对时间精度与不可抵赖的要求。",
+              "subsections": [
+                {
+                  "title": "监管时间精度要求",
+                  "slug": "01_监管时间精度_Regulatory_Precision",
+                  "intro": "微秒/纳秒级要求的来源。"
+                },
+                {
+                  "title": "时间戳的绑定与传递",
+                  "slug": "02_时间戳绑定与传递_Timestamp_Binding",
+                  "intro": "从产生到报告的完整链路。"
+                },
+                {
+                  "title": "审计轨迹完整性",
+                  "slug": "03_审计轨迹完整性_Audit_Trail",
+                  "intro": "不可抵赖与完整历史。"
+                },
+                {
+                  "title": "工程落地检查清单",
+                  "slug": "04_工程落地检查清单_Checklist",
+                  "intro": "满足监管的常见检查点。"
+                }
+              ]
+            },
+            {
+              "title": "数据保留与销毁",
+              "slug": "02_数据保留与销毁_Retention",
+              "intro": "合规保留期与安全删除。",
+              "subsections": [
+                {
+                  "title": "保留期要求",
+                  "slug": "01_保留期要求_Retention_Period",
+                  "intro": "不同数据类型的保留时长。"
+                },
+                {
+                  "title": "安全删除",
+                  "slug": "02_安全删除_Secure_Deletion",
+                  "intro": "覆盖、加密擦除与证明。"
+                },
+                {
+                  "title": "归档与检索",
+                  "slug": "03_归档与检索_Archive_Retrieve",
+                  "intro": "长期归档的成本与可访问性。"
+                },
+                {
+                  "title": "策略自动化",
+                  "slug": "04_策略自动化_Policy_Automation",
+                  "intro": "基于策略的自动保留与销毁。"
+                }
+              ]
+            },
+            {
+              "title": "跨区域数据与主权",
+              "slug": "03_跨区域数据与主权_Data_Sovereignty",
+              "intro": "数据驻留与跨境传输约束。",
+              "subsections": [
+                {
+                  "title": "数据驻留要求",
+                  "slug": "01_数据驻留要求_Data_Residency",
+                  "intro": "数据必须存储在指定区域。"
+                },
+                {
+                  "title": "跨境传输限制",
+                  "slug": "02_跨境传输限制_Cross_Border",
+                  "intro": "允许与禁止的传输场景。"
+                },
+                {
+                  "title": "架构应对策略",
+                  "slug": "03_架构应对策略_Architecture",
+                  "intro": "区域部署与数据隔离。"
+                },
+                {
+                  "title": "合规证明与审计",
+                  "slug": "04_合规证明与审计_Proof_Audit",
+                  "intro": "如何向监管证明合规。"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "部署、配置与运维基础",
+          "slug": "03_部署配置与运维基础_Deployment_and_Ops",
+          "intro": "让系统可上线、可变更、可回滚。",
+          "sections": [
+            {
+              "title": "配置管理与动态下发",
+              "slug": "01_配置管理与动态下发_Config_Management",
+              "intro": "版本化配置、灰度与回滚。",
+              "subsections": [
+                {
+                  "title": "配置版本化",
+                  "slug": "01_配置版本化_Config_Versioning",
+                  "intro": "配置变更的可追溯与回滚。"
+                },
+                {
+                  "title": "动态下发机制",
+                  "slug": "02_动态下发机制_Dynamic_Push",
+                  "intro": "推送、拉取与一致性保证。"
+                },
+                {
+                  "title": "灰度发布配置",
+                  "slug": "03_灰度发布配置_Canary_Config",
+                  "intro": "按比例或按标签的配置生效。"
+                },
+                {
+                  "title": "配置与代码的边界",
+                  "slug": "04_配置与代码边界_Config_Code",
+                  "intro": "哪些适合配置，哪些应在代码中。"
+                }
+              ]
+            },
+            {
+              "title": "滚动升级与蓝绿/金丝雀",
+              "slug": "02_滚动升级与发布策略_Release_Strategies",
+              "intro": "有状态服务的升级难点与策略。",
+              "subsections": [
+                {
+                  "title": "滚动升级",
+                  "slug": "01_滚动升级_Rolling",
+                  "intro": "逐个替换实例的无停机升级。"
+                },
+                {
+                  "title": "蓝绿部署",
+                  "slug": "02_蓝绿部署_Blue_Green",
+                  "intro": "两套环境切换的快速回滚。"
+                },
+                {
+                  "title": "金丝雀发布",
+                  "slug": "03_金丝雀发布_Canary",
+                  "intro": "小流量验证后全量。"
+                },
+                {
+                  "title": "有状态服务的特殊处理",
+                  "slug": "04_有状态服务特殊处理_Stateful",
+                  "intro": "数据迁移与成员变更的协调。"
+                }
+              ]
+            },
+            {
+              "title": "依赖管理与供应链安全简介",
+              "slug": "03_依赖管理与供应链_Dependency_Security",
+              "intro": "第三方库、镜像与漏洞响应。",
+              "subsections": [
+                {
+                  "title": "依赖锁定与审计",
+                  "slug": "01_依赖锁定与审计_Lock_Audit",
+                  "intro": "可复现构建与已知漏洞扫描。"
+                },
+                {
+                  "title": "镜像与制品安全",
+                  "slug": "02_镜像与制品安全_Image_Artifact",
+                  "intro": "签名、扫描与最小基础镜像。"
+                },
+                {
+                  "title": "漏洞响应流程",
+                  "slug": "03_漏洞响应流程_Vulnerability_Response",
+                  "intro": "发现、评估、修复与验证。"
+                },
+                {
+                  "title": "内部制品库",
+                  "slug": "04_内部制品库_Internal_Repo",
+                  "intro": "代理与缓存可信依赖。"
+                }
+              ]
+            },
+            {
+              "title": "容量与弹性伸缩实践",
+              "slug": "04_容量与弹性伸缩_Autoscaling",
+              "intro": "基于指标的扩缩与预热。",
+              "subsections": [
+                {
+                  "title": "扩缩容指标选择",
+                  "slug": "01_扩缩容指标选择_Metrics",
+                  "intro": "CPU、队列、延迟等信号。"
+                },
+                {
+                  "title": "预热与冷启动",
+                  "slug": "02_预热与冷启动_Warmup",
+                  "intro": "新实例就绪前的准备。"
+                },
+                {
+                  "title": "金融系统中的谨慎使用",
+                  "slug": "03_金融谨慎使用_Finance_Caution",
+                  "intro": "为何自动扩缩在关键路径较少使用。"
+                },
+                {
+                  "title": "容量规划与弹性的结合",
+                  "slug": "04_容量规划与弹性结合_Capacity_Elasticity",
+                  "intro": "预留 + 有限弹性的 pragmatic 方案。"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "可靠性、测试与综合项目",
+      "slug": "09_可靠性测试与综合项目_Reliability_Testing_and_Projects",
+      "intro": "把系统做到可运维、可验证。",
+      "chapters": [
+        {
+          "title": "可观测性",
+          "slug": "01_可观测性_Observability",
+          "intro": "没有观测就没有可靠性。",
+          "sections": [
+            {
+              "title": "日志、指标与追踪",
+              "slug": "01_日志、指标与追踪_Logs_Metrics_Traces",
+              "intro": "三大支柱与 OpenTelemetry。",
+              "subsections": [
+                {
+                  "title": "结构化日志",
+                  "slug": "01_结构化日志_Structured_Logging",
+                  "intro": "机器可读与上下文关联。"
+                },
+                {
+                  "title": "指标类型与采集",
+                  "slug": "02_指标类型与采集_Metrics",
+                  "intro": "Counter、Gauge、Histogram 的使用。"
+                },
+                {
+                  "title": "分布式追踪",
+                  "slug": "03_分布式追踪_Tracing",
+                  "intro": "Trace、Span 与上下文传播。"
+                },
+                {
+                  "title": "OpenTelemetry 实践",
+                  "slug": "04_OpenTelemetry实践_OTel",
+                  "intro": "统一采集与导出的标准。"
+                }
+              ]
+            },
+            {
+              "title": "延迟直方图与采样",
+              "slug": "02_延迟直方图与采样_Latency_Histograms",
+              "intro": "HdrHistogram 与低开销埋点。",
+              "subsections": [
+                {
+                  "title": "HdrHistogram 原理",
+                  "slug": "01_HdrHistogram原理_HdrHistogram",
+                  "intro": "高精度、低开销的延迟记录。"
+                },
+                {
+                  "title": "采样策略",
+                  "slug": "02_采样策略_Sampling",
+                  "intro": "全量 vs 采样的权衡与偏差控制。"
+                },
+                {
+                  "title": "低开销埋点",
+                  "slug": "03_低开销埋点_Low_Overhead",
+                  "intro": "在热路径上最小化观测开销。"
+                },
+                {
+                  "title": "与告警的结合",
+                  "slug": "04_与告警结合_with_Alerting",
+                  "intro": "基于百分位的告警规则。"
+                }
+              ]
+            },
+            {
+              "title": "告警与 SLO",
+              "slug": "03_告警与 SLO_Alerting_and_SLO",
+              "intro": "基于 SLO 的告警设计。",
+              "subsections": [
+                {
+                  "title": "SLO 定义",
+                  "slug": "01_SLO定义_SLO_Definition",
+                  "intro": "服务级别目标的量化。"
+                },
+                {
+                  "title": "错误预算",
+                  "slug": "02_错误预算_Error_Budget",
+                  "intro": "允许的不可靠程度与发布决策。"
+                },
+                {
+                  "title": "告警规则设计",
+                  "slug": "03_告警规则设计_Alert_Rules",
+                  "intro": "避免告警疲劳的原则。"
+                },
+                {
+                  "title": "值班与升级",
+                  "slug": "04_值班与升级_Oncall_Escalation",
+                  "intro": "告警到人的响应流程。"
+                }
+              ]
+            },
+            {
+              "title": "分布式追踪在低延迟系统中的落地",
+              "slug": "04_分布式追踪落地_Tracing_in_Low_Latency",
+              "intro": "采样策略与开销控制。",
+              "subsections": [
+                {
+                  "title": "热路径上的开销控制",
+                  "slug": "01_热路径开销控制_Hot_Path_Overhead",
+                  "intro": "最小化追踪对延迟的影响。"
+                },
+                {
+                  "title": "自适应采样",
+                  "slug": "02_自适应采样_Adaptive_Sampling",
+                  "intro": "根据负载与错误率调整采样率。"
+                },
+                {
+                  "title": "关键路径强制采样",
+                  "slug": "03_关键路径强制采样_Forced_Sampling",
+                  "intro": "错误与高延迟请求的完整追踪。"
+                },
+                {
+                  "title": "与日志、指标的关联",
+                  "slug": "04_与日志指标关联_Correlation",
+                  "intro": "统一上下文实现三大支柱联动。"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "容错与容灾",
+          "slug": "02_容错与容灾_Fault_Tolerance_and_DR",
+          "intro": "从节点故障到机房故障的分层设计。",
+          "sections": [
+            {
+              "title": "故障域与多活架构",
+              "slug": "01_故障域与多活架构_Failure_Domains",
+              "intro": "同城、异地与多活的取舍。",
+              "subsections": [
+                {
+                  "title": "故障域分层回顾",
+                  "slug": "01_故障域分层回顾_Domain_Layers",
+                  "intro": "进程到地域的隔离层次。"
+                },
+                {
+                  "title": "同城多活",
+                  "slug": "02_同城多活_Same_City",
+                  "intro": "低延迟同步与快速切换。"
+                },
+                {
+                  "title": "异地多活挑战",
+                  "slug": "03_异地多活挑战_Cross_Region",
+                  "intro": "延迟与一致性的根本矛盾。"
+                },
+                {
+                  "title": "架构选型决策树",
+                  "slug": "04_架构选型决策树_Decision_Tree",
+                  "intro": "根据 RTO/RPO 与成本选择架构。"
+                }
+              ]
+            },
+            {
+              "title": "灾备演练与恢复目标",
+              "slug": "02_灾备演练与恢复目标_DR_Drills",
+              "intro": "RTO/RPO 与演练流程。",
+              "subsections": [
+                {
+                  "title": "RTO 与 RPO 定义",
+                  "slug": "01_RTO与RPO定义_RTO_RPO",
+                  "intro": "恢复时间与数据丢失目标。"
+                },
+                {
+                  "title": "演练类型与频率",
+                  "slug": "02_演练类型与频率_Drill_Types",
+                  "intro": "桌面推演、部分演练与全量切换。"
+                },
+                {
+                  "title": "演练流程与记录",
+                  "slug": "03_演练流程与记录_Drill_Process",
+                  "intro": "准备、执行、复盘的标准化。"
+                },
+                {
+                  "title": "演练发现问题的闭环",
+                  "slug": "04_演练发现问题闭环_Issue_Closure",
+                  "intro": "从发现到修复的跟踪。"
+                }
+              ]
+            },
+            {
+              "title": "混沌工程",
+              "slug": "03_混沌工程_Chaos_Engineering",
+              "intro": "故障注入的方法与边界。",
+              "subsections": [
+                {
+                  "title": "混沌工程原则",
+                  "slug": "01_混沌工程原则_Principles",
+                  "intro": "假设、实验、观察与改进。"
+                },
+                {
+                  "title": "故障注入类型",
+                  "slug": "02_故障注入类型_Injection_Types",
+                  "intro": "网络、进程、资源与时钟故障。"
+                },
+                {
+                  "title": "在生产环境的边界",
+                  "slug": "03_生产环境边界_Production_Boundary",
+                  "intro": "安全实验与爆炸半径控制。"
+                },
+                {
+                  "title": "与确定性架构的结合",
+                  "slug": "04_与确定性架构结合_with_Determinism",
+                  "intro": "在可重放系统中更安全地注入故障。"
+                }
+              ]
+            },
+            {
+              "title": "故障演练在确定性架构中的实践",
+              "slug": "04_确定性架构故障演练_Chaos_in_Deterministic",
+              "intro": "如何安全地注入故障并验证恢复。",
+              "subsections": [
+                {
+                  "title": "确定性环境下的故障注入",
+                  "slug": "01_确定性故障注入_Deterministic_Injection",
+                  "intro": "可精确复现的故障场景。"
+                },
+                {
+                  "title": "恢复正确性验证",
+                  "slug": "02_恢复正确性验证_Recovery_Verification",
+                  "intro": "状态比对与业务结果检查。"
+                },
+                {
+                  "title": "演练自动化",
+                  "slug": "03_演练自动化_Automation",
+                  "intro": "将故障演练纳入 CI/CD。"
+                },
+                {
+                  "title": "经验沉淀与知识库",
+                  "slug": "04_经验沉淀与知识库_Knowledge",
+                  "intro": "故障模式与应对的文档化。"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "测试与形式化验证",
+          "slug": "03_测试与形式化验证_Testing_and_Verification",
+          "intro": "分布式系统最难的部分。",
+          "sections": [
+            {
+              "title": "确定性模拟测试",
+              "slug": "01_确定性模拟测试_Simulation_Testing",
+              "intro": "可复现的并发与故障测试。",
+              "subsections": [
+                {
+                  "title": "模拟环境构建",
+                  "slug": "01_模拟环境构建_Simulation_Env",
+                  "intro": "可控的网络、时钟与调度。"
+                },
+                {
+                  "title": "并发交错探索",
+                  "slug": "02_并发交错探索_Interleaving",
+                  "intro": "系统化探索可能的执行交错。"
+                },
+                {
+                  "title": "故障场景覆盖",
+                  "slug": "03_故障场景覆盖_Fault_Coverage",
+                  "intro": "崩溃、分区、延迟的组合。"
+                },
+                {
+                  "title": "与单元/集成测试的关系",
+                  "slug": "04_与单元集成测试关系_with_Unit_Integration",
+                  "intro": "分层测试策略中的定位。"
+                }
+              ]
+            },
+            {
+              "title": "Jepsen 与线性一致性检查",
+              "slug": "02_Jepsen 与线性一致性检查_Jepsen_and_Checkers",
+              "intro": "黑盒一致性验证。",
+              "subsections": [
+                {
+                  "title": "Jepsen 方法论",
+                  "slug": "01_Jepsen方法论_Jepsen_Method",
+                  "intro": "黑盒测试与历史分析。"
+                },
+                {
+                  "title": "线性一致性检查器",
+                  "slug": "02_线性一致性检查器_Linearizability_Checker",
+                  "intro": "从操作历史验证线性一致。"
+                },
+                {
+                  "title": "其他一致性模型检查",
+                  "slug": "03_其他一致性模型检查_Other_Models",
+                  "intro": "顺序一致、因果一致等的检查。"
+                },
+                {
+                  "title": "在自研系统中的应用",
+                  "slug": "04_自研系统应用_In_House",
+                  "intro": "如何将 Jepsen 思想用于内部系统。"
+                }
+              ]
+            },
+            {
+              "title": "TLA+ 建模入门",
+              "slug": "03_TLA+ 建模入门_TLA_Plus_Intro",
+              "intro": "对协议做模型检验。",
+              "subsections": [
+                {
+                  "title": "TLA+ 基本概念",
+                  "slug": "01_TLA+基本概念_TLA_Concepts",
+                  "intro": "状态、动作与时序逻辑。"
+                },
+                {
+                  "title": "建模分布式协议",
+                  "slug": "02_建模分布式协议_Modeling_Protocols",
+                  "intro": "Raft、2PC 等的 TLA+ 描述。"
+                },
+                {
+                  "title": "模型检验与反例",
+                  "slug": "03_模型检验与反例_Model_Checking",
+                  "intro": "发现设计缺陷的典型流程。"
+                },
+                {
+                  "title": "从模型到实现的桥梁",
+                  "slug": "04_从模型到实现_Model_to_Impl",
+                  "intro": "如何让模型指导实现与测试。"
+                }
+              ]
+            },
+            {
+              "title": "属性测试与模糊测试在并发中的应用",
+              "slug": "04_属性测试与模糊测试_Property_and_Fuzz",
+              "intro": "发现竞态与边界条件。",
+              "subsections": [
+                {
+                  "title": "属性测试原理",
+                  "slug": "01_属性测试原理_Property_Testing",
+                  "intro": "随机生成输入验证通用属性。"
+                },
+                {
+                  "title": "并发属性测试",
+                  "slug": "02_并发属性测试_Concurrent_Property",
+                  "intro": "探索线程交错下的正确性。"
+                },
+                {
+                  "title": "模糊测试基础",
+                  "slug": "03_模糊测试基础_Fuzzing",
+                  "intro": "随机变异输入发现崩溃与异常。"
+                },
+                {
+                  "title": "在 C++ 并发代码中的实践",
+                  "slug": "04_C++并发实践_Cpp_Practice",
+                  "intro": "工具与集成到开发流程的方法。"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "综合项目",
+          "slug": "04_综合项目_Capstone_Projects",
+          "intro": "三个递进项目贯穿全书，强调系统设计与实现闭环。",
+          "sections": [
+            {
+              "title": "项目一：分布式 KV（基于 Raft）",
+              "slug": "01_项目一：分布式 KV（基于 Raft）_Project_Raft_KV",
+              "intro": "把共识库封装为可用的 KV 服务，包含客户端、快照与成员变更。",
+              "subsections": [
+                {
+                  "title": "项目目标与验收标准",
+                  "slug": "01_项目目标与验收_Goals_Acceptance",
+                  "intro": "功能、性能与正确性的明确标准。"
+                },
+                {
+                  "title": "Raft 库集成",
+                  "slug": "02_Raft库集成_Raft_Integration",
+                  "intro": "将前面实现的 Raft 封装为服务。"
+                },
+                {
+                  "title": "KV 语义与客户端",
+                  "slug": "03_KV语义与客户端_KV_Client",
+                  "intro": "Get/Put/Delete 与线性一致保证。"
+                },
+                {
+                  "title": "快照、成员变更与测试",
+                  "slug": "04_快照成员变更与测试_Snapshot_Membership_Test",
+                  "intro": "完整功能与确定性测试覆盖。"
+                }
+              ]
+            },
+            {
+              "title": "项目二：带复制的订单簿服务",
+              "slug": "02_项目二：带复制的订单簿服务_Project_Replicated_OrderBook",
+              "intro": "Sequencer + 撮合 + 副本回放，覆盖确定性与故障切换。",
+              "subsections": [
+                {
+                  "title": "项目目标与验收标准",
+                  "slug": "01_项目目标与验收_Goals_Acceptance",
+                  "intro": "撮合正确性、确定性与故障恢复。"
+                },
+                {
+                  "title": "定序器与日志设计",
+                  "slug": "02_定序器与日志设计_Sequencer_Log",
+                  "intro": "全局序号与持久化日志。"
+                },
+                {
+                  "title": "订单簿状态机",
+                  "slug": "03_订单簿状态机_OrderBook_SM",
+                  "intro": "确定性撮合逻辑的实现。"
+                },
+                {
+                  "title": "复制、切换与重放验证",
+                  "slug": "04_复制切换与重放_Replication_Failover",
+                  "intro": "多副本一致性与故障演练。"
+                }
+              ]
+            },
+            {
+              "title": "项目三：Entitlement 权限服务",
+              "slug": "03_项目三：Entitlement 权限服务_Project_Entitlement_Service",
+              "intro": "低延迟判定、热更新、审计与压测。",
+              "subsections": [
+                {
+                  "title": "项目目标与验收标准",
+                  "slug": "01_项目目标与验收_Goals_Acceptance",
+                  "intro": "检查延迟、热更新正确性与审计完整性。"
+                },
+                {
+                  "title": "数据模型与存储",
+                  "slug": "02_数据模型与存储_Data_Model",
+                  "intro": "身份、资源、权限的持久化设计。"
+                },
+                {
+                  "title": "低延迟检查与热更新",
+                  "slug": "03_低延迟检查与热更新_Fast_Check_Hot_Reload",
+                  "intro": "无锁快照与 RCU 更新实现。"
+                },
+                {
+                  "title": "审计、压测与故障演练",
+                  "slug": "04_审计压测与故障_Audit_Load_Fault",
+                  "intro": "完整闭环验证。"
+                }
+              ]
+            },
+            {
+              "title": "项目四（可选）：端到端迷你交易链路",
+              "slug": "04_项目四：端到端迷你交易链路_Mini_Trading_Pipeline",
+              "intro": "网关 → 风控 → 撮合 → 行情分发的简化闭环，综合运用全书技术。",
+              "subsections": [
+                {
+                  "title": "项目范围与简化假设",
+                  "slug": "01_项目范围与简化_Scope_Assumptions",
+                  "intro": "单市场、有限功能的可完成范围。"
+                },
+                {
+                  "title": "组件划分与接口",
+                  "slug": "02_组件划分与接口_Components",
+                  "intro": "网关、风控、撮合、行情的边界。"
+                },
+                {
+                  "title": "确定性与可重放要求",
+                  "slug": "03_确定性与可重放_Determinism",
+                  "intro": "全链路可重放验证。"
+                },
+                {
+                  "title": "综合验收与演示",
+                  "slug": "04_综合验收与演示_Acceptance_Demo",
+                  "intro": "功能、性能、故障恢复的完整演示。"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,950 @@
+{
+  "course_title": "Distributed Systems & System Design (分布式系统与系统设计)",
+  "version": "1.1",
+  "description": "面向生产级分布式软件系统的完整知识架构大纲，涵盖8层逻辑架构、核心组件、易忽略生产组件、12模块学习大纲、术语分类体系、高性能C++分布式系统核心支柱，以及从《分布式系统工程实践》教材大纲补充的完整章节/知识点、金融与低延迟工程专题、共识与事务、测试验证与综合实战项目。",
+  "logical_architecture_layers": [
+    {
+      "layer_id": 1,
+      "name": "Client Layer",
+      "zh_name": "客户端层",
+      "note": "逻辑分层方式，不代表每个系统都必须部署成八个独立的物理层",
+      "components": [
+        "Web Browser",
+        "Mobile App",
+        "Desktop App"
+      ]
+    },
+    {
+      "layer_id": 2,
+      "name": "Frontend Layer",
+      "zh_name": "前端层",
+      "components": [
+        "UI",
+        "State Management",
+        "Router",
+        "HTTP Client"
+      ]
+    },
+    {
+      "layer_id": 3,
+      "name": "Traffic Management Layer",
+      "zh_name": "流量管理层",
+      "core_problem": "大量请求同时进入系统时，如何控制、分配和保护流量",
+      "components": [
+        {
+          "name": "DNS",
+          "zh_name": "域名解析系统",
+          "responsibility": "将域名解析为入口IP地址，实现地理路由与全局流量调度"
+        },
+        {
+          "name": "Load Balancer",
+          "zh_name": "负载均衡器",
+          "responsibility": "将请求分配给不同服务器",
+          "typical_targets": [
+            "Server",
+            "Instance"
+          ],
+          "common_algorithms": [
+            "Round Robin",
+            "Least Connections",
+            "Consistent Hashing",
+            "P2C (Power of Two Choices)"
+          ],
+          "location": "网络或服务入口"
+        },
+        {
+          "name": "API Gateway",
+          "zh_name": "API 网关",
+          "responsibility": "统一管理 API 请求入口（路由、认证、聚合、协议转换、南北向/东西向流量、协议桥接与限流入口）"
+        },
+        {
+          "name": "Rate Limiter",
+          "zh_name": "速率限制器",
+          "responsibility": "限制单位时间内请求数量（侧重请求速率配额控制）",
+          "common_algorithms": [
+            "Token Bucket",
+            "Leaky Bucket",
+            "Fixed Window",
+            "Sliding Window"
+          ]
+        },
+        {
+          "name": "Throttler",
+          "zh_name": "流量节流器",
+          "responsibility": "流量过大时主动限制处理速度，保护系统免于过载（CPU 100%、Memory耗尽、Thread Pool/DB Connection Pool占满）",
+          "actions": [
+            "Accept within capacity",
+            "Reject",
+            "Delay",
+            "Queue"
+          ],
+          "common_algorithms": [
+            "Token Bucket",
+            "Leaky Bucket",
+            "Fixed Window",
+            "Sliding Window"
+          ],
+          "distinction_from_rate_limiter": "Rate Limiter 更强调请求速率限制，Throttler 更强调对系统处理负载的主动调节"
+        },
+        {
+          "name": "Circuit Breaker",
+          "zh_name": "熔断器",
+          "responsibility": "下游故障时停止继续调用，防止级联雪崩"
+        },
+        {
+          "name": "Retry Manager",
+          "zh_name": "重试管理器",
+          "responsibility": "对瞬时失败请求进行可控重试（如指数退避与抖动、退避策略）"
+        },
+        {
+          "name": "Timeout Manager",
+          "zh_name": "超时管理器",
+          "responsibility": "控制请求最长等待时间，释放阻塞资源"
+        },
+        {
+          "name": "Degradation & Bulkhead Controller",
+          "zh_name": "降级与舱壁隔离控制器",
+          "responsibility": "在系统高压或局部依赖受损时执行服务降级与资源舱壁隔离（Bulkhead）"
+        }
+      ]
+    },
+    {
+      "layer_id": 4,
+      "name": "Application / Service Layer",
+      "zh_name": "应用与服务处理层",
+      "components": [
+        {
+          "name": "Dispatcher",
+          "zh_name": "请求/任务分发器",
+          "responsibility": "决定一个请求或任务应该交给哪个处理单元执行",
+          "variants": [
+            {
+              "type": "Thread Dispatcher",
+              "responsibility": "分发任务到线程"
+            },
+            {
+              "type": "Message Dispatcher",
+              "responsibility": "将消息分发给消费者"
+            },
+            {
+              "type": "Event Dispatcher",
+              "responsibility": "将事件分发给对应 Handler"
+            },
+            {
+              "type": "Request Dispatcher",
+              "responsibility": "将请求路由到对应 Service"
+            },
+            {
+              "type": "Job Dispatcher",
+              "responsibility": "将后台任务分配给 Worker"
+            }
+          ],
+          "vs_load_balancer": {
+            "core_responsibility": "分配任务（Load Balancer 负责分配流量）",
+            "typical_targets": [
+              "Worker",
+              "Handler",
+              "Service"
+            ],
+            "common_algorithms": [
+              "Routing",
+              "Priority",
+              "Work Stealing"
+            ],
+            "location": "应用内部或消息系统"
+          }
+        },
+        {
+          "name": "Controller",
+          "zh_name": "控制器",
+          "responsibility": "接收和处理 API 请求入口"
+        },
+        {
+          "name": "Router",
+          "zh_name": "路由器",
+          "responsibility": "根据 URL 或消息类型选择处理逻辑"
+        },
+        {
+          "name": "Service",
+          "zh_name": "业务服务",
+          "responsibility": "执行业务规则"
+        },
+        {
+          "name": "Handler",
+          "zh_name": "处理器",
+          "responsibility": "处理特定事件或请求"
+        },
+        {
+          "name": "Worker",
+          "zh_name": "工作线程/进程",
+          "responsibility": "执行实际任务"
+        },
+        {
+          "name": "Scheduler",
+          "zh_name": "调度器",
+          "responsibility": "决定任务什么时候执行"
+        },
+        {
+          "name": "Executor",
+          "zh_name": "执行器",
+          "responsibility": "执行被分配的任务"
+        },
+        {
+          "name": "Thread Pool",
+          "zh_name": "线程池",
+          "responsibility": "复用线程，控制并发"
+        },
+        {
+          "name": "Sequencer",
+          "zh_name": "定序器",
+          "responsibility": "为输入事件分配全局唯一单调递增序列号，支撑确定性状态机与可重放架构"
+        },
+        {
+          "name": "Replicated State Machine",
+          "zh_name": "复制状态机",
+          "responsibility": "结合确定性状态机与复制日志实现多副本状态一致"
+        },
+        {
+          "name": "Matching Engine",
+          "zh_name": "撮合引擎",
+          "responsibility": "维护订单簿数据结构并执行确定性订单撮合（金融交易场景）"
+        },
+        {
+          "name": "Risk Control Engine",
+          "zh_name": "风控引擎",
+          "responsibility": "执行前置限额检查与实时风控规则匹配（含 CEP 复杂事件处理）"
+        },
+        {
+          "name": "Entitlement Engine",
+          "zh_name": "权限判定引擎",
+          "responsibility": "基于 RBAC/ABAC 与位图/集合/无锁只读快照执行低延迟权限检查与撤销"
+        }
+      ]
+    },
+    {
+      "layer_id": 5,
+      "name": "Messaging / Async Layer",
+      "zh_name": "消息与异步处理层",
+      "components": [
+        {
+          "name": "Message Queue",
+          "zh_name": "消息队列",
+          "responsibility": "暂存待处理消息，削峰填谷与解耦"
+        },
+        {
+          "name": "Producer",
+          "zh_name": "生产者",
+          "responsibility": "发送消息"
+        },
+        {
+          "name": "Consumer",
+          "zh_name": "消费者",
+          "responsibility": "接收并处理消息"
+        },
+        {
+          "name": "Event Bus",
+          "zh_name": "事件总线",
+          "responsibility": "在多个组件间传递事件"
+        },
+        {
+          "name": "Broker",
+          "zh_name": "消息代理",
+          "responsibility": "管理消息存储和分发"
+        },
+        {
+          "name": "Dead Letter Queue",
+          "zh_name": "死信队列",
+          "responsibility": "保存多次处理失败的消息"
+        },
+        {
+          "name": "Retry Queue",
+          "zh_name": "重试队列",
+          "responsibility": "延迟重试失败消息"
+        },
+        {
+          "name": "Partitioned Log / Stream",
+          "zh_name": "分区日志与流",
+          "responsibility": "以追加写分区日志作为系统事实来源（如 Kafka 模型），支持重放与投递语义管理"
+        },
+        {
+          "name": "Multicast / Low-Latency Transport (e.g., Aeron)",
+          "zh_name": "低延迟组播传输",
+          "responsibility": "基于 UDP 组播与可靠传输/重传机制实现低延迟行情分发与消息传递"
+        }
+      ],
+      "reference_pattern": {
+        "name": "Asynchronous State/Cache Distribution (e.g., Bloomberg Entitlement & Snapshot + Delta)",
+        "flow": [
+          "Authoritative Database",
+          "Producer",
+          "Message Broker",
+          "Multiple Server Consumers (Server A, B, C)",
+          "Local Cache / Snapshot + Delta Update"
+        ]
+      }
+    },
+    {
+      "layer_id": 6,
+      "name": "Data Layer",
+      "zh_name": "数据层",
+      "components": [
+        {
+          "name": "Relational DB",
+          "zh_name": "关系数据库",
+          "responsibility": "持久化结构化数据"
+        },
+        {
+          "name": "NoSQL DB",
+          "zh_name": "非关系数据库",
+          "responsibility": "灵活的数据存储"
+        },
+        {
+          "name": "Cache",
+          "zh_name": "缓存",
+          "responsibility": "减少数据库访问"
+        },
+        {
+          "name": "Distributed Cache",
+          "zh_name": "分布式缓存",
+          "responsibility": "多节点共享缓存"
+        },
+        {
+          "name": "Read Replica",
+          "zh_name": "只读副本",
+          "responsibility": "分担读取压力"
+        },
+        {
+          "name": "Sharding",
+          "zh_name": "分片",
+          "responsibility": "将数据分散到多个节点"
+        },
+        {
+          "name": "Search Engine",
+          "zh_name": "搜索引擎",
+          "responsibility": "全文检索"
+        },
+        {
+          "name": "Object Storage",
+          "zh_name": "对象存储",
+          "responsibility": "保存文件、图片等"
+        },
+        {
+          "name": "WAL (Write-Ahead Log)",
+          "zh_name": "预写日志",
+          "responsibility": "追加写持久化与检查点机制，支撑崩溃恢复与日志复制"
+        },
+        {
+          "name": "In-Memory DB & Event Store",
+          "zh_name": "内存数据库与事件存储",
+          "responsibility": "以事件日志重建状态，满足低延迟读写与可审计回放"
+        },
+        {
+          "name": "Columnar / Analytical Store",
+          "zh_name": "列存与分析型存储",
+          "responsibility": "面向风控分析、报表统计与批量查询的高压缩分析存储"
+        },
+        {
+          "name": "Multi-Level Cache (L1 Local / Shared Memory / Distributed)",
+          "zh_name": "多级缓存与本地副本",
+          "responsibility": "组合进程内缓存、共享内存与分布式缓存，配合快照+增量与缓存穿透/击穿/雪崩防护"
+        }
+      ]
+    },
+    {
+      "layer_id": 7,
+      "name": "Infrastructure Layer",
+      "zh_name": "基础设施层",
+      "components": [
+        "Service Discovery",
+        "Container",
+        "Kubernetes",
+        "Network",
+        "Kernel Bypass / User-Space Network Stack (DPDK, Solarflare Onload / TCPDirect, RDMA)",
+        "PTP Hardware Clock & Timestamping"
+      ]
+    },
+    {
+      "layer_id": 8,
+      "name": "Observability & Security",
+      "zh_name": "可观测性与安全层",
+      "components": [
+        "Logging",
+        "Metrics",
+        "Tracing",
+        "Authentication",
+        "Authorization",
+        "HdrHistogram / Latency Profiler",
+        "Audit & Compliance Trail"
+      ]
+    }
+  ],
+  "end_to_end_request_flow": {
+    "pipeline": [
+      "User / Client",
+      "Load Balancer",
+      "API Gateway",
+      "Rate Limiter / Throttler",
+      "Dispatcher / Router",
+      "Services (Service A / Service B / Service C)",
+      "Data & Async Backends (Cache, Database, Message Broker -> Workers)",
+      "Cross-cutting: Monitoring / Logging"
+    ],
+    "mermaid_diagram": "flowchart TD\n    Client[User / Client] --> LB[Load Balancer]\n    LB --> GW[API Gateway]\n    GW --> RL[Rate Limiter / Throttler]\n    RL --> Disp[Dispatcher / Router]\n    Disp --> SvcA[Service A]\n    Disp --> SvcB[Service B]\n    Disp --> SvcC[Service C]\n    SvcA --> Cache[(Cache)]\n    SvcA --> DB[(Database)]\n    SvcB --> Broker[[Message Broker]]\n    Broker --> W1[Worker 1]\n    Broker --> W2[Worker 2]\n    SvcA -.-> Obs[Monitoring / Logging]\n    SvcB -.-> Obs\n    SvcC -.-> Obs"
+  },
+  "overlooked_production_components": [
+    {
+      "name": "Service Discovery",
+      "zh_name": "服务发现",
+      "problem_solved": "如何找到其他服务？"
+    },
+    {
+      "name": "Configuration Manager",
+      "zh_name": "配置管理",
+      "problem_solved": "如何动态管理配置？（含版本化、灰度与回滚）"
+    },
+    {
+      "name": "Secret Manager",
+      "zh_name": "密钥管理",
+      "problem_solved": "如何安全保存密码和密钥？"
+    },
+    {
+      "name": "Authentication",
+      "zh_name": "身份认证",
+      "problem_solved": "你是谁？"
+    },
+    {
+      "name": "Authorization",
+      "zh_name": "权限控制",
+      "problem_solved": "你能做什么？"
+    },
+    {
+      "name": "Health Checker",
+      "zh_name": "健康检查",
+      "problem_solved": "服务是否正常？"
+    },
+    {
+      "name": "Leader Election",
+      "zh_name": "Leader 选举",
+      "problem_solved": "多个节点谁负责协调？"
+    },
+    {
+      "name": "Distributed Lock",
+      "zh_name": "分布式锁",
+      "problem_solved": "如何协调多个节点？（含租约 Lease 与 Fencing Token）"
+    },
+    {
+      "name": "Idempotency Manager",
+      "zh_name": "幂等管理",
+      "problem_solved": "如何避免重复执行？（结合对账与最终修复兜底）"
+    },
+    {
+      "name": "Schema Registry",
+      "zh_name": "Schema 注册中心",
+      "problem_solved": "如何管理消息格式与向前/向后兼容性？"
+    },
+    {
+      "name": "CDC",
+      "zh_name": "变更数据捕获",
+      "problem_solved": "如何捕获数据库变化？"
+    },
+    {
+      "name": "Audit Logger",
+      "zh_name": "审计日志",
+      "problem_solved": "谁在什么时候做了什么？（含金融合规时间戳与不可篡改轨迹）"
+    },
+    {
+      "name": "Failure Detector",
+      "zh_name": "故障检测器",
+      "problem_solved": "如何区分慢节点、网络分区与真正宕机？（心跳、Phi Accrual、租约）"
+    },
+    {
+      "name": "Reconciler",
+      "zh_name": "对账与修复器",
+      "problem_solved": "如何发现并自动/人工修复分布式状态差异与账务偏差？"
+    }
+  ],
+  "curriculum_modules": [
+    {
+      "module_number": "01",
+      "title": "Fundamentals",
+      "zh_title": "系统设计基础指标、建模与时间顺序",
+      "topics": [
+        "Scalability",
+        "Availability",
+        "Reliability",
+        "Latency",
+        "Throughput",
+        "Thundering Herd Problem",
+        "Eight Fallacies of Distributed Computing",
+        "Timing Models (Sync / Async / Partial Sync)",
+        "Failure Types (Crash / Omission / Timing / Byzantine)",
+        "Failure Detectors (Heartbeat / Phi Accrual / Lease)",
+        "Failure Domains & Blast Radius",
+        "Physical Clocks (NTP / PTP / Hardware Timestamps)",
+        "Lamport Clocks",
+        "Vector Clocks & Version Vectors",
+        "Hybrid Logical Clocks (HLC)",
+        "Regulatory Timestamps (e.g., MiFID II)",
+        "Event Time, Processing Time & Watermarks",
+        "Capacity Planning & Growth Modeling",
+        "Tradeoff Matrix"
+      ]
+    },
+    {
+      "module_number": "02",
+      "title": "Client & Frontend",
+      "zh_title": "客户端与前端架构",
+      "topics": [
+        "Browser",
+        "Mobile",
+        "CDN",
+        "State Management"
+      ]
+    },
+    {
+      "module_number": "03",
+      "title": "Traffic Management",
+      "zh_title": "流量管理与接入控制",
+      "topics": [
+        "Load Balancer",
+        "API Gateway",
+        "Throttler",
+        "Rate Limiter",
+        "Token Bucket",
+        "Leaky Bucket",
+        "Fixed Window",
+        "Sliding Window",
+        "Consistent Hashing",
+        "P2C",
+        "Circuit Breaker",
+        "Retry",
+        "Timeout",
+        "Bulkhead",
+        "Graceful Degradation",
+        "Backpressure & Flow Control"
+      ]
+    },
+    {
+      "module_number": "04",
+      "title": "Request Processing",
+      "zh_title": "请求分发、网络IO与并发执行",
+      "topics": [
+        "Dispatcher",
+        "Router",
+        "Controller",
+        "Worker",
+        "Thread Pool",
+        "Scheduler",
+        "Executor",
+        "Work Stealing",
+        "Socket & epoll",
+        "Reactor & Proactor",
+        "Asio & io_uring",
+        "Zero Copy",
+        "TCP Tuning",
+        "UDP Multicast"
+      ]
+    },
+    {
+      "module_number": "05",
+      "title": "Distributed Communication",
+      "zh_title": "分布式通信、RPC、序列化与异步消息",
+      "topics": [
+        "REST",
+        "gRPC",
+        "RPC",
+        "Message Queue",
+        "Event Bus",
+        "Broker",
+        "Dead Letter Queue",
+        "Retry Queue",
+        "Schema Registry",
+        "Protobuf / FlatBuffers / SBE",
+        "Schema Evolution",
+        "Partitioned Log / Kafka Abstraction",
+        "Delivery Semantics & Ordering",
+        "Aeron & Low-Latency Multicast",
+        "Messaging Backpressure"
+      ]
+    },
+    {
+      "module_number": "06",
+      "title": "Data Management",
+      "zh_title": "数据存储、分区、缓存与流处理",
+      "topics": [
+        "SQL",
+        "NoSQL",
+        "Cache",
+        "Distributed Cache",
+        "Read Replica",
+        "Sharding",
+        "Search Engine",
+        "Object Storage",
+        "CDC",
+        "Hash & Range Partitioning",
+        "Consistent Hashing",
+        "Rebalancing & Hotspots",
+        "B+ Tree vs LSM-Tree",
+        "WAL & Checkpointing",
+        "In-Memory DB & Event Sourcing",
+        "Columnar Storage",
+        "Cache-Aside / Write-Through",
+        "Snapshot + Delta",
+        "Multi-Level Cache",
+        "Cache Penetration / Breakdown / Avalanche",
+        "Stream Processing & Windows",
+        "CEP (Complex Event Processing)"
+      ]
+    },
+    {
+      "module_number": "07",
+      "title": "Distributed Systems",
+      "zh_title": "分布式一致性、共识与分布式事务",
+      "topics": [
+        "Consistency (Linearizability / Sequential / Causal / Eventual / CRDT / Client-Centric)",
+        "Consensus",
+        "CAP",
+        "PACELC",
+        "Replication (Leader-Follower / Multi-Leader / Leaderless / Replicated State Machine / Lag & Read Repair)",
+        "FLP Impossibility",
+        "Paxos & Multi-Paxos",
+        "Raft & C++ Raft Implementation",
+        "Byzantine Fault Tolerance (BFT)",
+        "2PC & 3PC",
+        "Saga & TCC",
+        "Percolator & Spanner",
+        "Leader Election",
+        "Distributed Lock & Fencing Token",
+        "Idempotency Manager & Reconciliation"
+      ]
+    },
+    {
+      "module_number": "08",
+      "title": "Concurrency",
+      "zh_title": "高并发、低延迟与无锁底层机制",
+      "topics": [
+        "Thread Pool",
+        "Lock-free",
+        "Atomic & Memory Order",
+        "RCU",
+        "Hazard Pointer",
+        "Disruptor & SPSC/MPMC Ring Buffer",
+        "False Sharing",
+        "PMR & Custom Allocators",
+        "Latency Budget & Tail Latency (P99/P99.9, Coordinated Omission)",
+        "CPU Affinity & NUMA",
+        "Kernel Bypass (DPDK, Solarflare Onload, RDMA, PTP Hardware Timestamps)",
+        "Jitter Avoidance",
+        "Queueing Theory (Little's Law)",
+        "Adaptive Overload Protection",
+        "Deterministic & Replayable Architecture (Sequencer + State Machine)"
+      ]
+    },
+    {
+      "module_number": "09",
+      "title": "Fault Tolerance",
+      "zh_title": "容错、灾备、测试验证与综合项目",
+      "topics": [
+        "Circuit Breaker",
+        "Retry",
+        "Timeout",
+        "Bulkhead",
+        "Failover",
+        "Health Checker",
+        "Failure Domains & Multi-Active DR",
+        "RTO / RPO & DR Drills",
+        "Chaos Engineering",
+        "Deterministic Simulation Testing",
+        "Jepsen & Linearizability Checkers",
+        "TLA+ Model Checking",
+        "Property & Fuzz Testing",
+        "Capstone Projects (Raft KV, Replicated OrderBook, Entitlement Service, Mini Trading Pipeline)"
+      ]
+    },
+    {
+      "module_number": "10",
+      "title": "Observability",
+      "zh_title": "可观测性体系",
+      "topics": [
+        "Logging",
+        "Metrics",
+        "Tracing",
+        "Alerting",
+        "OpenTelemetry",
+        "HdrHistogram & Sampling",
+        "SLO-based Alerting",
+        "Low-Latency Tracing"
+      ]
+    },
+    {
+      "module_number": "11",
+      "title": "Security",
+      "zh_title": "安全、合规与监管审计",
+      "topics": [
+        "Authentication",
+        "Authorization",
+        "Encryption (mTLS / TLS / At-Rest)",
+        "Audit",
+        "Secret Manager",
+        "Least Privilege",
+        "Regulatory Timestamps & Retention",
+        "Data Sovereignty"
+      ]
+    },
+    {
+      "module_number": "12",
+      "title": "Deployment & Infrastructure",
+      "zh_title": "部署、配置与基础设施",
+      "topics": [
+        "Docker",
+        "Kubernetes",
+        "Service Discovery",
+        "Configuration Manager",
+        "CI/CD",
+        "Blue-Green / Canary / Rolling Release",
+        "Supply Chain Security",
+        "Autoscaling & Warmup"
+      ]
+    }
+  ],
+  "concept_taxonomy": [
+    {
+      "category": "Component",
+      "zh_category": "系统组件",
+      "examples": [
+        "Dispatcher",
+        "Cache",
+        "Database",
+        "API Gateway",
+        "Throttler",
+        "Sequencer",
+        "Matching Engine",
+        "WAL"
+      ]
+    },
+    {
+      "category": "Design Pattern",
+      "zh_category": "设计模式",
+      "examples": [
+        "Circuit Breaker",
+        "Bulkhead",
+        "CQRS",
+        "Event Sourcing",
+        "Sequencer + State Machine",
+        "Snapshot + Delta",
+        "Reactor / Proactor"
+      ]
+    },
+    {
+      "category": "Algorithm",
+      "zh_category": "算法",
+      "examples": [
+        "Token Bucket",
+        "Leaky Bucket",
+        "Round Robin",
+        "Least Connections",
+        "Work Stealing",
+        "Consistent Hashing",
+        "P2C",
+        "Raft",
+        "Paxos",
+        "HLC"
+      ]
+    },
+    {
+      "category": "Protocol",
+      "zh_category": "通信协议",
+      "examples": [
+        "HTTP",
+        "gRPC",
+        "TCP",
+        "UDP Multicast",
+        "RDMA",
+        "PTP",
+        "NTP",
+        "mTLS"
+      ]
+    },
+    {
+      "category": "Architecture",
+      "zh_category": "架构风格",
+      "examples": [
+        "Microservices",
+        "Event-Driven",
+        "Deterministic & Replayable",
+        "Multi-Active"
+      ]
+    },
+    {
+      "category": "Infrastructure",
+      "zh_category": "基础设施",
+      "examples": [
+        "Kubernetes",
+        "Docker",
+        "DPDK",
+        "Solarflare Onload",
+        "io_uring",
+        "epoll"
+      ]
+    },
+    {
+      "category": "Mechanism",
+      "zh_category": "实现机制",
+      "examples": [
+        "RCU",
+        "Hazard Pointer",
+        "Atomic",
+        "Lease & Fencing Token",
+        "Phi Accrual Failure Detector",
+        "Disruptor Ring Buffer"
+      ]
+    }
+  ],
+  "core_pillars_for_cpp_distributed_systems": [
+    {
+      "pillar": "Traffic Management",
+      "focus": "流量进入系统后如何控制（Throttler、Rate Limiter、Backpressure、自适应过载保护、熔断降级与隔离）"
+    },
+    {
+      "pillar": "Request Dispatching",
+      "focus": "请求如何被分配和执行（Dispatcher、Thread Pool、Work Stealing、epoll/io_uring、Sequencer 定序与低延迟网络）"
+    },
+    {
+      "pillar": "Data Management",
+      "focus": "数据如何存储、缓存和同步（Local Cache 快照+增量、CDC、异步消息分发、多级缓存、WAL/LSM/B+树与分区路由）"
+    },
+    {
+      "pillar": "Concurrency",
+      "focus": "多个线程如何高效协作（Atomic、Lock-free、RCU、Hazard Pointer、Disruptor、内存模型、NUMA/亲和性与确定性编程）"
+    },
+    {
+      "pillar": "Fault Tolerance",
+      "focus": "部分组件失效时系统如何继续运行（Circuit Breaker、Bulkhead、Retry、Timeout、Failover、Raft/共识、对账与确定性仿真/混沌测试）"
+    }
+  ],
+  "textbook_curriculum_additions_from_distributed_system_2": {
+    "source_title": "分布式系统工程实践",
+    "language": "zh-CN",
+    "navigation": {
+      "index_filename": "index.md",
+      "hierarchy": [
+        "part",
+        "chapter",
+        "section"
+      ],
+      "prev_label": "上一节",
+      "next_label": "下一节",
+      "cross_chapter": true,
+      "cross_part": true
+    },
+    "newly_added_parts": [
+      {
+        "part_number": "01",
+        "title": "基础与建模",
+        "slug": "01_基础与建模_Foundations",
+        "intro": "建立分布式系统的问题意识、系统模型、时间观与系统设计目标。",
+        "new_chapters_and_topics": [
+          "分布式系统概述与系统设计目标（分布式八大谬误、金融场景行情/订单/清结算/权限/风控/对账、权衡矩阵、容量规划）",
+          "系统模型与故障模型（同步/异步/部分同步、崩溃/遗漏/时序/拜占庭故障、网络分区与超时、心跳/Phi Accrual/租约故障检测器、分层故障域与爆炸半径）",
+          "时间、时钟与事件顺序（NTP/PTP与硬件时间戳、Lamport逻辑时钟、向量时钟与版本向量、混合逻辑时钟HLC、MiFID II等金融合规时间戳、事件时间/处理时间/水印）",
+          "可扩展性与可用性模式（水平/垂直扩展、主从/多主/无主复制与仲裁防脑裂、L4/L7负载均衡/一致性哈希/P2C、熔断/限流/降级/舱壁隔离、多级缓存与穿透/击穿/雪崩防护）"
+        ]
+      },
+      {
+        "part_number": "02",
+        "title": "C++ 网络与通信基础",
+        "slug": "02_C++ 网络与通信基础_Networking_and_Communication",
+        "intro": "分布式系统的通信底座与 C++ 实现手段。",
+        "new_chapters_and_topics": [
+          "C++ 网络编程模型（Socket与epoll、Reactor与Proactor、Asio与io_uring、零拷贝sendfile/mmap/splice、TCP调优、UDP组播与丢包恢复）",
+          "RPC 与序列化（RPC框架设计、Protobuf/FlatBuffers/SBE、接口演进与兼容性、超时/重试/幂等、API网关、服务发现与配置中心）",
+          "消息系统与发布订阅（队列/主题/流/日志、Kafka分区日志作为事实来源、投递语义与顺序保证、低延迟组播与Aeron、消息层背压与流量整形）",
+          "内核旁路与用户态网络进阶（DPDK轮询模式驱动、Solarflare Onload / TCPDirect、RDMA基础、硬件时间戳与精密时钟）"
+        ]
+      },
+      {
+        "part_number": "03",
+        "title": "一致性与共识",
+        "slug": "03_一致性与共识_Consistency_and_Consensus",
+        "intro": "分布式系统最核心的理论与实现。",
+        "new_chapters_and_topics": [
+          "一致性模型（线性一致性、顺序/因果一致性、最终一致性与CRDT、会话保证、CAP与PACELC、金融热路径一致性与延迟权衡）",
+          "数据复制（主从/多主/无主复制、复制状态机、复制延迟与读修复）",
+          "共识算法（FLP不可能性、Paxos与Multi-Paxos、Raft详解、成员变更与快照、拜占庭容错简介、共识在金融中的使用边界）",
+          "C++ 实现 Raft（模块解耦、日志存储与WAL/fsync、状态机与快照、确定性测试与故障注入、批处理与流水线优化）",
+          "分布式事务与协调（2PC与3PC、Saga与TCC、Percolator与Spanner、分布式锁与租约/fencing token、幂等/对账与最终修复）"
+        ]
+      },
+      {
+        "part_number": "04",
+        "title": "存储与数据分区",
+        "slug": "04_存储与数据分区_Storage_and_Partitioning",
+        "intro": "数据如何分布、存储与分发。",
+        "new_chapters_and_topics": [
+          "分区与路由（Hash与Range分区、一致性哈希与虚拟节点、再均衡与行情热点处理、分区键设计）",
+          "存储引擎（B+树与LSM-Tree读写放大、WAL/检查点与恢复、内存数据库与事件溯源、列存与分析型存储）",
+          "缓存与数据分发（Cache-Aside/Write-Through、快照加增量分发、多级缓存与本地副本、缓存穿透/击穿/雪崩防护）",
+          "流处理与复杂事件处理（流处理窗口、检查点与精确一次语义、CEP模式匹配与实时风控、与消息及状态机集成）"
+        ]
+      },
+      {
+        "part_number": "05",
+        "title": "低延迟与高并发工程",
+        "slug": "05_低延迟与高并发工程_Low_Latency_and_Concurrency",
+        "intro": "C++ 工程能力的核心战场。",
+        "new_chapters_and_topics": [
+          "低延迟系统设计（延迟预算与P99/P99.9/Coordinated Omission、CPU亲和性与NUMA、内核旁路、避免内存与系统调用抖动、perf/火焰图/HdrHistogram基准测试）",
+          "C++ 高并发编程（内存模型与memory_order、无锁队列与Disruptor环形队列/伪共享、线程池/协程/Run-to-completion、定制分配器与PMR、读写锁/RCU与无锁进阶）",
+          "背压、流控与过载保护（排队论/利特尔法则、限流/熔断/降级、负载均衡、基于延迟或队列长度的自适应过载保护）",
+          "确定性与可重放架构（Sequencer架构、事件溯源与回放、避免时间/随机数/浮点/容器顺序等非确定性来源、输入录制与状态比对）"
+        ]
+      },
+      {
+        "part_number": "06",
+        "title": "金融系统架构",
+        "slug": "06_金融系统架构_Financial_System_Architecture",
+        "intro": "把前面的技术映射到真实业务系统。",
+        "new_chapters_and_topics": [
+          "交易系统架构（订单流与网关、撮合引擎与订单簿、前置与实时风控、高可用切换、端到端交易系统案例）",
+          "行情与参考数据系统（行情采集与标准化、丢包恢复与快照重建、订阅管理与扇出、参考数据与版本管理、延迟与吞吐设计）",
+          "清结算与对账（复式记账与不变量、日终批处理与流式处理、自动对账与差异修复、清结算一致性与审计）",
+          "典型金融系统架构模式（定序器+状态机、CQRS与读写分离、事件驱动解耦、多活与异地容灾）"
+        ]
+      },
+      {
+        "part_number": "07",
+        "title": "Entitlement 权限与数据许可",
+        "slug": "07_Entitlement 权限与数据许可_Entitlement_Systems",
+        "intro": "围绕金融数据平台的 Entitlement 场景讲授通用权限系统设计（基于公开接口概念，不涉及内部实现）。",
+        "new_chapters_and_topics": [
+          "Entitlement 基础（数据许可/合规/计费背景、身份/资源/权限/EID抽象、认证/授权/订阅过滤/撤销流程、BLPAPI公开概念中的Identity与EID、权限与计费合规交叉点）",
+          "分布式权限系统设计（RBAC与ABAC、本地缓存/版本号/批量下发、实时撤销与一致性窗口、不可篡改审计日志、多租户与热点权限处理）",
+          "C++ 实现 Entitlement 服务（位图/集合/无锁只读快照低延迟检查、RCU风格热更新、服务接口与客户端SDK、压测与缓存失效风暴演练、端到端设计案例）"
+        ]
+      },
+      {
+        "part_number": "08",
+        "title": "安全、合规与运维",
+        "slug": "08_安全合规与运维_Security_Compliance_Ops",
+        "intro": "金融分布式系统不可缺少的横向能力。",
+        "new_chapters_and_topics": [
+          "分布式系统安全基础（mTLS/Token/证书与细粒度授权、传输TLS与存储加密/密钥管理、最小权限、安全审计与入侵检测）",
+          "合规与监管要求（时钟精度与不可抵赖审计轨迹、数据保留与销毁、跨区域数据驻留与主权）",
+          "部署、配置与运维基础（版本化配置/灰度/回滚、滚动升级/蓝绿/金丝雀、依赖管理与供应链安全、容量与弹性伸缩/预热）"
+        ]
+      },
+      {
+        "part_number": "09",
+        "title": "可靠性、测试与综合项目",
+        "slug": "09_可靠性测试与综合项目_Reliability_Testing_and_Projects",
+        "intro": "把系统做到可运维、可验证。",
+        "new_chapters_and_topics": [
+          "可观测性（日志/指标/追踪与OpenTelemetry、HdrHistogram延迟直方图与采样、基于SLO的告警、低延迟系统追踪落地）",
+          "容错与容灾（故障域与多活架构、RTO/RPO与灾备演练、混沌工程、确定性架构故障演练）",
+          "测试与形式化验证（确定性模拟测试、Jepsen与线性一致性检查、TLA+模型检验、并发属性测试与模糊测试）",
+          "综合项目（项目一：基于Raft的分布式KV；项目二：带复制的订单簿服务；项目三：Entitlement权限服务；项目四可选：端到端迷你交易链路）"
+        ]
+      }
+    ]
+  }
+}

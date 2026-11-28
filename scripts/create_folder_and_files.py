@@ -13,8 +13,6 @@ from typing import Any
 
 from index_paths import (
     is_index_marker_name,
-    metadata_contents_path,
-    metadata_directory,
     metadata_index_path,
 )
 
@@ -49,8 +47,20 @@ def resolve_json_file(raw_path: Path) -> Path:
     return current
 
 
-def get_children(node: dict[str, Any]) -> list[dict[str, Any]]:
-    for key in ("parts", "sections", "subsections", "children", "topics"):
+def get_children(node: dict[str, Any]) -> list[Any]:
+    for key in (
+        "parts",
+        "chapters",
+        "sections",
+        "subsections",
+        "children",
+        "curriculum_modules",
+        "modules",
+        "units",
+        "lessons",
+        "topics",
+        "items",
+    ):
         value = node.get(key)
         if isinstance(value, list):
             return value
@@ -80,9 +90,72 @@ def validate(data: dict[str, Any]) -> None:
     walk(data, "Root")
 
 
+def normalize_outline(data: dict[str, Any]) -> None:
+    if not isinstance(data.get("title"), str) or not data["title"].strip():
+        for key in ("outline_title", "course_title", "book_title", "name"):
+            value = data.get(key)
+            if isinstance(value, str) and value.strip():
+                data["title"] = value
+                break
+
+    normalize_outline_node(data)
+
+
+def normalize_outline_node(node: dict[str, Any]) -> None:
+    if not isinstance(node.get("title"), str):
+        for key in ("name", "label", "outline_title", "course_title"):
+            value = node.get(key)
+            if isinstance(value, str) and value.strip():
+                node["title"] = value
+                break
+
+    child_keys = (
+        "parts",
+        "chapters",
+        "sections",
+        "subsections",
+        "children",
+        "curriculum_modules",
+        "modules",
+        "units",
+        "lessons",
+        "topics",
+        "items",
+    )
+    for key in child_keys:
+        children = node.get(key)
+        if not isinstance(children, list):
+            continue
+        for index, child in enumerate(children):
+            if isinstance(child, str) and key in child_keys:
+                children[index] = {"title": child}
+            elif isinstance(child, dict):
+                normalize_outline_node(child)
+
+
+def node_number(node: dict[str, Any], fallback: str) -> str:
+    for key in (
+        "chapter_id",
+        "section_id",
+        "subsection_id",
+        "part_id",
+        "module_id",
+        "unit_id",
+        "lesson_id",
+        "topic_id",
+        "item_id",
+    ):
+        value = node.get(key)
+        if isinstance(value, (str, int)) and re.fullmatch(
+            r"\d+(?:\.\d+)*", str(value).strip()
+        ):
+            return str(value).strip()
+    return fallback
+
+
 def node_slug(node: dict[str, Any], fallback: str) -> str:
     slug = node.get("slug")
-    return safe_component(str(slug)) if slug else fallback
+    return safe_component(str(slug or node.get("title") or fallback))
 
 
 def numbered_slug(node: dict[str, Any], number: str) -> str:
@@ -98,10 +171,26 @@ def pretty_title(raw: str) -> str:
     return title.replace("_", " ")
 
 
-def create_markdown_file(path: Path) -> None:
+def has_chinese_text(data: dict[str, Any]) -> bool:
+    language = str(data.get("language") or "").lower()
+    if language.startswith(("zh", "cn")):
+        return True
+    text = " ".join(
+        str(data.get(key) or "")
+        for key in ("title", "outline_title", "course_title", "book_title")
+    )
+    return bool(re.search(r"[\u3400-\u4dbf\u4e00-\u9fff]", text))
+
+
+def contents_index_path(book_root: Path, chinese: bool) -> Path:
+    return book_root / ("0_大纲.md" if chinese else "0_CONTENTS.md")
+
+
+def create_markdown_file(path: Path, title: str | None = None) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
-    if not path.exists():
-        path.touch()
+    if not path.exists() or (title and not path.read_text(encoding="utf-8").strip()):
+        content = f"# {title}\n\n" if title else ""
+        path.write_text(content, encoding="utf-8")
 
 
 def create_json_markdown_files(raw_node: dict[str, Any], parent: Path) -> None:
@@ -122,7 +211,12 @@ def create_json_markdown_files(raw_node: dict[str, Any], parent: Path) -> None:
         filename = Path(filename).name
         if filename and filename.lower().endswith(".md"):
             if (
-                filename.lower() not in {"目录.md", "contents.md"}
+                filename.lower() not in {
+                    "目录.md",
+                    "contents.md",
+                    "0_contents.md",
+                    "0_大纲.md",
+                }
                 and not is_index_marker_name(filename)
             ):
                 create_markdown_file(parent / filename)
@@ -133,34 +227,40 @@ def create_outline(
     parent: Path,
     number_prefix: str,
     book_root: Path,
+    chinese: bool,
 ) -> None:
     for index, child in enumerate(raw_children, 1):
-        number = f"{number_prefix}.{index}" if number_prefix else str(index)
+        fallback = f"{number_prefix}.{index}" if number_prefix else str(index)
+        number = node_number(child, fallback)
         slug = numbered_slug(child, number)
         children = get_children(child)
 
         if children:
             child_dir = parent / slug
             child_dir.mkdir(parents=True, exist_ok=True)
-            create_markdown_file(metadata_index_path(book_root, child_dir))
+            create_markdown_file(metadata_index_path(book_root, child_dir, chinese=chinese))
             create_json_markdown_files(child, child_dir)
-            create_outline(children, child_dir, number, book_root)
+            create_outline(children, child_dir, number, book_root, chinese)
         else:
-            filename = f"{number}_{re.sub(r'^\d+(?:\.\d+)*[_\s]+', '', slug)}.md"
-            create_markdown_file(parent / filename)
+            filename = f"{slug}.md"
+            title = f"{number} {pretty_title(child['title'])}"
+            create_markdown_file(parent / filename, title)
 
 
 def create_folder_and_files(json_file: Path, output_dir: Path) -> Path:
     with json_file.open("r", encoding="utf-8") as handle:
         data = json.load(handle)
+    if not isinstance(data, dict):
+        raise ValueError("JSON 顶层必须是对象")
+    normalize_outline(data)
     validate(data)
 
     root_dir = output_dir / safe_component(data["title"])
     root_dir.mkdir(parents=True, exist_ok=True)
-    metadata_directory(root_dir).mkdir(parents=True, exist_ok=True)
+    chinese = has_chinese_text(data)
     create_json_markdown_files(data, root_dir)
-    create_outline(get_children(data), root_dir, "", root_dir)
-    create_markdown_file(metadata_contents_path(root_dir))
+    create_outline(get_children(data), root_dir, "", root_dir, chinese)
+    create_markdown_file(contents_index_path(root_dir, chinese))
     return root_dir
 
 

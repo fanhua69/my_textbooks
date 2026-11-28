@@ -1,0 +1,219 @@
+{
+  "outline_title": "Bloomberg Entitlement System 与低延迟系统全景大纲",
+  "version": "1.2",
+  "goal": "以 Bloomberg Entitlement 权限与数据许可系统为切入点，围绕其热路径判定、数据分发、状态同步与高可用诉求，系统讲解其核心低延迟技术，并向外辐射扩展到现代低延迟系统（HFT、行情分发、撮合引擎、网关与分布式基础设施）的完整低延迟技术谱系。",
+  "design_principles": [
+    "围绕公开接口语义（如 Identity、EID、权限过滤与实时撤销）与通用分布式/C++低延迟架构原则展开，不涉及任何专有内部实现细节",
+    "区分热路径（Hot Path，纳秒~微秒级权限检查/过滤）与冷/温路径（Warm/Cold Path，权限变更同步、审计落盘、对账与配置管理）",
+    "将组件、算法、协议、硬件机制、OS/C++底层优化与验证方法论分层组织，便于作为教材章节或系统设计专题大纲",
+    "完整覆盖网卡绕开（NIC Bypass / Kernel Bypass）技术谱系：从 DPDK/PMD、Solarflare Onload/TCPDirect、RDMA 到 AF_XDP / XDP 驱动级旁路与 SmartNIC / DPU 硬件卸载，明确其适用边界、代价与运维要求",
+    "显式涵盖缓存行争用（Cache Line Contention）与缓存行弹跳（Cache Line Bounce / Ping-Pong）：阐明 MESI/MOESI 等缓存一致性协议下跨核读写共享缓存行的延迟代价、伪共享（False Sharing）与真共享（True Sharing）的区别，以及通过对齐、分片/本地化与无锁环形队列缓解的工程手段"
+  ],
+  "chapters": [
+    {
+      "chapter_id": "01",
+      "title": "Entitlement 系统业务语义与低延迟切入点",
+      "focus": "为什么金融数据许可（Entitlement）必须在高并发、微秒级延迟下完成校验",
+      "sections": [
+        {
+          "section_id": "01.1",
+          "title": "Entitlement 的核心职责与金融合规背景",
+          "topics": [
+            "身份（User / Application / Session / Identity）与权限标识（EID / Resource / Field）建模",
+            "数据许可合规、按需计费与订阅过滤（Subscription Filtering）",
+            "权限授予与实时撤销（Revocation）对一致性和生效延迟的要求"
+          ]
+        },
+        {
+          "section_id": "01.2",
+          "title": "热路径 vs 温/冷路径分离",
+          "topics": [
+            "热路径：每条行情/消息/请求到达时的毫秒/微秒/纳秒级权限判定",
+            "温路径：权限变更事件生产、消息分发、本地快照与增量更新",
+            "冷路径：不可篡改审计日志、账务/使用量对账、权限历史回溯"
+          ]
+        },
+        {
+          "section_id": "01.3",
+          "title": "低延迟指标与测量基线",
+          "topics": [
+            "平均延迟、P50、P99、P99.9 与 P99.99 尾延迟预算分配",
+            "吞吐量（QPS / MPS）与并发连接/订阅规模扩展",
+            "Coordinated Omission 问题与 HdrHistogram 延迟分布采样"
+          ]
+        }
+      ]
+    },
+    {
+      "chapter_id": "02",
+      "title": "Entitlement 核心低延迟技术：数据分发与本地缓存",
+      "focus": "减少跨网络/跨进程往返（RTT），将判定状态就近放在计算节点内存中",
+      "sections": [
+        {
+          "section_id": "02.1",
+          "title": "权威源 -> 生产者 -> 消息代理 -> 本地缓存架构",
+          "topics": [
+            "从权威数据库（Authoritative DB）捕获变更并发布事件",
+            "多实例订阅消费与本地权限快照维护",
+            "避免热路径直接同步查询远端数据库或集中式权限中心"
+          ]
+        },
+        {
+          "section_id": "02.2",
+          "title": "快照加增量（Snapshot + Delta）分发模式",
+          "topics": [
+            "启动/重连阶段全量快照加载与基线版本号对齐",
+            "运行阶段增量变更流推送、序列号校验与缺口恢复",
+            "批量合并与背压控制，防止突发权限变更风暴拖垮消费者"
+          ]
+        },
+        {
+          "section_id": "02.3",
+          "title": "多级缓存与热更新无锁切换",
+          "topics": [
+            "L1 进程内本地缓存、共享内存缓存与分布式缓存分层",
+            "位图（Bitmap / Roaring Bitmap）、哈希表与扁平数组紧凑编码",
+            "RCU（Read-Copy-Update）与原子指针交换实现读零锁热更新"
+          ]
+        }
+      ]
+    },
+    {
+      "chapter_id": "03",
+      "title": "C++ 并发、内存布局与无锁低延迟技术",
+      "focus": "消除锁竞争、缓存未命中与动态内存分配抖动",
+      "sections": [
+        {
+          "section_id": "03.1",
+          "title": "C++ 内存模型与原子操作",
+          "topics": [
+            "std::memory_order（relaxed、acquire、release、acq_rel、seq_cst）语义与选型",
+            "编译器重排与 CPU 内存屏障（LoadLoad、StoreStore 等）",
+            "无锁读多写少数据结构：RCU、Hazard Pointer、Epoch-Based Reclamation（EBR）"
+          ]
+        },
+        {
+          "section_id": "03.2",
+          "title": "缓存行争用（Cache Line Contention）、弹跳（Bounce）与无锁环形队列",
+          "topics": [
+            "缓存行争用（Cache Line Contention）与缓存行弹跳（Cache Line Bounce / Ping-Pong）：多核间频繁修改同一缓存行引发的状态失效、总线/互连流量激增与延迟飙升",
+            "缓存一致性协议视角：MESI / MOESI 状态转移（Modified / Exclusive / Shared / Invalid）与跨核读取失效缓存行的 RTT 代价",
+            "伪共享（False Sharing）与真共享（True Sharing）：不同独立变量落入同一 64B 缓存行 vs 多个线程真正读写同一共享原子变量/控制字",
+            "缓解与消除策略：alignas 缓存行对齐与填充、减少跨核写热点（单写多读、线程本地化/分片）、SPSC / MPMC 无锁环形缓冲区（Ring Buffer）与 Disruptor 思想",
+            "顺序批处理、事件合并与读指针/写指针协调"
+          ]
+        },
+        {
+          "section_id": "03.3",
+          "title": "内存管理与确定性执行",
+          "topics": [
+            "热路径禁用动态分配（malloc/new）与锁，使用对象池、Arena 与 std::pmr",
+            "预分配与热身（Warmup），避免运行期缺页中断（Page Fault）",
+            "确定性编程约束：避免隐藏锁、非确定性哈希/容器遍历与时间/浮点抖动"
+          ]
+        }
+      ]
+    },
+    {
+      "chapter_id": "04",
+      "title": "操作系统、网络协议栈与内核旁路低延迟技术",
+      "focus": "缩短数据包从网卡到用户态应用处理循环的路径",
+      "sections": [
+        {
+          "section_id": "04.1",
+          "title": "CPU 亲和性与 NUMA 架构优化",
+          "topics": [
+            "线程绑核（CPU Pinning / Affinity）、隔离核（isolcpus / nohz_full）与关中断/调频",
+            "NUMA（Non-Uniform Memory Access）节点亲和性与跨节点内存访问代价",
+            "Run-to-Completion 与专用线程模型（网络线程、定序/判定线程、IO/日志线程分离）"
+          ]
+        },
+        {
+          "section_id": "04.2",
+          "title": "传统与现代异步 IO 模型",
+          "topics": [
+            "阻塞/非阻塞 Socket、select/poll/epoll 与 Reactor / Proactor 模式",
+            "Boost.Asio / Standalone Asio 与 Linux io_uring 提交/完成队列批处理",
+            "零拷贝机制（sendfile、mmap、splice）与序列化格式（SBE、FlatBuffers、Protobuf）"
+          ]
+        },
+        {
+          "section_id": "04.3",
+          "title": "网卡绕开（NIC Bypass）、内核旁路、组播与精密时钟同步",
+          "topics": [
+            "网卡绕开（NIC Bypass / Kernel Bypass）核心原理：绕过内核协议栈、中断驱动与 sk_buff 拷贝，将 NIC 队列直接映射到用户态内存/线程轮询",
+            "DPDK（Poll Mode Driver，PMD）：用户态驱动接管网卡队列、Hugepages 大页内存池、零拷贝包收发与 CPU 亲和性绑定",
+            "Solarflare / AMD Onload 与 TCPDirect：兼容标准 Socket API 的 TCP 加速栈（OpenOnload）与绕过协议栈直连网卡队列的超低延迟用户态接口（TCPDirect）",
+            "RDMA（InfiniBand / RoCEv2 / iWARP）：通过网卡硬件直接读写远端内存（RDMA Read / Write / Send），减少 CPU 介入与内核态切换",
+            "AF_XDP 与 XDP（eXpress Data Path）：在驱动层/早期内核层实现高性能包重定向与用户态零拷贝收发，兼顾性能与内核生态",
+            "SmartNIC / DPU 硬件卸载：将连接跟踪、加密/解密、过滤、流控或部分协议处理卸载到网卡芯片",
+            "网卡绕开的工程代价与取舍：独占网卡队列、100% CPU 轮询功耗/温度、安全隔离/网络工具（tcpdump/iptables/路由表）失效、与传统网络监控及运维的协同",
+            "TCP 低延迟调优（TCP_NODELAY、Nagle/延迟 ACK、缓冲区与拥塞控制）与 UDP 组播（Multicast）",
+            "PTP（IEEE 1588）硬件时间戳、NTP 与混合逻辑时钟（HLC）在延迟测量和合规审计中的应用"
+          ]
+        }
+      ]
+    },
+    {
+      "chapter_id": "05",
+      "title": "流量控制、定序、容错与可观测性低延迟协同",
+      "focus": "在高压、故障与乱序下保持低延迟与正确性",
+      "sections": [
+        {
+          "section_id": "05.1",
+          "title": "流控、背压、节流与过载保护",
+          "topics": [
+            "Rate Limiter 与 Throttler 的协同（Token Bucket、Leaky Bucket、Sliding Window）",
+            "生产者-消费者背压（Backpressure）、信用机制（Credit-Based）与队列深度控制",
+            "熔断器（Circuit Breaker）、舱壁隔离（Bulkhead）、超时与降级"
+          ]
+        },
+        {
+          "section_id": "05.2",
+          "title": "定序、一致性窗口与故障恢复",
+          "topics": [
+            "Sequencer 定序器、复制状态机与权限撤销一致性窗口权衡",
+            "幂等管理、序列号缺口重传与异步对账修复（Reconciliation）",
+            "主备/多活故障转移（Failover）与脑裂防护（Lease / Fencing Token）"
+          ]
+        },
+        {
+          "section_id": "05.3",
+          "title": "低延迟可观测性与验证体系",
+          "topics": [
+            "无锁/异步日志与低开销指标采集，避免日志刷盘阻塞热路径",
+            "perf、火焰图、硬件性能计数器（Cache Miss、Branch Miss）与延迟直方图分析",
+            "确定性模拟测试、故障注入、并发属性/模糊测试与端到端压测",
+            "硬件性能计数器诊断缓存行争用与弹跳：监控 Cache Miss、LLC Miss、RFO（Read For Ownership）与跨核缓存行迁移事件"
+          ]
+        }
+      ]
+    },
+    {
+      "chapter_id": "06",
+      "title": "向外扩展：所有典型低延迟系统技术全景图谱",
+      "focus": "顺带梳理除 Entitlement 之外各类低延迟系统的核心技术栈与演进方向",
+      "sections": [
+        {
+          "section_id": "06.1",
+          "title": "金融低延迟系统家族",
+          "topics": [
+            "行情分发系统（Market Data Feed Handler）：组播接入、归一化、序号缺口恢复、快照+增量扇出",
+            "交易接入网关与实时风控（Order Gateway & Pre-Trade Risk）：协议解析、会话状态机、微秒级资金/仓位校验",
+            "撮合引擎（Matching Engine）与定序架构：单线程/分片内存订单簿、确定性事件日志与重放"
+          ]
+        },
+        {
+          "section_id": "06.2",
+          "title": "通用高吞吐/低延迟基础设施与新兴方向",
+          "topics": [
+            "低延迟消息与流传输（如 Aeron、分区日志与零拷贝持久化）",
+            "分布式存储与缓存低延迟优化（LSM/B+树调优、内存索引、多级缓存与读写分离）",
+            "现代内核与硬件演进（io_uring 深化、eBPF/XDP 加速、CXL 内存池化与硬件加速）",
+            "网卡绕开与硬件加速演进：DPDK/Onload/TCPDirect/RDMA、AF_XDP、SmartNIC/DPU 卸载与 CXL 内存互联的协同"
+          ]
+        }
+      ]
+    }
+  ]
+}
